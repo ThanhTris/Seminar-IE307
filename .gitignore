@@ -1,0 +1,12 @@
+.env
+.env.*
+!.env.example
+*service-account*.json
+google-services.json
+local.properties
+.gradle/
+build/
+node_modules/
+*.jks
+*.keystore
+.idea/
