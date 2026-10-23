@@ -14,4 +14,3 @@ Tất cả task ở backlog; owner/reviewer chờ phân công. Đường dẫn �
 | [SEM-08](backlog/SEM-08.md) | Chạy ma trận thực nghiệm | SEM-07 |
 | [SEM-09](backlog/SEM-09.md) | Đối chiếu và soạn bài trình bày | SEM-03, SEM-08 |
 | [SEM-10](backlog/SEM-10.md) | Đóng gói và diễn tập | SEM-09 |
-

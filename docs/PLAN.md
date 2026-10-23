@@ -25,7 +25,27 @@ Stack đề xuất, chưa chốt: Kotlin + Jetpack Compose + Room + WorkManager 
 | SEM-09 | Phân tích, báo cáo và slide | 10 |
 | SEM-10 | Đóng gói và diễn tập | 5 |
 
-Nhóm thực hành SEM-01/02/04/05/06/07/08/10 = 80; nghiên cứu và lập luận SEM-03/09 = 20. Đây là tỷ trọng công sức, không phải số slide. Chưa gán ngày do chưa có deadline và nhân sự.
+Nhóm thực hành SEM-01/02/04/05/06/07/08/10 = 80; nghiên cứu và lập luận SEM-03/09 = 20. Đây là tỷ trọng công sức, không phải số slide.
+
+## Lịch 3 tuần đã chốt
+
+Bắt đầu 23/10/2026; hoàn thành chậm nhất 13/11/2026, theo giờ Việt Nam (UTC+7). Task được quản lý bằng file trong repo, tập trung việc cần làm và đầu ra; chưa phân công người khi chưa biết thành viên.
+
+| Thời gian | Task | Đầu ra bắt buộc |
+|---|---|---|
+| 23–24/10 | SEM-01 | Phạm vi, stack, thiết bị và môi trường chạy được xác nhận |
+| 24–27/10 | SEM-02, SEM-03 | Tài liệu cơ chế, thí nghiệm nhỏ; ghi chú 2–4 bài nghiên cứu và bảng claim–evidence ban đầu |
+| 25–28/10 | SEM-04 | App/server chạy đầu cuối, cache và timeline có ID |
+| 28–30/10 | SEM-05, SEM-06 | Hai luồng periodic và push chạy riêng, có log thật |
+| 31/10–02/11 | SEM-07 | Ba chế độ đồng bộ, chống trùng, retry và phục hồi mạng |
+| 03–06/11 | SEM-08 | Ma trận kiểm thử, dữ liệu thô và tổng hợp kết quả |
+| 07–10/11 | SEM-09 | Báo cáo, slide và kết luận đối chiếu nguồn với thực nghiệm |
+| 11–12/11 | SEM-10 | APK, runbook, video dự phòng và diễn tập |
+| 13/11 | Dự phòng và bàn giao | Sửa lỗi cuối, kiểm tra gói nộp và chốt phiên bản |
+
+Tuần 1 (23–29/10): hiểu cơ chế, nền tảng demo và nguồn nghiên cứu. Tuần 2 (30/10–05/11): hoàn thiện demo và thu thập dữ liệu. Tuần 3 (06–12/11): chốt kết quả, trình bày và diễn tập; 13/11 là hạn bàn giao.
+
+SEM-03 có thể làm cùng SEM-02/04 khi đầu vào SEM-01 sẵn sàng. SEM-05/06 chỉ tích hợp sau khi SEM-02/04 đạt nghiệm thu. Nếu trễ tiến độ, bỏ phần mở rộng đo pin/đa thiết bị và trang trí UI trước; giữ ba chế độ, ca thử trọng tâm, dữ liệu thô và giải thích giới hạn.
 
 ## Cổng nghiệm thu
 
@@ -53,4 +73,4 @@ Trạng thái: backlog → in-progress → review → done. Nhánh `task/SEM-XX-
 
 ## Các điểm cần xác nhận
 
-Deadline, thời lượng trình bày, số thành viên, rubric; công nghệ bắt buộc; thiết bị Android; GitHub account/visibility; có cần chat Codex riêng hoặc GitHub Issues/Project hay không.
+Đã chốt: deadline 13/11/2026; GitHub ThanhTris, public; task dạng yêu cầu công việc và đầu ra trong repo. Còn cần xác nhận trước SEM-01 hoàn tất: thời lượng trình bày, số thành viên, rubric, công nghệ bắt buộc và thiết bị Android. Không chặn việc lập kế hoạch vì các mục này.

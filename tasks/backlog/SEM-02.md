@@ -1,13 +1,14 @@
 # SEM-02 — Giải thích cơ chế Android
 
 - Status: backlog
+- Lịch dự kiến: 24–27/10/2026
 - Owner: chưa phân công
 - Reviewer: chưa phân công
 - Dependencies: SEM-01
 - Đầu vào: PLAN.md và đầu ra được nghiệm thu của các dependency.
 - Đầu ra dự kiến: docs/MECHANISMS.md
 
-## Tiêu chí nghiệm thu
+## Công việc cần làm và tiêu chí nghiệm thu
 
 - [ ] Vẽ luồng WorkManager/JobScheduler và FCM; giải thích Doze, constraints, retry, process death và force-stop; chạy thí nghiệm nhỏ có log.
 - [ ] Có docs/evidence/SEM-02/CHECKS.md: môi trường, bước thực hiện, expected/actual, log và hạn chế.
@@ -17,4 +18,3 @@
 ## Kiểm tra và bàn giao
 
 Kiểm tra đúng phạm vi task. Với tài liệu: xác minh nguồn và liên kết; với code: chạy hành vi thật và kiểm thử logic quan trọng; với thí nghiệm: lưu dữ liệu thô và lệnh tái lập. Không đánh dấu hoàn thành nếu chỉ có scaffold.
-

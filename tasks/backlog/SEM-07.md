@@ -1,13 +1,14 @@
 # SEM-07 — Tích hợp hybrid và phục hồi
 
 - Status: backlog
+- Lịch dự kiến: 31/10–02/11/2026
 - Owner: chưa phân công
 - Reviewer: chưa phân công
 - Dependencies: SEM-05, SEM-06
 - Đầu vào: PLAN.md và đầu ra được nghiệm thu của các dependency.
 - Đầu ra dự kiến: android/; server/; docs/SYNC.md
 
-## Tiêu chí nghiệm thu
+## Công việc cần làm và tiêu chí nghiệm thu
 
 - [ ] Ba chế độ chọn riêng; cùng sync engine; chống xử lý trùng, version cũ, retry mất mạng; periodic làm cơ chế bổ sung; có test logic idempotency.
 - [ ] Có docs/evidence/SEM-07/CHECKS.md: môi trường, bước thực hiện, expected/actual, log và hạn chế.
@@ -17,4 +18,3 @@
 ## Kiểm tra và bàn giao
 
 Kiểm tra đúng phạm vi task. Với tài liệu: xác minh nguồn và liên kết; với code: chạy hành vi thật và kiểm thử logic quan trọng; với thí nghiệm: lưu dữ liệu thô và lệnh tái lập. Không đánh dấu hoàn thành nếu chỉ có scaffold.
-
