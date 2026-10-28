@@ -24,6 +24,7 @@ Theo [phân công 6 người](../../docs/TEAM_ASSIGNMENTS.md); owner tổng hợ
 3. Xử lý tín hiệu đến trong lúc worker đang kết thúc; chọn cơ chế queue/coalesce có ca test race.
 4. Định nghĩa retry/backoff hữu hạn cho lỗi transient; lỗi permanent trả failure có lý do.
 5. Thêm khả năng cập nhật server mà bỏ gửi push có chủ ý để thử periodic phục hồi.
+6. Cuối 05/11, Trí bàn giao bản tích hợp ứng viên với commit app/server, APK checksum và cấu hình; Vinh xác nhận nhận được trước khi chạy tập chính ngày 06–07/11. Ghi metadata vào CHECKS, không chỉ gửi APK qua chat.
 
 ## Đầu ra bắt buộc
 
@@ -37,6 +38,7 @@ Theo [phân công 6 người](../../docs/TEAM_ASSIGNMENTS.md); owner tổng hợ
 - [ ] Các test logic quan trọng pass; không viết test chỉ kiểm tra tên hàm hoặc scaffold.
 - [ ] E05 pilot không giảm version/ghi trùng, không bỏ mất version mới ở race.
 - [ ] E06 pilot thể hiện cập nhật từ PERIODIC khi cố ý không gửi push; không gọi là vượt Doze/force-stop.
+- [ ] Có bản tích hợp ứng viên định danh được để SEM-08 đo; nếu sửa sync/trigger/retry/logging sau đó, nêu các ca cần chạy lại.
 - [ ] Có đủ đầu ra và CHECKS.md; người làm giải thích được kết quả, reviewer được phân công kiểm tra và ghi kết luận.
 
 ## Trạng thái bàn giao

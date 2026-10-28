@@ -27,5 +27,6 @@ Mỗi task có việc cần làm, đầu ra bắt buộc, ca nghiệm thu và đ
 4. SEM-09 soạn dàn ý ngay; phần kết quả chờ SEM-08. SEM-10 có thể chuẩn bị đóng gói sau SEM-07, nhưng nghiệm thu cuối phải có SEM-08/09.
 5. Trạng thái backlog → in-progress → review → done; nhánh task/SEM-XX-ten-ngan. Mỗi task có một CHECKS.md bao gồm bàn giao; HANDOFF.md là tùy chọn.
 6. Task done cần đầu ra thật, kiểm chứng và kết luận review; không coi việc viết kế hoạch là hoàn thành task.
+7. Đến 31/10, SEM-04 phải giao cả SyncWorker/enqueue chung cho hai trigger. Ngày 02–05/11 chạy pilot; bản ứng viên chốt cuối 05/11, dữ liệu chính thức chạy 06–07/11 và phân nhóm theo build. Nội dung slide/evidence bàn giao ngày 08/11 để ghép/review trước ngày 10/11.
 
 Trọng số: thực hành/cơ chế/diễn tập 80, nghiên cứu/lập luận 20. Khi trễ cổng, báo blocker và điều chỉnh phần mở rộng theo [PLAN](../docs/PLAN.md), không tự kéo dài deadline.

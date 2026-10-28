@@ -23,16 +23,16 @@ Nếu giảng viên tính cả hỏi đáp trong 15 phút: dùng biến thể 13
 | Phần theo lịch phía trên | Người trình bày |
 |---|---|
 | Mở bài 00:00–00:45 | Trí |
-| Hai cách kích hoạt 00:45–02:00 | Tuấn |
+| Hai cách kích hoạt 00:45–02:00 | Trung |
 | Periodic 02:00–04:00 | Trung |
 | Silent push 04:00–06:00 | Trang |
 | Kiến trúc 06:00–07:00 | Tâm |
-| Demo 07:00–11:00 | Trí thao tác thiết bị xuyên suốt; Trang dẫn 90 giây đầu, Trung 60 giây periodic, Vinh 60 giây ca giới hạn, Trí chốt 30 giây |
+| Demo 07:00–11:00 | Trang dẫn toàn bộ; Trí thao tác thiết bị và mở log/video dự phòng |
 | Kết quả 11:00–12:45 | Vinh |
-| Đối chiếu nghiên cứu 12:45–14:00 | Tâm |
+| Đối chiếu nghiên cứu 12:45–14:00 | Tuấn |
 | Kết luận 14:00–15:00 | Tuấn |
 
-Giữ nguyên tổng 15 phút; không thêm thời gian giới thiệu từng người. Khi diễn tập, có thể giảm số lần đổi người trong demo nếu lời dẫn bị ngắt; người phụ trách thao tác vẫn là Trí. Đây là phân vai nói, không thay phân công triển khai trong [TEAM_ASSIGNMENTS](TEAM_ASSIGNMENTS.md).
+Gộp thành 7 lượt nói liên tục: Trí → Trung → Trang → Tâm → Trang (demo) → Vinh → Tuấn. Chỉ có 6 lần chuyển người; dành 5 giây mỗi lần ngay trong khung thời gian đã chia, tổng 30 giây chuyển tiếp và tối đa 14 phút 30 giây nội dung. Trang dẫn cả periodic/Doze trong demo để không đổi người giữa thao tác. Không thêm thời gian giới thiệu thành viên. Đây là phân vai nói, không thay phân công triển khai trong [TEAM_ASSIGNMENTS](TEAM_ASSIGNMENTS.md).
 
 ## Kịch bản demo 4 phút
 

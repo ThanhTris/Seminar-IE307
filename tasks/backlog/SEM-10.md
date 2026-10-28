@@ -20,6 +20,7 @@ Phân việc: Trí build/đóng gói, ghi manifest/checksum và DEMO_RUNBOOK; Vi
 Theo [phân công 6 người](../../docs/TEAM_ASSIGNMENTS.md); owner tổng hợp đầu ra và CHECKS, reviewer kiểm trước khi chuyển done.
 
 1. Build APK cho OPPO và emulator, chạy setup từ môi trường sạch hoặc ghi rõ phần chưa tái lập.
+   Dùng source code đã kiểm chứng trong SEM-08; nếu rebuild, ghi checksum và cấu hình. Nếu code/config thực thi thay đổi, phối hợp Vinh chạy lại ca bị ảnh hưởng trước khi đóng gói, không coi log của bản cũ là evidence cho bản mới.
 2. Quay video dự phòng từ run thật của bản build tương ứng; metadata và nhãn phát lại rõ ràng.
 3. Soạn runbook: kết nối, mode/reset, dữ liệu, thao tác live, ngưỡng chuyển video 30 giây và khôi phục thiết bị.
 4. Diễn tập 2 lần có bấm giờ; sửa lời dẫn và kiểm tra không lộ token/credential trong log/video.
@@ -37,7 +38,7 @@ Theo [phân công 6 người](../../docs/TEAM_ASSIGNMENTS.md); owner tổng hợ
 
 - [ ] Người khác làm theo runbook tái lập được hoặc ghi rõ bước cần hỗ trợ/cấu hình.
 - [ ] Hai lần diễn tập nằm trong 15 phút gồm demo; payload/log/video không lộ bí mật.
-- [ ] APK, server, báo cáo và slide trỏ đúng commit; mọi phần chưa hoàn thành được liệt kê trước bàn giao.
+- [ ] Manifest chỉ rõ commit app/server và checksum đã kiểm chứng, phiên bản tài liệu/slide tương ứng; mọi phần chưa hoàn thành được liệt kê trước bàn giao. Không yêu cầu commit tài liệu cuối trùng commit source đã đo, nhưng phải truy được quan hệ giữa các phiên bản.
 - [ ] Có đủ đầu ra và CHECKS.md; người làm giải thích được kết quả, reviewer được phân công kiểm tra và ghi kết luận.
 
 ## Trạng thái bàn giao

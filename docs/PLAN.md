@@ -49,7 +49,7 @@ Chuyển chế độ phải hủy lịch không cần, đợi worker đang chạ
 
 UI chỉ cần: snapshot/version cache, mode hiện tại, lần sync cuối và timeline có lọc run_id. Backend có health, đọc snapshot, cập nhật snapshot, gửi hoặc bỏ qua push có chủ ý; token được lưu qua cấu hình local hoặc cơ chế đăng ký tối thiểu có xử lý refresh.
 
-Trước code, SEM-04 chốt docs/API.md và docs/EVENT_SCHEMA.md. Event tối thiểu: run_id, event_id, source, mode, device_alias, data_version, UTC timestamp, monotonic time phía Android, request_id/work_id/message_id nếu có, outcome/reason. Server accepted, push_received, work_started và snapshot_applied là các event riêng.
+Trước code, SEM-04 chốt docs/API.md và docs/EVENT_SCHEMA.md. Trung bàn giao SyncRepository, SyncWorker và giao diện enqueue chung ngay trong SEM-04, để periodic và push có thể tích hợp độc lập từ 01/11. Event tối thiểu: run_id, event_id, source, mode, device_alias, data_version, UTC timestamp, monotonic time phía Android, request_id/work_id/message_id nếu có, outcome/reason. Server accepted, push_received, work_started và snapshot_applied là các event riêng.
 
 ## 5. Tối ưu cần chứng minh
 
@@ -71,16 +71,16 @@ Giảm số request/ghi DB là chỉ số công việc; chưa đủ để kết 
 | SEM-01 | 28–29/10 | Cấu hình build, thiết bị và quyền truy cập Firebase rõ ràng |
 | SEM-02 | 28–30/10 | Mô hình cơ chế, bảng thuật ngữ, các câu hỏi phản biện |
 | SEM-03 | 29/10–01/11 | 2 bài có ghi chú, bibliography và bảng lập luận ban đầu |
-| SEM-04 | 29–31/10 | App/server sync thủ công + cache + logging chạy đầu cuối |
+| SEM-04 | 29–31/10 | App/server, SyncWorker/giao diện enqueue chung, cache và logging chạy đầu cuối |
 | SEM-05 | 01–02/11 | Periodic có bằng chứng chạy tự nhiên |
 | SEM-06 | 01–03/11 | Push data-only có bằng chứng nhận và sync khi background |
-| SEM-07 | 04–05/11 | Hybrid, version guard, duplicate/race/retry tests |
-| SEM-08 | 02–07/11 | Thử từng luồng ngay khi sẵn sàng; hoàn tất tập ca cốt lõi |
+| SEM-07 | 04–05/11 | Hybrid, version guard, duplicate/race/retry tests; chốt bản ứng viên cuối 05/11 |
+| SEM-08 | 02–07/11 | Pilot 02–05/11; tập chính trên bản ứng viên 06–07/11 |
 | SEM-09 | Dàn ý 28/10; bản cuối 08–10/11 | Bài trình bày 15 phút và báo cáo đối chiếu evidence |
 | SEM-10 | 11–12/11 | APK, video, runbook, diễn tập có bấm giờ |
 | Dự phòng | 13/11 | Sửa lỗi cuối và gói bàn giao, không thêm tính năng |
 
-SEM-02 có thể bắt đầu từ phạm vi đã chốt mà không chờ build; thí nghiệm thật thuộc SEM-05/06/08. SEM-08 chuẩn bị theo protocol ngay, chạy từng ca sau task cung cấp luồng tương ứng; không chờ hybrid để kiểm tra periodic/push. SEM-09 soạn lời dẫn sớm nhưng chỉ chốt kết quả sau SEM-08.
+SEM-02 có thể bắt đầu từ phạm vi đã chốt mà không chờ build; thí nghiệm thật thuộc SEM-05/06/08. SEM-08 chạy pilot từng luồng ngay khi đầu vào sẵn sàng để tìm lỗi sớm. Trí bàn giao commit app/server và checksum bản ứng viên cuối 05/11; Vinh đo tập chính 06–07/11, không gộp log khác build vào cùng thống kê. Sửa code/config có ảnh hưởng phải chạy lại ca liên quan theo protocol. SEM-09 soạn lời dẫn sớm; các thành viên giao nội dung/evidence ngày 08/11, Tuấn ghép ngày 09/11, review và chốt ngày 10/11.
 
 Nếu 31/10 chưa có M1 (sync thủ công và log), báo blocker ngay và ưu tiên thông luồng. Nếu 03/11 chưa có đủ hai trigger, cắt UI, high-priority contrast và ca mở rộng; không bỏ hai cơ chế chính. Nếu thiếu dữ liệu đến 07/11, công bố phần chưa chạy, giảm số ca mở rộng; không dùng log giả. Video chỉ thay thao tác live khi cần, không thay bằng chứng thực nghiệm.
 
@@ -107,7 +107,7 @@ Tổng thực hành 80, nghiên cứu 20. Chia theo phần đóng góp: Trí 17,
 - M2: hai trigger hoạt động độc lập; không có sync ngầm khi mở app làm sai chứng cứ.
 - M3: protocol cốt lõi có run thực tế, kể cả timeout/negative results, metadata và giới hạn.
 - M4: demo 4 phút, toàn bài 15 phút, có câu trả lời vì sao các ca trễ/không chạy.
-- M5: APK, hướng dẫn, server, dữ liệu đã loại thông tin nhạy cảm, báo cáo và slide gắn với một commit.
+- M5: manifest nối được APK/server đã kiểm chứng (commit và checksum) với dữ liệu đo, hướng dẫn, báo cáo và slide. Commit tài liệu có thể mới hơn code đã đo; mọi thay đổi code phải được kiểm tra ảnh hưởng trước bàn giao.
 
 Theo [task board](../tasks/README.md). Không đánh dấu task done chỉ vì đã tạo tài liệu yêu cầu. Một CHECKS.md cho mỗi task có thể chứa cả kiểm chứng và bàn giao; không bắt buộc thêm HANDOFF.md trùng nội dung.
 

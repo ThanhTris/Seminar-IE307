@@ -28,6 +28,14 @@ Pilot trước mỗi loại ca, không gộp pilot vào tập chính nếu đổ
 
 Tập trên cần khoảng 10–12 giờ cửa sổ quan sát tuần tự, chưa tính setup/pilot. Có thể để chạy dài ngoài giờ làm việc nhưng không để các run cùng app làm nhiễu nhau. Tăng số lượt nếu còn thời gian; không tuyên bố độ tin cậy thống kê rộng từ mẫu nhỏ.
 
+## Phiên bản dùng đo và lịch chạy
+
+- 02–05/11: chạy thử để tìm lỗi; Vinh ghi run_phase=pilot/development. Trí bàn giao bản ứng viên vào cuối 05/11 sau tích hợp SEM-07, gồm commit app/server, APK checksum và cấu hình.
+- 06–07/11: Vinh chạy tập chính với run_phase=main trên bản ứng viên. Đặt lịch ít nhất 10–12 giờ quan sát cùng thời gian setup/pilot; hai thiết bị có thể chạy song song khi run và cấu hình tách biệt.
+- Run trước bản ứng viên chỉ dùng cho kết quả chính nếu reviewer xác nhận code/config có liên quan không đổi, ghi rõ quyết định trong CHECKS. Mặc định giữ là pilot; không dùng để mô tả APK cuối.
+- Nếu sửa scheduler, callback, sync core, retry, version guard hoặc logging sau khi đo: ghi bản mới và chạy lại ca chịu ảnh hưởng trước khi chốt SUMMARY. Thay đổi chỉ ở slide/tài liệu không bắt buộc chạy lại app.
+- Không gộp các commit/build khác nhau vào cùng thống kê. Nếu chỉ so sánh hai phiên bản, tạo nhóm kết quả riêng và giải thích thay đổi.
+
 ## Ca đối chiếu bổ sung
 
 Bắt buộc mô tả giới hạn process death/vuốt recent/force-stop trong bài. Nếu khả thi, mỗi trạng thái một ca mô tả trên OPPO với PUSH, ghi hành động chính xác và quan sát 5 phút; sau force-stop chỉ quan sát tiếp sau khi người dùng mở app, ghi rõ mốc mở lại. Không coi hybrid là cách vượt force-stop.
@@ -36,7 +44,7 @@ Battery Saver, reboot, TTL hết hạn và collapse key là mở rộng sau tậ
 
 ## Dữ liệu phải lưu
 
-Mỗi run có manifest: case_id, run_id, device_alias, cấu hình OS/app, mode, thời gian bắt đầu/kết thúc, cửa sổ quan sát, network/power/Doze, version trước/sau, TTL/collapse settings, commit, outcome và đường dẫn logs.
+Mỗi run có manifest: case_id, run_id, run_phase, device_alias, cấu hình OS/app, mode, thời gian bắt đầu/kết thúc, cửa sổ quan sát, network/power/Doze, version trước/sau, TTL/collapse settings, app_commit, server_commit, apk_sha256, outcome và đường dẫn logs.
 
 Sự kiện: server_updated, push_send_accepted/rejected, push_received, work_enqueued, work_started, snapshot_applied/unchanged, retry/failure. Dùng message_id từ FCM khi có; message_id chưa có thì null, không bịa. Work ID, request ID và trigger nối được về run.
 
@@ -44,7 +52,7 @@ Ghi UTC ở hai đầu và monotonic time ở Android. Đo clock offset với se
 
 ## Phân tích
 
-- Tỷ lệ cập nhật trong cửa sổ = số run applied đúng version trong cửa sổ / tổng run hợp lệ cùng case/device/mode.
+- Tỷ lệ cập nhật trong cửa sổ = số run applied đúng version trong cửa sổ / tổng run hợp lệ cùng case/device/mode/build và cấu hình; dùng tập main, không trộn pilot.
 - Run timeout không bị xóa hoặc gán latency bằng 0; trình bày riêng dưới dạng chưa quan sát được trong cửa sổ.
 - Median và min–max chỉ trên run đã hoàn tất, luôn đi kèm n_complete/n_total và số timeout.
 - Tách độ trễ nhận push, thời gian chờ worker và thời gian sync; không lấy FCM accepted làm thời điểm app nhận.

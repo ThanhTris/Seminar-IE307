@@ -20,6 +20,7 @@ Phân việc: Vinh điều phối thiết bị, chạy E01–E06, quản lý man
 Theo [phân công 6 người](../../docs/TEAM_ASSIGNMENTS.md); owner tổng hợp đầu ra và CHECKS, reviewer kiểm trước khi chuyển done.
 
 1. Tạo script/manifest theo protocol và test pilot; giữ cấu hình cố định cho tập chính.
+   Giai đoạn 02–05/11 dùng cho phát hiện lỗi/pilot. Tập chính chạy 06–07/11 trên bản ứng viên SEM-07 bàn giao; số liệu cũ chỉ được giữ trong tập chính nếu reviewer xác nhận phần code/config liên quan không thay đổi, nếu không phải chạy lại.
 2. Thực hiện E01–E06 với số lượt/cửa sổ quy định, ghi cả run lỗi/timeout và tình trạng NOT_RUN.
 3. Đối chiếu trên OPPO cho E01/E02; mô tả khác biệt thiết bị mà không suy rộng.
 4. Tổng hợp kết quả từ JSONL sang CSV, kiểm tra clock offset và nguồn trigger; tính số request/ghi DB khi có instrument.
@@ -37,6 +38,7 @@ Theo [phân công 6 người](../../docs/TEAM_ASSIGNMENTS.md); owner tổng hợ
 
 - [ ] Số lượt đạt protocol hoặc ghi rõ phần chưa đạt; không xóa timeout khỏi mẫu số.
 - [ ] Tái tính được bảng từ log; median đi kèm n_complete/n_total.
+- [ ] Mỗi bảng ghi build/commit app và server, thiết bị, mode và cấu hình; không gộp số liệu khác phiên bản làm kết quả của APK cuối. Thay đổi code có ảnh hưởng phải chạy lại ca tương ứng.
 - [ ] Không so độ trễ periodic/push như thử nghiệm kiểm soát nếu vị trí update trong chu kỳ khác nhau.
 - [ ] Không suy kết luận pin từ số request; lưu cả kết quả trái giả thuyết.
 - [ ] Có đủ đầu ra và CHECKS.md; người làm giải thích được kết quả, reviewer được phân công kiểm tra và ghi kết luận.

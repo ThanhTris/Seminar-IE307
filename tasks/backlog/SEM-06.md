@@ -11,7 +11,7 @@
 
 ## Đầu vào
 
-App/server baseline, schema event, Firebase project đã cấu hình, cơ chế API v1 trong MECHANISMS.
+App/server baseline, SyncWorker và giao diện enqueue từ SEM-04; schema event, Firebase project đã cấu hình, cơ chế API v1 trong MECHANISMS.
 
 ## Việc cần làm
 
@@ -20,10 +20,10 @@ Phân việc: Trang làm client FCM, token refresh, enqueue worker, PUSH.md và 
 Theo [phân công 6 người](../../docs/TEAM_ASSIGNMENTS.md); owner tổng hợp đầu ra và CHECKS, reviewer kiểm trước khi chuyển done.
 
 1. Server gửi AndroidConfig v1 data-only normal priority với run/version, TTL khai báo rõ; không gắn notification payload.
-2. Client ghi received rồi enqueue regular work để fetch snapshot; không để async network rời lifecycle callback.
+2. Client ghi received rồi dùng giao diện enqueue/SyncWorker có sẵn từ SEM-04 để fetch snapshot; không tạo worker riêng hoặc để async network rời lifecycle callback.
 3. Lưu/cập nhật token theo onNewToken và làm mới cấu hình gửi; không commit giá trị token.
 4. Hủy periodic khi thử PUSH; phân biệt FCM accepted, callback, worker và cache applied.
-5. Chạy pilot foreground/background trên emulator và OPPO; payload/callback luôn khớp phiên bản đã chọn.
+5. Ngày 01/11 kiểm tra đầu cuối tối thiểu foreground từ sender của Tâm đến callback và worker; báo blocker ngay nếu chưa thông. Đến 03/11 hoàn tất pilot foreground/background trên emulator và OPPO; payload/callback luôn khớp phiên bản đã chọn.
 
 ## Đầu ra bắt buộc
 

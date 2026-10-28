@@ -11,7 +11,7 @@ Phân công theo đầu việc, chưa dựa trên thông tin về thế mạnh c
 | **Trí** | Môi trường, nền app, tích hợp hybrid, đóng gói | SCOPE/ENVIRONMENT; scaffold/UI/timeline; mode integration và SYNC; APK, release manifest và DEMO_RUNBOOK | 29/10; 31/10; 05/11; 12/11 |
 | **Trang** | Cơ chế và client silent push | Phần lý thuyết FCM; FirebaseMessagingService/token/enqueue; PUSH; pilot push và nội dung slide push | 30/10; 03/11; 10/11 |
 | **Vinh** | Thiết bị, kiểm thử và kiểm chứng dữ liệu | Hồ sơ OPPO/emulator; scripts chạy/reset; manifest và logs E01–E06; SUMMARY; video dự phòng | 29/10; 07/11; 12/11 |
-| **Trung** | Sync core và periodic fetch | Room/SyncRepository/manual sync; scheduler/SyncWorker; PERIODIC; version/retry/race tests | 31/10; 02/11; 05/11 |
+| **Trung** | Sync core và periodic fetch | Room/SyncRepository/SyncWorker và giao diện enqueue chung; periodic scheduler; PERIODIC; version/retry/race tests | Core 31/10; periodic 02/11; tích hợp 05/11 |
 | **Tâm** | Backend, API và gửi FCM | Server snapshot/version; API/EVENT_SCHEMA; CLI gửi/bỏ gửi push; ghi chú bài nghiên cứu thứ hai | 31/10; 01/11; 03–05/11 |
 | **Tuấn** | Tổng hợp cơ chế, nghiên cứu và bài trình bày | MECHANISMS/QUESTIONS; bài nghiên cứu thứ nhất/bibliography; script phân tích/CSV; CLAIMS, slide/PDF/report/notes | 30/10; 01/11; 07/11; 10/11 |
 
@@ -40,7 +40,7 @@ Reviewer kiểm lại đầu ra và CHECKS trước khi chuyển done, không ch
 
 - 28–29/10: chốt phạm vi và môi trường với Tâm/Vinh; ghi phiên bản thực tế và blocker Firebase nếu có.
 - 29–31/10: tạo scaffold Android, UI cache/timeline và nối phần sync của Trung với server của Tâm; tổng hợp SETUP.
-- 04–05/11: tích hợp periodic + push vào ba mode; bảo đảm đổi mode không để worker cũ làm nhiễu ca thử; chốt SYNC.md và một commit tích hợp.
+- 04–05/11: tích hợp periodic + push vào ba mode; bảo đảm đổi mode không để worker cũ làm nhiễu ca thử; chốt SYNC.md, commit app/server và checksum bản ứng viên cuối 05/11 cho Vinh đo tập chính.
 - 11–12/11: build APK, ghi commit/checksum, viết runbook và chốt gói bàn giao. Vinh hỗ trợ video/tái lập; Tuấn hỗ trợ diễn tập.
 - Bàn giao môi trường cho Trung/Trang/Tâm; bản tích hợp cho Vinh; bản demo ổn định cho Tuấn.
 
@@ -48,25 +48,25 @@ Reviewer kiểm lại đầu ra và CHECKS trước khi chuyển done, không ch
 
 - 28–30/10: viết đường đi server → FCM → callback → worker và các giới hạn vào phần SEM-02 giao Tuấn tổng hợp.
 - Đến 01/11: đối chiếu lập luận push trong hai bài nghiên cứu với tài liệu API đang dùng.
-- 01–03/11: triển khai nhận FCM, refresh token, enqueue và PUSH.md; phối hợp Tâm gửi payload đúng; cùng Vinh kiểm foreground/background.
+- 01–03/11: triển khai nhận FCM, refresh token, gọi enqueue/SyncWorker đã có từ SEM-04 và viết PUSH.md; phối hợp Tâm kiểm luồng foreground tối thiểu ngay 01/11, hoàn tất pilot background đến 03/11.
 - 04–05/11: tích hợp duplicate/enqueue vào hybrid với Trí/Trung.
-- 08–10/11: giao nội dung slide push và lời dẫn demo cho Tuấn.
+- Đến 08/11: giao nội dung slide push và lời dẫn demo cho Tuấn; ngày 09–10/11 phối hợp review/sửa. Trang dẫn toàn demo 4 phút, Trí thao tác thiết bị.
 - Đầu ra quan trọng: push nhận được và cache được áp dụng trước khi mở lại UI, có log từng giai đoạn.
 
 ### Vinh — thiết bị và thực nghiệm
 
 - 28–29/10: ghi cấu hình emulator/OPPO, chuẩn bị cách xuất log; phối hợp người đang giữ OPPO để đặt lịch sử dụng, không mặc định Vinh sở hữu thiết bị.
 - 29–31/10: góp ý EVENT_SCHEMA để log đủ phân tích; chuẩn bị run manifest và script chạy/reset.
-- 02–07/11: chạy từng luồng ngay khi được bàn giao; quản lý E01–E06, timeout, run bị nhiễu và kết quả đối chiếu hai máy.
-- Cùng Tuấn tái tính số liệu từ logs; Vinh kiểm dữ liệu đầu vào và ký nhận SUMMARY.
+- 02–05/11: chạy pilot từng luồng để tìm lỗi. Ngày 06–07/11 chạy tập chính E01–E06 trên bản ứng viên, lưu commit/checksum, timeout và run bị nhiễu; chạy lại ca có code/config thay đổi thay vì trộn build.
+- Cùng Tuấn tái tính số liệu từ logs; Vinh kiểm dữ liệu đầu vào, ký nhận SUMMARY ngày 07/11 và giao kết quả/giới hạn cho bài nói chậm nhất 08/11.
 - 11–12/11: quay video bản build thật, tái lập runbook và lưu lỗi diễn tập.
 - Không chỉ chụp màn hình: mỗi kết luận phải truy được về run_id, manifest và log.
 
 ### Trung — sync core và periodic
 
 - 28–30/10: viết phần WorkManager/constraints/lifecycle và cách đọc timeline.
-- 29–31/10: làm Room, SyncRepository, version snapshot và manual sync; UI chỉ đọc cache khi mở lại.
-- 01–02/11: làm unique periodic work, network constraint, SyncWorker, PERIODIC.md và pilot E01.
+- 29–31/10: làm Room, SyncRepository, SyncWorker và giao diện enqueue chung, version snapshot và manual sync; bàn giao core cho Trang trước SEM-06. UI chỉ đọc cache khi mở lại.
+- 01–02/11: làm unique periodic work và network constraint gọi worker chung, PERIODIC.md và pilot E01.
 - 04–05/11: xử lý version guard, retry và race trong core; test trigger trùng/cũ/đến trong khi worker đang kết thúc.
 - Hỗ trợ Vinh kiểm/reset scheduler và xác nhận trigger của dữ liệu đo.
 - Bàn giao cùng API sync cho Trang sử dụng; không tạo sync engine riêng cho từng mode.
@@ -78,14 +78,14 @@ Reviewer kiểm lại đầu ra và CHECKS trước khi chuyển done, không ch
 - Đến 01/11: đọc bài nghiên cứu thứ hai, ghi phương pháp/giới hạn và ca thử liên quan cho Tuấn.
 - 01–03/11: làm CLI gửi data-only, log accepted/rejected và ID; phối hợp Trang kiểm payload/token.
 - 04–05/11: thêm chế độ cố ý bỏ gửi push để thử hybrid.
-- 08–10/11: giao phần kiến trúc và đối chiếu nghiên cứu cho Tuấn; 11–12/11 review gói release.
+- Đến 08/11: giao phần kiến trúc và đối chiếu nghiên cứu cho Tuấn; 09–10/11 hỗ trợ sửa, 11–12/11 review gói release.
 
 ### Tuấn — cơ chế, phân tích và bài nói
 
 - 28–30/10: tổng hợp phần cơ chế của cả nhóm thành hai sơ đồ và ít nhất 10 câu hỏi phản biện; không chỉ ghép văn bản.
 - 29/10–01/11: đọc bài nghiên cứu thứ nhất, tổng hợp hai bài với Tâm/Trang, quản lý references.bib và CLAIMS.
 - 02–07/11: làm script tổng hợp log thành results.csv và bảng/biểu đồ; phối hợp Vinh kiểm số mẫu và timeout.
-- Chuẩn bị dàn ý sớm; 08–10/11 chốt deck/PDF, report, speaker notes và evidence cho từng kết luận.
+- Chuẩn bị dàn ý sớm; nhận nội dung/evidence các phần ngày 08/11, ghép deck/report ngày 09/11 để Trung review, chốt deck/PDF/notes/CLAIMS ngày 10/11. Mỗi người viết phần mình, Tuấn tổng hợp.
 - 11–12/11: điều phối hai lần diễn tập có bấm giờ, ghi REHEARSAL, sửa lời dẫn; mỗi người vẫn phải hiểu cả hai cơ chế.
 - Tuấn là đầu mối chỉnh file deck chính; các thành viên gửi nội dung và evidence, tránh sáu bản slide lệch nhau.
 
@@ -112,11 +112,11 @@ SEM-03 + SEM-09 giữ 20 đơn vị nghiên cứu/lập luận; các task còn l
 ## 5. Thứ tự phối hợp và tránh sửa trùng
 
 - **29/10:** Trí chốt cấu hình nền; Tâm chốt API/EVENT_SCHEMA bản đầu với cả nhóm. Sau đầu vào SEM-01, Trí/Trung làm Android và Tâm làm server song song. Tài liệu SEM-02/03 có thể chuẩn bị trước.
-- **31/10:** ghép manual sync đầu cuối và log. Có thể chuẩn bị tài liệu/test trước, nhưng SEM-05/06 chỉ tích hợp khi đầu vào SEM-02/04 đạt.
+- **31/10:** ghép manual sync đầu cuối và log; SyncWorker/enqueue chung phải có trong đầu ra SEM-04. Có thể chuẩn bị tài liệu/test trước, nhưng SEM-05/06 chỉ tích hợp khi đầu vào SEM-02/04 đạt.
 - **01–03/11:** Trung làm periodic và Trang làm push trên cùng nền tảng; Tâm cung cấp sender; Vinh nhận từng phần để test.
-- **04–05/11:** Trí tập hợp bản hybrid; các thay đổi sync core qua Trung, messaging qua Trang, server qua Tâm.
-- **02–07/11:** Vinh điều phối một lịch chạy cho mỗi thiết bị; không chạy hai ca cùng app làm nhiễu nhau. Tuấn phân tích dữ liệu đã xuất trong lúc phiên khác đang chạy.
-- **08–10/11:** Tuấn tổng hợp bài nói; từng người xác nhận nội dung và số liệu phần mình.
+- **04–05/11:** Trí tập hợp bản hybrid; các thay đổi sync core qua Trung, messaging qua Trang, server qua Tâm. Cuối 05/11 chốt bản ứng viên app/server có commit/checksum cho tập chính.
+- **02–07/11:** Vinh điều phối lịch mỗi thiết bị: 02–05 pilot, 06–07 tập chính trên bản ứng viên; không chạy hai ca cùng app làm nhiễu nhau. Tuấn phân tích dữ liệu đã xuất trong lúc phiên khác đang chạy.
+- **08–10/11:** tất cả giao nội dung/evidence ngày 08, Tuấn ghép ngày 09, Trung review và chốt ngày 10; từng người xác nhận phần mình.
 - **11–12/11:** cả sáu diễn tập, gói nộp chốt bởi Trí; 13/11 dành sửa lỗi cuối.
 
 Đầu mối file dùng chung: Trí quản build/manifest/UI và tích hợp mode; Trung quản Room/SyncRepository/SyncWorker; Trang quản messaging; Tâm quản server/API/EVENT_SCHEMA; Vinh quản script chạy/reset, manifest/log và SUMMARY; Tuấn quản script phân tích, CSV sinh ra, CLAIMS, report và slide.
@@ -128,3 +128,9 @@ SEM-03 + SEM-09 giữ 20 đơn vị nghiên cứu/lập luận; các task còn l
 Owner cập nhật task với: đã làm, link commit/đầu ra, CHECKS, phần còn thiếu và người cần hỗ trợ. Reviewer xác nhận hành vi/nguồn thật trước done. Giữ toàn bộ tiêu chí của task; việc phân người không bỏ đầu ra.
 
 Mỗi thành viên phải giải thích được periodic, silent push, Doze và cách đọc timeline; biết chạy ít nhất một ca thử hoặc tái lập phân tích từ log. Tất cả tham gia diễn tập và trả lời phản biện phần mình.
+
+## 7. Kết quả kiểm tra lần hai
+
+Đã sửa thiếu đầu vào SyncWorker của luồng push, thêm gate bản ứng viên và quy tắc không trộn dữ liệu khác build, đặt hạn nội dung trước ngày chốt slide. Phân vai nói được gộp thành 7 lượt liên tục với một người dẫn demo; 30 giây chuyển tiếp nằm trong tổng 15 phút.
+
+Owner/reviewer, 10 đầu việc, effort 80/20 và các mốc đến 13/11 được giữ. Phân bổ 16–17 đơn vị/người là ước lượng ban đầu; Trí kiểm lại tải và blocker ngày 31/10 và 05/11, điều chuyển phần hỗ trợ khi cần và cập nhật task tương ứng.

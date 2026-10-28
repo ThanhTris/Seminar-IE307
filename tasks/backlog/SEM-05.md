@@ -11,11 +11,11 @@
 
 ## Đầu vào
 
-SyncRepository, docs/API.md, docs/EVENT_SCHEMA.md và mô hình cơ chế đã review.
+SyncRepository, SyncWorker và giao diện enqueue từ SEM-04; docs/API.md, docs/EVENT_SCHEMA.md và mô hình cơ chế đã review.
 
 ## Việc cần làm
 
-Phân việc: Trung làm scheduler/worker, PERIODIC.md và pilot; Trí hỗ trợ nối mode/UI; Vinh kiểm đăng ký lịch và thu pilot E01. Trung bàn giao commit, cấu hình và log cho Vinh chạy tập chính.
+Phân việc: Trung làm periodic scheduler/configuration dùng SyncWorker đã bàn giao ở SEM-04, PERIODIC.md và pilot; Trí hỗ trợ nối mode/UI; Vinh kiểm đăng ký lịch và thu pilot E01. Trung bàn giao commit, cấu hình và log cho Vinh chạy tập chính.
 
 Theo [phân công 6 người](../../docs/TEAM_ASSIGNMENTS.md); owner tổng hợp đầu ra và CHECKS, reviewer kiểm trước khi chuyển done.
 
@@ -26,7 +26,7 @@ Theo [phân công 6 người](../../docs/TEAM_ASSIGNMENTS.md); owner tổng hợ
 
 ## Đầu ra bắt buộc
 
-- android/ — periodic scheduler và SyncWorker dùng repository chung.
+- android/ — periodic scheduler gọi SyncWorker chung từ SEM-04; không tạo worker hay sync engine riêng cạnh tranh với luồng push.
 - docs/PERIODIC.md — luồng xử lý, cấu hình được dùng, cách kiểm tra lịch và đọc log.
 - experiments/runs/<run_id>/ — manifest và event log của pilot được gắn nhãn.
 - docs/evidence/SEM-05/CHECKS.md — commit, môi trường, bước kiểm tra, expected/actual, link bằng chứng, hạn chế và phần bàn giao.

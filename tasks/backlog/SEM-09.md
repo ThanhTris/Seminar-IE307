@@ -24,6 +24,7 @@ Theo [phân công 6 người](../../docs/TEAM_ASSIGNMENTS.md); owner tổng hợ
 3. Cập nhật docs/CLAIMS.md với evidence thực tế và trạng thái supported/limited/not-tested.
 4. Soạn speaker notes, lời dẫn chuyển demo, đáp án phản biện và báo cáo ngắn có trích dẫn.
 5. Chỉ chốt kết luận khi đủ dữ liệu; giữ chi tiết API/EAP/metadata ở phụ lục.
+6. Trí/Trang/Vinh/Tâm giao nội dung và evidence phần mình chậm nhất 08/11; Tuấn ghép bản đầu ngày 09/11, Trung review, chốt ngày 10/11. Không để mọi người giao nội dung vào đúng ngày phải hoàn tất deck.
 
 ## Đầu ra bắt buộc
 
