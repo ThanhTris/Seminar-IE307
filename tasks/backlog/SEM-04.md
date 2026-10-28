@@ -3,7 +3,9 @@
 - Status: backlog
 - Lịch mục tiêu: 29–31/10/2026
 - Công sức: 15/100 — Thực hành
-- Owner/reviewer: chưa phân công
+- Owner: Tâm
+- Reviewer: Trang
+- Phối hợp: Trí, Vinh, Trung
 - Điều kiện bắt đầu: SEM-01 đã có đầu ra cần dùng
 - Điều kiện hoàn tất bổ sung: không ngoài điều kiện bắt đầu
 
@@ -12,6 +14,10 @@
 docs/SCOPE.md và docs/ENVIRONMENT.md đã đủ để build; kiến trúc tối thiểu trong PLAN.
 
 ## Việc cần làm
+
+Phân việc: Tâm làm server, API.md và phần event phía server; Trung làm Room/SyncRepository/manual sync; Trí làm scaffold Android, UI timeline và tích hợp, tổng hợp SETUP; Vinh chốt trường dữ liệu đo và kiểm log. Tâm quản lý API.md/EVENT_SCHEMA.md và nghiệm thu đầu cuối.
+
+Theo [phân công 6 người](../../docs/TEAM_ASSIGNMENTS.md); owner tổng hợp đầu ra và CHECKS, reviewer kiểm trước khi chuyển done.
 
 1. Tạo project Android Kotlin/Compose/Room và server TypeScript; pin dependency, Gradle wrapper và package lock.
 2. Xây API đọc/cập nhật snapshot có version tăng đơn điệu; persist version và snapshot qua restart server.
@@ -33,7 +39,7 @@ docs/SCOPE.md và docs/ENVIRONMENT.md đã đủ để build; kiến trúc tối
 - [ ] Build APK debug; server khởi động, app GET và lưu snapshot; đọc cache sau khi offline/mở lại.
 - [ ] Manual sync ghi trigger MANUAL; mở UI không âm thầm GET dữ liệu.
 - [ ] Server restart không làm version giảm; log từ hai phía liên kết được cùng một run.
-- [ ] Có đủ đầu ra và CHECKS.md; người làm giải thích được kết quả, reviewer hoặc người thực hiện tự review được ghi rõ.
+- [ ] Có đủ đầu ra và CHECKS.md; người làm giải thích được kết quả, reviewer được phân công kiểm tra và ghi kết luận.
 
 ## Trạng thái bàn giao
 

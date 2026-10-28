@@ -3,7 +3,9 @@
 - Status: backlog
 - Lịch mục tiêu: 29/10–01/11/2026
 - Công sức: 10/100 — Nghiên cứu
-- Owner/reviewer: chưa phân công
+- Owner: Tuấn
+- Reviewer: Vinh
+- Phối hợp: Trang, Tâm
 - Điều kiện bắt đầu: có thể chuẩn bị từ kế hoạch đã chốt
 - Điều kiện hoàn tất bổ sung: SEM-01 đã bàn giao
 
@@ -12,6 +14,10 @@
 Phạm vi Android đã xác nhận, các câu hỏi trong PLAN và protocol; bổ sung cơ chế từ SEM-02 khi có.
 
 ## Việc cần làm
+
+Phân việc: Tuấn chọn và đọc bài thứ nhất, quản lý bibliography và CLAIMS; Tâm đọc bài thứ hai và liên hệ thiết kế thử; Trang đối chiếu lập luận push với tài liệu hiện hành. Tuấn chịu trách nhiệm đủ hai ghi chú và nguồn kiểm chứng.
+
+Theo [phân công 6 người](../../docs/TEAM_ASSIGNMENTS.md); owner tổng hợp đầu ra và CHECKS, reviewer kiểm trước khi chuyển done.
 
 1. Tìm và chọn 2 nghiên cứu phù hợp về scheduling/push-polling/đồng bộ mobile; đọc phương pháp và giới hạn, không chỉ abstract.
 2. Ghi tác giả, năm, DOI/URL, môi trường thử, kết luận và điều có thể/không thể áp dụng cho demo.
@@ -30,7 +36,7 @@ Phạm vi Android đã xác nhận, các câu hỏi trong PLAN và protocol; b�
 - [ ] DOI/URL, tên và tác giả khớp bản gốc; nguồn không liên quan phải bị loại.
 - [ ] Ít nhất một lập luận ảnh hưởng trực tiếp cách thử hoặc giải thích trade-off; không nhét paper chỉ để tăng số trích dẫn.
 - [ ] Không dùng kết quả nghiên cứu cũ làm số đo trên OPPO; giữ công sức nghiên cứu trong 20%.
-- [ ] Có đủ đầu ra và CHECKS.md; người làm giải thích được kết quả, reviewer hoặc người thực hiện tự review được ghi rõ.
+- [ ] Có đủ đầu ra và CHECKS.md; người làm giải thích được kết quả, reviewer được phân công kiểm tra và ghi kết luận.
 
 ## Trạng thái bàn giao
 

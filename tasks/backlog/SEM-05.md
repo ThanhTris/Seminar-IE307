@@ -3,7 +3,9 @@
 - Status: backlog
 - Lịch mục tiêu: 01–02/11/2026
 - Công sức: 10/100 — Thực hành
-- Owner/reviewer: chưa phân công
+- Owner: Trung
+- Reviewer: Trang
+- Phối hợp: Trí, Vinh
 - Điều kiện bắt đầu: SEM-02, SEM-04 đã có đầu ra cần dùng
 - Điều kiện hoàn tất bổ sung: không ngoài điều kiện bắt đầu
 
@@ -12,6 +14,10 @@
 SyncRepository, docs/API.md, docs/EVENT_SCHEMA.md và mô hình cơ chế đã review.
 
 ## Việc cần làm
+
+Phân việc: Trung làm scheduler/worker, PERIODIC.md và pilot; Trí hỗ trợ nối mode/UI; Vinh kiểm đăng ký lịch và thu pilot E01. Trung bàn giao commit, cấu hình và log cho Vinh chạy tập chính.
+
+Theo [phân công 6 người](../../docs/TEAM_ASSIGNMENTS.md); owner tổng hợp đầu ra và CHECKS, reviewer kiểm trước khi chuyển done.
 
 1. Thêm unique periodic work và network constraint, cập nhật UI trạng thái lịch.
 2. Tắt push khi thử mode PERIODIC; đăng ký nhiều lần không sinh thêm lịch.
@@ -30,7 +36,7 @@ SyncRepository, docs/API.md, docs/EVENT_SCHEMA.md và mô hình cơ chế đã r
 - [ ] Một lịch active sau nhiều lần đăng ký; worker có trigger PERIODIC.
 - [ ] Có ít nhất 2 lần chạy tự nhiên trong pilot và ghi cả phiên quan sát; nếu thiếu, nêu blocker.
 - [ ] Không yêu cầu hệ thống phải lệch giờ để chứng minh hiểu giới hạn; đối chiếu điều quan sát với tài liệu.
-- [ ] Có đủ đầu ra và CHECKS.md; người làm giải thích được kết quả, reviewer hoặc người thực hiện tự review được ghi rõ.
+- [ ] Có đủ đầu ra và CHECKS.md; người làm giải thích được kết quả, reviewer được phân công kiểm tra và ghi kết luận.
 
 ## Trạng thái bàn giao
 

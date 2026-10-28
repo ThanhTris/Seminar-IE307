@@ -25,7 +25,7 @@ Tỷ lệ 80/20 là công sức, không áp đặt tỷ lệ số slide. Phần 
 | Trình bày | 15 phút gồm 4 phút demo; phân bổ chi tiết tại PRESENTATION_PLAN.md |
 | Ngoài phạm vi cốt lõi | iOS, đa người dùng, đăng nhập sản phẩm, thiết kế UI cầu kỳ, benchmark pin, phát hành store |
 | Bài báo | 2 nghiên cứu phù hợp được đọc kỹ; bài thứ 3–4 là mở rộng |
-| Nhân sự | Chưa gán owner; task có thể thực hiện tuần tự, không giả định có nhiều thành viên |
+| Nhân sự | 6 người: Trí, Trang, Vinh, Trung, Tâm, Tuấn; owner/phối hợp/reviewer theo [bảng phân công](TEAM_ASSIGNMENTS.md) |
 
 Phiên bản Android/ColorOS, API level máy ảo, JDK/Gradle/SDK và thư viện phải ghi trong SEM-01. Không suy ra thông số thiết bị từ tên model. Không chuyển stack nếu chưa có lý do và cập nhật quyết định trong repo.
 
@@ -99,7 +99,7 @@ Nếu 31/10 chưa có M1 (sync thủ công và log), báo blocker ngay và ưu t
 | SEM-09 | 10 | Nghiên cứu/lập luận/trình bày |
 | SEM-10 | 5 | Thực hành/diễn tập |
 
-Tổng thực hành 80, nghiên cứu 20. Đây là trọng số tương đối, chưa phải dự toán giờ vì chưa có quỹ thời gian/người thực hiện.
+Tổng thực hành 80, nghiên cứu 20. Chia theo phần đóng góp: Trí 17, Trang 16, Vinh 17, Trung 17, Tâm 16, Tuấn 17. Đây là trọng số tương đối, không phải giờ hoặc điểm đánh giá; điều chỉnh nếu khối lượng thực tế lệch.
 
 ## 8. Nghiệm thu chung
 

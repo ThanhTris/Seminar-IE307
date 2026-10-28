@@ -3,7 +3,9 @@
 - Status: backlog
 - Lịch mục tiêu: 28–30/10/2026
 - Công sức: 15/100 — Thực hành/hiểu cơ chế
-- Owner/reviewer: chưa phân công
+- Owner: Tuấn
+- Reviewer: Trí
+- Phối hợp: Trí, Trang, Vinh, Trung, Tâm
 - Điều kiện bắt đầu: có thể chuẩn bị từ kế hoạch đã chốt
 - Điều kiện hoàn tất bổ sung: SEM-01 đã bàn giao
 
@@ -12,6 +14,10 @@
 Phạm vi đã xác nhận trong docs/PLAN.md và nguồn chính thức trong research/README.md. Bổ sung version thiết bị khi SEM-01 bàn giao.
 
 ## Việc cần làm
+
+Phân việc: Trung viết luồng periodic; Trang viết luồng push; Vinh viết bảng trạng thái và điều cần đo; Tâm viết phần server/FCM; Trí kiểm đường đi dữ liệu chung. Tuấn tổng hợp MECHANISMS, hai sơ đồ và QUESTIONS. Các phần do Trí viết được Tuấn đọc chéo.
+
+Theo [phân công 6 người](../../docs/TEAM_ASSIGNMENTS.md); owner tổng hợp đầu ra và CHECKS, reviewer kiểm trước khi chuyển done.
 
 1. Giải thích từ trigger đến cache: periodic scheduler/WorkManager và push FCM/callback/worker.
 2. Phân biệt data-only, notification và mixed payload trong baseline API; phân biệt trigger nhận được và sync hoàn tất.
@@ -29,7 +35,7 @@ Phạm vi đã xác nhận trong docs/PLAN.md và nguồn chính thức trong re
 - [ ] Có thể giải thích hai luồng không đọc code, chỉ ra điểm Android quyết định chạy.
 - [ ] Không đồng nhất màn hình tắt với Doze hoặc data-only với thông báo tắt tiếng.
 - [ ] Không cần tạo app riêng cho task này; bằng chứng runtime được bổ sung từ SEM-05/06/08.
-- [ ] Có đủ đầu ra và CHECKS.md; người làm giải thích được kết quả, reviewer hoặc người thực hiện tự review được ghi rõ.
+- [ ] Có đủ đầu ra và CHECKS.md; người làm giải thích được kết quả, reviewer được phân công kiểm tra và ghi kết luận.
 
 ## Trạng thái bàn giao
 

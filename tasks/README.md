@@ -4,18 +4,20 @@ Kế hoạch cập nhật 28/10/2026, hạn 13/11/2026. Toàn bộ task vẫn **
 
 Mỗi task có việc cần làm, đầu ra bắt buộc, ca nghiệm thu và điều kiện bắt đầu/hoàn tất. Giữ ID SEM-01…SEM-10; không tạo chat hoặc GitHub Issue mới.
 
-| Task | Lịch mục tiêu | Công sức | Điều kiện bắt đầu | Điều kiện hoàn tất bổ sung |
-|---|---|---:|---|---|
-| [SEM-01 — Chốt phạm vi và kiểm tra môi trường](backlog/SEM-01.md) | 28–29/10/2026 | 5 | Chuẩn bị ngay | — |
-| [SEM-02 — Xây mô hình cơ chế và câu hỏi phản biện](backlog/SEM-02.md) | 28–30/10/2026 | 15 | Chuẩn bị ngay | SEM-01 |
-| [SEM-03 — Đọc hai nghiên cứu và lập bảng lập luận](backlog/SEM-03.md) | 29/10–01/11/2026 | 10 | Chuẩn bị ngay | SEM-01 |
-| [SEM-04 — Dựng demo tối thiểu và logging](backlog/SEM-04.md) | 29–31/10/2026 | 15 | SEM-01 | — |
-| [SEM-05 — Triển khai và quan sát periodic fetch](backlog/SEM-05.md) | 01–02/11/2026 | 10 | SEM-02, SEM-04 | — |
-| [SEM-06 — Triển khai và quan sát push im lặng](backlog/SEM-06.md) | 01–03/11/2026 | 10 | SEM-02, SEM-04 | — |
-| [SEM-07 — Tích hợp hybrid và tính đúng của đồng bộ](backlog/SEM-07.md) | 04–05/11/2026 | 10 | SEM-05, SEM-06 | — |
-| [SEM-08 — Chạy tập ca cốt lõi và phân tích số đo](backlog/SEM-08.md) | Chuẩn bị từ 28/10; chạy 02–07/11/2026 | 10 | Chuẩn bị ngay | SEM-05, SEM-06, SEM-07 |
-| [SEM-09 — Hoàn thiện bài trình bày 15 phút và lập luận](backlog/SEM-09.md) | Dàn ý từ 28/10; bản cuối 08–10/11/2026 | 10 | Chuẩn bị ngay | SEM-02, SEM-03, SEM-08 |
-| [SEM-10 — Đóng gói demo và diễn tập](backlog/SEM-10.md) | 11–12/11/2026; dự phòng 13/11 | 5 | SEM-07 | SEM-08, SEM-09 |
+Đã phân công cho Trí, Trang, Vinh, Trung, Tâm và Tuấn. Xem [bảng phân công theo người](../docs/TEAM_ASSIGNMENTS.md) để biết phần đóng góp, đầu ra, mốc bàn giao và reviewer; owner/reviewer cũng được ghi trực tiếp trong từng task.
+
+| Task | Owner | Reviewer | Lịch mục tiêu | Công sức | Điều kiện bắt đầu | Điều kiện hoàn tất bổ sung |
+|---|---|---|---|---:|---|---|
+| [SEM-01 — Chốt phạm vi và kiểm tra môi trường](backlog/SEM-01.md) | Trí | Trung | 28–29/10/2026 | 5 | Chuẩn bị ngay | — |
+| [SEM-02 — Xây mô hình cơ chế và câu hỏi phản biện](backlog/SEM-02.md) | Tuấn | Trí | 28–30/10/2026 | 15 | Chuẩn bị ngay | SEM-01 |
+| [SEM-03 — Đọc hai nghiên cứu và lập bảng lập luận](backlog/SEM-03.md) | Tuấn | Vinh | 29/10–01/11/2026 | 10 | Chuẩn bị ngay | SEM-01 |
+| [SEM-04 — Dựng demo tối thiểu và logging](backlog/SEM-04.md) | Tâm | Trang | 29–31/10/2026 | 15 | SEM-01 | — |
+| [SEM-05 — Triển khai và quan sát periodic fetch](backlog/SEM-05.md) | Trung | Trang | 01–02/11/2026 | 10 | SEM-02, SEM-04 | — |
+| [SEM-06 — Triển khai và quan sát push im lặng](backlog/SEM-06.md) | Trang | Trí | 01–03/11/2026 | 10 | SEM-02, SEM-04 | — |
+| [SEM-07 — Tích hợp hybrid và tính đúng của đồng bộ](backlog/SEM-07.md) | Trí | Vinh | 04–05/11/2026 | 10 | SEM-05, SEM-06 | — |
+| [SEM-08 — Chạy tập ca cốt lõi và phân tích số đo](backlog/SEM-08.md) | Vinh | Trang | Chuẩn bị từ 28/10; chạy 02–07/11/2026 | 10 | Chuẩn bị ngay | SEM-05, SEM-06, SEM-07 |
+| [SEM-09 — Hoàn thiện bài trình bày 15 phút và lập luận](backlog/SEM-09.md) | Tuấn | Trung | Dàn ý từ 28/10; bản cuối 08–10/11/2026 | 10 | Chuẩn bị ngay | SEM-02, SEM-03, SEM-08 |
+| [SEM-10 — Đóng gói demo và diễn tập](backlog/SEM-10.md) | Trí | Tâm | 11–12/11/2026; dự phòng 13/11 | 5 | SEM-07 | SEM-08, SEM-09 |
 
 ## Cách sử dụng
 

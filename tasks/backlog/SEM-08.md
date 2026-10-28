@@ -3,7 +3,9 @@
 - Status: backlog
 - Lịch mục tiêu: Chuẩn bị từ 28/10; chạy 02–07/11/2026
 - Công sức: 10/100 — Thực hành
-- Owner/reviewer: chưa phân công
+- Owner: Vinh
+- Reviewer: Trang
+- Phối hợp: Trung, Tuấn
 - Điều kiện bắt đầu: có thể chuẩn bị từ kế hoạch đã chốt
 - Điều kiện hoàn tất bổ sung: SEM-05, SEM-06, SEM-07 đã bàn giao
 
@@ -12,6 +14,10 @@
 docs/EXPERIMENT_PROTOCOL.md. E01 chờ SEM-05; E02 chờ SEM-06; E03/E04 chạy từng trigger khi sẵn sàng; E05/E06 chờ SEM-07.
 
 ## Việc cần làm
+
+Phân việc: Vinh điều phối thiết bị, chạy E01–E06, quản lý manifest/log và SUMMARY; Tuấn làm script tổng hợp CSV, bảng/biểu đồ và kiểm số mẫu/timeout; Trung hỗ trợ reset scheduler, xác nhận log periodic. Người viết trigger sửa lỗi thuộc module của mình trước khi Vinh chạy lại.
+
+Theo [phân công 6 người](../../docs/TEAM_ASSIGNMENTS.md); owner tổng hợp đầu ra và CHECKS, reviewer kiểm trước khi chuyển done.
 
 1. Tạo script/manifest theo protocol và test pilot; giữ cấu hình cố định cho tập chính.
 2. Thực hiện E01–E06 với số lượt/cửa sổ quy định, ghi cả run lỗi/timeout và tình trạng NOT_RUN.
@@ -33,7 +39,7 @@ docs/EXPERIMENT_PROTOCOL.md. E01 chờ SEM-05; E02 chờ SEM-06; E03/E04 chạy 
 - [ ] Tái tính được bảng từ log; median đi kèm n_complete/n_total.
 - [ ] Không so độ trễ periodic/push như thử nghiệm kiểm soát nếu vị trí update trong chu kỳ khác nhau.
 - [ ] Không suy kết luận pin từ số request; lưu cả kết quả trái giả thuyết.
-- [ ] Có đủ đầu ra và CHECKS.md; người làm giải thích được kết quả, reviewer hoặc người thực hiện tự review được ghi rõ.
+- [ ] Có đủ đầu ra và CHECKS.md; người làm giải thích được kết quả, reviewer được phân công kiểm tra và ghi kết luận.
 
 ## Trạng thái bàn giao
 

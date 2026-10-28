@@ -5,6 +5,7 @@
 - [Kế hoạch hiện hành](docs/PLAN.md)
 - [Kết quả rà soát ngày 28/10/2026](docs/REVIEW-2026-10-28.md)
 - [10 task: việc cần làm và đầu ra](tasks/README.md)
+- [Phân công 6 thành viên](docs/TEAM_ASSIGNMENTS.md)
 - [Kịch bản thuyết trình 15 phút](docs/PRESENTATION_PLAN.md)
 - [Thiết kế kiểm thử](docs/EXPERIMENT_PROTOCOL.md)
 - [Tài liệu tham khảo](research/README.md)

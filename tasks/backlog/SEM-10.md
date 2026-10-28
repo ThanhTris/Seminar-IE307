@@ -3,7 +3,9 @@
 - Status: backlog
 - Lịch mục tiêu: 11–12/11/2026; dự phòng 13/11
 - Công sức: 5/100 — Thực hành
-- Owner/reviewer: chưa phân công
+- Owner: Trí
+- Reviewer: Tâm
+- Phối hợp: Vinh, Tuấn
 - Điều kiện bắt đầu: SEM-07 đã có đầu ra cần dùng
 - Điều kiện hoàn tất bổ sung: SEM-08, SEM-09 đã bàn giao
 
@@ -12,6 +14,10 @@
 App/server đã tích hợp; kịch bản PRESENTATION_PLAN; kết quả SEM-08 và slide SEM-09 trước khi hoàn tất.
 
 ## Việc cần làm
+
+Phân việc: Trí build/đóng gói, ghi manifest/checksum và DEMO_RUNBOOK; Vinh quay video, thử chạy theo runbook và ghi lỗi; Tuấn điều phối hai lượt diễn tập, ghi REHEARSAL và sửa lời dẫn. Cả sáu tham gia diễn tập, sửa nội dung/module mình phụ trách.
+
+Theo [phân công 6 người](../../docs/TEAM_ASSIGNMENTS.md); owner tổng hợp đầu ra và CHECKS, reviewer kiểm trước khi chuyển done.
 
 1. Build APK cho OPPO và emulator, chạy setup từ môi trường sạch hoặc ghi rõ phần chưa tái lập.
 2. Quay video dự phòng từ run thật của bản build tương ứng; metadata và nhãn phát lại rõ ràng.
@@ -32,7 +38,7 @@ App/server đã tích hợp; kịch bản PRESENTATION_PLAN; kết quả SEM-08 
 - [ ] Người khác làm theo runbook tái lập được hoặc ghi rõ bước cần hỗ trợ/cấu hình.
 - [ ] Hai lần diễn tập nằm trong 15 phút gồm demo; payload/log/video không lộ bí mật.
 - [ ] APK, server, báo cáo và slide trỏ đúng commit; mọi phần chưa hoàn thành được liệt kê trước bàn giao.
-- [ ] Có đủ đầu ra và CHECKS.md; người làm giải thích được kết quả, reviewer hoặc người thực hiện tự review được ghi rõ.
+- [ ] Có đủ đầu ra và CHECKS.md; người làm giải thích được kết quả, reviewer được phân công kiểm tra và ghi kết luận.
 
 ## Trạng thái bàn giao
 

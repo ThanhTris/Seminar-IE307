@@ -18,6 +18,22 @@
 
 Nếu giảng viên tính cả hỏi đáp trong 15 phút: dùng biến thể 13 phút trình bày + 2 phút hỏi đáp; rút mỗi phần cơ chế 30 giây, demo 30 giây và kết quả 30 giây. Phương án chính hiện là 15 phút trình bày gồm demo theo xác nhận của người dùng.
 
+## Phân vai trình bày đề xuất
+
+| Phần theo lịch phía trên | Người trình bày |
+|---|---|
+| Mở bài 00:00–00:45 | Trí |
+| Hai cách kích hoạt 00:45–02:00 | Tuấn |
+| Periodic 02:00–04:00 | Trung |
+| Silent push 04:00–06:00 | Trang |
+| Kiến trúc 06:00–07:00 | Tâm |
+| Demo 07:00–11:00 | Trí thao tác thiết bị xuyên suốt; Trang dẫn 90 giây đầu, Trung 60 giây periodic, Vinh 60 giây ca giới hạn, Trí chốt 30 giây |
+| Kết quả 11:00–12:45 | Vinh |
+| Đối chiếu nghiên cứu 12:45–14:00 | Tâm |
+| Kết luận 14:00–15:00 | Tuấn |
+
+Giữ nguyên tổng 15 phút; không thêm thời gian giới thiệu từng người. Khi diễn tập, có thể giảm số lần đổi người trong demo nếu lời dẫn bị ngắt; người phụ trách thao tác vẫn là Trí. Đây là phân vai nói, không thay phân công triển khai trong [TEAM_ASSIGNMENTS](TEAM_ASSIGNMENTS.md).
+
 ## Kịch bản demo 4 phút
 
 1. 0:00–0:30: cho thấy mode PUSH, cache version N; đưa app về background. Màn hình timeline của server và log đã lọc device/run sẵn.

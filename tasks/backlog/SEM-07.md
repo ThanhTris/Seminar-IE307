@@ -3,7 +3,9 @@
 - Status: backlog
 - Lịch mục tiêu: 04–05/11/2026
 - Công sức: 10/100 — Thực hành
-- Owner/reviewer: chưa phân công
+- Owner: Trí
+- Reviewer: Vinh
+- Phối hợp: Trang, Trung, Tâm
 - Điều kiện bắt đầu: SEM-05, SEM-06 đã có đầu ra cần dùng
 - Điều kiện hoàn tất bổ sung: không ngoài điều kiện bắt đầu
 
@@ -12,6 +14,10 @@
 Hai trigger chạy độc lập, repository/schema chung và dữ liệu pilot.
 
 ## Việc cần làm
+
+Phân việc: Trí tích hợp mode và quản lý merge/SYNC.md; Trung làm version guard, retry và test race trong sync core; Trang xử lý duplicate/enqueue từ push; Tâm thêm lệnh bỏ gửi push có chủ ý. Trí bàn giao một bản tích hợp cho E05/E06.
+
+Theo [phân công 6 người](../../docs/TEAM_ASSIGNMENTS.md); owner tổng hợp đầu ra và CHECKS, reviewer kiểm trước khi chuyển done.
 
 1. Bật mode HYBRID và làm sạch lịch khi chuyển mode; worker còn chạy phải kết thúc hoặc đánh dấu ca bị nhiễu.
 2. Dùng transaction/version guard để không áp dụng snapshot cũ hoặc ghi trùng.
@@ -31,7 +37,7 @@ Hai trigger chạy độc lập, repository/schema chung và dữ liệu pilot.
 - [ ] Các test logic quan trọng pass; không viết test chỉ kiểm tra tên hàm hoặc scaffold.
 - [ ] E05 pilot không giảm version/ghi trùng, không bỏ mất version mới ở race.
 - [ ] E06 pilot thể hiện cập nhật từ PERIODIC khi cố ý không gửi push; không gọi là vượt Doze/force-stop.
-- [ ] Có đủ đầu ra và CHECKS.md; người làm giải thích được kết quả, reviewer hoặc người thực hiện tự review được ghi rõ.
+- [ ] Có đủ đầu ra và CHECKS.md; người làm giải thích được kết quả, reviewer được phân công kiểm tra và ghi kết luận.
 
 ## Trạng thái bàn giao
 

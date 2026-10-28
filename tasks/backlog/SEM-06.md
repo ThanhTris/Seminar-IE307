@@ -3,7 +3,9 @@
 - Status: backlog
 - Lịch mục tiêu: 01–03/11/2026
 - Công sức: 10/100 — Thực hành
-- Owner/reviewer: chưa phân công
+- Owner: Trang
+- Reviewer: Trí
+- Phối hợp: Vinh, Tâm
 - Điều kiện bắt đầu: SEM-02, SEM-04 đã có đầu ra cần dùng
 - Điều kiện hoàn tất bổ sung: không ngoài điều kiện bắt đầu
 
@@ -12,6 +14,10 @@
 App/server baseline, schema event, Firebase project đã cấu hình, cơ chế API v1 trong MECHANISMS.
 
 ## Việc cần làm
+
+Phân việc: Trang làm client FCM, token refresh, enqueue worker, PUSH.md và pilot; Tâm làm lệnh gửi server, TTL và correlation ID; Vinh xác nhận log/pilot trên hai thiết bị. Trang chịu trách nhiệm luồng push đầu cuối.
+
+Theo [phân công 6 người](../../docs/TEAM_ASSIGNMENTS.md); owner tổng hợp đầu ra và CHECKS, reviewer kiểm trước khi chuyển done.
 
 1. Server gửi AndroidConfig v1 data-only normal priority với run/version, TTL khai báo rõ; không gắn notification payload.
 2. Client ghi received rồi enqueue regular work để fetch snapshot; không để async network rời lifecycle callback.
@@ -33,7 +39,7 @@ App/server baseline, schema event, Firebase project đã cấu hình, cơ chế 
 - [ ] Không có thông báo do demo tự tạo; ghi màn hình và log để xác nhận data-only.
 - [ ] Không báo FCM accepted là delivered; không dùng high-priority silent traffic để che tình huống chậm.
 - [ ] Khóa SDK ổn định; AndroidConfigV2 EAP chỉ là ghi chú trong nguồn, không trộn code vào baseline.
-- [ ] Có đủ đầu ra và CHECKS.md; người làm giải thích được kết quả, reviewer hoặc người thực hiện tự review được ghi rõ.
+- [ ] Có đủ đầu ra và CHECKS.md; người làm giải thích được kết quả, reviewer được phân công kiểm tra và ghi kết luận.
 
 ## Trạng thái bàn giao
 
