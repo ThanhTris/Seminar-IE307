@@ -1,16 +1,29 @@
 # Task board — Seminar IE307
 
-Tất cả task ở backlog; owner/reviewer chờ phân công. Đường dẫn đầu ra dưới đây là kế hoạch, chưa phải artifact đã hoàn thành.
+Kế hoạch cập nhật 28/10/2026, hạn 13/11/2026. Toàn bộ task vẫn **backlog**, chưa có code/evidence. Các đầu ra là yêu cầu bàn giao, không phải file đã hoàn thành.
 
-| ID | Task | Phụ thuộc |
-|---|---|---|
-| [SEM-01](backlog/SEM-01.md) | Chốt phạm vi và môi trường | — |
-| [SEM-02](backlog/SEM-02.md) | Giải thích cơ chế Android | SEM-01 |
-| [SEM-03](backlog/SEM-03.md) | Tuyển chọn và đọc nghiên cứu | SEM-01 |
-| [SEM-04](backlog/SEM-04.md) | Dựng app, server và quan sát | SEM-01 |
-| [SEM-05](backlog/SEM-05.md) | Triển khai periodic fetch | SEM-02, SEM-04 |
-| [SEM-06](backlog/SEM-06.md) | Triển khai FCM data-only | SEM-02, SEM-04 |
-| [SEM-07](backlog/SEM-07.md) | Tích hợp hybrid và phục hồi | SEM-05, SEM-06 |
-| [SEM-08](backlog/SEM-08.md) | Chạy ma trận thực nghiệm | SEM-07 |
-| [SEM-09](backlog/SEM-09.md) | Đối chiếu và soạn bài trình bày | SEM-03, SEM-08 |
-| [SEM-10](backlog/SEM-10.md) | Đóng gói và diễn tập | SEM-09 |
+Mỗi task có việc cần làm, đầu ra bắt buộc, ca nghiệm thu và điều kiện bắt đầu/hoàn tất. Giữ ID SEM-01…SEM-10; không tạo chat hoặc GitHub Issue mới.
+
+| Task | Lịch mục tiêu | Công sức | Điều kiện bắt đầu | Điều kiện hoàn tất bổ sung |
+|---|---|---:|---|---|
+| [SEM-01 — Chốt phạm vi và kiểm tra môi trường](backlog/SEM-01.md) | 28–29/10/2026 | 5 | Chuẩn bị ngay | — |
+| [SEM-02 — Xây mô hình cơ chế và câu hỏi phản biện](backlog/SEM-02.md) | 28–30/10/2026 | 15 | Chuẩn bị ngay | SEM-01 |
+| [SEM-03 — Đọc hai nghiên cứu và lập bảng lập luận](backlog/SEM-03.md) | 29/10–01/11/2026 | 10 | Chuẩn bị ngay | SEM-01 |
+| [SEM-04 — Dựng demo tối thiểu và logging](backlog/SEM-04.md) | 29–31/10/2026 | 15 | SEM-01 | — |
+| [SEM-05 — Triển khai và quan sát periodic fetch](backlog/SEM-05.md) | 01–02/11/2026 | 10 | SEM-02, SEM-04 | — |
+| [SEM-06 — Triển khai và quan sát push im lặng](backlog/SEM-06.md) | 01–03/11/2026 | 10 | SEM-02, SEM-04 | — |
+| [SEM-07 — Tích hợp hybrid và tính đúng của đồng bộ](backlog/SEM-07.md) | 04–05/11/2026 | 10 | SEM-05, SEM-06 | — |
+| [SEM-08 — Chạy tập ca cốt lõi và phân tích số đo](backlog/SEM-08.md) | Chuẩn bị từ 28/10; chạy 02–07/11/2026 | 10 | Chuẩn bị ngay | SEM-05, SEM-06, SEM-07 |
+| [SEM-09 — Hoàn thiện bài trình bày 15 phút và lập luận](backlog/SEM-09.md) | Dàn ý từ 28/10; bản cuối 08–10/11/2026 | 10 | Chuẩn bị ngay | SEM-02, SEM-03, SEM-08 |
+| [SEM-10 — Đóng gói demo và diễn tập](backlog/SEM-10.md) | 11–12/11/2026; dự phòng 13/11 | 5 | SEM-07 | SEM-08, SEM-09 |
+
+## Cách sử dụng
+
+1. Bắt đầu SEM-01 kiểm tra môi trường và SEM-02 xây mô hình cơ chế; SEM-03 có thể đọc nguồn theo phạm vi đã xác nhận.
+2. SEM-04 chỉ code trên môi trường đã chốt. SEM-05 và SEM-06 dùng cùng nền tảng; nếu một người làm, thực hiện từng luồng, không cần hai project riêng.
+3. SEM-08 chuẩn bị protocol ngay, chạy ca theo từng đầu vào: E01 sau SEM-05; E02 sau SEM-06; E03/E04 theo trigger đã sẵn sàng; E05/E06 sau SEM-07. Chỉ hoàn tất sau đủ tập cốt lõi.
+4. SEM-09 soạn dàn ý ngay; phần kết quả chờ SEM-08. SEM-10 có thể chuẩn bị đóng gói sau SEM-07, nhưng nghiệm thu cuối phải có SEM-08/09.
+5. Trạng thái backlog → in-progress → review → done; nhánh task/SEM-XX-ten-ngan. Mỗi task có một CHECKS.md bao gồm bàn giao; HANDOFF.md là tùy chọn.
+6. Task done cần đầu ra thật, kiểm chứng và kết luận review; không coi việc viết kế hoạch là hoàn thành task.
+
+Trọng số: thực hành/cơ chế/diễn tập 80, nghiên cứu/lập luận 20. Khi trễ cổng, báo blocker và điều chỉnh phần mở rộng theo [PLAN](../docs/PLAN.md), không tự kéo dài deadline.

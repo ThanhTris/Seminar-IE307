@@ -1,20 +1,39 @@
-# SEM-10 — Đóng gói và diễn tập
+# SEM-10 — Đóng gói demo và diễn tập
 
 - Status: backlog
-- Lịch dự kiến: 11–12/11/2026
-- Owner: chưa phân công
-- Reviewer: chưa phân công
-- Dependencies: SEM-09
-- Đầu vào: PLAN.md và đầu ra được nghiệm thu của các dependency.
-- Đầu ra dự kiến: release/; docs/DEMO_RUNBOOK.md
+- Lịch mục tiêu: 11–12/11/2026; dự phòng 13/11
+- Công sức: 5/100 — Thực hành
+- Owner/reviewer: chưa phân công
+- Điều kiện bắt đầu: SEM-07 đã có đầu ra cần dùng
+- Điều kiện hoàn tất bổ sung: SEM-08, SEM-09 đã bàn giao
 
-## Công việc cần làm và tiêu chí nghiệm thu
+## Đầu vào
 
-- [ ] Clean setup chạy được; APK/server khớp commit; demo trực tiếp và video dự phòng; trả lời câu hỏi cơ chế và tình huống thất bại; không chứa credential.
-- [ ] Có docs/evidence/SEM-10/CHECKS.md: môi trường, bước thực hiện, expected/actual, log và hạn chế.
-- [ ] Có docs/evidence/SEM-10/HANDOFF.md: commit, đầu ra, cách sử dụng và việc còn lại.
-- [ ] Người thực hiện giải thích được cơ chế liên quan; reviewer xác nhận trước khi chuyển done.
+App/server đã tích hợp; kịch bản PRESENTATION_PLAN; kết quả SEM-08 và slide SEM-09 trước khi hoàn tất.
 
-## Kiểm tra và bàn giao
+## Việc cần làm
 
-Kiểm tra đúng phạm vi task. Với tài liệu: xác minh nguồn và liên kết; với code: chạy hành vi thật và kiểm thử logic quan trọng; với thí nghiệm: lưu dữ liệu thô và lệnh tái lập. Không đánh dấu hoàn thành nếu chỉ có scaffold.
+1. Build APK cho OPPO và emulator, chạy setup từ môi trường sạch hoặc ghi rõ phần chưa tái lập.
+2. Quay video dự phòng từ run thật của bản build tương ứng; metadata và nhãn phát lại rõ ràng.
+3. Soạn runbook: kết nối, mode/reset, dữ liệu, thao tác live, ngưỡng chuyển video 30 giây và khôi phục thiết bị.
+4. Diễn tập 2 lần có bấm giờ; sửa lời dẫn và kiểm tra không lộ token/credential trong log/video.
+5. Đóng gói artifact với commit, checksum và danh mục; rà soát tài liệu và link tải.
+
+## Đầu ra bắt buộc
+
+- release/ — APK hoặc liên kết GitHub Release tới APK, manifest phiên bản/commit/checksum và danh mục artifact.
+- docs/DEMO_RUNBOOK.md — hướng dẫn chuẩn bị, thao tác, fallback và cleanup.
+- Video demo thật và clip dự phòng, đường dẫn trong release manifest; tránh commit file quá lớn.
+- docs/REHEARSAL.md — thời gian từng phần của 2 lần diễn tập, lỗi và cách sửa.
+- docs/evidence/SEM-10/CHECKS.md — commit, môi trường, bước kiểm tra, expected/actual, link bằng chứng, hạn chế và phần bàn giao.
+
+## Tiêu chí nghiệm thu
+
+- [ ] Người khác làm theo runbook tái lập được hoặc ghi rõ bước cần hỗ trợ/cấu hình.
+- [ ] Hai lần diễn tập nằm trong 15 phút gồm demo; payload/log/video không lộ bí mật.
+- [ ] APK, server, báo cáo và slide trỏ đúng commit; mọi phần chưa hoàn thành được liệt kê trước bàn giao.
+- [ ] Có đủ đầu ra và CHECKS.md; người làm giải thích được kết quả, reviewer hoặc người thực hiện tự review được ghi rõ.
+
+## Trạng thái bàn giao
+
+Chưa thực hiện. Tên file ở trên là đầu ra phải tạo khi làm task, không phải bằng chứng đã tồn tại. Cập nhật task và task board cùng lúc khi đổi trạng thái.

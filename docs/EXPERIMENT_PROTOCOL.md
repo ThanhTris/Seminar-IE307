@@ -1,0 +1,59 @@
+# Thiết kế kiểm thử — chưa có kết quả
+
+Version kế hoạch: 2026-10-28. SEM-08 dùng tài liệu này để tạo run manifest, script và kết quả thật tại experiments/. Mọi expected dưới đây là điều cần kiểm tra, không phải số liệu đã đo.
+
+## Cấu hình và cách tránh nhầm nguyên nhân
+
+- Máy ảo Android có Google Play services; OPPO Find X9. Ghi API level, Android/ColorOS, build fingerprint đã loại định danh, SDK app, package, commit và pin/nguồn điện/mạng.
+- Kiểm tra kết nối server và FCM riêng. Cáp USB/ADB reverse dùng cho truy cập server không tự chứng minh có Internet cho FCM.
+- Baseline giữ cấu hình pin mặc định; nếu đổi tối ưu pin, ghi là một cấu hình riêng và hoàn tác sau thử.
+- Mỗi run có run_id; reset lịch/background work từ mode trước, xác nhận worker cũ đã xong, đặt cache/server version ban đầu. Không re-register periodic ở từng tick để làm sai lịch.
+- UI mở lại chỉ đọc Room; manual sync phải ghi trigger MANUAL và loại khỏi kết quả background.
+- Xác nhận Doze bằng trạng thái hệ thống trước/sau; màn hình tắt chỉ là một điều kiện riêng. Dùng quy trình ADB từ tài liệu Android, có bước khôi phục nguồn điện/idle sau mỗi run.
+- Không dùng lệnh force-run job hoặc test driver để suy ra thời điểm chạy tự nhiên; nếu dùng cho debug phải gắn nhãn INJECTED.
+- Lưu log trên máy/thiết bị trong thời gian idle; tải lên sau run để giảm ảnh hưởng của telemetry.
+
+## Tập ca cốt lõi và số lượt
+
+| ID | Trigger / thiết bị | Cách tạo tình huống | Điều cần đối chiếu | Tối thiểu |
+|---|---|---|---|---|
+| E01 | Periodic, emulator + OPPO | Background, có mạng, giữ lịch đã đăng ký | Lịch tồn tại; có lần chạy tự nhiên; version/cache và trigger khớp | 1 phiên 90 phút/máy, mục tiêu ít nhất 3 lần chạy |
+| E02 | Push, emulator + OPPO | Tắt periodic, background, thay snapshot và gửi data-only | Received và applied tách biệt; không cần mở app để bắt đầu sync | 5 lượt/máy, cửa sổ 120 giây/lượt |
+| E03 | Periodic và push riêng, emulator | Xác nhận Doze, giữ 20 phút, sau đó thoát và quan sát thêm 10 phút | Sự kiện trước/trong/sau Doze, không suy ra luôn trễ từ một lần | 2 lượt/trigger |
+| E04 | Hai trigger riêng, emulator | Mất mạng 2 phút, cập nhật server, sau đó nối lại | Pending/retry, cache cuối và lỗi; push TTL được ghi cố định | 3 lượt/trigger; 30 phút sau nối lại cho periodic, 5 phút cho push |
+| E05 | Push + sync engine, emulator | Gửi tín hiệu trùng, phiên bản cũ và bản mới khi worker đang chạy | Version không giảm, không ghi trùng, không bỏ mất bản mới | 3 lượt/kịch bản + test logic |
+| E06 | Hybrid, emulator | Cập nhật server nhưng cố ý không gửi push | Cập nhật đến từ periodic; đây là bỏ gửi có kiểm soát, không phải bằng chứng FCM làm mất tin | 2 lượt, 45 phút/lượt |
+
+Pilot trước mỗi loại ca, không gộp pilot vào tập chính nếu đổi cấu hình sau đó. E01 thiếu số lần chạy sau 90 phút: giữ dữ liệu, ghi chưa đạt mục tiêu quan sát, kiểm tra nguyên nhân và lên lịch chạy thêm nếu còn thời gian; không force-run để bù mẫu.
+
+Tập trên cần khoảng 10–12 giờ cửa sổ quan sát tuần tự, chưa tính setup/pilot. Có thể để chạy dài ngoài giờ làm việc nhưng không để các run cùng app làm nhiễu nhau. Tăng số lượt nếu còn thời gian; không tuyên bố độ tin cậy thống kê rộng từ mẫu nhỏ.
+
+## Ca đối chiếu bổ sung
+
+Bắt buộc mô tả giới hạn process death/vuốt recent/force-stop trong bài. Nếu khả thi, mỗi trạng thái một ca mô tả trên OPPO với PUSH, ghi hành động chính xác và quan sát 5 phút; sau force-stop chỉ quan sát tiếp sau khi người dùng mở app, ghi rõ mốc mở lại. Không coi hybrid là cách vượt force-stop.
+
+Battery Saver, reboot, TTL hết hạn và collapse key là mở rộng sau tập cốt lõi. Các ô chưa chạy mang trạng thái NOT_RUN. Không cần thử mọi tổ hợp trạng thái × mode × máy.
+
+## Dữ liệu phải lưu
+
+Mỗi run có manifest: case_id, run_id, device_alias, cấu hình OS/app, mode, thời gian bắt đầu/kết thúc, cửa sổ quan sát, network/power/Doze, version trước/sau, TTL/collapse settings, commit, outcome và đường dẫn logs.
+
+Sự kiện: server_updated, push_send_accepted/rejected, push_received, work_enqueued, work_started, snapshot_applied/unchanged, retry/failure. Dùng message_id từ FCM khi có; message_id chưa có thì null, không bịa. Work ID, request ID và trigger nối được về run.
+
+Ghi UTC ở hai đầu và monotonic time ở Android. Đo clock offset với server trước/sau phiên; không báo end-to-end milliseconds chính xác nếu sai lệch đồng hồ chưa được kiểm soát. Duration nội bộ Android dùng monotonic time.
+
+## Phân tích
+
+- Tỷ lệ cập nhật trong cửa sổ = số run applied đúng version trong cửa sổ / tổng run hợp lệ cùng case/device/mode.
+- Run timeout không bị xóa hoặc gán latency bằng 0; trình bày riêng dưới dạng chưa quan sát được trong cửa sổ.
+- Median và min–max chỉ trên run đã hoàn tất, luôn đi kèm n_complete/n_total và số timeout.
+- Tách độ trễ nhận push, thời gian chờ worker và thời gian sync; không lấy FCM accepted làm thời điểm app nhận.
+- Đếm GET, retry và DB writes nếu đã instrument; không quy đổi thành mAh.
+- E01 là quan sát định kỳ tự nhiên; không so “ai nhanh hơn” với E02 nếu thời điểm server update so với lịch không được kiểm soát. Muốn so định lượng cần thêm trial có cùng vị trí update trong chu kỳ và khai báo trước.
+- So OPPO và emulator theo từng cấu hình, không suy rộng mọi Android; trình bày giới hạn số lượt.
+
+## File bàn giao
+
+experiments/runs/<run_id>/manifest.json và events.jsonl; experiments/results.csv; experiments/SUMMARY.md; script tái lập trong experiments/scripts/. README của experiments ghi cách chạy và phiên bản.
+
+Repo public chỉ nhận bản dữ liệu đã loại FCM token, service-account key, serial và thông tin cá nhân. Bản nguyên gốc nhạy cảm giữ trong experiments/private/ (gitignored). Không thay đổi giá trị đo khi loại định danh.

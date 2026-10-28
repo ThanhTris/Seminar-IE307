@@ -1,20 +1,40 @@
-# SEM-06 — Triển khai FCM data-only
+# SEM-06 — Triển khai và quan sát push im lặng
 
 - Status: backlog
-- Lịch dự kiến: 28–30/10/2026
-- Owner: chưa phân công
-- Reviewer: chưa phân công
-- Dependencies: SEM-02, SEM-04
-- Đầu vào: PLAN.md và đầu ra được nghiệm thu của các dependency.
-- Đầu ra dự kiến: android/; server/; docs/PUSH.md
+- Lịch mục tiêu: 01–03/11/2026
+- Công sức: 10/100 — Thực hành
+- Owner/reviewer: chưa phân công
+- Điều kiện bắt đầu: SEM-02, SEM-04 đã có đầu ra cần dùng
+- Điều kiện hoàn tất bổ sung: không ngoài điều kiện bắt đầu
 
-## Công việc cần làm và tiêu chí nghiệm thu
+## Đầu vào
 
-- [ ] Gửi qua Admin SDK, nhận data-only, bàn giao việc dài sang worker; xử lý token refresh; ghi server accepted khác device received; thử foreground/background.
-- [ ] Có docs/evidence/SEM-06/CHECKS.md: môi trường, bước thực hiện, expected/actual, log và hạn chế.
-- [ ] Có docs/evidence/SEM-06/HANDOFF.md: commit, đầu ra, cách sử dụng và việc còn lại.
-- [ ] Người thực hiện giải thích được cơ chế liên quan; reviewer xác nhận trước khi chuyển done.
+App/server baseline, schema event, Firebase project đã cấu hình, cơ chế API v1 trong MECHANISMS.
 
-## Kiểm tra và bàn giao
+## Việc cần làm
 
-Kiểm tra đúng phạm vi task. Với tài liệu: xác minh nguồn và liên kết; với code: chạy hành vi thật và kiểm thử logic quan trọng; với thí nghiệm: lưu dữ liệu thô và lệnh tái lập. Không đánh dấu hoàn thành nếu chỉ có scaffold.
+1. Server gửi AndroidConfig v1 data-only normal priority với run/version, TTL khai báo rõ; không gắn notification payload.
+2. Client ghi received rồi enqueue regular work để fetch snapshot; không để async network rời lifecycle callback.
+3. Lưu/cập nhật token theo onNewToken và làm mới cấu hình gửi; không commit giá trị token.
+4. Hủy periodic khi thử PUSH; phân biệt FCM accepted, callback, worker và cache applied.
+5. Chạy pilot foreground/background trên emulator và OPPO; payload/callback luôn khớp phiên bản đã chọn.
+
+## Đầu ra bắt buộc
+
+- android/ — FirebaseMessagingService và phần enqueue sync, xử lý token refresh.
+- server/ — lệnh gửi data-only, kết quả accepted/rejected và message correlation.
+- docs/PUSH.md — payload mẫu đã loại token, đường đi callback, TTL, cách đăng ký/cập nhật token và giới hạn.
+- experiments/runs/<run_id>/ — pilot push ghi nhận từng event.
+- docs/evidence/SEM-06/CHECKS.md — commit, môi trường, bước kiểm tra, expected/actual, link bằng chứng, hạn chế và phần bàn giao.
+
+## Tiêu chí nghiệm thu
+
+- [ ] Background nhận tín hiệu và cập nhật cache trước khi mở app trong ít nhất một pilot hợp lệ.
+- [ ] Không có thông báo do demo tự tạo; ghi màn hình và log để xác nhận data-only.
+- [ ] Không báo FCM accepted là delivered; không dùng high-priority silent traffic để che tình huống chậm.
+- [ ] Khóa SDK ổn định; AndroidConfigV2 EAP chỉ là ghi chú trong nguồn, không trộn code vào baseline.
+- [ ] Có đủ đầu ra và CHECKS.md; người làm giải thích được kết quả, reviewer hoặc người thực hiện tự review được ghi rõ.
+
+## Trạng thái bàn giao
+
+Chưa thực hiện. Tên file ở trên là đầu ra phải tạo khi làm task, không phải bằng chứng đã tồn tại. Cập nhật task và task board cùng lúc khi đổi trạng thái.

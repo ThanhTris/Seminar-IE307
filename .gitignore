@@ -10,3 +10,5 @@ node_modules/
 *.jks
 *.keystore
 .idea/
+.local/
+experiments/private/

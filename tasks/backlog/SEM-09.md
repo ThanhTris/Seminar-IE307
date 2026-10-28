@@ -1,20 +1,39 @@
-# SEM-09 — Đối chiếu và soạn bài trình bày
+# SEM-09 — Hoàn thiện bài trình bày 15 phút và lập luận
 
 - Status: backlog
-- Lịch dự kiến: 07–10/11/2026
-- Owner: chưa phân công
-- Reviewer: chưa phân công
-- Dependencies: SEM-03, SEM-08
-- Đầu vào: PLAN.md và đầu ra được nghiệm thu của các dependency.
-- Đầu ra dự kiến: report/; slides/; docs/CLAIMS.md
+- Lịch mục tiêu: Dàn ý từ 28/10; bản cuối 08–10/11/2026
+- Công sức: 10/100 — Nghiên cứu/lập luận
+- Owner/reviewer: chưa phân công
+- Điều kiện bắt đầu: có thể chuẩn bị từ kế hoạch đã chốt
+- Điều kiện hoàn tất bổ sung: SEM-02, SEM-03, SEM-08 đã bàn giao
 
-## Công việc cần làm và tiêu chí nghiệm thu
+## Đầu vào
 
-- [ ] Mỗi kết luận nối tới nguồn hoặc log; phân biệt giả thuyết/kết quả; báo cáo sai lệch và hạn chế; phân bổ slide theo thời lượng đã chốt.
-- [ ] Có docs/evidence/SEM-09/CHECKS.md: môi trường, bước thực hiện, expected/actual, log và hạn chế.
-- [ ] Có docs/evidence/SEM-09/HANDOFF.md: commit, đầu ra, cách sử dụng và việc còn lại.
-- [ ] Người thực hiện giải thích được cơ chế liên quan; reviewer xác nhận trước khi chuyển done.
+docs/PRESENTATION_PLAN.md để soạn từ đầu. Nội dung kết quả phải chờ experiments/SUMMARY.md; nguồn học thuật từ SEM-03.
 
-## Kiểm tra và bàn giao
+## Việc cần làm
 
-Kiểm tra đúng phạm vi task. Với tài liệu: xác minh nguồn và liên kết; với code: chạy hành vi thật và kiểm thử logic quan trọng; với thí nghiệm: lưu dữ liệu thô và lệnh tái lập. Không đánh dấu hoàn thành nếu chỉ có scaffold.
+1. Soạn 9 slide theo phân bổ 15 phút, nói rõ câu hỏi, cơ chế, demo, kết quả và lựa chọn.
+2. Chèn sơ đồ và một bảng/biểu đồ từ số liệu thật; không dùng kết quả minh họa như dữ liệu thật.
+3. Cập nhật docs/CLAIMS.md với evidence thực tế và trạng thái supported/limited/not-tested.
+4. Soạn speaker notes, lời dẫn chuyển demo, đáp án phản biện và báo cáo ngắn có trích dẫn.
+5. Chỉ chốt kết luận khi đủ dữ liệu; giữ chi tiết API/EAP/metadata ở phụ lục.
+
+## Đầu ra bắt buộc
+
+- slides/seminar-ie307.pptx và slides/seminar-ie307.pdf — bản chỉnh sửa được và bản trình chiếu dự phòng.
+- slides/SPEAKER_NOTES.md — lời dẫn, mốc thời gian và câu hỏi phản biện.
+- report/REPORT.md — cơ chế, phương pháp, kết quả, giới hạn và tài liệu tham khảo.
+- docs/CLAIMS.md — bảng lập luận đã cập nhật evidence.
+- docs/evidence/SEM-09/CHECKS.md — commit, môi trường, bước kiểm tra, expected/actual, link bằng chứng, hạn chế và phần bàn giao.
+
+## Tiêu chí nghiệm thu
+
+- [ ] Tổng phân bổ chính là 15 phút, demo 4 phút; không vượt thời lượng khi diễn tập sơ bộ.
+- [ ] Mỗi kết luận định lượng có run/evidence; mỗi claim kỹ thuật có nguồn đúng phiên bản.
+- [ ] Hai bài nghiên cứu được dùng có mục đích, không biến bài nói thành đọc literature review.
+- [ ] Có đủ đầu ra và CHECKS.md; người làm giải thích được kết quả, reviewer hoặc người thực hiện tự review được ghi rõ.
+
+## Trạng thái bàn giao
+
+Chưa thực hiện. Tên file ở trên là đầu ra phải tạo khi làm task, không phải bằng chứng đã tồn tại. Cập nhật task và task board cùng lúc khi đổi trạng thái.
