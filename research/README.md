@@ -1,6 +1,6 @@
 # Nguồn nghiên cứu và đối chiếu
 
-Kiểm tra lại ngày **28/10/2026**. Nguồn dưới đây là documentation chính thức; **chưa có bài báo học thuật được tuyển chọn hoặc PDF tải về**. SEM-03 phải tìm và đọc 2 nghiên cứu liên quan.
+Nguồn kỹ thuật được đối chiếu ngày **28/10/2026**; phân công cập nhật **29/10/2026**. Nguồn dưới đây là documentation chính thức; **chưa có bài báo học thuật được tuyển chọn hoặc PDF tải về**. [SEM-20](../tasks/backlog/SEM-20.md) do Tuấn đọc bài thứ nhất; [SEM-21](../tasks/backlog/SEM-21.md) do Tâm đọc bài thứ hai; [SEM-22](../tasks/backlog/SEM-22.md) do Trang đối chiếu với API. Mỗi task chỉ một người thực hiện.
 
 ## Nguồn kỹ thuật
 
@@ -25,7 +25,7 @@ Chọn 2 bài có bản gốc/DOI xác minh được, ưu tiên:
 
 Mỗi ghi chú research/notes/<paper-id>.md gồm metadata, câu hỏi, phương pháp, thiết bị/OS, kết quả, hạn chế, điều có thể áp dụng và case_id liên quan. Không suy kết quả của nghiên cứu sang OPPO nếu chưa đo. Bài ít liên quan không được giữ chỉ để đủ số lượng.
 
-Lưu metadata tại research/references.bib và lập luận tại docs/CLAIMS.md. PDF chỉ đưa vào research/papers/ khi quyền chia sẻ cho phép; nếu không, giữ link và ghi chú. Bài thứ 3–4 là tùy chọn sau demo cốt lõi.
+Mỗi người lưu metadata riêng trong research/metadata/paper-1.bib hoặc paper-2.bib, không cùng sửa bibliography tổng hợp. SEM-50 do Tuấn ghép research/references.bib và docs/CLAIMS.md sau khi nhận đủ input. PDF chỉ đưa vào research/papers/ khi quyền chia sẻ cho phép; nếu không, giữ link và ghi chú. Bài thứ 3–4 là tùy chọn sau demo cốt lõi.
 
 ## Bảng claim cần phát triển
 

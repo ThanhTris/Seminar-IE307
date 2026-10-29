@@ -1,46 +1,13 @@
-# SEM-07 — Tích hợp hybrid và tính đúng của đồng bộ
+# [ĐÃ TÁCH] SEM-07 — Tích hợp hybrid và tính đúng của đồng bộ
 
-- Status: backlog
-- Lịch mục tiêu: 04–05/11/2026
-- Công sức: 10/100 — Thực hành
-- Owner: Trí
-- Reviewer: Vinh
-- Phối hợp: Trang, Trung, Tâm
-- Điều kiện bắt đầu: SEM-05, SEM-06 đã có đầu ra cần dùng
-- Điều kiện hoàn tất bổ sung: không ngoài điều kiện bắt đầu
+Nhóm kế hoạch này đã được thay bằng các task một người vào 29/10/2026. Thẻ nhóm cũ được lưu archive trên Project, không phải Done và không còn là task giao việc.
 
-## Đầu vào
+| Task thực hiện | Một người duy nhất | Công sức | Hạn |
+|---|---|---:|---|
+| [SEM-36](SEM-36.md) — Tích hợp ba mode và pilot hybrid | Trí | 3 | 2026-11-05 |
+| [SEM-37](SEM-37.md) — Chốt bản ứng viên và manifest phục vụ tập chính | Trí | 2 | 2026-11-05 |
+| [SEM-38](SEM-38.md) — Xử lý duplicate và version hint của push | Trang | 2 | 2026-11-05 |
+| [SEM-39](SEM-39.md) — Củng cố version guard, retry và race trong core | Trung | 2 | 2026-11-05 |
+| [SEM-40](SEM-40.md) — Thêm fault injection cố ý bỏ gửi push | Tâm | 1 | 2026-11-04 |
 
-Hai trigger chạy độc lập, repository/schema chung và dữ liệu pilot.
-
-## Việc cần làm
-
-Phân việc: Trí tích hợp mode và quản lý merge/SYNC.md; Trung làm version guard, retry và test race trong sync core; Trang xử lý duplicate/enqueue từ push; Tâm thêm lệnh bỏ gửi push có chủ ý. Trí bàn giao một bản tích hợp cho E05/E06.
-
-Theo [phân công 6 người](../../docs/TEAM_ASSIGNMENTS.md); owner tổng hợp đầu ra và CHECKS, reviewer kiểm trước khi chuyển done.
-
-1. Bật mode HYBRID và làm sạch lịch khi chuyển mode; worker còn chạy phải kết thúc hoặc đánh dấu ca bị nhiễu.
-2. Dùng transaction/version guard để không áp dụng snapshot cũ hoặc ghi trùng.
-3. Xử lý tín hiệu đến trong lúc worker đang kết thúc; chọn cơ chế queue/coalesce có ca test race.
-4. Định nghĩa retry/backoff hữu hạn cho lỗi transient; lỗi permanent trả failure có lý do.
-5. Thêm khả năng cập nhật server mà bỏ gửi push có chủ ý để thử periodic phục hồi.
-6. Cuối 05/11, Trí bàn giao bản tích hợp ứng viên với commit app/server, APK checksum và cấu hình; Vinh xác nhận nhận được trước khi chạy tập chính ngày 06–07/11. Ghi metadata vào CHECKS, không chỉ gửi APK qua chat.
-
-## Đầu ra bắt buộc
-
-- android/ và server/ — ba mode, đồng bộ an toàn khi cạnh tranh, retry và fault injection có nhãn.
-- docs/SYNC.md — quy tắc version, concurrency, mode transition, retry và giới hạn phục hồi.
-- Test logic cho snapshot cũ, trigger trùng, trigger đến khi sync đang chạy và lỗi mạng.
-- docs/evidence/SEM-07/CHECKS.md — commit, môi trường, bước kiểm tra, expected/actual, link bằng chứng, hạn chế và phần bàn giao.
-
-## Tiêu chí nghiệm thu
-
-- [ ] Các test logic quan trọng pass; không viết test chỉ kiểm tra tên hàm hoặc scaffold.
-- [ ] E05 pilot không giảm version/ghi trùng, không bỏ mất version mới ở race.
-- [ ] E06 pilot thể hiện cập nhật từ PERIODIC khi cố ý không gửi push; không gọi là vượt Doze/force-stop.
-- [ ] Có bản tích hợp ứng viên định danh được để SEM-08 đo; nếu sửa sync/trigger/retry/logging sau đó, nêu các ca cần chạy lại.
-- [ ] Có đủ đầu ra và CHECKS.md; người làm giải thích được kết quả, reviewer được phân công kiểm tra và ghi kết luận.
-
-## Trạng thái bàn giao
-
-Chưa thực hiện. Tên file ở trên là đầu ra phải tạo khi làm task, không phải bằng chứng đã tồn tại. Cập nhật task và task board cùng lúc khi đổi trạng thái.
+[Đặc tả trước khi chia nhỏ](https://github.com/ThanhTris/Seminar-IE307/blob/40ac61c0de77bcc872223da0c73db29151a38472/tasks/backlog/SEM-07.md). Xem [bảng hiện hành](../README.md).

@@ -1,0 +1,1352 @@
+{
+  "version": "2026-10-29-single-owner",
+  "project_url": "https://github.com/users/ThanhTris/projects/3/views/1",
+  "deadline": "2026-11-13",
+  "members": {
+    "Trí": "ThanhTris",
+    "Trang": "rosy179",
+    "Vinh": "Vinh5905",
+    "Trung": "TrungNQ2645",
+    "Tâm": "HoaiTam",
+    "Tuấn": "mtuan2491"
+  },
+  "tasks": [
+    {
+      "id": "SEM-11",
+      "source_group": "SEM-01",
+      "owner": "Trí",
+      "github": "ThanhTris",
+      "effort": 3,
+      "category": "practice",
+      "title": "Chốt phạm vi và môi trường build Android",
+      "due": "2026-10-29",
+      "status": "Todo",
+      "start_dependencies": [],
+      "finish_dependencies": [],
+      "work": [
+        "Ghi SCOPE: Kotlin native, ba mode, demo 15 phút và các tính năng ngoài phạm vi.",
+        "Kiểm JDK/Android SDK/Gradle/ADB trên máy build; pin phiên bản stable và application ID.",
+        "Ghi kết quả lệnh thật và blocker; bàn giao cấu hình build cho scaffold Android."
+      ],
+      "outputs": [
+        "docs/SCOPE.md",
+        "docs/environment/ANDROID_BUILD.md"
+      ],
+      "acceptance": [
+        "Lệnh kiểm công cụ có version và kết quả thực; không suy cấu hình máy từ kế hoạch.",
+        "Nêu rõ baseline FCM v1/data-only/normal priority và giới hạn demo."
+      ]
+    },
+    {
+      "id": "SEM-12",
+      "source_group": "SEM-01",
+      "owner": "Vinh",
+      "github": "Vinh5905",
+      "effort": 1,
+      "category": "practice",
+      "title": "Lập hồ sơ OPPO và emulator",
+      "due": "2026-10-29",
+      "status": "Todo",
+      "start_dependencies": [],
+      "finish_dependencies": [],
+      "work": [
+        "Đọc Android/API/ColorOS thực tế qua thiết bị; ghi alias thay cho serial.",
+        "Chọn emulator có Google Play services, kiểm ADB và cách lấy log.",
+        "Ghi lịch sử dụng OPPO với người đang giữ máy và cách kết nối thiết bị với server."
+      ],
+      "outputs": [
+        "docs/environment/DEVICES.md"
+      ],
+      "acceptance": [
+        "ADB nhận emulator và OPPO hoặc ghi blocker cụ thể; không tự mặc định phiên bản OS.",
+        "Hồ sơ phân biệt mạng tới server với Internet/FCM, không dùng localhost PC làm địa chỉ OPPO."
+      ]
+    },
+    {
+      "id": "SEM-13",
+      "source_group": "SEM-01",
+      "owner": "Tâm",
+      "github": "HoaiTam",
+      "effort": 1,
+      "category": "practice",
+      "title": "Kiểm môi trường Node và quyền Firebase",
+      "due": "2026-10-29",
+      "status": "Todo",
+      "start_dependencies": [],
+      "finish_dependencies": [],
+      "work": [
+        "Kiểm Node/package manager và phương án Firebase project cho demo.",
+        "Ghi quyền gửi test, cấu hình local và cách cấp cấu hình cho app/server.",
+        "Kiểm phương án kết nối LAN/ADB reverse và Internet tới FCM."
+      ],
+      "outputs": [
+        "docs/environment/SERVER_FIREBASE.md"
+      ],
+      "acceptance": [
+        "Có phiên bản thực và kết quả quyền/kết nối hoặc blocker, không ghi đã gửi thành công nếu chưa gửi.",
+        "Chỉ commit cấu hình mẫu; không đưa token/service-account key/google-services.json thật vào repo."
+      ]
+    },
+    {
+      "id": "SEM-14",
+      "source_group": "SEM-02",
+      "owner": "Trí",
+      "github": "ThanhTris",
+      "effort": 1,
+      "category": "practice",
+      "title": "Vẽ luồng dữ liệu và hợp đồng sync chung",
+      "due": "2026-10-30",
+      "status": "Todo",
+      "start_dependencies": [
+        "SEM-11"
+      ],
+      "finish_dependencies": [],
+      "work": [
+        "Mô tả trigger → worker → GET snapshot → transaction Room → timeline.",
+        "Định nghĩa giao diện enqueue chung: source, mode, run_id, version hint và correlation.",
+        "Chỉ rõ ranh giới UI/cache, sync core, scheduling, messaging và server để mỗi task sửa đúng phần."
+      ],
+      "outputs": [
+        "docs/mechanisms/SHARED_SYNC.md"
+      ],
+      "acceptance": [
+        "Periodic, push và manual cùng dùng một sync core; UI mở lại chỉ đọc cache.",
+        "Có hình luồng và bảng input/output đủ để API, app và worker triển khai độc lập."
+      ]
+    },
+    {
+      "id": "SEM-15",
+      "source_group": "SEM-02",
+      "owner": "Trang",
+      "github": "rosy179",
+      "effort": 3,
+      "category": "practice",
+      "title": "Giải thích cơ chế silent push và giới hạn FCM",
+      "due": "2026-10-30",
+      "status": "Todo",
+      "start_dependencies": [],
+      "finish_dependencies": [],
+      "work": [
+        "Viết luồng server → FCM → callback → worker và giới hạn thực thi nền.",
+        "Phân biệt notification/data/mixed, normal priority và FCM accepted với app received.",
+        "Gắn nguồn chính thức và version áp dụng; EAP chỉ ghi phụ lục, không trộn với baseline v1."
+      ],
+      "outputs": [
+        "docs/mechanisms/SILENT_PUSH.md"
+      ],
+      "acceptance": [
+        "Có thể giải thích vì sao data-only không đồng nghĩa một thông báo bị tắt tiếng.",
+        "Chỉ ra trường hợp trì hoãn/không nhận và không hứa push tức thì."
+      ]
+    },
+    {
+      "id": "SEM-16",
+      "source_group": "SEM-02",
+      "owner": "Vinh",
+      "github": "Vinh5905",
+      "effort": 2,
+      "category": "practice",
+      "title": "Lập ma trận lifecycle và protocol E01–E06",
+      "due": "2026-10-30",
+      "status": "Todo",
+      "start_dependencies": [],
+      "finish_dependencies": [],
+      "work": [
+        "Lập bảng foreground/background/process death/recent-swipe/force-stop/Doze và giả thuyết cần đo.",
+        "Chuyển EXPERIMENT_PROTOCOL thành checklist có số lượt, cửa sổ, reset/cleanup và tiêu chí run hợp lệ.",
+        "Lập lịch độc quyền cho từng app/thiết bị, tách pilot 02–05/11 với main 06–07/11."
+      ],
+      "outputs": [
+        "experiments/PROTOCOL.md",
+        "experiments/RUN_SCHEDULE.md"
+      ],
+      "acceptance": [
+        "Giữ nguyên số lượt và cửa sổ cốt lõi E01–E06; dự trù ít nhất 10–12 giờ quan sát.",
+        "Màn hình tắt không tự được gọi Doze; force-stop có mốc người dùng mở lại và cleanup."
+      ]
+    },
+    {
+      "id": "SEM-17",
+      "source_group": "SEM-02",
+      "owner": "Trung",
+      "github": "TrungNQ2645",
+      "effort": 3,
+      "category": "practice",
+      "title": "Giải thích periodic WorkManager và constraints",
+      "due": "2026-10-30",
+      "status": "Todo",
+      "start_dependencies": [],
+      "finish_dependencies": [],
+      "work": [
+        "Viết cơ chế scheduler/constraints/worker, chu kỳ tối thiểu và tính không chính xác thời điểm chạy.",
+        "Phân biệt work đăng ký, work được chạy, retry và snapshot được áp dụng.",
+        "Giải thích Doze/network constraint và cách đọc timeline theo nguồn chính thức có version."
+      ],
+      "outputs": [
+        "docs/mechanisms/PERIODIC_FETCH.md"
+      ],
+      "acceptance": [
+        "Không coi chu kỳ cấu hình là cam kết chạy đúng từng mốc.",
+        "Phân biệt periodic tự nhiên với force-run/test driver chỉ dùng debug."
+      ]
+    },
+    {
+      "id": "SEM-18",
+      "source_group": "SEM-02",
+      "owner": "Tâm",
+      "github": "HoaiTam",
+      "effort": 2,
+      "category": "practice",
+      "title": "Giải thích server, FCM accepted và correlation",
+      "due": "2026-10-30",
+      "status": "Todo",
+      "start_dependencies": [],
+      "finish_dependencies": [],
+      "work": [
+        "Mô tả cập nhật snapshot, gửi data-only và response message ID từ FCM.",
+        "Đề xuất request/work/message IDs nối các event, UTC và monotonic phía Android.",
+        "Ghi lỗi accepted/rejected, TTL và khoảng nào chưa biết app đã nhận."
+      ],
+      "outputs": [
+        "docs/mechanisms/SERVER_FCM.md"
+      ],
+      "acceptance": [
+        "Tách accepted, received, work_started và snapshot_applied thành các sự kiện riêng.",
+        "Không bịa message_id khi API chưa trả và không quy accepted thành delivered."
+      ]
+    },
+    {
+      "id": "SEM-19",
+      "source_group": "SEM-02",
+      "owner": "Tuấn",
+      "github": "mtuan2491",
+      "effort": 4,
+      "category": "practice",
+      "title": "Tổng hợp mô hình cơ chế và câu hỏi phản biện",
+      "due": "2026-10-30",
+      "status": "Todo",
+      "start_dependencies": [],
+      "finish_dependencies": [
+        "SEM-11",
+        "SEM-12",
+        "SEM-13",
+        "SEM-14",
+        "SEM-15",
+        "SEM-16",
+        "SEM-17",
+        "SEM-18"
+      ],
+      "work": [
+        "Soạn khung MECHANISMS và QUESTIONS ngay từ kế hoạch; nhận tài liệu từng nguồn vào khi được bàn giao.",
+        "Tổng hợp hai sơ đồ trigger-to-cache, bảng thuật ngữ, lifecycle, giới hạn và phạm vi version.",
+        "Viết ít nhất 10 câu hỏi kèm đáp án ngắn và nguồn; ghi giả thuyết, chưa ghi kết quả đo."
+      ],
+      "outputs": [
+        "docs/MECHANISMS.md",
+        "docs/QUESTIONS.md"
+      ],
+      "acceptance": [
+        "Các phần tham chiếu đúng đầu ra riêng của SEM-14…18, không yêu cầu người khác cùng viết file tổng hợp.",
+        "Cơ chế, API và cấu hình môi trường khớp; giải thích được hai luồng không cần đọc code."
+      ]
+    },
+    {
+      "id": "SEM-20",
+      "source_group": "SEM-03",
+      "owner": "Tuấn",
+      "github": "mtuan2491",
+      "effort": 5,
+      "category": "research",
+      "title": "Đọc bài nghiên cứu thứ nhất và ghi chú nguồn",
+      "due": "2026-11-01",
+      "status": "Todo",
+      "start_dependencies": [],
+      "finish_dependencies": [
+        "SEM-11",
+        "SEM-12"
+      ],
+      "work": [
+        "Chọn và đọc toàn văn một nghiên cứu về scheduling/push-polling/mobile sync, không chỉ abstract.",
+        "Kiểm metadata/DOI, phương pháp, môi trường, kết quả gốc và giới hạn áp dụng cho demo.",
+        "Lưu ghi chú, metadata riêng và PDF chỉ khi được phép chia sẻ; đề xuất claim/case kiểm chứng."
+      ],
+      "outputs": [
+        "research/notes/PAPER_1.md",
+        "research/metadata/paper-1.bib"
+      ],
+      "acceptance": [
+        "Tên/tác giả/DOI khớp nguồn gốc; ít nhất một lập luận gắn được quyết định thử hoặc trade-off.",
+        "Không dùng số đo paper làm số đo OPPO; phân biệt nguồn paper và tài liệu API."
+      ]
+    },
+    {
+      "id": "SEM-21",
+      "source_group": "SEM-03",
+      "owner": "Tâm",
+      "github": "HoaiTam",
+      "effort": 3,
+      "category": "research",
+      "title": "Đọc bài nghiên cứu thứ hai và ghi chú nguồn",
+      "due": "2026-11-01",
+      "status": "Todo",
+      "start_dependencies": [],
+      "finish_dependencies": [
+        "SEM-11",
+        "SEM-12"
+      ],
+      "work": [
+        "Chọn bài thứ hai bổ sung cho bài thứ nhất; ghi tiêu chí phù hợp chủ đề mobile sync.",
+        "Đọc phương pháp, môi trường, kết quả gốc và giới hạn; kiểm DOI/metadata.",
+        "Tạo ghi chú và metadata riêng, đề xuất giả thuyết/case liên quan demo."
+      ],
+      "outputs": [
+        "research/notes/PAPER_2.md",
+        "research/metadata/paper-2.bib"
+      ],
+      "acceptance": [
+        "Có ghi chú toàn văn, nguồn kiểm chứng và giới hạn áp dụng.",
+        "Nếu không có PDF chia sẻ hợp lệ thì metadata/link vẫn đủ; không tải bản không được phép."
+      ]
+    },
+    {
+      "id": "SEM-22",
+      "source_group": "SEM-03",
+      "owner": "Trang",
+      "github": "rosy179",
+      "effort": 2,
+      "category": "research",
+      "title": "Đối chiếu hai bài nghiên cứu với API push hiện hành",
+      "due": "2026-11-01",
+      "status": "Todo",
+      "start_dependencies": [],
+      "finish_dependencies": [
+        "SEM-15",
+        "SEM-20",
+        "SEM-21"
+      ],
+      "work": [
+        "Chuẩn bị bảng documentation cho FCM v1/data-only/normal priority ngay.",
+        "Khi hai ghi chú paper có sẵn, đối chiếu claim push với API/OS version của demo.",
+        "Đánh dấu claim còn là giả thuyết và case cần evidence; ghi EAP khác baseline ở phụ lục."
+      ],
+      "outputs": [
+        "research/notes/API_CROSSCHECK.md"
+      ],
+      "acceptance": [
+        "Mỗi dòng có nguồn/vị trí/version và giới hạn, không trộn kết quả paper với demo.",
+        "Không yêu cầu paper hoàn tất mới bắt đầu đọc tài liệu API; chỉ gate bản đối chiếu cuối."
+      ]
+    },
+    {
+      "id": "SEM-23",
+      "source_group": "SEM-04",
+      "owner": "Trí",
+      "github": "ThanhTris",
+      "effort": 4,
+      "category": "practice",
+      "title": "Tạo scaffold Android và UI cache/timeline",
+      "due": "2026-10-31",
+      "status": "Todo",
+      "start_dependencies": [
+        "SEM-11"
+      ],
+      "finish_dependencies": [],
+      "work": [
+        "Tạo project Kotlin/Compose, manifest, Gradle wrapper và dependency đã pin.",
+        "Làm UI bản tin/version/mode/lần sync/timeline lọc run_id và adapter đọc cache từ core.",
+        "Giữ code trong build/ui/config; không viết thêm sync engine hay tự gọi GET lúc mở UI."
+      ],
+      "outputs": [
+        "android/ (build, manifest, ui, config)",
+        "docs/setup/ANDROID.md"
+      ],
+      "acceptance": [
+        "Build được debug APK; UI trạng thái rỗng và timeline hiển thị rõ trigger.",
+        "Không auto-fetch khi mở app; nút manual phải dùng giao diện enqueue của task core khi được bàn giao."
+      ]
+    },
+    {
+      "id": "SEM-24",
+      "source_group": "SEM-04",
+      "owner": "Vinh",
+      "github": "Vinh5905",
+      "effort": 1,
+      "category": "practice",
+      "title": "Chuẩn bị bộ xuất log và run manifest",
+      "due": "2026-10-31",
+      "status": "Todo",
+      "start_dependencies": [
+        "SEM-12"
+      ],
+      "finish_dependencies": [
+        "SEM-26"
+      ],
+      "work": [
+        "Tạo template manifest theo protocol và script lấy log theo device alias/run_id.",
+        "Bổ sung reset/cleanup và hướng dẫn chạy; nhận event schema để chốt tên trường.",
+        "Dùng fixture gắn nhãn để kiểm công cụ; không trình bày fixture là số liệu thực nghiệm."
+      ],
+      "outputs": [
+        "experiments/RUN_MANIFEST_TEMPLATE.json",
+        "experiments/scripts/export_logs.*",
+        "experiments/README.md"
+      ],
+      "acceptance": [
+        "Manifest có commit app/server, APK SHA256, OS/config, phase và outcome.",
+        "Script không xuất token/serial/credential vào dữ liệu public, không sửa giá trị đo."
+      ]
+    },
+    {
+      "id": "SEM-25",
+      "source_group": "SEM-04",
+      "owner": "Trung",
+      "github": "TrungNQ2645",
+      "effort": 4,
+      "category": "practice",
+      "title": "Xây Room, SyncRepository và SyncWorker dùng chung",
+      "due": "2026-10-31",
+      "status": "Todo",
+      "start_dependencies": [
+        "SEM-23",
+        "SEM-26"
+      ],
+      "finish_dependencies": [],
+      "work": [
+        "Tạo data/cache và sync core; GET snapshot rồi transaction chỉ áp dụng version mới.",
+        "Cung cấp enqueue API chung cho MANUAL/PERIODIC/PUSH với run/source/mode/correlation.",
+        "Ghi event UTC/monotonic, kết quả applied/unchanged/failure; bàn giao interface dùng được cho hai trigger."
+      ],
+      "outputs": [
+        "android/ (data và sync core)",
+        "docs/SYNC_CORE_API.md"
+      ],
+      "acceptance": [
+        "Manual enqueue chạy được worker, cache sống qua mở lại/offline và version không giảm.",
+        "Periodic/push gọi cùng worker; UI không tạo engine hoặc auto-fetch riêng."
+      ]
+    },
+    {
+      "id": "SEM-26",
+      "source_group": "SEM-04",
+      "owner": "Tâm",
+      "github": "HoaiTam",
+      "effort": 2,
+      "category": "practice",
+      "title": "Chốt hợp đồng API và event schema",
+      "due": "2026-10-30",
+      "status": "Todo",
+      "start_dependencies": [
+        "SEM-11",
+        "SEM-13",
+        "SEM-14"
+      ],
+      "finish_dependencies": [],
+      "work": [
+        "Viết health/GET snapshot/update, payload/error và version semantics đủ để client code theo contract.",
+        "Chốt event fields và nullable correlation, UTC/monotonic, outcome/reason.",
+        "Đưa ví dụ đã loại token và phiên bản contract; thay đổi sau bàn giao phải ghi delta."
+      ],
+      "outputs": [
+        "docs/API.md",
+        "docs/EVENT_SCHEMA.md"
+      ],
+      "acceptance": [
+        "Snapshot/version/error rõ ràng, event accepted/received/started/applied riêng biệt.",
+        "Core và server có thể triển khai theo contract mà không cần chờ code của nhau."
+      ]
+    },
+    {
+      "id": "SEM-27",
+      "source_group": "SEM-04",
+      "owner": "Tâm",
+      "github": "HoaiTam",
+      "effort": 4,
+      "category": "practice",
+      "title": "Triển khai server snapshot và CLI cập nhật",
+      "due": "2026-10-31",
+      "status": "Todo",
+      "start_dependencies": [
+        "SEM-13",
+        "SEM-26"
+      ],
+      "finish_dependencies": [],
+      "work": [
+        "Tạo server Node/TypeScript, lockfile và cấu hình mẫu; hiện thực health/read/update snapshot.",
+        "Persist snapshot và version tăng đơn điệu qua restart; CLI cập nhật và log theo schema.",
+        "Viết cách chạy/kết nối từ emulator và OPPO; không tạo dashboard hay auth sản phẩm."
+      ],
+      "outputs": [
+        "server/ (API, snapshot store, update CLI)",
+        "docs/setup/SERVER.md"
+      ],
+      "acceptance": [
+        "Đọc/update/restart không giảm version, payload và lỗi khớp API.md.",
+        "Log đối chiếu được run/request; cấu hình thật giữ local."
+      ]
+    },
+    {
+      "id": "SEM-28",
+      "source_group": "SEM-05",
+      "owner": "Trí",
+      "github": "ThanhTris",
+      "effort": 1,
+      "category": "practice",
+      "title": "Ghép manual sync đầu cuối và chốt hướng dẫn setup",
+      "due": "2026-10-31",
+      "status": "Todo",
+      "start_dependencies": [
+        "SEM-23",
+        "SEM-24",
+        "SEM-25",
+        "SEM-27"
+      ],
+      "finish_dependencies": [],
+      "work": [
+        "Nhận app/server/core/exporter đã bàn giao và nối nút manual với enqueue.",
+        "Chạy một luồng update → manual worker → Room → UI/timeline, mở lại offline.",
+        "Tổng hợp SETUP từ tài liệu Android/server, ghi M1 và revision đã ghép."
+      ],
+      "outputs": [
+        "docs/SETUP.md",
+        "docs/evidence/SEM-28/M1.md"
+      ],
+      "acceptance": [
+        "Build debug/server chạy; MANUAL có nhãn và UI mở lại không phát sinh GET.",
+        "M1 chỉ Pass khi có run thật; thiếu credential/mạng ghi blocker, không tự nghiệm thu từ tài liệu."
+      ]
+    },
+    {
+      "id": "SEM-29",
+      "source_group": "SEM-05",
+      "owner": "Vinh",
+      "github": "Vinh5905",
+      "effort": 2,
+      "category": "practice",
+      "title": "Chạy pilot periodic E01 trên hai thiết bị",
+      "due": "2026-11-02",
+      "status": "Todo",
+      "start_dependencies": [
+        "SEM-16",
+        "SEM-24",
+        "SEM-30"
+      ],
+      "finish_dependencies": [
+        "SEM-31"
+      ],
+      "work": [
+        "Nhận scheduler hoạt động và chạy pilot tự nhiên có phase=pilot/development.",
+        "Quan sát ít nhất hai lần chạy trong pilot; giữ đăng ký lịch ổn định và kiểm trigger PERIODIC.",
+        "Xuất manifest/log, ghi timeout/thiếu quan sát và lỗi cần sửa; không thay dữ liệu main."
+      ],
+      "outputs": [
+        "experiments/runs/<periodic-pilot-run>/manifest.json",
+        "experiments/runs/<periodic-pilot-run>/events.jsonl"
+      ],
+      "acceptance": [
+        "Không force-run để bù lần chạy và không gọi pilot là tập chính.",
+        "Hoàn tất sau khi có hướng dẫn chẩn đoán SEM-31 và ghi commit/config thật."
+      ]
+    },
+    {
+      "id": "SEM-30",
+      "source_group": "SEM-05",
+      "owner": "Trung",
+      "github": "TrungNQ2645",
+      "effort": 4,
+      "category": "practice",
+      "title": "Triển khai unique periodic work",
+      "due": "2026-11-01",
+      "status": "Todo",
+      "start_dependencies": [
+        "SEM-17",
+        "SEM-25",
+        "SEM-28"
+      ],
+      "finish_dependencies": [],
+      "work": [
+        "Tạo periodic scheduler với network constraint, unique work và chu kỳ hợp lệ.",
+        "Gọi worker chung, ghi đăng ký/start/finish với source PERIODIC.",
+        "Cung cấp thao tác bật/tắt/query lịch cho mode controller; không tạo engine sync thứ hai."
+      ],
+      "outputs": [
+        "android/ (periodic scheduler)"
+      ],
+      "acceptance": [
+        "Đăng ký lặp chỉ có một lịch active; tắt periodic không để lịch cũ tiếp tục gây nhiễu.",
+        "Kiểm scheduler logic không được dùng để kết luận thời điểm chạy tự nhiên."
+      ]
+    },
+    {
+      "id": "SEM-31",
+      "source_group": "SEM-05",
+      "owner": "Trung",
+      "github": "TrungNQ2645",
+      "effort": 3,
+      "category": "practice",
+      "title": "Bàn giao chẩn đoán và tài liệu periodic",
+      "due": "2026-11-02",
+      "status": "Todo",
+      "start_dependencies": [
+        "SEM-30"
+      ],
+      "finish_dependencies": [],
+      "work": [
+        "Viết PERIODIC: config/constraints, cách query lịch, phân biệt debug với quan sát tự nhiên.",
+        "Kiểm re-register/cancel/network constraints trên đúng build và lưu lệnh chẩn đoán.",
+        "Ghi cách đọc periodic timeline để người chạy ca dùng độc lập."
+      ],
+      "outputs": [
+        "docs/PERIODIC.md",
+        "docs/evidence/SEM-31/SCHEDULER_CHECKS.md"
+      ],
+      "acceptance": [
+        "Có bằng chứng một lịch active và hành vi constraint/cancel, không chỉ tên hàm.",
+        "Tài liệu nêu scheduler không bảo đảm chạy đúng từng mốc, giữ các giới hạn OS."
+      ]
+    },
+    {
+      "id": "SEM-32",
+      "source_group": "SEM-06",
+      "owner": "Trang",
+      "github": "rosy179",
+      "effort": 4,
+      "category": "practice",
+      "title": "Triển khai callback FCM và enqueue sync",
+      "due": "2026-11-02",
+      "status": "Todo",
+      "start_dependencies": [
+        "SEM-15",
+        "SEM-25",
+        "SEM-28"
+      ],
+      "finish_dependencies": [],
+      "work": [
+        "Thêm FirebaseMessagingService nhận data-only v1, ghi push_received rồi enqueue worker chung.",
+        "Parse run/version/message correlation, xử lý payload thiếu/sai; không sync dài ngay trong callback.",
+        "Giữ normal priority và không tạo thông báo hiển thị trong demo."
+      ],
+      "outputs": [
+        "android/ (messaging callback và enqueue adapter)"
+      ],
+      "acceptance": [
+        "Callback dẫn tới work_enqueued/start/applied theo correlation khi đủ điều kiện.",
+        "Không dùng high priority/EAP hoặc engine riêng để che độ trễ."
+      ]
+    },
+    {
+      "id": "SEM-33",
+      "source_group": "SEM-06",
+      "owner": "Trang",
+      "github": "rosy179",
+      "effort": 3,
+      "category": "practice",
+      "title": "Xử lý token refresh và bàn giao PUSH.md",
+      "due": "2026-11-03",
+      "status": "Todo",
+      "start_dependencies": [
+        "SEM-13",
+        "SEM-32"
+      ],
+      "finish_dependencies": [],
+      "work": [
+        "Xử lý đăng ký/cập nhật token và cấu hình local tối thiểu, bao gồm onNewToken.",
+        "Viết payload đã loại token, TTL, callback/enqueue, thao tác setup và giới hạn nhận nền.",
+        "Kiểm token thay đổi/cấu hình thiếu và giữ credential ngoài repo/log public."
+      ],
+      "outputs": [
+        "android/ (token lifecycle)",
+        "docs/PUSH.md"
+      ],
+      "acceptance": [
+        "Có bằng chứng token refresh hoặc blocker được ghi thật, không chỉ token hardcode.",
+        "PUSH.md đủ để chạy sender và phân biệt accepted/received/applied."
+      ]
+    },
+    {
+      "id": "SEM-34",
+      "source_group": "SEM-06",
+      "owner": "Vinh",
+      "github": "Vinh5905",
+      "effort": 1,
+      "category": "practice",
+      "title": "Chạy pilot push E02 và xác nhận cache nền",
+      "due": "2026-11-03",
+      "status": "Todo",
+      "start_dependencies": [
+        "SEM-16",
+        "SEM-24",
+        "SEM-32",
+        "SEM-35"
+      ],
+      "finish_dependencies": [
+        "SEM-33"
+      ],
+      "work": [
+        "Tắt periodic và gửi data-only khi app ở background; ghi trước/sau từng event.",
+        "Xác nhận snapshot_applied trước khi mở lại UI và không có notification do demo tạo.",
+        "Lưu run pilot/recording đã loại token và lỗi còn thiếu để owner module sửa."
+      ],
+      "outputs": [
+        "experiments/runs/<push-pilot-run>/manifest.json",
+        "experiments/runs/<push-pilot-run>/events.jsonl"
+      ],
+      "acceptance": [
+        "Không coi accepted là delivered và không dùng UI auto-refresh để tạo kết quả.",
+        "Ghi điều kiện thiết bị/window/timeout thật; bản PUSH/token lifecycle đã được bàn giao."
+      ]
+    },
+    {
+      "id": "SEM-35",
+      "source_group": "SEM-06",
+      "owner": "Tâm",
+      "github": "HoaiTam",
+      "effort": 2,
+      "category": "practice",
+      "title": "Làm CLI gửi FCM data-only normal priority",
+      "due": "2026-11-01",
+      "status": "Todo",
+      "start_dependencies": [
+        "SEM-13",
+        "SEM-18",
+        "SEM-27"
+      ],
+      "finish_dependencies": [],
+      "work": [
+        "Hiện thực sender stable Firebase Admin với AndroidConfig v1/data-only/normal priority.",
+        "Ghi accepted/rejected, message correlation, TTL và run/version, không log token.",
+        "Bàn giao lệnh test cho client callback và hướng dẫn cấu hình local."
+      ],
+      "outputs": [
+        "server/ (FCM sender CLI)",
+        "docs/setup/FCM_SENDER.md"
+      ],
+      "acceptance": [
+        "CLI gửi có response thật hoặc blocker; ID có thể null nếu API chưa cấp.",
+        "Payload không có notification block và không trộn AndroidConfigV2 EAP."
+      ]
+    },
+    {
+      "id": "SEM-36",
+      "source_group": "SEM-07",
+      "owner": "Trí",
+      "github": "ThanhTris",
+      "effort": 3,
+      "category": "practice",
+      "title": "Tích hợp ba mode và pilot hybrid",
+      "due": "2026-11-05",
+      "status": "Todo",
+      "start_dependencies": [
+        "SEM-29",
+        "SEM-30",
+        "SEM-32",
+        "SEM-34",
+        "SEM-35"
+      ],
+      "finish_dependencies": [
+        "SEM-38",
+        "SEM-39",
+        "SEM-40"
+      ],
+      "work": [
+        "Tích hợp PERIODIC/PUSH/HYBRID; hủy lịch không cần và chờ worker kết thúc hoặc đánh dấu run bị nhiễu.",
+        "Ghép output robustness của core/messaging và skip-push CLI vào bản tích hợp.",
+        "Chạy E05/E06 pilot và ghi SYNC về version/concurrency/retry/mode transition."
+      ],
+      "outputs": [
+        "android/ (mode controller và tích hợp)",
+        "docs/SYNC.md",
+        "docs/evidence/SEM-36/HYBRID_PILOT.md"
+      ],
+      "acceptance": [
+        "E05 không rollback/ghi trùng/mất cập nhật ở race; E06 phục hồi từ PERIODIC khi bỏ gửi có chủ ý.",
+        "Không coi hybrid là vượt Doze/force-stop; các nhánh code vẫn dùng cùng sync engine."
+      ]
+    },
+    {
+      "id": "SEM-37",
+      "source_group": "SEM-07",
+      "owner": "Trí",
+      "github": "ThanhTris",
+      "effort": 2,
+      "category": "practice",
+      "title": "Chốt bản ứng viên và manifest phục vụ tập chính",
+      "due": "2026-11-05",
+      "status": "Todo",
+      "start_dependencies": [
+        "SEM-31",
+        "SEM-33",
+        "SEM-36",
+        "SEM-38",
+        "SEM-39",
+        "SEM-40"
+      ],
+      "finish_dependencies": [],
+      "work": [
+        "Pin app/server commit, APK SHA256, dependency/config và danh sách ca pilot trên bản ứng viên.",
+        "Build candidate, rà M1/hai trigger/hybrid và ghi cổng đủ để đo main.",
+        "Bàn giao đường dẫn artifact và quy tắc phải chạy lại ca khi code/config liên quan đổi."
+      ],
+      "outputs": [
+        "release/CANDIDATE_MANIFEST.json",
+        "docs/evidence/SEM-37/CANDIDATE_GATE.md"
+      ],
+      "acceptance": [
+        "Truy được artifact tới đúng source/config và pilot đã ghi; không chỉ gửi APK không metadata.",
+        "Chốt cuối 05/11 để tập chính 06–07/11; nếu trễ ghi blocker và điều chỉnh ca mở rộng."
+      ]
+    },
+    {
+      "id": "SEM-38",
+      "source_group": "SEM-07",
+      "owner": "Trang",
+      "github": "rosy179",
+      "effort": 2,
+      "category": "practice",
+      "title": "Xử lý duplicate và version hint của push",
+      "due": "2026-11-05",
+      "status": "Todo",
+      "start_dependencies": [
+        "SEM-32",
+        "SEM-33"
+      ],
+      "finish_dependencies": [],
+      "work": [
+        "Xử lý payload trùng/cũ và tín hiệu mới tới lúc worker đang chạy thông qua enqueue API chung.",
+        "Giữ input phía messaging và correlation rõ; không viết lại transaction/version guard của core.",
+        "Kiểm ba tình huống duplicate/stale/new-during-sync và bàn giao diff messaging."
+      ],
+      "outputs": [
+        "android/ (messaging input policy)",
+        "docs/evidence/SEM-38/PUSH_INPUT_CASES.md"
+      ],
+      "acceptance": [
+        "Tín hiệu trùng không gây notification hoặc sync engine riêng; bản mới không bị bỏ qua.",
+        "Mỗi ca có input/expected/actual trên đúng revision; lỗi core chuyển đúng task SEM-39."
+      ]
+    },
+    {
+      "id": "SEM-39",
+      "source_group": "SEM-07",
+      "owner": "Trung",
+      "github": "TrungNQ2645",
+      "effort": 2,
+      "category": "practice",
+      "title": "Củng cố version guard, retry và race trong core",
+      "due": "2026-11-05",
+      "status": "Todo",
+      "start_dependencies": [
+        "SEM-25",
+        "SEM-30"
+      ],
+      "finish_dependencies": [],
+      "work": [
+        "Hoàn thiện concurrency/transaction/idempotence, retry hữu hạn cho transient và failure cho permanent.",
+        "Kiểm snapshot cũ/trùng, trigger đến khi worker kết thúc và phục hồi mạng.",
+        "Giữ worker/enqueue contract tương thích, ghi core behavior riêng cho task tích hợp nhận."
+      ],
+      "outputs": [
+        "android/ (sync robustness và logic checks)",
+        "docs/evidence/SEM-39/CORE_CASES.md"
+      ],
+      "acceptance": [
+        "Version không giảm, không ghi trùng, không mất bản mới trong race.",
+        "Logic checks có ý nghĩa chạy thật; retry không vô hạn, có lý do dừng."
+      ]
+    },
+    {
+      "id": "SEM-40",
+      "source_group": "SEM-07",
+      "owner": "Tâm",
+      "github": "HoaiTam",
+      "effort": 1,
+      "category": "practice",
+      "title": "Thêm fault injection cố ý bỏ gửi push",
+      "due": "2026-11-04",
+      "status": "Todo",
+      "start_dependencies": [
+        "SEM-27",
+        "SEM-35"
+      ],
+      "finish_dependencies": [],
+      "work": [
+        "Thêm lệnh update snapshot với tùy chọn không gửi push và nhãn fault injection.",
+        "Ghi run/version và lý do skip để chứng minh server đã cập nhật nhưng không gửi tín hiệu.",
+        "Bàn giao lệnh chạy E06; không giả định FCM đã làm mất tin."
+      ],
+      "outputs": [
+        "server/ (skip-push CLI)",
+        "docs/evidence/SEM-40/FAULT_INJECTION.md"
+      ],
+      "acceptance": [
+        "Update vẫn persist đúng version, log không có accepted cho lần đã skip.",
+        "Phân biệt bỏ gửi có kiểm soát với delivery failure thật."
+      ]
+    },
+    {
+      "id": "SEM-41",
+      "source_group": "SEM-08",
+      "owner": "Vinh",
+      "github": "Vinh5905",
+      "effort": 3,
+      "category": "practice",
+      "title": "Chạy tập chính E01–E06 trên emulator",
+      "due": "2026-11-07",
+      "status": "Todo",
+      "start_dependencies": [
+        "SEM-16",
+        "SEM-24",
+        "SEM-37"
+      ],
+      "finish_dependencies": [],
+      "work": [
+        "Chạy E01–E06 theo đủ số lượt/cửa sổ protocol trên bản ứng viên và run_phase=main.",
+        "Kiểm Doze trước/sau, tách trigger, reset/cleanup giữa run; giữ cả lỗi/timeout/NOT_RUN.",
+        "Xuất manifest/log theo run và chia nhóm đúng commit/config; sửa code phải chạy lại ca liên quan."
+      ],
+      "outputs": [
+        "experiments/runs/<emulator-main-run>/manifest.json",
+        "experiments/runs/<emulator-main-run>/events.jsonl"
+      ],
+      "acceptance": [
+        "Giữ E01 90 phút, E02 5 lượt/120 giây, E03 2/trigger, E04 3/trigger, E05 3/kịch bản, E06 2×45 phút.",
+        "Không force-run cho kết quả tự nhiên, không trộn pilot/build hoặc loại timeout khỏi mẫu số."
+      ]
+    },
+    {
+      "id": "SEM-42",
+      "source_group": "SEM-08",
+      "owner": "Vinh",
+      "github": "Vinh5905",
+      "effort": 3,
+      "category": "practice",
+      "title": "Chạy đối chiếu OPPO E01/E02 và ghi giới hạn OEM",
+      "due": "2026-11-07",
+      "status": "Todo",
+      "start_dependencies": [
+        "SEM-12",
+        "SEM-16",
+        "SEM-24",
+        "SEM-37"
+      ],
+      "finish_dependencies": [],
+      "work": [
+        "Chạy E01 phiên 90 phút và E02 5 lượt/120 giây trên OPPO với bản ứng viên.",
+        "Ghi cấu hình pin/OS/mạng thật; nếu thử process death/recent-swipe/force-stop thì gắn nhãn riêng.",
+        "Xuất manifest/log và lý do ca không chạy; hoàn tác cấu hình đã đổi theo protocol."
+      ],
+      "outputs": [
+        "experiments/runs/<oppo-main-run>/manifest.json",
+        "experiments/runs/<oppo-main-run>/events.jsonl"
+      ],
+      "acceptance": [
+        "Không lấy phiên bản OS từ tên model; phân biệt baseline với cấu hình pin thay đổi.",
+        "Không suy rộng mọi Android từ OPPO; force-stop có mốc mở lại và không tuyên bố hybrid vượt giới hạn."
+      ]
+    },
+    {
+      "id": "SEM-43",
+      "source_group": "SEM-08",
+      "owner": "Vinh",
+      "github": "Vinh5905",
+      "effort": 1,
+      "category": "practice",
+      "title": "Chốt SUMMARY và bộ evidence thực nghiệm",
+      "due": "2026-11-07",
+      "status": "Todo",
+      "start_dependencies": [
+        "SEM-41",
+        "SEM-42",
+        "SEM-44",
+        "SEM-45"
+      ],
+      "finish_dependencies": [],
+      "work": [
+        "Tổng hợp hypothesis → observation → explanation → limitation theo case/device/mode/build.",
+        "Liên kết CSV, logs, run_id và audit, ghi đủ mẫu thiếu/timeout/run bị nhiễu.",
+        "Chốt SUMMARY để report/slide dùng đúng evidence; chưa chạy ghi NOT_RUN."
+      ],
+      "outputs": [
+        "experiments/SUMMARY.md"
+      ],
+      "acceptance": [
+        "Mọi bảng truy được run/manifest/build; không trộn tập khác version.",
+        "Median kèm n_complete/n_total, không suy pin từ số request và không so latency thiếu kiểm soát."
+      ]
+    },
+    {
+      "id": "SEM-44",
+      "source_group": "SEM-08",
+      "owner": "Trung",
+      "github": "TrungNQ2645",
+      "effort": 1,
+      "category": "practice",
+      "title": "Kiểm độc lập trigger và phép tính dữ liệu main",
+      "due": "2026-11-07",
+      "status": "Todo",
+      "start_dependencies": [
+        "SEM-41",
+        "SEM-42",
+        "SEM-45"
+      ],
+      "finish_dependencies": [],
+      "work": [
+        "Đối chiếu CSV với log/manifest, kiểm trigger PERIODIC/PUSH/MANUAL và phase/build.",
+        "Kiểm mẫu số, timeout, clock offset/monotonic và các ca applied/unchanged.",
+        "Ghi lỗi dữ liệu theo run để task producer sửa, không sửa số đo cho khớp giả thuyết."
+      ],
+      "outputs": [
+        "experiments/AUDIT.md"
+      ],
+      "acceptance": [
+        "Có case/input/expected/actual/assertion và run_id/commit thật.",
+        "Không tự ký Pass cho run chưa thực hiện hoặc chưa đủ log."
+      ]
+    },
+    {
+      "id": "SEM-45",
+      "source_group": "SEM-08",
+      "owner": "Tuấn",
+      "github": "mtuan2491",
+      "effort": 2,
+      "category": "practice",
+      "title": "Viết parser log và sinh results.csv",
+      "due": "2026-11-07",
+      "status": "Todo",
+      "start_dependencies": [
+        "SEM-24",
+        "SEM-26"
+      ],
+      "finish_dependencies": [
+        "SEM-41",
+        "SEM-42"
+      ],
+      "work": [
+        "Xây parser từ manifest/events sang outcome/timings/counts theo protocol; có thể chuẩn bị bằng fixture có nhãn.",
+        "Khi main logs bàn giao, chạy để sinh results.csv và lệnh tái lập.",
+        "Giữ timeout riêng, kiểm clock offset và nhóm theo case/device/mode/build."
+      ],
+      "outputs": [
+        "experiments/scripts/analyze.*",
+        "experiments/results.csv"
+      ],
+      "acceptance": [
+        "Tái sinh được CSV từ log; fixture không lẫn main, không gán latency timeout bằng 0.",
+        "Accepted/received/queue/sync không bị gộp thành một mốc."
+      ]
+    },
+    {
+      "id": "SEM-46",
+      "source_group": "SEM-09",
+      "owner": "Trí",
+      "github": "ThanhTris",
+      "effort": 1,
+      "category": "research",
+      "title": "Viết phần mở bài và bàn giao lời dẫn thao tác demo",
+      "due": "2026-11-08",
+      "status": "Todo",
+      "start_dependencies": [],
+      "finish_dependencies": [
+        "SEM-14",
+        "SEM-37"
+      ],
+      "work": [
+        "Viết nội dung mở bài/câu hỏi trigger-to-cache và thao tác thiết bị cho demo.",
+        "Liên kết bản ứng viên, mode/reset và phương án mở log/video trong đúng phần nói.",
+        "Bàn giao file nội dung riêng; không chỉnh deck chính của Tuấn."
+      ],
+      "outputs": [
+        "slides/inputs/TRI.md"
+      ],
+      "acceptance": [
+        "Lời dẫn khớp scope/candidate thật, ghi rõ live và playback.",
+        "Không thêm tính năng hoặc lời hứa độ trễ chưa được evidence hỗ trợ."
+      ]
+    },
+    {
+      "id": "SEM-47",
+      "source_group": "SEM-09",
+      "owner": "Trang",
+      "github": "rosy179",
+      "effort": 2,
+      "category": "research",
+      "title": "Viết phần silent push và lời dẫn demo 4 phút",
+      "due": "2026-11-08",
+      "status": "Todo",
+      "start_dependencies": [
+        "SEM-15"
+      ],
+      "finish_dependencies": [
+        "SEM-33",
+        "SEM-34",
+        "SEM-38"
+      ],
+      "work": [
+        "Soạn nội dung cơ chế push, payload/TTL/token và giới hạn bằng evidence được bàn giao.",
+        "Viết một mạch lời dẫn demo cho cả push/periodic/Doze; đánh dấu phần live/playback.",
+        "Ghi ngưỡng 30 giây đổi video và câu trả lời accepted khác delivered."
+      ],
+      "outputs": [
+        "slides/inputs/TRANG.md",
+        "slides/DEMO_SCRIPT.md"
+      ],
+      "acceptance": [
+        "Nội dung demo nằm trong 4 phút và không coi 30 giây là bảo đảm FCM.",
+        "Mỗi claim có nguồn/evidence hoặc ghi giả thuyết; chỉ giao file input riêng."
+      ]
+    },
+    {
+      "id": "SEM-48",
+      "source_group": "SEM-09",
+      "owner": "Vinh",
+      "github": "Vinh5905",
+      "effort": 1,
+      "category": "research",
+      "title": "Viết nội dung và biểu đồ kết quả cho bài nói",
+      "due": "2026-11-08",
+      "status": "Todo",
+      "start_dependencies": [],
+      "finish_dependencies": [
+        "SEM-43",
+        "SEM-44",
+        "SEM-45"
+      ],
+      "work": [
+        "Tạo bảng/biểu đồ từ CSV đã audit, có số mẫu, timeout, thiết bị và build.",
+        "Soạn lời dẫn phần kết quả 1 phút 45 giây và giới hạn mẫu/clock/OS.",
+        "Bàn giao input có link run/evidence và ảnh/plot tái sinh được."
+      ],
+      "outputs": [
+        "slides/inputs/VINH.md",
+        "slides/inputs/results/"
+      ],
+      "acceptance": [
+        "Biểu đồ đúng số liệu main, có n_complete/n_total và không giấu kết quả trái giả thuyết.",
+        "Không kết luận pin hoặc mọi Android từ request count/OPPO."
+      ]
+    },
+    {
+      "id": "SEM-49",
+      "source_group": "SEM-09",
+      "owner": "Tâm",
+      "github": "HoaiTam",
+      "effort": 1,
+      "category": "research",
+      "title": "Viết phần kiến trúc và lập luận nghiên cứu thứ hai",
+      "due": "2026-11-08",
+      "status": "Todo",
+      "start_dependencies": [
+        "SEM-18"
+      ],
+      "finish_dependencies": [
+        "SEM-21",
+        "SEM-27",
+        "SEM-35",
+        "SEM-40"
+      ],
+      "work": [
+        "Soạn nội dung kiến trúc server/shared sync và giải thích fault injection.",
+        "Đối chiếu bài thứ hai với dữ liệu demo/phương pháp, ghi giới hạn áp dụng.",
+        "Bàn giao file riêng có nguồn và link contract/runtime."
+      ],
+      "outputs": [
+        "slides/inputs/TAM.md"
+      ],
+      "acceptance": [
+        "Không đồng nhất skip-push với FCM mất tin hoặc accepted với delivered.",
+        "Kiến trúc đúng code/contract đã bàn giao và lập luận paper được dẫn nguồn."
+      ]
+    },
+    {
+      "id": "SEM-50",
+      "source_group": "SEM-09",
+      "owner": "Tuấn",
+      "github": "mtuan2491",
+      "effort": 2,
+      "category": "research",
+      "title": "Hoàn thiện báo cáo, bibliography và CLAIMS",
+      "due": "2026-11-09",
+      "status": "Todo",
+      "start_dependencies": [],
+      "finish_dependencies": [
+        "SEM-19",
+        "SEM-20",
+        "SEM-21",
+        "SEM-22",
+        "SEM-43",
+        "SEM-45"
+      ],
+      "work": [
+        "Soạn khung report ngay; nhận notes/evidence rồi hoàn thiện cơ chế, phương pháp, kết quả và giới hạn.",
+        "Ghép metadata hai bài vào references.bib; tạo CLAIMS có nguồn/vị trí/case/evidence/trạng thái.",
+        "Đối chiếu các kết luận với SUMMARY và không trình bày giả thuyết như số đo."
+      ],
+      "outputs": [
+        "report/REPORT.md",
+        "research/references.bib",
+        "docs/CLAIMS.md"
+      ],
+      "acceptance": [
+        "Hai nghiên cứu có vai trò trong lập luận, DOI/metadata khớp và citations truy được.",
+        "Số liệu/giới hạn khớp logs/CSV/SUMMARY; phần chưa chạy nêu rõ."
+      ]
+    },
+    {
+      "id": "SEM-51",
+      "source_group": "SEM-09",
+      "owner": "Tuấn",
+      "github": "mtuan2491",
+      "effort": 3,
+      "category": "research",
+      "title": "Ghép deck 15 phút, PDF và speaker notes",
+      "due": "2026-11-10",
+      "status": "Todo",
+      "start_dependencies": [],
+      "finish_dependencies": [
+        "SEM-46",
+        "SEM-47",
+        "SEM-48",
+        "SEM-49",
+        "SEM-50"
+      ],
+      "work": [
+        "Chuẩn bị dàn ý rồi ghép input của từng owner vào một deck chính.",
+        "Xuất PPTX/PDF và notes theo PRESENTATION_PLAN: 7 lượt nói, 30 giây chuyển tiếp trong 15 phút.",
+        "Kiểm source/evidence/link, các nhãn live/playback và thời lượng demo 4 phút."
+      ],
+      "outputs": [
+        "slides/seminar-ie307.pptx",
+        "slides/seminar-ie307.pdf",
+        "slides/SPEAKER_NOTES.md"
+      ],
+      "acceptance": [
+        "Bộ slide chỉnh sửa được và PDF đọc được; không tăng tổng thời lượng vì chuyển người.",
+        "Bản cuối chỉ dùng input/evidence đã bàn giao; không ghi đã có kết quả khi chưa có."
+      ]
+    },
+    {
+      "id": "SEM-52",
+      "source_group": "SEM-10",
+      "owner": "Trí",
+      "github": "ThanhTris",
+      "effort": 1,
+      "category": "practice",
+      "title": "Build APK bàn giao và viết DEMO_RUNBOOK",
+      "due": "2026-11-11",
+      "status": "Todo",
+      "start_dependencies": [
+        "SEM-37"
+      ],
+      "finish_dependencies": [
+        "SEM-43",
+        "SEM-50",
+        "SEM-51"
+      ],
+      "work": [
+        "Build từ source đã đo, ghi commit/config/SHA256 và link APK chạy trên OPPO/emulator.",
+        "Viết runbook clone/setup/kết nối/reset/mode/live/fallback/cleanup để người khác tái lập.",
+        "Bàn giao artifact nền cho task video và diễn tập; thay code phải ghi ca đo cần chạy lại."
+      ],
+      "outputs": [
+        "release/BUILD_MANIFEST.json",
+        "docs/DEMO_RUNBOOK.md",
+        "release/ (APK hoặc liên kết tải)"
+      ],
+      "acceptance": [
+        "Commit/config/checksum nối được với candidate/dữ liệu đo; không tự lấy evidence bản cũ cho code mới.",
+        "Runbook nêu ngưỡng đổi video 30 giây và cách khôi phục thiết bị."
+      ]
+    },
+    {
+      "id": "SEM-53",
+      "source_group": "SEM-10",
+      "owner": "Vinh",
+      "github": "Vinh5905",
+      "effort": 2,
+      "category": "practice",
+      "title": "Tái lập runbook và quay video dự phòng",
+      "due": "2026-11-12",
+      "status": "Todo",
+      "start_dependencies": [
+        "SEM-52"
+      ],
+      "finish_dependencies": [],
+      "work": [
+        "Làm theo runbook trên thiết bị, ghi bước tái lập được và blocker/sai lệch để task SEM-52 sửa.",
+        "Quay video thật của đúng build; gắn nhãn playback và run/commit/checksum.",
+        "Xuất video manifest/link artifact; không commit media quá lớn hoặc lộ token/serial."
+      ],
+      "outputs": [
+        "release/VIDEO_MANIFEST.json",
+        "docs/evidence/SEM-53/REPRODUCTION.md",
+        "Video demo/fallback có liên kết tải"
+      ],
+      "acceptance": [
+        "Video có metadata thật và không thay evidence thực nghiệm bằng mô phỏng.",
+        "Runbook tái lập được hoặc chỉ rõ phần cần hỗ trợ; dữ liệu nhạy cảm đã được loại."
+      ]
+    },
+    {
+      "id": "SEM-54",
+      "source_group": "SEM-10",
+      "owner": "Tuấn",
+      "github": "mtuan2491",
+      "effort": 1,
+      "category": "practice",
+      "title": "Điều phối hai lần diễn tập và ghi thời lượng",
+      "due": "2026-11-12",
+      "status": "Todo",
+      "start_dependencies": [
+        "SEM-51",
+        "SEM-52"
+      ],
+      "finish_dependencies": [
+        "SEM-53"
+      ],
+      "work": [
+        "Lên lịch/điều phối hai lượt diễn tập theo các vai nói đã chốt; ghi thời gian thực từng phần.",
+        "Kiểm lời dẫn/live/playback/fallback với bản video bàn giao; ghi lỗi và owner task cần sửa.",
+        "Cập nhật REHEARSAL và lời dẫn/notes thuộc phạm vi tổng hợp, không sửa module người khác."
+      ],
+      "outputs": [
+        "docs/REHEARSAL.md"
+      ],
+      "acceptance": [
+        "Có hai lượt bấm giờ thật, toàn bài ≤15 phút gồm demo và thời gian chuyển tiếp.",
+        "Nêu lỗi còn tồn tại và cách xử lý; không ghi nhóm đã diễn tập khi chưa tổ chức."
+      ]
+    },
+    {
+      "id": "SEM-55",
+      "source_group": "SEM-10",
+      "owner": "Trí",
+      "github": "ThanhTris",
+      "effort": 1,
+      "category": "practice",
+      "title": "Chốt manifest và gói bàn giao seminar",
+      "due": "2026-11-12",
+      "status": "Todo",
+      "start_dependencies": [
+        "SEM-43",
+        "SEM-50",
+        "SEM-51",
+        "SEM-52",
+        "SEM-53",
+        "SEM-54"
+      ],
+      "finish_dependencies": [],
+      "work": [
+        "Ghép chỉ mục APK/server/source/slide/report/video/checks thành manifest cuối.",
+        "Rà link tải/checksum/version và danh mục phần còn thiếu, dành 13/11 sửa lỗi cuối.",
+        "Ghi quan hệ commit code đã đo và commit tài liệu cuối; không yêu cầu hai commit phải trùng."
+      ],
+      "outputs": [
+        "release/MANIFEST.json",
+        "release/README.md"
+      ],
+      "acceptance": [
+        "Mọi artifact truy được source/build/evidence và tải/đọc được.",
+        "Video/rehearsal/report/slide có thật trước khi Done, phần chưa thực hiện liệt kê rõ."
+      ]
+    }
+  ]
+}

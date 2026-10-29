@@ -1,0 +1,39 @@
+# SEM-54 — Điều phối hai lần diễn tập và ghi thời lượng
+
+- Trạng thái: Todo — chưa thực hiện.
+- Người thực hiện duy nhất: **Tuấn** (`mtuan2491`).
+- Hạn: **2026-11-12** (UTC+7).
+- Công sức: 1/100 — Cơ chế/thực hành.
+- Tách từ nhóm cũ: [SEM-10](SEM-10.md); nhóm cũ chỉ còn lưu lịch sử.
+
+## Dependency — bấm mã task để mở yêu cầu
+
+- **Bắt đầu sau:** [SEM-51](SEM-51.md), [SEM-52](SEM-52.md)
+- **Hoàn tất còn cần:** [SEM-53](SEM-53.md)
+
+Không có gate bắt đầu nghĩa là có thể chuẩn bị ngay. Gate hoàn tất chỉ chặn bàn giao cuối; bản nháp/fixture phải ghi đúng nhãn, không được gọi là kết quả chạy thật.
+
+## Việc Tuấn cần làm
+
+1. Lên lịch/điều phối hai lượt diễn tập theo các vai nói đã chốt; ghi thời gian thực từng phần.
+2. Kiểm lời dẫn/live/playback/fallback với bản video bàn giao; ghi lỗi và owner task cần sửa.
+3. Cập nhật REHEARSAL và lời dẫn/notes thuộc phạm vi tổng hợp, không sửa module người khác.
+
+## Đầu ra bắt buộc
+
+- `docs/REHEARSAL.md`
+- `docs/evidence/SEM-54/CHECKS.md`: commit/build/config, thao tác, expected/actual, Pass/Fail/Not run, evidence, blocker và đầu ra đã bàn giao.
+
+## Tiêu chí hoàn thành
+
+- [ ] Có hai lượt bấm giờ thật, toàn bài ≤15 phút gồm demo và thời gian chuyển tiếp.
+- [ ] Nêu lỗi còn tồn tại và cách xử lý; không ghi nhóm đã diễn tập khi chưa tổ chức.
+- [ ] Đầu ra và CHECKS có thật, link đọc được; chưa chạy phải ghi Not run, không tự chuyển Done từ kế hoạch.
+
+## Task được mở khóa
+
+- [SEM-55](SEM-55.md) cần đầu ra này để **bắt đầu**.
+
+## Ranh giới thực hiện
+
+Một task chỉ có Tuấn thực hiện và cập nhật phần việc này. Người nhận đầu ra làm task riêng được liên kết ở trên; không có đồng thực hiện hay reviewer được gán thêm vào thẻ. Lỗi thuộc đầu ra này trả về task này ở Needs Update. Không sửa phần do task khác sở hữu mà chưa cập nhật ranh giới/bàn giao.

@@ -66,4 +66,4 @@ Ngưỡng đổi sang video: live chưa hoàn tất trong 30 giây kể từ lú
 
 ## Bộ tài liệu cuối
 
-SEM-09 bàn giao slide chỉnh sửa được, PDF slide, speaker notes và báo cáo ngắn. SEM-10 bàn giao demo runbook, APK, server và video. Phụ lục dành cho sơ đồ chi tiết, metadata, payload đã loại token và tài liệu API mới; không nhồi vào 15 phút.
+SEM-50 (Tuấn) bàn giao report/CLAIMS/bibliography; SEM-51 (Tuấn) bàn giao PPTX/PDF/notes. SEM-52 (Trí) giao APK/runbook; SEM-53 (Vinh) video/tái lập; SEM-54 (Tuấn) ghi diễn tập; SEM-55 (Trí) chốt manifest. Mỗi task chỉ một người thực hiện. Phụ lục dành cho sơ đồ chi tiết, metadata, payload đã loại token và tài liệu API mới; không nhồi vào 15 phút.

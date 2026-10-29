@@ -1,46 +1,14 @@
-# SEM-09 — Hoàn thiện bài trình bày 15 phút và lập luận
+# [ĐÃ TÁCH] SEM-09 — Hoàn thiện bài trình bày 15 phút và lập luận
 
-- Status: backlog
-- Lịch mục tiêu: Dàn ý từ 28/10; bản cuối 08–10/11/2026
-- Công sức: 10/100 — Nghiên cứu/lập luận
-- Owner: Tuấn
-- Reviewer: Trung
-- Phối hợp: Trí, Trang, Vinh, Tâm
-- Điều kiện bắt đầu: có thể chuẩn bị từ kế hoạch đã chốt
-- Điều kiện hoàn tất bổ sung: SEM-02, SEM-03, SEM-08 đã bàn giao
+Nhóm kế hoạch này đã được thay bằng các task một người vào 29/10/2026. Thẻ nhóm cũ được lưu archive trên Project, không phải Done và không còn là task giao việc.
 
-## Đầu vào
+| Task thực hiện | Một người duy nhất | Công sức | Hạn |
+|---|---|---:|---|
+| [SEM-46](SEM-46.md) — Viết phần mở bài và bàn giao lời dẫn thao tác demo | Trí | 1 | 2026-11-08 |
+| [SEM-47](SEM-47.md) — Viết phần silent push và lời dẫn demo 4 phút | Trang | 2 | 2026-11-08 |
+| [SEM-48](SEM-48.md) — Viết nội dung và biểu đồ kết quả cho bài nói | Vinh | 1 | 2026-11-08 |
+| [SEM-49](SEM-49.md) — Viết phần kiến trúc và lập luận nghiên cứu thứ hai | Tâm | 1 | 2026-11-08 |
+| [SEM-50](SEM-50.md) — Hoàn thiện báo cáo, bibliography và CLAIMS | Tuấn | 2 | 2026-11-09 |
+| [SEM-51](SEM-51.md) — Ghép deck 15 phút, PDF và speaker notes | Tuấn | 3 | 2026-11-10 |
 
-docs/PRESENTATION_PLAN.md để soạn từ đầu. Nội dung kết quả phải chờ experiments/SUMMARY.md; nguồn học thuật từ SEM-03.
-
-## Việc cần làm
-
-Phân việc: Tuấn quản lý duy nhất file deck chính, PDF, speaker notes, report và CLAIMS; Trang soạn nội dung push, rà lời dẫn demo; Vinh cung cấp kết quả/giới hạn; Tâm viết phần đối chiếu hai nghiên cứu và kiến trúc; Trí kiểm đoạn tích hợp và demo. Tuấn chốt bản trình bày 15 phút.
-
-Theo [phân công 6 người](../../docs/TEAM_ASSIGNMENTS.md); owner tổng hợp đầu ra và CHECKS, reviewer kiểm trước khi chuyển done.
-
-1. Soạn 9 slide theo phân bổ 15 phút, nói rõ câu hỏi, cơ chế, demo, kết quả và lựa chọn.
-2. Chèn sơ đồ và một bảng/biểu đồ từ số liệu thật; không dùng kết quả minh họa như dữ liệu thật.
-3. Cập nhật docs/CLAIMS.md với evidence thực tế và trạng thái supported/limited/not-tested.
-4. Soạn speaker notes, lời dẫn chuyển demo, đáp án phản biện và báo cáo ngắn có trích dẫn.
-5. Chỉ chốt kết luận khi đủ dữ liệu; giữ chi tiết API/EAP/metadata ở phụ lục.
-6. Trí/Trang/Vinh/Tâm giao nội dung và evidence phần mình chậm nhất 08/11; Tuấn ghép bản đầu ngày 09/11, Trung review, chốt ngày 10/11. Không để mọi người giao nội dung vào đúng ngày phải hoàn tất deck.
-
-## Đầu ra bắt buộc
-
-- slides/seminar-ie307.pptx và slides/seminar-ie307.pdf — bản chỉnh sửa được và bản trình chiếu dự phòng.
-- slides/SPEAKER_NOTES.md — lời dẫn, mốc thời gian và câu hỏi phản biện.
-- report/REPORT.md — cơ chế, phương pháp, kết quả, giới hạn và tài liệu tham khảo.
-- docs/CLAIMS.md — bảng lập luận đã cập nhật evidence.
-- docs/evidence/SEM-09/CHECKS.md — commit, môi trường, bước kiểm tra, expected/actual, link bằng chứng, hạn chế và phần bàn giao.
-
-## Tiêu chí nghiệm thu
-
-- [ ] Tổng phân bổ chính là 15 phút, demo 4 phút; không vượt thời lượng khi diễn tập sơ bộ.
-- [ ] Mỗi kết luận định lượng có run/evidence; mỗi claim kỹ thuật có nguồn đúng phiên bản.
-- [ ] Hai bài nghiên cứu được dùng có mục đích, không biến bài nói thành đọc literature review.
-- [ ] Có đủ đầu ra và CHECKS.md; người làm giải thích được kết quả, reviewer được phân công kiểm tra và ghi kết luận.
-
-## Trạng thái bàn giao
-
-Chưa thực hiện. Tên file ở trên là đầu ra phải tạo khi làm task, không phải bằng chứng đã tồn tại. Cập nhật task và task board cùng lúc khi đổi trạng thái.
+[Đặc tả trước khi chia nhỏ](https://github.com/ThanhTris/Seminar-IE307/blob/40ac61c0de77bcc872223da0c73db29151a38472/tasks/backlog/SEM-09.md). Xem [bảng hiện hành](../README.md).

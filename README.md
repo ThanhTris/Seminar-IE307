@@ -4,7 +4,8 @@
 
 - [Kế hoạch hiện hành](docs/PLAN.md)
 - [Kết quả rà soát ngày 28/10/2026](docs/REVIEW-2026-10-28.md)
-- [10 task: việc cần làm và đầu ra](tasks/README.md)
+- [45 task: mỗi task một người, việc làm và đầu ra](tasks/README.md)
+- [GitHub Project và dependency](https://github.com/users/ThanhTris/projects/3/views/1)
 - [Phân công 6 thành viên](docs/TEAM_ASSIGNMENTS.md)
 - [Kịch bản thuyết trình 15 phút](docs/PRESENTATION_PLAN.md)
 - [Thiết kế kiểm thử](docs/EXPERIMENT_PROTOCOL.md)
@@ -21,6 +22,6 @@
 
 ## Trạng thái thực tế
 
-Tại lần rà soát 28/10/2026, repo có tài liệu kế hoạch; **chưa có code demo, APK, bài báo đã tuyển chọn hoặc kết quả đo**. Các đầu ra trong task là yêu cầu tương lai. Việc cập nhật kế hoạch không đồng nghĩa hoàn thành SEM-01…SEM-10.
+Tại lần rà soát 28/10/2026, repo có tài liệu kế hoạch; **chưa có code demo, APK, bài báo đã tuyển chọn hoặc kết quả đo**. Các đầu ra trong task là yêu cầu tương lai. Việc cập nhật kế hoạch không đồng nghĩa hoàn thành các task. Cập nhật 29/10/2026: đã chia 45 task SEM-11…SEM-55, mỗi task đúng một người; toàn bộ vẫn Todo.
 
-Bước tiếp theo: SEM-01 kiểm tra build/thiết bị và chốt phiên bản; SEM-02 xây mô hình cơ chế. Theo dõi tiến độ trong task, chỉ chuyển done khi có đầu ra và kiểm chứng.
+Bước tiếp theo: Trí làm SEM-11, Vinh làm SEM-12, Tâm làm SEM-13; Trang làm SEM-15, Trung làm SEM-17, Tuấn chuẩn bị SEM-19/20. Xem 45 task một người ở bảng hiện hành; 10 thẻ cũ đã archive. Theo dõi tiến độ trong task, chỉ chuyển done khi có đầu ra và kiểm chứng.

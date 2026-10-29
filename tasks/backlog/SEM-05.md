@@ -1,43 +1,12 @@
-# SEM-05 — Triển khai và quan sát periodic fetch
+# [ĐÃ TÁCH] SEM-05 — Triển khai và quan sát periodic fetch
 
-- Status: backlog
-- Lịch mục tiêu: 01–02/11/2026
-- Công sức: 10/100 — Thực hành
-- Owner: Trung
-- Reviewer: Trang
-- Phối hợp: Trí, Vinh
-- Điều kiện bắt đầu: SEM-02, SEM-04 đã có đầu ra cần dùng
-- Điều kiện hoàn tất bổ sung: không ngoài điều kiện bắt đầu
+Nhóm kế hoạch này đã được thay bằng các task một người vào 29/10/2026. Thẻ nhóm cũ được lưu archive trên Project, không phải Done và không còn là task giao việc.
 
-## Đầu vào
+| Task thực hiện | Một người duy nhất | Công sức | Hạn |
+|---|---|---:|---|
+| [SEM-28](SEM-28.md) — Ghép manual sync đầu cuối và chốt hướng dẫn setup | Trí | 1 | 2026-10-31 |
+| [SEM-29](SEM-29.md) — Chạy pilot periodic E01 trên hai thiết bị | Vinh | 2 | 2026-11-02 |
+| [SEM-30](SEM-30.md) — Triển khai unique periodic work | Trung | 4 | 2026-11-01 |
+| [SEM-31](SEM-31.md) — Bàn giao chẩn đoán và tài liệu periodic | Trung | 3 | 2026-11-02 |
 
-SyncRepository, SyncWorker và giao diện enqueue từ SEM-04; docs/API.md, docs/EVENT_SCHEMA.md và mô hình cơ chế đã review.
-
-## Việc cần làm
-
-Phân việc: Trung làm periodic scheduler/configuration dùng SyncWorker đã bàn giao ở SEM-04, PERIODIC.md và pilot; Trí hỗ trợ nối mode/UI; Vinh kiểm đăng ký lịch và thu pilot E01. Trung bàn giao commit, cấu hình và log cho Vinh chạy tập chính.
-
-Theo [phân công 6 người](../../docs/TEAM_ASSIGNMENTS.md); owner tổng hợp đầu ra và CHECKS, reviewer kiểm trước khi chuyển done.
-
-1. Thêm unique periodic work và network constraint, cập nhật UI trạng thái lịch.
-2. Tắt push khi thử mode PERIODIC; đăng ký nhiều lần không sinh thêm lịch.
-3. Ghi work start/end, trigger, version và failure; retry có phân biệt lỗi tạm thời/vĩnh viễn.
-4. Chạy E01 pilot và bắt đầu ghi phiên periodic tự nhiên dài, không ép chạy để tạo bằng chứng.
-
-## Đầu ra bắt buộc
-
-- android/ — periodic scheduler gọi SyncWorker chung từ SEM-04; không tạo worker hay sync engine riêng cạnh tranh với luồng push.
-- docs/PERIODIC.md — luồng xử lý, cấu hình được dùng, cách kiểm tra lịch và đọc log.
-- experiments/runs/<run_id>/ — manifest và event log của pilot được gắn nhãn.
-- docs/evidence/SEM-05/CHECKS.md — commit, môi trường, bước kiểm tra, expected/actual, link bằng chứng, hạn chế và phần bàn giao.
-
-## Tiêu chí nghiệm thu
-
-- [ ] Một lịch active sau nhiều lần đăng ký; worker có trigger PERIODIC.
-- [ ] Có ít nhất 2 lần chạy tự nhiên trong pilot và ghi cả phiên quan sát; nếu thiếu, nêu blocker.
-- [ ] Không yêu cầu hệ thống phải lệch giờ để chứng minh hiểu giới hạn; đối chiếu điều quan sát với tài liệu.
-- [ ] Có đủ đầu ra và CHECKS.md; người làm giải thích được kết quả, reviewer được phân công kiểm tra và ghi kết luận.
-
-## Trạng thái bàn giao
-
-Chưa thực hiện. Tên file ở trên là đầu ra phải tạo khi làm task, không phải bằng chứng đã tồn tại. Cập nhật task và task board cùng lúc khi đổi trạng thái.
+[Đặc tả trước khi chia nhỏ](https://github.com/ThanhTris/Seminar-IE307/blob/40ac61c0de77bcc872223da0c73db29151a38472/tasks/backlog/SEM-05.md). Xem [bảng hiện hành](../README.md).

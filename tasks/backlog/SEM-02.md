@@ -1,42 +1,14 @@
-# SEM-02 — Xây mô hình cơ chế và câu hỏi phản biện
+# [ĐÃ TÁCH] SEM-02 — Xây mô hình cơ chế và câu hỏi phản biện
 
-- Status: backlog
-- Lịch mục tiêu: 28–30/10/2026
-- Công sức: 15/100 — Thực hành/hiểu cơ chế
-- Owner: Tuấn
-- Reviewer: Trí
-- Phối hợp: Trí, Trang, Vinh, Trung, Tâm
-- Điều kiện bắt đầu: có thể chuẩn bị từ kế hoạch đã chốt
-- Điều kiện hoàn tất bổ sung: SEM-01 đã bàn giao
+Nhóm kế hoạch này đã được thay bằng các task một người vào 29/10/2026. Thẻ nhóm cũ được lưu archive trên Project, không phải Done và không còn là task giao việc.
 
-## Đầu vào
+| Task thực hiện | Một người duy nhất | Công sức | Hạn |
+|---|---|---:|---|
+| [SEM-14](SEM-14.md) — Vẽ luồng dữ liệu và hợp đồng sync chung | Trí | 1 | 2026-10-30 |
+| [SEM-15](SEM-15.md) — Giải thích cơ chế silent push và giới hạn FCM | Trang | 3 | 2026-10-30 |
+| [SEM-16](SEM-16.md) — Lập ma trận lifecycle và protocol E01–E06 | Vinh | 2 | 2026-10-30 |
+| [SEM-17](SEM-17.md) — Giải thích periodic WorkManager và constraints | Trung | 3 | 2026-10-30 |
+| [SEM-18](SEM-18.md) — Giải thích server, FCM accepted và correlation | Tâm | 2 | 2026-10-30 |
+| [SEM-19](SEM-19.md) — Tổng hợp mô hình cơ chế và câu hỏi phản biện | Tuấn | 4 | 2026-10-30 |
 
-Phạm vi đã xác nhận trong docs/PLAN.md và nguồn chính thức trong research/README.md. Bổ sung version thiết bị khi SEM-01 bàn giao.
-
-## Việc cần làm
-
-Phân việc: Trung viết luồng periodic; Trang viết luồng push; Vinh viết bảng trạng thái và điều cần đo; Tâm viết phần server/FCM; Trí kiểm đường đi dữ liệu chung. Tuấn tổng hợp MECHANISMS, hai sơ đồ và QUESTIONS. Các phần do Trí viết được Tuấn đọc chéo.
-
-Theo [phân công 6 người](../../docs/TEAM_ASSIGNMENTS.md); owner tổng hợp đầu ra và CHECKS, reviewer kiểm trước khi chuyển done.
-
-1. Giải thích từ trigger đến cache: periodic scheduler/WorkManager và push FCM/callback/worker.
-2. Phân biệt data-only, notification và mixed payload trong baseline API; phân biệt trigger nhận được và sync hoàn tất.
-3. Lập bảng foreground/background/process death/recent-swipe/force-stop/Doze; đánh dấu điều cần đo trên OPPO.
-4. Chuẩn bị câu hỏi phản biện và dự đoán cho E01–E06; mỗi giả thuyết gắn nguồn, chưa gọi là kết quả.
-
-## Đầu ra bắt buộc
-
-- docs/MECHANISMS.md — bảng thuật ngữ, 2 sơ đồ luồng, lifecycle/OS constraints, version áp dụng và nguồn.
-- docs/QUESTIONS.md — ít nhất 10 câu hỏi cơ chế kèm đáp án ngắn và liên kết nguồn.
-- docs/evidence/SEM-02/CHECKS.md — commit, môi trường, bước kiểm tra, expected/actual, link bằng chứng, hạn chế và phần bàn giao.
-
-## Tiêu chí nghiệm thu
-
-- [ ] Có thể giải thích hai luồng không đọc code, chỉ ra điểm Android quyết định chạy.
-- [ ] Không đồng nhất màn hình tắt với Doze hoặc data-only với thông báo tắt tiếng.
-- [ ] Không cần tạo app riêng cho task này; bằng chứng runtime được bổ sung từ SEM-05/06/08.
-- [ ] Có đủ đầu ra và CHECKS.md; người làm giải thích được kết quả, reviewer được phân công kiểm tra và ghi kết luận.
-
-## Trạng thái bàn giao
-
-Chưa thực hiện. Tên file ở trên là đầu ra phải tạo khi làm task, không phải bằng chứng đã tồn tại. Cập nhật task và task board cùng lúc khi đổi trạng thái.
+[Đặc tả trước khi chia nhỏ](https://github.com/ThanhTris/Seminar-IE307/blob/40ac61c0de77bcc872223da0c73db29151a38472/tasks/backlog/SEM-02.md). Xem [bảng hiện hành](../README.md).

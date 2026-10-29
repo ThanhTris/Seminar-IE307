@@ -1,6 +1,6 @@
 # Thiết kế kiểm thử — chưa có kết quả
 
-Version kế hoạch: 2026-10-28. SEM-08 dùng tài liệu này để tạo run manifest, script và kết quả thật tại experiments/. Mọi expected dưới đây là điều cần kiểm tra, không phải số liệu đã đo.
+Version phân công: 2026-10-29; giữ thông số thử từ kế hoạch 28/10. SEM-16/24/29/34/41/42/43/44/45 dùng tài liệu này theo đầu ra riêng để tạo run manifest, script và kết quả thật tại experiments/. Mọi expected dưới đây là điều cần kiểm tra, không phải số liệu đã đo.
 
 ## Cấu hình và cách tránh nhầm nguyên nhân
 
@@ -30,9 +30,9 @@ Tập trên cần khoảng 10–12 giờ cửa sổ quan sát tuần tự, chưa
 
 ## Phiên bản dùng đo và lịch chạy
 
-- 02–05/11: chạy thử để tìm lỗi; Vinh ghi run_phase=pilot/development. Trí bàn giao bản ứng viên vào cuối 05/11 sau tích hợp SEM-07, gồm commit app/server, APK checksum và cấu hình.
+- 02–05/11: chạy thử để tìm lỗi; Vinh ghi run_phase=pilot/development. Trí bàn giao bản ứng viên vào cuối 05/11 sau tích hợp SEM-36, qua gate SEM-37, gồm commit app/server, APK checksum và cấu hình.
 - 06–07/11: Vinh chạy tập chính với run_phase=main trên bản ứng viên. Đặt lịch ít nhất 10–12 giờ quan sát cùng thời gian setup/pilot; hai thiết bị có thể chạy song song khi run và cấu hình tách biệt.
-- Run trước bản ứng viên chỉ dùng cho kết quả chính nếu reviewer xác nhận code/config có liên quan không đổi, ghi rõ quyết định trong CHECKS. Mặc định giữ là pilot; không dùng để mô tả APK cuối.
+- Run trước bản ứng viên chỉ dùng cho kết quả chính nếu SEM-44 kiểm độc lập và ghi code/config có liên quan không đổi, ghi rõ quyết định trong CHECKS. Mặc định giữ là pilot; không dùng để mô tả APK cuối.
 - Nếu sửa scheduler, callback, sync core, retry, version guard hoặc logging sau khi đo: ghi bản mới và chạy lại ca chịu ảnh hưởng trước khi chốt SUMMARY. Thay đổi chỉ ở slide/tài liệu không bắt buộc chạy lại app.
 - Không gộp các commit/build khác nhau vào cùng thống kê. Nếu chỉ so sánh hai phiên bản, tạo nhóm kết quả riêng và giải thích thay đổi.
 
@@ -65,3 +65,7 @@ Ghi UTC ở hai đầu và monotonic time ở Android. Đo clock offset với se
 experiments/runs/<run_id>/manifest.json và events.jsonl; experiments/results.csv; experiments/SUMMARY.md; script tái lập trong experiments/scripts/. README của experiments ghi cách chạy và phiên bản.
 
 Repo public chỉ nhận bản dữ liệu đã loại FCM token, service-account key, serial và thông tin cá nhân. Bản nguyên gốc nhạy cảm giữ trong experiments/private/ (gitignored). Không thay đổi giá trị đo khi loại định danh.
+
+## Task một người dùng protocol
+
+SEM-16 Vinh chuẩn bị protocol; SEM-24 Vinh exporter/manifest; SEM-29 Vinh pilot periodic; SEM-34 Vinh pilot push; SEM-41 Vinh main emulator; SEM-42 Vinh main OPPO; SEM-45 Tuấn parser/CSV; SEM-44 Trung kiểm độc lập; SEM-43 Vinh chốt SUMMARY. Không có task nhiều người cùng thực hiện.

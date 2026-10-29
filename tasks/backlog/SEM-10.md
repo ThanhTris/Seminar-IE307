@@ -1,46 +1,12 @@
-# SEM-10 — Đóng gói demo và diễn tập
+# [ĐÃ TÁCH] SEM-10 — Đóng gói demo và diễn tập
 
-- Status: backlog
-- Lịch mục tiêu: 11–12/11/2026; dự phòng 13/11
-- Công sức: 5/100 — Thực hành
-- Owner: Trí
-- Reviewer: Tâm
-- Phối hợp: Vinh, Tuấn
-- Điều kiện bắt đầu: SEM-07 đã có đầu ra cần dùng
-- Điều kiện hoàn tất bổ sung: SEM-08, SEM-09 đã bàn giao
+Nhóm kế hoạch này đã được thay bằng các task một người vào 29/10/2026. Thẻ nhóm cũ được lưu archive trên Project, không phải Done và không còn là task giao việc.
 
-## Đầu vào
+| Task thực hiện | Một người duy nhất | Công sức | Hạn |
+|---|---|---:|---|
+| [SEM-52](SEM-52.md) — Build APK bàn giao và viết DEMO_RUNBOOK | Trí | 1 | 2026-11-11 |
+| [SEM-53](SEM-53.md) — Tái lập runbook và quay video dự phòng | Vinh | 2 | 2026-11-12 |
+| [SEM-54](SEM-54.md) — Điều phối hai lần diễn tập và ghi thời lượng | Tuấn | 1 | 2026-11-12 |
+| [SEM-55](SEM-55.md) — Chốt manifest và gói bàn giao seminar | Trí | 1 | 2026-11-12 |
 
-App/server đã tích hợp; kịch bản PRESENTATION_PLAN; kết quả SEM-08 và slide SEM-09 trước khi hoàn tất.
-
-## Việc cần làm
-
-Phân việc: Trí build/đóng gói, ghi manifest/checksum và DEMO_RUNBOOK; Vinh quay video, thử chạy theo runbook và ghi lỗi; Tuấn điều phối hai lượt diễn tập, ghi REHEARSAL và sửa lời dẫn. Cả sáu tham gia diễn tập, sửa nội dung/module mình phụ trách.
-
-Theo [phân công 6 người](../../docs/TEAM_ASSIGNMENTS.md); owner tổng hợp đầu ra và CHECKS, reviewer kiểm trước khi chuyển done.
-
-1. Build APK cho OPPO và emulator, chạy setup từ môi trường sạch hoặc ghi rõ phần chưa tái lập.
-   Dùng source code đã kiểm chứng trong SEM-08; nếu rebuild, ghi checksum và cấu hình. Nếu code/config thực thi thay đổi, phối hợp Vinh chạy lại ca bị ảnh hưởng trước khi đóng gói, không coi log của bản cũ là evidence cho bản mới.
-2. Quay video dự phòng từ run thật của bản build tương ứng; metadata và nhãn phát lại rõ ràng.
-3. Soạn runbook: kết nối, mode/reset, dữ liệu, thao tác live, ngưỡng chuyển video 30 giây và khôi phục thiết bị.
-4. Diễn tập 2 lần có bấm giờ; sửa lời dẫn và kiểm tra không lộ token/credential trong log/video.
-5. Đóng gói artifact với commit, checksum và danh mục; rà soát tài liệu và link tải.
-
-## Đầu ra bắt buộc
-
-- release/ — APK hoặc liên kết GitHub Release tới APK, manifest phiên bản/commit/checksum và danh mục artifact.
-- docs/DEMO_RUNBOOK.md — hướng dẫn chuẩn bị, thao tác, fallback và cleanup.
-- Video demo thật và clip dự phòng, đường dẫn trong release manifest; tránh commit file quá lớn.
-- docs/REHEARSAL.md — thời gian từng phần của 2 lần diễn tập, lỗi và cách sửa.
-- docs/evidence/SEM-10/CHECKS.md — commit, môi trường, bước kiểm tra, expected/actual, link bằng chứng, hạn chế và phần bàn giao.
-
-## Tiêu chí nghiệm thu
-
-- [ ] Người khác làm theo runbook tái lập được hoặc ghi rõ bước cần hỗ trợ/cấu hình.
-- [ ] Hai lần diễn tập nằm trong 15 phút gồm demo; payload/log/video không lộ bí mật.
-- [ ] Manifest chỉ rõ commit app/server và checksum đã kiểm chứng, phiên bản tài liệu/slide tương ứng; mọi phần chưa hoàn thành được liệt kê trước bàn giao. Không yêu cầu commit tài liệu cuối trùng commit source đã đo, nhưng phải truy được quan hệ giữa các phiên bản.
-- [ ] Có đủ đầu ra và CHECKS.md; người làm giải thích được kết quả, reviewer được phân công kiểm tra và ghi kết luận.
-
-## Trạng thái bàn giao
-
-Chưa thực hiện. Tên file ở trên là đầu ra phải tạo khi làm task, không phải bằng chứng đã tồn tại. Cập nhật task và task board cùng lúc khi đổi trạng thái.
+[Đặc tả trước khi chia nhỏ](https://github.com/ThanhTris/Seminar-IE307/blob/40ac61c0de77bcc872223da0c73db29151a38472/tasks/backlog/SEM-10.md). Xem [bảng hiện hành](../README.md).

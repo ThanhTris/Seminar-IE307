@@ -1,32 +1,60 @@
-# Task board — Seminar IE307
+# Task board — mỗi task một người
 
-Kế hoạch cập nhật 28/10/2026, hạn 13/11/2026. Toàn bộ task vẫn **backlog**, chưa có code/evidence. Các đầu ra là yêu cầu bàn giao, không phải file đã hoàn thành.
+Cập nhật 29/10/2026. **45 task SEM-11…SEM-55**, mỗi task đúng một người thực hiện; chưa có code/evidence và tất cả vẫn Todo. Hạn cuối 13/11/2026, 15 phút gồm demo, giữ 80 đơn vị thực hành/cơ chế và 20 nghiên cứu/lập luận.
 
-Mỗi task có việc cần làm, đầu ra bắt buộc, ca nghiệm thu và điều kiện bắt đầu/hoàn tất. Giữ ID SEM-01…SEM-10; không tạo chat hoặc GitHub Issue mới.
+[Project hiện hành](https://github.com/users/ThanhTris/projects/3/views/1) · [Theo từng người](../docs/TEAM_ASSIGNMENTS.md) · [Dữ liệu task](catalog.json).
 
-Đã phân công cho Trí, Trang, Vinh, Trung, Tâm và Tuấn. Xem [bảng phân công theo người](../docs/TEAM_ASSIGNMENTS.md) để biết phần đóng góp, đầu ra, mốc bàn giao và reviewer; owner/reviewer cũng được ghi trực tiếp trong từng task.
+SEM-01…SEM-10 chỉ còn là nhóm lịch sử với link tới task thay thế; thẻ cũ được archive, không tính Done. Mỗi task mới có việc làm, file đầu ra, CHECKS, acceptance, gate bắt đầu/gate hoàn tất và các task nhận bàn giao. Không có cột Phối hợp/Reviewer trong phân công thực hiện.
 
-| Task | Owner | Reviewer | Lịch mục tiêu | Công sức | Điều kiện bắt đầu | Điều kiện hoàn tất bổ sung |
-|---|---|---|---|---:|---|---|
-| [SEM-01 — Chốt phạm vi và kiểm tra môi trường](backlog/SEM-01.md) | Trí | Trung | 28–29/10/2026 | 5 | Chuẩn bị ngay | — |
-| [SEM-02 — Xây mô hình cơ chế và câu hỏi phản biện](backlog/SEM-02.md) | Tuấn | Trí | 28–30/10/2026 | 15 | Chuẩn bị ngay | SEM-01 |
-| [SEM-03 — Đọc hai nghiên cứu và lập bảng lập luận](backlog/SEM-03.md) | Tuấn | Vinh | 29/10–01/11/2026 | 10 | Chuẩn bị ngay | SEM-01 |
-| [SEM-04 — Dựng demo tối thiểu và logging](backlog/SEM-04.md) | Tâm | Trang | 29–31/10/2026 | 15 | SEM-01 | — |
-| [SEM-05 — Triển khai và quan sát periodic fetch](backlog/SEM-05.md) | Trung | Trang | 01–02/11/2026 | 10 | SEM-02, SEM-04 | — |
-| [SEM-06 — Triển khai và quan sát push im lặng](backlog/SEM-06.md) | Trang | Trí | 01–03/11/2026 | 10 | SEM-02, SEM-04 | — |
-| [SEM-07 — Tích hợp hybrid và tính đúng của đồng bộ](backlog/SEM-07.md) | Trí | Vinh | 04–05/11/2026 | 10 | SEM-05, SEM-06 | — |
-| [SEM-08 — Chạy tập ca cốt lõi và phân tích số đo](backlog/SEM-08.md) | Vinh | Trang | Chuẩn bị từ 28/10; chạy 02–07/11/2026 | 10 | Chuẩn bị ngay | SEM-05, SEM-06, SEM-07 |
-| [SEM-09 — Hoàn thiện bài trình bày 15 phút và lập luận](backlog/SEM-09.md) | Tuấn | Trung | Dàn ý từ 28/10; bản cuối 08–10/11/2026 | 10 | Chuẩn bị ngay | SEM-02, SEM-03, SEM-08 |
-| [SEM-10 — Đóng gói demo và diễn tập](backlog/SEM-10.md) | Trí | Tâm | 11–12/11/2026; dự phòng 13/11 | 5 | SEM-07 | SEM-08, SEM-09 |
+- **Bắt đầu sau:** cần đầu ra của task đó trước khi bắt đầu phần triển khai.
+- **Hoàn tất còn cần:** có thể soạn khung/chuẩn bị ngay nếu không có gate bắt đầu, nhưng chưa được bàn giao cuối khi thiếu đầu vào.
+- Task nhận đầu ra kiểm artifact/version/CHECKS trước dùng; lỗi trả về đúng owner ở Needs Update. Status Review là bước kiểm nhận, không thêm người thực hiện.
+- Một nhánh `codex/SEM-XX-ten-ngan` cho mỗi task; mỗi CHECKS ghi đầu ra bàn giao cho task nào, không lấy trạng thái thay cho artifact thật.
 
-## Cách sử dụng
-
-1. Bắt đầu SEM-01 kiểm tra môi trường và SEM-02 xây mô hình cơ chế; SEM-03 có thể đọc nguồn theo phạm vi đã xác nhận.
-2. SEM-04 chỉ code trên môi trường đã chốt. SEM-05 và SEM-06 dùng cùng nền tảng; nếu một người làm, thực hiện từng luồng, không cần hai project riêng.
-3. SEM-08 chuẩn bị protocol ngay, chạy ca theo từng đầu vào: E01 sau SEM-05; E02 sau SEM-06; E03/E04 theo trigger đã sẵn sàng; E05/E06 sau SEM-07. Chỉ hoàn tất sau đủ tập cốt lõi.
-4. SEM-09 soạn dàn ý ngay; phần kết quả chờ SEM-08. SEM-10 có thể chuẩn bị đóng gói sau SEM-07, nhưng nghiệm thu cuối phải có SEM-08/09.
-5. Trạng thái backlog → in-progress → review → done; nhánh task/SEM-XX-ten-ngan. Mỗi task có một CHECKS.md bao gồm bàn giao; HANDOFF.md là tùy chọn.
-6. Task done cần đầu ra thật, kiểm chứng và kết luận review; không coi việc viết kế hoạch là hoàn thành task.
-7. Đến 31/10, SEM-04 phải giao cả SyncWorker/enqueue chung cho hai trigger. Ngày 02–05/11 chạy pilot; bản ứng viên chốt cuối 05/11, dữ liệu chính thức chạy 06–07/11 và phân nhóm theo build. Nội dung slide/evidence bàn giao ngày 08/11 để ghép/review trước ngày 10/11.
-
-Trọng số: thực hành/cơ chế/diễn tập 80, nghiên cứu/lập luận 20. Khi trễ cổng, báo blocker và điều chỉnh phần mở rộng theo [PLAN](../docs/PLAN.md), không tự kéo dài deadline.
+| Task | Người thực hiện duy nhất | Hạn 2026 | Công sức | Bắt đầu sau | Hoàn tất còn cần |
+|---|---|---|---:|---|---|
+| [SEM-11](backlog/SEM-11.md) — Chốt phạm vi và môi trường build Android | Trí | 10-29 | 3 | Không có. | Không có. |
+| [SEM-12](backlog/SEM-12.md) — Lập hồ sơ OPPO và emulator | Vinh | 10-29 | 1 | Không có. | Không có. |
+| [SEM-13](backlog/SEM-13.md) — Kiểm môi trường Node và quyền Firebase | Tâm | 10-29 | 1 | Không có. | Không có. |
+| [SEM-14](backlog/SEM-14.md) — Vẽ luồng dữ liệu và hợp đồng sync chung | Trí | 10-30 | 1 | [SEM-11](backlog/SEM-11.md) | Không có. |
+| [SEM-15](backlog/SEM-15.md) — Giải thích cơ chế silent push và giới hạn FCM | Trang | 10-30 | 3 | Không có. | Không có. |
+| [SEM-16](backlog/SEM-16.md) — Lập ma trận lifecycle và protocol E01–E06 | Vinh | 10-30 | 2 | Không có. | Không có. |
+| [SEM-17](backlog/SEM-17.md) — Giải thích periodic WorkManager và constraints | Trung | 10-30 | 3 | Không có. | Không có. |
+| [SEM-18](backlog/SEM-18.md) — Giải thích server, FCM accepted và correlation | Tâm | 10-30 | 2 | Không có. | Không có. |
+| [SEM-19](backlog/SEM-19.md) — Tổng hợp mô hình cơ chế và câu hỏi phản biện | Tuấn | 10-30 | 4 | Không có. | [SEM-11](backlog/SEM-11.md), [SEM-12](backlog/SEM-12.md), [SEM-13](backlog/SEM-13.md), [SEM-14](backlog/SEM-14.md), [SEM-15](backlog/SEM-15.md), [SEM-16](backlog/SEM-16.md), [SEM-17](backlog/SEM-17.md), [SEM-18](backlog/SEM-18.md) |
+| [SEM-20](backlog/SEM-20.md) — Đọc bài nghiên cứu thứ nhất và ghi chú nguồn | Tuấn | 11-01 | 5 | Không có. | [SEM-11](backlog/SEM-11.md), [SEM-12](backlog/SEM-12.md) |
+| [SEM-21](backlog/SEM-21.md) — Đọc bài nghiên cứu thứ hai và ghi chú nguồn | Tâm | 11-01 | 3 | Không có. | [SEM-11](backlog/SEM-11.md), [SEM-12](backlog/SEM-12.md) |
+| [SEM-22](backlog/SEM-22.md) — Đối chiếu hai bài nghiên cứu với API push hiện hành | Trang | 11-01 | 2 | Không có. | [SEM-15](backlog/SEM-15.md), [SEM-20](backlog/SEM-20.md), [SEM-21](backlog/SEM-21.md) |
+| [SEM-23](backlog/SEM-23.md) — Tạo scaffold Android và UI cache/timeline | Trí | 10-31 | 4 | [SEM-11](backlog/SEM-11.md) | Không có. |
+| [SEM-24](backlog/SEM-24.md) — Chuẩn bị bộ xuất log và run manifest | Vinh | 10-31 | 1 | [SEM-12](backlog/SEM-12.md) | [SEM-26](backlog/SEM-26.md) |
+| [SEM-25](backlog/SEM-25.md) — Xây Room, SyncRepository và SyncWorker dùng chung | Trung | 10-31 | 4 | [SEM-23](backlog/SEM-23.md), [SEM-26](backlog/SEM-26.md) | Không có. |
+| [SEM-26](backlog/SEM-26.md) — Chốt hợp đồng API và event schema | Tâm | 10-30 | 2 | [SEM-11](backlog/SEM-11.md), [SEM-13](backlog/SEM-13.md), [SEM-14](backlog/SEM-14.md) | Không có. |
+| [SEM-27](backlog/SEM-27.md) — Triển khai server snapshot và CLI cập nhật | Tâm | 10-31 | 4 | [SEM-13](backlog/SEM-13.md), [SEM-26](backlog/SEM-26.md) | Không có. |
+| [SEM-28](backlog/SEM-28.md) — Ghép manual sync đầu cuối và chốt hướng dẫn setup | Trí | 10-31 | 1 | [SEM-23](backlog/SEM-23.md), [SEM-24](backlog/SEM-24.md), [SEM-25](backlog/SEM-25.md), [SEM-27](backlog/SEM-27.md) | Không có. |
+| [SEM-29](backlog/SEM-29.md) — Chạy pilot periodic E01 trên hai thiết bị | Vinh | 11-02 | 2 | [SEM-16](backlog/SEM-16.md), [SEM-24](backlog/SEM-24.md), [SEM-30](backlog/SEM-30.md) | [SEM-31](backlog/SEM-31.md) |
+| [SEM-30](backlog/SEM-30.md) — Triển khai unique periodic work | Trung | 11-01 | 4 | [SEM-17](backlog/SEM-17.md), [SEM-25](backlog/SEM-25.md), [SEM-28](backlog/SEM-28.md) | Không có. |
+| [SEM-31](backlog/SEM-31.md) — Bàn giao chẩn đoán và tài liệu periodic | Trung | 11-02 | 3 | [SEM-30](backlog/SEM-30.md) | Không có. |
+| [SEM-32](backlog/SEM-32.md) — Triển khai callback FCM và enqueue sync | Trang | 11-02 | 4 | [SEM-15](backlog/SEM-15.md), [SEM-25](backlog/SEM-25.md), [SEM-28](backlog/SEM-28.md) | Không có. |
+| [SEM-33](backlog/SEM-33.md) — Xử lý token refresh và bàn giao PUSH.md | Trang | 11-03 | 3 | [SEM-13](backlog/SEM-13.md), [SEM-32](backlog/SEM-32.md) | Không có. |
+| [SEM-34](backlog/SEM-34.md) — Chạy pilot push E02 và xác nhận cache nền | Vinh | 11-03 | 1 | [SEM-16](backlog/SEM-16.md), [SEM-24](backlog/SEM-24.md), [SEM-32](backlog/SEM-32.md), [SEM-35](backlog/SEM-35.md) | [SEM-33](backlog/SEM-33.md) |
+| [SEM-35](backlog/SEM-35.md) — Làm CLI gửi FCM data-only normal priority | Tâm | 11-01 | 2 | [SEM-13](backlog/SEM-13.md), [SEM-18](backlog/SEM-18.md), [SEM-27](backlog/SEM-27.md) | Không có. |
+| [SEM-36](backlog/SEM-36.md) — Tích hợp ba mode và pilot hybrid | Trí | 11-05 | 3 | [SEM-29](backlog/SEM-29.md), [SEM-30](backlog/SEM-30.md), [SEM-32](backlog/SEM-32.md), [SEM-34](backlog/SEM-34.md), [SEM-35](backlog/SEM-35.md) | [SEM-38](backlog/SEM-38.md), [SEM-39](backlog/SEM-39.md), [SEM-40](backlog/SEM-40.md) |
+| [SEM-37](backlog/SEM-37.md) — Chốt bản ứng viên và manifest phục vụ tập chính | Trí | 11-05 | 2 | [SEM-31](backlog/SEM-31.md), [SEM-33](backlog/SEM-33.md), [SEM-36](backlog/SEM-36.md), [SEM-38](backlog/SEM-38.md), [SEM-39](backlog/SEM-39.md), [SEM-40](backlog/SEM-40.md) | Không có. |
+| [SEM-38](backlog/SEM-38.md) — Xử lý duplicate và version hint của push | Trang | 11-05 | 2 | [SEM-32](backlog/SEM-32.md), [SEM-33](backlog/SEM-33.md) | Không có. |
+| [SEM-39](backlog/SEM-39.md) — Củng cố version guard, retry và race trong core | Trung | 11-05 | 2 | [SEM-25](backlog/SEM-25.md), [SEM-30](backlog/SEM-30.md) | Không có. |
+| [SEM-40](backlog/SEM-40.md) — Thêm fault injection cố ý bỏ gửi push | Tâm | 11-04 | 1 | [SEM-27](backlog/SEM-27.md), [SEM-35](backlog/SEM-35.md) | Không có. |
+| [SEM-41](backlog/SEM-41.md) — Chạy tập chính E01–E06 trên emulator | Vinh | 11-07 | 3 | [SEM-16](backlog/SEM-16.md), [SEM-24](backlog/SEM-24.md), [SEM-37](backlog/SEM-37.md) | Không có. |
+| [SEM-42](backlog/SEM-42.md) — Chạy đối chiếu OPPO E01/E02 và ghi giới hạn OEM | Vinh | 11-07 | 3 | [SEM-12](backlog/SEM-12.md), [SEM-16](backlog/SEM-16.md), [SEM-24](backlog/SEM-24.md), [SEM-37](backlog/SEM-37.md) | Không có. |
+| [SEM-43](backlog/SEM-43.md) — Chốt SUMMARY và bộ evidence thực nghiệm | Vinh | 11-07 | 1 | [SEM-41](backlog/SEM-41.md), [SEM-42](backlog/SEM-42.md), [SEM-44](backlog/SEM-44.md), [SEM-45](backlog/SEM-45.md) | Không có. |
+| [SEM-44](backlog/SEM-44.md) — Kiểm độc lập trigger và phép tính dữ liệu main | Trung | 11-07 | 1 | [SEM-41](backlog/SEM-41.md), [SEM-42](backlog/SEM-42.md), [SEM-45](backlog/SEM-45.md) | Không có. |
+| [SEM-45](backlog/SEM-45.md) — Viết parser log và sinh results.csv | Tuấn | 11-07 | 2 | [SEM-24](backlog/SEM-24.md), [SEM-26](backlog/SEM-26.md) | [SEM-41](backlog/SEM-41.md), [SEM-42](backlog/SEM-42.md) |
+| [SEM-46](backlog/SEM-46.md) — Viết phần mở bài và bàn giao lời dẫn thao tác demo | Trí | 11-08 | 1 | Không có. | [SEM-14](backlog/SEM-14.md), [SEM-37](backlog/SEM-37.md) |
+| [SEM-47](backlog/SEM-47.md) — Viết phần silent push và lời dẫn demo 4 phút | Trang | 11-08 | 2 | [SEM-15](backlog/SEM-15.md) | [SEM-33](backlog/SEM-33.md), [SEM-34](backlog/SEM-34.md), [SEM-38](backlog/SEM-38.md) |
+| [SEM-48](backlog/SEM-48.md) — Viết nội dung và biểu đồ kết quả cho bài nói | Vinh | 11-08 | 1 | Không có. | [SEM-43](backlog/SEM-43.md), [SEM-44](backlog/SEM-44.md), [SEM-45](backlog/SEM-45.md) |
+| [SEM-49](backlog/SEM-49.md) — Viết phần kiến trúc và lập luận nghiên cứu thứ hai | Tâm | 11-08 | 1 | [SEM-18](backlog/SEM-18.md) | [SEM-21](backlog/SEM-21.md), [SEM-27](backlog/SEM-27.md), [SEM-35](backlog/SEM-35.md), [SEM-40](backlog/SEM-40.md) |
+| [SEM-50](backlog/SEM-50.md) — Hoàn thiện báo cáo, bibliography và CLAIMS | Tuấn | 11-09 | 2 | Không có. | [SEM-19](backlog/SEM-19.md), [SEM-20](backlog/SEM-20.md), [SEM-21](backlog/SEM-21.md), [SEM-22](backlog/SEM-22.md), [SEM-43](backlog/SEM-43.md), [SEM-45](backlog/SEM-45.md) |
+| [SEM-51](backlog/SEM-51.md) — Ghép deck 15 phút, PDF và speaker notes | Tuấn | 11-10 | 3 | Không có. | [SEM-46](backlog/SEM-46.md), [SEM-47](backlog/SEM-47.md), [SEM-48](backlog/SEM-48.md), [SEM-49](backlog/SEM-49.md), [SEM-50](backlog/SEM-50.md) |
+| [SEM-52](backlog/SEM-52.md) — Build APK bàn giao và viết DEMO_RUNBOOK | Trí | 11-11 | 1 | [SEM-37](backlog/SEM-37.md) | [SEM-43](backlog/SEM-43.md), [SEM-50](backlog/SEM-50.md), [SEM-51](backlog/SEM-51.md) |
+| [SEM-53](backlog/SEM-53.md) — Tái lập runbook và quay video dự phòng | Vinh | 11-12 | 2 | [SEM-52](backlog/SEM-52.md) | Không có. |
+| [SEM-54](backlog/SEM-54.md) — Điều phối hai lần diễn tập và ghi thời lượng | Tuấn | 11-12 | 1 | [SEM-51](backlog/SEM-51.md), [SEM-52](backlog/SEM-52.md) | [SEM-53](backlog/SEM-53.md) |
+| [SEM-55](backlog/SEM-55.md) — Chốt manifest và gói bàn giao seminar | Trí | 11-12 | 1 | [SEM-43](backlog/SEM-43.md), [SEM-50](backlog/SEM-50.md), [SEM-51](backlog/SEM-51.md), [SEM-52](backlog/SEM-52.md), [SEM-53](backlog/SEM-53.md), [SEM-54](backlog/SEM-54.md) | Không có. |
