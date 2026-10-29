@@ -19,7 +19,7 @@
       "effort": 3,
       "category": "practice",
       "title": "Chốt phạm vi và môi trường build Android",
-      "due": "2026-10-29",
+      "due": "2026-10-30",
       "status": "Todo",
       "start_dependencies": [],
       "finish_dependencies": [],
@@ -37,7 +37,8 @@
         "Nêu rõ baseline FCM v1/data-only/normal priority và giới hạn demo."
       ],
       "input_status": "Sẵn sàng",
-      "inputs": []
+      "inputs": [],
+      "due_at": "2026-10-30T12:00:00+07:00"
     },
     {
       "id": "SEM-12",
@@ -47,7 +48,7 @@
       "effort": 1,
       "category": "practice",
       "title": "Lập hồ sơ OPPO và emulator",
-      "due": "2026-10-29",
+      "due": "2026-10-30",
       "status": "Todo",
       "start_dependencies": [],
       "finish_dependencies": [],
@@ -64,7 +65,8 @@
         "Hồ sơ phân biệt mạng tới server với Internet/FCM, không dùng localhost PC làm địa chỉ OPPO."
       ],
       "input_status": "Sẵn sàng",
-      "inputs": []
+      "inputs": [],
+      "due_at": "2026-10-30T12:00:00+07:00"
     },
     {
       "id": "SEM-13",
@@ -74,7 +76,7 @@
       "effort": 1,
       "category": "practice",
       "title": "Kiểm môi trường Node và quyền Firebase",
-      "due": "2026-10-29",
+      "due": "2026-10-30",
       "status": "Todo",
       "start_dependencies": [],
       "finish_dependencies": [],
@@ -91,7 +93,8 @@
         "Chỉ commit cấu hình mẫu; không đưa token/service-account key/google-services.json thật vào repo."
       ],
       "input_status": "Sẵn sàng",
-      "inputs": []
+      "inputs": [],
+      "due_at": "2026-10-30T12:00:00+07:00"
     },
     {
       "id": "SEM-14",
@@ -132,7 +135,8 @@
           "checks": "docs/evidence/SEM-11/CHECKS.md",
           "source_status": "Todo"
         }
-      ]
+      ],
+      "due_at": "2026-10-30T14:00:00+07:00"
     },
     {
       "id": "SEM-15",
@@ -159,7 +163,8 @@
         "Chỉ ra trường hợp trì hoãn/không nhận và không hứa push tức thì."
       ],
       "input_status": "Sẵn sàng",
-      "inputs": []
+      "inputs": [],
+      "due_at": "2026-10-30T18:00:00+07:00"
     },
     {
       "id": "SEM-16",
@@ -187,7 +192,8 @@
         "Màn hình tắt không tự được gọi Doze; force-stop có mốc người dùng mở lại và cleanup."
       ],
       "input_status": "Sẵn sàng",
-      "inputs": []
+      "inputs": [],
+      "due_at": "2026-10-30T18:00:00+07:00"
     },
     {
       "id": "SEM-17",
@@ -214,7 +220,8 @@
         "Phân biệt periodic tự nhiên với force-run/test driver chỉ dùng debug."
       ],
       "input_status": "Sẵn sàng",
-      "inputs": []
+      "inputs": [],
+      "due_at": "2026-10-30T18:00:00+07:00"
     },
     {
       "id": "SEM-18",
@@ -241,7 +248,8 @@
         "Không bịa message_id khi API chưa trả và không quy accepted thành delivered."
       ],
       "input_status": "Sẵn sàng",
-      "inputs": []
+      "inputs": [],
+      "due_at": "2026-10-30T18:00:00+07:00"
     },
     {
       "id": "SEM-19",
@@ -361,7 +369,8 @@
           "checks": "docs/evidence/SEM-18/CHECKS.md",
           "source_status": "Todo"
         }
-      ]
+      ],
+      "due_at": "2026-10-30T22:00:00+07:00"
     },
     {
       "id": "SEM-20",
@@ -414,7 +423,8 @@
           "checks": "docs/evidence/SEM-12/CHECKS.md",
           "source_status": "Todo"
         }
-      ]
+      ],
+      "due_at": "2026-11-01T16:00:00+07:00"
     },
     {
       "id": "SEM-21",
@@ -467,7 +477,8 @@
           "checks": "docs/evidence/SEM-12/CHECKS.md",
           "source_status": "Todo"
         }
-      ]
+      ],
+      "due_at": "2026-11-01T16:00:00+07:00"
     },
     {
       "id": "SEM-22",
@@ -531,7 +542,8 @@
           "checks": "docs/evidence/SEM-21/CHECKS.md",
           "source_status": "Todo"
         }
-      ]
+      ],
+      "due_at": "2026-11-01T22:00:00+07:00"
     },
     {
       "id": "SEM-23",
@@ -573,7 +585,8 @@
           "checks": "docs/evidence/SEM-11/CHECKS.md",
           "source_status": "Todo"
         }
-      ]
+      ],
+      "due_at": "2026-10-31T12:00:00+07:00"
     },
     {
       "id": "SEM-24",
@@ -628,7 +641,8 @@
           "checks": "docs/evidence/SEM-26/CHECKS.md",
           "source_status": "Todo"
         }
-      ]
+      ],
+      "due_at": "2026-10-31T15:00:00+07:00"
     },
     {
       "id": "SEM-25",
@@ -682,7 +696,8 @@
           "checks": "docs/evidence/SEM-26/CHECKS.md",
           "source_status": "Todo"
         }
-      ]
+      ],
+      "due_at": "2026-10-31T17:00:00+07:00"
     },
     {
       "id": "SEM-26",
@@ -746,7 +761,8 @@
           "checks": "docs/evidence/SEM-14/CHECKS.md",
           "source_status": "Todo"
         }
-      ]
+      ],
+      "due_at": "2026-10-30T17:00:00+07:00"
     },
     {
       "id": "SEM-27",
@@ -799,7 +815,8 @@
           "checks": "docs/evidence/SEM-26/CHECKS.md",
           "source_status": "Todo"
         }
-      ]
+      ],
+      "due_at": "2026-10-31T17:00:00+07:00"
     },
     {
       "id": "SEM-28",
@@ -879,7 +896,8 @@
           "checks": "docs/evidence/SEM-27/CHECKS.md",
           "source_status": "Todo"
         }
-      ]
+      ],
+      "due_at": "2026-10-31T22:00:00+07:00"
     },
     {
       "id": "SEM-29",
@@ -958,7 +976,8 @@
           "checks": "docs/evidence/SEM-31/CHECKS.md",
           "source_status": "Todo"
         }
-      ]
+      ],
+      "due_at": "2026-11-02T22:00:00+07:00"
     },
     {
       "id": "SEM-30",
@@ -1023,7 +1042,8 @@
           "checks": "docs/evidence/SEM-28/CHECKS.md",
           "source_status": "Todo"
         }
-      ]
+      ],
+      "due_at": "2026-11-01T18:00:00+07:00"
     },
     {
       "id": "SEM-31",
@@ -1064,7 +1084,8 @@
           "checks": "docs/evidence/SEM-30/CHECKS.md",
           "source_status": "Todo"
         }
-      ]
+      ],
+      "due_at": "2026-11-02T12:00:00+07:00"
     },
     {
       "id": "SEM-32",
@@ -1129,7 +1150,8 @@
           "checks": "docs/evidence/SEM-28/CHECKS.md",
           "source_status": "Todo"
         }
-      ]
+      ],
+      "due_at": "2026-11-02T18:00:00+07:00"
     },
     {
       "id": "SEM-33",
@@ -1181,7 +1203,8 @@
           "checks": "docs/evidence/SEM-32/CHECKS.md",
           "source_status": "Todo"
         }
-      ]
+      ],
+      "due_at": "2026-11-03T14:00:00+07:00"
     },
     {
       "id": "SEM-34",
@@ -1272,7 +1295,8 @@
           "checks": "docs/evidence/SEM-33/CHECKS.md",
           "source_status": "Todo"
         }
-      ]
+      ],
+      "due_at": "2026-11-03T22:00:00+07:00"
     },
     {
       "id": "SEM-35",
@@ -1336,7 +1360,8 @@
           "checks": "docs/evidence/SEM-27/CHECKS.md",
           "source_status": "Todo"
         }
-      ]
+      ],
+      "due_at": "2026-11-01T15:00:00+07:00"
     },
     {
       "id": "SEM-36",
@@ -1462,7 +1487,8 @@
           "checks": "docs/evidence/SEM-40/CHECKS.md",
           "source_status": "Todo"
         }
-      ]
+      ],
+      "due_at": "2026-11-05T18:00:00+07:00"
     },
     {
       "id": "SEM-37",
@@ -1565,7 +1591,8 @@
           "checks": "docs/evidence/SEM-40/CHECKS.md",
           "source_status": "Todo"
         }
-      ]
+      ],
+      "due_at": "2026-11-05T22:00:00+07:00"
     },
     {
       "id": "SEM-38",
@@ -1618,7 +1645,8 @@
           "checks": "docs/evidence/SEM-33/CHECKS.md",
           "source_status": "Todo"
         }
-      ]
+      ],
+      "due_at": "2026-11-05T12:00:00+07:00"
     },
     {
       "id": "SEM-39",
@@ -1671,7 +1699,8 @@
           "checks": "docs/evidence/SEM-30/CHECKS.md",
           "source_status": "Todo"
         }
-      ]
+      ],
+      "due_at": "2026-11-05T12:00:00+07:00"
     },
     {
       "id": "SEM-40",
@@ -1725,7 +1754,8 @@
           "checks": "docs/evidence/SEM-35/CHECKS.md",
           "source_status": "Todo"
         }
-      ]
+      ],
+      "due_at": "2026-11-04T18:00:00+07:00"
     },
     {
       "id": "SEM-41",
@@ -1792,7 +1822,8 @@
           "checks": "docs/evidence/SEM-37/CHECKS.md",
           "source_status": "Todo"
         }
-      ]
+      ],
+      "due_at": "2026-11-07T13:00:00+07:00"
     },
     {
       "id": "SEM-42",
@@ -1870,7 +1901,8 @@
           "checks": "docs/evidence/SEM-37/CHECKS.md",
           "source_status": "Todo"
         }
-      ]
+      ],
+      "due_at": "2026-11-07T15:00:00+07:00"
     },
     {
       "id": "SEM-43",
@@ -1946,7 +1978,8 @@
           "checks": "docs/evidence/SEM-45/CHECKS.md",
           "source_status": "Todo"
         }
-      ]
+      ],
+      "due_at": "2026-11-07T22:00:00+07:00"
     },
     {
       "id": "SEM-44",
@@ -2011,7 +2044,8 @@
           "checks": "docs/evidence/SEM-45/CHECKS.md",
           "source_status": "Todo"
         }
-      ]
+      ],
+      "due_at": "2026-11-07T19:00:00+07:00"
     },
     {
       "id": "SEM-45",
@@ -2091,7 +2125,8 @@
           "checks": "docs/evidence/SEM-42/CHECKS.md",
           "source_status": "Todo"
         }
-      ]
+      ],
+      "due_at": "2026-11-07T17:00:00+07:00"
     },
     {
       "id": "SEM-46",
@@ -2143,7 +2178,8 @@
           "checks": "docs/evidence/SEM-37/CHECKS.md",
           "source_status": "Todo"
         }
-      ]
+      ],
+      "due_at": "2026-11-08T16:00:00+07:00"
     },
     {
       "id": "SEM-47",
@@ -2221,7 +2257,8 @@
           "checks": "docs/evidence/SEM-38/CHECKS.md",
           "source_status": "Todo"
         }
-      ]
+      ],
+      "due_at": "2026-11-08T16:00:00+07:00"
     },
     {
       "id": "SEM-48",
@@ -2285,7 +2322,8 @@
           "checks": "docs/evidence/SEM-45/CHECKS.md",
           "source_status": "Todo"
         }
-      ]
+      ],
+      "due_at": "2026-11-08T18:00:00+07:00"
     },
     {
       "id": "SEM-49",
@@ -2374,7 +2412,8 @@
           "checks": "docs/evidence/SEM-40/CHECKS.md",
           "source_status": "Todo"
         }
-      ]
+      ],
+      "due_at": "2026-11-08T16:00:00+07:00"
     },
     {
       "id": "SEM-50",
@@ -2475,7 +2514,8 @@
           "checks": "docs/evidence/SEM-45/CHECKS.md",
           "source_status": "Todo"
         }
-      ]
+      ],
+      "due_at": "2026-11-09T22:00:00+07:00"
     },
     {
       "id": "SEM-51",
@@ -2565,7 +2605,8 @@
           "checks": "docs/evidence/SEM-50/CHECKS.md",
           "source_status": "Todo"
         }
-      ]
+      ],
+      "due_at": "2026-11-10T22:00:00+07:00"
     },
     {
       "id": "SEM-52",
@@ -2646,7 +2687,8 @@
           "checks": "docs/evidence/SEM-51/CHECKS.md",
           "source_status": "Todo"
         }
-      ]
+      ],
+      "due_at": "2026-11-11T22:00:00+07:00"
     },
     {
       "id": "SEM-53",
@@ -2690,7 +2732,8 @@
           "checks": "docs/evidence/SEM-52/CHECKS.md",
           "source_status": "Todo"
         }
-      ]
+      ],
+      "due_at": "2026-11-12T15:00:00+07:00"
     },
     {
       "id": "SEM-54",
@@ -2759,7 +2802,8 @@
           "checks": "docs/evidence/SEM-53/CHECKS.md",
           "source_status": "Todo"
         }
-      ]
+      ],
+      "due_at": "2026-11-12T19:00:00+07:00"
     },
     {
       "id": "SEM-55",
@@ -2863,9 +2907,30 @@
           "checks": "docs/evidence/SEM-54/CHECKS.md",
           "source_status": "Todo"
         }
-      ]
+      ],
+      "due_at": "2026-11-12T22:00:00+07:00"
     }
   ],
-  "snapshot_at": "2026-10-29 16:22:16 UTC",
-  "snapshot_source": "https://github.com/users/ThanhTris/projects/3/views/1"
+  "snapshot_at": "2026-10-29 16:31:03 UTC",
+  "snapshot_source": "https://github.com/users/ThanhTris/projects/3/views/1",
+  "timezone": "Asia/Ho_Chi_Minh",
+  "deadline_at": "2026-11-13T22:00:00+07:00",
+  "deadline_policy": "Mỗi deadline là giờ bàn giao mục tiêu UTC+7; SEM-55 chốt 12/11 22:00, 13/11 dự phòng đến 22:00.",
+  "deadline_changes": [
+    {
+      "task": "SEM-11",
+      "old_date": "2026-10-29",
+      "new_date": "2026-10-30"
+    },
+    {
+      "task": "SEM-12",
+      "old_date": "2026-10-29",
+      "new_date": "2026-10-30"
+    },
+    {
+      "task": "SEM-13",
+      "old_date": "2026-10-29",
+      "new_date": "2026-10-30"
+    }
+  ]
 }

@@ -4,11 +4,11 @@ Nhóm kế hoạch này đã được thay bằng các task một người vào 
 
 | Task thực hiện | Một người duy nhất | Công sức | Hạn |
 |---|---|---:|---|
-| [SEM-46](SEM-46.md) — Viết phần mở bài và bàn giao lời dẫn thao tác demo | Trí | 1 | 2026-11-08 |
-| [SEM-47](SEM-47.md) — Viết phần silent push và lời dẫn demo 4 phút | Trang | 2 | 2026-11-08 |
-| [SEM-48](SEM-48.md) — Viết nội dung và biểu đồ kết quả cho bài nói | Vinh | 1 | 2026-11-08 |
-| [SEM-49](SEM-49.md) — Viết phần kiến trúc và lập luận nghiên cứu thứ hai | Tâm | 1 | 2026-11-08 |
-| [SEM-50](SEM-50.md) — Hoàn thiện báo cáo, bibliography và CLAIMS | Tuấn | 2 | 2026-11-09 |
-| [SEM-51](SEM-51.md) — Ghép deck 15 phút, PDF và speaker notes | Tuấn | 3 | 2026-11-10 |
+| [SEM-46](SEM-46.md) — Viết phần mở bài và bàn giao lời dẫn thao tác demo | Trí | 1 | 08/11/2026 16:00 (UTC+7) |
+| [SEM-47](SEM-47.md) — Viết phần silent push và lời dẫn demo 4 phút | Trang | 2 | 08/11/2026 16:00 (UTC+7) |
+| [SEM-48](SEM-48.md) — Viết nội dung và biểu đồ kết quả cho bài nói | Vinh | 1 | 08/11/2026 18:00 (UTC+7) |
+| [SEM-49](SEM-49.md) — Viết phần kiến trúc và lập luận nghiên cứu thứ hai | Tâm | 1 | 08/11/2026 16:00 (UTC+7) |
+| [SEM-50](SEM-50.md) — Hoàn thiện báo cáo, bibliography và CLAIMS | Tuấn | 2 | 09/11/2026 22:00 (UTC+7) |
+| [SEM-51](SEM-51.md) — Ghép deck 15 phút, PDF và speaker notes | Tuấn | 3 | 10/11/2026 22:00 (UTC+7) |
 
 [Đặc tả trước khi chia nhỏ](https://github.com/ThanhTris/Seminar-IE307/blob/40ac61c0de77bcc872223da0c73db29151a38472/tasks/backlog/SEM-09.md). Xem [bảng hiện hành](../README.md).

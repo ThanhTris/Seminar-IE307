@@ -2,9 +2,9 @@
 
 - Trạng thái: **Todo** (Project).
 - Trạng thái đầu vào: **Chuẩn bị trước**.
-- Đối chiếu Project: 2026-10-29 16:22:16 UTC.
+- Đối chiếu Project: 2026-10-29 16:31:03 UTC.
 - Người thực hiện duy nhất: **Trang** (`rosy179`).
-- Hạn: **2026-11-01** (UTC+7).
+- Hạn: **01/11/2026 22:00 (UTC+7)**.
 - Công sức: 2/100 — Nghiên cứu/lập luận.
 - Tách từ nhóm cũ: [SEM-03](SEM-03.md); nhóm cũ chỉ còn lưu lịch sử.
 
@@ -28,7 +28,7 @@ Tài liệu nền đã có: [Kế hoạch/phạm vi](../../docs/PLAN.md) · [Ngu
 
 Đây là danh sách đầu ra cần bàn giao, chưa phải xác nhận các file đã tồn tại. Trước khi dùng, nhận đúng artifact/commit/config và CHECKS từ task nguồn.
 
-Status nguồn được đối chiếu Project lúc **2026-10-29 16:22:16 UTC**; mở link task nguồn để xem cập nhật mới hơn.
+Status nguồn được đối chiếu Project lúc **2026-10-29 16:31:03 UTC**; mở link task nguồn để xem cập nhật mới hơn.
 <!-- task-inputs:end -->
 
 

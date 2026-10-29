@@ -70,7 +70,7 @@ Các task thực hiện là SEM-11…SEM-55, tra dependency đầy đủ tại [
 
 | Mốc | Task đầu ra | Hạn |
 |---|---|---|
-| Môi trường độc lập | SEM-11 Trí; SEM-12 Vinh; SEM-13 Tâm | 29/10 |
+| Môi trường độc lập | SEM-11 Trí; SEM-12 Vinh; SEM-13 Tâm | 30/10, 12:00 UTC+7 |
 | Cơ chế từng phần và bản tổng hợp | SEM-14…19, từng task một người | 30/10 |
 | Contract và runtime tối thiểu | SEM-26 contract; SEM-23 scaffold; SEM-25 core; SEM-27 server; SEM-24 exporter; SEM-28 M1 | 30–31/10 |
 | Nghiên cứu | SEM-20 Tuấn; SEM-21 Tâm; SEM-22 Trang | 01/11 |
@@ -84,6 +84,8 @@ Các task thực hiện là SEM-11…SEM-55, tra dependency đầy đủ tại [
 | Report và deck | SEM-50/51 Tuấn | 09–10/11 |
 | APK/runbook → video → diễn tập → manifest cuối | SEM-52 Trí → SEM-53 Vinh → SEM-54 Tuấn → SEM-55 Trí | 11–12/11 |
 | Dự phòng | Sửa lỗi cuối, không thêm tính năng | 13/11 |
+
+Deadline chi tiết từng task, gồm giờ UTC+7 và phân theo người, ở [tasks/DEADLINES.md](../tasks/DEADLINES.md). Ba task môi trường chuyển sang trưa 30/10 vì lần chốt giờ diễn ra gần hết 29/10 khi cả ba vẫn Todo; các ngày hạn còn lại giữ theo lịch hiện có. Candidate SEM-37 chốt 05/11 22:00; bản cuối SEM-55 chốt 12/11 22:00, dành 13/11 đến 22:00 dự phòng.
 
 Chỉ phần được ghi rõ chuẩn bị ngay mới được làm trước gate hoàn tất; task nhận đầu ra ghi artifact/version đã nhận. Mỗi người tự thực hiện và ghi CHECKS của task mình, không có cột Phối hợp/Reviewer. Task kiểm độc lập SEM-44 và tái lập SEM-53 có owner riêng.
 

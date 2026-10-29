@@ -2,9 +2,9 @@
 
 - Trạng thái: **Todo** (Project).
 - Trạng thái đầu vào: **Sẵn sàng**.
-- Đối chiếu Project: 2026-10-29 16:22:16 UTC.
+- Đối chiếu Project: 2026-10-29 16:31:03 UTC.
 - Người thực hiện duy nhất: **Trang** (`rosy179`).
-- Hạn: **2026-10-30** (UTC+7).
+- Hạn: **30/10/2026 18:00 (UTC+7)**.
 - Công sức: 3/100 — Cơ chế/thực hành.
 - Tách từ nhóm cũ: [SEM-02](SEM-02.md); nhóm cũ chỉ còn lưu lịch sử.
 
@@ -22,7 +22,7 @@ Tài liệu nền đã có: [Kế hoạch/phạm vi](../../docs/PLAN.md) · [Ngu
 
 Không cần nhận đầu ra từ task khác để bắt đầu. Owner thực hiện từ tài liệu nền và tự ghi các blocker môi trường/quyền truy cập trong CHECKS của task này.
 
-Status nguồn được đối chiếu Project lúc **2026-10-29 16:22:16 UTC**; mở link task nguồn để xem cập nhật mới hơn.
+Status nguồn được đối chiếu Project lúc **2026-10-29 16:31:03 UTC**; mở link task nguồn để xem cập nhật mới hơn.
 <!-- task-inputs:end -->
 
 

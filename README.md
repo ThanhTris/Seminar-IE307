@@ -7,6 +7,7 @@
 - [45 task: mỗi task một người, việc làm và đầu ra](tasks/README.md)
 - [GitHub Project và dependency](https://github.com/users/ThanhTris/projects/3/views/1)
 - [Project nhóm task theo từng người](https://github.com/users/ThanhTris/projects/3/views/2)
+- [Deadline ngày giờ cho từng task, theo người](tasks/DEADLINES.md)
 - [Phân công 6 thành viên](docs/TEAM_ASSIGNMENTS.md)
 - [Kịch bản thuyết trình 15 phút](docs/PRESENTATION_PLAN.md)
 - [Thiết kế kiểm thử](docs/EXPERIMENT_PROTOCOL.md)

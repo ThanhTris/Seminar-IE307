@@ -7,7 +7,7 @@ from __future__ import annotations
 
 import argparse
 from collections import Counter
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 import json
 from pathlib import Path
 import re
@@ -20,7 +20,14 @@ PROJECT = 'PVT_kwHOCnL5Fs4BpUDU'
 BOARD = 'https://github.com/users/ThanhTris/projects/3/views/1'
 REPO = 'https://github.com/ThanhTris/Seminar-IE307/blob/main/'
 INPUT_FIELD = 'Input status'
+DEADLINE_FIELD = 'Deadline (UTC+7)'
 READINESS = ('Sẵn sàng', 'Chuẩn bị trước', 'Chờ đầu vào')
+
+
+def format_deadline(task):
+    if task.get('due_at'):
+        return datetime.fromisoformat(task['due_at']).strftime('%d/%m/%Y %H:%M') + ' (UTC+7)'
+    return task['due']
 
 
 def gh(*args, payload=None):
@@ -68,6 +75,8 @@ def audit(catalog, snapshot):
     tasks = catalog['tasks']
     by = {t['id']: t for t in tasks}
     assert len(by) == len(tasks) == 45, 'Expected 45 distinct task specifications.'
+    if catalog.get('deadline_at'):
+        assert all(t.get('due_at') for t in tasks), 'Every task needs a full deadline with timezone.'
     assert not snapshot['items']['pageInfo']['hasNextPage'], 'Fetch all pages before auditing.'
     active = [i for i in snapshot['items']['nodes'] if not i['isArchived']]
     assert len(active) == 45, f'Expected 45 active cards, got {len(active)}.'
@@ -83,6 +92,12 @@ def audit(catalog, snapshot):
         assert [a['login'] for a in item['content']['assignees']['nodes']] == [t['github']], (tid, 'Assignees')
         assert fields['Owner'] == t['owner'], (tid, 'Owner')
         assert fields['Deadline'] == t['due'], (tid, 'Deadline')
+        if t.get('due_at'):
+            due_at = datetime.fromisoformat(t['due_at'])
+            assert due_at.utcoffset() == timedelta(hours=7), (tid, 'Timezone')
+            assert due_at.date().isoformat() == t['due'], (tid, 'Date/time mismatch')
+            assert fields.get(DEADLINE_FIELD) == format_deadline(t), (tid, DEADLINE_FIELD)
+            assert due_at <= datetime.fromisoformat(catalog['deadline_at']), (tid, 'Final deadline')
         assert fields['Status'] in ('Todo', 'In Progress', 'Review', 'Needs Update', 'Done')
         assert not fields.get('Task Reviewer'), (tid, 'Extra reviewer')
     assert sum(t['effort'] for t in tasks) == 100
@@ -96,6 +111,8 @@ def audit(catalog, snapshot):
         visiting.add(tid)
         for d in by[tid]['start_dependencies'] + by[tid]['finish_dependencies']:
             assert d in by and by[d]['due'] <= by[tid]['due'], (tid, d)
+            if by[tid].get('due_at'):
+                assert datetime.fromisoformat(by[d]['due_at']) < datetime.fromisoformat(by[tid]['due_at']), (tid, d, 'Deadline order')
             visit(d)
         visiting.remove(tid)
         visited.add(tid)
@@ -155,6 +172,7 @@ def update_docs(catalog, by, statuses, stamp):
         p = ROOT / 'tasks/backlog' / f"{t['id']}.md"
         body = p.read_text(encoding='utf-8')
         body = re.sub(r'(?m)^- Trạng thái:.*$', f"- Trạng thái: **{t['status']}** (Project).", body)
+        body = re.sub(r'(?m)^- Hạn:.*$', f"- Hạn: **{format_deadline(t)}**.", body)
         body = re.sub(r'(?m)^- (Trạng thái đầu vào|Đối chiếu Project):.*\n', '', body)
         body = body.replace(f"- Trạng thái: **{t['status']}** (Project).\n",
                             f"- Trạng thái: **{t['status']}** (Project).\n- Trạng thái đầu vào: **{t['input_status']}**.\n- Đối chiếu Project: {stamp}.\n", 1)
@@ -170,6 +188,15 @@ def update_docs(catalog, by, statuses, stamp):
     body = re.sub(r'Cập nhật 29/10/2026\. \*\*45 task SEM-11…SEM-55\*\*, mỗi task đúng một người thực hiện;.*?Hạn cuối',
                   'Phân công 29/10/2026: **45 task SEM-11…SEM-55**, mỗi task đúng một người thực hiện. Tiến độ được đối chiếu Project trong snapshot bên dưới. Hạn cuối', body)
     body = re.sub(r'(?s)<!-- input-snapshot:start -->.*?<!-- input-snapshot:end -->\s*', '', body)
+    body = re.sub(r'(?s)<!-- deadline-policy:start -->.*?<!-- deadline-policy:end -->\s*', '', body)
+    if catalog.get('deadline_at'):
+        body += '''<!-- deadline-policy:start -->
+## Deadline từng task
+
+[Lịch đầy đủ theo từng người](DEADLINES.md). Mỗi task có ngày và giờ bàn giao theo UTC+7; cột `Deadline (UTC+7)` trên Project hiển thị đầy đủ. Các gate trong cùng ngày được xếp giờ bàn giao trước task nhận đầu vào. Gói cuối SEM-55 hạn 12/11/2026 22:00, ngày 13/11 dành dự phòng đến 22:00.
+<!-- deadline-policy:end -->
+
+'''
     counts = Counter(t['input_status'] for t in catalog['tasks'])
     body += f'''<!-- input-snapshot:start -->
 ## Trạng thái đối chiếu Project
@@ -183,11 +210,11 @@ Snapshot **{stamp}**. Status là tiến độ thực hiện; Input status là kh
 Project là nguồn Status hiện hành. Sau khi đổi Status nguồn, chạy `python scripts/update_task_snapshot.py --apply` để đồng bộ Input status và tài liệu; `--check` chỉ kiểm độ khớp. Script giữ nguyên Status/Assignees/Owner/Deadline và không tạo thẻ.
 <!-- input-snapshot:end -->
 
-| Task | Người thực hiện | Status | Input status | Hạn 2026 | Công sức | Bắt đầu sau | Hoàn tất còn cần |
+| Task | Người thực hiện | Status | Input status | Hạn (UTC+7) | Công sức | Bắt đầu sau | Hoàn tất còn cần |
 |---|---|---|---|---|---:|---|---|
 '''
     for t in catalog['tasks']:
-        body += f"| [{t['id']}](backlog/{t['id']}.md) — {t['title']} | {t['owner']} | {t['status']} | {t['input_status']} | {t['due'][5:]} | {t['effort']} | {refs(t['start_dependencies'], 'backlog/')} | {refs(t['finish_dependencies'], 'backlog/')} |\n"
+        body += f"| [{t['id']}](backlog/{t['id']}.md) — {t['title']} | {t['owner']} | {t['status']} | {t['input_status']} | {format_deadline(t)} | {t['effort']} | {refs(t['start_dependencies'], 'backlog/')} | {refs(t['finish_dependencies'], 'backlog/')} |\n"
     # Older snapshots used a different header; future runs use the same anchor.
     body = body.replace('| Task | Người thực hiện | Status |', '| Task | Người thực hiện duy nhất | Status |', 1)
     p.write_text(body, encoding='utf-8')
@@ -198,16 +225,30 @@ Project là nguồn Status hiện hành. Sau khi đổi Status nguồn, chạy `
         end = body.find('\n## ', start + 4)
         if end < 0:
             end = len(body)
-        part = f'## {name}\n\n| Task | Đầu việc duy nhất | Status | Input status | Hạn | Bắt đầu sau | Hoàn tất còn cần |\n|---|---|---|---|---|---|---|\n'
+        part = f'## {name}\n\n| Task | Đầu việc duy nhất | Status | Input status | Hạn (UTC+7) | Bắt đầu sau | Hoàn tất còn cần |\n|---|---|---|---|---|---|---|\n'
         for t in catalog['tasks']:
             if t['owner'] != name:
                 continue
-            part += f"| [{t['id']}](../tasks/backlog/{t['id']}.md) | {t['title']} | {t['status']} | {t['input_status']} | {t['due'][5:]} | {refs(t['start_dependencies'], '../tasks/backlog/')} | {refs(t['finish_dependencies'], '../tasks/backlog/')} |\n"
+            part += f"| [{t['id']}](../tasks/backlog/{t['id']}.md) | {t['title']} | {t['status']} | {t['input_status']} | {format_deadline(t)} | {refs(t['start_dependencies'], '../tasks/backlog/')} | {refs(t['finish_dependencies'], '../tasks/backlog/')} |\n"
         body = body[:start] + part + body[end:]
     body = re.sub(r'(?s)<!-- team-snapshot:start -->.*?<!-- team-snapshot:end -->\s*', '', body)
     at = body.index('## Trí\n')
     body = body[:at] + f'<!-- team-snapshot:start -->\nStatus và Input status đối chiếu Project lúc **{stamp}**. Mở từng task để xem cụ thể file đầu vào, người bàn giao và CHECKS phải nhận. [Cách làm mới trạng thái](../tasks/README.md#trạng-thái-đối-chiếu-project).\n<!-- team-snapshot:end -->\n\n' + body[at:]
     p.write_text(body, encoding='utf-8')
+    if catalog.get('deadline_at'):
+        deadline_doc = '''# Deadline từng task — một người thực hiện
+
+Tất cả mốc dưới đây dùng **giờ Việt Nam (UTC+7)**, năm **2026**. Đây là lịch mục tiêu bàn giao, không phải thời điểm task đã hoàn thành. Gói cuối SEM-55 chốt **12/11 lúc 22:00**; dự phòng sửa lỗi/nghiệm thu cuối đến **13/11 lúc 22:00**.
+
+[Mở Project theo người](https://github.com/users/ThanhTris/projects/3/views/2) · [Task và trạng thái đầu vào](README.md).
+
+Do lần lập giờ diễn ra gần hết ngày 29/10 và SEM-11/12/13 vẫn Todo, ba task này chuyển sang 12:00 ngày 30/10. Các ngày hạn còn lại giữ như lịch trước; thêm giờ để tách cổng bàn giao trong cùng ngày. Hạn task nguồn luôn sớm hơn task nhận đầu vào. Nếu trễ gate, owner báo blocker, không tự coi task nguồn đã xong hay bỏ gate.
+'''
+        for name in catalog['members']:
+            deadline_doc += f'\n## {name}\n\n| Task | Việc bàn giao | Deadline UTC+7 |\n|---|---|---|\n'
+            for t in sorted((t for t in catalog['tasks'] if t['owner'] == name), key=lambda t: t['due_at']):
+                deadline_doc += f"| [{t['id']}](backlog/{t['id']}.md) | {t['title']} | {format_deadline(t)} |\n"
+        (ROOT / 'tasks/DEADLINES.md').write_text(deadline_doc, encoding='utf-8')
 
 
 def render(t, lookup):
@@ -230,17 +271,20 @@ def render(t, lookup):
 def generated_parts(body):
     metadata = re.search(r'(?m)^- Trạng thái:.*\n- Trạng thái đầu vào:.*\n- Đối chiếu Project:.*\n', body)
     inputs = re.search(r'(?s)<!-- task-inputs:start -->.*?<!-- task-inputs:end -->', body)
-    assert metadata and inputs, 'Missing generated input/status sections.'
-    return metadata.group(), inputs.group()
+    deadline = re.search(r'(?m)^- Hạn:.*$', body)
+    assert metadata and inputs and deadline, 'Missing generated input/status/deadline sections.'
+    return metadata.group(), inputs.group(), deadline.group()
 
 
 def merge_card_snapshot(t, item, lookup):
     """Refresh generated sections while retaining owner notes and manual body edits."""
-    expected_meta, expected_inputs = generated_parts(render(t, lookup))
+    expected_meta, expected_inputs, expected_deadline = generated_parts(render(t, lookup))
     body = item['content']['body']
     metadata = re.compile(r'(?m)^- Trạng thái:.*(?:\n- Trạng thái đầu vào:.*)?(?:\n- Đối chiếu Project:.*)?\n')
     assert metadata.search(body), (t['id'], 'Missing status block; review task description before applying.')
     body = metadata.sub(lambda _: expected_meta, body, count=1)
+    assert re.search(r'(?m)^- Hạn:.*$', body), (t['id'], 'Missing deadline line')
+    body = re.sub(r'(?m)^- Hạn:.*$', lambda _: expected_deadline, body, count=1)
     inputs = re.compile(r'(?s)<!-- task-inputs:start -->.*?<!-- task-inputs:end -->')
     if inputs.search(body):
         body = inputs.sub(lambda _: expected_inputs, body, count=1)
@@ -296,7 +340,8 @@ def main():
             batch(ops)
             print('Updated inputs: ' + ', '.join(t['id'] for t in tasks[offset:offset + 2]), flush=True)
         field_ids = {f['name']: f['id'] for f in fields}
-        visible = [field_ids[n] for n in ('Title', 'Assignees', 'Status', 'Input status', 'Owner', 'Deadline', 'Depends on', 'Unblocks')]
+        deadline_name = DEADLINE_FIELD if DEADLINE_FIELD in field_ids else 'Deadline'
+        visible = [field_ids[n] for n in ('Title', 'Owner', deadline_name, 'Status', 'Input status', 'Assignees', 'Depends on', 'Unblocks')]
         for view in snapshot['views']['nodes']:
             if view['number'] in (1, 2):
                 gql('mutation($input:UpdateProjectV2ViewInput!){updateProjectV2View(input:$input){projectV2View{id}}}',
