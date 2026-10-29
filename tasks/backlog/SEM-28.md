@@ -17,11 +17,12 @@ Không có gate bắt đầu nghĩa là có thể chuẩn bị ngay. Gate hoàn 
 
 1. Nhận app/server/core/exporter đã bàn giao và nối nút manual với enqueue.
 2. Chạy một luồng update → manual worker → Room → UI/timeline, mở lại offline.
-3. Tổng hợp SETUP từ tài liệu Android/server, ghi M1 và revision đã ghép.
+3. Tổng hợp SETUP và ENVIRONMENT dạng chỉ mục từ ba hồ sơ môi trường cùng tài liệu Android/server; ghi M1 và revision đã ghép.
 
 ## Đầu ra bắt buộc
 
 - `docs/SETUP.md`
+- `docs/ENVIRONMENT.md`
 - `docs/evidence/SEM-28/M1.md`
 - `docs/evidence/SEM-28/CHECKS.md`: commit/build/config, thao tác, expected/actual, Pass/Fail/Not run, evidence, blocker và đầu ra đã bàn giao.
 

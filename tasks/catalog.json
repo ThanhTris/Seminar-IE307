@@ -504,10 +504,11 @@
       "work": [
         "Nhận app/server/core/exporter đã bàn giao và nối nút manual với enqueue.",
         "Chạy một luồng update → manual worker → Room → UI/timeline, mở lại offline.",
-        "Tổng hợp SETUP từ tài liệu Android/server, ghi M1 và revision đã ghép."
+        "Tổng hợp SETUP và ENVIRONMENT dạng chỉ mục từ ba hồ sơ môi trường cùng tài liệu Android/server; ghi M1 và revision đã ghép."
       ],
       "outputs": [
         "docs/SETUP.md",
+        "docs/ENVIRONMENT.md",
         "docs/evidence/SEM-28/M1.md"
       ],
       "acceptance": [

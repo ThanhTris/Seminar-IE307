@@ -2,6 +2,8 @@
 
 Cập nhật 29/10/2026 theo yêu cầu chia nhỏ. Mỗi task đúng một owner và một tài khoản Assignees trên GitHub Project; không có đồng thực hiện. 45 task mới thay 10 nhóm cũ. Mỗi người có nhiều task nhỏ liên tiếp, không có task yêu cầu nhiều người cùng sửa đầu ra.
 
+[Mở Project nhóm theo người](https://github.com/users/ThanhTris/projects/3/views/2); bảng này chỉ hiển thị task thực hiện hiện hành, được nhóm theo Owner và sắp hạn tăng dần. Mỗi thẻ đồng thời được gán đúng một tài khoản Assignees tương ứng.
+
 Hạn cuối 13/11/2026; bài nói 15 phút gồm demo. Tổng công sức giữ 100: thực hành/cơ chế 80, nghiên cứu/lập luận 20. Số task không đại diện khối lượng: Vinh có nhiều ca nhỏ; mỗi task chỉ 1–5 đơn vị.
 
 | Người | GitHub | Số task | Công sức / 100 |

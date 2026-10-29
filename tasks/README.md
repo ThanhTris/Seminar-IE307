@@ -2,7 +2,7 @@
 
 Cập nhật 29/10/2026. **45 task SEM-11…SEM-55**, mỗi task đúng một người thực hiện; chưa có code/evidence và tất cả vẫn Todo. Hạn cuối 13/11/2026, 15 phút gồm demo, giữ 80 đơn vị thực hành/cơ chế và 20 nghiên cứu/lập luận.
 
-[Project hiện hành](https://github.com/users/ThanhTris/projects/3/views/1) · [Theo từng người](../docs/TEAM_ASSIGNMENTS.md) · [Dữ liệu task](catalog.json).
+[Project hiện hành](https://github.com/users/ThanhTris/projects/3/views/1) · [Project nhóm theo người](https://github.com/users/ThanhTris/projects/3/views/2) · [Phân công trong repo](../docs/TEAM_ASSIGNMENTS.md) · [Dữ liệu task](catalog.json).
 
 SEM-01…SEM-10 chỉ còn là nhóm lịch sử với link tới task thay thế; thẻ cũ được archive, không tính Done. Mỗi task mới có việc làm, file đầu ra, CHECKS, acceptance, gate bắt đầu/gate hoàn tất và các task nhận bàn giao. Không có cột Phối hợp/Reviewer trong phân công thực hiện.
 

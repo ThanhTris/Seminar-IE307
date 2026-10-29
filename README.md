@@ -6,6 +6,7 @@
 - [Kết quả rà soát ngày 28/10/2026](docs/REVIEW-2026-10-28.md)
 - [45 task: mỗi task một người, việc làm và đầu ra](tasks/README.md)
 - [GitHub Project và dependency](https://github.com/users/ThanhTris/projects/3/views/1)
+- [Project nhóm task theo từng người](https://github.com/users/ThanhTris/projects/3/views/2)
 - [Phân công 6 thành viên](docs/TEAM_ASSIGNMENTS.md)
 - [Kịch bản thuyết trình 15 phút](docs/PRESENTATION_PLAN.md)
 - [Thiết kế kiểm thử](docs/EXPERIMENT_PROTOCOL.md)
