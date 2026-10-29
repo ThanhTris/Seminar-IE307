@@ -1,6 +1,8 @@
 # SEM-31 — Bàn giao chẩn đoán và tài liệu periodic
 
-- Trạng thái: Todo — chưa thực hiện.
+- Trạng thái: **Todo** (Project).
+- Trạng thái đầu vào: **Chờ đầu vào**.
+- Đối chiếu Project: 2026-10-29 16:22:16 UTC.
 - Người thực hiện duy nhất: **Trung** (`TrungNQ2645`).
 - Hạn: **2026-11-02** (UTC+7).
 - Công sức: 3/100 — Cơ chế/thực hành.
@@ -12,6 +14,21 @@
 - **Hoàn tất còn cần:** Không có.
 
 Không có gate bắt đầu nghĩa là có thể chuẩn bị ngay. Gate hoàn tất chỉ chặn bàn giao cuối; bản nháp/fixture phải ghi đúng nhãn, không được gọi là kết quả chạy thật.
+
+<!-- task-inputs:start -->
+## Đầu vào cần nhận
+
+Tài liệu nền đã có: [Kế hoạch/phạm vi](../../docs/PLAN.md).
+
+| Cần cho | Task cung cấp | Người bàn giao | Đầu ra phải nhận | Kiểm chứng bàn giao | Status nguồn |
+|---|---|---|---|---|---|
+| Bắt đầu | [SEM-30 — Triển khai unique periodic work](SEM-30.md) | Trung | `android/ (periodic scheduler)` | `docs/evidence/SEM-30/CHECKS.md` | Todo |
+
+Đây là danh sách đầu ra cần bàn giao, chưa phải xác nhận các file đã tồn tại. Trước khi dùng, nhận đúng artifact/commit/config và CHECKS từ task nguồn.
+
+Status nguồn được đối chiếu Project lúc **2026-10-29 16:22:16 UTC**; mở link task nguồn để xem cập nhật mới hơn.
+<!-- task-inputs:end -->
+
 
 ## Việc Trung cần làm
 

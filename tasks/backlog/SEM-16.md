@@ -1,6 +1,8 @@
 # SEM-16 — Lập ma trận lifecycle và protocol E01–E06
 
-- Trạng thái: Todo — chưa thực hiện.
+- Trạng thái: **Todo** (Project).
+- Trạng thái đầu vào: **Sẵn sàng**.
+- Đối chiếu Project: 2026-10-29 16:22:16 UTC.
 - Người thực hiện duy nhất: **Vinh** (`Vinh5905`).
 - Hạn: **2026-10-30** (UTC+7).
 - Công sức: 2/100 — Cơ chế/thực hành.
@@ -12,6 +14,17 @@
 - **Hoàn tất còn cần:** Không có.
 
 Không có gate bắt đầu nghĩa là có thể chuẩn bị ngay. Gate hoàn tất chỉ chặn bàn giao cuối; bản nháp/fixture phải ghi đúng nhãn, không được gọi là kết quả chạy thật.
+
+<!-- task-inputs:start -->
+## Đầu vào cần nhận
+
+Tài liệu nền đã có: [Kế hoạch/phạm vi](../../docs/PLAN.md) · [Protocol cốt lõi](../../docs/EXPERIMENT_PROTOCOL.md).
+
+Không cần nhận đầu ra từ task khác để bắt đầu. Owner thực hiện từ tài liệu nền và tự ghi các blocker môi trường/quyền truy cập trong CHECKS của task này.
+
+Status nguồn được đối chiếu Project lúc **2026-10-29 16:22:16 UTC**; mở link task nguồn để xem cập nhật mới hơn.
+<!-- task-inputs:end -->
+
 
 ## Việc Vinh cần làm
 

@@ -1,6 +1,8 @@
 # SEM-32 — Triển khai callback FCM và enqueue sync
 
-- Trạng thái: Todo — chưa thực hiện.
+- Trạng thái: **Todo** (Project).
+- Trạng thái đầu vào: **Chờ đầu vào**.
+- Đối chiếu Project: 2026-10-29 16:22:16 UTC.
 - Người thực hiện duy nhất: **Trang** (`rosy179`).
 - Hạn: **2026-11-02** (UTC+7).
 - Công sức: 4/100 — Cơ chế/thực hành.
@@ -12,6 +14,23 @@
 - **Hoàn tất còn cần:** Không có.
 
 Không có gate bắt đầu nghĩa là có thể chuẩn bị ngay. Gate hoàn tất chỉ chặn bàn giao cuối; bản nháp/fixture phải ghi đúng nhãn, không được gọi là kết quả chạy thật.
+
+<!-- task-inputs:start -->
+## Đầu vào cần nhận
+
+Tài liệu nền đã có: [Kế hoạch/phạm vi](../../docs/PLAN.md).
+
+| Cần cho | Task cung cấp | Người bàn giao | Đầu ra phải nhận | Kiểm chứng bàn giao | Status nguồn |
+|---|---|---|---|---|---|
+| Bắt đầu | [SEM-15 — Giải thích cơ chế silent push và giới hạn FCM](SEM-15.md) | Trang | `docs/mechanisms/SILENT_PUSH.md` | `docs/evidence/SEM-15/CHECKS.md` | Todo |
+| Bắt đầu | [SEM-25 — Xây Room, SyncRepository và SyncWorker dùng chung](SEM-25.md) | Trung | `android/ (data và sync core)`<br>`docs/SYNC_CORE_API.md` | `docs/evidence/SEM-25/CHECKS.md` | Todo |
+| Bắt đầu | [SEM-28 — Ghép manual sync đầu cuối và chốt hướng dẫn setup](SEM-28.md) | Trí | `docs/SETUP.md`<br>`docs/ENVIRONMENT.md`<br>`docs/evidence/SEM-28/M1.md` | `docs/evidence/SEM-28/CHECKS.md` | Todo |
+
+Đây là danh sách đầu ra cần bàn giao, chưa phải xác nhận các file đã tồn tại. Trước khi dùng, nhận đúng artifact/commit/config và CHECKS từ task nguồn.
+
+Status nguồn được đối chiếu Project lúc **2026-10-29 16:22:16 UTC**; mở link task nguồn để xem cập nhật mới hơn.
+<!-- task-inputs:end -->
+
 
 ## Việc Trang cần làm
 

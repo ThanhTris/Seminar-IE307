@@ -35,7 +35,9 @@
       "acceptance": [
         "Lệnh kiểm công cụ có version và kết quả thực; không suy cấu hình máy từ kế hoạch.",
         "Nêu rõ baseline FCM v1/data-only/normal priority và giới hạn demo."
-      ]
+      ],
+      "input_status": "Sẵn sàng",
+      "inputs": []
     },
     {
       "id": "SEM-12",
@@ -60,7 +62,9 @@
       "acceptance": [
         "ADB nhận emulator và OPPO hoặc ghi blocker cụ thể; không tự mặc định phiên bản OS.",
         "Hồ sơ phân biệt mạng tới server với Internet/FCM, không dùng localhost PC làm địa chỉ OPPO."
-      ]
+      ],
+      "input_status": "Sẵn sàng",
+      "inputs": []
     },
     {
       "id": "SEM-13",
@@ -85,7 +89,9 @@
       "acceptance": [
         "Có phiên bản thực và kết quả quyền/kết nối hoặc blocker, không ghi đã gửi thành công nếu chưa gửi.",
         "Chỉ commit cấu hình mẫu; không đưa token/service-account key/google-services.json thật vào repo."
-      ]
+      ],
+      "input_status": "Sẵn sàng",
+      "inputs": []
     },
     {
       "id": "SEM-14",
@@ -112,6 +118,20 @@
       "acceptance": [
         "Periodic, push và manual cùng dùng một sync core; UI mở lại chỉ đọc cache.",
         "Có hình luồng và bảng input/output đủ để API, app và worker triển khai độc lập."
+      ],
+      "input_status": "Chờ đầu vào",
+      "inputs": [
+        {
+          "source_task": "SEM-11",
+          "required_for": "start",
+          "producer": "Trí",
+          "artifacts": [
+            "docs/SCOPE.md",
+            "docs/environment/ANDROID_BUILD.md"
+          ],
+          "checks": "docs/evidence/SEM-11/CHECKS.md",
+          "source_status": "Todo"
+        }
       ]
     },
     {
@@ -137,7 +157,9 @@
       "acceptance": [
         "Có thể giải thích vì sao data-only không đồng nghĩa một thông báo bị tắt tiếng.",
         "Chỉ ra trường hợp trì hoãn/không nhận và không hứa push tức thì."
-      ]
+      ],
+      "input_status": "Sẵn sàng",
+      "inputs": []
     },
     {
       "id": "SEM-16",
@@ -163,7 +185,9 @@
       "acceptance": [
         "Giữ nguyên số lượt và cửa sổ cốt lõi E01–E06; dự trù ít nhất 10–12 giờ quan sát.",
         "Màn hình tắt không tự được gọi Doze; force-stop có mốc người dùng mở lại và cleanup."
-      ]
+      ],
+      "input_status": "Sẵn sàng",
+      "inputs": []
     },
     {
       "id": "SEM-17",
@@ -188,7 +212,9 @@
       "acceptance": [
         "Không coi chu kỳ cấu hình là cam kết chạy đúng từng mốc.",
         "Phân biệt periodic tự nhiên với force-run/test driver chỉ dùng debug."
-      ]
+      ],
+      "input_status": "Sẵn sàng",
+      "inputs": []
     },
     {
       "id": "SEM-18",
@@ -213,7 +239,9 @@
       "acceptance": [
         "Tách accepted, received, work_started và snapshot_applied thành các sự kiện riêng.",
         "Không bịa message_id khi API chưa trả và không quy accepted thành delivered."
-      ]
+      ],
+      "input_status": "Sẵn sàng",
+      "inputs": []
     },
     {
       "id": "SEM-19",
@@ -248,6 +276,91 @@
       "acceptance": [
         "Các phần tham chiếu đúng đầu ra riêng của SEM-14…18, không yêu cầu người khác cùng viết file tổng hợp.",
         "Cơ chế, API và cấu hình môi trường khớp; giải thích được hai luồng không cần đọc code."
+      ],
+      "input_status": "Chuẩn bị trước",
+      "inputs": [
+        {
+          "source_task": "SEM-11",
+          "required_for": "finish",
+          "producer": "Trí",
+          "artifacts": [
+            "docs/SCOPE.md",
+            "docs/environment/ANDROID_BUILD.md"
+          ],
+          "checks": "docs/evidence/SEM-11/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-12",
+          "required_for": "finish",
+          "producer": "Vinh",
+          "artifacts": [
+            "docs/environment/DEVICES.md"
+          ],
+          "checks": "docs/evidence/SEM-12/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-13",
+          "required_for": "finish",
+          "producer": "Tâm",
+          "artifacts": [
+            "docs/environment/SERVER_FIREBASE.md"
+          ],
+          "checks": "docs/evidence/SEM-13/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-14",
+          "required_for": "finish",
+          "producer": "Trí",
+          "artifacts": [
+            "docs/mechanisms/SHARED_SYNC.md"
+          ],
+          "checks": "docs/evidence/SEM-14/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-15",
+          "required_for": "finish",
+          "producer": "Trang",
+          "artifacts": [
+            "docs/mechanisms/SILENT_PUSH.md"
+          ],
+          "checks": "docs/evidence/SEM-15/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-16",
+          "required_for": "finish",
+          "producer": "Vinh",
+          "artifacts": [
+            "experiments/PROTOCOL.md",
+            "experiments/RUN_SCHEDULE.md"
+          ],
+          "checks": "docs/evidence/SEM-16/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-17",
+          "required_for": "finish",
+          "producer": "Trung",
+          "artifacts": [
+            "docs/mechanisms/PERIODIC_FETCH.md"
+          ],
+          "checks": "docs/evidence/SEM-17/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-18",
+          "required_for": "finish",
+          "producer": "Tâm",
+          "artifacts": [
+            "docs/mechanisms/SERVER_FCM.md"
+          ],
+          "checks": "docs/evidence/SEM-18/CHECKS.md",
+          "source_status": "Todo"
+        }
       ]
     },
     {
@@ -277,6 +390,30 @@
       "acceptance": [
         "Tên/tác giả/DOI khớp nguồn gốc; ít nhất một lập luận gắn được quyết định thử hoặc trade-off.",
         "Không dùng số đo paper làm số đo OPPO; phân biệt nguồn paper và tài liệu API."
+      ],
+      "input_status": "Chuẩn bị trước",
+      "inputs": [
+        {
+          "source_task": "SEM-11",
+          "required_for": "finish",
+          "producer": "Trí",
+          "artifacts": [
+            "docs/SCOPE.md",
+            "docs/environment/ANDROID_BUILD.md"
+          ],
+          "checks": "docs/evidence/SEM-11/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-12",
+          "required_for": "finish",
+          "producer": "Vinh",
+          "artifacts": [
+            "docs/environment/DEVICES.md"
+          ],
+          "checks": "docs/evidence/SEM-12/CHECKS.md",
+          "source_status": "Todo"
+        }
       ]
     },
     {
@@ -306,6 +443,30 @@
       "acceptance": [
         "Có ghi chú toàn văn, nguồn kiểm chứng và giới hạn áp dụng.",
         "Nếu không có PDF chia sẻ hợp lệ thì metadata/link vẫn đủ; không tải bản không được phép."
+      ],
+      "input_status": "Chuẩn bị trước",
+      "inputs": [
+        {
+          "source_task": "SEM-11",
+          "required_for": "finish",
+          "producer": "Trí",
+          "artifacts": [
+            "docs/SCOPE.md",
+            "docs/environment/ANDROID_BUILD.md"
+          ],
+          "checks": "docs/evidence/SEM-11/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-12",
+          "required_for": "finish",
+          "producer": "Vinh",
+          "artifacts": [
+            "docs/environment/DEVICES.md"
+          ],
+          "checks": "docs/evidence/SEM-12/CHECKS.md",
+          "source_status": "Todo"
+        }
       ]
     },
     {
@@ -335,6 +496,41 @@
       "acceptance": [
         "Mỗi dòng có nguồn/vị trí/version và giới hạn, không trộn kết quả paper với demo.",
         "Không yêu cầu paper hoàn tất mới bắt đầu đọc tài liệu API; chỉ gate bản đối chiếu cuối."
+      ],
+      "input_status": "Chuẩn bị trước",
+      "inputs": [
+        {
+          "source_task": "SEM-15",
+          "required_for": "finish",
+          "producer": "Trang",
+          "artifacts": [
+            "docs/mechanisms/SILENT_PUSH.md"
+          ],
+          "checks": "docs/evidence/SEM-15/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-20",
+          "required_for": "finish",
+          "producer": "Tuấn",
+          "artifacts": [
+            "research/notes/PAPER_1.md",
+            "research/metadata/paper-1.bib"
+          ],
+          "checks": "docs/evidence/SEM-20/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-21",
+          "required_for": "finish",
+          "producer": "Tâm",
+          "artifacts": [
+            "research/notes/PAPER_2.md",
+            "research/metadata/paper-2.bib"
+          ],
+          "checks": "docs/evidence/SEM-21/CHECKS.md",
+          "source_status": "Todo"
+        }
       ]
     },
     {
@@ -363,6 +559,20 @@
       "acceptance": [
         "Build được debug APK; UI trạng thái rỗng và timeline hiển thị rõ trigger.",
         "Không auto-fetch khi mở app; nút manual phải dùng giao diện enqueue của task core khi được bàn giao."
+      ],
+      "input_status": "Chờ đầu vào",
+      "inputs": [
+        {
+          "source_task": "SEM-11",
+          "required_for": "start",
+          "producer": "Trí",
+          "artifacts": [
+            "docs/SCOPE.md",
+            "docs/environment/ANDROID_BUILD.md"
+          ],
+          "checks": "docs/evidence/SEM-11/CHECKS.md",
+          "source_status": "Todo"
+        }
       ]
     },
     {
@@ -394,6 +604,30 @@
       "acceptance": [
         "Manifest có commit app/server, APK SHA256, OS/config, phase và outcome.",
         "Script không xuất token/serial/credential vào dữ liệu public, không sửa giá trị đo."
+      ],
+      "input_status": "Chờ đầu vào",
+      "inputs": [
+        {
+          "source_task": "SEM-12",
+          "required_for": "start",
+          "producer": "Vinh",
+          "artifacts": [
+            "docs/environment/DEVICES.md"
+          ],
+          "checks": "docs/evidence/SEM-12/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-26",
+          "required_for": "finish",
+          "producer": "Tâm",
+          "artifacts": [
+            "docs/API.md",
+            "docs/EVENT_SCHEMA.md"
+          ],
+          "checks": "docs/evidence/SEM-26/CHECKS.md",
+          "source_status": "Todo"
+        }
       ]
     },
     {
@@ -423,6 +657,31 @@
       "acceptance": [
         "Manual enqueue chạy được worker, cache sống qua mở lại/offline và version không giảm.",
         "Periodic/push gọi cùng worker; UI không tạo engine hoặc auto-fetch riêng."
+      ],
+      "input_status": "Chờ đầu vào",
+      "inputs": [
+        {
+          "source_task": "SEM-23",
+          "required_for": "start",
+          "producer": "Trí",
+          "artifacts": [
+            "android/ (build, manifest, ui, config)",
+            "docs/setup/ANDROID.md"
+          ],
+          "checks": "docs/evidence/SEM-23/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-26",
+          "required_for": "start",
+          "producer": "Tâm",
+          "artifacts": [
+            "docs/API.md",
+            "docs/EVENT_SCHEMA.md"
+          ],
+          "checks": "docs/evidence/SEM-26/CHECKS.md",
+          "source_status": "Todo"
+        }
       ]
     },
     {
@@ -453,6 +712,40 @@
       "acceptance": [
         "Snapshot/version/error rõ ràng, event accepted/received/started/applied riêng biệt.",
         "Core và server có thể triển khai theo contract mà không cần chờ code của nhau."
+      ],
+      "input_status": "Chờ đầu vào",
+      "inputs": [
+        {
+          "source_task": "SEM-11",
+          "required_for": "start",
+          "producer": "Trí",
+          "artifacts": [
+            "docs/SCOPE.md",
+            "docs/environment/ANDROID_BUILD.md"
+          ],
+          "checks": "docs/evidence/SEM-11/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-13",
+          "required_for": "start",
+          "producer": "Tâm",
+          "artifacts": [
+            "docs/environment/SERVER_FIREBASE.md"
+          ],
+          "checks": "docs/evidence/SEM-13/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-14",
+          "required_for": "start",
+          "producer": "Trí",
+          "artifacts": [
+            "docs/mechanisms/SHARED_SYNC.md"
+          ],
+          "checks": "docs/evidence/SEM-14/CHECKS.md",
+          "source_status": "Todo"
+        }
       ]
     },
     {
@@ -482,6 +775,30 @@
       "acceptance": [
         "Đọc/update/restart không giảm version, payload và lỗi khớp API.md.",
         "Log đối chiếu được run/request; cấu hình thật giữ local."
+      ],
+      "input_status": "Chờ đầu vào",
+      "inputs": [
+        {
+          "source_task": "SEM-13",
+          "required_for": "start",
+          "producer": "Tâm",
+          "artifacts": [
+            "docs/environment/SERVER_FIREBASE.md"
+          ],
+          "checks": "docs/evidence/SEM-13/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-26",
+          "required_for": "start",
+          "producer": "Tâm",
+          "artifacts": [
+            "docs/API.md",
+            "docs/EVENT_SCHEMA.md"
+          ],
+          "checks": "docs/evidence/SEM-26/CHECKS.md",
+          "source_status": "Todo"
+        }
       ]
     },
     {
@@ -514,6 +831,54 @@
       "acceptance": [
         "Build debug/server chạy; MANUAL có nhãn và UI mở lại không phát sinh GET.",
         "M1 chỉ Pass khi có run thật; thiếu credential/mạng ghi blocker, không tự nghiệm thu từ tài liệu."
+      ],
+      "input_status": "Chờ đầu vào",
+      "inputs": [
+        {
+          "source_task": "SEM-23",
+          "required_for": "start",
+          "producer": "Trí",
+          "artifacts": [
+            "android/ (build, manifest, ui, config)",
+            "docs/setup/ANDROID.md"
+          ],
+          "checks": "docs/evidence/SEM-23/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-24",
+          "required_for": "start",
+          "producer": "Vinh",
+          "artifacts": [
+            "experiments/RUN_MANIFEST_TEMPLATE.json",
+            "experiments/scripts/export_logs.*",
+            "experiments/README.md"
+          ],
+          "checks": "docs/evidence/SEM-24/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-25",
+          "required_for": "start",
+          "producer": "Trung",
+          "artifacts": [
+            "android/ (data và sync core)",
+            "docs/SYNC_CORE_API.md"
+          ],
+          "checks": "docs/evidence/SEM-25/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-27",
+          "required_for": "start",
+          "producer": "Tâm",
+          "artifacts": [
+            "server/ (API, snapshot store, update CLI)",
+            "docs/setup/SERVER.md"
+          ],
+          "checks": "docs/evidence/SEM-27/CHECKS.md",
+          "source_status": "Todo"
+        }
       ]
     },
     {
@@ -546,6 +911,53 @@
       "acceptance": [
         "Không force-run để bù lần chạy và không gọi pilot là tập chính.",
         "Hoàn tất sau khi có hướng dẫn chẩn đoán SEM-31 và ghi commit/config thật."
+      ],
+      "input_status": "Chờ đầu vào",
+      "inputs": [
+        {
+          "source_task": "SEM-16",
+          "required_for": "start",
+          "producer": "Vinh",
+          "artifacts": [
+            "experiments/PROTOCOL.md",
+            "experiments/RUN_SCHEDULE.md"
+          ],
+          "checks": "docs/evidence/SEM-16/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-24",
+          "required_for": "start",
+          "producer": "Vinh",
+          "artifacts": [
+            "experiments/RUN_MANIFEST_TEMPLATE.json",
+            "experiments/scripts/export_logs.*",
+            "experiments/README.md"
+          ],
+          "checks": "docs/evidence/SEM-24/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-30",
+          "required_for": "start",
+          "producer": "Trung",
+          "artifacts": [
+            "android/ (periodic scheduler)"
+          ],
+          "checks": "docs/evidence/SEM-30/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-31",
+          "required_for": "finish",
+          "producer": "Trung",
+          "artifacts": [
+            "docs/PERIODIC.md",
+            "docs/evidence/SEM-31/SCHEDULER_CHECKS.md"
+          ],
+          "checks": "docs/evidence/SEM-31/CHECKS.md",
+          "source_status": "Todo"
+        }
       ]
     },
     {
@@ -575,6 +987,42 @@
       "acceptance": [
         "Đăng ký lặp chỉ có một lịch active; tắt periodic không để lịch cũ tiếp tục gây nhiễu.",
         "Kiểm scheduler logic không được dùng để kết luận thời điểm chạy tự nhiên."
+      ],
+      "input_status": "Chờ đầu vào",
+      "inputs": [
+        {
+          "source_task": "SEM-17",
+          "required_for": "start",
+          "producer": "Trung",
+          "artifacts": [
+            "docs/mechanisms/PERIODIC_FETCH.md"
+          ],
+          "checks": "docs/evidence/SEM-17/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-25",
+          "required_for": "start",
+          "producer": "Trung",
+          "artifacts": [
+            "android/ (data và sync core)",
+            "docs/SYNC_CORE_API.md"
+          ],
+          "checks": "docs/evidence/SEM-25/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-28",
+          "required_for": "start",
+          "producer": "Trí",
+          "artifacts": [
+            "docs/SETUP.md",
+            "docs/ENVIRONMENT.md",
+            "docs/evidence/SEM-28/M1.md"
+          ],
+          "checks": "docs/evidence/SEM-28/CHECKS.md",
+          "source_status": "Todo"
+        }
       ]
     },
     {
@@ -603,6 +1051,19 @@
       "acceptance": [
         "Có bằng chứng một lịch active và hành vi constraint/cancel, không chỉ tên hàm.",
         "Tài liệu nêu scheduler không bảo đảm chạy đúng từng mốc, giữ các giới hạn OS."
+      ],
+      "input_status": "Chờ đầu vào",
+      "inputs": [
+        {
+          "source_task": "SEM-30",
+          "required_for": "start",
+          "producer": "Trung",
+          "artifacts": [
+            "android/ (periodic scheduler)"
+          ],
+          "checks": "docs/evidence/SEM-30/CHECKS.md",
+          "source_status": "Todo"
+        }
       ]
     },
     {
@@ -632,6 +1093,42 @@
       "acceptance": [
         "Callback dẫn tới work_enqueued/start/applied theo correlation khi đủ điều kiện.",
         "Không dùng high priority/EAP hoặc engine riêng để che độ trễ."
+      ],
+      "input_status": "Chờ đầu vào",
+      "inputs": [
+        {
+          "source_task": "SEM-15",
+          "required_for": "start",
+          "producer": "Trang",
+          "artifacts": [
+            "docs/mechanisms/SILENT_PUSH.md"
+          ],
+          "checks": "docs/evidence/SEM-15/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-25",
+          "required_for": "start",
+          "producer": "Trung",
+          "artifacts": [
+            "android/ (data và sync core)",
+            "docs/SYNC_CORE_API.md"
+          ],
+          "checks": "docs/evidence/SEM-25/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-28",
+          "required_for": "start",
+          "producer": "Trí",
+          "artifacts": [
+            "docs/SETUP.md",
+            "docs/ENVIRONMENT.md",
+            "docs/evidence/SEM-28/M1.md"
+          ],
+          "checks": "docs/evidence/SEM-28/CHECKS.md",
+          "source_status": "Todo"
+        }
       ]
     },
     {
@@ -661,6 +1158,29 @@
       "acceptance": [
         "Có bằng chứng token refresh hoặc blocker được ghi thật, không chỉ token hardcode.",
         "PUSH.md đủ để chạy sender và phân biệt accepted/received/applied."
+      ],
+      "input_status": "Chờ đầu vào",
+      "inputs": [
+        {
+          "source_task": "SEM-13",
+          "required_for": "start",
+          "producer": "Tâm",
+          "artifacts": [
+            "docs/environment/SERVER_FIREBASE.md"
+          ],
+          "checks": "docs/evidence/SEM-13/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-32",
+          "required_for": "start",
+          "producer": "Trang",
+          "artifacts": [
+            "android/ (messaging callback và enqueue adapter)"
+          ],
+          "checks": "docs/evidence/SEM-32/CHECKS.md",
+          "source_status": "Todo"
+        }
       ]
     },
     {
@@ -694,6 +1214,64 @@
       "acceptance": [
         "Không coi accepted là delivered và không dùng UI auto-refresh để tạo kết quả.",
         "Ghi điều kiện thiết bị/window/timeout thật; bản PUSH/token lifecycle đã được bàn giao."
+      ],
+      "input_status": "Chờ đầu vào",
+      "inputs": [
+        {
+          "source_task": "SEM-16",
+          "required_for": "start",
+          "producer": "Vinh",
+          "artifacts": [
+            "experiments/PROTOCOL.md",
+            "experiments/RUN_SCHEDULE.md"
+          ],
+          "checks": "docs/evidence/SEM-16/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-24",
+          "required_for": "start",
+          "producer": "Vinh",
+          "artifacts": [
+            "experiments/RUN_MANIFEST_TEMPLATE.json",
+            "experiments/scripts/export_logs.*",
+            "experiments/README.md"
+          ],
+          "checks": "docs/evidence/SEM-24/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-32",
+          "required_for": "start",
+          "producer": "Trang",
+          "artifacts": [
+            "android/ (messaging callback và enqueue adapter)"
+          ],
+          "checks": "docs/evidence/SEM-32/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-35",
+          "required_for": "start",
+          "producer": "Tâm",
+          "artifacts": [
+            "server/ (FCM sender CLI)",
+            "docs/setup/FCM_SENDER.md"
+          ],
+          "checks": "docs/evidence/SEM-35/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-33",
+          "required_for": "finish",
+          "producer": "Trang",
+          "artifacts": [
+            "android/ (token lifecycle)",
+            "docs/PUSH.md"
+          ],
+          "checks": "docs/evidence/SEM-33/CHECKS.md",
+          "source_status": "Todo"
+        }
       ]
     },
     {
@@ -724,6 +1302,40 @@
       "acceptance": [
         "CLI gửi có response thật hoặc blocker; ID có thể null nếu API chưa cấp.",
         "Payload không có notification block và không trộn AndroidConfigV2 EAP."
+      ],
+      "input_status": "Chờ đầu vào",
+      "inputs": [
+        {
+          "source_task": "SEM-13",
+          "required_for": "start",
+          "producer": "Tâm",
+          "artifacts": [
+            "docs/environment/SERVER_FIREBASE.md"
+          ],
+          "checks": "docs/evidence/SEM-13/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-18",
+          "required_for": "start",
+          "producer": "Tâm",
+          "artifacts": [
+            "docs/mechanisms/SERVER_FCM.md"
+          ],
+          "checks": "docs/evidence/SEM-18/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-27",
+          "required_for": "start",
+          "producer": "Tâm",
+          "artifacts": [
+            "server/ (API, snapshot store, update CLI)",
+            "docs/setup/SERVER.md"
+          ],
+          "checks": "docs/evidence/SEM-27/CHECKS.md",
+          "source_status": "Todo"
+        }
       ]
     },
     {
@@ -761,6 +1373,95 @@
       "acceptance": [
         "E05 không rollback/ghi trùng/mất cập nhật ở race; E06 phục hồi từ PERIODIC khi bỏ gửi có chủ ý.",
         "Không coi hybrid là vượt Doze/force-stop; các nhánh code vẫn dùng cùng sync engine."
+      ],
+      "input_status": "Chờ đầu vào",
+      "inputs": [
+        {
+          "source_task": "SEM-29",
+          "required_for": "start",
+          "producer": "Vinh",
+          "artifacts": [
+            "experiments/runs/<periodic-pilot-run>/manifest.json",
+            "experiments/runs/<periodic-pilot-run>/events.jsonl"
+          ],
+          "checks": "docs/evidence/SEM-29/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-30",
+          "required_for": "start",
+          "producer": "Trung",
+          "artifacts": [
+            "android/ (periodic scheduler)"
+          ],
+          "checks": "docs/evidence/SEM-30/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-32",
+          "required_for": "start",
+          "producer": "Trang",
+          "artifacts": [
+            "android/ (messaging callback và enqueue adapter)"
+          ],
+          "checks": "docs/evidence/SEM-32/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-34",
+          "required_for": "start",
+          "producer": "Vinh",
+          "artifacts": [
+            "experiments/runs/<push-pilot-run>/manifest.json",
+            "experiments/runs/<push-pilot-run>/events.jsonl"
+          ],
+          "checks": "docs/evidence/SEM-34/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-35",
+          "required_for": "start",
+          "producer": "Tâm",
+          "artifacts": [
+            "server/ (FCM sender CLI)",
+            "docs/setup/FCM_SENDER.md"
+          ],
+          "checks": "docs/evidence/SEM-35/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-38",
+          "required_for": "finish",
+          "producer": "Trang",
+          "artifacts": [
+            "android/ (messaging input policy)",
+            "docs/evidence/SEM-38/PUSH_INPUT_CASES.md"
+          ],
+          "checks": "docs/evidence/SEM-38/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-39",
+          "required_for": "finish",
+          "producer": "Trung",
+          "artifacts": [
+            "android/ (sync robustness và logic checks)",
+            "docs/evidence/SEM-39/CORE_CASES.md"
+          ],
+          "checks": "docs/evidence/SEM-39/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-40",
+          "required_for": "finish",
+          "producer": "Tâm",
+          "artifacts": [
+            "server/ (skip-push CLI)",
+            "docs/evidence/SEM-40/FAULT_INJECTION.md"
+          ],
+          "checks": "docs/evidence/SEM-40/CHECKS.md",
+          "source_status": "Todo"
+        }
       ]
     },
     {
@@ -794,6 +1495,76 @@
       "acceptance": [
         "Truy được artifact tới đúng source/config và pilot đã ghi; không chỉ gửi APK không metadata.",
         "Chốt cuối 05/11 để tập chính 06–07/11; nếu trễ ghi blocker và điều chỉnh ca mở rộng."
+      ],
+      "input_status": "Chờ đầu vào",
+      "inputs": [
+        {
+          "source_task": "SEM-31",
+          "required_for": "start",
+          "producer": "Trung",
+          "artifacts": [
+            "docs/PERIODIC.md",
+            "docs/evidence/SEM-31/SCHEDULER_CHECKS.md"
+          ],
+          "checks": "docs/evidence/SEM-31/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-33",
+          "required_for": "start",
+          "producer": "Trang",
+          "artifacts": [
+            "android/ (token lifecycle)",
+            "docs/PUSH.md"
+          ],
+          "checks": "docs/evidence/SEM-33/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-36",
+          "required_for": "start",
+          "producer": "Trí",
+          "artifacts": [
+            "android/ (mode controller và tích hợp)",
+            "docs/SYNC.md",
+            "docs/evidence/SEM-36/HYBRID_PILOT.md"
+          ],
+          "checks": "docs/evidence/SEM-36/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-38",
+          "required_for": "start",
+          "producer": "Trang",
+          "artifacts": [
+            "android/ (messaging input policy)",
+            "docs/evidence/SEM-38/PUSH_INPUT_CASES.md"
+          ],
+          "checks": "docs/evidence/SEM-38/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-39",
+          "required_for": "start",
+          "producer": "Trung",
+          "artifacts": [
+            "android/ (sync robustness và logic checks)",
+            "docs/evidence/SEM-39/CORE_CASES.md"
+          ],
+          "checks": "docs/evidence/SEM-39/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-40",
+          "required_for": "start",
+          "producer": "Tâm",
+          "artifacts": [
+            "server/ (skip-push CLI)",
+            "docs/evidence/SEM-40/FAULT_INJECTION.md"
+          ],
+          "checks": "docs/evidence/SEM-40/CHECKS.md",
+          "source_status": "Todo"
+        }
       ]
     },
     {
@@ -823,6 +1594,30 @@
       "acceptance": [
         "Tín hiệu trùng không gây notification hoặc sync engine riêng; bản mới không bị bỏ qua.",
         "Mỗi ca có input/expected/actual trên đúng revision; lỗi core chuyển đúng task SEM-39."
+      ],
+      "input_status": "Chờ đầu vào",
+      "inputs": [
+        {
+          "source_task": "SEM-32",
+          "required_for": "start",
+          "producer": "Trang",
+          "artifacts": [
+            "android/ (messaging callback và enqueue adapter)"
+          ],
+          "checks": "docs/evidence/SEM-32/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-33",
+          "required_for": "start",
+          "producer": "Trang",
+          "artifacts": [
+            "android/ (token lifecycle)",
+            "docs/PUSH.md"
+          ],
+          "checks": "docs/evidence/SEM-33/CHECKS.md",
+          "source_status": "Todo"
+        }
       ]
     },
     {
@@ -852,6 +1647,30 @@
       "acceptance": [
         "Version không giảm, không ghi trùng, không mất bản mới trong race.",
         "Logic checks có ý nghĩa chạy thật; retry không vô hạn, có lý do dừng."
+      ],
+      "input_status": "Chờ đầu vào",
+      "inputs": [
+        {
+          "source_task": "SEM-25",
+          "required_for": "start",
+          "producer": "Trung",
+          "artifacts": [
+            "android/ (data và sync core)",
+            "docs/SYNC_CORE_API.md"
+          ],
+          "checks": "docs/evidence/SEM-25/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-30",
+          "required_for": "start",
+          "producer": "Trung",
+          "artifacts": [
+            "android/ (periodic scheduler)"
+          ],
+          "checks": "docs/evidence/SEM-30/CHECKS.md",
+          "source_status": "Todo"
+        }
       ]
     },
     {
@@ -881,6 +1700,31 @@
       "acceptance": [
         "Update vẫn persist đúng version, log không có accepted cho lần đã skip.",
         "Phân biệt bỏ gửi có kiểm soát với delivery failure thật."
+      ],
+      "input_status": "Chờ đầu vào",
+      "inputs": [
+        {
+          "source_task": "SEM-27",
+          "required_for": "start",
+          "producer": "Tâm",
+          "artifacts": [
+            "server/ (API, snapshot store, update CLI)",
+            "docs/setup/SERVER.md"
+          ],
+          "checks": "docs/evidence/SEM-27/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-35",
+          "required_for": "start",
+          "producer": "Tâm",
+          "artifacts": [
+            "server/ (FCM sender CLI)",
+            "docs/setup/FCM_SENDER.md"
+          ],
+          "checks": "docs/evidence/SEM-35/CHECKS.md",
+          "source_status": "Todo"
+        }
       ]
     },
     {
@@ -911,6 +1755,43 @@
       "acceptance": [
         "Giữ E01 90 phút, E02 5 lượt/120 giây, E03 2/trigger, E04 3/trigger, E05 3/kịch bản, E06 2×45 phút.",
         "Không force-run cho kết quả tự nhiên, không trộn pilot/build hoặc loại timeout khỏi mẫu số."
+      ],
+      "input_status": "Chờ đầu vào",
+      "inputs": [
+        {
+          "source_task": "SEM-16",
+          "required_for": "start",
+          "producer": "Vinh",
+          "artifacts": [
+            "experiments/PROTOCOL.md",
+            "experiments/RUN_SCHEDULE.md"
+          ],
+          "checks": "docs/evidence/SEM-16/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-24",
+          "required_for": "start",
+          "producer": "Vinh",
+          "artifacts": [
+            "experiments/RUN_MANIFEST_TEMPLATE.json",
+            "experiments/scripts/export_logs.*",
+            "experiments/README.md"
+          ],
+          "checks": "docs/evidence/SEM-24/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-37",
+          "required_for": "start",
+          "producer": "Trí",
+          "artifacts": [
+            "release/CANDIDATE_MANIFEST.json",
+            "docs/evidence/SEM-37/CANDIDATE_GATE.md"
+          ],
+          "checks": "docs/evidence/SEM-37/CHECKS.md",
+          "source_status": "Todo"
+        }
       ]
     },
     {
@@ -942,6 +1823,53 @@
       "acceptance": [
         "Không lấy phiên bản OS từ tên model; phân biệt baseline với cấu hình pin thay đổi.",
         "Không suy rộng mọi Android từ OPPO; force-stop có mốc mở lại và không tuyên bố hybrid vượt giới hạn."
+      ],
+      "input_status": "Chờ đầu vào",
+      "inputs": [
+        {
+          "source_task": "SEM-12",
+          "required_for": "start",
+          "producer": "Vinh",
+          "artifacts": [
+            "docs/environment/DEVICES.md"
+          ],
+          "checks": "docs/evidence/SEM-12/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-16",
+          "required_for": "start",
+          "producer": "Vinh",
+          "artifacts": [
+            "experiments/PROTOCOL.md",
+            "experiments/RUN_SCHEDULE.md"
+          ],
+          "checks": "docs/evidence/SEM-16/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-24",
+          "required_for": "start",
+          "producer": "Vinh",
+          "artifacts": [
+            "experiments/RUN_MANIFEST_TEMPLATE.json",
+            "experiments/scripts/export_logs.*",
+            "experiments/README.md"
+          ],
+          "checks": "docs/evidence/SEM-24/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-37",
+          "required_for": "start",
+          "producer": "Trí",
+          "artifacts": [
+            "release/CANDIDATE_MANIFEST.json",
+            "docs/evidence/SEM-37/CANDIDATE_GATE.md"
+          ],
+          "checks": "docs/evidence/SEM-37/CHECKS.md",
+          "source_status": "Todo"
+        }
       ]
     },
     {
@@ -972,6 +1900,52 @@
       "acceptance": [
         "Mọi bảng truy được run/manifest/build; không trộn tập khác version.",
         "Median kèm n_complete/n_total, không suy pin từ số request và không so latency thiếu kiểm soát."
+      ],
+      "input_status": "Chờ đầu vào",
+      "inputs": [
+        {
+          "source_task": "SEM-41",
+          "required_for": "start",
+          "producer": "Vinh",
+          "artifacts": [
+            "experiments/runs/<emulator-main-run>/manifest.json",
+            "experiments/runs/<emulator-main-run>/events.jsonl"
+          ],
+          "checks": "docs/evidence/SEM-41/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-42",
+          "required_for": "start",
+          "producer": "Vinh",
+          "artifacts": [
+            "experiments/runs/<oppo-main-run>/manifest.json",
+            "experiments/runs/<oppo-main-run>/events.jsonl"
+          ],
+          "checks": "docs/evidence/SEM-42/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-44",
+          "required_for": "start",
+          "producer": "Trung",
+          "artifacts": [
+            "experiments/AUDIT.md"
+          ],
+          "checks": "docs/evidence/SEM-44/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-45",
+          "required_for": "start",
+          "producer": "Tuấn",
+          "artifacts": [
+            "experiments/scripts/analyze.*",
+            "experiments/results.csv"
+          ],
+          "checks": "docs/evidence/SEM-45/CHECKS.md",
+          "source_status": "Todo"
+        }
       ]
     },
     {
@@ -1001,6 +1975,42 @@
       "acceptance": [
         "Có case/input/expected/actual/assertion và run_id/commit thật.",
         "Không tự ký Pass cho run chưa thực hiện hoặc chưa đủ log."
+      ],
+      "input_status": "Chờ đầu vào",
+      "inputs": [
+        {
+          "source_task": "SEM-41",
+          "required_for": "start",
+          "producer": "Vinh",
+          "artifacts": [
+            "experiments/runs/<emulator-main-run>/manifest.json",
+            "experiments/runs/<emulator-main-run>/events.jsonl"
+          ],
+          "checks": "docs/evidence/SEM-41/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-42",
+          "required_for": "start",
+          "producer": "Vinh",
+          "artifacts": [
+            "experiments/runs/<oppo-main-run>/manifest.json",
+            "experiments/runs/<oppo-main-run>/events.jsonl"
+          ],
+          "checks": "docs/evidence/SEM-42/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-45",
+          "required_for": "start",
+          "producer": "Tuấn",
+          "artifacts": [
+            "experiments/scripts/analyze.*",
+            "experiments/results.csv"
+          ],
+          "checks": "docs/evidence/SEM-45/CHECKS.md",
+          "source_status": "Todo"
+        }
       ]
     },
     {
@@ -1033,6 +2043,54 @@
       "acceptance": [
         "Tái sinh được CSV từ log; fixture không lẫn main, không gán latency timeout bằng 0.",
         "Accepted/received/queue/sync không bị gộp thành một mốc."
+      ],
+      "input_status": "Chờ đầu vào",
+      "inputs": [
+        {
+          "source_task": "SEM-24",
+          "required_for": "start",
+          "producer": "Vinh",
+          "artifacts": [
+            "experiments/RUN_MANIFEST_TEMPLATE.json",
+            "experiments/scripts/export_logs.*",
+            "experiments/README.md"
+          ],
+          "checks": "docs/evidence/SEM-24/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-26",
+          "required_for": "start",
+          "producer": "Tâm",
+          "artifacts": [
+            "docs/API.md",
+            "docs/EVENT_SCHEMA.md"
+          ],
+          "checks": "docs/evidence/SEM-26/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-41",
+          "required_for": "finish",
+          "producer": "Vinh",
+          "artifacts": [
+            "experiments/runs/<emulator-main-run>/manifest.json",
+            "experiments/runs/<emulator-main-run>/events.jsonl"
+          ],
+          "checks": "docs/evidence/SEM-41/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-42",
+          "required_for": "finish",
+          "producer": "Vinh",
+          "artifacts": [
+            "experiments/runs/<oppo-main-run>/manifest.json",
+            "experiments/runs/<oppo-main-run>/events.jsonl"
+          ],
+          "checks": "docs/evidence/SEM-42/CHECKS.md",
+          "source_status": "Todo"
+        }
       ]
     },
     {
@@ -1061,6 +2119,30 @@
       "acceptance": [
         "Lời dẫn khớp scope/candidate thật, ghi rõ live và playback.",
         "Không thêm tính năng hoặc lời hứa độ trễ chưa được evidence hỗ trợ."
+      ],
+      "input_status": "Chuẩn bị trước",
+      "inputs": [
+        {
+          "source_task": "SEM-14",
+          "required_for": "finish",
+          "producer": "Trí",
+          "artifacts": [
+            "docs/mechanisms/SHARED_SYNC.md"
+          ],
+          "checks": "docs/evidence/SEM-14/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-37",
+          "required_for": "finish",
+          "producer": "Trí",
+          "artifacts": [
+            "release/CANDIDATE_MANIFEST.json",
+            "docs/evidence/SEM-37/CANDIDATE_GATE.md"
+          ],
+          "checks": "docs/evidence/SEM-37/CHECKS.md",
+          "source_status": "Todo"
+        }
       ]
     },
     {
@@ -1093,6 +2175,52 @@
       "acceptance": [
         "Nội dung demo nằm trong 4 phút và không coi 30 giây là bảo đảm FCM.",
         "Mỗi claim có nguồn/evidence hoặc ghi giả thuyết; chỉ giao file input riêng."
+      ],
+      "input_status": "Chờ đầu vào",
+      "inputs": [
+        {
+          "source_task": "SEM-15",
+          "required_for": "start",
+          "producer": "Trang",
+          "artifacts": [
+            "docs/mechanisms/SILENT_PUSH.md"
+          ],
+          "checks": "docs/evidence/SEM-15/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-33",
+          "required_for": "finish",
+          "producer": "Trang",
+          "artifacts": [
+            "android/ (token lifecycle)",
+            "docs/PUSH.md"
+          ],
+          "checks": "docs/evidence/SEM-33/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-34",
+          "required_for": "finish",
+          "producer": "Vinh",
+          "artifacts": [
+            "experiments/runs/<push-pilot-run>/manifest.json",
+            "experiments/runs/<push-pilot-run>/events.jsonl"
+          ],
+          "checks": "docs/evidence/SEM-34/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-38",
+          "required_for": "finish",
+          "producer": "Trang",
+          "artifacts": [
+            "android/ (messaging input policy)",
+            "docs/evidence/SEM-38/PUSH_INPUT_CASES.md"
+          ],
+          "checks": "docs/evidence/SEM-38/CHECKS.md",
+          "source_status": "Todo"
+        }
       ]
     },
     {
@@ -1123,6 +2251,40 @@
       "acceptance": [
         "Biểu đồ đúng số liệu main, có n_complete/n_total và không giấu kết quả trái giả thuyết.",
         "Không kết luận pin hoặc mọi Android từ request count/OPPO."
+      ],
+      "input_status": "Chuẩn bị trước",
+      "inputs": [
+        {
+          "source_task": "SEM-43",
+          "required_for": "finish",
+          "producer": "Vinh",
+          "artifacts": [
+            "experiments/SUMMARY.md"
+          ],
+          "checks": "docs/evidence/SEM-43/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-44",
+          "required_for": "finish",
+          "producer": "Trung",
+          "artifacts": [
+            "experiments/AUDIT.md"
+          ],
+          "checks": "docs/evidence/SEM-44/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-45",
+          "required_for": "finish",
+          "producer": "Tuấn",
+          "artifacts": [
+            "experiments/scripts/analyze.*",
+            "experiments/results.csv"
+          ],
+          "checks": "docs/evidence/SEM-45/CHECKS.md",
+          "source_status": "Todo"
+        }
       ]
     },
     {
@@ -1155,6 +2317,63 @@
       "acceptance": [
         "Không đồng nhất skip-push với FCM mất tin hoặc accepted với delivered.",
         "Kiến trúc đúng code/contract đã bàn giao và lập luận paper được dẫn nguồn."
+      ],
+      "input_status": "Chờ đầu vào",
+      "inputs": [
+        {
+          "source_task": "SEM-18",
+          "required_for": "start",
+          "producer": "Tâm",
+          "artifacts": [
+            "docs/mechanisms/SERVER_FCM.md"
+          ],
+          "checks": "docs/evidence/SEM-18/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-21",
+          "required_for": "finish",
+          "producer": "Tâm",
+          "artifacts": [
+            "research/notes/PAPER_2.md",
+            "research/metadata/paper-2.bib"
+          ],
+          "checks": "docs/evidence/SEM-21/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-27",
+          "required_for": "finish",
+          "producer": "Tâm",
+          "artifacts": [
+            "server/ (API, snapshot store, update CLI)",
+            "docs/setup/SERVER.md"
+          ],
+          "checks": "docs/evidence/SEM-27/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-35",
+          "required_for": "finish",
+          "producer": "Tâm",
+          "artifacts": [
+            "server/ (FCM sender CLI)",
+            "docs/setup/FCM_SENDER.md"
+          ],
+          "checks": "docs/evidence/SEM-35/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-40",
+          "required_for": "finish",
+          "producer": "Tâm",
+          "artifacts": [
+            "server/ (skip-push CLI)",
+            "docs/evidence/SEM-40/FAULT_INJECTION.md"
+          ],
+          "checks": "docs/evidence/SEM-40/CHECKS.md",
+          "source_status": "Todo"
+        }
       ]
     },
     {
@@ -1189,6 +2408,73 @@
       "acceptance": [
         "Hai nghiên cứu có vai trò trong lập luận, DOI/metadata khớp và citations truy được.",
         "Số liệu/giới hạn khớp logs/CSV/SUMMARY; phần chưa chạy nêu rõ."
+      ],
+      "input_status": "Chuẩn bị trước",
+      "inputs": [
+        {
+          "source_task": "SEM-19",
+          "required_for": "finish",
+          "producer": "Tuấn",
+          "artifacts": [
+            "docs/MECHANISMS.md",
+            "docs/QUESTIONS.md"
+          ],
+          "checks": "docs/evidence/SEM-19/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-20",
+          "required_for": "finish",
+          "producer": "Tuấn",
+          "artifacts": [
+            "research/notes/PAPER_1.md",
+            "research/metadata/paper-1.bib"
+          ],
+          "checks": "docs/evidence/SEM-20/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-21",
+          "required_for": "finish",
+          "producer": "Tâm",
+          "artifacts": [
+            "research/notes/PAPER_2.md",
+            "research/metadata/paper-2.bib"
+          ],
+          "checks": "docs/evidence/SEM-21/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-22",
+          "required_for": "finish",
+          "producer": "Trang",
+          "artifacts": [
+            "research/notes/API_CROSSCHECK.md"
+          ],
+          "checks": "docs/evidence/SEM-22/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-43",
+          "required_for": "finish",
+          "producer": "Vinh",
+          "artifacts": [
+            "experiments/SUMMARY.md"
+          ],
+          "checks": "docs/evidence/SEM-43/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-45",
+          "required_for": "finish",
+          "producer": "Tuấn",
+          "artifacts": [
+            "experiments/scripts/analyze.*",
+            "experiments/results.csv"
+          ],
+          "checks": "docs/evidence/SEM-45/CHECKS.md",
+          "source_status": "Todo"
+        }
       ]
     },
     {
@@ -1222,6 +2508,63 @@
       "acceptance": [
         "Bộ slide chỉnh sửa được và PDF đọc được; không tăng tổng thời lượng vì chuyển người.",
         "Bản cuối chỉ dùng input/evidence đã bàn giao; không ghi đã có kết quả khi chưa có."
+      ],
+      "input_status": "Chuẩn bị trước",
+      "inputs": [
+        {
+          "source_task": "SEM-46",
+          "required_for": "finish",
+          "producer": "Trí",
+          "artifacts": [
+            "slides/inputs/TRI.md"
+          ],
+          "checks": "docs/evidence/SEM-46/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-47",
+          "required_for": "finish",
+          "producer": "Trang",
+          "artifacts": [
+            "slides/inputs/TRANG.md",
+            "slides/DEMO_SCRIPT.md"
+          ],
+          "checks": "docs/evidence/SEM-47/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-48",
+          "required_for": "finish",
+          "producer": "Vinh",
+          "artifacts": [
+            "slides/inputs/VINH.md",
+            "slides/inputs/results/"
+          ],
+          "checks": "docs/evidence/SEM-48/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-49",
+          "required_for": "finish",
+          "producer": "Tâm",
+          "artifacts": [
+            "slides/inputs/TAM.md"
+          ],
+          "checks": "docs/evidence/SEM-49/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-50",
+          "required_for": "finish",
+          "producer": "Tuấn",
+          "artifacts": [
+            "report/REPORT.md",
+            "research/references.bib",
+            "docs/CLAIMS.md"
+          ],
+          "checks": "docs/evidence/SEM-50/CHECKS.md",
+          "source_status": "Todo"
+        }
       ]
     },
     {
@@ -1255,6 +2598,54 @@
       "acceptance": [
         "Commit/config/checksum nối được với candidate/dữ liệu đo; không tự lấy evidence bản cũ cho code mới.",
         "Runbook nêu ngưỡng đổi video 30 giây và cách khôi phục thiết bị."
+      ],
+      "input_status": "Chờ đầu vào",
+      "inputs": [
+        {
+          "source_task": "SEM-37",
+          "required_for": "start",
+          "producer": "Trí",
+          "artifacts": [
+            "release/CANDIDATE_MANIFEST.json",
+            "docs/evidence/SEM-37/CANDIDATE_GATE.md"
+          ],
+          "checks": "docs/evidence/SEM-37/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-43",
+          "required_for": "finish",
+          "producer": "Vinh",
+          "artifacts": [
+            "experiments/SUMMARY.md"
+          ],
+          "checks": "docs/evidence/SEM-43/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-50",
+          "required_for": "finish",
+          "producer": "Tuấn",
+          "artifacts": [
+            "report/REPORT.md",
+            "research/references.bib",
+            "docs/CLAIMS.md"
+          ],
+          "checks": "docs/evidence/SEM-50/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-51",
+          "required_for": "finish",
+          "producer": "Tuấn",
+          "artifacts": [
+            "slides/seminar-ie307.pptx",
+            "slides/seminar-ie307.pdf",
+            "slides/SPEAKER_NOTES.md"
+          ],
+          "checks": "docs/evidence/SEM-51/CHECKS.md",
+          "source_status": "Todo"
+        }
       ]
     },
     {
@@ -1284,6 +2675,21 @@
       "acceptance": [
         "Video có metadata thật và không thay evidence thực nghiệm bằng mô phỏng.",
         "Runbook tái lập được hoặc chỉ rõ phần cần hỗ trợ; dữ liệu nhạy cảm đã được loại."
+      ],
+      "input_status": "Chờ đầu vào",
+      "inputs": [
+        {
+          "source_task": "SEM-52",
+          "required_for": "start",
+          "producer": "Trí",
+          "artifacts": [
+            "release/BUILD_MANIFEST.json",
+            "docs/DEMO_RUNBOOK.md",
+            "release/ (APK hoặc liên kết tải)"
+          ],
+          "checks": "docs/evidence/SEM-52/CHECKS.md",
+          "source_status": "Todo"
+        }
       ]
     },
     {
@@ -1314,6 +2720,45 @@
       "acceptance": [
         "Có hai lượt bấm giờ thật, toàn bài ≤15 phút gồm demo và thời gian chuyển tiếp.",
         "Nêu lỗi còn tồn tại và cách xử lý; không ghi nhóm đã diễn tập khi chưa tổ chức."
+      ],
+      "input_status": "Chờ đầu vào",
+      "inputs": [
+        {
+          "source_task": "SEM-51",
+          "required_for": "start",
+          "producer": "Tuấn",
+          "artifacts": [
+            "slides/seminar-ie307.pptx",
+            "slides/seminar-ie307.pdf",
+            "slides/SPEAKER_NOTES.md"
+          ],
+          "checks": "docs/evidence/SEM-51/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-52",
+          "required_for": "start",
+          "producer": "Trí",
+          "artifacts": [
+            "release/BUILD_MANIFEST.json",
+            "docs/DEMO_RUNBOOK.md",
+            "release/ (APK hoặc liên kết tải)"
+          ],
+          "checks": "docs/evidence/SEM-52/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-53",
+          "required_for": "finish",
+          "producer": "Vinh",
+          "artifacts": [
+            "release/VIDEO_MANIFEST.json",
+            "docs/evidence/SEM-53/REPRODUCTION.md",
+            "Video demo/fallback có liên kết tải"
+          ],
+          "checks": "docs/evidence/SEM-53/CHECKS.md",
+          "source_status": "Todo"
+        }
       ]
     },
     {
@@ -1347,7 +2792,80 @@
       "acceptance": [
         "Mọi artifact truy được source/build/evidence và tải/đọc được.",
         "Video/rehearsal/report/slide có thật trước khi Done, phần chưa thực hiện liệt kê rõ."
+      ],
+      "input_status": "Chờ đầu vào",
+      "inputs": [
+        {
+          "source_task": "SEM-43",
+          "required_for": "start",
+          "producer": "Vinh",
+          "artifacts": [
+            "experiments/SUMMARY.md"
+          ],
+          "checks": "docs/evidence/SEM-43/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-50",
+          "required_for": "start",
+          "producer": "Tuấn",
+          "artifacts": [
+            "report/REPORT.md",
+            "research/references.bib",
+            "docs/CLAIMS.md"
+          ],
+          "checks": "docs/evidence/SEM-50/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-51",
+          "required_for": "start",
+          "producer": "Tuấn",
+          "artifacts": [
+            "slides/seminar-ie307.pptx",
+            "slides/seminar-ie307.pdf",
+            "slides/SPEAKER_NOTES.md"
+          ],
+          "checks": "docs/evidence/SEM-51/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-52",
+          "required_for": "start",
+          "producer": "Trí",
+          "artifacts": [
+            "release/BUILD_MANIFEST.json",
+            "docs/DEMO_RUNBOOK.md",
+            "release/ (APK hoặc liên kết tải)"
+          ],
+          "checks": "docs/evidence/SEM-52/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-53",
+          "required_for": "start",
+          "producer": "Vinh",
+          "artifacts": [
+            "release/VIDEO_MANIFEST.json",
+            "docs/evidence/SEM-53/REPRODUCTION.md",
+            "Video demo/fallback có liên kết tải"
+          ],
+          "checks": "docs/evidence/SEM-53/CHECKS.md",
+          "source_status": "Todo"
+        },
+        {
+          "source_task": "SEM-54",
+          "required_for": "start",
+          "producer": "Tuấn",
+          "artifacts": [
+            "docs/REHEARSAL.md"
+          ],
+          "checks": "docs/evidence/SEM-54/CHECKS.md",
+          "source_status": "Todo"
+        }
       ]
     }
-  ]
+  ],
+  "snapshot_at": "2026-10-29 16:22:16 UTC",
+  "snapshot_source": "https://github.com/users/ThanhTris/projects/3/views/1"
 }
