@@ -1,10 +1,10 @@
 # SEM-11 — CHECKS và bàn giao
 
 - Thực hiện: Trí (`ThanhTris`).
-- Ngày kiểm tra: 30/10/2026 (UTC+7).
+- Thời điểm kiểm tra/bàn giao snapshot: 30/10/2026 08:48:21 (UTC+7).
 - Repo baseline: `63a3ab0804ca18e96d1180a449fa2ed64465f221` (`main`).
 - Nhánh thực hiện: `codex/SEM-11-android-build`.
-- Bàn giao: xem commit của nhánh này chứa ba artifact SEM-11; chưa ghi commit hash ở đây để tránh giá trị tự tham chiếu trước khi commit được tạo.
+- Commit tạo ba artifact SEM-11: `7b502c0adc73d14933271e16427361062deac455` trên nhánh `codex/SEM-11-android-build`.
 
 ## Kiểm tra và kết quả
 
