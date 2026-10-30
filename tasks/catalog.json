@@ -554,7 +554,7 @@
       "category": "practice",
       "title": "Tạo scaffold Android và UI cache/timeline",
       "due": "2026-10-31",
-      "status": "Todo",
+      "status": "Done",
       "start_dependencies": [
         "SEM-11"
       ],
@@ -683,7 +683,7 @@
             "docs/setup/ANDROID.md"
           ],
           "checks": "docs/evidence/SEM-23/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Done"
         },
         {
           "source_task": "SEM-26",
@@ -860,7 +860,7 @@
             "docs/setup/ANDROID.md"
           ],
           "checks": "docs/evidence/SEM-23/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Done"
         },
         {
           "source_task": "SEM-24",
@@ -2911,7 +2911,7 @@
       "due_at": "2026-11-12T22:00:00+07:00"
     }
   ],
-  "snapshot_at": "2026-10-30 12:33:46 UTC",
+  "snapshot_at": "2026-10-30 20:34:26 UTC",
   "snapshot_source": "https://github.com/users/ThanhTris/projects/3/views/1",
   "timezone": "Asia/Ho_Chi_Minh",
   "deadline_at": "2026-11-13T22:00:00+07:00",
