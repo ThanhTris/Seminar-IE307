@@ -20,7 +20,7 @@ SEM-01…SEM-10 chỉ còn là nhóm lịch sử với link tới task thay th�
 <!-- input-snapshot:start -->
 ## Trạng thái đối chiếu Project
 
-Snapshot **2026-10-30 01:48:21 UTC**. Status là tiến độ thực hiện; Input status là khả năng bắt đầu theo dependency: **Sẵn sàng 9**, **Chuẩn bị trước 8**, **Chờ đầu vào 28**.
+Snapshot **2026-10-30 12:33:46 UTC**. Status là tiến độ thực hiện; Input status là khả năng bắt đầu theo dependency: **Sẵn sàng 9**, **Chuẩn bị trước 8**, **Chờ đầu vào 28**.
 
 - Sẵn sàng: không có task dependency chưa Done; vẫn cần kiểm artifact/CHECKS khi nhận bàn giao.
 - Chuẩn bị trước: được làm phần độc lập nhưng còn gate hoàn tất chưa bàn giao.
@@ -34,7 +34,7 @@ Project là nguồn Status hiện hành. Sau khi đổi Status nguồn, chạy `
 | [SEM-11](backlog/SEM-11.md) — Chốt phạm vi và môi trường build Android | Trí | Done | Sẵn sàng | 30/10/2026 12:00 (UTC+7) | 3 | Không có. | Không có. |
 | [SEM-12](backlog/SEM-12.md) — Lập hồ sơ OPPO và emulator | Vinh | Todo | Sẵn sàng | 30/10/2026 12:00 (UTC+7) | 1 | Không có. | Không có. |
 | [SEM-13](backlog/SEM-13.md) — Kiểm môi trường Node và quyền Firebase | Tâm | Todo | Sẵn sàng | 30/10/2026 12:00 (UTC+7) | 1 | Không có. | Không có. |
-| [SEM-14](backlog/SEM-14.md) — Vẽ luồng dữ liệu và hợp đồng sync chung | Trí | Todo | Sẵn sàng | 30/10/2026 14:00 (UTC+7) | 1 | [SEM-11](backlog/SEM-11.md) | Không có. |
+| [SEM-14](backlog/SEM-14.md) — Vẽ luồng dữ liệu và hợp đồng sync chung | Trí | Done | Sẵn sàng | 30/10/2026 14:00 (UTC+7) | 1 | [SEM-11](backlog/SEM-11.md) | Không có. |
 | [SEM-15](backlog/SEM-15.md) — Giải thích cơ chế silent push và giới hạn FCM | Trang | Todo | Sẵn sàng | 30/10/2026 18:00 (UTC+7) | 3 | Không có. | Không có. |
 | [SEM-16](backlog/SEM-16.md) — Lập ma trận lifecycle và protocol E01–E06 | Vinh | Todo | Sẵn sàng | 30/10/2026 18:00 (UTC+7) | 2 | Không có. | Không có. |
 | [SEM-17](backlog/SEM-17.md) — Giải thích periodic WorkManager và constraints | Trung | Todo | Sẵn sàng | 30/10/2026 18:00 (UTC+7) | 3 | Không có. | Không có. |

@@ -2,7 +2,7 @@
 
 - Trạng thái: **Todo** (Project).
 - Trạng thái đầu vào: **Chuẩn bị trước**.
-- Đối chiếu Project: 2026-10-30 01:48:21 UTC.
+- Đối chiếu Project: 2026-10-30 12:33:46 UTC.
 - Người thực hiện duy nhất: **Tuấn** (`mtuan2491`).
 - Hạn: **30/10/2026 22:00 (UTC+7)**.
 - Công sức: 4/100 — Cơ chế/thực hành.
@@ -25,7 +25,7 @@ Tài liệu nền đã có: [Kế hoạch/phạm vi](../../docs/PLAN.md).
 | Hoàn tất | [SEM-11 — Chốt phạm vi và môi trường build Android](SEM-11.md) | Trí | `docs/SCOPE.md`<br>`docs/environment/ANDROID_BUILD.md` | `docs/evidence/SEM-11/CHECKS.md` | Done |
 | Hoàn tất | [SEM-12 — Lập hồ sơ OPPO và emulator](SEM-12.md) | Vinh | `docs/environment/DEVICES.md` | `docs/evidence/SEM-12/CHECKS.md` | Todo |
 | Hoàn tất | [SEM-13 — Kiểm môi trường Node và quyền Firebase](SEM-13.md) | Tâm | `docs/environment/SERVER_FIREBASE.md` | `docs/evidence/SEM-13/CHECKS.md` | Todo |
-| Hoàn tất | [SEM-14 — Vẽ luồng dữ liệu và hợp đồng sync chung](SEM-14.md) | Trí | `docs/mechanisms/SHARED_SYNC.md` | `docs/evidence/SEM-14/CHECKS.md` | Todo |
+| Hoàn tất | [SEM-14 — Vẽ luồng dữ liệu và hợp đồng sync chung](SEM-14.md) | Trí | `docs/mechanisms/SHARED_SYNC.md` | `docs/evidence/SEM-14/CHECKS.md` | Done |
 | Hoàn tất | [SEM-15 — Giải thích cơ chế silent push và giới hạn FCM](SEM-15.md) | Trang | `docs/mechanisms/SILENT_PUSH.md` | `docs/evidence/SEM-15/CHECKS.md` | Todo |
 | Hoàn tất | [SEM-16 — Lập ma trận lifecycle và protocol E01–E06](SEM-16.md) | Vinh | `experiments/PROTOCOL.md`<br>`experiments/RUN_SCHEDULE.md` | `docs/evidence/SEM-16/CHECKS.md` | Todo |
 | Hoàn tất | [SEM-17 — Giải thích periodic WorkManager và constraints](SEM-17.md) | Trung | `docs/mechanisms/PERIODIC_FETCH.md` | `docs/evidence/SEM-17/CHECKS.md` | Todo |
@@ -33,7 +33,7 @@ Tài liệu nền đã có: [Kế hoạch/phạm vi](../../docs/PLAN.md).
 
 Đây là danh sách đầu ra cần bàn giao, chưa phải xác nhận các file đã tồn tại. Trước khi dùng, nhận đúng artifact/commit/config và CHECKS từ task nguồn.
 
-Status nguồn được đối chiếu Project lúc **2026-10-30 01:48:21 UTC**; mở link task nguồn để xem cập nhật mới hơn.
+Status nguồn được đối chiếu Project lúc **2026-10-30 12:33:46 UTC**; mở link task nguồn để xem cập nhật mới hơn.
 <!-- task-inputs:end -->
 
 

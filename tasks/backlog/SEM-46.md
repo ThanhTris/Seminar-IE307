@@ -2,7 +2,7 @@
 
 - Trạng thái: **Todo** (Project).
 - Trạng thái đầu vào: **Chuẩn bị trước**.
-- Đối chiếu Project: 2026-10-30 01:48:21 UTC.
+- Đối chiếu Project: 2026-10-30 12:33:46 UTC.
 - Người thực hiện duy nhất: **Trí** (`ThanhTris`).
 - Hạn: **08/11/2026 16:00 (UTC+7)**.
 - Công sức: 1/100 — Nghiên cứu/lập luận.
@@ -22,12 +22,12 @@ Tài liệu nền đã có: [Kế hoạch/phạm vi](../../docs/PLAN.md) · [K�
 
 | Cần cho | Task cung cấp | Người bàn giao | Đầu ra phải nhận | Kiểm chứng bàn giao | Status nguồn |
 |---|---|---|---|---|---|
-| Hoàn tất | [SEM-14 — Vẽ luồng dữ liệu và hợp đồng sync chung](SEM-14.md) | Trí | `docs/mechanisms/SHARED_SYNC.md` | `docs/evidence/SEM-14/CHECKS.md` | Todo |
+| Hoàn tất | [SEM-14 — Vẽ luồng dữ liệu và hợp đồng sync chung](SEM-14.md) | Trí | `docs/mechanisms/SHARED_SYNC.md` | `docs/evidence/SEM-14/CHECKS.md` | Done |
 | Hoàn tất | [SEM-37 — Chốt bản ứng viên và manifest phục vụ tập chính](SEM-37.md) | Trí | `release/CANDIDATE_MANIFEST.json`<br>`docs/evidence/SEM-37/CANDIDATE_GATE.md` | `docs/evidence/SEM-37/CHECKS.md` | Todo |
 
 Đây là danh sách đầu ra cần bàn giao, chưa phải xác nhận các file đã tồn tại. Trước khi dùng, nhận đúng artifact/commit/config và CHECKS từ task nguồn.
 
-Status nguồn được đối chiếu Project lúc **2026-10-30 01:48:21 UTC**; mở link task nguồn để xem cập nhật mới hơn.
+Status nguồn được đối chiếu Project lúc **2026-10-30 12:33:46 UTC**; mở link task nguồn để xem cập nhật mới hơn.
 <!-- task-inputs:end -->
 
 
