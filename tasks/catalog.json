@@ -105,7 +105,7 @@
       "category": "practice",
       "title": "Vẽ luồng dữ liệu và hợp đồng sync chung",
       "due": "2026-10-30",
-      "status": "Todo",
+      "status": "Done",
       "start_dependencies": [
         "SEM-11"
       ],
@@ -326,7 +326,7 @@
             "docs/mechanisms/SHARED_SYNC.md"
           ],
           "checks": "docs/evidence/SEM-14/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Done"
         },
         {
           "source_task": "SEM-15",
@@ -759,7 +759,7 @@
             "docs/mechanisms/SHARED_SYNC.md"
           ],
           "checks": "docs/evidence/SEM-14/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Done"
         }
       ],
       "due_at": "2026-10-30T17:00:00+07:00"
@@ -2165,7 +2165,7 @@
             "docs/mechanisms/SHARED_SYNC.md"
           ],
           "checks": "docs/evidence/SEM-14/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Done"
         },
         {
           "source_task": "SEM-37",
@@ -2911,7 +2911,7 @@
       "due_at": "2026-11-12T22:00:00+07:00"
     }
   ],
-  "snapshot_at": "2026-10-30 01:48:21 UTC",
+  "snapshot_at": "2026-10-30 12:33:46 UTC",
   "snapshot_source": "https://github.com/users/ThanhTris/projects/3/views/1",
   "timezone": "Asia/Ho_Chi_Minh",
   "deadline_at": "2026-11-13T22:00:00+07:00",

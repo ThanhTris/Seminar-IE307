@@ -2,7 +2,7 @@
 
 - Trạng thái: **Todo** (Project).
 - Trạng thái đầu vào: **Chờ đầu vào**.
-- Đối chiếu Project: 2026-10-30 01:48:21 UTC.
+- Đối chiếu Project: 2026-10-30 12:33:46 UTC.
 - Người thực hiện duy nhất: **Tâm** (`HoaiTam`).
 - Hạn: **30/10/2026 17:00 (UTC+7)**.
 - Công sức: 2/100 — Cơ chế/thực hành.
@@ -24,11 +24,11 @@ Tài liệu nền đã có: [Kế hoạch/phạm vi](../../docs/PLAN.md).
 |---|---|---|---|---|---|
 | Bắt đầu | [SEM-11 — Chốt phạm vi và môi trường build Android](SEM-11.md) | Trí | `docs/SCOPE.md`<br>`docs/environment/ANDROID_BUILD.md` | `docs/evidence/SEM-11/CHECKS.md` | Done |
 | Bắt đầu | [SEM-13 — Kiểm môi trường Node và quyền Firebase](SEM-13.md) | Tâm | `docs/environment/SERVER_FIREBASE.md` | `docs/evidence/SEM-13/CHECKS.md` | Todo |
-| Bắt đầu | [SEM-14 — Vẽ luồng dữ liệu và hợp đồng sync chung](SEM-14.md) | Trí | `docs/mechanisms/SHARED_SYNC.md` | `docs/evidence/SEM-14/CHECKS.md` | Todo |
+| Bắt đầu | [SEM-14 — Vẽ luồng dữ liệu và hợp đồng sync chung](SEM-14.md) | Trí | `docs/mechanisms/SHARED_SYNC.md` | `docs/evidence/SEM-14/CHECKS.md` | Done |
 
 Đây là danh sách đầu ra cần bàn giao, chưa phải xác nhận các file đã tồn tại. Trước khi dùng, nhận đúng artifact/commit/config và CHECKS từ task nguồn.
 
-Status nguồn được đối chiếu Project lúc **2026-10-30 01:48:21 UTC**; mở link task nguồn để xem cập nhật mới hơn.
+Status nguồn được đối chiếu Project lúc **2026-10-30 12:33:46 UTC**; mở link task nguồn để xem cập nhật mới hơn.
 <!-- task-inputs:end -->
 
 
