@@ -20,7 +20,7 @@ SEM-01…SEM-10 chỉ còn là nhóm lịch sử với link tới task thay th�
 <!-- input-snapshot:start -->
 ## Trạng thái đối chiếu Project
 
-Snapshot **2026-10-29 16:31:03 UTC**. Status là tiến độ thực hiện; Input status là khả năng bắt đầu theo dependency: **Sẵn sàng 7**, **Chuẩn bị trước 8**, **Chờ đầu vào 30**.
+Snapshot **2026-10-30 01:48:21 UTC**. Status là tiến độ thực hiện; Input status là khả năng bắt đầu theo dependency: **Sẵn sàng 9**, **Chuẩn bị trước 8**, **Chờ đầu vào 28**.
 
 - Sẵn sàng: không có task dependency chưa Done; vẫn cần kiểm artifact/CHECKS khi nhận bàn giao.
 - Chuẩn bị trước: được làm phần độc lập nhưng còn gate hoàn tất chưa bàn giao.
@@ -31,10 +31,10 @@ Project là nguồn Status hiện hành. Sau khi đổi Status nguồn, chạy `
 
 | Task | Người thực hiện duy nhất | Status | Input status | Hạn (UTC+7) | Công sức | Bắt đầu sau | Hoàn tất còn cần |
 |---|---|---|---|---|---:|---|---|
-| [SEM-11](backlog/SEM-11.md) — Chốt phạm vi và môi trường build Android | Trí | Todo | Sẵn sàng | 30/10/2026 12:00 (UTC+7) | 3 | Không có. | Không có. |
+| [SEM-11](backlog/SEM-11.md) — Chốt phạm vi và môi trường build Android | Trí | Done | Sẵn sàng | 30/10/2026 12:00 (UTC+7) | 3 | Không có. | Không có. |
 | [SEM-12](backlog/SEM-12.md) — Lập hồ sơ OPPO và emulator | Vinh | Todo | Sẵn sàng | 30/10/2026 12:00 (UTC+7) | 1 | Không có. | Không có. |
 | [SEM-13](backlog/SEM-13.md) — Kiểm môi trường Node và quyền Firebase | Tâm | Todo | Sẵn sàng | 30/10/2026 12:00 (UTC+7) | 1 | Không có. | Không có. |
-| [SEM-14](backlog/SEM-14.md) — Vẽ luồng dữ liệu và hợp đồng sync chung | Trí | Todo | Chờ đầu vào | 30/10/2026 14:00 (UTC+7) | 1 | [SEM-11](backlog/SEM-11.md) | Không có. |
+| [SEM-14](backlog/SEM-14.md) — Vẽ luồng dữ liệu và hợp đồng sync chung | Trí | Todo | Sẵn sàng | 30/10/2026 14:00 (UTC+7) | 1 | [SEM-11](backlog/SEM-11.md) | Không có. |
 | [SEM-15](backlog/SEM-15.md) — Giải thích cơ chế silent push và giới hạn FCM | Trang | Todo | Sẵn sàng | 30/10/2026 18:00 (UTC+7) | 3 | Không có. | Không có. |
 | [SEM-16](backlog/SEM-16.md) — Lập ma trận lifecycle và protocol E01–E06 | Vinh | Todo | Sẵn sàng | 30/10/2026 18:00 (UTC+7) | 2 | Không có. | Không có. |
 | [SEM-17](backlog/SEM-17.md) — Giải thích periodic WorkManager và constraints | Trung | Todo | Sẵn sàng | 30/10/2026 18:00 (UTC+7) | 3 | Không có. | Không có. |
@@ -43,7 +43,7 @@ Project là nguồn Status hiện hành. Sau khi đổi Status nguồn, chạy `
 | [SEM-20](backlog/SEM-20.md) — Đọc bài nghiên cứu thứ nhất và ghi chú nguồn | Tuấn | Todo | Chuẩn bị trước | 01/11/2026 16:00 (UTC+7) | 5 | Không có. | [SEM-11](backlog/SEM-11.md), [SEM-12](backlog/SEM-12.md) |
 | [SEM-21](backlog/SEM-21.md) — Đọc bài nghiên cứu thứ hai và ghi chú nguồn | Tâm | Todo | Chuẩn bị trước | 01/11/2026 16:00 (UTC+7) | 3 | Không có. | [SEM-11](backlog/SEM-11.md), [SEM-12](backlog/SEM-12.md) |
 | [SEM-22](backlog/SEM-22.md) — Đối chiếu hai bài nghiên cứu với API push hiện hành | Trang | Todo | Chuẩn bị trước | 01/11/2026 22:00 (UTC+7) | 2 | Không có. | [SEM-15](backlog/SEM-15.md), [SEM-20](backlog/SEM-20.md), [SEM-21](backlog/SEM-21.md) |
-| [SEM-23](backlog/SEM-23.md) — Tạo scaffold Android và UI cache/timeline | Trí | Todo | Chờ đầu vào | 31/10/2026 12:00 (UTC+7) | 4 | [SEM-11](backlog/SEM-11.md) | Không có. |
+| [SEM-23](backlog/SEM-23.md) — Tạo scaffold Android và UI cache/timeline | Trí | Todo | Sẵn sàng | 31/10/2026 12:00 (UTC+7) | 4 | [SEM-11](backlog/SEM-11.md) | Không có. |
 | [SEM-24](backlog/SEM-24.md) — Chuẩn bị bộ xuất log và run manifest | Vinh | Todo | Chờ đầu vào | 31/10/2026 15:00 (UTC+7) | 1 | [SEM-12](backlog/SEM-12.md) | [SEM-26](backlog/SEM-26.md) |
 | [SEM-25](backlog/SEM-25.md) — Xây Room, SyncRepository và SyncWorker dùng chung | Trung | Todo | Chờ đầu vào | 31/10/2026 17:00 (UTC+7) | 4 | [SEM-23](backlog/SEM-23.md), [SEM-26](backlog/SEM-26.md) | Không có. |
 | [SEM-26](backlog/SEM-26.md) — Chốt hợp đồng API và event schema | Tâm | Todo | Chờ đầu vào | 30/10/2026 17:00 (UTC+7) | 2 | [SEM-11](backlog/SEM-11.md), [SEM-13](backlog/SEM-13.md), [SEM-14](backlog/SEM-14.md) | Không có. |

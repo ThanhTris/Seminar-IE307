@@ -20,7 +20,7 @@
       "category": "practice",
       "title": "Chốt phạm vi và môi trường build Android",
       "due": "2026-10-30",
-      "status": "Todo",
+      "status": "Done",
       "start_dependencies": [],
       "finish_dependencies": [],
       "work": [
@@ -122,7 +122,7 @@
         "Periodic, push và manual cùng dùng một sync core; UI mở lại chỉ đọc cache.",
         "Có hình luồng và bảng input/output đủ để API, app và worker triển khai độc lập."
       ],
-      "input_status": "Chờ đầu vào",
+      "input_status": "Sẵn sàng",
       "inputs": [
         {
           "source_task": "SEM-11",
@@ -133,7 +133,7 @@
             "docs/environment/ANDROID_BUILD.md"
           ],
           "checks": "docs/evidence/SEM-11/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Done"
         }
       ],
       "due_at": "2026-10-30T14:00:00+07:00"
@@ -296,7 +296,7 @@
             "docs/environment/ANDROID_BUILD.md"
           ],
           "checks": "docs/evidence/SEM-11/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Done"
         },
         {
           "source_task": "SEM-12",
@@ -411,7 +411,7 @@
             "docs/environment/ANDROID_BUILD.md"
           ],
           "checks": "docs/evidence/SEM-11/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Done"
         },
         {
           "source_task": "SEM-12",
@@ -465,7 +465,7 @@
             "docs/environment/ANDROID_BUILD.md"
           ],
           "checks": "docs/evidence/SEM-11/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Done"
         },
         {
           "source_task": "SEM-12",
@@ -572,7 +572,7 @@
         "Build được debug APK; UI trạng thái rỗng và timeline hiển thị rõ trigger.",
         "Không auto-fetch khi mở app; nút manual phải dùng giao diện enqueue của task core khi được bàn giao."
       ],
-      "input_status": "Chờ đầu vào",
+      "input_status": "Sẵn sàng",
       "inputs": [
         {
           "source_task": "SEM-11",
@@ -583,7 +583,7 @@
             "docs/environment/ANDROID_BUILD.md"
           ],
           "checks": "docs/evidence/SEM-11/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Done"
         }
       ],
       "due_at": "2026-10-31T12:00:00+07:00"
@@ -739,7 +739,7 @@
             "docs/environment/ANDROID_BUILD.md"
           ],
           "checks": "docs/evidence/SEM-11/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Done"
         },
         {
           "source_task": "SEM-13",
@@ -2911,7 +2911,7 @@
       "due_at": "2026-11-12T22:00:00+07:00"
     }
   ],
-  "snapshot_at": "2026-10-29 16:31:03 UTC",
+  "snapshot_at": "2026-10-30 01:48:21 UTC",
   "snapshot_source": "https://github.com/users/ThanhTris/projects/3/views/1",
   "timezone": "Asia/Ho_Chi_Minh",
   "deadline_at": "2026-11-13T22:00:00+07:00",
