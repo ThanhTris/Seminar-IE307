@@ -1,0 +1,23 @@
+{
+  "name": "seminar-ie307-server",
+  "version": "1.0.0",
+  "description": "Snapshot server and update CLI for Android sync seminar IE307",
+  "type": "module",
+  "main": "src/server.js",
+  "bin": {
+    "update-cli": "./bin/update-cli.js"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "update": "node bin/update-cli.js",
+    "test": "node --test test/*.test.js"
+  },
+  "keywords": [
+    "seminar",
+    "sync",
+    "android",
+    "fcm"
+  ],
+  "author": "Thanh Tris & Hoai Tam",
+  "license": "ISC"
+}
