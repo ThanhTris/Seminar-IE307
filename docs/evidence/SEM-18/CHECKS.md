@@ -64,7 +64,7 @@ python3 scripts/update_task_snapshot.py --check
 
 Cả hai lệnh **Pass**: 45 task, **4 Done / 40 Todo / 1 Review**; đầu vào **10 Sẵn sàng / 8 Chuẩn bị trước / 27 Chờ đầu vào**; một assignee khớp owner mỗi task, dependency không có vòng lặp. Ngoài hai artifact, script cập nhật 48 file snapshot. Đối chiếu diff xác nhận chỉ workflow status SEM-18 đổi từ Todo sang Review; không đổi scope/owner/deadline/dependency/công sức hoặc acceptance checklist. SEM-35/49 vẫn chờ đầu vào, không được mở gate vì SEM-18 còn Review.
 
-Theo yêu cầu của HoaiTam, **dừng ở Review**: nhóm trưởng kiểm nhận và quyết định merge/Done. Không tự merge, không tự chuyển Done, không coi review của tác giả ở bảng trên là chấp thuận của nhóm trưởng. Chỉ sửa tiếp khi có comment yêu cầu fix từ nhóm trưởng. Checklist nghiệm thu trên task được để nhóm trưởng kiểm nhận, không dùng để vượt gate phụ thuộc khi trạng thái còn Review.
+Nhóm trưởng (ThanhTris) đã kiểm nhận kỹ thuật toàn diện, approve và merge [PR #5](https://github.com/ThanhTris/Seminar-IE307/pull/5) vào main. Đã chuyển trạng thái SEM-18 **Review → Done** trên GitHub Project và đánh dấu 3 checkbox nghiệm thu. Đồng bộ snapshot ghi nhận **5 Done / 40 Todo**, mở khóa đầu vào cho các task phụ thuộc tiếp theo ([SEM-19](../../tasks/backlog/SEM-19.md), [SEM-35](../../tasks/backlog/SEM-35.md), [SEM-49](../../tasks/backlog/SEM-49.md)).
 
 ## Bàn giao cho các task nhận đầu ra
 

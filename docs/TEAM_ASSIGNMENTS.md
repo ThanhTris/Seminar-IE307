@@ -16,7 +16,7 @@ Hạn cuối 13/11/2026; bài nói 15 phút gồm demo. Tổng công sức giữ
 | Tuấn | `mtuan2491` | 6 | 17 |
 
 <!-- team-snapshot:start -->
-Status và Input status đối chiếu Project lúc **2026-10-31 13:26:56 UTC**. Mở từng task để xem cụ thể file đầu vào, người bàn giao và CHECKS phải nhận. [Cách làm mới trạng thái](../tasks/README.md#trạng-thái-đối-chiếu-project).
+Status và Input status đối chiếu Project lúc **2026-10-31 16:46:06 UTC**. Mở từng task để xem cụ thể file đầu vào, người bàn giao và CHECKS phải nhận. [Cách làm mới trạng thái](../tasks/README.md#trạng-thái-đối-chiếu-project).
 <!-- team-snapshot:end -->
 
 ## Trí
@@ -75,13 +75,13 @@ Status và Input status đối chiếu Project lúc **2026-10-31 13:26:56 UTC**.
 | Task | Đầu việc duy nhất | Status | Input status | Hạn (UTC+7) | Bắt đầu sau | Hoàn tất còn cần |
 |---|---|---|---|---|---|---|
 | [SEM-13](../tasks/backlog/SEM-13.md) | Kiểm môi trường Node và quyền Firebase | Done | Sẵn sàng | 30/10/2026 12:00 (UTC+7) | Không có. | Không có. |
-| [SEM-18](../tasks/backlog/SEM-18.md) | Giải thích server, FCM accepted và correlation | Review | Sẵn sàng | 30/10/2026 18:00 (UTC+7) | Không có. | Không có. |
+| [SEM-18](../tasks/backlog/SEM-18.md) | Giải thích server, FCM accepted và correlation | Done | Sẵn sàng | 30/10/2026 18:00 (UTC+7) | Không có. | Không có. |
 | [SEM-21](../tasks/backlog/SEM-21.md) | Đọc bài nghiên cứu thứ hai và ghi chú nguồn | Todo | Chuẩn bị trước | 01/11/2026 16:00 (UTC+7) | Không có. | [SEM-11](../tasks/backlog/SEM-11.md), [SEM-12](../tasks/backlog/SEM-12.md) |
 | [SEM-26](../tasks/backlog/SEM-26.md) | Chốt hợp đồng API và event schema | Todo | Sẵn sàng | 30/10/2026 17:00 (UTC+7) | [SEM-11](../tasks/backlog/SEM-11.md), [SEM-13](../tasks/backlog/SEM-13.md), [SEM-14](../tasks/backlog/SEM-14.md) | Không có. |
 | [SEM-27](../tasks/backlog/SEM-27.md) | Triển khai server snapshot và CLI cập nhật | Todo | Chờ đầu vào | 31/10/2026 17:00 (UTC+7) | [SEM-13](../tasks/backlog/SEM-13.md), [SEM-26](../tasks/backlog/SEM-26.md) | Không có. |
 | [SEM-35](../tasks/backlog/SEM-35.md) | Làm CLI gửi FCM data-only normal priority | Todo | Chờ đầu vào | 01/11/2026 15:00 (UTC+7) | [SEM-13](../tasks/backlog/SEM-13.md), [SEM-18](../tasks/backlog/SEM-18.md), [SEM-27](../tasks/backlog/SEM-27.md) | Không có. |
 | [SEM-40](../tasks/backlog/SEM-40.md) | Thêm fault injection cố ý bỏ gửi push | Todo | Chờ đầu vào | 04/11/2026 18:00 (UTC+7) | [SEM-27](../tasks/backlog/SEM-27.md), [SEM-35](../tasks/backlog/SEM-35.md) | Không có. |
-| [SEM-49](../tasks/backlog/SEM-49.md) | Viết phần kiến trúc và lập luận nghiên cứu thứ hai | Todo | Chờ đầu vào | 08/11/2026 16:00 (UTC+7) | [SEM-18](../tasks/backlog/SEM-18.md) | [SEM-21](../tasks/backlog/SEM-21.md), [SEM-27](../tasks/backlog/SEM-27.md), [SEM-35](../tasks/backlog/SEM-35.md), [SEM-40](../tasks/backlog/SEM-40.md) |
+| [SEM-49](../tasks/backlog/SEM-49.md) | Viết phần kiến trúc và lập luận nghiên cứu thứ hai | Todo | Chuẩn bị trước | 08/11/2026 16:00 (UTC+7) | [SEM-18](../tasks/backlog/SEM-18.md) | [SEM-21](../tasks/backlog/SEM-21.md), [SEM-27](../tasks/backlog/SEM-27.md), [SEM-35](../tasks/backlog/SEM-35.md), [SEM-40](../tasks/backlog/SEM-40.md) |
 
 ## Tuấn
 

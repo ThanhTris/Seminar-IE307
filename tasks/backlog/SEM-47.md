@@ -2,7 +2,7 @@
 
 - Trạng thái: **Todo** (Project).
 - Trạng thái đầu vào: **Chờ đầu vào**.
-- Đối chiếu Project: 2026-10-31 13:26:56 UTC.
+- Đối chiếu Project: 2026-10-31 16:46:06 UTC.
 - Người thực hiện duy nhất: **Trang** (`rosy179`).
 - Hạn: **08/11/2026 16:00 (UTC+7)**.
 - Công sức: 2/100 — Nghiên cứu/lập luận.
@@ -29,7 +29,7 @@ Tài liệu nền đã có: [Kế hoạch/phạm vi](../../docs/PLAN.md) · [K�
 
 Đây là danh sách đầu ra cần bàn giao, chưa phải xác nhận các file đã tồn tại. Trước khi dùng, nhận đúng artifact/commit/config và CHECKS từ task nguồn.
 
-Status nguồn được đối chiếu Project lúc **2026-10-31 13:26:56 UTC**; mở link task nguồn để xem cập nhật mới hơn.
+Status nguồn được đối chiếu Project lúc **2026-10-31 16:46:06 UTC**; mở link task nguồn để xem cập nhật mới hơn.
 <!-- task-inputs:end -->
 
 
