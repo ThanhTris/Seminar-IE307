@@ -5,7 +5,7 @@
 - Hạn được giao: 30/10/2026 12:00 (UTC+7); giữ nguyên hạn, không ghi lùi ngày kiểm tra.
 - Base: `ff8f11148d5d2cfe0f2602bb6b58db00ca194f64` (`main`, đã fetch trước khi làm).
 - Nhánh: `codex/SEM-13-server-firebase`.
-- Artifact: [SERVER_FIREBASE.md](../../environment/SERVER_FIREBASE.md), cùng CHECKS này trong commit bàn giao SEM-13; tra commit bằng `git log -- docs/environment/SERVER_FIREBASE.md`.
+- Artifact môi trường: [SERVER_FIREBASE.md](../../environment/SERVER_FIREBASE.md), commit `b9da9a02ec252211d793345a339aecdf39e2c393`; CHECKS và snapshot được cập nhật thêm trong commit hoàn tất workflow.
 - Phạm vi: audit môi trường và bàn giao kết quả/blocker theo [yêu cầu SEM-13](../../../tasks/backlog/SEM-13.md); không tuyên bố app/server/sender đã chạy end-to-end.
 
 ## Kiểm chứng thực tế
@@ -24,7 +24,7 @@
 | ADB/SDK | Có công cụ và thiết bị cho phép chạy reverse | ADB không có trên PATH; `~/Library/Android/sdk` không có; ANDROID_HOME/ANDROID_SDK_ROOT chưa đặt; không tìm toàn máy | Not run — B2 |
 | LAN/reverse/device Internet | Thiết bị truy cập server và FCM riêng biệt | Chưa chạy emulator/OPPO, chưa có runtime server trên base; bảng mapping và bước kiểm lại trong artifact | Not run — B2/B3 |
 | Cấu hình local và ranh giới | Có cách cấp riêng cho app/server, mẫu không chứa dữ liệu thật | Package ID lấy từ SEM-11; project ID để placeholder; phân tách service-account JSON, Google Services config và registration token; không sửa app/server của task khác | Pass (tài liệu) |
-| Secret handling | File thật không được đưa vào Git | Chỉ hai tài liệu Markdown được bàn giao; dependency/cache/probe nằm trong `.local/` được ignore; kiểm ignore bằng đường dẫn fixture | Pass |
+| Secret handling | File thật không được đưa vào Git | Đầu ra môi trường là hai tài liệu Markdown; phần cập nhật còn lại là snapshot/checklist; dependency/cache/probe nằm trong `.local/` được ignore; kiểm ignore bằng đường dẫn fixture | Pass |
 | Markdown và cấu hình mẫu | Link nội bộ đọc được, không lỗi khoảng trắng hoặc credential-shaped content | 5 link nội bộ tồn tại; hai tài liệu có newline cuối, code fence cân bằng, không trailing whitespace; scan private-key/API-key/GitHub-token patterns không có match | Pass |
 | Git ignore | Cấu hình local/probe được bỏ qua, mẫu vẫn track được | 7 đường dẫn fixture `.env`/local/token/Google Services/local properties/probe bị ignore; `.env.example` không bị ignore | Pass |
 
@@ -68,11 +68,27 @@ Sandbox mặc định chặn DNS ngoài máy và socket listener (`EPERM`); đã
 
 ## GitHub Project và kiểm tra snapshot
 
-- GitHub đọc được bằng tài khoản `HoaiTam`, quyền repo `WRITE`. Token có `read:project` nhưng thiếu scope `project` cho cập nhật Project; không phải lỗi đăng nhập.
-- Lệnh chuyển SEM-13 sang In Progress bằng `gh project item-edit` và phép thử GraphQL riêng đều bị từ chối vì thiếu scope `project`. Lần đọc lại nguồn lúc audit cho thấy SEM-13 là **In Progress**; không quy thay đổi này cho lệnh đã thất bại.
-- `python3 scripts/update_task_snapshot.py --check` đã chạy và **Fail** với `SEM-11: Input/status snapshot differs; review or refresh`. Rà read-only thấy Project dùng timestamp snapshot `2026-10-30 20:34:26 UTC`, còn catalog của base là `2026-10-30 12:33:46 UTC`; nguồn có 3 Done / 1 In Progress / 41 Todo lúc kiểm tra. Đây là sai lệch đã có trước khi thêm hai artifact SEM-13.
-- Không chạy `--apply` khi thiếu quyền ghi Project, không sửa tay các snapshot để giả trạng thái đồng bộ. Không sửa script hoặc task của người khác để làm check này xanh.
-- Để hoàn tất workflow: tài khoản thực hiện cần bổ sung scope `project` qua `gh auth refresh -h github.com -s project` và có quyền edit Project, hoặc người quản lý Project thực hiện bước đó. Sau kiểm nhận đầu ra, chuyển trạng thái đúng thực tế, chạy `python3 scripts/update_task_snapshot.py --apply` rồi `--check` trên base đã cập nhật. Không coi task là Done chỉ vì có PR.
+- Lần audit đầu, tài khoản `HoaiTam` có repo `WRITE` nhưng token thiếu scope `project`. Các lệnh mutation bị từ chối; nguồn lúc đó đã là In Progress, không quy thay đổi này cho lệnh đã thất bại.
+- Kiểm lại **31/10/2026 19:43 (UTC+7)**: API xác nhận token đã có scope `project`; cập nhật SEM-13 qua `gh project item-edit` thành công. Đã chuyển **In Progress → Review → Done** sau khi kiểm nhận các tiêu chí audit bên dưới.
+- Snapshot check ban đầu Fail với `SEM-11: Input/status snapshot differs; review or refresh`: timestamp trên Project mới hơn catalog của base. Sau khi quyền được bổ sung, chạy script chính thức để sửa lệch snapshot, không sửa script hoặc thay trạng thái task khác bằng tay.
+
+```sh
+python3 scripts/update_task_snapshot.py --apply
+python3 scripts/update_task_snapshot.py --check
+git diff --check
+```
+
+Kết quả `--apply` và `--check` đều **Pass**: 45 task, **4 Done / 41 Todo**, đầu vào **10 Sẵn sàng / 8 Chuẩn bị trước / 27 Chờ đầu vào**, đúng một assignee khớp owner mỗi task, dependency không có vòng lặp. Script cập nhật các section sinh tự động trong 48 file snapshot; không đổi scope, owner, deadline, dependency hoặc công sức. SEM-23 đã Done trên nguồn trước lần đồng bộ này, nên snapshot cũng nhận trạng thái đó; không thực hiện hay kiểm nhận SEM-23 thay owner.
+
+Kiểm lại diff hoàn tất: 49 file (48 snapshot và CHECKS), 853 link Markdown nội bộ tồn tại, code fence cân bằng, không trailing whitespace hoặc credential-shaped content; `git diff --check` Pass. Ba checkbox nghiệm thu của riêng SEM-13 được đánh dấu trên repo và thẻ Project; phần nội dung khác của thẻ được giữ nguyên.
+
+PR bàn giao: [#4 — SEM-13](https://github.com/ThanhTris/Seminar-IE307/pull/4). Cập nhật trạng thái xác nhận việc hoàn thành **audit có blocker**, không xác nhận Firebase/thiết bị/runtime đã sẵn sàng.
+
+## Kiểm nhận tiêu chí SEM-13
+
+- [x] Có phiên bản thực và kết quả quyền/kết nối hoặc blocker: bảng kiểm chứng và hồ sơ môi trường ghi rõ B1/B2/B3, không có tuyên bố đã gửi FCM.
+- [x] Chỉ bàn giao cấu hình mẫu: không có token, service-account key hay Google Services config thật trong diff; file thử nghiệm/local được Git bỏ qua.
+- [x] Đầu ra và CHECKS tồn tại, link đọc được; các ca chưa chạy ghi Not run. Done dựa trên audit đã thực hiện, không dựa vào kế hoạch hoặc việc có PR.
 
 ## Bàn giao và blocker còn mở
 

@@ -77,7 +77,7 @@
       "category": "practice",
       "title": "Kiểm môi trường Node và quyền Firebase",
       "due": "2026-10-30",
-      "status": "Todo",
+      "status": "Done",
       "start_dependencies": [],
       "finish_dependencies": [],
       "work": [
@@ -316,7 +316,7 @@
             "docs/environment/SERVER_FIREBASE.md"
           ],
           "checks": "docs/evidence/SEM-13/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Done"
         },
         {
           "source_task": "SEM-14",
@@ -554,7 +554,7 @@
       "category": "practice",
       "title": "Tạo scaffold Android và UI cache/timeline",
       "due": "2026-10-31",
-      "status": "Todo",
+      "status": "Done",
       "start_dependencies": [
         "SEM-11"
       ],
@@ -683,7 +683,7 @@
             "docs/setup/ANDROID.md"
           ],
           "checks": "docs/evidence/SEM-23/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Done"
         },
         {
           "source_task": "SEM-26",
@@ -728,7 +728,7 @@
         "Snapshot/version/error rõ ràng, event accepted/received/started/applied riêng biệt.",
         "Core và server có thể triển khai theo contract mà không cần chờ code của nhau."
       ],
-      "input_status": "Chờ đầu vào",
+      "input_status": "Sẵn sàng",
       "inputs": [
         {
           "source_task": "SEM-11",
@@ -749,7 +749,7 @@
             "docs/environment/SERVER_FIREBASE.md"
           ],
           "checks": "docs/evidence/SEM-13/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Done"
         },
         {
           "source_task": "SEM-14",
@@ -802,7 +802,7 @@
             "docs/environment/SERVER_FIREBASE.md"
           ],
           "checks": "docs/evidence/SEM-13/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Done"
         },
         {
           "source_task": "SEM-26",
@@ -860,7 +860,7 @@
             "docs/setup/ANDROID.md"
           ],
           "checks": "docs/evidence/SEM-23/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Done"
         },
         {
           "source_task": "SEM-24",
@@ -1191,7 +1191,7 @@
             "docs/environment/SERVER_FIREBASE.md"
           ],
           "checks": "docs/evidence/SEM-13/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Done"
         },
         {
           "source_task": "SEM-32",
@@ -1337,7 +1337,7 @@
             "docs/environment/SERVER_FIREBASE.md"
           ],
           "checks": "docs/evidence/SEM-13/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Done"
         },
         {
           "source_task": "SEM-18",
@@ -2911,7 +2911,7 @@
       "due_at": "2026-11-12T22:00:00+07:00"
     }
   ],
-  "snapshot_at": "2026-10-30 12:33:46 UTC",
+  "snapshot_at": "2026-10-31 12:44:19 UTC",
   "snapshot_source": "https://github.com/users/ThanhTris/projects/3/views/1",
   "timezone": "Asia/Ho_Chi_Minh",
   "deadline_at": "2026-11-13T22:00:00+07:00",

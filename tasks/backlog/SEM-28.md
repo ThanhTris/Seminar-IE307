@@ -2,7 +2,7 @@
 
 - Trạng thái: **Todo** (Project).
 - Trạng thái đầu vào: **Chờ đầu vào**.
-- Đối chiếu Project: 2026-10-30 12:33:46 UTC.
+- Đối chiếu Project: 2026-10-31 12:44:19 UTC.
 - Người thực hiện duy nhất: **Trí** (`ThanhTris`).
 - Hạn: **31/10/2026 22:00 (UTC+7)**.
 - Công sức: 1/100 — Cơ chế/thực hành.
@@ -22,14 +22,14 @@ Tài liệu nền đã có: [Kế hoạch/phạm vi](../../docs/PLAN.md).
 
 | Cần cho | Task cung cấp | Người bàn giao | Đầu ra phải nhận | Kiểm chứng bàn giao | Status nguồn |
 |---|---|---|---|---|---|
-| Bắt đầu | [SEM-23 — Tạo scaffold Android và UI cache/timeline](SEM-23.md) | Trí | `android/ (build, manifest, ui, config)`<br>`docs/setup/ANDROID.md` | `docs/evidence/SEM-23/CHECKS.md` | Todo |
+| Bắt đầu | [SEM-23 — Tạo scaffold Android và UI cache/timeline](SEM-23.md) | Trí | `android/ (build, manifest, ui, config)`<br>`docs/setup/ANDROID.md` | `docs/evidence/SEM-23/CHECKS.md` | Done |
 | Bắt đầu | [SEM-24 — Chuẩn bị bộ xuất log và run manifest](SEM-24.md) | Vinh | `experiments/RUN_MANIFEST_TEMPLATE.json`<br>`experiments/scripts/export_logs.*`<br>`experiments/README.md` | `docs/evidence/SEM-24/CHECKS.md` | Todo |
 | Bắt đầu | [SEM-25 — Xây Room, SyncRepository và SyncWorker dùng chung](SEM-25.md) | Trung | `android/ (data và sync core)`<br>`docs/SYNC_CORE_API.md` | `docs/evidence/SEM-25/CHECKS.md` | Todo |
 | Bắt đầu | [SEM-27 — Triển khai server snapshot và CLI cập nhật](SEM-27.md) | Tâm | `server/ (API, snapshot store, update CLI)`<br>`docs/setup/SERVER.md` | `docs/evidence/SEM-27/CHECKS.md` | Todo |
 
 Đây là danh sách đầu ra cần bàn giao, chưa phải xác nhận các file đã tồn tại. Trước khi dùng, nhận đúng artifact/commit/config và CHECKS từ task nguồn.
 
-Status nguồn được đối chiếu Project lúc **2026-10-30 12:33:46 UTC**; mở link task nguồn để xem cập nhật mới hơn.
+Status nguồn được đối chiếu Project lúc **2026-10-31 12:44:19 UTC**; mở link task nguồn để xem cập nhật mới hơn.
 <!-- task-inputs:end -->
 
 
