@@ -2,7 +2,7 @@
 
 - Trạng thái: **Todo** (Project).
 - Trạng thái đầu vào: **Chuẩn bị trước**.
-- Đối chiếu Project: 2026-10-31 12:44:19 UTC.
+- Đối chiếu Project: 2026-10-31 13:26:56 UTC.
 - Người thực hiện duy nhất: **Tuấn** (`mtuan2491`).
 - Hạn: **30/10/2026 22:00 (UTC+7)**.
 - Công sức: 4/100 — Cơ chế/thực hành.
@@ -29,11 +29,11 @@ Tài liệu nền đã có: [Kế hoạch/phạm vi](../../docs/PLAN.md).
 | Hoàn tất | [SEM-15 — Giải thích cơ chế silent push và giới hạn FCM](SEM-15.md) | Trang | `docs/mechanisms/SILENT_PUSH.md` | `docs/evidence/SEM-15/CHECKS.md` | Todo |
 | Hoàn tất | [SEM-16 — Lập ma trận lifecycle và protocol E01–E06](SEM-16.md) | Vinh | `experiments/PROTOCOL.md`<br>`experiments/RUN_SCHEDULE.md` | `docs/evidence/SEM-16/CHECKS.md` | Todo |
 | Hoàn tất | [SEM-17 — Giải thích periodic WorkManager và constraints](SEM-17.md) | Trung | `docs/mechanisms/PERIODIC_FETCH.md` | `docs/evidence/SEM-17/CHECKS.md` | Todo |
-| Hoàn tất | [SEM-18 — Giải thích server, FCM accepted và correlation](SEM-18.md) | Tâm | `docs/mechanisms/SERVER_FCM.md` | `docs/evidence/SEM-18/CHECKS.md` | Todo |
+| Hoàn tất | [SEM-18 — Giải thích server, FCM accepted và correlation](SEM-18.md) | Tâm | `docs/mechanisms/SERVER_FCM.md` | `docs/evidence/SEM-18/CHECKS.md` | Review |
 
 Đây là danh sách đầu ra cần bàn giao, chưa phải xác nhận các file đã tồn tại. Trước khi dùng, nhận đúng artifact/commit/config và CHECKS từ task nguồn.
 
-Status nguồn được đối chiếu Project lúc **2026-10-31 12:44:19 UTC**; mở link task nguồn để xem cập nhật mới hơn.
+Status nguồn được đối chiếu Project lúc **2026-10-31 13:26:56 UTC**; mở link task nguồn để xem cập nhật mới hơn.
 <!-- task-inputs:end -->
 
 
