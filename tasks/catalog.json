@@ -232,7 +232,7 @@
       "category": "practice",
       "title": "Giải thích server, FCM accepted và correlation",
       "due": "2026-10-30",
-      "status": "Todo",
+      "status": "Review",
       "start_dependencies": [],
       "finish_dependencies": [],
       "work": [
@@ -367,7 +367,7 @@
             "docs/mechanisms/SERVER_FCM.md"
           ],
           "checks": "docs/evidence/SEM-18/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Review"
         }
       ],
       "due_at": "2026-10-30T22:00:00+07:00"
@@ -1347,7 +1347,7 @@
             "docs/mechanisms/SERVER_FCM.md"
           ],
           "checks": "docs/evidence/SEM-18/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Review"
         },
         {
           "source_task": "SEM-27",
@@ -2366,7 +2366,7 @@
             "docs/mechanisms/SERVER_FCM.md"
           ],
           "checks": "docs/evidence/SEM-18/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Review"
         },
         {
           "source_task": "SEM-21",
@@ -2911,7 +2911,7 @@
       "due_at": "2026-11-12T22:00:00+07:00"
     }
   ],
-  "snapshot_at": "2026-10-31 12:44:19 UTC",
+  "snapshot_at": "2026-10-31 13:26:56 UTC",
   "snapshot_source": "https://github.com/users/ThanhTris/projects/3/views/1",
   "timezone": "Asia/Ho_Chi_Minh",
   "deadline_at": "2026-11-13T22:00:00+07:00",

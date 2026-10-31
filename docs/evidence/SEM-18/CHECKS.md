@@ -5,7 +5,7 @@
 - Hạn được giao: **30/10/2026 18:00 (UTC+7)**, giữ nguyên.
 - Base: `730d5ddca974b7551166d874a80050aeb2c28794` (`origin/main`, đã fetch trước khi tạo nhánh).
 - Nhánh: `codex/SEM-18-server-fcm`.
-- Đầu ra: [SERVER_FCM.md](../../mechanisms/SERVER_FCM.md) và CHECKS này; commit artifact tra qua `git log -- docs/mechanisms/SERVER_FCM.md`.
+- Đầu ra: [SERVER_FCM.md](../../mechanisms/SERVER_FCM.md) và CHECKS này; commit artifact ban đầu `22c393f4323510339547e849986393fff3834010`. CHECKS/snapshot được cập nhật thêm khi bàn giao Review.
 - Loại bằng chứng: review tài liệu/nguồn và kiểm cấu trúc ví dụ. **Không có run FCM, Android hoặc phép đo runtime trong SEM-18.**
 
 ## Đầu vào đã đọc
@@ -51,11 +51,18 @@ Nguồn chính thức được mở và đối chiếu ngày 31/10/2026, đặt 
 
 Đã parse JSON trong Markdown bằng Python `json.loads`, kiểm placeholder, data string, source/mode/version, data-only, priority và đơn vị TTL. Đây là kiểm cấu trúc fixture, không phải FCM validate-only API hoặc xác nhận Firebase nhận payload.
 
-Kiểm tra hai artifact: link nội bộ tồn tại, newline cuối, không trailing whitespace, code fence cân bằng và không có mẫu private key/API key/GitHub token. Các ví dụ không chứa credential hoặc token thật. `git diff --cached --check` được chạy trước commit. Không cần build app/server vì không sửa code/config runtime.
+Kiểm tra hai artifact: **13 link nội bộ** tồn tại, newline cuối, không trailing whitespace, code fence cân bằng và không có mẫu private key/API key/GitHub token. Các ví dụ không chứa credential hoặc token thật. `git diff --cached --check` Pass trước commit. Không cần build app/server vì không sửa code/config runtime.
 
 ## Workflow và giới hạn quyền thực hiện
 
-Đã tạo nhánh từ main và chuyển riêng SEM-18 từ Todo sang In Progress. Sau khi đầu ra sẵn sàng, tạo PR và chuyển **Review**; snapshot/dependency phải đồng bộ bằng `scripts/update_task_snapshot.py --apply` và kiểm lại với `--check`.
+Đã tạo nhánh từ main, chuyển riêng SEM-18 **Todo → In Progress → Review** và tạo [PR #5](https://github.com/ThanhTris/Seminar-IE307/pull/5). Snapshot đồng bộ lúc **31/10/2026 20:26:56 (UTC+7)** bằng script chính thức:
+
+```sh
+python3 scripts/update_task_snapshot.py --apply
+python3 scripts/update_task_snapshot.py --check
+```
+
+Cả hai lệnh **Pass**: 45 task, **4 Done / 40 Todo / 1 Review**; đầu vào **10 Sẵn sàng / 8 Chuẩn bị trước / 27 Chờ đầu vào**; một assignee khớp owner mỗi task, dependency không có vòng lặp. Ngoài hai artifact, script cập nhật 48 file snapshot. Đối chiếu diff xác nhận chỉ workflow status SEM-18 đổi từ Todo sang Review; không đổi scope/owner/deadline/dependency/công sức hoặc acceptance checklist. SEM-35/49 vẫn chờ đầu vào, không được mở gate vì SEM-18 còn Review.
 
 Theo yêu cầu của HoaiTam, **dừng ở Review**: nhóm trưởng kiểm nhận và quyết định merge/Done. Không tự merge, không tự chuyển Done, không coi review của tác giả ở bảng trên là chấp thuận của nhóm trưởng. Chỉ sửa tiếp khi có comment yêu cầu fix từ nhóm trưởng. Checklist nghiệm thu trên task được để nhóm trưởng kiểm nhận, không dùng để vượt gate phụ thuộc khi trạng thái còn Review.
 

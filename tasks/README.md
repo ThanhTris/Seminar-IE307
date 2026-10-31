@@ -20,7 +20,7 @@ SEM-01…SEM-10 chỉ còn là nhóm lịch sử với link tới task thay th�
 <!-- input-snapshot:start -->
 ## Trạng thái đối chiếu Project
 
-Snapshot **2026-10-31 12:44:19 UTC**. Status là tiến độ thực hiện; Input status là khả năng bắt đầu theo dependency: **Sẵn sàng 10**, **Chuẩn bị trước 8**, **Chờ đầu vào 27**.
+Snapshot **2026-10-31 13:26:56 UTC**. Status là tiến độ thực hiện; Input status là khả năng bắt đầu theo dependency: **Sẵn sàng 10**, **Chuẩn bị trước 8**, **Chờ đầu vào 27**.
 
 - Sẵn sàng: không có task dependency chưa Done; vẫn cần kiểm artifact/CHECKS khi nhận bàn giao.
 - Chuẩn bị trước: được làm phần độc lập nhưng còn gate hoàn tất chưa bàn giao.
@@ -38,7 +38,7 @@ Project là nguồn Status hiện hành. Sau khi đổi Status nguồn, chạy `
 | [SEM-15](backlog/SEM-15.md) — Giải thích cơ chế silent push và giới hạn FCM | Trang | Todo | Sẵn sàng | 30/10/2026 18:00 (UTC+7) | 3 | Không có. | Không có. |
 | [SEM-16](backlog/SEM-16.md) — Lập ma trận lifecycle và protocol E01–E06 | Vinh | Todo | Sẵn sàng | 30/10/2026 18:00 (UTC+7) | 2 | Không có. | Không có. |
 | [SEM-17](backlog/SEM-17.md) — Giải thích periodic WorkManager và constraints | Trung | Todo | Sẵn sàng | 30/10/2026 18:00 (UTC+7) | 3 | Không có. | Không có. |
-| [SEM-18](backlog/SEM-18.md) — Giải thích server, FCM accepted và correlation | Tâm | Todo | Sẵn sàng | 30/10/2026 18:00 (UTC+7) | 2 | Không có. | Không có. |
+| [SEM-18](backlog/SEM-18.md) — Giải thích server, FCM accepted và correlation | Tâm | Review | Sẵn sàng | 30/10/2026 18:00 (UTC+7) | 2 | Không có. | Không có. |
 | [SEM-19](backlog/SEM-19.md) — Tổng hợp mô hình cơ chế và câu hỏi phản biện | Tuấn | Todo | Chuẩn bị trước | 30/10/2026 22:00 (UTC+7) | 4 | Không có. | [SEM-11](backlog/SEM-11.md), [SEM-12](backlog/SEM-12.md), [SEM-13](backlog/SEM-13.md), [SEM-14](backlog/SEM-14.md), [SEM-15](backlog/SEM-15.md), [SEM-16](backlog/SEM-16.md), [SEM-17](backlog/SEM-17.md), [SEM-18](backlog/SEM-18.md) |
 | [SEM-20](backlog/SEM-20.md) — Đọc bài nghiên cứu thứ nhất và ghi chú nguồn | Tuấn | Todo | Chuẩn bị trước | 01/11/2026 16:00 (UTC+7) | 5 | Không có. | [SEM-11](backlog/SEM-11.md), [SEM-12](backlog/SEM-12.md) |
 | [SEM-21](backlog/SEM-21.md) — Đọc bài nghiên cứu thứ hai và ghi chú nguồn | Tâm | Todo | Chuẩn bị trước | 01/11/2026 16:00 (UTC+7) | 3 | Không có. | [SEM-11](backlog/SEM-11.md), [SEM-12](backlog/SEM-12.md) |

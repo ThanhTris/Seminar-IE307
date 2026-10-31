@@ -1,8 +1,8 @@
 # SEM-18 — Giải thích server, FCM accepted và correlation
 
-- Trạng thái: **Todo** (Project).
+- Trạng thái: **Review** (Project).
 - Trạng thái đầu vào: **Sẵn sàng**.
-- Đối chiếu Project: 2026-10-31 12:44:19 UTC.
+- Đối chiếu Project: 2026-10-31 13:26:56 UTC.
 - Người thực hiện duy nhất: **Tâm** (`HoaiTam`).
 - Hạn: **30/10/2026 18:00 (UTC+7)**.
 - Công sức: 2/100 — Cơ chế/thực hành.
@@ -22,7 +22,7 @@ Tài liệu nền đã có: [Kế hoạch/phạm vi](../../docs/PLAN.md) · [Ngu
 
 Không cần nhận đầu ra từ task khác để bắt đầu. Owner thực hiện từ tài liệu nền và tự ghi các blocker môi trường/quyền truy cập trong CHECKS của task này.
 
-Status nguồn được đối chiếu Project lúc **2026-10-31 12:44:19 UTC**; mở link task nguồn để xem cập nhật mới hơn.
+Status nguồn được đối chiếu Project lúc **2026-10-31 13:26:56 UTC**; mở link task nguồn để xem cập nhật mới hơn.
 <!-- task-inputs:end -->
 
 
