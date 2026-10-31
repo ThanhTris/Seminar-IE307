@@ -1,8 +1,8 @@
 # SEM-13 — Kiểm môi trường Node và quyền Firebase
 
-- Trạng thái: **Todo** (Project).
+- Trạng thái: **Done** (Project).
 - Trạng thái đầu vào: **Sẵn sàng**.
-- Đối chiếu Project: 2026-10-30 12:33:46 UTC.
+- Đối chiếu Project: 2026-10-31 12:44:19 UTC.
 - Người thực hiện duy nhất: **Tâm** (`HoaiTam`).
 - Hạn: **30/10/2026 12:00 (UTC+7)**.
 - Công sức: 1/100 — Cơ chế/thực hành.
@@ -22,7 +22,7 @@ Tài liệu nền đã có: [Kế hoạch/phạm vi](../../docs/PLAN.md) · [Ngu
 
 Không cần nhận đầu ra từ task khác để bắt đầu. Owner thực hiện từ tài liệu nền và tự ghi các blocker môi trường/quyền truy cập trong CHECKS của task này.
 
-Status nguồn được đối chiếu Project lúc **2026-10-30 12:33:46 UTC**; mở link task nguồn để xem cập nhật mới hơn.
+Status nguồn được đối chiếu Project lúc **2026-10-31 12:44:19 UTC**; mở link task nguồn để xem cập nhật mới hơn.
 <!-- task-inputs:end -->
 
 
@@ -39,9 +39,9 @@ Status nguồn được đối chiếu Project lúc **2026-10-30 12:33:46 UTC**;
 
 ## Tiêu chí hoàn thành
 
-- [ ] Có phiên bản thực và kết quả quyền/kết nối hoặc blocker, không ghi đã gửi thành công nếu chưa gửi.
-- [ ] Chỉ commit cấu hình mẫu; không đưa token/service-account key/google-services.json thật vào repo.
-- [ ] Đầu ra và CHECKS có thật, link đọc được; chưa chạy phải ghi Not run, không tự chuyển Done từ kế hoạch.
+- [x] Có phiên bản thực và kết quả quyền/kết nối hoặc blocker, không ghi đã gửi thành công nếu chưa gửi.
+- [x] Chỉ commit cấu hình mẫu; không đưa token/service-account key/google-services.json thật vào repo.
+- [x] Đầu ra và CHECKS có thật, link đọc được; chưa chạy phải ghi Not run, không tự chuyển Done từ kế hoạch.
 
 ## Task được mở khóa
 
