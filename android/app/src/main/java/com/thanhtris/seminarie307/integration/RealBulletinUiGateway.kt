@@ -1,6 +1,7 @@
 package com.thanhtris.seminarie307.integration
 
 import android.content.Context
+import android.os.SystemClock
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import androidx.work.workDataOf
@@ -59,6 +60,7 @@ class RealBulletinUiGateway(
 
         // 1. Record work_enqueued event before or at enqueue
         val now = Instant.now()
+        val elapsedRealtime = SystemClock.elapsedRealtime()
         timelineDao.insert(
             TimelineEventEntity(
                 eventId = UUID.randomUUID().toString(),
@@ -73,6 +75,7 @@ class RealBulletinUiGateway(
                 requestId = requestId,
                 workId = workRequest.id.toString(),
                 messageId = null,
+                elapsedRealtimeMillis = elapsedRealtime,
             )
         )
 

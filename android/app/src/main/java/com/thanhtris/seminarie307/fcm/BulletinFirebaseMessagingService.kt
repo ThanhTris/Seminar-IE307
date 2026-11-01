@@ -1,5 +1,6 @@
 package com.thanhtris.seminarie307.fcm
 
+import android.os.SystemClock
 import android.util.Log
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
@@ -33,6 +34,7 @@ class BulletinFirebaseMessagingService : FirebaseMessagingService() {
 
         val mode = runCatching { SyncMode.valueOf(modeStr) }.getOrDefault(SyncMode.PUSH)
         val now = Instant.now()
+        val elapsedRealtime = SystemClock.elapsedRealtime()
         val database = AppDatabase.getInstance(applicationContext)
         val timelineDao = database.timelineDao()
 
@@ -52,6 +54,7 @@ class BulletinFirebaseMessagingService : FirebaseMessagingService() {
                     requestId = requestId,
                     workId = null,
                     messageId = messageId,
+                    elapsedRealtimeMillis = elapsedRealtime,
                 )
             )
 
@@ -71,6 +74,7 @@ class BulletinFirebaseMessagingService : FirebaseMessagingService() {
 
             // 3. Record work_enqueued event
             val enqueuedNow = Instant.now()
+            val enqueuedElapsed = SystemClock.elapsedRealtime()
             timelineDao.insert(
                 TimelineEventEntity(
                     eventId = UUID.randomUUID().toString(),
@@ -85,6 +89,7 @@ class BulletinFirebaseMessagingService : FirebaseMessagingService() {
                     requestId = requestId,
                     workId = workRequest.id.toString(),
                     messageId = messageId,
+                    elapsedRealtimeMillis = enqueuedElapsed,
                 )
             )
 
@@ -92,6 +97,7 @@ class BulletinFirebaseMessagingService : FirebaseMessagingService() {
         }
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onNewToken(token: String) {
         super.onNewToken(token)
         Log.i(TAG, "New FCM Token received: $token")

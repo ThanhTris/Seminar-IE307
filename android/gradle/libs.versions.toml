@@ -9,6 +9,7 @@ ksp = "2.3.12"
 workManager = "2.12.0"
 firebaseBom = "35.1.0"
 googleServices = "4.5.0"
+desugarJdkLibs = "2.1.4"
 junit = "4.13.2"
 androidxTest = "1.7.0"
 androidxTestJunit = "1.3.0"
@@ -37,6 +38,7 @@ room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 work-runtime-ktx = { module = "androidx.work:work-runtime-ktx", version.ref = "workManager" }
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
 firebase-messaging = { module = "com.google.firebase:firebase-messaging" }
+desugar-jdk-libs = { module = "com.android.tools:desugar_jdk_libs", version.ref = "desugarJdkLibs" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

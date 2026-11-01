@@ -19,12 +19,15 @@ sealed interface RemoteSnapshotResult {
     data class Failure(
         val statusCode: Int?,
         val message: String,
+        val isTransient: Boolean = false,
     ) : RemoteSnapshotResult
 }
 
 class SnapshotRemoteDataSource(
-    private val baseUrl: String = "http://10.0.2.2:3000",
+    customBaseUrl: String? = null,
 ) {
+    val baseUrl: String = (customBaseUrl ?: defaultBaseUrl).trimEnd('/')
+
     suspend fun fetchSnapshot(
         currentVersion: Long? = null,
         requestId: String? = null,
@@ -77,18 +80,30 @@ class SnapshotRemoteDataSource(
                 )
             }
 
+            val isTransient = statusCode in 500..599 || statusCode == 429 || statusCode == 408
             val errorStream = connection.errorStream?.bufferedReader()?.use { it.readText() }
             return@withContext RemoteSnapshotResult.Failure(
                 statusCode = statusCode,
                 message = errorStream ?: "HTTP error $statusCode",
+                isTransient = isTransient,
             )
         } catch (e: Exception) {
             return@withContext RemoteSnapshotResult.Failure(
                 statusCode = null,
                 message = e.message ?: "Connection failure",
+                isTransient = true, // Network exceptions (timeout, connect error) are transient
             )
         } finally {
             connection?.disconnect()
+        }
+    }
+
+    companion object {
+        @Volatile
+        var defaultBaseUrl: String = "http://10.0.2.2:3000"
+
+        fun setBaseUrl(url: String) {
+            defaultBaseUrl = url.trimEnd('/')
         }
     }
 }

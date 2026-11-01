@@ -1,19 +1,22 @@
 package com.thanhtris.seminarie307.sync
 
 import android.content.Context
+import android.os.SystemClock
 import androidx.work.Constraints
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.NetworkType
 import androidx.work.PeriodicWorkRequestBuilder
-import androidx.work.WorkInfo
 import androidx.work.WorkManager
 import androidx.work.workDataOf
 import com.thanhtris.seminarie307.data.local.AppDatabase
 import com.thanhtris.seminarie307.data.local.TimelineEventEntity
 import com.thanhtris.seminarie307.integration.SyncMode
 import com.thanhtris.seminarie307.integration.SyncSource
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
 import java.time.Instant
 import java.util.UUID
 import java.util.concurrent.TimeUnit
@@ -54,10 +57,11 @@ class PeriodicSyncScheduler(
             periodicRequest,
         )
 
-        // 2. Record schedule event in local timeline
+        // 2. Record schedule event asynchronously in background
         val now = Instant.now()
+        val elapsedRealtime = SystemClock.elapsedRealtime()
         val timelineDao = database.timelineDao()
-        kotlinx.coroutines.CoroutineScope(kotlinx.coroutines.Dispatchers.IO).run {
+        CoroutineScope(Dispatchers.IO).launch {
             val event = TimelineEventEntity(
                 eventId = UUID.randomUUID().toString(),
                 source = SyncSource.PERIODIC.name,
@@ -71,10 +75,9 @@ class PeriodicSyncScheduler(
                 requestId = null,
                 workId = periodicRequest.id.toString(),
                 messageId = null,
+                elapsedRealtimeMillis = elapsedRealtime,
             )
-            kotlinx.coroutines.runBlocking {
-                timelineDao.insert(event)
-            }
+            timelineDao.insert(event)
         }
     }
 
@@ -82,8 +85,9 @@ class PeriodicSyncScheduler(
         workManager.cancelUniqueWork(PERIODIC_WORK_NAME)
 
         val now = Instant.now()
+        val elapsedRealtime = SystemClock.elapsedRealtime()
         val timelineDao = database.timelineDao()
-        kotlinx.coroutines.CoroutineScope(kotlinx.coroutines.Dispatchers.IO).run {
+        CoroutineScope(Dispatchers.IO).launch {
             val event = TimelineEventEntity(
                 eventId = UUID.randomUUID().toString(),
                 source = SyncSource.PERIODIC.name,
@@ -97,10 +101,9 @@ class PeriodicSyncScheduler(
                 requestId = null,
                 workId = null,
                 messageId = null,
+                elapsedRealtimeMillis = elapsedRealtime,
             )
-            kotlinx.coroutines.runBlocking {
-                timelineDao.insert(event)
-            }
+            timelineDao.insert(event)
         }
     }
 

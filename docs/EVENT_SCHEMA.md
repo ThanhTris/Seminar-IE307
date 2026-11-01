@@ -20,7 +20,7 @@ Mỗi sự kiện được ghi nhận vào cơ sở dữ liệu Room và xuất 
 | `eventType` | String (Enum) | Có | Loại sự kiện (xem mục 2). |
 | `occurredAtEpochMillis` | Long | Có | Thời điểm xảy ra theo Unix epoch (milliseconds). |
 | `occurredAtUtc` | String | Có | Thời điểm xảy ra định dạng ISO 8601 UTC kết thúc bằng `Z`. |
-| `elapsedMonotonicNanos` | Long | Tùy chọn | Thời gian đồng hồ monotonic (System.nanoTime) để tính độ trễ chính xác không bị nhảy giờ do NTP. |
+| `elapsedRealtimeMillis` | Long | Tùy chọn | Thời gian đồng hồ monotonic (`SystemClock.elapsedRealtime()`) để tính độ trễ chính xác không bị nhảy giờ do NTP hay Doze mode. |
 | `version` | Long | Tùy chọn | Phiên bản snapshot liên quan (ví dụ version vừa cập nhật). |
 | `outcome` | String | Tùy chọn | Kết quả tóm tắt: `applied`, `unchanged`, `stale`, `rejected`, `failure`. |
 | `reason` | String | Tùy chọn | Lý do chi tiết (nếu bị reject hoặc lỗi). |

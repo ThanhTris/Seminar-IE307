@@ -6,8 +6,6 @@
  */
 
 import fs from 'node:fs';
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
 
 const args = process.argv.slice(2);
 let token = null;
@@ -27,6 +25,9 @@ for (let i = 0; i < args.length; i++) {
   }
 }
 
+// TTL for Firebase Admin SDK AndroidConfig must be in milliseconds
+const TTL_MILLISECONDS = 86400 * 1000;
+
 const payload = {
   data: {
     run_id: runId,
@@ -35,29 +36,55 @@ const payload = {
     mode: 'PUSH',
   },
   android: {
-    priority: 'normal', // Normal priority, strictly no high priority
-    ttl: 86400, // 24 hours in seconds
+    priority: 'normal', // Strictly normal priority per protocol
+    ttl: TTL_MILLISECONDS, // 24 hours in milliseconds
   },
 };
 
 console.log('--- FCM Sender CLI (SEM-35) ---');
-console.log('Payload (data-only, normal priority):');
+console.log('Payload (data-only, normal priority, TTL in ms):');
 console.log(JSON.stringify(payload, null, 2));
 
 const credPath = process.env.GOOGLE_APPLICATION_CREDENTIALS;
+
 if (!token) {
   console.log('\n[Warning] No target registration token provided. Use --token <FCM_TOKEN>.');
-  console.log('[Dry-Run Simulation] Message structure validated. Outputting mock result:');
+  console.log('[Dry-Run Simulation] Message structure validated.');
   const mockMessageId = `projects/seminar-ie307/messages/mock-${Date.now()}`;
-  console.log(`Accepted with Message ID: ${mockMessageId}`);
+  console.log(`[Result] Accepted in simulation mode. Message ID: ${mockMessageId}`);
   process.exit(0);
 }
 
 if (!credPath || !fs.existsSync(credPath)) {
   console.log('\n[Blocker] GOOGLE_APPLICATION_CREDENTIALS is not set or file does not exist.');
-  console.log(`Target Token: ${token.substring(0, 10)}... (truncated for safety)`);
+  console.log(`Target Token: ${token.substring(0, 10)}... (truncated for security)`);
   console.log('[Simulation Result] Accepted in dry-run mode (live credentials pending project owner configuration).');
   process.exit(0);
 }
 
-console.log('\nLive Firebase Admin initialization is supported when credential file is present.');
+// Live send with Firebase Admin
+try {
+  const { default: admin } = await import('firebase-admin');
+  const serviceAccount = JSON.parse(fs.readFileSync(credPath, 'utf-8'));
+
+  if (!admin.apps.length) {
+    admin.initializeApp({
+      credential: admin.credential.cert(serviceAccount),
+    });
+  }
+
+  const message = {
+    token,
+    data: payload.data,
+    android: payload.android,
+  };
+
+  const messageId = await admin.messaging().send(message);
+  console.log(`\n[Success] FCM message sent successfully!`);
+  console.log(`Message ID: ${messageId}`);
+  console.log(`Run ID: ${runId}`);
+  console.log(`Version Hint: ${versionHint}`);
+} catch (err) {
+  console.error('\n[Error] Failed to send live FCM message:', err.message);
+  process.exit(1);
+}

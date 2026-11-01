@@ -20,6 +20,7 @@ data class TimelineEventEntity(
     val requestId: String? = null,
     val workId: String? = null,
     val messageId: String? = null,
+    val elapsedRealtimeMillis: Long? = null,
 ) {
     fun toTimelineEvent(): TimelineEvent = TimelineEvent(
         eventId = eventId,
@@ -36,6 +37,7 @@ data class TimelineEventEntity(
             workId = workId,
             messageId = messageId,
         ),
+        elapsedRealtimeMillis = elapsedRealtimeMillis,
     )
 
     companion object {
@@ -52,6 +54,7 @@ data class TimelineEventEntity(
             requestId = event.correlation?.requestId,
             workId = event.correlation?.workId,
             messageId = event.correlation?.messageId,
+            elapsedRealtimeMillis = event.elapsedRealtimeMillis,
         )
     }
 }

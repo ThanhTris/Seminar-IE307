@@ -38,6 +38,7 @@ data class TimelineEvent(
     val outcome: String? = null,
     val reason: String? = null,
     val correlation: CorrelationUi? = null,
+    val elapsedRealtimeMillis: Long? = null,
 )
 
 data class BulletinUiState(

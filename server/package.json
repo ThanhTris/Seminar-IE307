@@ -5,12 +5,17 @@
   "type": "module",
   "main": "src/server.js",
   "bin": {
-    "update-cli": "./bin/update-cli.js"
+    "update-cli": "./bin/update-cli.js",
+    "fcm-sender": "./bin/fcm-sender.js"
   },
   "scripts": {
     "start": "node src/server.js",
     "update": "node bin/update-cli.js",
+    "send-push": "node bin/fcm-sender.js",
     "test": "node --test test/*.test.js"
+  },
+  "dependencies": {
+    "firebase-admin": "^13.1.0"
   },
   "keywords": [
     "seminar",

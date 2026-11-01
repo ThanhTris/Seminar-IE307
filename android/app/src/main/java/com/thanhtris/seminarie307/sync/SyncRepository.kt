@@ -1,5 +1,6 @@
 package com.thanhtris.seminarie307.sync
 
+import android.os.SystemClock
 import androidx.room.withTransaction
 import com.thanhtris.seminarie307.data.local.AppDatabase
 import com.thanhtris.seminarie307.data.local.BulletinEntity
@@ -21,63 +22,63 @@ class SyncRepository(
     private val metadataDao = database.metadataDao()
 
     suspend fun executeSync(input: SyncInput): SyncResult = withContext(Dispatchers.IO) {
-        val currentVersion = bulletinDao.getLatestVersion()
+        val initialVersion = bulletinDao.getLatestVersion()
 
         // 1. Record work_started
         recordEvent(
             input = input,
             eventType = "work_started",
-            version = currentVersion,
+            version = initialVersion,
             outcome = "started",
             reason = "Bắt đầu fetch snapshot từ server",
         )
 
         // 2. Fetch remote snapshot
         val remoteResult = remoteDataSource.fetchSnapshot(
-            currentVersion = currentVersion,
+            currentVersion = initialVersion,
             requestId = input.correlation.requestId,
         )
 
         val nowUtc = Instant.now().toString()
 
-        // 3. Process outcome with version guard
+        // 3. Process outcome with atomic version guard inside Room transaction
         when (remoteResult) {
             is RemoteSnapshotResult.Success -> {
-                // Guard: only apply if remote version > current cached version
-                if (currentVersion == null || remoteResult.version > currentVersion) {
-                    val entities = remoteResult.items.map { BulletinEntity.fromBulletinItem(it) }
-                    database.withTransaction {
+                database.withTransaction {
+                    val lockedVersion = bulletinDao.getLatestVersion()
+                    if (lockedVersion == null || remoteResult.version > lockedVersion) {
+                        val entities = remoteResult.items.map { BulletinEntity.fromBulletinItem(it) }
                         bulletinDao.replaceSnapshot(entities)
+                        metadataDao.setValue(SyncMetadataEntity("cachedVersion", remoteResult.version.toString()))
+                        metadataDao.setValue(SyncMetadataEntity("lastSyncAtUtc", nowUtc))
+
+                        recordEvent(
+                            input = input,
+                            eventType = "snapshot_applied",
+                            version = remoteResult.version,
+                            outcome = "applied",
+                            reason = "Đã lưu snapshot v${remoteResult.version} (${entities.size} bản tin)",
+                        )
+
+                        SyncResult(
+                            outcome = SyncOutcomeType.APPLIED,
+                            reason = "Đã cập nhật snapshot v${remoteResult.version}",
+                            version = remoteResult.version,
+                        )
+                    } else {
+                        recordEvent(
+                            input = input,
+                            eventType = "snapshot_stale",
+                            version = lockedVersion,
+                            outcome = "stale",
+                            reason = "Bỏ qua: version server (${remoteResult.version}) không mới hơn cache ($lockedVersion)",
+                        )
+                        SyncResult(
+                            outcome = SyncOutcomeType.STALE,
+                            reason = "Version không mới hơn cache",
+                            version = lockedVersion,
+                        )
                     }
-                    metadataDao.setValue(SyncMetadataEntity("cachedVersion", remoteResult.version.toString()))
-                    metadataDao.setValue(SyncMetadataEntity("lastSyncAtUtc", nowUtc))
-
-                    recordEvent(
-                        input = input,
-                        eventType = "snapshot_applied",
-                        version = remoteResult.version,
-                        outcome = "applied",
-                        reason = "Đã lưu snapshot v${remoteResult.version} (${entities.size} bản tin)",
-                    )
-
-                    SyncResult(
-                        outcome = SyncOutcomeType.APPLIED,
-                        reason = "Đã cập nhật snapshot v${remoteResult.version}",
-                        version = remoteResult.version,
-                    )
-                } else {
-                    recordEvent(
-                        input = input,
-                        eventType = "snapshot_stale",
-                        version = currentVersion,
-                        outcome = "stale",
-                        reason = "Bỏ qua: version server (${remoteResult.version}) không mới hơn cache ($currentVersion)",
-                    )
-                    SyncResult(
-                        outcome = SyncOutcomeType.STALE,
-                        reason = "Version không mới hơn cache",
-                        version = currentVersion,
-                    )
                 }
             }
 
@@ -86,29 +87,36 @@ class SyncRepository(
                 recordEvent(
                     input = input,
                     eventType = "snapshot_unchanged",
-                    version = currentVersion,
+                    version = initialVersion,
                     outcome = "unchanged",
                     reason = "Bản tin không đổi (HTTP 304 Not Modified)",
                 )
                 SyncResult(
                     outcome = SyncOutcomeType.UNCHANGED,
                     reason = "Bản tin không đổi",
-                    version = currentVersion,
+                    version = initialVersion,
                 )
             }
 
             is RemoteSnapshotResult.Failure -> {
+                val outcomeType = if (remoteResult.isTransient) {
+                    SyncOutcomeType.RETRY
+                } else {
+                    SyncOutcomeType.FAILURE
+                }
+
                 recordEvent(
                     input = input,
-                    eventType = "sync_failed",
-                    version = currentVersion,
-                    outcome = "failure",
+                    eventType = if (remoteResult.isTransient) "sync_retrying" else "sync_failed",
+                    version = initialVersion,
+                    outcome = if (remoteResult.isTransient) "retry" else "failure",
                     reason = remoteResult.message,
                 )
+
                 SyncResult(
-                    outcome = SyncOutcomeType.FAILURE,
+                    outcome = outcomeType,
                     reason = remoteResult.message,
-                    version = currentVersion,
+                    version = initialVersion,
                 )
             }
         }
@@ -122,6 +130,7 @@ class SyncRepository(
         reason: String?,
     ) {
         val now = Instant.now()
+        val elapsedRealtime = SystemClock.elapsedRealtime()
         val eventEntity = TimelineEventEntity(
             eventId = UUID.randomUUID().toString(),
             source = input.source.name,
@@ -135,6 +144,7 @@ class SyncRepository(
             requestId = input.correlation.requestId,
             workId = input.correlation.workId,
             messageId = input.correlation.messageId,
+            elapsedRealtimeMillis = elapsedRealtime,
         )
         timelineDao.insert(eventEntity)
     }
