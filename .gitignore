@@ -12,3 +12,4 @@ node_modules/
 .idea/
 .local/
 experiments/private/
+.kotlin/
