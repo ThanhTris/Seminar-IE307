@@ -81,16 +81,18 @@ Script chỉ kiểm ví dụ và correlation được nêu, **không phải vali
 
 ### Workflow và bàn giao
 
-SEM-26 đã chuyển **Todo → In Progress → Review**; [PR #6](https://github.com/ThanhTris/Seminar-IE307/pull/6) có mô tả tiếng Việt và tag `@ThanhTris`. Snapshot đối chiếu **02/11/2026 09:54:44 UTC+7** bằng:
+SEM-26 đã chuyển **Todo → In Progress → Review** qua [PR #6](https://github.com/ThanhTris/Seminar-IE307/pull/6).
+Nhóm trưởng `ThanhTris` đã review, duyệt và merge PR #6 vào `main` tại merge commit `3d49386e08fbe7b4299731b942b7c7dbec2e8fee`.
+Trạng thái task SEM-26 trên GitHub Project 3 đã được cập nhật sang **Done** (item `PVTI_lAHOCnL5Fs4BpUDUzhEiXIg`).
+
+Snapshot được đồng bộ bằng:
 
 ```sh
-python3 scripts/update_task_snapshot.py --apply
-python3 scripts/update_task_snapshot.py --check
+python scripts/update_task_snapshot.py --apply
+python scripts/update_task_snapshot.py --check
 ```
 
-Cả hai lệnh Pass: **45 task; 5 Done / 39 Todo / 1 Review; 10 Sẵn sàng / 9 Chuẩn bị trước / 26 Chờ đầu vào**; mỗi task có một assignee khớp owner, dependency không có vòng lặp. Diff các task chỉ thay phần snapshot tự sinh; không đổi scope, owner, deadline, dependency hay acceptance checklist. SEM-24/25/27/45 vẫn chờ đầu vào theo Project.
-
-Theo yêu cầu HoaiTam, nhóm trưởng `ThanhTris` kiểm nhận và quyết định merge/Done. Không tự merge, không tự đánh dấu Done; chỉ sửa tiếp khi có comment yêu cầu fix từ nhóm trưởng.
+Cả hai lệnh Pass: **45 task; 6 Done / 39 Todo**; mỗi task có một assignee khớp owner, dependency không có vòng lặp. SEM-26 hoàn tất mở khóa cho SEM-24, SEM-25, SEM-27 và SEM-45 theo dependency graph.
 
 - **SEM-24:** event keys, nullability và manifest cho exporter; đầu vào SEM-12 vẫn cần nhận riêng.
 - **SEM-25:** endpoint/ETag, version guard, metadata snapshot rỗng, canonical JSONL và các khác biệt Android nêu trên.

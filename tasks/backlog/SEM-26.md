@@ -1,8 +1,8 @@
 # SEM-26 — Chốt hợp đồng API và event schema
 
-- Trạng thái: **Review** (Project).
+- Trạng thái: **Done** (Project).
 - Trạng thái đầu vào: **Sẵn sàng**.
-- Đối chiếu Project: 2026-11-02 02:54:44 UTC.
+- Đối chiếu Project: 2026-11-02 12:31:44 UTC.
 - Người thực hiện duy nhất: **Tâm** (`HoaiTam`).
 - Hạn: **30/10/2026 17:00 (UTC+7)**.
 - Công sức: 2/100 — Cơ chế/thực hành.
@@ -28,7 +28,7 @@ Tài liệu nền đã có: [Kế hoạch/phạm vi](../../docs/PLAN.md).
 
 Đây là danh sách đầu ra cần bàn giao, chưa phải xác nhận các file đã tồn tại. Trước khi dùng, nhận đúng artifact/commit/config và CHECKS từ task nguồn.
 
-Status nguồn được đối chiếu Project lúc **2026-11-02 02:54:44 UTC**; mở link task nguồn để xem cập nhật mới hơn.
+Status nguồn được đối chiếu Project lúc **2026-11-02 12:31:44 UTC**; mở link task nguồn để xem cập nhật mới hơn.
 <!-- task-inputs:end -->
 
 
@@ -46,9 +46,9 @@ Status nguồn được đối chiếu Project lúc **2026-11-02 02:54:44 UTC**;
 
 ## Tiêu chí hoàn thành
 
-- [ ] Snapshot/version/error rõ ràng, event accepted/received/started/applied riêng biệt.
-- [ ] Core và server có thể triển khai theo contract mà không cần chờ code của nhau.
-- [ ] Đầu ra và CHECKS có thật, link đọc được; chưa chạy phải ghi Not run, không tự chuyển Done từ kế hoạch.
+- [x] Snapshot/version/error rõ ràng, event accepted/received/started/applied riêng biệt.
+- [x] Core và server có thể triển khai theo contract mà không cần chờ code của nhau.
+- [x] Đầu ra và CHECKS có thật, link đọc được; chưa chạy phải ghi Not run, không tự chuyển Done từ kế hoạch.
 
 ## Task được mở khóa
 

@@ -4,6 +4,7 @@ from datetime import datetime
 import json
 from pathlib import Path
 import re
+import sys
 from uuid import UUID
 
 ROOT = Path(__file__).resolve().parents[3]
@@ -191,4 +192,6 @@ def main():
 
 
 if __name__ == '__main__':
+    if hasattr(sys.stdout, 'reconfigure'):
+        sys.stdout.reconfigure(encoding='utf-8')
     main()
