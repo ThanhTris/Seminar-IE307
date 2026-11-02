@@ -1,8 +1,8 @@
 # SEM-26 — Chốt hợp đồng API và event schema
 
-- Trạng thái: **Todo** (Project).
+- Trạng thái: **Review** (Project).
 - Trạng thái đầu vào: **Sẵn sàng**.
-- Đối chiếu Project: 2026-10-31 16:46:06 UTC.
+- Đối chiếu Project: 2026-11-02 02:54:44 UTC.
 - Người thực hiện duy nhất: **Tâm** (`HoaiTam`).
 - Hạn: **30/10/2026 17:00 (UTC+7)**.
 - Công sức: 2/100 — Cơ chế/thực hành.
@@ -28,7 +28,7 @@ Tài liệu nền đã có: [Kế hoạch/phạm vi](../../docs/PLAN.md).
 
 Đây là danh sách đầu ra cần bàn giao, chưa phải xác nhận các file đã tồn tại. Trước khi dùng, nhận đúng artifact/commit/config và CHECKS từ task nguồn.
 
-Status nguồn được đối chiếu Project lúc **2026-10-31 16:46:06 UTC**; mở link task nguồn để xem cập nhật mới hơn.
+Status nguồn được đối chiếu Project lúc **2026-11-02 02:54:44 UTC**; mở link task nguồn để xem cập nhật mới hơn.
 <!-- task-inputs:end -->
 
 
