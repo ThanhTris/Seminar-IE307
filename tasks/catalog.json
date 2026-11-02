@@ -639,7 +639,7 @@
             "docs/EVENT_SCHEMA.md"
           ],
           "checks": "docs/evidence/SEM-26/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Review"
         }
       ],
       "due_at": "2026-10-31T15:00:00+07:00"
@@ -694,7 +694,7 @@
             "docs/EVENT_SCHEMA.md"
           ],
           "checks": "docs/evidence/SEM-26/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Review"
         }
       ],
       "due_at": "2026-10-31T17:00:00+07:00"
@@ -708,7 +708,7 @@
       "category": "practice",
       "title": "Chốt hợp đồng API và event schema",
       "due": "2026-10-30",
-      "status": "Todo",
+      "status": "Review",
       "start_dependencies": [
         "SEM-11",
         "SEM-13",
@@ -813,7 +813,7 @@
             "docs/EVENT_SCHEMA.md"
           ],
           "checks": "docs/evidence/SEM-26/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Review"
         }
       ],
       "due_at": "2026-10-31T17:00:00+07:00"
@@ -2101,7 +2101,7 @@
             "docs/EVENT_SCHEMA.md"
           ],
           "checks": "docs/evidence/SEM-26/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Review"
         },
         {
           "source_task": "SEM-41",
@@ -2911,7 +2911,7 @@
       "due_at": "2026-11-12T22:00:00+07:00"
     }
   ],
-  "snapshot_at": "2026-10-31 16:46:06 UTC",
+  "snapshot_at": "2026-11-02 02:54:44 UTC",
   "snapshot_source": "https://github.com/users/ThanhTris/projects/3/views/1",
   "timezone": "Asia/Ho_Chi_Minh",
   "deadline_at": "2026-11-13T22:00:00+07:00",
