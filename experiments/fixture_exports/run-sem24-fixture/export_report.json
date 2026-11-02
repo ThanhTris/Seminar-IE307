@@ -1,0 +1,30 @@
+{
+  "exporter_version": "1.0.0",
+  "data_kind": "FIXTURE",
+  "run_id": "run-sem24-fixture",
+  "device_alias": "fixture-device",
+  "manifest_input_sha256": "9e41d1b72959e3589e041956361da2067b09f17e82a9099857c943c904317388",
+  "sources": [
+    {
+      "origin": "ANDROID",
+      "sha256": "76c9a53768a838022ca093a047c8184a1b2f9d24f86105a41e8ffafeafa4aafc",
+      "lines": 7,
+      "selected": 6,
+      "other_run_or_device": 1,
+      "duplicates": 0,
+      "extra_fields_omitted": 8
+    },
+    {
+      "origin": "SERVER",
+      "sha256": "3a3a7c45896ba866f3d6f24e13563a4c283c9a30f82f5520d2c03019a36a41d2",
+      "lines": 3,
+      "selected": 2,
+      "other_run_or_device": 0,
+      "duplicates": 1,
+      "extra_fields_omitted": 3
+    }
+  ],
+  "events_exported": 8,
+  "ordering": "INPUT_ORDER_NOT_CAUSAL",
+  "analysis_performed": false
+}

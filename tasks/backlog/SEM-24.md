@@ -46,9 +46,15 @@ Status nguồn được đối chiếu Project lúc **2026-11-02 12:31:44 UTC**;
 
 ## Tiêu chí hoàn thành
 
-- [ ] Manifest có commit app/server, APK SHA256, OS/config, phase và outcome.
-- [ ] Script không xuất token/serial/credential vào dữ liệu public, không sửa giá trị đo.
-- [ ] Đầu ra và CHECKS có thật, link đọc được; chưa chạy phải ghi Not run, không tự chuyển Done từ kế hoạch.
+- [x] Manifest có commit app/server, APK SHA256, OS/config, phase và outcome.
+- [x] Script không xuất token/serial/credential vào dữ liệu public, không sửa giá trị đo.
+- [x] Đầu ra và CHECKS có thật, link đọc được; chưa chạy phải ghi Not run, không tự chuyển Done từ kế hoạch.
+
+## Đầu ra đã kiểm ngày 03/11/2026
+
+[Manifest template 1.0.0](../../experiments/RUN_MANIFEST_TEMPLATE.json) · [Exporter 1.0.0](../../experiments/scripts/export_logs.py) · [README](../../experiments/README.md) · [CHECKS SEM-24](../../docs/evidence/SEM-24/CHECKS.md).
+
+Đã nhận artifact SEM-12/26 trên nhánh kế thừa SEM-16, kiểm công cụ bằng fixture có nhãn và 36 tests. Bản export mẫu là FIXTURE/development, không phải số liệu thực nghiệm. ADB producer/runtime/OPPO vẫn **Not run**; xem CHECKS về đầu vào tích hợp còn thiếu. Checklist cục bộ không tự đổi Project Done; Status/Input status phía trên vẫn là snapshot 02/11/2026, PR SEM-12/16 đang chờ merge khi bắt đầu.
 
 ## Task được mở khóa
 
