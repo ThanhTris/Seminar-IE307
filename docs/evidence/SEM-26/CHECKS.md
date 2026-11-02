@@ -31,7 +31,7 @@
 - **Base:** `68db745def039d2277640c560b9b1e4e28ed3c92` (`origin/main`, đã fetch); nhánh `codex/SEM-26-api-event-schema`.
 - **Đầu vào đã nhận:** SEM-11 — [phạm vi](../../SCOPE.md), [Android build](../../environment/ANDROID_BUILD.md), [CHECKS](../SEM-11/CHECKS.md), artifact commit `7b502c0`; SEM-13 — [server/Firebase](../../environment/SERVER_FIREBASE.md), [CHECKS](../SEM-13/CHECKS.md), artifact `b9da9a0`; SEM-14 — [shared sync](../../mechanisms/SHARED_SYNC.md), [CHECKS](../SEM-14/CHECKS.md), artifact `3bf7dcf`. Các task nguồn đều Done trên Project khi bắt đầu.
 - **Nguồn bổ sung:** [SEM-18](../../mechanisms/SERVER_FCM.md), artifact `22c393f`; [protocol](../../EXPERIMENT_PROTOCOL.md); baseline server/Android thực tế trên main. SEM-18 không phải gate bắt đầu của SEM-26.
-- **Đầu ra:** [API.md](../../API.md), [EVENT_SCHEMA.md](../../EVENT_SCHEMA.md), CHECKS này và [validate_fixtures.py](validate_fixtures.py). Contract `2.0.0` là **đề xuất chờ review**, không khẳng định code đã tuân thủ.
+- **Đầu ra:** [API.md](../../API.md), [EVENT_SCHEMA.md](../../EVENT_SCHEMA.md), CHECKS này và [validate_fixtures.py](validate_fixtures.py); commit artifact `981b4304de99052df5f553444493aec646dd7d07`. Contract `2.0.0` là **đề xuất chờ review**, không khẳng định code đã tuân thủ.
 
 ### Soát tiêu chí và kiểm tra
 
@@ -81,7 +81,16 @@ Script chỉ kiểm ví dụ và correlation được nêu, **không phải vali
 
 ### Workflow và bàn giao
 
-SEM-26 đã bắt đầu trên nhánh riêng; sau khi hoàn tất kiểm tra, chuyển **Review** và đồng bộ snapshot theo script của repo. Theo yêu cầu HoaiTam, nhóm trưởng `ThanhTris` kiểm nhận và quyết định merge/Done. Không tự merge, không tự đánh dấu Done; chỉ sửa tiếp khi có comment yêu cầu fix từ nhóm trưởng.
+SEM-26 đã chuyển **Todo → In Progress → Review**; [PR #6](https://github.com/ThanhTris/Seminar-IE307/pull/6) có mô tả tiếng Việt và tag `@ThanhTris`. Snapshot đối chiếu **02/11/2026 09:54:44 UTC+7** bằng:
+
+```sh
+python3 scripts/update_task_snapshot.py --apply
+python3 scripts/update_task_snapshot.py --check
+```
+
+Cả hai lệnh Pass: **45 task; 5 Done / 39 Todo / 1 Review; 10 Sẵn sàng / 9 Chuẩn bị trước / 26 Chờ đầu vào**; mỗi task có một assignee khớp owner, dependency không có vòng lặp. Diff các task chỉ thay phần snapshot tự sinh; không đổi scope, owner, deadline, dependency hay acceptance checklist. SEM-24/25/27/45 vẫn chờ đầu vào theo Project.
+
+Theo yêu cầu HoaiTam, nhóm trưởng `ThanhTris` kiểm nhận và quyết định merge/Done. Không tự merge, không tự đánh dấu Done; chỉ sửa tiếp khi có comment yêu cầu fix từ nhóm trưởng.
 
 - **SEM-24:** event keys, nullability và manifest cho exporter; đầu vào SEM-12 vẫn cần nhận riêng.
 - **SEM-25:** endpoint/ETag, version guard, metadata snapshot rỗng, canonical JSONL và các khác biệt Android nêu trên.
