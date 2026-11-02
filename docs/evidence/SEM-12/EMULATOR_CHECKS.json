@@ -1,0 +1,212 @@
+{
+  "checked_at": "2026-11-03T01:18:24.864084+07:00",
+  "source_commit": "8f8d39e31b50fae946da050094eb3d3432fe540a",
+  "device_alias": "emulator-main",
+  "physical_devices_connected": 0,
+  "scope": "SEM-12 environment checks; no app build, install, push send or experiment run",
+  "checks": {
+    "sys.boot_completed": {
+      "exit_code": 0,
+      "stdout": "1",
+      "stderr": ""
+    },
+    "ro.product.model": {
+      "exit_code": 0,
+      "stdout": "sdk_gphone16k_arm64",
+      "stderr": ""
+    },
+    "ro.product.manufacturer": {
+      "exit_code": 0,
+      "stdout": "Google",
+      "stderr": ""
+    },
+    "ro.build.version.release": {
+      "exit_code": 0,
+      "stdout": "17",
+      "stderr": ""
+    },
+    "ro.build.version.sdk": {
+      "exit_code": 0,
+      "stdout": "37",
+      "stderr": ""
+    },
+    "ro.build.version.security_patch": {
+      "exit_code": 0,
+      "stdout": "2026-07-05",
+      "stderr": ""
+    },
+    "ro.build.version.incremental": {
+      "exit_code": 0,
+      "stdout": "16064790",
+      "stderr": ""
+    },
+    "ro.build.fingerprint": {
+      "exit_code": 0,
+      "stdout": "google/sdk_gphone16k_arm64/emu64a16k:17/CP31.260623.012/16064790:user/dev-keys",
+      "stderr": ""
+    },
+    "ro.product.cpu.abi": {
+      "exit_code": 0,
+      "stdout": "arm64-v8a",
+      "stderr": ""
+    },
+    "ro.boot.qemu.avd_name": {
+      "exit_code": 0,
+      "stdout": "Pixel_7a",
+      "stderr": ""
+    },
+    "page_size": {
+      "exit_code": 0,
+      "stdout": "16384",
+      "stderr": ""
+    },
+    "package:com.google.android.gms": {
+      "installed": true,
+      "version": [
+        "versionCode=263332035 minSdk=35 targetSdk=37",
+        "versionName=26.33.32 (260400-974685114)"
+      ],
+      "user_state": {
+        "installed": "true",
+        "hidden": "false",
+        "suspended": "false",
+        "stopped": "false",
+        "enabled": "0"
+      }
+    },
+    "package:com.android.vending": {
+      "installed": true,
+      "version": [
+        "versionCode=85372340 minSdk=34 targetSdk=37",
+        "versionName=53.7.23-34 [0] [PR] 1001145691"
+      ],
+      "user_state": {
+        "installed": "true",
+        "hidden": "false",
+        "suspended": "false",
+        "stopped": "false",
+        "enabled": "1"
+      }
+    },
+    "package:com.thanhtris.seminarie307": {
+      "installed": false
+    },
+    "battery": {
+      "exit_code": 0,
+      "stdout": "AC powered: false\nUSB powered: false\nWireless powered: false\nstatus: 4\nlevel: 100\nscale: 100\ntemperature: 250",
+      "stderr": ""
+    },
+    "battery_saver": {
+      "exit_code": 0,
+      "stdout": "0",
+      "stderr": ""
+    },
+    "deviceidle_deep": {
+      "exit_code": 0,
+      "stdout": "ACTIVE",
+      "stderr": ""
+    },
+    "host_health": {
+      "http_status": 200,
+      "body": {
+        "status": "ok",
+        "uptime_seconds": 72.26,
+        "server_time_utc": "2026-11-02T18:18:28.099Z"
+      }
+    },
+    "guest_host_health": {
+      "exit_code": 0,
+      "stdout": "HTTP/1.1 200 OK\nContent-Type: application/json; charset=utf-8\nAccess-Control-Allow-Origin: *\nAccess-Control-Allow-Methods: GET, POST, OPTIONS\nAccess-Control-Allow-Headers: Content-Type, If-None-Match, X-Correlation-Request-Id\nDate: Mon, 02 Nov 2026 18:18:28 GMT\nConnection: close\nTransfer-Encoding: chunked\n\n54\n{\"status\":\"ok\",\"uptime_seconds\":72.384,\"server_time_utc\":\"2026-11-02T18:18:28.223Z\"}\n0",
+      "stderr": ""
+    },
+    "guest_host_snapshot": {
+      "exit_code": 0,
+      "stdout": "HTTP/1.1 200 OK\nContent-Type: application/json; charset=utf-8\nAccess-Control-Allow-Origin: *\nAccess-Control-Allow-Methods: GET, POST, OPTIONS\nAccess-Control-Allow-Headers: Content-Type, If-None-Match, X-Correlation-Request-Id\nETag: \"v1\"\nDate: Mon, 02 Nov 2026 18:18:28 GMT\nConnection: close\nTransfer-Encoding: chunked\n\ne9\n{\"version\":1,\"last_modified_utc\":\"2026-10-31T16:48:04.306Z\",\"items\":[{\"id\":\"bulletin-1\",\"title\":\"Chào mừng đến với Seminar IE307\",\"body\":\"Hệ thống đồng bộ dữ liệu Android (Periodic, Push, Hybrid).\",\"version\":1}]}\n0",
+      "stderr": ""
+    },
+    "reverse_before_count": 0,
+    "reverse_add": {
+      "exit_code": 0,
+      "stdout": "58207",
+      "stderr": ""
+    },
+    "guest_reverse_health": {
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "reverse_cleanup": {
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "reverse_mapping_remaining": false,
+    "guest_internet_http": {
+      "exit_code": 0,
+      "stdout": "HTTP/1.1 204 No Content\nContent-Length: 0\nCross-Origin-Resource-Policy: cross-origin\nDate: Mon, 02 Nov 2026 18:18:28 GMT\nConnection: close",
+      "stderr": ""
+    },
+    "guest_fcm_tcp443": {
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "log_marker_write": {
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "logcat_marker_read": {
+      "exit_code": 0,
+      "stdout": "I/SEM12   ( 4093): SEM12_LOG_PROBE_20261103",
+      "stderr": ""
+    },
+    "reverse_recheck": {
+      "add": {
+        "exit_code": 0,
+        "stdout": "58207",
+        "stderr": ""
+      },
+      "mapping_present": true,
+      "attempt_1": {
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      "attempt_2": {
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      "attempt_3": {
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      "cleanup": {
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      "mapping_remaining": false
+    },
+    "reverse_halfclose_recheck": {
+      "add": {
+        "exit_code": 0,
+        "stdout": "58207",
+        "stderr": ""
+      },
+      "request_kept_open_2s": {
+        "exit_code": 0,
+        "stdout": "HTTP/1.1 200 OK\nContent-Type: application/json; charset=utf-8\nAccess-Control-Allow-Origin: *\nAccess-Control-Allow-Methods: GET, POST, OPTIONS\nAccess-Control-Allow-Headers: Content-Type, If-None-Match, X-Correlation-Request-Id\nDate: Mon, 02 Nov 2026 18:20:02 GMT\nConnection: close\nTransfer-Encoding: chunked\n\n54\n{\"status\":\"ok\",\"uptime_seconds\":166.58,\"server_time_utc\":\"2026-11-02T18:20:02.419Z\"}\n0",
+        "stderr": ""
+      },
+      "cleanup": {
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      "mapping_remaining": false
+    }
+  }
+}
