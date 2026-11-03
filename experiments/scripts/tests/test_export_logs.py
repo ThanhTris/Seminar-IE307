@@ -6,6 +6,7 @@ import hashlib
 import importlib.util
 import io
 import json
+import os
 from pathlib import Path
 import subprocess
 import tempfile
@@ -224,8 +225,9 @@ class ExportTests(unittest.TestCase):
         captures = list((self.root / "experiments/private").rglob("android.raw.jsonl"))
         self.assertEqual(len(captures), 1)
         self.assertEqual(captures[0].read_bytes(), raw)
-        self.assertEqual(captures[0].stat().st_mode & 0o777, 0o600)
-        self.assertEqual(captures[0].parent.stat().st_mode & 0o777, 0o700)
+        if os.name != 'nt':
+            self.assertEqual(captures[0].stat().st_mode & 0o777, 0o600)
+            self.assertEqual(captures[0].parent.stat().st_mode & 0o777, 0o700)
         self.assertNotIn(self.deny[1], "".join(p.read_text() for p in self.public.iterdir()))
 
     def test_adb_failure_does_not_expose_stderr_or_fallback(self):

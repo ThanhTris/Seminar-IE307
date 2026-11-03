@@ -49,7 +49,7 @@
       "category": "practice",
       "title": "Lập hồ sơ OPPO và emulator",
       "due": "2026-10-30",
-      "status": "Todo",
+      "status": "Done",
       "start_dependencies": [],
       "finish_dependencies": [],
       "work": [
@@ -175,7 +175,7 @@
       "category": "practice",
       "title": "Lập ma trận lifecycle và protocol E01–E06",
       "due": "2026-10-30",
-      "status": "Todo",
+      "status": "Done",
       "start_dependencies": [],
       "finish_dependencies": [],
       "work": [
@@ -306,7 +306,7 @@
             "docs/environment/DEVICES.md"
           ],
           "checks": "docs/evidence/SEM-12/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Done"
         },
         {
           "source_task": "SEM-13",
@@ -347,7 +347,7 @@
             "experiments/RUN_SCHEDULE.md"
           ],
           "checks": "docs/evidence/SEM-16/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Done"
         },
         {
           "source_task": "SEM-17",
@@ -400,7 +400,7 @@
         "Tên/tác giả/DOI khớp nguồn gốc; ít nhất một lập luận gắn được quyết định thử hoặc trade-off.",
         "Không dùng số đo paper làm số đo OPPO; phân biệt nguồn paper và tài liệu API."
       ],
-      "input_status": "Chuẩn bị trước",
+      "input_status": "Sẵn sàng",
       "inputs": [
         {
           "source_task": "SEM-11",
@@ -421,7 +421,7 @@
             "docs/environment/DEVICES.md"
           ],
           "checks": "docs/evidence/SEM-12/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Done"
         }
       ],
       "due_at": "2026-11-01T16:00:00+07:00"
@@ -454,7 +454,7 @@
         "Có ghi chú toàn văn, nguồn kiểm chứng và giới hạn áp dụng.",
         "Nếu không có PDF chia sẻ hợp lệ thì metadata/link vẫn đủ; không tải bản không được phép."
       ],
-      "input_status": "Chuẩn bị trước",
+      "input_status": "Sẵn sàng",
       "inputs": [
         {
           "source_task": "SEM-11",
@@ -475,7 +475,7 @@
             "docs/environment/DEVICES.md"
           ],
           "checks": "docs/evidence/SEM-12/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Done"
         }
       ],
       "due_at": "2026-11-01T16:00:00+07:00"
@@ -597,7 +597,7 @@
       "category": "practice",
       "title": "Chuẩn bị bộ xuất log và run manifest",
       "due": "2026-10-31",
-      "status": "Todo",
+      "status": "Done",
       "start_dependencies": [
         "SEM-12"
       ],
@@ -618,7 +618,7 @@
         "Manifest có commit app/server, APK SHA256, OS/config, phase và outcome.",
         "Script không xuất token/serial/credential vào dữ liệu public, không sửa giá trị đo."
       ],
-      "input_status": "Chờ đầu vào",
+      "input_status": "Sẵn sàng",
       "inputs": [
         {
           "source_task": "SEM-12",
@@ -628,7 +628,7 @@
             "docs/environment/DEVICES.md"
           ],
           "checks": "docs/evidence/SEM-12/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Done"
         },
         {
           "source_task": "SEM-26",
@@ -872,7 +872,7 @@
             "experiments/README.md"
           ],
           "checks": "docs/evidence/SEM-24/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Done"
         },
         {
           "source_task": "SEM-25",
@@ -941,7 +941,7 @@
             "experiments/RUN_SCHEDULE.md"
           ],
           "checks": "docs/evidence/SEM-16/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Done"
         },
         {
           "source_task": "SEM-24",
@@ -953,7 +953,7 @@
             "experiments/README.md"
           ],
           "checks": "docs/evidence/SEM-24/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Done"
         },
         {
           "source_task": "SEM-30",
@@ -1249,7 +1249,7 @@
             "experiments/RUN_SCHEDULE.md"
           ],
           "checks": "docs/evidence/SEM-16/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Done"
         },
         {
           "source_task": "SEM-24",
@@ -1261,7 +1261,7 @@
             "experiments/README.md"
           ],
           "checks": "docs/evidence/SEM-24/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Done"
         },
         {
           "source_task": "SEM-32",
@@ -1797,7 +1797,7 @@
             "experiments/RUN_SCHEDULE.md"
           ],
           "checks": "docs/evidence/SEM-16/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Done"
         },
         {
           "source_task": "SEM-24",
@@ -1809,7 +1809,7 @@
             "experiments/README.md"
           ],
           "checks": "docs/evidence/SEM-24/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Done"
         },
         {
           "source_task": "SEM-37",
@@ -1865,7 +1865,7 @@
             "docs/environment/DEVICES.md"
           ],
           "checks": "docs/evidence/SEM-12/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Done"
         },
         {
           "source_task": "SEM-16",
@@ -1876,7 +1876,7 @@
             "experiments/RUN_SCHEDULE.md"
           ],
           "checks": "docs/evidence/SEM-16/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Done"
         },
         {
           "source_task": "SEM-24",
@@ -1888,7 +1888,7 @@
             "experiments/README.md"
           ],
           "checks": "docs/evidence/SEM-24/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Done"
         },
         {
           "source_task": "SEM-37",
@@ -2078,7 +2078,7 @@
         "Tái sinh được CSV từ log; fixture không lẫn main, không gán latency timeout bằng 0.",
         "Accepted/received/queue/sync không bị gộp thành một mốc."
       ],
-      "input_status": "Chờ đầu vào",
+      "input_status": "Chuẩn bị trước",
       "inputs": [
         {
           "source_task": "SEM-24",
@@ -2090,7 +2090,7 @@
             "experiments/README.md"
           ],
           "checks": "docs/evidence/SEM-24/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Done"
         },
         {
           "source_task": "SEM-26",
@@ -2911,7 +2911,7 @@
       "due_at": "2026-11-12T22:00:00+07:00"
     }
   ],
-  "snapshot_at": "2026-11-02 12:31:44 UTC",
+  "snapshot_at": "2026-11-03 03:22:54 UTC",
   "snapshot_source": "https://github.com/users/ThanhTris/projects/3/views/1",
   "timezone": "Asia/Ho_Chi_Minh",
   "deadline_at": "2026-11-13T22:00:00+07:00",

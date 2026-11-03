@@ -1,8 +1,8 @@
 # SEM-24 — Chuẩn bị bộ xuất log và run manifest
 
-- Trạng thái: **Todo** (Project).
-- Trạng thái đầu vào: **Chờ đầu vào**.
-- Đối chiếu Project: 2026-11-02 12:31:44 UTC.
+- Trạng thái: **Done** (Project).
+- Trạng thái đầu vào: **Sẵn sàng**.
+- Đối chiếu Project: 2026-11-03 03:22:54 UTC.
 - Người thực hiện duy nhất: **Vinh** (`Vinh5905`).
 - Hạn: **31/10/2026 15:00 (UTC+7)**.
 - Công sức: 1/100 — Cơ chế/thực hành.
@@ -22,12 +22,12 @@ Tài liệu nền đã có: [Kế hoạch/phạm vi](../../docs/PLAN.md) · [Pro
 
 | Cần cho | Task cung cấp | Người bàn giao | Đầu ra phải nhận | Kiểm chứng bàn giao | Status nguồn |
 |---|---|---|---|---|---|
-| Bắt đầu | [SEM-12 — Lập hồ sơ OPPO và emulator](SEM-12.md) | Vinh | `docs/environment/DEVICES.md` | `docs/evidence/SEM-12/CHECKS.md` | Todo |
+| Bắt đầu | [SEM-12 — Lập hồ sơ OPPO và emulator](SEM-12.md) | Vinh | `docs/environment/DEVICES.md` | `docs/evidence/SEM-12/CHECKS.md` | Done |
 | Hoàn tất | [SEM-26 — Chốt hợp đồng API và event schema](SEM-26.md) | Tâm | `docs/API.md`<br>`docs/EVENT_SCHEMA.md` | `docs/evidence/SEM-26/CHECKS.md` | Done |
 
 Đây là danh sách đầu ra cần bàn giao, chưa phải xác nhận các file đã tồn tại. Trước khi dùng, nhận đúng artifact/commit/config và CHECKS từ task nguồn.
 
-Status nguồn được đối chiếu Project lúc **2026-11-02 12:31:44 UTC**; mở link task nguồn để xem cập nhật mới hơn.
+Status nguồn được đối chiếu Project lúc **2026-11-03 03:22:54 UTC**; mở link task nguồn để xem cập nhật mới hơn.
 <!-- task-inputs:end -->
 
 

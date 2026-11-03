@@ -13,3 +13,5 @@ node_modules/
 .local/
 experiments/private/
 .kotlin/
+__pycache__/
+*.pyc

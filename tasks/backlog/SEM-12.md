@@ -1,8 +1,8 @@
 # SEM-12 — Lập hồ sơ OPPO và emulator
 
-- Trạng thái: **Todo** (Project).
+- Trạng thái: **Done** (Project).
 - Trạng thái đầu vào: **Sẵn sàng**.
-- Đối chiếu Project: 2026-11-02 12:31:44 UTC.
+- Đối chiếu Project: 2026-11-03 03:22:54 UTC.
 - Người thực hiện duy nhất: **Vinh** (`Vinh5905`).
 - Hạn: **30/10/2026 12:00 (UTC+7)**.
 - Công sức: 1/100 — Cơ chế/thực hành.
@@ -22,7 +22,7 @@ Tài liệu nền đã có: [Kế hoạch/phạm vi](../../docs/PLAN.md) · [Pro
 
 Không cần nhận đầu ra từ task khác để bắt đầu. Owner thực hiện từ tài liệu nền và tự ghi các blocker môi trường/quyền truy cập trong CHECKS của task này.
 
-Status nguồn được đối chiếu Project lúc **2026-11-02 12:31:44 UTC**; mở link task nguồn để xem cập nhật mới hơn.
+Status nguồn được đối chiếu Project lúc **2026-11-03 03:22:54 UTC**; mở link task nguồn để xem cập nhật mới hơn.
 <!-- task-inputs:end -->
 
 
