@@ -1,23 +1,22 @@
-# SEM-30 — Kiểm tra và bàn giao Unique Periodic Work
+# SEM-30 CHECKS — Unique periodic work
 
-## Nhận dạng lần kiểm
+## Đầu ra
 
-- **Thời điểm:** 31/10/2026 (UTC+7).
-- **Task:** [SEM-30](../../../tasks/backlog/SEM-30.md).
-- **Người thực hiện:** Trung (`TrungNQ2645`) / Trí (`ThanhTris`).
-- **Thành phần bàn giao:**
-  - `PeriodicSyncScheduler.kt`: Lớp quản lý lịch lặp duy nhất (`enqueueUniquePeriodicWork`).
-  - Tái sử dụng `SyncWorker` chung với nguồn `SyncSource.PERIODIC`.
-  - Hỗ trợ bật/tắt/truy vấn trạng thái lịch lặp.
+- Scheduler: `android/app/src/main/java/com/thanhtris/seminarie307/sync/PeriodicSyncScheduler.kt`.
+- Constraints: `CONNECTED`; unique name `periodic_bulletin_sync`; interval tối thiểu 15 phút; mode phải là PERIODIC/HYBRID.
 
-## Tiêu chí và Kết quả
+## Kiểm tra
 
-| Yêu cầu kiểm tra | Expected | Actual | Trạng thái |
-|---|---|---|:---:|
-| Unique work registration | Đăng ký lặp duy nhất theo tên `periodic_bulletin_sync` | Dùng `ExistingPeriodicWorkPolicy.UPDATE` | Pass |
-| Ràng buộc mạng (Network Constraints) | Chỉ chạy khi có mạng (`NetworkType.CONNECTED`) | Đã cấu hình qua `Constraints.Builder` | Pass |
-| Không tạo sync engine riêng | Tái sử dụng `SyncWorker` và `SyncRepository` | Chạy cùng logic Version Guard và ghi Room DB | Pass |
-| Thao tác hủy lịch | Tắt periodic hủy work duy nhất, không để lịch cũ sót lại | `cancelPeriodicSync()` gọi `cancelUniqueWork` và ghi event timeline | Pass |
+| Hạng mục | Expected | Actual | Trạng thái |
+|---|---|---|---|
+| Interval dưới 15 phút | Bị từ chối rõ ràng | `require` kiểm tra trước khi tạo request | Pass (code review) |
+| Đăng ký lặp | Chỉ một unique periodic work | Cùng unique name, policy UPDATE; đợi Operation rồi đọc WorkInfo thật | Pass (code review) |
+| Hủy | Unique work bị cancel | Đợi Operation cancel hoàn tất rồi ghi cancel event | Pass (code review) |
+| Network constraint | Không chạy khi chưa CONNECTED | Constraint được gắn vào request | Pass (code review) |
+| Registration event | Chỉ ghi sau Operation hoàn tất và WorkInfo active được quan sát; ghi ID thật | Đã thêm; chưa chạy Android | Pass (code review) |
+| Re-register/cancel/query trên Android | Có đúng một lịch; cancel dừng lịch | Chưa chạy trên thiết bị | Not run |
+| Natural periodic timing | Quan sát run không bị force-run | Chưa có run manifest/log | Not run |
 
-## Bàn giao tiếp theo
-- Cung cấp thành phần cho **SEM-29** (Chạy pilot periodic E01 trên thiết bị) và **SEM-36** (Tích hợp 3 mode).
+Commit/config: working tree hiện tại, chưa commit; WorkManager 2.12.0; build chưa chạy. SEM-28 setup/M1 artifacts đã có trong checkout; M1 document ghi nhận historical build/runtime pass. Các thay đổi core hiện tại chưa được build lại. Blocker runtime: Android SDK/ADB và thiết bị không hiện diện trong môi trường này. `periodic_registered` chỉ xác nhận WorkManager chấp nhận/đang giữ unique work, không xác nhận worker đã dispatch.
+
+**Kết luận:** implementation có; runtime acceptance và kiểm nhận đầu vào vẫn mở.

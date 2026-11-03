@@ -16,4 +16,7 @@ interface SyncMetadataDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun setValue(entry: SyncMetadataEntity)
+
+    @Query("DELETE FROM sync_metadata WHERE `key` = :key")
+    suspend fun deleteValue(key: String)
 }

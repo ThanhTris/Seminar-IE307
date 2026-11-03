@@ -8,6 +8,7 @@ import com.thanhtris.seminarie307.data.local.AppDatabase
 import com.thanhtris.seminarie307.integration.CorrelationUi
 import com.thanhtris.seminarie307.integration.SyncMode
 import com.thanhtris.seminarie307.integration.SyncSource
+import java.util.UUID
 
 class SyncWorker(
     appContext: Context,
@@ -15,22 +16,45 @@ class SyncWorker(
 ) : CoroutineWorker(appContext, workerParams) {
 
     override suspend fun doWork(): Result {
-        val sourceStr = inputData.getString(KEY_SOURCE) ?: SyncSource.MANUAL.name
-        val modeStr = inputData.getString(KEY_MODE) ?: SyncMode.HYBRID.name
-        val runId = inputData.getString(KEY_RUN_ID) ?: "default-run"
-        val requestId = inputData.getString(KEY_REQUEST_ID)
+        val source = inputData.getString(KEY_SOURCE)?.let { runCatching { SyncSource.valueOf(it) }.getOrNull() }
+            ?: return Result.failure(workDataOf(KEY_OUTCOME to "INVALID_TRIGGER"))
+        val mode = inputData.getString(KEY_MODE)?.let { runCatching { SyncMode.valueOf(it) }.getOrNull() }
+            ?: return Result.failure(workDataOf(KEY_OUTCOME to "INVALID_TRIGGER"))
+        val runId = inputData.getString(KEY_RUN_ID)?.takeIf { isAppId(it) }
+            ?: return Result.failure(workDataOf(KEY_OUTCOME to "INVALID_TRIGGER"))
+        val triggerAllowed = when (source) {
+            SyncSource.MANUAL -> true
+            SyncSource.PERIODIC -> mode == SyncMode.PERIODIC || mode == SyncMode.HYBRID
+            SyncSource.PUSH -> mode == SyncMode.PUSH || mode == SyncMode.HYBRID
+        }
+        if (!triggerAllowed) return Result.failure(workDataOf(KEY_OUTCOME to "MODE_DISABLED"))
         val messageId = inputData.getString(KEY_MESSAGE_ID)
         val rawVersion = inputData.getLong(KEY_VERSION_HINT, -1L)
         val versionHint = rawVersion.takeIf { it >= 0 }
-
-        val source = runCatching { SyncSource.valueOf(sourceStr) }.getOrDefault(SyncSource.MANUAL)
-        val mode = runCatching { SyncMode.valueOf(modeStr) }.getOrDefault(SyncMode.HYBRID)
+        val database = AppDatabase.getInstance(applicationContext)
+        val suppliedRequestId = inputData.getString(KEY_REQUEST_ID)?.takeIf { it.isNotBlank() }
+        val periodicRequestKey = if (source == SyncSource.PERIODIC) periodicRequestIdKey(id.toString()) else null
+        val requestId = when {
+            suppliedRequestId != null -> suppliedRequestId
+            source == SyncSource.PERIODIC -> {
+                val key = checkNotNull(periodicRequestKey)
+                val existing = if (runAttemptCount > 0) database.metadataDao().getValue(key) else null
+                (existing ?: "req-${UUID.randomUUID()}").also {
+                    if (existing == null) database.metadataDao().setValue(
+                        com.thanhtris.seminarie307.data.local.SyncMetadataEntity(key, it)
+                    )
+                }
+            }
+            else -> return Result.failure(workDataOf(KEY_OUTCOME to "INVALID_TRIGGER"))
+        }
+        if (!isAppId(requestId)) return Result.failure(workDataOf(KEY_OUTCOME to "INVALID_TRIGGER"))
 
         val input = SyncInput(
             source = source,
             mode = mode,
             runId = runId,
             versionHint = versionHint,
+            workAttempt = runAttemptCount,
             correlation = CorrelationUi(
                 requestId = requestId,
                 workId = id.toString(),
@@ -38,10 +62,12 @@ class SyncWorker(
             ),
         )
 
-        val database = AppDatabase.getInstance(applicationContext)
         val repository = SyncRepository(database)
 
         val result = repository.executeSync(input)
+        if (periodicRequestKey != null && result.outcome != SyncOutcomeType.RETRY) {
+            database.metadataDao().deleteValue(periodicRequestKey)
+        }
 
         return when (result.outcome) {
             SyncOutcomeType.APPLIED,
@@ -62,6 +88,10 @@ class SyncWorker(
     }
 
     companion object {
+        const val MAX_RETRY_COUNT = 3
+        private val APP_ID_PATTERN = Regex("^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$")
+        private fun isAppId(value: String) = APP_ID_PATTERN.matches(value)
+        private fun periodicRequestIdKey(workId: String) = "periodic_request_id_$workId"
         const val KEY_SOURCE = "source"
         const val KEY_MODE = "mode"
         const val KEY_RUN_ID = "run_id"

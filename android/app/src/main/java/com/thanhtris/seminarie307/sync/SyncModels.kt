@@ -9,6 +9,7 @@ data class SyncInput(
     val mode: SyncMode,
     val runId: String,
     val versionHint: Long? = null,
+    val workAttempt: Int = 0,
     val correlation: CorrelationUi = CorrelationUi(),
 )
 
