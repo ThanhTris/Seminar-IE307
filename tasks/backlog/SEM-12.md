@@ -39,9 +39,11 @@ Status nguồn được đối chiếu Project lúc **2026-11-02 12:31:44 UTC**;
 
 ## Tiêu chí hoàn thành
 
-- [ ] ADB nhận emulator và OPPO hoặc ghi blocker cụ thể; không tự mặc định phiên bản OS.
-- [ ] Hồ sơ phân biệt mạng tới server với Internet/FCM, không dùng localhost PC làm địa chỉ OPPO.
-- [ ] Đầu ra và CHECKS có thật, link đọc được; chưa chạy phải ghi Not run, không tự chuyển Done từ kế hoạch.
+- [x] ADB nhận emulator và OPPO hoặc ghi blocker cụ thể; không tự mặc định phiên bản OS.
+- [x] Hồ sơ phân biệt mạng tới server với Internet/FCM, không dùng localhost PC làm địa chỉ OPPO.
+- [x] Đầu ra và CHECKS có thật, link đọc được; chưa chạy phải ghi Not run, không tự chuyển Done từ kế hoạch.
+
+Kiểm nhận artifact cục bộ ngày **03/11/2026**: [hồ sơ thiết bị](../../docs/environment/DEVICES.md), [CHECKS](../../docs/evidence/SEM-12/CHECKS.md), [evidence emulator](../../docs/evidence/SEM-12/EMULATOR_CHECKS.json) và [lệnh tái lập](../../docs/evidence/SEM-12/REPRODUCE.md). Emulator đã kiểm thực tế; Vinh xác nhận hiện không có OPPO, B1/B2 và các phép kiểm Not run được ghi rõ. **Đủ hồ sơ đề nghị Review với blocker**, không xác nhận OPPO/FCM thật đã chạy. Trạng thái Project ở đầu file là snapshot ngày 02/11, chưa được cập nhật trong lần rà tài liệu này.
 
 ## Task được mở khóa
 
