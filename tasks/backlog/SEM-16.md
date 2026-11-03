@@ -40,9 +40,15 @@ Status nguồn được đối chiếu Project lúc **2026-11-02 12:31:44 UTC**;
 
 ## Tiêu chí hoàn thành
 
-- [ ] Giữ nguyên số lượt và cửa sổ cốt lõi E01–E06; dự trù ít nhất 10–12 giờ quan sát.
-- [ ] Màn hình tắt không tự được gọi Doze; force-stop có mốc người dùng mở lại và cleanup.
-- [ ] Đầu ra và CHECKS có thật, link đọc được; chưa chạy phải ghi Not run, không tự chuyển Done từ kế hoạch.
+- [x] Giữ nguyên số lượt và cửa sổ cốt lõi E01–E06; dự trù ít nhất 10–12 giờ quan sát.
+- [x] Màn hình tắt không tự được gọi Doze; force-stop có mốc người dùng mở lại và cleanup.
+- [x] Đầu ra và CHECKS có thật, link đọc được; chưa chạy phải ghi Not run, không tự chuyển Done từ kế hoạch.
+
+## Đầu ra đã soát ngày 03/11/2026
+
+[PROTOCOL 1.0.0](../../experiments/PROTOCOL.md) · [RUN_SCHEDULE 1.0.0](../../experiments/RUN_SCHEDULE.md) · [CHECKS SEM-16](../../docs/evidence/SEM-16/CHECKS.md).
+
+Đã soát ma trận lifecycle, định mức E01–E06, 11 giờ 22 phút quan sát dự trù và lịch độc quyền pilot/main. Đây là bàn giao thiết kế SEM-16; các ca thực nghiệm vẫn **Not run**, OPPO chưa có máy. Checklist này không tự chuyển Status Project sang Done; các trường Project phía trên vẫn là snapshot 02/11/2026. Chi tiết điều kiện chạy và task nhận ở CHECKS.
 
 ## Task được mở khóa
 
