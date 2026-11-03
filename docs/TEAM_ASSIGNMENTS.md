@@ -16,7 +16,7 @@ Hạn cuối 13/11/2026; bài nói 15 phút gồm demo. Tổng công sức giữ
 | Tuấn | `mtuan2491` | 6 | 17 |
 
 <!-- team-snapshot:start -->
-Status và Input status đối chiếu Project lúc **2026-11-03 03:22:54 UTC**. Mở từng task để xem cụ thể file đầu vào, người bàn giao và CHECKS phải nhận. [Cách làm mới trạng thái](../tasks/README.md#trạng-thái-đối-chiếu-project).
+Status và Input status đối chiếu Project lúc **2026-11-03 15:04:04 UTC**. Mở từng task để xem cụ thể file đầu vào, người bàn giao và CHECKS phải nhận. [Cách làm mới trạng thái](../tasks/README.md#trạng-thái-đối-chiếu-project).
 <!-- team-snapshot:end -->
 
 ## Trí
@@ -51,7 +51,7 @@ Status và Input status đối chiếu Project lúc **2026-11-03 03:22:54 UTC**.
 | [SEM-12](../tasks/backlog/SEM-12.md) | Lập hồ sơ OPPO và emulator | Done | Sẵn sàng | 30/10/2026 12:00 (UTC+7) | Không có. | Không có. |
 | [SEM-16](../tasks/backlog/SEM-16.md) | Lập ma trận lifecycle và protocol E01–E06 | Done | Sẵn sàng | 30/10/2026 18:00 (UTC+7) | Không có. | Không có. |
 | [SEM-24](../tasks/backlog/SEM-24.md) | Chuẩn bị bộ xuất log và run manifest | Done | Sẵn sàng | 31/10/2026 15:00 (UTC+7) | [SEM-12](../tasks/backlog/SEM-12.md) | [SEM-26](../tasks/backlog/SEM-26.md) |
-| [SEM-29](../tasks/backlog/SEM-29.md) | Chạy pilot periodic E01 trên hai thiết bị | Todo | Chờ đầu vào | 02/11/2026 22:00 (UTC+7) | [SEM-16](../tasks/backlog/SEM-16.md), [SEM-24](../tasks/backlog/SEM-24.md), [SEM-30](../tasks/backlog/SEM-30.md) | [SEM-31](../tasks/backlog/SEM-31.md) |
+| [SEM-29](../tasks/backlog/SEM-29.md) | Chạy pilot periodic E01 trên hai thiết bị | Todo | Sẵn sàng | 02/11/2026 22:00 (UTC+7) | [SEM-16](../tasks/backlog/SEM-16.md), [SEM-24](../tasks/backlog/SEM-24.md), [SEM-30](../tasks/backlog/SEM-30.md) | [SEM-31](../tasks/backlog/SEM-31.md) |
 | [SEM-34](../tasks/backlog/SEM-34.md) | Chạy pilot push E02 và xác nhận cache nền | Todo | Chờ đầu vào | 03/11/2026 22:00 (UTC+7) | [SEM-16](../tasks/backlog/SEM-16.md), [SEM-24](../tasks/backlog/SEM-24.md), [SEM-32](../tasks/backlog/SEM-32.md), [SEM-35](../tasks/backlog/SEM-35.md) | [SEM-33](../tasks/backlog/SEM-33.md) |
 | [SEM-41](../tasks/backlog/SEM-41.md) | Chạy tập chính E01–E06 trên emulator | Todo | Chờ đầu vào | 07/11/2026 13:00 (UTC+7) | [SEM-16](../tasks/backlog/SEM-16.md), [SEM-24](../tasks/backlog/SEM-24.md), [SEM-37](../tasks/backlog/SEM-37.md) | Không có. |
 | [SEM-42](../tasks/backlog/SEM-42.md) | Chạy đối chiếu OPPO E01/E02 và ghi giới hạn OEM | Todo | Chờ đầu vào | 07/11/2026 15:00 (UTC+7) | [SEM-12](../tasks/backlog/SEM-12.md), [SEM-16](../tasks/backlog/SEM-16.md), [SEM-24](../tasks/backlog/SEM-24.md), [SEM-37](../tasks/backlog/SEM-37.md) | Không có. |
@@ -63,11 +63,11 @@ Status và Input status đối chiếu Project lúc **2026-11-03 03:22:54 UTC**.
 
 | Task | Đầu việc duy nhất | Status | Input status | Hạn (UTC+7) | Bắt đầu sau | Hoàn tất còn cần |
 |---|---|---|---|---|---|---|
-| [SEM-17](../tasks/backlog/SEM-17.md) | Giải thích periodic WorkManager và constraints | Todo | Sẵn sàng | 30/10/2026 18:00 (UTC+7) | Không có. | Không có. |
-| [SEM-25](../tasks/backlog/SEM-25.md) | Xây Room, SyncRepository và SyncWorker dùng chung | Todo | Sẵn sàng | 31/10/2026 17:00 (UTC+7) | [SEM-23](../tasks/backlog/SEM-23.md), [SEM-26](../tasks/backlog/SEM-26.md) | Không có. |
-| [SEM-30](../tasks/backlog/SEM-30.md) | Triển khai unique periodic work | Todo | Chờ đầu vào | 01/11/2026 18:00 (UTC+7) | [SEM-17](../tasks/backlog/SEM-17.md), [SEM-25](../tasks/backlog/SEM-25.md), [SEM-28](../tasks/backlog/SEM-28.md) | Không có. |
-| [SEM-31](../tasks/backlog/SEM-31.md) | Bàn giao chẩn đoán và tài liệu periodic | Todo | Chờ đầu vào | 02/11/2026 12:00 (UTC+7) | [SEM-30](../tasks/backlog/SEM-30.md) | Không có. |
-| [SEM-39](../tasks/backlog/SEM-39.md) | Củng cố version guard, retry và race trong core | Todo | Chờ đầu vào | 05/11/2026 12:00 (UTC+7) | [SEM-25](../tasks/backlog/SEM-25.md), [SEM-30](../tasks/backlog/SEM-30.md) | Không có. |
+| [SEM-17](../tasks/backlog/SEM-17.md) | Giải thích periodic WorkManager và constraints | Done | Sẵn sàng | 30/10/2026 18:00 (UTC+7) | Không có. | Không có. |
+| [SEM-25](../tasks/backlog/SEM-25.md) | Xây Room, SyncRepository và SyncWorker dùng chung | Done | Sẵn sàng | 31/10/2026 17:00 (UTC+7) | [SEM-23](../tasks/backlog/SEM-23.md), [SEM-26](../tasks/backlog/SEM-26.md) | Không có. |
+| [SEM-30](../tasks/backlog/SEM-30.md) | Triển khai unique periodic work | Done | Chờ đầu vào | 01/11/2026 18:00 (UTC+7) | [SEM-17](../tasks/backlog/SEM-17.md), [SEM-25](../tasks/backlog/SEM-25.md), [SEM-28](../tasks/backlog/SEM-28.md) | Không có. |
+| [SEM-31](../tasks/backlog/SEM-31.md) | Bàn giao chẩn đoán và tài liệu periodic | Done | Sẵn sàng | 02/11/2026 12:00 (UTC+7) | [SEM-30](../tasks/backlog/SEM-30.md) | Không có. |
+| [SEM-39](../tasks/backlog/SEM-39.md) | Củng cố version guard, retry và race trong core | Done | Sẵn sàng | 05/11/2026 12:00 (UTC+7) | [SEM-25](../tasks/backlog/SEM-25.md), [SEM-30](../tasks/backlog/SEM-30.md) | Không có. |
 | [SEM-44](../tasks/backlog/SEM-44.md) | Kiểm độc lập trigger và phép tính dữ liệu main | Todo | Chờ đầu vào | 07/11/2026 19:00 (UTC+7) | [SEM-41](../tasks/backlog/SEM-41.md), [SEM-42](../tasks/backlog/SEM-42.md), [SEM-45](../tasks/backlog/SEM-45.md) | Không có. |
 
 ## Tâm
