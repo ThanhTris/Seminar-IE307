@@ -22,7 +22,7 @@ class SyncRepository(
     private val metadataDao = database.metadataDao()
 
     suspend fun executeSync(input: SyncInput): SyncResult = withContext(Dispatchers.IO) {
-        val initialVersion = bulletinDao.getLatestVersion()
+        val initialVersion = readLatestCachedVersion()
 
         // 1. Record work_started
         recordEvent(
@@ -30,7 +30,7 @@ class SyncRepository(
             eventType = "work_started",
             version = initialVersion,
             outcome = "started",
-            reason = "Bắt đầu fetch snapshot từ server",
+            reason = null,
         )
 
         // 2. Fetch remote snapshot
@@ -45,7 +45,7 @@ class SyncRepository(
         when (remoteResult) {
             is RemoteSnapshotResult.Success -> {
                 database.withTransaction {
-                    val lockedVersion = bulletinDao.getLatestVersion()
+                    val lockedVersion = readLatestCachedVersion()
                     if (lockedVersion == null || remoteResult.version > lockedVersion) {
                         val entities = remoteResult.items.map { BulletinEntity.fromBulletinItem(it) }
                         bulletinDao.replaceSnapshot(entities)
@@ -57,25 +57,42 @@ class SyncRepository(
                             eventType = "snapshot_applied",
                             version = remoteResult.version,
                             outcome = "applied",
-                            reason = "Đã lưu snapshot v${remoteResult.version} (${entities.size} bản tin)",
+                            reason = null,
                         )
 
                         SyncResult(
                             outcome = SyncOutcomeType.APPLIED,
-                            reason = "Đã cập nhật snapshot v${remoteResult.version}",
+                            reason = "SNAPSHOT_APPLIED",
                             version = remoteResult.version,
                         )
+                    } else if (remoteResult.version == lockedVersion) {
+                        metadataDao.setValue(SyncMetadataEntity("cachedVersion", checkNotNull(lockedVersion).toString()))
+                        metadataDao.setValue(SyncMetadataEntity("lastSyncAtUtc", nowUtc))
+                        recordEvent(
+                            input = input,
+                            eventType = "snapshot_unchanged",
+                            version = lockedVersion,
+                            outcome = "unchanged",
+                            reason = null,
+                        )
+                        SyncResult(
+                            outcome = SyncOutcomeType.UNCHANGED,
+                            reason = "VERSION_UNCHANGED",
+                            version = lockedVersion,
+                        )
                     } else {
+                        metadataDao.setValue(SyncMetadataEntity("cachedVersion", checkNotNull(lockedVersion).toString()))
+                        metadataDao.setValue(SyncMetadataEntity("lastSyncAtUtc", nowUtc))
                         recordEvent(
                             input = input,
                             eventType = "snapshot_stale",
-                            version = lockedVersion,
+                            version = remoteResult.version,
                             outcome = "stale",
-                            reason = "Bỏ qua: version server (${remoteResult.version}) không mới hơn cache ($lockedVersion)",
+                            reason = "VERSION_STALE",
                         )
                         SyncResult(
                             outcome = SyncOutcomeType.STALE,
-                            reason = "Version không mới hơn cache",
+                            reason = "VERSION_STALE",
                             version = lockedVersion,
                         )
                     }
@@ -83,13 +100,18 @@ class SyncRepository(
             }
 
             RemoteSnapshotResult.NotModified -> {
+                if (initialVersion == null) {
+                    recordEvent(input, "sync_failed", null, "failure", "INVALID_RESPONSE")
+                    return@withContext SyncResult(SyncOutcomeType.FAILURE, "INVALID_RESPONSE")
+                }
+                metadataDao.setValue(SyncMetadataEntity("cachedVersion", initialVersion.toString()))
                 metadataDao.setValue(SyncMetadataEntity("lastSyncAtUtc", nowUtc))
                 recordEvent(
                     input = input,
                     eventType = "snapshot_unchanged",
                     version = initialVersion,
                     outcome = "unchanged",
-                    reason = "Bản tin không đổi (HTTP 304 Not Modified)",
+                    reason = null,
                 )
                 SyncResult(
                     outcome = SyncOutcomeType.UNCHANGED,
@@ -99,7 +121,8 @@ class SyncRepository(
             }
 
             is RemoteSnapshotResult.Failure -> {
-                val outcomeType = if (remoteResult.isTransient) {
+                val canRetry = remoteResult.isTransient && input.workAttempt < SyncWorker.MAX_RETRY_COUNT
+                val outcomeType = if (canRetry) {
                     SyncOutcomeType.RETRY
                 } else {
                     SyncOutcomeType.FAILURE
@@ -107,15 +130,15 @@ class SyncRepository(
 
                 recordEvent(
                     input = input,
-                    eventType = if (remoteResult.isTransient) "sync_retrying" else "sync_failed",
+                    eventType = if (canRetry) "sync_retrying" else "sync_failed",
                     version = initialVersion,
-                    outcome = if (remoteResult.isTransient) "retry" else "failure",
-                    reason = remoteResult.message,
+                    outcome = if (canRetry) "retry" else "failure",
+                    reason = if (remoteResult.isTransient && !canRetry) "RETRY_EXHAUSTED" else remoteResult.message,
                 )
 
                 SyncResult(
                     outcome = outcomeType,
-                    reason = remoteResult.message,
+                    reason = if (remoteResult.isTransient && !canRetry) "RETRY_EXHAUSTED" else remoteResult.message,
                     version = initialVersion,
                 )
             }
@@ -147,5 +170,17 @@ class SyncRepository(
             elapsedRealtimeMillis = elapsedRealtime,
         )
         timelineDao.insert(eventEntity)
+    }
+
+    private suspend fun readLatestCachedVersion(): Long? {
+        val metadataVersion = metadataDao.getValue("cachedVersion")?.toLongOrNull()
+        val itemVersion = bulletinDao.getLatestVersion()
+        return listOfNotNull(metadataVersion, itemVersion)
+            .filter { it in 0..MAX_SAFE_JSON_INTEGER }
+            .maxOrNull()
+    }
+
+    companion object {
+        private const val MAX_SAFE_JSON_INTEGER = 9_007_199_254_740_991L
     }
 }
