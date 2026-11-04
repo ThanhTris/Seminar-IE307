@@ -435,7 +435,7 @@
       "category": "research",
       "title": "Đọc bài nghiên cứu thứ hai và ghi chú nguồn",
       "due": "2026-11-01",
-      "status": "Todo",
+      "status": "Review",
       "start_dependencies": [],
       "finish_dependencies": [
         "SEM-11",
@@ -540,7 +540,7 @@
             "research/metadata/paper-2.bib"
           ],
           "checks": "docs/evidence/SEM-21/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Review"
         }
       ],
       "due_at": "2026-11-01T22:00:00+07:00"
@@ -2377,7 +2377,7 @@
             "research/metadata/paper-2.bib"
           ],
           "checks": "docs/evidence/SEM-21/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Review"
         },
         {
           "source_task": "SEM-27",
@@ -2481,7 +2481,7 @@
             "research/metadata/paper-2.bib"
           ],
           "checks": "docs/evidence/SEM-21/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Review"
         },
         {
           "source_task": "SEM-22",
@@ -2911,7 +2911,7 @@
       "due_at": "2026-11-12T22:00:00+07:00"
     }
   ],
-  "snapshot_at": "2026-11-03 15:04:04 UTC",
+  "snapshot_at": "2026-11-04 02:22:48 UTC",
   "snapshot_source": "https://github.com/users/ThanhTris/projects/3/views/1",
   "timezone": "Asia/Ho_Chi_Minh",
   "deadline_at": "2026-11-13T22:00:00+07:00",

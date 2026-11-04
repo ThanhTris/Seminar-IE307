@@ -22,3 +22,9 @@
 - [Ghi chú toàn văn](../../../research/notes/PAPER_2.md), [metadata BibTeX](../../../research/metadata/paper-2.bib) và CHECKS này là đầu ra cho SEM-22, SEM-49, SEM-50. PDF không commit; link kho trường và DOI đủ truy cập nguồn.
 - Không có blocker hoàn tất SEM-21 đối với đầu vào SEM-11/12. Chưa có OPPO là giới hạn của các phép đo tiếp theo, không phải dữ liệu bị thiếu của bài báo.
 - Trưởng nhóm kiểm nhận PR; không tự merge hoặc chuyển Done. Sau bàn giao Review, chỉ sửa nội dung theo comment yêu cầu của trưởng nhóm.
+
+## Đồng bộ bàn giao
+
+- Commit nội dung nghiên cứu: `f794bdc`; [PR #11](https://github.com/ThanhTris/Seminar-IE307/pull/11) đã gắn thẻ `@ThanhTris` và đang chờ review.
+- Đã chuyển SEM-21 sang Review trên Project, sau đó chạy `python3 scripts/update_task_snapshot.py --apply` và `--check`: cả hai exit 0; đối chiếu 45 task, 14 Done, 30 Todo, 1 Review; mỗi task có một assignee khớp owner, không có chu trình dependency. Snapshot được sinh lại lúc 02:22:48 UTC ngày 04/11/2026.
+- Metadata DOI/tác giả/tập/mã bài và các liên kết tương đối đã được kiểm tự động; `git diff --check` không báo lỗi. Các con số và mốc trên chỉ phản ánh lần kiểm này.
