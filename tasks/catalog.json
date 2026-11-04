@@ -435,7 +435,7 @@
       "category": "research",
       "title": "Đọc bài nghiên cứu thứ hai và ghi chú nguồn",
       "due": "2026-11-01",
-      "status": "Review",
+      "status": "Done",
       "start_dependencies": [],
       "finish_dependencies": [
         "SEM-11",
@@ -540,7 +540,7 @@
             "research/metadata/paper-2.bib"
           ],
           "checks": "docs/evidence/SEM-21/CHECKS.md",
-          "source_status": "Review"
+          "source_status": "Done"
         }
       ],
       "due_at": "2026-11-01T22:00:00+07:00"
@@ -773,7 +773,7 @@
       "category": "practice",
       "title": "Triển khai server snapshot và CLI cập nhật",
       "due": "2026-10-31",
-      "status": "Todo",
+      "status": "Review",
       "start_dependencies": [
         "SEM-13",
         "SEM-26"
@@ -894,7 +894,7 @@
             "docs/setup/SERVER.md"
           ],
           "checks": "docs/evidence/SEM-27/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Review"
         }
       ],
       "due_at": "2026-10-31T22:00:00+07:00"
@@ -1358,7 +1358,7 @@
             "docs/setup/SERVER.md"
           ],
           "checks": "docs/evidence/SEM-27/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Review"
         }
       ],
       "due_at": "2026-11-01T15:00:00+07:00"
@@ -1741,7 +1741,7 @@
             "docs/setup/SERVER.md"
           ],
           "checks": "docs/evidence/SEM-27/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Review"
         },
         {
           "source_task": "SEM-35",
@@ -2377,7 +2377,7 @@
             "research/metadata/paper-2.bib"
           ],
           "checks": "docs/evidence/SEM-21/CHECKS.md",
-          "source_status": "Review"
+          "source_status": "Done"
         },
         {
           "source_task": "SEM-27",
@@ -2388,7 +2388,7 @@
             "docs/setup/SERVER.md"
           ],
           "checks": "docs/evidence/SEM-27/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Review"
         },
         {
           "source_task": "SEM-35",
@@ -2481,7 +2481,7 @@
             "research/metadata/paper-2.bib"
           ],
           "checks": "docs/evidence/SEM-21/CHECKS.md",
-          "source_status": "Review"
+          "source_status": "Done"
         },
         {
           "source_task": "SEM-22",
@@ -2911,7 +2911,7 @@
       "due_at": "2026-11-12T22:00:00+07:00"
     }
   ],
-  "snapshot_at": "2026-11-04 02:22:48 UTC",
+  "snapshot_at": "2026-11-04 03:02:19 UTC",
   "snapshot_source": "https://github.com/users/ThanhTris/projects/3/views/1",
   "timezone": "Asia/Ho_Chi_Minh",
   "deadline_at": "2026-11-13T22:00:00+07:00",
