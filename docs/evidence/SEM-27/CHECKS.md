@@ -35,3 +35,9 @@ Lần `npm test` trong sandbox bị từ chối bind `127.0.0.1` (`EPERM`); ch�
 - Sau crash/SIGKILL, cần xác minh process cũ đã dừng và gỡ `state.json.lock` cũ trước khi chạy lại; state và outbox được giữ. Việc khôi phục đó không đồng nghĩa đã kiểm crash ở mọi thời điểm ghi hoặc mất điện vật lý.
 - Cổng endpoint update không có auth; chỉ chạy trên host/LAN tin cậy. Hướng dẫn emulator/OPPO chưa được chứng minh bằng thiết bị trong task này.
 - Đầu ra dành cho SEM-28, SEM-35, SEM-40 và SEM-49 sau khi trưởng nhóm kiểm nhận. Trưởng nhóm review và merge; không tự chuyển Done.
+
+## Đồng bộ Review
+
+- [PR #12](https://github.com/ThanhTris/Seminar-IE307/pull/12) đã gắn thẻ `@ThanhTris`; source được kiểm tại `a3575fc`, CHECKS tại `ee73a2e`.
+- SEM-27 đã chuyển Review trên Project. Chạy `python3 scripts/update_task_snapshot.py --apply` và `--check`: exit 0, đối chiếu 45 task, 14 Done, 29 Todo, 2 Review; assignee khớp owner, không có chu trình dependency. Snapshot lúc 02:55:28 UTC ngày 04/11/2026.
+- Sau bàn giao Review, chỉ sửa nội dung khi trưởng nhóm có comment yêu cầu; không tự merge hoặc chuyển Done.
