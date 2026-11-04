@@ -773,7 +773,7 @@
       "category": "practice",
       "title": "Triển khai server snapshot và CLI cập nhật",
       "due": "2026-10-31",
-      "status": "Review",
+      "status": "Needs Update",
       "start_dependencies": [
         "SEM-13",
         "SEM-26"
@@ -894,7 +894,7 @@
             "docs/setup/SERVER.md"
           ],
           "checks": "docs/evidence/SEM-27/CHECKS.md",
-          "source_status": "Review"
+          "source_status": "Needs Update"
         }
       ],
       "due_at": "2026-10-31T22:00:00+07:00"
@@ -1358,7 +1358,7 @@
             "docs/setup/SERVER.md"
           ],
           "checks": "docs/evidence/SEM-27/CHECKS.md",
-          "source_status": "Review"
+          "source_status": "Needs Update"
         }
       ],
       "due_at": "2026-11-01T15:00:00+07:00"
@@ -1741,7 +1741,7 @@
             "docs/setup/SERVER.md"
           ],
           "checks": "docs/evidence/SEM-27/CHECKS.md",
-          "source_status": "Review"
+          "source_status": "Needs Update"
         },
         {
           "source_task": "SEM-35",
@@ -2388,7 +2388,7 @@
             "docs/setup/SERVER.md"
           ],
           "checks": "docs/evidence/SEM-27/CHECKS.md",
-          "source_status": "Review"
+          "source_status": "Needs Update"
         },
         {
           "source_task": "SEM-35",
@@ -2911,7 +2911,7 @@
       "due_at": "2026-11-12T22:00:00+07:00"
     }
   ],
-  "snapshot_at": "2026-11-04 03:02:19 UTC",
+  "snapshot_at": "2026-11-04 13:06:16 UTC",
   "snapshot_source": "https://github.com/users/ThanhTris/projects/3/views/1",
   "timezone": "Asia/Ho_Chi_Minh",
   "deadline_at": "2026-11-13T22:00:00+07:00",

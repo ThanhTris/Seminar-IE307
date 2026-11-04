@@ -20,7 +20,7 @@ SEM-01…SEM-10 chỉ còn là nhóm lịch sử với link tới task thay th�
 <!-- input-snapshot:start -->
 ## Trạng thái đối chiếu Project
 
-Snapshot **2026-11-04 03:02:19 UTC**. Status là tiến độ thực hiện; Input status là khả năng bắt đầu theo dependency: **Sẵn sàng 18**, **Chuẩn bị trước 8**, **Chờ đầu vào 19**.
+Snapshot **2026-11-04 13:06:16 UTC**. Status là tiến độ thực hiện; Input status là khả năng bắt đầu theo dependency: **Sẵn sàng 18**, **Chuẩn bị trước 8**, **Chờ đầu vào 19**.
 
 - Sẵn sàng: không có task dependency chưa Done; vẫn cần kiểm artifact/CHECKS khi nhận bàn giao.
 - Chuẩn bị trước: được làm phần độc lập nhưng còn gate hoàn tất chưa bàn giao.
@@ -47,7 +47,7 @@ Project là nguồn Status hiện hành. Sau khi đổi Status nguồn, chạy `
 | [SEM-24](backlog/SEM-24.md) — Chuẩn bị bộ xuất log và run manifest | Vinh | Done | Sẵn sàng | 31/10/2026 15:00 (UTC+7) | 1 | [SEM-12](backlog/SEM-12.md) | [SEM-26](backlog/SEM-26.md) |
 | [SEM-25](backlog/SEM-25.md) — Xây Room, SyncRepository và SyncWorker dùng chung | Trung | Done | Sẵn sàng | 31/10/2026 17:00 (UTC+7) | 4 | [SEM-23](backlog/SEM-23.md), [SEM-26](backlog/SEM-26.md) | Không có. |
 | [SEM-26](backlog/SEM-26.md) — Chốt hợp đồng API và event schema | Tâm | Done | Sẵn sàng | 30/10/2026 17:00 (UTC+7) | 2 | [SEM-11](backlog/SEM-11.md), [SEM-13](backlog/SEM-13.md), [SEM-14](backlog/SEM-14.md) | Không có. |
-| [SEM-27](backlog/SEM-27.md) — Triển khai server snapshot và CLI cập nhật | Tâm | Review | Sẵn sàng | 31/10/2026 17:00 (UTC+7) | 4 | [SEM-13](backlog/SEM-13.md), [SEM-26](backlog/SEM-26.md) | Không có. |
+| [SEM-27](backlog/SEM-27.md) — Triển khai server snapshot và CLI cập nhật | Tâm | Needs Update | Sẵn sàng | 31/10/2026 17:00 (UTC+7) | 4 | [SEM-13](backlog/SEM-13.md), [SEM-26](backlog/SEM-26.md) | Không có. |
 | [SEM-28](backlog/SEM-28.md) — Ghép manual sync đầu cuối và chốt hướng dẫn setup | Trí | Todo | Chờ đầu vào | 31/10/2026 22:00 (UTC+7) | 1 | [SEM-23](backlog/SEM-23.md), [SEM-24](backlog/SEM-24.md), [SEM-25](backlog/SEM-25.md), [SEM-27](backlog/SEM-27.md) | Không có. |
 | [SEM-29](backlog/SEM-29.md) — Chạy pilot periodic E01 trên hai thiết bị | Vinh | Todo | Sẵn sàng | 02/11/2026 22:00 (UTC+7) | 2 | [SEM-16](backlog/SEM-16.md), [SEM-24](backlog/SEM-24.md), [SEM-30](backlog/SEM-30.md) | [SEM-31](backlog/SEM-31.md) |
 | [SEM-30](backlog/SEM-30.md) — Triển khai unique periodic work | Trung | Done | Chờ đầu vào | 01/11/2026 18:00 (UTC+7) | 4 | [SEM-17](backlog/SEM-17.md), [SEM-25](backlog/SEM-25.md), [SEM-28](backlog/SEM-28.md) | Không có. |
