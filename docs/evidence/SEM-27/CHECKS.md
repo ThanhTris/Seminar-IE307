@@ -41,3 +41,10 @@ Lần `npm test` trong sandbox bị từ chối bind `127.0.0.1` (`EPERM`); ch�
 - [PR #12](https://github.com/ThanhTris/Seminar-IE307/pull/12) đã gắn thẻ `@ThanhTris`; source được kiểm tại `a3575fc`, CHECKS tại `ee73a2e`.
 - SEM-27 đã chuyển Review trên Project. Chạy `python3 scripts/update_task_snapshot.py --apply` và `--check`: exit 0, đối chiếu 45 task, 14 Done, 29 Todo, 2 Review; assignee khớp owner, không có chu trình dependency. Snapshot lúc 02:55:28 UTC ngày 04/11/2026.
 - Sau bàn giao Review, chỉ sửa nội dung khi trưởng nhóm có comment yêu cầu; không tự merge hoặc chuyển Done.
+
+## Cập nhật theo review của ThanhTris — 05/11/2026
+
+- [Review PR #12](https://github.com/ThanhTris/Seminar-IE307/pull/12) yêu cầu sửa lỗi `fsync` thư mục trên Windows và xử lý xung đột snapshot với `main`. Đã nhập `origin/main` tại `9b5408b` vào nhánh SEM-27; giữ phiên bản snapshot mới từ main rồi đồng bộ lại từ Project. Không merge PR vào main.
+- Commit `af60deb` giữ `fsync` file tạm trên mọi nền tảng và chỉ mở/sync thư mục sau rename khi `process.platform !== 'win32'`. [Hướng dẫn server](../../setup/SERVER.md) ghi rõ giới hạn về độ bền khi mất điện trên Windows.
+- Trên macOS ARM64, Node `v26.0.0`, npm `11.12.1`, chạy `npm test` ngoài sandbox: build TypeScript thành công, **9/9 test pass**. Test thứ 9 mô phỏng `process.platform = win32` và giả lập lỗi khi mở thư mục; xác nhận khởi tạo/update không mở thư mục để sync. Tám test còn lại tiếp tục kiểm các hành vi đã ghi ở trên.
+- **Windows/Linux native trên commit cập nhật: Not run trong lần này.** Review của trưởng nhóm mô tả đã kiểm bản vá đề xuất trên Windows và Linux; kết quả đó không thay thế kiểm thử native của chính commit `af60deb`. Chưa kiểm độ bền sau mất điện vật lý.
