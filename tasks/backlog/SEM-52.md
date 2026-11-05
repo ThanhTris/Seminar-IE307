@@ -2,7 +2,7 @@
 
 - Trạng thái: **Todo** (Project).
 - Trạng thái đầu vào: **Chờ đầu vào**.
-- Đối chiếu Project: 2026-11-05 14:24:29 UTC.
+- Đối chiếu Project: 2026-11-05 14:44:34 UTC.
 - Người thực hiện duy nhất: **Trung** (`TrungNQ2645`).
 - Hạn: **11/11/2026 22:00 (UTC+7)**.
 - Công sức: 1/100 — Cơ chế/thực hành.
@@ -24,12 +24,12 @@ Tài liệu nền đã có: [Kế hoạch/phạm vi](../../docs/PLAN.md) · [K�
 |---|---|---|---|---|---|
 | Bắt đầu | [SEM-37 — Chốt bản ứng viên và manifest phục vụ tập chính](SEM-37.md) | Trung | `release/CANDIDATE_MANIFEST.json`<br>`docs/evidence/SEM-37/CANDIDATE_GATE.md` | `docs/evidence/SEM-37/CHECKS.md` | Todo |
 | Hoàn tất | [SEM-43 — Chốt SUMMARY và bộ evidence thực nghiệm](SEM-43.md) | Vinh | `experiments/SUMMARY.md` | `docs/evidence/SEM-43/CHECKS.md` | Todo |
-| Hoàn tất | [SEM-50 — Hoàn thiện báo cáo, bibliography và CLAIMS](SEM-50.md) | Tâm | `report/REPORT.md`<br>`research/references.bib`<br>`docs/CLAIMS.md` | `docs/evidence/SEM-50/CHECKS.md` | Todo |
+| Hoàn tất | [SEM-50 — Hoàn thiện báo cáo, bibliography và CLAIMS](SEM-50.md) | Tuấn | `report/REPORT.md`<br>`research/references.bib`<br>`docs/CLAIMS.md` | `docs/evidence/SEM-50/CHECKS.md` | Todo |
 | Hoàn tất | [SEM-51 — Ghép deck 15 phút, PDF và speaker notes](SEM-51.md) | Tuấn | `slides/seminar-ie307.pptx`<br>`slides/seminar-ie307.pdf`<br>`slides/SPEAKER_NOTES.md` | `docs/evidence/SEM-51/CHECKS.md` | Todo |
 
 Đây là danh sách đầu ra cần bàn giao, chưa phải xác nhận các file đã tồn tại. Trước khi dùng, nhận đúng artifact/commit/config và CHECKS từ task nguồn.
 
-Status nguồn được đối chiếu Project lúc **2026-11-05 14:24:29 UTC**; mở link task nguồn để xem cập nhật mới hơn.
+Status nguồn được đối chiếu Project lúc **2026-11-05 14:44:34 UTC**; mở link task nguồn để xem cập nhật mới hơn.
 <!-- task-inputs:end -->
 
 

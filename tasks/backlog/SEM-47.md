@@ -2,8 +2,8 @@
 
 - Trạng thái: **Todo** (Project).
 - Trạng thái đầu vào: **Chuẩn bị trước**.
-- Đối chiếu Project: 2026-11-05 14:24:29 UTC.
-- Người thực hiện duy nhất: **Tuấn** (`mtuan2491`).
+- Đối chiếu Project: 2026-11-05 14:44:34 UTC.
+- Người thực hiện duy nhất: **Trang** (`rosy179`).
 - Hạn: **08/11/2026 16:00 (UTC+7)**.
 - Công sức: 2/100 — Nghiên cứu/lập luận.
 - Tách từ nhóm cũ: [SEM-09](SEM-09.md); nhóm cũ chỉ còn lưu lịch sử.
@@ -23,17 +23,17 @@ Tài liệu nền đã có: [Kế hoạch/phạm vi](../../docs/PLAN.md) · [K�
 | Cần cho | Task cung cấp | Người bàn giao | Đầu ra phải nhận | Kiểm chứng bàn giao | Status nguồn |
 |---|---|---|---|---|---|
 | Bắt đầu | [SEM-15 — Giải thích cơ chế silent push và giới hạn FCM](SEM-15.md) | Trang | `docs/mechanisms/SILENT_PUSH.md` | `docs/evidence/SEM-15/CHECKS.md` | Done |
-| Hoàn tất | [SEM-33 — Xử lý token refresh và bàn giao PUSH.md](SEM-33.md) | Trung | `android/ (token lifecycle)`<br>`docs/PUSH.md` | `docs/evidence/SEM-33/CHECKS.md` | Todo |
+| Hoàn tất | [SEM-33 — Xử lý token refresh và bàn giao PUSH.md](SEM-33.md) | Trang | `android/ (token lifecycle)`<br>`docs/PUSH.md` | `docs/evidence/SEM-33/CHECKS.md` | Todo |
 | Hoàn tất | [SEM-34 — Chạy pilot push E02 và xác nhận cache nền](SEM-34.md) | Vinh | `experiments/runs/<push-pilot-run>/manifest.json`<br>`experiments/runs/<push-pilot-run>/events.jsonl` | `docs/evidence/SEM-34/CHECKS.md` | Todo |
-| Hoàn tất | [SEM-38 — Xử lý duplicate và version hint của push](SEM-38.md) | Trung | `android/ (messaging input policy)`<br>`docs/evidence/SEM-38/PUSH_INPUT_CASES.md` | `docs/evidence/SEM-38/CHECKS.md` | Todo |
+| Hoàn tất | [SEM-38 — Xử lý duplicate và version hint của push](SEM-38.md) | Trang | `android/ (messaging input policy)`<br>`docs/evidence/SEM-38/PUSH_INPUT_CASES.md` | `docs/evidence/SEM-38/CHECKS.md` | Todo |
 
 Đây là danh sách đầu ra cần bàn giao, chưa phải xác nhận các file đã tồn tại. Trước khi dùng, nhận đúng artifact/commit/config và CHECKS từ task nguồn.
 
-Status nguồn được đối chiếu Project lúc **2026-11-05 14:24:29 UTC**; mở link task nguồn để xem cập nhật mới hơn.
+Status nguồn được đối chiếu Project lúc **2026-11-05 14:44:34 UTC**; mở link task nguồn để xem cập nhật mới hơn.
 <!-- task-inputs:end -->
 
 
-## Việc Tuấn cần làm
+## Việc Trang cần làm
 
 1. Soạn nội dung cơ chế push, payload/TTL/token và giới hạn bằng evidence được bàn giao.
 2. Viết một mạch lời dẫn demo cho cả push/periodic/Doze; đánh dấu phần live/playback.
@@ -57,4 +57,4 @@ Status nguồn được đối chiếu Project lúc **2026-11-05 14:24:29 UTC**;
 
 ## Ranh giới thực hiện
 
-Một task chỉ có Tuấn thực hiện và cập nhật phần việc này. Người nhận đầu ra làm task riêng được liên kết ở trên; không có đồng thực hiện hay reviewer được gán thêm vào thẻ. Lỗi thuộc đầu ra này trả về task này ở Needs Update. Không sửa phần do task khác sở hữu mà chưa cập nhật ranh giới/bàn giao.
+Một task chỉ có Trang thực hiện và cập nhật phần việc này. Người nhận đầu ra làm task riêng được liên kết ở trên; không có đồng thực hiện hay reviewer được gán thêm vào thẻ. Lỗi thuộc đầu ra này trả về task này ở Needs Update. Không sửa phần do task khác sở hữu mà chưa cập nhật ranh giới/bàn giao.
