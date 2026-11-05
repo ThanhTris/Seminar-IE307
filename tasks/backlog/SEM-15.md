@@ -39,9 +39,15 @@ Status nguồn được đối chiếu Project lúc **2026-11-04 13:06:16 UTC**;
 
 ## Tiêu chí hoàn thành
 
-- [ ] Có thể giải thích vì sao data-only không đồng nghĩa một thông báo bị tắt tiếng.
-- [ ] Chỉ ra trường hợp trì hoãn/không nhận và không hứa push tức thì.
-- [ ] Đầu ra và CHECKS có thật, link đọc được; chưa chạy phải ghi Not run, không tự chuyển Done từ kế hoạch.
+- [x] Có thể giải thích vì sao data-only không đồng nghĩa một thông báo bị tắt tiếng.
+- [x] Chỉ ra trường hợp trì hoãn/không nhận và không hứa push tức thì.
+- [x] Đầu ra và CHECKS có thật, link đọc được; chưa chạy phải ghi Not run, không tự chuyển Done từ kế hoạch.
+
+## Đầu ra đã soát ngày 05/11/2026
+
+[SILENT_PUSH 1.0.0](../../docs/mechanisms/SILENT_PUSH.md) · [CHECKS SEM-15](../../docs/evidence/SEM-15/CHECKS.md).
+
+Đã phân tích bản chất data-only khác notification tắt tiếng, luồng end-to-end từ server tới Room cache, giới hạn thực thi nền trong callback và chuyển tiếp sang WorkManager, so sánh Normal vs High priority, và 8 nguyên nhân trì hoãn/mất tín hiệu push. Đây là bàn giao tài liệu cơ chế và hợp đồng thiết kế của SEM-15; các ca đo thực nghiệm vẫn **Not run** để bàn giao cho các task pilot/main runs downstream. Checklist này không tự chuyển Status Project sang Done; các trường Project phía trên vẫn là snapshot hiện hành.
 
 ## Task được mở khóa
 
