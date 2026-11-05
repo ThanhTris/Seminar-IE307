@@ -94,3 +94,5 @@ Theo [nhiệm vụ SEM-15](../../../tasks/backlog/SEM-15.md), task không có ga
 
 - Toàn bộ nội dung yêu cầu của SEM-15 đã được hoàn thành với mức độ chi tiết học thuật vượt trội, minh chứng đầy đủ nguồn tài liệu chính thức, và cung cấp giá trị sử dụng trực tiếp cho toàn bộ 5 thành viên còn lại trong nhóm.
 - Tài liệu [docs/mechanisms/SILENT_PUSH.md](../../mechanisms/SILENT_PUSH.md) và hồ sơ [CHECKS.md](CHECKS.md) hoàn toàn sẵn sàng cho quá trình kiểm tra chéo và hợp nhất vào nhánh chính.
+- PR #13 đã được nhóm trưởng `ThanhTris` review, nghiệm thu và merge vào `main` tại merge commit `8f85e8f496eb52fcff34b419b78a9c24097435f3`.
+- Trạng thái task SEM-15 trên GitHub Project 3 đã được cập nhật sang **Done** (item `PVTI_lAHOCnL5Fs4BpUDUzhEiW8w`).

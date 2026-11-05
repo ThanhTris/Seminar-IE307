@@ -45,4 +45,5 @@ Kiểm cục bộ: `node .local/sem20/validate-docs.cjs` dùng Citation.js core/
 - **SEM-50:** nhận metadata riêng và các giả thuyết đã gắn case; chỉ ghép bibliography/CLAIMS/report trong task tổng hợp, không coi số liệu paper là dữ liệu nhóm.
 - **Khi chốt SEM-20:** đối chiếu thiết bị/scope và revision demo thực sự được bàn giao; ghi thay đổi hoặc giới hạn mới nếu có. SEM-11/12 đã có artifact trên main, không báo lại là dependency chưa Done và không bắt buộc chờ E01-E06 để hoàn thành task đọc bài.
 
-Lần này chỉ chuẩn bị phần nghiên cứu độc lập theo yêu cầu người dùng; không thay trạng thái Project hoặc nghiệm thu task của thành viên khác. Bàn giao bằng commit cục bộ trên nhánh SEM-20, chưa push.
+- PR #14 đã được nhóm trưởng `ThanhTris` review, nghiệm thu và merge vào `main` tại merge commit `9931af1f7cf62f592aa15259160533ebcb2b8bc5`.
+- Trạng thái task SEM-20 trên GitHub Project 3 đã được cập nhật sang **Done** (item `PVTI_lAHOCnL5Fs4BpUDUzhEiXAk`).
