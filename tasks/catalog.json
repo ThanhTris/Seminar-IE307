@@ -827,7 +827,7 @@
       "category": "practice",
       "title": "Ghép manual sync đầu cuối và chốt hướng dẫn setup",
       "due": "2026-10-31",
-      "status": "Todo",
+      "status": "In Progress",
       "start_dependencies": [
         "SEM-23",
         "SEM-24",
@@ -1040,7 +1040,7 @@
             "docs/evidence/SEM-28/M1.md"
           ],
           "checks": "docs/evidence/SEM-28/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "In Progress"
         }
       ],
       "due_at": "2026-11-01T18:00:00+07:00"
@@ -1148,7 +1148,7 @@
             "docs/evidence/SEM-28/M1.md"
           ],
           "checks": "docs/evidence/SEM-28/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "In Progress"
         }
       ],
       "due_at": "2026-11-02T18:00:00+07:00"
@@ -1282,7 +1282,7 @@
             "docs/setup/FCM_SENDER.md"
           ],
           "checks": "docs/evidence/SEM-35/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Needs Update"
         },
         {
           "source_task": "SEM-33",
@@ -1307,7 +1307,7 @@
       "category": "practice",
       "title": "Làm CLI gửi FCM data-only normal priority",
       "due": "2026-11-01",
-      "status": "Todo",
+      "status": "Needs Update",
       "start_dependencies": [
         "SEM-13",
         "SEM-18",
@@ -1452,7 +1452,7 @@
             "docs/setup/FCM_SENDER.md"
           ],
           "checks": "docs/evidence/SEM-35/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Needs Update"
         },
         {
           "source_task": "SEM-38",
@@ -1752,7 +1752,7 @@
             "docs/setup/FCM_SENDER.md"
           ],
           "checks": "docs/evidence/SEM-35/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Needs Update"
         }
       ],
       "due_at": "2026-11-04T18:00:00+07:00"
@@ -2399,7 +2399,7 @@
             "docs/setup/FCM_SENDER.md"
           ],
           "checks": "docs/evidence/SEM-35/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Needs Update"
         },
         {
           "source_task": "SEM-40",
@@ -2911,7 +2911,7 @@
       "due_at": "2026-11-12T22:00:00+07:00"
     }
   ],
-  "snapshot_at": "2026-11-05 07:42:13 UTC",
+  "snapshot_at": "2026-11-05 14:04:52 UTC",
   "snapshot_source": "https://github.com/users/ThanhTris/projects/3/views/1",
   "timezone": "Asia/Ho_Chi_Minh",
   "deadline_at": "2026-11-13T22:00:00+07:00",
