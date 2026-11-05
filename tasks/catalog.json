@@ -827,7 +827,7 @@
       "category": "practice",
       "title": "Ghép manual sync đầu cuối và chốt hướng dẫn setup",
       "due": "2026-10-31",
-      "status": "In Progress",
+      "status": "Done",
       "start_dependencies": [
         "SEM-23",
         "SEM-24",
@@ -1007,7 +1007,7 @@
         "Đăng ký lặp chỉ có một lịch active; tắt periodic không để lịch cũ tiếp tục gây nhiễu.",
         "Kiểm scheduler logic không được dùng để kết luận thời điểm chạy tự nhiên."
       ],
-      "input_status": "Chờ đầu vào",
+      "input_status": "Sẵn sàng",
       "inputs": [
         {
           "source_task": "SEM-17",
@@ -1040,7 +1040,7 @@
             "docs/evidence/SEM-28/M1.md"
           ],
           "checks": "docs/evidence/SEM-28/CHECKS.md",
-          "source_status": "In Progress"
+          "source_status": "Done"
         }
       ],
       "due_at": "2026-11-01T18:00:00+07:00"
@@ -1115,7 +1115,7 @@
         "Callback dẫn tới work_enqueued/start/applied theo correlation khi đủ điều kiện.",
         "Không dùng high priority/EAP hoặc engine riêng để che độ trễ."
       ],
-      "input_status": "Chờ đầu vào",
+      "input_status": "Sẵn sàng",
       "inputs": [
         {
           "source_task": "SEM-15",
@@ -1148,7 +1148,7 @@
             "docs/evidence/SEM-28/M1.md"
           ],
           "checks": "docs/evidence/SEM-28/CHECKS.md",
-          "source_status": "In Progress"
+          "source_status": "Done"
         }
       ],
       "due_at": "2026-11-02T18:00:00+07:00"
@@ -2911,7 +2911,7 @@
       "due_at": "2026-11-12T22:00:00+07:00"
     }
   ],
-  "snapshot_at": "2026-11-05 14:49:28 UTC",
+  "snapshot_at": "2026-11-05 16:29:54 UTC",
   "snapshot_source": "https://github.com/users/ThanhTris/projects/3/views/1",
   "timezone": "Asia/Ho_Chi_Minh",
   "deadline_at": "2026-11-13T22:00:00+07:00",
