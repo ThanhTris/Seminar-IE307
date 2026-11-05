@@ -49,3 +49,8 @@ Lần `npm test` trong sandbox bị từ chối bind `127.0.0.1` (`EPERM`); ch�
 - Trên macOS ARM64, Node `v26.0.0`, npm `11.12.1`, chạy `npm test` ngoài sandbox: build TypeScript thành công, **9/9 test pass**. Test thứ 9 mô phỏng `process.platform = win32` và giả lập lỗi khi mở thư mục; xác nhận khởi tạo/update không mở thư mục để sync. Tám test còn lại tiếp tục kiểm các hành vi đã ghi ở trên.
 - **Windows/Linux native trên commit cập nhật: Not run trong lần này.** Review của trưởng nhóm mô tả đã kiểm bản vá đề xuất trên Windows và Linux; kết quả đó không thay thế kiểm thử native của chính commit `af60deb`. Chưa kiểm độ bền sau mất điện vật lý.
 - Đã chuyển SEM-27 từ Needs Update trở lại Review và chạy `python3 scripts/update_task_snapshot.py --apply`, sau đó `--check`: cả hai exit 0; 45 task, 17 Done, 26 Todo, 1 In Progress, 1 Review; assignee khớp owner và không có chu trình dependency. Snapshot đối chiếu lúc **05:25:56 UTC ngày 05/11/2026**.
+
+## Nghiệm thu và Merge
+
+- PR #12 đã được nhóm trưởng `ThanhTris` kiểm tra thực tế trên Windows (9/9 tests pass 100%), approve và merge vào `main` tại merge commit `1a198161f4fa2ea8149e29a997d91e324c45b73d`.
+- Trạng thái task SEM-27 trên GitHub Project 3 đã được cập nhật sang **Done** (item `PVTI_lAHOCnL5Fs4BpUDUzhEiXJM`).

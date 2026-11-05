@@ -489,7 +489,7 @@
       "category": "research",
       "title": "Đối chiếu hai bài nghiên cứu với API push hiện hành",
       "due": "2026-11-01",
-      "status": "In Progress",
+      "status": "Done",
       "start_dependencies": [],
       "finish_dependencies": [
         "SEM-15",
@@ -773,7 +773,7 @@
       "category": "practice",
       "title": "Triển khai server snapshot và CLI cập nhật",
       "due": "2026-10-31",
-      "status": "Review",
+      "status": "Done",
       "start_dependencies": [
         "SEM-13",
         "SEM-26"
@@ -849,7 +849,7 @@
         "Build debug/server chạy; MANUAL có nhãn và UI mở lại không phát sinh GET.",
         "M1 chỉ Pass khi có run thật; thiếu credential/mạng ghi blocker, không tự nghiệm thu từ tài liệu."
       ],
-      "input_status": "Chờ đầu vào",
+      "input_status": "Sẵn sàng",
       "inputs": [
         {
           "source_task": "SEM-23",
@@ -894,7 +894,7 @@
             "docs/setup/SERVER.md"
           ],
           "checks": "docs/evidence/SEM-27/CHECKS.md",
-          "source_status": "Review"
+          "source_status": "Done"
         }
       ],
       "due_at": "2026-10-31T22:00:00+07:00"
@@ -1327,7 +1327,7 @@
         "CLI gửi có response thật hoặc blocker; ID có thể null nếu API chưa cấp.",
         "Payload không có notification block và không trộn AndroidConfigV2 EAP."
       ],
-      "input_status": "Chờ đầu vào",
+      "input_status": "Sẵn sàng",
       "inputs": [
         {
           "source_task": "SEM-13",
@@ -1358,7 +1358,7 @@
             "docs/setup/SERVER.md"
           ],
           "checks": "docs/evidence/SEM-27/CHECKS.md",
-          "source_status": "Review"
+          "source_status": "Done"
         }
       ],
       "due_at": "2026-11-01T15:00:00+07:00"
@@ -1741,7 +1741,7 @@
             "docs/setup/SERVER.md"
           ],
           "checks": "docs/evidence/SEM-27/CHECKS.md",
-          "source_status": "Review"
+          "source_status": "Done"
         },
         {
           "source_task": "SEM-35",
@@ -2388,7 +2388,7 @@
             "docs/setup/SERVER.md"
           ],
           "checks": "docs/evidence/SEM-27/CHECKS.md",
-          "source_status": "Review"
+          "source_status": "Done"
         },
         {
           "source_task": "SEM-35",
@@ -2491,7 +2491,7 @@
             "research/notes/API_CROSSCHECK.md"
           ],
           "checks": "docs/evidence/SEM-22/CHECKS.md",
-          "source_status": "In Progress"
+          "source_status": "Done"
         },
         {
           "source_task": "SEM-43",
@@ -2911,7 +2911,7 @@
       "due_at": "2026-11-12T22:00:00+07:00"
     }
   ],
-  "snapshot_at": "2026-11-05 05:25:56 UTC",
+  "snapshot_at": "2026-11-05 07:42:13 UTC",
   "snapshot_source": "https://github.com/users/ThanhTris/projects/3/views/1",
   "timezone": "Asia/Ho_Chi_Minh",
   "deadline_at": "2026-11-13T22:00:00+07:00",

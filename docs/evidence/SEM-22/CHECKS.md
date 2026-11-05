@@ -69,3 +69,6 @@ Theo [nhiệm vụ SEM-22](../../../tasks/backlog/SEM-22.md), task cần nhận 
 
 - Toàn bộ nội dung yêu cầu của SEM-22 đã được hoàn thành với độ sâu học thuật cao, trích dẫn chính xác và liên kết chặt chẽ với các ca thử nghiệm thực tế của đề tài.
 - Báo cáo [research/notes/API_CROSSCHECK.md](../../../research/notes/API_CROSSCHECK.md) và hồ sơ [CHECKS.md](CHECKS.md) sẵn sàng phục vụ kiểm tra chéo và hợp nhất vào nhánh chính.
+
+- PR #15 đã được nhóm trưởng `ThanhTris` review, nghiệm thu và merge vào `main` tại merge commit `a7ba6c1d76eafeff02f1a3059882200d79e564d2`.
+- Trạng thái task SEM-22 trên GitHub Project 3 đã được cập nhật sang **Done** (item `PVTI_lAHOCnL5Fs4BpUDUzhEiXD8`).
