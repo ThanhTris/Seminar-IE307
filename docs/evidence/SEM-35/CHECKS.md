@@ -29,3 +29,8 @@ Nguồn đối chiếu ngày 05/11: [Admin send](https://firebase.google.com/doc
 - `server/bin/fcm-sender.js`, `server/src/fcm_sender.js`, test và lockfile; [FCM_SENDER.md](../../setup/FCM_SENDER.md) có cấu hình, lệnh và cách thu event cho SEM-24/34/36/40.
 - Sender log tách file khỏi outbox SEM-27; nếu crash sau response trước khi ghi event thì kết quả có thể không được ghi nhận. SDK có thể tự retry HTTP nội bộ; attempt ID ghi theo mỗi lần gọi SDK. Phải giữ signal ID khi retry và không suy mất event là chưa gửi.
 - Không tự merge hoặc chuyển Done; sau bàn giao Review chỉ sửa theo comment của nhóm trưởng.
+
+## Đồng bộ bàn giao
+
+- Commit nội dung được kiểm: `ea01a6a`; [PR #16](https://github.com/ThanhTris/Seminar-IE307/pull/16) đã tag `@ThanhTris`, chờ nhóm trưởng kiểm nhận.
+- SEM-35 đã chuyển Review. `python3 scripts/update_task_snapshot.py --apply` và `--check` exit 0: 45 task, 19 Done, 24 Todo, 1 In Progress, 1 Review; assignee khớp owner, không có vòng lặp dependency. Snapshot đối chiếu 08:02:58 UTC ngày 05/11/2026.
