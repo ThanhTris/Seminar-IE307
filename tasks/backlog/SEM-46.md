@@ -2,8 +2,8 @@
 
 - Trạng thái: **Todo** (Project).
 - Trạng thái đầu vào: **Chuẩn bị trước**.
-- Đối chiếu Project: 2026-11-05 08:19:49 UTC.
-- Người thực hiện duy nhất: **Trí** (`ThanhTris`).
+- Đối chiếu Project: 2026-11-05 14:49:28 UTC.
+- Người thực hiện duy nhất: **Tuấn** (`mtuan2491`).
 - Hạn: **08/11/2026 16:00 (UTC+7)**.
 - Công sức: 1/100 — Nghiên cứu/lập luận.
 - Tách từ nhóm cũ: [SEM-09](SEM-09.md); nhóm cũ chỉ còn lưu lịch sử.
@@ -23,15 +23,15 @@ Tài liệu nền đã có: [Kế hoạch/phạm vi](../../docs/PLAN.md) · [K�
 | Cần cho | Task cung cấp | Người bàn giao | Đầu ra phải nhận | Kiểm chứng bàn giao | Status nguồn |
 |---|---|---|---|---|---|
 | Hoàn tất | [SEM-14 — Vẽ luồng dữ liệu và hợp đồng sync chung](SEM-14.md) | Trí | `docs/mechanisms/SHARED_SYNC.md` | `docs/evidence/SEM-14/CHECKS.md` | Done |
-| Hoàn tất | [SEM-37 — Chốt bản ứng viên và manifest phục vụ tập chính](SEM-37.md) | Trí | `release/CANDIDATE_MANIFEST.json`<br>`docs/evidence/SEM-37/CANDIDATE_GATE.md` | `docs/evidence/SEM-37/CHECKS.md` | Todo |
+| Hoàn tất | [SEM-37 — Chốt bản ứng viên và manifest phục vụ tập chính](SEM-37.md) | Trung | `release/CANDIDATE_MANIFEST.json`<br>`docs/evidence/SEM-37/CANDIDATE_GATE.md` | `docs/evidence/SEM-37/CHECKS.md` | Todo |
 
 Đây là danh sách đầu ra cần bàn giao, chưa phải xác nhận các file đã tồn tại. Trước khi dùng, nhận đúng artifact/commit/config và CHECKS từ task nguồn.
 
-Status nguồn được đối chiếu Project lúc **2026-11-05 08:19:49 UTC**; mở link task nguồn để xem cập nhật mới hơn.
+Status nguồn được đối chiếu Project lúc **2026-11-05 14:49:28 UTC**; mở link task nguồn để xem cập nhật mới hơn.
 <!-- task-inputs:end -->
 
 
-## Việc Trí cần làm
+## Việc Tuấn cần làm
 
 1. Viết nội dung mở bài/câu hỏi trigger-to-cache và thao tác thiết bị cho demo.
 2. Liên kết bản ứng viên, mode/reset và phương án mở log/video trong đúng phần nói.
@@ -54,4 +54,4 @@ Status nguồn được đối chiếu Project lúc **2026-11-05 08:19:49 UTC**;
 
 ## Ranh giới thực hiện
 
-Một task chỉ có Trí thực hiện và cập nhật phần việc này. Người nhận đầu ra làm task riêng được liên kết ở trên; không có đồng thực hiện hay reviewer được gán thêm vào thẻ. Lỗi thuộc đầu ra này trả về task này ở Needs Update. Không sửa phần do task khác sở hữu mà chưa cập nhật ranh giới/bàn giao.
+Một task chỉ có Tuấn thực hiện và cập nhật phần việc này. Người nhận đầu ra làm task riêng được liên kết ở trên; không có đồng thực hiện hay reviewer được gán thêm vào thẻ. Lỗi thuộc đầu ra này trả về task này ở Needs Update. Không sửa phần do task khác sở hữu mà chưa cập nhật ranh giới/bàn giao.

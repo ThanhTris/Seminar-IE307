@@ -2,8 +2,8 @@
 
 - Trạng thái: **Todo** (Project).
 - Trạng thái đầu vào: **Chờ đầu vào**.
-- Đối chiếu Project: 2026-11-05 08:19:49 UTC.
-- Người thực hiện duy nhất: **Trí** (`ThanhTris`).
+- Đối chiếu Project: 2026-11-05 14:49:28 UTC.
+- Người thực hiện duy nhất: **Trung** (`TrungNQ2645`).
 - Hạn: **05/11/2026 22:00 (UTC+7)**.
 - Công sức: 2/100 — Cơ chế/thực hành.
 - Tách từ nhóm cũ: [SEM-07](SEM-07.md); nhóm cũ chỉ còn lưu lịch sử.
@@ -24,18 +24,18 @@ Tài liệu nền đã có: [Kế hoạch/phạm vi](../../docs/PLAN.md).
 |---|---|---|---|---|---|
 | Bắt đầu | [SEM-31 — Bàn giao chẩn đoán và tài liệu periodic](SEM-31.md) | Trung | `docs/PERIODIC.md`<br>`docs/evidence/SEM-31/SCHEDULER_CHECKS.md` | `docs/evidence/SEM-31/CHECKS.md` | Done |
 | Bắt đầu | [SEM-33 — Xử lý token refresh và bàn giao PUSH.md](SEM-33.md) | Trang | `android/ (token lifecycle)`<br>`docs/PUSH.md` | `docs/evidence/SEM-33/CHECKS.md` | Todo |
-| Bắt đầu | [SEM-36 — Tích hợp ba mode và pilot hybrid](SEM-36.md) | Trí | `android/ (mode controller và tích hợp)`<br>`docs/SYNC.md`<br>`docs/evidence/SEM-36/HYBRID_PILOT.md` | `docs/evidence/SEM-36/CHECKS.md` | Todo |
+| Bắt đầu | [SEM-36 — Tích hợp ba mode và pilot hybrid](SEM-36.md) | Trung | `android/ (mode controller và tích hợp)`<br>`docs/SYNC.md`<br>`docs/evidence/SEM-36/HYBRID_PILOT.md` | `docs/evidence/SEM-36/CHECKS.md` | Todo |
 | Bắt đầu | [SEM-38 — Xử lý duplicate và version hint của push](SEM-38.md) | Trang | `android/ (messaging input policy)`<br>`docs/evidence/SEM-38/PUSH_INPUT_CASES.md` | `docs/evidence/SEM-38/CHECKS.md` | Todo |
 | Bắt đầu | [SEM-39 — Củng cố version guard, retry và race trong core](SEM-39.md) | Trung | `android/ (sync robustness và logic checks)`<br>`docs/evidence/SEM-39/CORE_CASES.md` | `docs/evidence/SEM-39/CHECKS.md` | Done |
 | Bắt đầu | [SEM-40 — Thêm fault injection cố ý bỏ gửi push](SEM-40.md) | Tâm | `server/ (skip-push CLI)`<br>`docs/evidence/SEM-40/FAULT_INJECTION.md` | `docs/evidence/SEM-40/CHECKS.md` | Todo |
 
 Đây là danh sách đầu ra cần bàn giao, chưa phải xác nhận các file đã tồn tại. Trước khi dùng, nhận đúng artifact/commit/config và CHECKS từ task nguồn.
 
-Status nguồn được đối chiếu Project lúc **2026-11-05 08:19:49 UTC**; mở link task nguồn để xem cập nhật mới hơn.
+Status nguồn được đối chiếu Project lúc **2026-11-05 14:49:28 UTC**; mở link task nguồn để xem cập nhật mới hơn.
 <!-- task-inputs:end -->
 
 
-## Việc Trí cần làm
+## Việc Trung cần làm
 
 1. Pin app/server commit, APK SHA256, dependency/config và danh sách ca pilot trên bản ứng viên.
 2. Build candidate, rà M1/hai trigger/hybrid và ghi cổng đủ để đo main.
@@ -62,4 +62,4 @@ Status nguồn được đối chiếu Project lúc **2026-11-05 08:19:49 UTC**;
 
 ## Ranh giới thực hiện
 
-Một task chỉ có Trí thực hiện và cập nhật phần việc này. Người nhận đầu ra làm task riêng được liên kết ở trên; không có đồng thực hiện hay reviewer được gán thêm vào thẻ. Lỗi thuộc đầu ra này trả về task này ở Needs Update. Không sửa phần do task khác sở hữu mà chưa cập nhật ranh giới/bàn giao.
+Một task chỉ có Trung thực hiện và cập nhật phần việc này. Người nhận đầu ra làm task riêng được liên kết ở trên; không có đồng thực hiện hay reviewer được gán thêm vào thẻ. Lỗi thuộc đầu ra này trả về task này ở Needs Update. Không sửa phần do task khác sở hữu mà chưa cập nhật ranh giới/bàn giao.

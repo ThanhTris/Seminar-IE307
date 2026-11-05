@@ -1282,7 +1282,7 @@
             "docs/setup/FCM_SENDER.md"
           ],
           "checks": "docs/evidence/SEM-35/CHECKS.md",
-          "source_status": "Review"
+          "source_status": "Needs Update"
         },
         {
           "source_task": "SEM-33",
@@ -1307,7 +1307,7 @@
       "category": "practice",
       "title": "Làm CLI gửi FCM data-only normal priority",
       "due": "2026-11-01",
-      "status": "Review",
+      "status": "Needs Update",
       "start_dependencies": [
         "SEM-13",
         "SEM-18",
@@ -1366,8 +1366,8 @@
     {
       "id": "SEM-36",
       "source_group": "SEM-07",
-      "owner": "Trí",
-      "github": "ThanhTris",
+      "owner": "Trung",
+      "github": "TrungNQ2645",
       "effort": 3,
       "category": "practice",
       "title": "Tích hợp ba mode và pilot hybrid",
@@ -1452,7 +1452,7 @@
             "docs/setup/FCM_SENDER.md"
           ],
           "checks": "docs/evidence/SEM-35/CHECKS.md",
-          "source_status": "Review"
+          "source_status": "Needs Update"
         },
         {
           "source_task": "SEM-38",
@@ -1493,8 +1493,8 @@
     {
       "id": "SEM-37",
       "source_group": "SEM-07",
-      "owner": "Trí",
-      "github": "ThanhTris",
+      "owner": "Trung",
+      "github": "TrungNQ2645",
       "effort": 2,
       "category": "practice",
       "title": "Chốt bản ứng viên và manifest phục vụ tập chính",
@@ -1549,7 +1549,7 @@
         {
           "source_task": "SEM-36",
           "required_for": "start",
-          "producer": "Trí",
+          "producer": "Trung",
           "artifacts": [
             "android/ (mode controller và tích hợp)",
             "docs/SYNC.md",
@@ -1752,7 +1752,7 @@
             "docs/setup/FCM_SENDER.md"
           ],
           "checks": "docs/evidence/SEM-35/CHECKS.md",
-          "source_status": "Review"
+          "source_status": "Needs Update"
         }
       ],
       "due_at": "2026-11-04T18:00:00+07:00"
@@ -1814,7 +1814,7 @@
         {
           "source_task": "SEM-37",
           "required_for": "start",
-          "producer": "Trí",
+          "producer": "Trung",
           "artifacts": [
             "release/CANDIDATE_MANIFEST.json",
             "docs/evidence/SEM-37/CANDIDATE_GATE.md"
@@ -1828,8 +1828,8 @@
     {
       "id": "SEM-42",
       "source_group": "SEM-08",
-      "owner": "Vinh",
-      "github": "Vinh5905",
+      "owner": "Trí",
+      "github": "ThanhTris",
       "effort": 3,
       "category": "practice",
       "title": "Chạy đối chiếu OPPO E01/E02 và ghi giới hạn OEM",
@@ -1893,7 +1893,7 @@
         {
           "source_task": "SEM-37",
           "required_for": "start",
-          "producer": "Trí",
+          "producer": "Trung",
           "artifacts": [
             "release/CANDIDATE_MANIFEST.json",
             "docs/evidence/SEM-37/CANDIDATE_GATE.md"
@@ -1949,7 +1949,7 @@
         {
           "source_task": "SEM-42",
           "required_for": "start",
-          "producer": "Vinh",
+          "producer": "Trí",
           "artifacts": [
             "experiments/runs/<oppo-main-run>/manifest.json",
             "experiments/runs/<oppo-main-run>/events.jsonl"
@@ -1960,7 +1960,7 @@
         {
           "source_task": "SEM-44",
           "required_for": "start",
-          "producer": "Trung",
+          "producer": "Trang",
           "artifacts": [
             "experiments/AUDIT.md"
           ],
@@ -1984,8 +1984,8 @@
     {
       "id": "SEM-44",
       "source_group": "SEM-08",
-      "owner": "Trung",
-      "github": "TrungNQ2645",
+      "owner": "Trang",
+      "github": "rosy179",
       "effort": 1,
       "category": "practice",
       "title": "Kiểm độc lập trigger và phép tính dữ liệu main",
@@ -2025,7 +2025,7 @@
         {
           "source_task": "SEM-42",
           "required_for": "start",
-          "producer": "Vinh",
+          "producer": "Trí",
           "artifacts": [
             "experiments/runs/<oppo-main-run>/manifest.json",
             "experiments/runs/<oppo-main-run>/events.jsonl"
@@ -2117,7 +2117,7 @@
         {
           "source_task": "SEM-42",
           "required_for": "finish",
-          "producer": "Vinh",
+          "producer": "Trí",
           "artifacts": [
             "experiments/runs/<oppo-main-run>/manifest.json",
             "experiments/runs/<oppo-main-run>/events.jsonl"
@@ -2131,8 +2131,8 @@
     {
       "id": "SEM-46",
       "source_group": "SEM-09",
-      "owner": "Trí",
-      "github": "ThanhTris",
+      "owner": "Tuấn",
+      "github": "mtuan2491",
       "effort": 1,
       "category": "research",
       "title": "Viết phần mở bài và bàn giao lời dẫn thao tác demo",
@@ -2170,7 +2170,7 @@
         {
           "source_task": "SEM-37",
           "required_for": "finish",
-          "producer": "Trí",
+          "producer": "Trung",
           "artifacts": [
             "release/CANDIDATE_MANIFEST.json",
             "docs/evidence/SEM-37/CANDIDATE_GATE.md"
@@ -2304,7 +2304,7 @@
         {
           "source_task": "SEM-44",
           "required_for": "finish",
-          "producer": "Trung",
+          "producer": "Trang",
           "artifacts": [
             "experiments/AUDIT.md"
           ],
@@ -2399,7 +2399,7 @@
             "docs/setup/FCM_SENDER.md"
           ],
           "checks": "docs/evidence/SEM-35/CHECKS.md",
-          "source_status": "Review"
+          "source_status": "Needs Update"
         },
         {
           "source_task": "SEM-40",
@@ -2554,7 +2554,7 @@
         {
           "source_task": "SEM-46",
           "required_for": "finish",
-          "producer": "Trí",
+          "producer": "Tuấn",
           "artifacts": [
             "slides/inputs/TRI.md"
           ],
@@ -2611,8 +2611,8 @@
     {
       "id": "SEM-52",
       "source_group": "SEM-10",
-      "owner": "Trí",
-      "github": "ThanhTris",
+      "owner": "Trung",
+      "github": "TrungNQ2645",
       "effort": 1,
       "category": "practice",
       "title": "Build APK bàn giao và viết DEMO_RUNBOOK",
@@ -2645,7 +2645,7 @@
         {
           "source_task": "SEM-37",
           "required_for": "start",
-          "producer": "Trí",
+          "producer": "Trung",
           "artifacts": [
             "release/CANDIDATE_MANIFEST.json",
             "docs/evidence/SEM-37/CANDIDATE_GATE.md"
@@ -2693,8 +2693,8 @@
     {
       "id": "SEM-53",
       "source_group": "SEM-10",
-      "owner": "Vinh",
-      "github": "Vinh5905",
+      "owner": "Trí",
+      "github": "ThanhTris",
       "effort": 2,
       "category": "practice",
       "title": "Tái lập runbook và quay video dự phòng",
@@ -2723,7 +2723,7 @@
         {
           "source_task": "SEM-52",
           "required_for": "start",
-          "producer": "Trí",
+          "producer": "Trung",
           "artifacts": [
             "release/BUILD_MANIFEST.json",
             "docs/DEMO_RUNBOOK.md",
@@ -2781,7 +2781,7 @@
         {
           "source_task": "SEM-52",
           "required_for": "start",
-          "producer": "Trí",
+          "producer": "Trung",
           "artifacts": [
             "release/BUILD_MANIFEST.json",
             "docs/DEMO_RUNBOOK.md",
@@ -2793,7 +2793,7 @@
         {
           "source_task": "SEM-53",
           "required_for": "finish",
-          "producer": "Vinh",
+          "producer": "Trí",
           "artifacts": [
             "release/VIDEO_MANIFEST.json",
             "docs/evidence/SEM-53/REPRODUCTION.md",
@@ -2808,8 +2808,8 @@
     {
       "id": "SEM-55",
       "source_group": "SEM-10",
-      "owner": "Trí",
-      "github": "ThanhTris",
+      "owner": "Tuấn",
+      "github": "mtuan2491",
       "effort": 1,
       "category": "practice",
       "title": "Chốt manifest và gói bàn giao seminar",
@@ -2876,7 +2876,7 @@
         {
           "source_task": "SEM-52",
           "required_for": "start",
-          "producer": "Trí",
+          "producer": "Trung",
           "artifacts": [
             "release/BUILD_MANIFEST.json",
             "docs/DEMO_RUNBOOK.md",
@@ -2888,7 +2888,7 @@
         {
           "source_task": "SEM-53",
           "required_for": "start",
-          "producer": "Vinh",
+          "producer": "Trí",
           "artifacts": [
             "release/VIDEO_MANIFEST.json",
             "docs/evidence/SEM-53/REPRODUCTION.md",
@@ -2911,7 +2911,7 @@
       "due_at": "2026-11-12T22:00:00+07:00"
     }
   ],
-  "snapshot_at": "2026-11-05 08:19:49 UTC",
+  "snapshot_at": "2026-11-05 14:49:28 UTC",
   "snapshot_source": "https://github.com/users/ThanhTris/projects/3/views/1",
   "timezone": "Asia/Ho_Chi_Minh",
   "deadline_at": "2026-11-13T22:00:00+07:00",
