@@ -45,9 +45,22 @@ Status nguồn được đối chiếu Project lúc **2026-11-05 04:46:13 UTC**;
 
 ## Tiêu chí hoàn thành
 
-- [ ] Mỗi dòng có nguồn/vị trí/version và giới hạn, không trộn kết quả paper với demo.
-- [ ] Không yêu cầu paper hoàn tất mới bắt đầu đọc tài liệu API; chỉ gate bản đối chiếu cuối.
-- [ ] Đầu ra và CHECKS có thật, link đọc được; chưa chạy phải ghi Not run, không tự chuyển Done từ kế hoạch.
+- [x] Mỗi dòng có nguồn/vị trí/version và giới hạn, không trộn kết quả paper với demo.
+- [x] Không yêu cầu paper hoàn tất mới bắt đầu đọc tài liệu API; chỉ gate bản đối chiếu cuối.
+- [x] Đầu ra và CHECKS có thật, link đọc được; chưa chạy phải ghi Not run, không tự chuyển Done từ kế hoạch.
+
+## Đầu ra đã soát ngày 05/11/2026
+
+[API_CROSSCHECK 1.0.0](../../research/notes/API_CROSSCHECK.md) · [CHECKS SEM-22](../../docs/evidence/SEM-22/CHECKS.md).
+
+Đã hoàn thành đối chiếu hai bài nghiên cứu với API push và scheduler hiện hành:
+1. Chuẩn hóa bảng documentation FCM HTTP v1 data-only normal priority (TTL 24h, payload < 1 KB, WorkManager handoff).
+2. Đối chiếu Paper 1 (Simon et al., 2017): chu kỳ rỗng 96.8% trên iOS 7 vs WorkManager interval tối thiểu 15 phút, giải quyết Lost Wake-Up bằng WorkManager REPLACE và Room Version Guard thay cho cờ in-memory loopOnceMore, và nguyên tắc tách trigger khỏi snapshot payload.
+3. Đối chiếu Paper 2 (González-Pérez et al., 2022): lập lịch dự kiến khác thực thi trên Doze/Standby Buckets (tỷ lệ miss 84%), phân tích các kỹ thuật lách luật bị Google cấm (exact alarm, foreground service), và phân mảnh OEM (ColorOS trên OPPO Find X9).
+4. Bảng ma trận 8 claims chi tiết có vị trí mục/trang trong paper, API hiện hành, đánh giá và gắn mã ca thử nghiệm E01–E06.
+5. Luận giải định vị mô hình HYBRID của Seminar IE307 từ góc độ học thuật.
+
+Đây là bàn giao nghiên cứu đối chiếu học thuật của SEM-22; các ca đo thực nghiệm vẫn **Not run** để bàn giao cho các task pilot/main runs downstream. Checklist này không tự chuyển Status Project sang Done; các trường Project phía trên vẫn là snapshot hiện hành.
 
 ## Task được mở khóa
 
