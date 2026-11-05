@@ -2,7 +2,7 @@
 
 - Trạng thái: **Todo** (Project).
 - Trạng thái đầu vào: **Chờ đầu vào**.
-- Đối chiếu Project: 2026-11-05 07:42:13 UTC.
+- Đối chiếu Project: 2026-11-05 08:19:49 UTC.
 - Người thực hiện duy nhất: **Trang** (`rosy179`).
 - Hạn: **02/11/2026 18:00 (UTC+7)**.
 - Công sức: 4/100 — Cơ chế/thực hành.
@@ -24,11 +24,11 @@ Tài liệu nền đã có: [Kế hoạch/phạm vi](../../docs/PLAN.md).
 |---|---|---|---|---|---|
 | Bắt đầu | [SEM-15 — Giải thích cơ chế silent push và giới hạn FCM](SEM-15.md) | Trang | `docs/mechanisms/SILENT_PUSH.md` | `docs/evidence/SEM-15/CHECKS.md` | Done |
 | Bắt đầu | [SEM-25 — Xây Room, SyncRepository và SyncWorker dùng chung](SEM-25.md) | Trung | `android/ (data và sync core)`<br>`docs/SYNC_CORE_API.md` | `docs/evidence/SEM-25/CHECKS.md` | Done |
-| Bắt đầu | [SEM-28 — Ghép manual sync đầu cuối và chốt hướng dẫn setup](SEM-28.md) | Trí | `docs/SETUP.md`<br>`docs/ENVIRONMENT.md`<br>`docs/evidence/SEM-28/M1.md` | `docs/evidence/SEM-28/CHECKS.md` | Todo |
+| Bắt đầu | [SEM-28 — Ghép manual sync đầu cuối và chốt hướng dẫn setup](SEM-28.md) | Trí | `docs/SETUP.md`<br>`docs/ENVIRONMENT.md`<br>`docs/evidence/SEM-28/M1.md` | `docs/evidence/SEM-28/CHECKS.md` | In Progress |
 
 Đây là danh sách đầu ra cần bàn giao, chưa phải xác nhận các file đã tồn tại. Trước khi dùng, nhận đúng artifact/commit/config và CHECKS từ task nguồn.
 
-Status nguồn được đối chiếu Project lúc **2026-11-05 07:42:13 UTC**; mở link task nguồn để xem cập nhật mới hơn.
+Status nguồn được đối chiếu Project lúc **2026-11-05 08:19:49 UTC**; mở link task nguồn để xem cập nhật mới hơn.
 <!-- task-inputs:end -->
 
 

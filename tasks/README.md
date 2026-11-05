@@ -20,7 +20,7 @@ SEM-01…SEM-10 chỉ còn là nhóm lịch sử với link tới task thay th�
 <!-- input-snapshot:start -->
 ## Trạng thái đối chiếu Project
 
-Snapshot **2026-11-05 07:42:13 UTC**. Status là tiến độ thực hiện; Input status là khả năng bắt đầu theo dependency: **Sẵn sàng 22**, **Chuẩn bị trước 7**, **Chờ đầu vào 16**.
+Snapshot **2026-11-05 08:19:49 UTC**. Status là tiến độ thực hiện; Input status là khả năng bắt đầu theo dependency: **Sẵn sàng 22**, **Chuẩn bị trước 7**, **Chờ đầu vào 16**.
 
 - Sẵn sàng: không có task dependency chưa Done; vẫn cần kiểm artifact/CHECKS khi nhận bàn giao.
 - Chuẩn bị trước: được làm phần độc lập nhưng còn gate hoàn tất chưa bàn giao.
@@ -48,14 +48,14 @@ Project là nguồn Status hiện hành. Sau khi đổi Status nguồn, chạy `
 | [SEM-25](backlog/SEM-25.md) — Xây Room, SyncRepository và SyncWorker dùng chung | Trung | Done | Sẵn sàng | 31/10/2026 17:00 (UTC+7) | 4 | [SEM-23](backlog/SEM-23.md), [SEM-26](backlog/SEM-26.md) | Không có. |
 | [SEM-26](backlog/SEM-26.md) — Chốt hợp đồng API và event schema | Tâm | Done | Sẵn sàng | 30/10/2026 17:00 (UTC+7) | 2 | [SEM-11](backlog/SEM-11.md), [SEM-13](backlog/SEM-13.md), [SEM-14](backlog/SEM-14.md) | Không có. |
 | [SEM-27](backlog/SEM-27.md) — Triển khai server snapshot và CLI cập nhật | Tâm | Done | Sẵn sàng | 31/10/2026 17:00 (UTC+7) | 4 | [SEM-13](backlog/SEM-13.md), [SEM-26](backlog/SEM-26.md) | Không có. |
-| [SEM-28](backlog/SEM-28.md) — Ghép manual sync đầu cuối và chốt hướng dẫn setup | Trí | Todo | Sẵn sàng | 31/10/2026 22:00 (UTC+7) | 1 | [SEM-23](backlog/SEM-23.md), [SEM-24](backlog/SEM-24.md), [SEM-25](backlog/SEM-25.md), [SEM-27](backlog/SEM-27.md) | Không có. |
+| [SEM-28](backlog/SEM-28.md) — Ghép manual sync đầu cuối và chốt hướng dẫn setup | Trí | In Progress | Sẵn sàng | 31/10/2026 22:00 (UTC+7) | 1 | [SEM-23](backlog/SEM-23.md), [SEM-24](backlog/SEM-24.md), [SEM-25](backlog/SEM-25.md), [SEM-27](backlog/SEM-27.md) | Không có. |
 | [SEM-29](backlog/SEM-29.md) — Chạy pilot periodic E01 trên hai thiết bị | Vinh | Todo | Sẵn sàng | 02/11/2026 22:00 (UTC+7) | 2 | [SEM-16](backlog/SEM-16.md), [SEM-24](backlog/SEM-24.md), [SEM-30](backlog/SEM-30.md) | [SEM-31](backlog/SEM-31.md) |
 | [SEM-30](backlog/SEM-30.md) — Triển khai unique periodic work | Trung | Done | Chờ đầu vào | 01/11/2026 18:00 (UTC+7) | 4 | [SEM-17](backlog/SEM-17.md), [SEM-25](backlog/SEM-25.md), [SEM-28](backlog/SEM-28.md) | Không có. |
 | [SEM-31](backlog/SEM-31.md) — Bàn giao chẩn đoán và tài liệu periodic | Trung | Done | Sẵn sàng | 02/11/2026 12:00 (UTC+7) | 3 | [SEM-30](backlog/SEM-30.md) | Không có. |
 | [SEM-32](backlog/SEM-32.md) — Triển khai callback FCM và enqueue sync | Trang | Todo | Chờ đầu vào | 02/11/2026 18:00 (UTC+7) | 4 | [SEM-15](backlog/SEM-15.md), [SEM-25](backlog/SEM-25.md), [SEM-28](backlog/SEM-28.md) | Không có. |
 | [SEM-33](backlog/SEM-33.md) — Xử lý token refresh và bàn giao PUSH.md | Trang | Todo | Chờ đầu vào | 03/11/2026 14:00 (UTC+7) | 3 | [SEM-13](backlog/SEM-13.md), [SEM-32](backlog/SEM-32.md) | Không có. |
 | [SEM-34](backlog/SEM-34.md) — Chạy pilot push E02 và xác nhận cache nền | Vinh | Todo | Chờ đầu vào | 03/11/2026 22:00 (UTC+7) | 1 | [SEM-16](backlog/SEM-16.md), [SEM-24](backlog/SEM-24.md), [SEM-32](backlog/SEM-32.md), [SEM-35](backlog/SEM-35.md) | [SEM-33](backlog/SEM-33.md) |
-| [SEM-35](backlog/SEM-35.md) — Làm CLI gửi FCM data-only normal priority | Tâm | Todo | Sẵn sàng | 01/11/2026 15:00 (UTC+7) | 2 | [SEM-13](backlog/SEM-13.md), [SEM-18](backlog/SEM-18.md), [SEM-27](backlog/SEM-27.md) | Không có. |
+| [SEM-35](backlog/SEM-35.md) — Làm CLI gửi FCM data-only normal priority | Tâm | Review | Sẵn sàng | 01/11/2026 15:00 (UTC+7) | 2 | [SEM-13](backlog/SEM-13.md), [SEM-18](backlog/SEM-18.md), [SEM-27](backlog/SEM-27.md) | Không có. |
 | [SEM-36](backlog/SEM-36.md) — Tích hợp ba mode và pilot hybrid | Trí | Todo | Chờ đầu vào | 05/11/2026 18:00 (UTC+7) | 3 | [SEM-29](backlog/SEM-29.md), [SEM-30](backlog/SEM-30.md), [SEM-32](backlog/SEM-32.md), [SEM-34](backlog/SEM-34.md), [SEM-35](backlog/SEM-35.md) | [SEM-38](backlog/SEM-38.md), [SEM-39](backlog/SEM-39.md), [SEM-40](backlog/SEM-40.md) |
 | [SEM-37](backlog/SEM-37.md) — Chốt bản ứng viên và manifest phục vụ tập chính | Trí | Todo | Chờ đầu vào | 05/11/2026 22:00 (UTC+7) | 2 | [SEM-31](backlog/SEM-31.md), [SEM-33](backlog/SEM-33.md), [SEM-36](backlog/SEM-36.md), [SEM-38](backlog/SEM-38.md), [SEM-39](backlog/SEM-39.md), [SEM-40](backlog/SEM-40.md) | Không có. |
 | [SEM-38](backlog/SEM-38.md) — Xử lý duplicate và version hint của push | Trang | Todo | Chờ đầu vào | 05/11/2026 12:00 (UTC+7) | 2 | [SEM-32](backlog/SEM-32.md), [SEM-33](backlog/SEM-33.md) | Không có. |
