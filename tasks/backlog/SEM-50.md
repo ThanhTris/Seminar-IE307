@@ -2,8 +2,8 @@
 
 - Trạng thái: **Todo** (Project).
 - Trạng thái đầu vào: **Chuẩn bị trước**.
-- Đối chiếu Project: 2026-11-05 14:04:52 UTC.
-- Người thực hiện duy nhất: **Tuấn** (`mtuan2491`).
+- Đối chiếu Project: 2026-11-05 14:24:29 UTC.
+- Người thực hiện duy nhất: **Tâm** (`HoaiTam`).
 - Hạn: **09/11/2026 22:00 (UTC+7)**.
 - Công sức: 2/100 — Nghiên cứu/lập luận.
 - Tách từ nhóm cũ: [SEM-09](SEM-09.md); nhóm cũ chỉ còn lưu lịch sử.
@@ -31,11 +31,11 @@ Tài liệu nền đã có: [Kế hoạch/phạm vi](../../docs/PLAN.md) · [K�
 
 Đây là danh sách đầu ra cần bàn giao, chưa phải xác nhận các file đã tồn tại. Trước khi dùng, nhận đúng artifact/commit/config và CHECKS từ task nguồn.
 
-Status nguồn được đối chiếu Project lúc **2026-11-05 14:04:52 UTC**; mở link task nguồn để xem cập nhật mới hơn.
+Status nguồn được đối chiếu Project lúc **2026-11-05 14:24:29 UTC**; mở link task nguồn để xem cập nhật mới hơn.
 <!-- task-inputs:end -->
 
 
-## Việc Tuấn cần làm
+## Việc Tâm cần làm
 
 1. Soạn khung report ngay; nhận notes/evidence rồi hoàn thiện cơ chế, phương pháp, kết quả và giới hạn.
 2. Ghép metadata hai bài vào references.bib; tạo CLAIMS có nguồn/vị trí/case/evidence/trạng thái.
@@ -62,4 +62,4 @@ Status nguồn được đối chiếu Project lúc **2026-11-05 14:04:52 UTC**;
 
 ## Ranh giới thực hiện
 
-Một task chỉ có Tuấn thực hiện và cập nhật phần việc này. Người nhận đầu ra làm task riêng được liên kết ở trên; không có đồng thực hiện hay reviewer được gán thêm vào thẻ. Lỗi thuộc đầu ra này trả về task này ở Needs Update. Không sửa phần do task khác sở hữu mà chưa cập nhật ranh giới/bàn giao.
+Một task chỉ có Tâm thực hiện và cập nhật phần việc này. Người nhận đầu ra làm task riêng được liên kết ở trên; không có đồng thực hiện hay reviewer được gán thêm vào thẻ. Lỗi thuộc đầu ra này trả về task này ở Needs Update. Không sửa phần do task khác sở hữu mà chưa cập nhật ranh giới/bàn giao.

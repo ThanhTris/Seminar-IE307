@@ -1090,8 +1090,8 @@
     {
       "id": "SEM-32",
       "source_group": "SEM-06",
-      "owner": "Trang",
-      "github": "rosy179",
+      "owner": "Trung",
+      "github": "TrungNQ2645",
       "effort": 4,
       "category": "practice",
       "title": "Triển khai callback FCM và enqueue sync",
@@ -1156,8 +1156,8 @@
     {
       "id": "SEM-33",
       "source_group": "SEM-06",
-      "owner": "Trang",
-      "github": "rosy179",
+      "owner": "Trung",
+      "github": "TrungNQ2645",
       "effort": 3,
       "category": "practice",
       "title": "Xử lý token refresh và bàn giao PUSH.md",
@@ -1196,7 +1196,7 @@
         {
           "source_task": "SEM-32",
           "required_for": "start",
-          "producer": "Trang",
+          "producer": "Trung",
           "artifacts": [
             "android/ (messaging callback và enqueue adapter)"
           ],
@@ -1266,7 +1266,7 @@
         {
           "source_task": "SEM-32",
           "required_for": "start",
-          "producer": "Trang",
+          "producer": "Trung",
           "artifacts": [
             "android/ (messaging callback và enqueue adapter)"
           ],
@@ -1287,7 +1287,7 @@
         {
           "source_task": "SEM-33",
           "required_for": "finish",
-          "producer": "Trang",
+          "producer": "Trung",
           "artifacts": [
             "android/ (token lifecycle)",
             "docs/PUSH.md"
@@ -1366,8 +1366,8 @@
     {
       "id": "SEM-36",
       "source_group": "SEM-07",
-      "owner": "Trí",
-      "github": "ThanhTris",
+      "owner": "Trung",
+      "github": "TrungNQ2645",
       "effort": 3,
       "category": "practice",
       "title": "Tích hợp ba mode và pilot hybrid",
@@ -1425,7 +1425,7 @@
         {
           "source_task": "SEM-32",
           "required_for": "start",
-          "producer": "Trang",
+          "producer": "Trung",
           "artifacts": [
             "android/ (messaging callback và enqueue adapter)"
           ],
@@ -1457,7 +1457,7 @@
         {
           "source_task": "SEM-38",
           "required_for": "finish",
-          "producer": "Trang",
+          "producer": "Trung",
           "artifacts": [
             "android/ (messaging input policy)",
             "docs/evidence/SEM-38/PUSH_INPUT_CASES.md"
@@ -1493,8 +1493,8 @@
     {
       "id": "SEM-37",
       "source_group": "SEM-07",
-      "owner": "Trí",
-      "github": "ThanhTris",
+      "owner": "Trung",
+      "github": "TrungNQ2645",
       "effort": 2,
       "category": "practice",
       "title": "Chốt bản ứng viên và manifest phục vụ tập chính",
@@ -1538,7 +1538,7 @@
         {
           "source_task": "SEM-33",
           "required_for": "start",
-          "producer": "Trang",
+          "producer": "Trung",
           "artifacts": [
             "android/ (token lifecycle)",
             "docs/PUSH.md"
@@ -1549,7 +1549,7 @@
         {
           "source_task": "SEM-36",
           "required_for": "start",
-          "producer": "Trí",
+          "producer": "Trung",
           "artifacts": [
             "android/ (mode controller và tích hợp)",
             "docs/SYNC.md",
@@ -1561,7 +1561,7 @@
         {
           "source_task": "SEM-38",
           "required_for": "start",
-          "producer": "Trang",
+          "producer": "Trung",
           "artifacts": [
             "android/ (messaging input policy)",
             "docs/evidence/SEM-38/PUSH_INPUT_CASES.md"
@@ -1597,8 +1597,8 @@
     {
       "id": "SEM-38",
       "source_group": "SEM-07",
-      "owner": "Trang",
-      "github": "rosy179",
+      "owner": "Trung",
+      "github": "TrungNQ2645",
       "effort": 2,
       "category": "practice",
       "title": "Xử lý duplicate và version hint của push",
@@ -1627,7 +1627,7 @@
         {
           "source_task": "SEM-32",
           "required_for": "start",
-          "producer": "Trang",
+          "producer": "Trung",
           "artifacts": [
             "android/ (messaging callback và enqueue adapter)"
           ],
@@ -1637,7 +1637,7 @@
         {
           "source_task": "SEM-33",
           "required_for": "start",
-          "producer": "Trang",
+          "producer": "Trung",
           "artifacts": [
             "android/ (token lifecycle)",
             "docs/PUSH.md"
@@ -1814,7 +1814,7 @@
         {
           "source_task": "SEM-37",
           "required_for": "start",
-          "producer": "Trí",
+          "producer": "Trung",
           "artifacts": [
             "release/CANDIDATE_MANIFEST.json",
             "docs/evidence/SEM-37/CANDIDATE_GATE.md"
@@ -1893,7 +1893,7 @@
         {
           "source_task": "SEM-37",
           "required_for": "start",
-          "producer": "Trí",
+          "producer": "Trung",
           "artifacts": [
             "release/CANDIDATE_MANIFEST.json",
             "docs/evidence/SEM-37/CANDIDATE_GATE.md"
@@ -2131,8 +2131,8 @@
     {
       "id": "SEM-46",
       "source_group": "SEM-09",
-      "owner": "Trí",
-      "github": "ThanhTris",
+      "owner": "Tuấn",
+      "github": "mtuan2491",
       "effort": 1,
       "category": "research",
       "title": "Viết phần mở bài và bàn giao lời dẫn thao tác demo",
@@ -2170,7 +2170,7 @@
         {
           "source_task": "SEM-37",
           "required_for": "finish",
-          "producer": "Trí",
+          "producer": "Trung",
           "artifacts": [
             "release/CANDIDATE_MANIFEST.json",
             "docs/evidence/SEM-37/CANDIDATE_GATE.md"
@@ -2184,8 +2184,8 @@
     {
       "id": "SEM-47",
       "source_group": "SEM-09",
-      "owner": "Trang",
-      "github": "rosy179",
+      "owner": "Tuấn",
+      "github": "mtuan2491",
       "effort": 2,
       "category": "research",
       "title": "Viết phần silent push và lời dẫn demo 4 phút",
@@ -2227,7 +2227,7 @@
         {
           "source_task": "SEM-33",
           "required_for": "finish",
-          "producer": "Trang",
+          "producer": "Trung",
           "artifacts": [
             "android/ (token lifecycle)",
             "docs/PUSH.md"
@@ -2249,7 +2249,7 @@
         {
           "source_task": "SEM-38",
           "required_for": "finish",
-          "producer": "Trang",
+          "producer": "Trung",
           "artifacts": [
             "android/ (messaging input policy)",
             "docs/evidence/SEM-38/PUSH_INPUT_CASES.md"
@@ -2418,8 +2418,8 @@
     {
       "id": "SEM-50",
       "source_group": "SEM-09",
-      "owner": "Tuấn",
-      "github": "mtuan2491",
+      "owner": "Tâm",
+      "github": "HoaiTam",
       "effort": 2,
       "category": "research",
       "title": "Hoàn thiện báo cáo, bibliography và CLAIMS",
@@ -2554,7 +2554,7 @@
         {
           "source_task": "SEM-46",
           "required_for": "finish",
-          "producer": "Trí",
+          "producer": "Tuấn",
           "artifacts": [
             "slides/inputs/TRI.md"
           ],
@@ -2564,7 +2564,7 @@
         {
           "source_task": "SEM-47",
           "required_for": "finish",
-          "producer": "Trang",
+          "producer": "Tuấn",
           "artifacts": [
             "slides/inputs/TRANG.md",
             "slides/DEMO_SCRIPT.md"
@@ -2596,7 +2596,7 @@
         {
           "source_task": "SEM-50",
           "required_for": "finish",
-          "producer": "Tuấn",
+          "producer": "Tâm",
           "artifacts": [
             "report/REPORT.md",
             "research/references.bib",
@@ -2611,8 +2611,8 @@
     {
       "id": "SEM-52",
       "source_group": "SEM-10",
-      "owner": "Trí",
-      "github": "ThanhTris",
+      "owner": "Trung",
+      "github": "TrungNQ2645",
       "effort": 1,
       "category": "practice",
       "title": "Build APK bàn giao và viết DEMO_RUNBOOK",
@@ -2645,7 +2645,7 @@
         {
           "source_task": "SEM-37",
           "required_for": "start",
-          "producer": "Trí",
+          "producer": "Trung",
           "artifacts": [
             "release/CANDIDATE_MANIFEST.json",
             "docs/evidence/SEM-37/CANDIDATE_GATE.md"
@@ -2666,7 +2666,7 @@
         {
           "source_task": "SEM-50",
           "required_for": "finish",
-          "producer": "Tuấn",
+          "producer": "Tâm",
           "artifacts": [
             "report/REPORT.md",
             "research/references.bib",
@@ -2723,7 +2723,7 @@
         {
           "source_task": "SEM-52",
           "required_for": "start",
-          "producer": "Trí",
+          "producer": "Trung",
           "artifacts": [
             "release/BUILD_MANIFEST.json",
             "docs/DEMO_RUNBOOK.md",
@@ -2781,7 +2781,7 @@
         {
           "source_task": "SEM-52",
           "required_for": "start",
-          "producer": "Trí",
+          "producer": "Trung",
           "artifacts": [
             "release/BUILD_MANIFEST.json",
             "docs/DEMO_RUNBOOK.md",
@@ -2852,7 +2852,7 @@
         {
           "source_task": "SEM-50",
           "required_for": "start",
-          "producer": "Tuấn",
+          "producer": "Tâm",
           "artifacts": [
             "report/REPORT.md",
             "research/references.bib",
@@ -2876,7 +2876,7 @@
         {
           "source_task": "SEM-52",
           "required_for": "start",
-          "producer": "Trí",
+          "producer": "Trung",
           "artifacts": [
             "release/BUILD_MANIFEST.json",
             "docs/DEMO_RUNBOOK.md",
@@ -2911,7 +2911,7 @@
       "due_at": "2026-11-12T22:00:00+07:00"
     }
   ],
-  "snapshot_at": "2026-11-05 14:04:52 UTC",
+  "snapshot_at": "2026-11-05 14:24:29 UTC",
   "snapshot_source": "https://github.com/users/ThanhTris/projects/3/views/1",
   "timezone": "Asia/Ho_Chi_Minh",
   "deadline_at": "2026-11-13T22:00:00+07:00",
