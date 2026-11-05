@@ -147,7 +147,7 @@
       "category": "practice",
       "title": "Giải thích cơ chế silent push và giới hạn FCM",
       "due": "2026-10-30",
-      "status": "Todo",
+      "status": "Done",
       "start_dependencies": [],
       "finish_dependencies": [],
       "work": [
@@ -285,7 +285,7 @@
         "Các phần tham chiếu đúng đầu ra riêng của SEM-14…18, không yêu cầu người khác cùng viết file tổng hợp.",
         "Cơ chế, API và cấu hình môi trường khớp; giải thích được hai luồng không cần đọc code."
       ],
-      "input_status": "Chuẩn bị trước",
+      "input_status": "Sẵn sàng",
       "inputs": [
         {
           "source_task": "SEM-11",
@@ -336,7 +336,7 @@
             "docs/mechanisms/SILENT_PUSH.md"
           ],
           "checks": "docs/evidence/SEM-15/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Done"
         },
         {
           "source_task": "SEM-16",
@@ -381,7 +381,7 @@
       "category": "research",
       "title": "Đọc bài nghiên cứu thứ nhất và ghi chú nguồn",
       "due": "2026-11-01",
-      "status": "Todo",
+      "status": "Done",
       "start_dependencies": [],
       "finish_dependencies": [
         "SEM-11",
@@ -435,7 +435,7 @@
       "category": "research",
       "title": "Đọc bài nghiên cứu thứ hai và ghi chú nguồn",
       "due": "2026-11-01",
-      "status": "Review",
+      "status": "Done",
       "start_dependencies": [],
       "finish_dependencies": [
         "SEM-11",
@@ -489,7 +489,7 @@
       "category": "research",
       "title": "Đối chiếu hai bài nghiên cứu với API push hiện hành",
       "due": "2026-11-01",
-      "status": "Todo",
+      "status": "In Progress",
       "start_dependencies": [],
       "finish_dependencies": [
         "SEM-15",
@@ -508,7 +508,7 @@
         "Mỗi dòng có nguồn/vị trí/version và giới hạn, không trộn kết quả paper với demo.",
         "Không yêu cầu paper hoàn tất mới bắt đầu đọc tài liệu API; chỉ gate bản đối chiếu cuối."
       ],
-      "input_status": "Chuẩn bị trước",
+      "input_status": "Sẵn sàng",
       "inputs": [
         {
           "source_task": "SEM-15",
@@ -518,7 +518,7 @@
             "docs/mechanisms/SILENT_PUSH.md"
           ],
           "checks": "docs/evidence/SEM-15/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Done"
         },
         {
           "source_task": "SEM-20",
@@ -529,7 +529,7 @@
             "research/metadata/paper-1.bib"
           ],
           "checks": "docs/evidence/SEM-20/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Done"
         },
         {
           "source_task": "SEM-21",
@@ -540,7 +540,7 @@
             "research/metadata/paper-2.bib"
           ],
           "checks": "docs/evidence/SEM-21/CHECKS.md",
-          "source_status": "Review"
+          "source_status": "Done"
         }
       ],
       "due_at": "2026-11-01T22:00:00+07:00"
@@ -773,7 +773,7 @@
       "category": "practice",
       "title": "Triển khai server snapshot và CLI cập nhật",
       "due": "2026-10-31",
-      "status": "Review",
+      "status": "Needs Update",
       "start_dependencies": [
         "SEM-13",
         "SEM-26"
@@ -894,7 +894,7 @@
             "docs/setup/SERVER.md"
           ],
           "checks": "docs/evidence/SEM-27/CHECKS.md",
-          "source_status": "Review"
+          "source_status": "Needs Update"
         }
       ],
       "due_at": "2026-10-31T22:00:00+07:00"
@@ -1125,7 +1125,7 @@
             "docs/mechanisms/SILENT_PUSH.md"
           ],
           "checks": "docs/evidence/SEM-15/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Done"
         },
         {
           "source_task": "SEM-25",
@@ -1358,7 +1358,7 @@
             "docs/setup/SERVER.md"
           ],
           "checks": "docs/evidence/SEM-27/CHECKS.md",
-          "source_status": "Review"
+          "source_status": "Needs Update"
         }
       ],
       "due_at": "2026-11-01T15:00:00+07:00"
@@ -1741,7 +1741,7 @@
             "docs/setup/SERVER.md"
           ],
           "checks": "docs/evidence/SEM-27/CHECKS.md",
-          "source_status": "Review"
+          "source_status": "Needs Update"
         },
         {
           "source_task": "SEM-35",
@@ -2212,7 +2212,7 @@
         "Nội dung demo nằm trong 4 phút và không coi 30 giây là bảo đảm FCM.",
         "Mỗi claim có nguồn/evidence hoặc ghi giả thuyết; chỉ giao file input riêng."
       ],
-      "input_status": "Chờ đầu vào",
+      "input_status": "Chuẩn bị trước",
       "inputs": [
         {
           "source_task": "SEM-15",
@@ -2222,7 +2222,7 @@
             "docs/mechanisms/SILENT_PUSH.md"
           ],
           "checks": "docs/evidence/SEM-15/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Done"
         },
         {
           "source_task": "SEM-33",
@@ -2377,7 +2377,7 @@
             "research/metadata/paper-2.bib"
           ],
           "checks": "docs/evidence/SEM-21/CHECKS.md",
-          "source_status": "Review"
+          "source_status": "Done"
         },
         {
           "source_task": "SEM-27",
@@ -2388,7 +2388,7 @@
             "docs/setup/SERVER.md"
           ],
           "checks": "docs/evidence/SEM-27/CHECKS.md",
-          "source_status": "Review"
+          "source_status": "Needs Update"
         },
         {
           "source_task": "SEM-35",
@@ -2470,7 +2470,7 @@
             "research/metadata/paper-1.bib"
           ],
           "checks": "docs/evidence/SEM-20/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Done"
         },
         {
           "source_task": "SEM-21",
@@ -2481,7 +2481,7 @@
             "research/metadata/paper-2.bib"
           ],
           "checks": "docs/evidence/SEM-21/CHECKS.md",
-          "source_status": "Review"
+          "source_status": "Done"
         },
         {
           "source_task": "SEM-22",
@@ -2491,7 +2491,7 @@
             "research/notes/API_CROSSCHECK.md"
           ],
           "checks": "docs/evidence/SEM-22/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "In Progress"
         },
         {
           "source_task": "SEM-43",
@@ -2911,7 +2911,7 @@
       "due_at": "2026-11-12T22:00:00+07:00"
     }
   ],
-  "snapshot_at": "2026-11-04 02:55:28 UTC",
+  "snapshot_at": "2026-11-05 04:46:13 UTC",
   "snapshot_source": "https://github.com/users/ThanhTris/projects/3/views/1",
   "timezone": "Asia/Ho_Chi_Minh",
   "deadline_at": "2026-11-13T22:00:00+07:00",

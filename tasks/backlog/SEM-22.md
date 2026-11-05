@@ -1,8 +1,8 @@
 # SEM-22 — Đối chiếu hai bài nghiên cứu với API push hiện hành
 
-- Trạng thái: **Todo** (Project).
-- Trạng thái đầu vào: **Chuẩn bị trước**.
-- Đối chiếu Project: 2026-11-04 02:55:28 UTC.
+- Trạng thái: **In Progress** (Project).
+- Trạng thái đầu vào: **Sẵn sàng**.
+- Đối chiếu Project: 2026-11-05 04:46:13 UTC.
 - Người thực hiện duy nhất: **Trang** (`rosy179`).
 - Hạn: **01/11/2026 22:00 (UTC+7)**.
 - Công sức: 2/100 — Nghiên cứu/lập luận.
@@ -22,13 +22,13 @@ Tài liệu nền đã có: [Kế hoạch/phạm vi](../../docs/PLAN.md) · [Ngu
 
 | Cần cho | Task cung cấp | Người bàn giao | Đầu ra phải nhận | Kiểm chứng bàn giao | Status nguồn |
 |---|---|---|---|---|---|
-| Hoàn tất | [SEM-15 — Giải thích cơ chế silent push và giới hạn FCM](SEM-15.md) | Trang | `docs/mechanisms/SILENT_PUSH.md` | `docs/evidence/SEM-15/CHECKS.md` | Todo |
-| Hoàn tất | [SEM-20 — Đọc bài nghiên cứu thứ nhất và ghi chú nguồn](SEM-20.md) | Tuấn | `research/notes/PAPER_1.md`<br>`research/metadata/paper-1.bib` | `docs/evidence/SEM-20/CHECKS.md` | Todo |
-| Hoàn tất | [SEM-21 — Đọc bài nghiên cứu thứ hai và ghi chú nguồn](SEM-21.md) | Tâm | `research/notes/PAPER_2.md`<br>`research/metadata/paper-2.bib` | `docs/evidence/SEM-21/CHECKS.md` | Review |
+| Hoàn tất | [SEM-15 — Giải thích cơ chế silent push và giới hạn FCM](SEM-15.md) | Trang | `docs/mechanisms/SILENT_PUSH.md` | `docs/evidence/SEM-15/CHECKS.md` | Done |
+| Hoàn tất | [SEM-20 — Đọc bài nghiên cứu thứ nhất và ghi chú nguồn](SEM-20.md) | Tuấn | `research/notes/PAPER_1.md`<br>`research/metadata/paper-1.bib` | `docs/evidence/SEM-20/CHECKS.md` | Done |
+| Hoàn tất | [SEM-21 — Đọc bài nghiên cứu thứ hai và ghi chú nguồn](SEM-21.md) | Tâm | `research/notes/PAPER_2.md`<br>`research/metadata/paper-2.bib` | `docs/evidence/SEM-21/CHECKS.md` | Done |
 
 Đây là danh sách đầu ra cần bàn giao, chưa phải xác nhận các file đã tồn tại. Trước khi dùng, nhận đúng artifact/commit/config và CHECKS từ task nguồn.
 
-Status nguồn được đối chiếu Project lúc **2026-11-04 02:55:28 UTC**; mở link task nguồn để xem cập nhật mới hơn.
+Status nguồn được đối chiếu Project lúc **2026-11-05 04:46:13 UTC**; mở link task nguồn để xem cập nhật mới hơn.
 <!-- task-inputs:end -->
 
 

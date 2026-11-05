@@ -1,8 +1,8 @@
 # SEM-15 — Giải thích cơ chế silent push và giới hạn FCM
 
-- Trạng thái: **Todo** (Project).
+- Trạng thái: **Done** (Project).
 - Trạng thái đầu vào: **Sẵn sàng**.
-- Đối chiếu Project: 2026-11-04 02:55:28 UTC.
+- Đối chiếu Project: 2026-11-05 04:46:13 UTC.
 - Người thực hiện duy nhất: **Trang** (`rosy179`).
 - Hạn: **30/10/2026 18:00 (UTC+7)**.
 - Công sức: 3/100 — Cơ chế/thực hành.
@@ -22,7 +22,7 @@ Tài liệu nền đã có: [Kế hoạch/phạm vi](../../docs/PLAN.md) · [Ngu
 
 Không cần nhận đầu ra từ task khác để bắt đầu. Owner thực hiện từ tài liệu nền và tự ghi các blocker môi trường/quyền truy cập trong CHECKS của task này.
 
-Status nguồn được đối chiếu Project lúc **2026-11-04 02:55:28 UTC**; mở link task nguồn để xem cập nhật mới hơn.
+Status nguồn được đối chiếu Project lúc **2026-11-05 04:46:13 UTC**; mở link task nguồn để xem cập nhật mới hơn.
 <!-- task-inputs:end -->
 
 
@@ -39,9 +39,27 @@ Status nguồn được đối chiếu Project lúc **2026-11-04 02:55:28 UTC**;
 
 ## Tiêu chí hoàn thành
 
-- [ ] Có thể giải thích vì sao data-only không đồng nghĩa một thông báo bị tắt tiếng.
-- [ ] Chỉ ra trường hợp trì hoãn/không nhận và không hứa push tức thì.
-- [ ] Đầu ra và CHECKS có thật, link đọc được; chưa chạy phải ghi Not run, không tự chuyển Done từ kế hoạch.
+- [x] Có thể giải thích vì sao data-only không đồng nghĩa một thông báo bị tắt tiếng.
+- [x] Chỉ ra trường hợp trì hoãn/không nhận và không hứa push tức thì.
+- [x] Đầu ra và CHECKS có thật, link đọc được; chưa chạy phải ghi Not run, không tự chuyển Done từ kế hoạch.
+
+## Đầu ra đã soát ngày 05/11/2026
+
+[SILENT_PUSH 1.0.0](../../docs/mechanisms/SILENT_PUSH.md) · [CHECKS SEM-15](../../docs/evidence/SEM-15/CHECKS.md).
+
+Đã hoàn thiện tài liệu nghiên cứu chuyên sâu và hồ sơ kiểm tra:
+1. Phân biệt kiến trúc Data-only vs Muted Notification và bảng đối chiếu 3 dạng payload FCM.
+2. Phân tích hạ tầng kết nối GmsCore MCS Socket (port 5228), chu kỳ Heartbeat và máy trạng thái RRC của modem di động (Tail Energy).
+3. Luồng dữ liệu end-to-end 10 bước (Server -> FCM -> GmsCore -> Callback -> WorkManager -> GET API -> Room Version Guard -> Compose UI).
+4. Giới hạn thực thi nền của Service (cửa sổ 10-20s, rủi ro ANR/SIGKILL) và nguyên tắc Ingest & Offload sang WorkManager (< 100ms).
+5. Phân tích Normal vs High Priority, cơ chế Doze gom cụm và chính sách phạt giáng cấp (Deprioritization).
+6. Phân tích chuyên sâu 8 rào cản kỹ thuật gây trễ/mất push: Doze/Standby, TTL 24h, Queue 100 tin, Force-Stop (FLAG_EXCLUDE_STOPPED_PACKAGES), OEM Killers (ColorOS trên OPPO Find X9), Silent Socket Drop/NAT, Rate Limits, Token Invalidation.
+7. Ma trận phân định ranh giới nhận thức sự kiện theo EVENT_SCHEMA 2.0.0.
+8. Cung cấp Code Blueprints hoàn chỉnh: Kotlin FirebaseMessagingService cho Trang (SEM-32) và Node.js Admin SDK cho Tâm (SEM-35).
+9. Cung cấp trọn bộ 10 câu hỏi phản biện chuyên sâu kèm đáp án chi tiết cho Tuấn (SEM-19).
+10. Thư viện 9 nguồn tài liệu chính thức từ Google/Android/AOSP.
+
+Đây là bàn giao nghiên cứu cơ chế và hợp đồng thiết kế của SEM-15; các ca đo thực nghiệm vẫn **Not run** để bàn giao cho các task pilot/main runs downstream. Checklist này không tự chuyển Status Project sang Done; các trường Project phía trên vẫn là snapshot hiện hành.
 
 ## Task được mở khóa
 
