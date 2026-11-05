@@ -1,23 +1,31 @@
-# SEM-35 — Kiểm tra và bàn giao FCM Sender CLI
+# SEM-35 — CHECKS FCM sender
 
-## Nhận dạng lần kiểm
+## Nhận dạng và đầu vào
 
-- **Thời điểm:** 31/10/2026 (UTC+7).
-- **Task:** [SEM-35](../../../tasks/backlog/SEM-35.md).
-- **Người thực hiện:** Tâm (`HoaiTam`) / Trí (`ThanhTris`).
-- **Thành phần bàn giao:**
-  - `server/bin/fcm-sender.js`: Công cụ CLI phát tín hiệu push FCM.
-  - `docs/setup/FCM_SENDER.md`: Hướng dẫn vận hành.
+- Người thực hiện: Tâm (`HoaiTam`); ngày kiểm 05/11/2026 (UTC+7); base `33e3bf7` trên `origin/main`, sau merge SEM-27.
+- SEM-13, SEM-18, SEM-27 Done trên Project; đã đối chiếu môi trường Firebase, giải thích FCM, HTTP/event schema 2.0.0 và server/CHECKS. Task không thay đổi server snapshot hay chạy thực nghiệm E02.
+- Host macOS ARM64, Node `v26.0.0`, npm `11.12.1`, Firebase Admin `14.5.0`; lockfile trong `server/`. Lệnh kiểm: `npm ci --ignore-scripts` và `npm test` từ `server/`, dùng loopback và thư mục tạm, không chứa token thật.
+- Kiểm sự hiện diện ngày 05/11: `FIREBASE_PROJECT_ID`, `GOOGLE_APPLICATION_CREDENTIALS`, `FCM_TOKEN_FILE` chưa đặt; không thấy ADC mặc định hoặc file credential/token tại các đường dẫn ví dụ. Đây chỉ là kết quả ở máy/tiến trình này, không kết luận nhóm chưa có Firebase ở nơi khác.
 
-## Tiêu chí và Kết quả
+## Expected / actual
 
-| Yêu cầu kiểm tra | Expected | Actual | Trạng thái |
-|---|---|---|:---:|
-| Cấu trúc Payload | Data-only (không có notification block) | JSON payload chỉ có key `data` và cấu hình `android.priority = normal` | Pass |
-| Normal Priority | Giữ mức ưu tiên bình thường, không dùng high priority | `android.priority = "normal"` | Pass |
-| TTL | 86400 giây (24 giờ) | `android.ttl = 86400` | Pass |
-| Bảo vệ bảo mật (Security) | Không log hoặc commit credential/token lên kho mã nguồn | CLI che giấu token và đọc biến môi trường | Pass |
-| Dry-run simulation | Chạy được mô phỏng khi chưa có project/credential thật | In payload và mã message giả lập hợp lệ | Pass |
+| Kiểm tra | Expected | Actual / evidence | Kết quả |
+|---|---|---|---|
+| Cài/build | Lockfile cài sạch, TypeScript server build | `npm ci --ignore-scripts`, `npm test` exit 0; Firebase Admin 14.5.0 | Pass |
+| Bộ test | Không hồi quy server, kiểm sender | 18 test pass: 9 test sender, 9 test SEM-27; [fcm-sender.test.js](../../../server/test/fcm-sender.test.js); event giả lập được kiểm bằng validator SEM-24 | Pass |
+| Payload | data-only, `normal`, TTL tính ms | Test kiểm data string, không notification, TTL mặc định 86400000; `--validate-only` không gửi | Pass — fixture |
+| Trạng thái send | Accepted chỉ khi SDK trả ID, tách rejected/unknown/local | Test inject SDK giả lập trả ID, lỗi token, lỗi network và thiếu cấu hình; kiểm event/schema/correlation và không in token. Không phải FCM thật | Pass — fixture |
+| Update trước push | Chỉ gửi khi snapshot và event `server_updated` tương ứng | Test preflight đúng/sai update/version; test CLI thật kết nối server loopback, thiếu Firebase tạo `push_send_failed_local`, không có message/attempt | Pass — local |
+| An toàn log | Không ghi token, error text hay giả ID | Test token/exception giả không xuất hiện; test lỗi ghi log không gửi lại và không bịa rejection | Pass — fixture |
+| Runtime Firebase / callback | Response thật hoặc blocker | Không có project ID, credential và token được xác nhận ở máy kiểm; chưa gọi FCM, không có message ID thật, Android callback Not run | **Not run — blocker B1** |
+| npm audit | Ghi cảnh báo thực tế | `npm ci` báo 6 moderate, 0 high/critical; `npm audit fix` vẫn báo 6 moderate trong glob/minimatch và các dependency bắc cầu. Chưa nâng ép hoặc thay override ngoài phạm vi | Có giới hạn |
 
-## Bàn giao tiếp theo
-- Cung cấp công cụ cho **SEM-34** (Chạy pilot push E02) và **SEM-36** (Tích hợp 3 mode).
+B1: cần người quản lý xác nhận project/app/quyền FCM và cung cấp credential local an toàn cùng registration token thiết bị theo [hướng dẫn](../../setup/FCM_SENDER.md). Không gửi token hoặc service-account key qua chat/repo. Vì acceptance cho phép **response thật hoặc blocker**, task có thể đề nghị Review với B1 và Not run được ghi rõ; không tuyên bố đã gửi hay nhận thành công.
+
+Nguồn đối chiếu ngày 05/11: [Admin send](https://firebase.google.com/docs/reference/admin/node/firebase-admin.messaging.messaging), [AndroidConfig](https://firebase.google.com/docs/reference/admin/node/firebase-admin.messaging.androidconfig), [FCM error codes](https://firebase.google.com/docs/cloud-messaging/error-codes) và [Admin error handling/retry](https://firebase.google.com/docs/reference/admin/error-handling). Test giả lập không khẳng định error code hoặc response đã được quan sát từ FCM.
+
+## Bàn giao và giới hạn
+
+- `server/bin/fcm-sender.js`, `server/src/fcm_sender.js`, test và lockfile; [FCM_SENDER.md](../../setup/FCM_SENDER.md) có cấu hình, lệnh và cách thu event cho SEM-24/34/36/40.
+- Sender log tách file khỏi outbox SEM-27; nếu crash sau response trước khi ghi event thì kết quả có thể không được ghi nhận. SDK có thể tự retry HTTP nội bộ; attempt ID ghi theo mỗi lần gọi SDK. Phải giữ signal ID khi retry và không suy mất event là chưa gửi.
+- Không tự merge hoặc chuyển Done; sau bàn giao Review chỉ sửa theo comment của nhóm trưởng.
