@@ -16,7 +16,9 @@ function atomicWrite(file:string, data:string) {
   try {
     fd=fs.openSync(tmp,'wx',0o600); fs.writeFileSync(fd,data); fs.fsyncSync(fd); fs.closeSync(fd); fd=undefined;
     fs.renameSync(tmp,file);
-    const d=fs.openSync(dir,'r'); try { fs.fsyncSync(d); } finally { fs.closeSync(d); }
+    if (process.platform !== 'win32') {
+      const d=fs.openSync(dir,'r'); try { fs.fsyncSync(d); } finally { fs.closeSync(d); }
+    }
   } finally { if(fd!==undefined) fs.closeSync(fd); try {fs.unlinkSync(tmp);} catch {} }
 }
 function validState(s:State):boolean {

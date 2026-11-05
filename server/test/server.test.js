@@ -77,3 +77,17 @@ test('process bị dừng đột ngột: phục hồi state và outbox sau khi x
  assert.throws(()=>new SnapshotStore(file,events),{code:'STORE_LOCKED'});fs.unlinkSync(`${file}.lock`);fs.unlinkSync(events);
  const recovered=new SnapshotStore(file,events);assert.equal(recovered.snapshot().version,1);assert.equal(recovered.update(update()).replayed,true);assert.equal(fs.readFileSync(events,'utf8').trim().split('\n').length,1);recovered.close();
 });
+test('nhánh Windows không mở hoặc fsync thư mục sau rename',()=>{
+ const dir=fs.mkdtempSync(path.join(os.tmpdir(),'sem27-win-'));
+ const platform=Object.getOwnPropertyDescriptor(process,'platform');
+ const originalOpen=fs.openSync; let directoryOpens=0; let store;
+ try {
+  Object.defineProperty(process,'platform',{value:'win32',configurable:true});
+  fs.openSync=function(file,...args){if(file===dir){directoryOpens++;throw Object.assign(new Error('directory sync unavailable'),{code:'EPERM'});}return originalOpen.call(fs,file,...args);};
+  store=new SnapshotStore(path.join(dir,'state.json'),path.join(dir,'events.jsonl'));
+  assert.equal(store.update(update()).version,1);assert.equal(directoryOpens,0);
+ } finally {
+  store?.close(); fs.openSync=originalOpen;
+  Object.defineProperty(process,'platform',platform);fs.rmSync(dir,{recursive:true,force:true});
+ }
+});
