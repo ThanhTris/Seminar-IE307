@@ -1,5 +1,13 @@
 # SEM-19 — CHECKS phần thực hiện độc lập
 
+## Cập nhật hoàn tất theo ba bước - 06/11/2026
+
+1. **Đã thực hiện:** [tiếp nhận/đối chiếu đủ đầu vào](INPUT_REVIEW.md), ghi cách chuẩn hóa các khác biệt giữa blueprint, contract và source.
+2. **Tiếp theo:** chốt MECHANISMS/QUESTIONS, thay nhãn chờ SEM-15 bằng nội dung đã đối chiếu.
+3. **Tiếp theo:** kiểm cuối, render sơ đồ, ghi bàn giao và acceptance; commit riêng sau từng bước theo yêu cầu người dùng.
+
+Phần dưới giữ lịch sử bản chuẩn bị ngày 03/11. Trạng thái và kết quả cuối sẽ được cập nhật ở bước 3; không dùng các dòng Todo/thiếu SEM-15 của lịch sử để mô tả đầu vào ngày 06/11.
+
 - Người thực hiện: Tuấn (`mtuan2491`).
 - Ngày thực hiện: **03/11/2026 (UTC+7)**.
 - Nhánh: `codex/SEM-19-mechanisms-questions`, theo mẫu `codex/SEM-XX-ten-ngan` trong [task board](../../../tasks/README.md).
