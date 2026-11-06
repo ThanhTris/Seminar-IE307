@@ -42,7 +42,7 @@ Sơ đồ mô tả **luồng mục tiêu**, không phải trace của run đã �
 ```mermaid
 sequenceDiagram
     participant C as Cấu hình run
-    participant W as WorkManager và SyncWorker
+    participant W as WorkManager<br/>SyncWorker
     participant R as SyncRepository
     participant S as Snapshot API
     participant D as Room
@@ -50,7 +50,7 @@ sequenceDiagram
     C->>W: Đăng ký unique periodic với run và mode
     W-->>C: Operation chấp nhận và work_id thật
     C->>D: periodic_registered
-    Note over W: Constraint và hệ thống quyết định lúc chạy
+    Note over W: Constraint và hệ thống<br/>quyết định lúc chạy
     loop Mỗi cycle được hệ thống cho chạy
         W->>D: work_started với request_id của cycle
         W->>R: sync với source PERIODIC
@@ -81,7 +81,7 @@ sequenceDiagram
     participant S as Server
     participant F as FCM
     participant C as Callback Android
-    participant W as WorkManager và SyncWorker
+    participant W as WorkManager<br/>SyncWorker
     participant R as SyncRepository
     participant D as Room
     S->>S: Persist snapshot và server_updated
@@ -103,8 +103,8 @@ sequenceDiagram
         W->>R: sync với source PUSH
         R->>S: GET /api/bulletin hiện hành
         S-->>R: Snapshot hoặc lỗi
-        R->>D: Version guard và outcome theo shared contract
-        Note over D: Chỉ snapshot mới đã commit mới ghi applied
+        R->>D: Version guard và outcome<br/>theo shared contract
+        Note over D: Chỉ snapshot mới đã commit<br/>mới ghi applied
     end
 ```
 

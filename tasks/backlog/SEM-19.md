@@ -51,9 +51,15 @@ Status nguồn được đối chiếu Project lúc **2026-11-05 16:29:54 UTC**;
 
 ## Tiêu chí hoàn thành
 
-- [ ] Các phần tham chiếu đúng đầu ra riêng của SEM-14…18, không yêu cầu người khác cùng viết file tổng hợp.
-- [ ] Cơ chế, API và cấu hình môi trường khớp; giải thích được hai luồng không cần đọc code.
-- [ ] Đầu ra và CHECKS có thật, link đọc được; chưa chạy phải ghi Not run, không tự chuyển Done từ kế hoạch.
+- [x] Các phần tham chiếu đúng đầu ra riêng của SEM-14…18, không yêu cầu người khác cùng viết file tổng hợp.
+- [x] Cơ chế, API và cấu hình môi trường khớp; giải thích được hai luồng không cần đọc code.
+- [x] Đầu ra và CHECKS có thật, link đọc được; chưa chạy phải ghi Not run, không tự chuyển Done từ kế hoạch.
+
+## Đầu ra hoàn tất ngày 06/11/2026
+
+[MECHANISMS](../../docs/MECHANISMS.md) · [25 câu hỏi/đáp án](../../docs/QUESTIONS.md) · [CHECKS](../../docs/evidence/SEM-19/CHECKS.md) · [Đối chiếu đầu vào](../../docs/evidence/SEM-19/INPUT_REVIEW.md).
+
+Nội dung đã nhận đủ SEM-11..18 và được chốt trên nhánh `codex/SEM-19-mechanisms-questions` theo ba bước/ba commit. Artifact đủ để bàn giao phần cơ chế cho SEM-50; runtime vẫn Not run trong SEM-19 và cần evidence riêng của các task đo. Checklist này ghi việc đã kiểm, không tự thay Status Project hoặc bước kiểm nhận/merge của nhóm trưởng.
 
 ## Task được mở khóa
 
