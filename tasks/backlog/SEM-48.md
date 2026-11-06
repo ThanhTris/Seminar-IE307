@@ -2,7 +2,7 @@
 
 - Trạng thái: **Todo** (Project).
 - Trạng thái đầu vào: **Chuẩn bị trước**.
-- Đối chiếu Project: 2026-11-03 15:04:04 UTC.
+- Đối chiếu Project: 2026-11-05 16:29:54 UTC.
 - Người thực hiện duy nhất: **Vinh** (`Vinh5905`).
 - Hạn: **08/11/2026 18:00 (UTC+7)**.
 - Công sức: 1/100 — Nghiên cứu/lập luận.
@@ -23,12 +23,12 @@ Tài liệu nền đã có: [Kế hoạch/phạm vi](../../docs/PLAN.md) · [K�
 | Cần cho | Task cung cấp | Người bàn giao | Đầu ra phải nhận | Kiểm chứng bàn giao | Status nguồn |
 |---|---|---|---|---|---|
 | Hoàn tất | [SEM-43 — Chốt SUMMARY và bộ evidence thực nghiệm](SEM-43.md) | Vinh | `experiments/SUMMARY.md` | `docs/evidence/SEM-43/CHECKS.md` | Todo |
-| Hoàn tất | [SEM-44 — Kiểm độc lập trigger và phép tính dữ liệu main](SEM-44.md) | Trung | `experiments/AUDIT.md` | `docs/evidence/SEM-44/CHECKS.md` | Todo |
+| Hoàn tất | [SEM-44 — Kiểm độc lập trigger và phép tính dữ liệu main](SEM-44.md) | Trang | `experiments/AUDIT.md` | `docs/evidence/SEM-44/CHECKS.md` | Todo |
 | Hoàn tất | [SEM-45 — Viết parser log và sinh results.csv](SEM-45.md) | Tuấn | `experiments/scripts/analyze.*`<br>`experiments/results.csv` | `docs/evidence/SEM-45/CHECKS.md` | Todo |
 
 Đây là danh sách đầu ra cần bàn giao, chưa phải xác nhận các file đã tồn tại. Trước khi dùng, nhận đúng artifact/commit/config và CHECKS từ task nguồn.
 
-Status nguồn được đối chiếu Project lúc **2026-11-03 15:04:04 UTC**; mở link task nguồn để xem cập nhật mới hơn.
+Status nguồn được đối chiếu Project lúc **2026-11-05 16:29:54 UTC**; mở link task nguồn để xem cập nhật mới hơn.
 <!-- task-inputs:end -->
 
 

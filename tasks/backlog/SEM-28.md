@@ -1,8 +1,8 @@
 # SEM-28 — Ghép manual sync đầu cuối và chốt hướng dẫn setup
 
-- Trạng thái: **Todo** (Project).
-- Trạng thái đầu vào: **Chờ đầu vào**.
-- Đối chiếu Project: 2026-11-03 15:04:04 UTC.
+- Trạng thái: **Done** (Project).
+- Trạng thái đầu vào: **Sẵn sàng**.
+- Đối chiếu Project: 2026-11-05 16:29:54 UTC.
 - Người thực hiện duy nhất: **Trí** (`ThanhTris`).
 - Hạn: **31/10/2026 22:00 (UTC+7)**.
 - Công sức: 1/100 — Cơ chế/thực hành.
@@ -25,11 +25,11 @@ Tài liệu nền đã có: [Kế hoạch/phạm vi](../../docs/PLAN.md).
 | Bắt đầu | [SEM-23 — Tạo scaffold Android và UI cache/timeline](SEM-23.md) | Trí | `android/ (build, manifest, ui, config)`<br>`docs/setup/ANDROID.md` | `docs/evidence/SEM-23/CHECKS.md` | Done |
 | Bắt đầu | [SEM-24 — Chuẩn bị bộ xuất log và run manifest](SEM-24.md) | Vinh | `experiments/RUN_MANIFEST_TEMPLATE.json`<br>`experiments/scripts/export_logs.*`<br>`experiments/README.md` | `docs/evidence/SEM-24/CHECKS.md` | Done |
 | Bắt đầu | [SEM-25 — Xây Room, SyncRepository và SyncWorker dùng chung](SEM-25.md) | Trung | `android/ (data và sync core)`<br>`docs/SYNC_CORE_API.md` | `docs/evidence/SEM-25/CHECKS.md` | Done |
-| Bắt đầu | [SEM-27 — Triển khai server snapshot và CLI cập nhật](SEM-27.md) | Tâm | `server/ (API, snapshot store, update CLI)`<br>`docs/setup/SERVER.md` | `docs/evidence/SEM-27/CHECKS.md` | Todo |
+| Bắt đầu | [SEM-27 — Triển khai server snapshot và CLI cập nhật](SEM-27.md) | Tâm | `server/ (API, snapshot store, update CLI)`<br>`docs/setup/SERVER.md` | `docs/evidence/SEM-27/CHECKS.md` | Done |
 
 Đây là danh sách đầu ra cần bàn giao, chưa phải xác nhận các file đã tồn tại. Trước khi dùng, nhận đúng artifact/commit/config và CHECKS từ task nguồn.
 
-Status nguồn được đối chiếu Project lúc **2026-11-03 15:04:04 UTC**; mở link task nguồn để xem cập nhật mới hơn.
+Status nguồn được đối chiếu Project lúc **2026-11-05 16:29:54 UTC**; mở link task nguồn để xem cập nhật mới hơn.
 <!-- task-inputs:end -->
 
 
