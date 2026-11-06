@@ -260,7 +260,7 @@
       "category": "practice",
       "title": "Tổng hợp mô hình cơ chế và câu hỏi phản biện",
       "due": "2026-10-30",
-      "status": "Todo",
+      "status": "Done",
       "start_dependencies": [],
       "finish_dependencies": [
         "SEM-11",
@@ -2459,7 +2459,7 @@
             "docs/QUESTIONS.md"
           ],
           "checks": "docs/evidence/SEM-19/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Done"
         },
         {
           "source_task": "SEM-20",
@@ -2911,7 +2911,7 @@
       "due_at": "2026-11-12T22:00:00+07:00"
     }
   ],
-  "snapshot_at": "2026-11-05 16:29:54 UTC",
+  "snapshot_at": "2026-11-06 12:37:05 UTC",
   "snapshot_source": "https://github.com/users/ThanhTris/projects/3/views/1",
   "timezone": "Asia/Ho_Chi_Minh",
   "deadline_at": "2026-11-13T22:00:00+07:00",

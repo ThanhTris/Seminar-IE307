@@ -16,7 +16,7 @@ Hạn cuối 13/11/2026; bài nói 15 phút gồm demo. Tổng công sức giữ
 | Tuấn | `mtuan2491` | 8 | 18 |
 
 <!-- team-snapshot:start -->
-Status và Input status đối chiếu Project lúc **2026-11-05 16:29:54 UTC**. Mở từng task để xem cụ thể file đầu vào, người bàn giao và CHECKS phải nhận. [Cách làm mới trạng thái](../tasks/README.md#trạng-thái-đối-chiếu-project).
+Status và Input status đối chiếu Project lúc **2026-11-06 12:37:05 UTC**. Mở từng task để xem cụ thể file đầu vào, người bàn giao và CHECKS phải nhận. [Cách làm mới trạng thái](../tasks/README.md#trạng-thái-đối-chiếu-project).
 <!-- team-snapshot:end -->
 
 ## Trí
@@ -85,7 +85,7 @@ Status và Input status đối chiếu Project lúc **2026-11-05 16:29:54 UTC**.
 
 | Task | Đầu việc duy nhất | Status | Input status | Hạn (UTC+7) | Bắt đầu sau | Hoàn tất còn cần |
 |---|---|---|---|---|---|---|
-| [SEM-19](../tasks/backlog/SEM-19.md) | Tổng hợp mô hình cơ chế và câu hỏi phản biện | Todo | Sẵn sàng | 30/10/2026 22:00 (UTC+7) | Không có. | [SEM-11](../tasks/backlog/SEM-11.md), [SEM-12](../tasks/backlog/SEM-12.md), [SEM-13](../tasks/backlog/SEM-13.md), [SEM-14](../tasks/backlog/SEM-14.md), [SEM-15](../tasks/backlog/SEM-15.md), [SEM-16](../tasks/backlog/SEM-16.md), [SEM-17](../tasks/backlog/SEM-17.md), [SEM-18](../tasks/backlog/SEM-18.md) |
+| [SEM-19](../tasks/backlog/SEM-19.md) | Tổng hợp mô hình cơ chế và câu hỏi phản biện | Done | Sẵn sàng | 30/10/2026 22:00 (UTC+7) | Không có. | [SEM-11](../tasks/backlog/SEM-11.md), [SEM-12](../tasks/backlog/SEM-12.md), [SEM-13](../tasks/backlog/SEM-13.md), [SEM-14](../tasks/backlog/SEM-14.md), [SEM-15](../tasks/backlog/SEM-15.md), [SEM-16](../tasks/backlog/SEM-16.md), [SEM-17](../tasks/backlog/SEM-17.md), [SEM-18](../tasks/backlog/SEM-18.md) |
 | [SEM-20](../tasks/backlog/SEM-20.md) | Đọc bài nghiên cứu thứ nhất và ghi chú nguồn | Done | Sẵn sàng | 01/11/2026 16:00 (UTC+7) | Không có. | [SEM-11](../tasks/backlog/SEM-11.md), [SEM-12](../tasks/backlog/SEM-12.md) |
 | [SEM-45](../tasks/backlog/SEM-45.md) | Viết parser log và sinh results.csv | Todo | Chuẩn bị trước | 07/11/2026 17:00 (UTC+7) | [SEM-24](../tasks/backlog/SEM-24.md), [SEM-26](../tasks/backlog/SEM-26.md) | [SEM-41](../tasks/backlog/SEM-41.md), [SEM-42](../tasks/backlog/SEM-42.md) |
 | [SEM-46](../tasks/backlog/SEM-46.md) | Viết phần mở bài và bàn giao lời dẫn thao tác demo | Todo | Chuẩn bị trước | 08/11/2026 16:00 (UTC+7) | Không có. | [SEM-14](../tasks/backlog/SEM-14.md), [SEM-37](../tasks/backlog/SEM-37.md) |
