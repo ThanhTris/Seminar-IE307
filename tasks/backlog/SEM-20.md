@@ -45,9 +45,13 @@ Status nguồn được đối chiếu Project lúc **2026-11-05 16:29:54 UTC**;
 
 ## Tiêu chí hoàn thành
 
-- [ ] Tên/tác giả/DOI khớp nguồn gốc; ít nhất một lập luận gắn được quyết định thử hoặc trade-off.
-- [ ] Không dùng số đo paper làm số đo OPPO; phân biệt nguồn paper và tài liệu API.
-- [ ] Đầu ra và CHECKS có thật, link đọc được; chưa chạy phải ghi Not run, không tự chuyển Done từ kế hoạch.
+- [x] Tên/tác giả/DOI khớp nguồn gốc; ít nhất một lập luận gắn được quyết định thử hoặc trade-off.
+- [x] Không dùng số đo paper làm số đo OPPO; phân biệt nguồn paper và tài liệu API.
+- [x] Đầu ra và CHECKS có thật, link đọc được; chưa chạy phải ghi Not run, không tự chuyển Done từ kế hoạch.
+
+## Rà soát đầu ra ngày 06/11/2026
+
+[CHECKS](../../docs/evidence/SEM-20/CHECKS.md) và [báo cáo đối chiếu SEM-20 với đầu vào SEM-22/50](../../docs/evidence/SEM-20/REVIEW-2026-11-06.md). Đã xác minh ba artifact, metadata, phạm vi kết quả nghiên cứu và hợp đồng bàn giao; phần SEM-20 đáp ứng đầu vào của hai consumer. Báo cáo ghi riêng những diễn giải cần kiểm lại trong SEM-22 trước khi dùng vào báo cáo tổng hợp; không thay đổi trạng thái hoặc nghiệm thu của task khác.
 
 ## Task được mở khóa
 

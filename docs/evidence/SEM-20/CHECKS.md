@@ -1,10 +1,10 @@
-# SEM-20 - CHECKS phần nghiên cứu độc lập
+# SEM-20 - Hồ sơ nghiệm thu và rà soát bàn giao
 
 - Người thực hiện: Tuấn (`mtuan2491`), ngày **03/11/2026 (UTC+7)**.
 - Nhánh: `codex/SEM-20-paper-1`, đúng mẫu `codex/SEM-XX-ten-ngan` của [project](../../../tasks/README.md).
 - Base: `5e1c643550e35aee5f08cd74002be038ee3d4b9e`; đã fetch `origin/main`, chuyển về `main` và kiểm fast-forward trước khi tạo nhánh. Không tạo SEM-20 từ nhánh SEM-19.
-- Phạm vi: theo yêu cầu làm trước một phần SEM-20 không cần nhận output chưa bàn giao; tạo commit cục bộ sau khi kiểm, **không push SEM-20**.
-- Task chưa được chuyển Done; bản này để review phần nghiên cứu đã làm, không yêu cầu run thiết bị để coi là đã đọc bài.
+- Phạm vi ban đầu ngày 03/11/2026: làm trước phần nghiên cứu độc lập và commit cục bộ; sau đó nhánh đã được push theo yêu cầu người dùng và merge qua PR #14.
+- Trạng thái hiện tại, đối chiếu ngày **06/11/2026 (UTC+7)**: SEM-20 đã **Done** trên GitHub Project và đã merge vào main. Phần kiểm tra ban đầu bên dưới được giữ để truy vết; [báo cáo rà soát đầu ra và consumer](REVIEW-2026-11-06.md) ghi kết luận hiện tại. Task nghiên cứu không yêu cầu chạy lại thí nghiệm của paper hoặc chạy E01-E06 để nghiệm thu.
 
 ## Artifact bàn giao
 
@@ -45,5 +45,5 @@ Kiểm cục bộ: `node .local/sem20/validate-docs.cjs` dùng Citation.js core/
 - **SEM-50:** nhận metadata riêng và các giả thuyết đã gắn case; chỉ ghép bibliography/CLAIMS/report trong task tổng hợp, không coi số liệu paper là dữ liệu nhóm.
 - **Khi chốt SEM-20:** đối chiếu thiết bị/scope và revision demo thực sự được bàn giao; ghi thay đổi hoặc giới hạn mới nếu có. SEM-11/12 đã có artifact trên main, không báo lại là dependency chưa Done và không bắt buộc chờ E01-E06 để hoàn thành task đọc bài.
 
-- PR #14 đã được nhóm trưởng `ThanhTris` review, nghiệm thu và merge vào `main` tại merge commit `9931af1f7cf62f592aa15259160533ebcb2b8bc5`.
+- [PR #14](https://github.com/ThanhTris/Seminar-IE307/pull/14) đã được `ThanhTris` merge vào `main` ngày 05/11/2026 tại merge commit `9931af1e8b1bb326c035dc5855022dd20ae9ddc7`, xác minh bằng Git và GitHub PR API ngày 06/11/2026. Đây là thông tin merge; không suy ra một GitHub review approval riêng khi danh sách PR reviews rỗng.
 - Trạng thái task SEM-20 trên GitHub Project 3 đã được cập nhật sang **Done** (item `PVTI_lAHOCnL5Fs4BpUDUzhEiXAk`).
