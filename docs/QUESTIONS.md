@@ -1,6 +1,6 @@
 # Câu hỏi phản biện — SEM-19
 
-Tuấn (`mtuan2491`), ngày **03/11/2026 (UTC+7)**. Bộ câu hỏi dùng để chuẩn bị bài nói, đi cùng [MECHANISMS](MECHANISMS.md). Đáp án mô tả cơ chế hoặc thiết kế; **không phải kết quả đo**. Các câu ghi **chờ đối chiếu SEM-15** có thể dùng làm bản nháp, chưa coi là phần silent push đã được bàn giao cuối.
+Tuấn (`mtuan2491`), khởi tạo 03/11, **chốt ngày 06/11/2026 (UTC+7)**. Bộ 25 câu hỏi đi cùng [MECHANISMS](MECHANISMS.md), đã đối chiếu SEM-14..18 và contract; [INPUT_REVIEW](evidence/SEM-19/INPUT_REVIEW.md) ghi chi tiết tiếp nhận SEM-15. Đáp án mô tả cơ chế hoặc thiết kế; **không phải kết quả đo**.
 
 ## 1. Background Fetch trong đề tài có phải tên một API Android không?
 
@@ -30,31 +30,31 @@ Nguồn: [SEM-17](mechanisms/PERIODIC_FETCH.md), [API](API.md). Kiểm chứng s
 
 Không. Demo chọn data-only, không có notification payload và không tạo thông báo hiển thị. Loại payload quyết định cách xử lý; tắt tiếng một notification không đổi nó thành tín hiệu data-only.
 
-Nguồn: [SCOPE](SCOPE.md), [Firebase receive messages](https://firebase.google.com/docs/cloud-messaging/android/receive-messages). **Chờ đối chiếu SEM-15** trước bản cuối.
+Nguồn: [SCOPE](SCOPE.md), [SEM-15](mechanisms/SILENT_PUSH.md), [Firebase receive messages](https://firebase.google.com/docs/cloud-messaging/android/receive-messages). Phạm vi: baseline AndroidConfig v1, không trộn notification/mixed với data-only.
 
 ## 6. Callback có thể tải snapshot và xử lý tùy ý đến khi xong không?
 
-Không nên dựa vào cửa sổ callback ngắn để chạy tác vụ dài. Thiết kế ghi receipt, kiểm input và enqueue worker chung; công việc sync diễn ra trong worker.
+Không nên dựa vào cửa sổ callback ngắn để chạy tác vụ dài. Thiết kế ghi receipt, kiểm input và enqueue worker chung; công việc sync diễn ra trong worker. Không coi mốc 50/100ms ở blueprint là cam kết thời gian của OS.
 
-Nguồn: [SHARED_SYNC](mechanisms/SHARED_SYNC.md), [Firebase receive messages](https://firebase.google.com/docs/cloud-messaging/android/receive-messages). **Chờ đối chiếu SEM-15**; runtime thuộc các task callback/core.
+Nguồn: [SEM-15](mechanisms/SILENT_PUSH.md), [SHARED_SYNC](mechanisms/SHARED_SYNC.md), [Firebase receive messages](https://firebase.google.com/docs/cloud-messaging/android/receive-messages). Runtime thuộc các task callback/core.
 
 ## 7. Vì sao FCM trả message ID nhưng cache vẫn cũ?
 
 ID từ send chỉ xác nhận accepted for delivery. Còn phải quan sát callback, enqueue, worker, HTTP và transaction. Không có `snapshot_applied` thì chưa đủ kết luận cache đã cập nhật.
 
-Nguồn: [SEM-18](mechanisms/SERVER_FCM.md), [Message lifespan](https://firebase.google.com/docs/cloud-messaging/customize-messages/setting-message-lifespan). Kiểm chứng sau: E02/E04; **chờ đối chiếu SEM-15** về điều kiện nhận.
+Nguồn: [SEM-15](mechanisms/SILENT_PUSH.md), [SEM-18](mechanisms/SERVER_FCM.md), [Message lifespan](https://firebase.google.com/docs/cloud-messaging/customize-messages/setting-message-lifespan). Kiểm chứng runtime: E02/E04; thiếu applied không tự xác định lỗi thuộc FCM hay worker.
 
 ## 8. Vì sao không tăng high priority để demo luôn nhanh?
 
 Baseline normal priority phục vụ câu hỏi đồng bộ không khẩn cấp. Đổi priority sẽ đổi điều kiện thí nghiệm; high priority có mục đích riêng cho nội dung cần người dùng chú ý và cũng không chứng minh transaction hoàn tất.
 
-Nguồn: [SCOPE](SCOPE.md), [Firebase priority](https://firebase.google.com/docs/cloud-messaging/android-message-priority). **Chờ đối chiếu SEM-15**; không hứa độ trễ.
+Nguồn: [SCOPE](SCOPE.md), [SEM-15](mechanisms/SILENT_PUSH.md), [Firebase priority](https://firebase.google.com/docs/cloud-messaging/android-message-priority). Không hứa độ trễ hoặc dùng một lần nhận nhanh làm SLA.
 
 ## 9. TTL 24 giờ có nghĩa worker sẽ hoàn tất trong 24 giờ không?
 
 Không. TTL của protocol là thời gian giữ tin tại FCM, không phải timeout worker. Sau khi app nhận và enqueue, không suy worker bị hủy chỉ vì TTL của message hết; outcome phải đọc từ work/cache events.
 
-Nguồn: [protocol SEM-16](../experiments/PROTOCOL.md), [SEM-18](mechanisms/SERVER_FCM.md), [Message lifespan](https://firebase.google.com/docs/cloud-messaging/customize-messages/setting-message-lifespan). **Chờ đối chiếu SEM-15**.
+Nguồn: [protocol SEM-16](../experiments/PROTOCOL.md), [SEM-15](mechanisms/SILENT_PUSH.md), [SEM-18](mechanisms/SERVER_FCM.md), [Message lifespan](https://firebase.google.com/docs/cloud-messaging/customize-messages/setting-message-lifespan). TTL/collapse được ghi theo cấu hình run, không suy nguyên nhân mất tin từ timeout.
 
 ## 10. Foreground, background, process chết và force-stop có giống nhau không?
 
@@ -98,11 +98,11 @@ Theo contract hiện tại là không: hint chỉ là metadata; server có thể
 
 Nguồn: [EVENT_SCHEMA](EVENT_SCHEMA.md), [protocol E05-B](../experiments/PROTOCOL.md). Kiểm chứng sau: E05.
 
-## 17. KEEP có tự bảo đảm không mất tín hiệu đến gần lúc worker kết thúc không?
+## 17. KEEP, REPLACE và version guard có tự bảo đảm không mất tín hiệu không?
 
-Không được giả định như vậy. Shared contract yêu cầu bảo toàn tín hiệu mới; task core/messaging phải chọn chiến lược và có test race. SEM-19 không thay quyết định triển khai bằng một tên policy.
+Không được giả định như vậy. KEEP có thể bỏ yêu cầu mới khi work cũ chưa xong; REPLACE hủy work cũ. Version guard ngăn rollback nhưng không tự chứng minh lần sync tiếp theo sẽ chạy hoặc giữ đủ signal. Cần chiến lược và test race đúng implementation.
 
-Nguồn: [SHARED_SYNC](mechanisms/SHARED_SYNC.md), [EVENT_SCHEMA](EVENT_SCHEMA.md). Kiểm chứng sau: SEM-38/39, E05-C.
+Nguồn: [SHARED_SYNC](mechanisms/SHARED_SYNC.md), [EVENT_SCHEMA](EVENT_SCHEMA.md), [Managing work](https://developer.android.com/develop/background-work/background-tasks/persistent/how-to/manage-work). Kiểm chứng runtime: SEM-38/39, E05-C.
 
 ## 18. Mở app lên thấy version mới có chứng minh đã sync ở nền không?
 
@@ -140,6 +140,18 @@ Không. Cần artifact, CHECKS và run tương ứng đúng commit/config. Một
 
 Nguồn: [quy tắc bàn giao](../tasks/README.md), [SEM-12](evidence/SEM-12/CHECKS.md), [SEM-13](evidence/SEM-13/CHECKS.md), [SEM-17](evidence/SEM-17/CHECKS.md). Đáp án dựa trên loại evidence, không đánh giá lại nghiệm thu của owner.
 
-## Trước khi dùng bộ câu hỏi làm bản cuối
+## 24. Worker phải gọi /api/snapshot hay /api/bulletin?
 
-Nhận tài liệu silent push và CHECKS của SEM-15, đối chiếu các câu 5–9, bổ sung delta nếu có. Khi dùng ví dụ thực nghiệm trong bài nói, dẫn run/commit/config thật và gắn nhãn live/playback. Chưa có run thì giữ lời giải ở mức cơ chế/giả thuyết; không thêm số latency, tỷ lệ thành công hoặc câu “đã chứng minh” từ bản nháp này.
+Contract hiện hành là **GET /api/bulletin**. Path trong sơ đồ minh họa của tài liệu khác phải được chuẩn hóa theo API và client thật; không suy endpoint mới từ một blueprint. GET, version guard và commit cache vẫn là các mốc khác nhau.
+
+Nguồn: [API](API.md), [remote datasource](../android/app/src/main/java/com/thanhtris/seminarie307/data/remote/SnapshotRemoteDataSource.kt), [đối chiếu I1](evidence/SEM-19/INPUT_REVIEW.md).
+
+## 25. Thiếu run hoặc mode có được tự lấy run hiện hành hay mặc định PUSH không?
+
+Không dùng fallback đó để tạo event thí nghiệm. Input không xác định được run/config hợp lệ phải từ chối và ghi diagnostic ngoài dataset. Nếu run xác định được nhưng mode không cho phép trigger, giữ receipt có thật và ghi trigger_rejected; không ghi enqueue như đã thành công.
+
+Nguồn: [EVENT_SCHEMA](EVENT_SCHEMA.md), [SHARED_SYNC](mechanisms/SHARED_SYNC.md), [đối chiếu I2](evidence/SEM-19/INPUT_REVIEW.md). Source PUSH không có nghĩa mode luôn là PUSH; mode HYBRID cũng có push.
+
+## Cách dùng khi chuẩn bị bài nói
+
+Đã đối chiếu các câu 5-9 với SEM-15 và nguồn chính thức, ghi cách xử lý blueprint tại INPUT_REVIEW. Khi dùng ví dụ thực nghiệm trong bài nói, dẫn run/commit/config thật và gắn nhãn live/playback. Chưa có run thì giữ lời giải ở mức cơ chế/giả thuyết; không thêm số latency, tỷ lệ thành công hoặc câu “đã chứng minh” chỉ từ lời giải. Có thể chọn nhóm câu theo periodic (2-4), push (5-9, 24-25), lifecycle (10-13), tính đúng (14-18), đo lường/giới hạn (19-23).

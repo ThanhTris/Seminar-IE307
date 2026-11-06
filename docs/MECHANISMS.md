@@ -1,6 +1,6 @@
 # Tổng hợp cơ chế đồng bộ nền — SEM-19
 
-Tuấn (`mtuan2491`), ngày **03/11/2026 (UTC+7)**. **Bản làm trước phần độc lập**, phục vụ tổng hợp và phản biện; chưa phải bàn giao cuối SEM-19 hoặc kết quả thực nghiệm. [CHECKS và phần còn chờ](evidence/SEM-19/CHECKS.md) ghi phạm vi kiểm chứng.
+Tuấn (`mtuan2491`), khởi tạo 03/11, **chốt tổng hợp ngày 06/11/2026 (UTC+7)**. Đã nhận và đối chiếu SEM-11..18, gồm phần silent push SEM-15. Đây là tài liệu cơ chế và phản biện; kết quả thực nghiệm phải dẫn run riêng. [CHECKS](evidence/SEM-19/CHECKS.md) ghi nghiệm thu tài liệu, [INPUT_REVIEW](evidence/SEM-19/INPUT_REVIEW.md) ghi revision nguồn và cách chuẩn hóa chi tiết khác nhau.
 
 ## 1. Câu hỏi và phạm vi seminar
 
@@ -41,27 +41,29 @@ Sơ đồ mô tả **luồng mục tiêu**, không phải trace của run đã �
 
 ```mermaid
 sequenceDiagram
-    participant C as Cau hinh run
-    participant W as WorkManager va SyncWorker
+    participant C as Cấu hình run
+    participant W as WorkManager và SyncWorker
     participant R as SyncRepository
     participant S as Snapshot API
     participant D as Room
-    participant U as UI doc cache
-    C->>W: Dang ky unique periodic voi run va mode
-    W-->>C: Operation chap nhan va work_id that
-    Note over W: Constraint va he thong quyet dinh luc chay
-    loop Moi cycle duoc he thong cho chay
-        W->>D: work_started voi request_id cua cycle
-        W->>R: sync voi source PERIODIC
-        R->>S: GET snapshot ngoai transaction
-        S-->>R: Snapshot hoac loi
-        alt Response hop le va version moi hon
-            R->>D: Transaction kiem lai version va commit cache cung event
-            D-->>U: Quan sat snapshot_applied sau commit
-        else Bang hoac cu hon cache
-            R->>D: Giu items va ghi unchanged hoac stale
-        else Loi
-            R-->>W: Retry huu han hoac failure
+    participant U as UI đọc cache
+    C->>W: Đăng ký unique periodic với run và mode
+    W-->>C: Operation chấp nhận và work_id thật
+    C->>D: periodic_registered
+    Note over W: Constraint và hệ thống quyết định lúc chạy
+    loop Mỗi cycle được hệ thống cho chạy
+        W->>D: work_started với request_id của cycle
+        W->>R: sync với source PERIODIC
+        R->>S: GET /api/bulletin ngoài transaction
+        S-->>R: Response hoặc lỗi
+        alt Response hợp lệ
+            R->>D: Transaction đọc lại version và xử lý snapshot
+            D-->>R: Applied, unchanged hoặc stale sau commit
+            opt Có snapshot mới được áp dụng
+                D-->>U: Quan sát cache và snapshot_applied
+            end
+        else Lỗi fetch hoặc contract
+            R-->>W: Retry hữu hạn hoặc failure theo phân loại
         end
     end
 ```
@@ -72,43 +74,66 @@ Trong project, tên event chuẩn là `periodic_registered`; mốc này phải t
 
 ## 4. Luồng push: từ server đến cache
 
-Sơ đồ dưới là **khung logic từ SEM-14, SEM-18 và contract SEM-26**, chưa thay tài liệu silent push do SEM-15 sở hữu. Khi nhận SEM-15, cần đối chiếu lại loại payload, callback, lifecycle và giới hạn trong mục này; không yêu cầu Trang cùng sửa file tổng hợp.
+Sơ đồ là **luồng hợp lệ có nhận callback**, tổng hợp từ [SEM-15](mechanisms/SILENT_PUSH.md), [SEM-18](mechanisms/SERVER_FCM.md), SEM-14 và contract SEM-26. Đã đối chiếu payload, callback, lifecycle và event; các chi tiết blueprint được chuẩn hóa tại [INPUT_REVIEW](evidence/SEM-19/INPUT_REVIEW.md). Các nhánh gửi lỗi, chưa biết kết quả hoặc input bị từ chối không được trình bày như sync thành công.
 
 ```mermaid
 sequenceDiagram
     participant S as Server
     participant F as FCM
     participant C as Callback Android
-    participant W as WorkManager va SyncWorker
+    participant W as WorkManager và SyncWorker
     participant R as SyncRepository
     participant D as Room
-    S->>S: Persist snapshot va server_updated
-    S->>F: Gui data-only normal sau commit
-    par Ket qua gui neu quan sat duoc
-        F-->>S: Ghi outcome theo response that
-    and Duong phan phoi
-        opt Tin duoc phan phoi va input hop le cho run
-            F-->>C: Callback nhan data-only
-            C->>D: push_received voi correlation
-            C->>W: Yeu cau enqueue sync chung
+    S->>S: Persist snapshot và server_updated
+    S->>F: Gửi data-only normal sau commit
+    par Response gửi nếu quan sát được
+        F-->>S: Accepted với message ID thật
+    and Đường nhận độc lập
+        opt Tin được phân phối và input hợp lệ cho run
+            F-->>C: Callback nhận data-only
+            C->>D: push_received với correlation
+            C->>W: Yêu cầu enqueue qua API chung
+            W-->>C: Operation chấp nhận và work_id thật
+            C->>D: work_enqueued
         end
     end
-    Note over S,C: Khong ap thu tu timestamp giua hai may
-    opt Work duoc chap nhan va du dieu kien chay
+    Note over S,C: Không áp thứ tự timestamp giữa hai máy
+    opt Work được chấp nhận và đủ điều kiện chạy
         W->>D: work_started
-        W->>R: sync voi source PUSH
-        R->>S: GET snapshot hien hanh
-        S-->>R: Snapshot hoac loi
-        R->>D: Version guard va outcome theo shared contract
-        Note over D: Chi snapshot moi duoc commit moi ghi applied
+        W->>R: sync với source PUSH
+        R->>S: GET /api/bulletin hiện hành
+        S-->>R: Snapshot hoặc lỗi
+        R->>D: Version guard và outcome theo shared contract
+        Note over D: Chỉ snapshot mới đã commit mới ghi applied
     end
 ```
 
-Với baseline `AndroidConfig` v1, notification, data-only và mixed có đường xử lý khác nhau khi app ở nền. Data-only đi qua `onMessageReceived`; callback có cửa sổ ngắn nên công việc kéo dài được bàn giao cho WorkManager. Demo không coi một thông báo bị tắt tiếng là data-only. Nguồn: [Receive messages in Android apps](https://firebase.google.com/docs/cloud-messaging/android/receive-messages).
+Với baseline `AndroidConfig` v1, notification, data-only và mixed có đường xử lý khác nhau khi app ở nền. Bảng mô tả routing khi message đã được phân phối theo điều kiện nền tảng, không bảo đảm phân phối sau force-stop hay khi cấu hình sai.
+
+| Payload v1 | Foreground | Background | Phù hợp demo |
+|---|---|---|---|
+| Notification | Callback; app xử lý hiển thị | Thông báo vào system tray | Không dùng cho silent sync. |
+| Data-only | `onMessageReceived` | `onMessageReceived` khi được phân phối | Baseline, callback offload sang worker. |
+| Notification + data | Callback nhận hai phần | Notification ở tray, data trong launcher intent khi người dùng tương tác | Không dùng để chứng minh sync nền không cần mở UI. |
+
+Nguồn: [SEM-15, bảng payload](mechanisms/SILENT_PUSH.md), [Firebase receive messages](https://firebase.google.com/docs/cloud-messaging/android/receive-messages). Callback có cửa sổ ngắn; không coi các mốc 50/100ms trong ví dụ là SLA của Android. Chuyển tác vụ kéo dài cho WorkManager, không chạy GET/transaction dài tùy ý trong callback.
 
 Normal priority có thể bị trì hoãn trong Doze. Project giữ normal priority cho tín hiệu đồng bộ và không dùng high priority để che độ trễ; đó là baseline thử nghiệm theo [SCOPE](SCOPE.md), phù hợp [hướng dẫn priority](https://firebase.google.com/docs/cloud-messaging/android-message-priority). Không suy sự bảo đảm giao tin từ một lần demo thành công. Sơ đồ chỉ mở rộng nhánh input hợp lệ; callback sai run/payload phải được xử lý theo contract, không mặc định enqueue.
 
+Theo EVENT_SCHEMA, callback có run/config xác định nhưng trigger không hợp mode ghi receipt rồi `trigger_rejected`. Input không xác định được run/config ghi diagnostic local ngoài dataset; không tự gán run hiện hành hoặc fallback mode PUSH. Trong run hợp lệ, `source=PUSH`, mode là PUSH hoặc HYBRID đã capture; `version_hint` là gợi ý và data payload không phải snapshot đã commit.
+
 Server persist thành công và gửi push là hai thao tác khác nhau. Nếu gửi lỗi hoặc cố ý bỏ gửi, snapshot vẫn tồn tại cho GET. FCM trả message ID chỉ xác nhận chấp nhận để phân phối, chưa chứng minh app nhận. TTL giới hạn thời gian giữ tin, không đặt deadline hoàn tất worker. Nguồn: [SEM-18](mechanisms/SERVER_FCM.md), [Message lifespan](https://firebase.google.com/docs/cloud-messaging/customize-messages/setting-message-lifespan).
+
+Các nhóm nguyên nhân từ SEM-15 được dùng để đặt câu hỏi, không phải lỗi đã quan sát trên thiết bị nhóm:
+
+| Nhóm | Evidence cần kiểm | Không tự kết luận |
+|---|---|---|
+| Lỗi config/IAM/token hoặc provider từ chối | Sender result và mã lỗi an toàn | Có accepted nếu chưa gọi/nhận response thật. |
+| Offline, đường mạng hoặc Google Play services | Kiểm kết nối server và FCM riêng; manifest cấu hình | ADB reverse tới server đồng nghĩa có Internet/receipt. |
+| Doze, standby hoặc stopped state | Trạng thái OS và mốc người dùng mở lại nếu force-stop | Màn hình tắt là Doze, hoặc hybrid vượt stopped. |
+| Tin pending, TTL/collapse hoặc giới hạn phân phối | Payload/config và event của run | Timeout đủ chứng minh tin bị mất hoặc TTL đã hết. |
+| Chính sách OEM | Hồ sơ OS/cấu hình và run thật | OPPO đã có hành vi cụ thể khi hồ sơ còn Not run. |
+| App đã nhận nhưng input/work/cache chưa thành công | Receipt, rejection/enqueue/start/fetch/commit theo correlation | Mọi cache cũ đều do FCM không giao tin. |
 
 ## 5. Ranh giới bằng chứng và đồng bộ dùng chung
 
@@ -131,6 +156,8 @@ Theo [SHARED_SYNC](mechanisms/SHARED_SYNC.md) và [API](API.md), GET ở ngoài 
 
 Correlation theo [EVENT_SCHEMA](EVENT_SCHEMA.md): `run_id + device_alias + signal_id` nối tín hiệu hai phía; `request_id` nối logical sync và retry; mỗi GET có `network_call_id`. Giữ FCM ID thật hoặc null, không nối chỉ bằng version/timestamp. UI mở lại chỉ đọc Room, không tự GET để làm đẹp kết quả nền.
 
+`KEEP`/`REPLACE` hoặc version guard riêng lẻ không phải chứng cứ rằng một cập nhật mới luôn được giữ qua race/process death. REPLACE hủy work cũ theo [Managing work](https://developer.android.com/develop/background-work/background-tasks/persistent/how-to/manage-work). Tại base đã đọc, [SyncWorkEnqueuer](../android/app/src/main/java/com/thanhtris/seminarie307/sync/SyncWorkEnqueuer.kt) dùng one-time `enqueue` cho MANUAL/PUSH; SEM-19 không gọi blueprint unique policy của nguồn khác là hành vi đã tích hợp. Yêu cầu giữ tín hiệu mới phải truy về chiến lược triển khai và E05-C/test logic thật.
+
 Android ghi `elapsed_realtime_ms` để tính khoảng thời gian trong cùng device và cùng `boot_session_id` khác null. UTC liên server/điện thoại phải kiểm clock offset trước khi tính latency; thiếu event hoặc thiếu clock không được gán duration bằng 0. Cơ sở: [SystemClock](https://developer.android.com/reference/android/os/SystemClock), [quy tắc đo của protocol](../experiments/PROTOCOL.md).
 
 ## 6. Lifecycle và giới hạn cần giải thích
@@ -151,16 +178,17 @@ Nguồn nền tảng: [Processes and app lifecycle](https://developer.android.co
 
 ## 7. Phiên bản và cấu hình được dùng làm cơ sở
 
-Đây là thông tin đọc từ artifact tại base `5e1c643550e35aee5f08cd74002be038ee3d4b9e`, không phải kiểm build/thiết bị trong SEM-19.
+Thông tin được đối chiếu lại tại base tiếp nhận `a26d270` chứa main `319cc67`, ngày 06/11/2026; không phải kiểm build/thiết bị trong SEM-19. [INPUT_REVIEW](evidence/SEM-19/INPUT_REVIEW.md) lưu các revision nguồn.
 
 | Phần | Cơ sở hiện có | Giới hạn |
 |---|---|---|
 | Android | [app build](../android/app/build.gradle.kts): package `com.thanhtris.seminarie307`, minSdk 24, compile/target 37; [version catalog](../android/gradle/libs.versions.toml): WorkManager 2.12.0, Room 2.8.5, Firebase BoM 35.1.0 | Không dùng version trong một CHECKS cũ để khẳng định cấu hình APK đang chạy. |
-| FCM | HTTP v1, `AndroidConfig` v1, data-only, normal | Giữ phạm vi baseline; không trộn callback AndroidConfigV2. SEM-15 cần bàn giao để đối chiếu cuối. |
+| FCM | [SEM-15](mechanisms/SILENT_PUSH.md): HTTP v1, `AndroidConfig` v1, data-only, normal | Đã đối chiếu routing và giới hạn; không trộn callback AndroidConfigV2 hoặc xem normal là cam kết tức thời. |
 | HTTP / event | [API](API.md) và [EVENT_SCHEMA](EVENT_SCHEMA.md) khai báo `2.0.0` | Đặc tả không tự chứng nhận client/server tuân thủ; giữ [delta SEM-26](evidence/SEM-26/CHECKS.md). |
 | Emulator của Vinh | [DEVICES](environment/DEVICES.md): Android 17 / runtime API 37, có Google Play services; probe server/mạng đã ghi | Kiểm môi trường không phải run push/periodic hoặc kết quả thiết bị của SEM-19. |
 | OPPO Find X9 | Hồ sơ SEM-12 ghi chưa có máy để kiểm | Android/API/ColorOS và hành vi OEM chưa xác nhận. |
 | Firebase/server | [SEM-13](environment/SERVER_FIREBASE.md) ghi môi trường host và blocker quyền/config tại lần kiểm | Không suy quyền gửi hay receipt từ transport probe; setup/run sau phải ghi trạng thái mới. |
+| API/server đã bàn giao sau hồ sơ môi trường | [SETUP](SETUP.md), [M1 SEM-28](evidence/SEM-28/M1.md), [API](API.md) | Có mã app/server và hồ sơ manual; đây không phải bằng chứng periodic/push tự nhiên hoặc một run mới của SEM-19. |
 | TTL/collapse | [SEM-16](../experiments/PROTOCOL.md): baseline TTL 24 giờ, không đặt collapse key | Là cấu hình protocol cần đối chiếu candidate, không phải payload đã gửi trong SEM-19. |
 
 ## 8. Giả thuyết và evidence còn cần
@@ -168,9 +196,9 @@ Nguồn nền tảng: [Processes and app lifecycle](https://developer.android.co
 | Luận điểm cần kiểm | Case / đầu ra liên quan | Trạng thái trong SEM-19 |
 |---|---|---|
 | Lịch đăng ký khác thời điểm worker chạy | E01/E03, SEM-29/41/42 | Cơ sở tài liệu; chưa đo trong task này. |
-| Nhận push khác hoàn tất sync | E02/E04, SEM-34/41/42 | Khung cơ chế; chờ SEM-15 và evidence runtime. |
+| Nhận push khác hoàn tất sync | E02/E04, SEM-34/41/42 | Cơ chế đã đối chiếu SEM-15/18; kết quả runtime cần run thật. |
 | Duplicate/stale/race không làm sai cache | E05, SEM-38/39/36 | Bất biến thiết kế; không lấy sơ đồ làm test Pass. |
 | Periodic có thể bổ sung cơ hội cập nhật khi bỏ gửi push | E06, SEM-40/36/41 | Giả thuyết hybrid; skip có chủ ý không chứng minh FCM mất tin. |
 | OEM/idle ảnh hưởng quan sát trên cấu hình thử | SEM-12/16/42 | Chờ máy và run thật; không suy rộng mọi Android. |
 
-Bản này có thể dùng ngay để chuẩn bị phần mở bài, thuật ngữ và phản biện. Trước bàn giao cuối cho SEM-50: nhận SEM-15 cùng CHECKS, đối chiếu lại mục push và câu hỏi liên quan, ghi delta nếu có. Số liệu, latency, tỷ lệ thành công và kết luận runtime chỉ bổ sung từ run có provenance; không tự tạo trong SEM-19.
+Bộ tổng hợp đã nhận đủ nguồn để bàn giao phần cơ chế cho SEM-50. Câu hỏi và đáp án ở [QUESTIONS](QUESTIONS.md) đã đối chiếu cùng contract. Số liệu, latency, tỷ lệ thành công và kết luận runtime phải bổ sung từ run có provenance; không tự tạo trong SEM-19. Hybrid bổ sung cơ hội cập nhật khi được phép, không được gọi là tối ưu nhất hoặc vượt chính sách nền chỉ từ thiết kế này.

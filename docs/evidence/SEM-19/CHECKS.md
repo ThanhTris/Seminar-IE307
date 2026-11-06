@@ -3,7 +3,7 @@
 ## Cập nhật hoàn tất theo ba bước - 06/11/2026
 
 1. **Đã thực hiện:** [tiếp nhận/đối chiếu đủ đầu vào](INPUT_REVIEW.md), ghi cách chuẩn hóa các khác biệt giữa blueprint, contract và source.
-2. **Tiếp theo:** chốt MECHANISMS/QUESTIONS, thay nhãn chờ SEM-15 bằng nội dung đã đối chiếu.
+2. **Đã thực hiện:** chốt MECHANISMS/QUESTIONS, đối chiếu SEM-15, chuẩn hóa endpoint/input/policy và có 25 đáp án có nguồn; kiểm cú pháp/link trước commit bước 2.
 3. **Tiếp theo:** kiểm cuối, render sơ đồ, ghi bàn giao và acceptance; commit riêng sau từng bước theo yêu cầu người dùng.
 
 Phần dưới giữ lịch sử bản chuẩn bị ngày 03/11. Trạng thái và kết quả cuối sẽ được cập nhật ở bước 3; không dùng các dòng Todo/thiếu SEM-15 của lịch sử để mô tả đầu vào ngày 06/11.
