@@ -1,0 +1,124 @@
+{
+  "data_kind": "OBSERVED",
+  "run_id": "run-sem29-periodic-emulator-20261107-r2",
+  "boot_session_unchanged": true,
+  "boot_session_id": "boot-34ee1ed9a31f1c0d",
+  "checkpoints": [
+    {
+      "phase": "before",
+      "capture_complete_host_utc": "2026-11-07T10:07:19.877885Z",
+      "deep_idle": "ACTIVE",
+      "screen_on": true,
+      "network_connected": true,
+      "powered": false,
+      "battery_percent": 100,
+      "package_stopped": false,
+      "local_network_permission_granted": true,
+      "resumed_packages": [
+        "com.google.android.apps.nexuslauncher"
+      ],
+      "private_capture_sha256": {
+        "idle": "7b942f8e00ffb954df7ec58ff46a25cf375076a1637c7db3b8c6d6c0b5334c20",
+        "battery": "b83111c6425d287f7675693b579f187ed228d9a6860dd544b75a5761667d66dc",
+        "activity": "943fc7c7002fa31d359f2d75358c1aae4dcb5ed2a7f65199aba41ed44503039c",
+        "package": "ab6783fb4f7407c60fd0885e4ab373470a230627ed4a4e5415d1333590da6da1",
+        "jobs": "b5d50fcdbc63481cba385f72ee19d1665bff9fec7a5d778288d00d08f02db75c"
+      }
+    },
+    {
+      "phase": "minute-30",
+      "capture_complete_host_utc": "2026-11-07T10:37:30.631363Z",
+      "deep_idle": "ACTIVE",
+      "screen_on": true,
+      "network_connected": true,
+      "powered": false,
+      "battery_percent": 100,
+      "package_stopped": false,
+      "local_network_permission_granted": true,
+      "resumed_packages": [
+        "com.google.android.apps.nexuslauncher"
+      ],
+      "private_capture_sha256": {
+        "idle": "5135c3a984b5bbc2c3944634a4b73f257eb5a3e27c81c5b254373fdf9101360f",
+        "battery": "b83111c6425d287f7675693b579f187ed228d9a6860dd544b75a5761667d66dc",
+        "activity": "789abc2b9c57040fcef816a7f2a28215e2d19711b88af2d14e1ce202441d2e10",
+        "package": "89ae007ec16709eed0f79f50c7be9aaac5416da6383d27fec9e903f340f58b1a",
+        "jobs": "fba0fb28d6214a850327f7962abd4d2874dc3ff2ef652d1317cf1204cb5f36ac"
+      }
+    },
+    {
+      "phase": "minute-60",
+      "capture_complete_host_utc": "2026-11-07T11:07:30.708636Z",
+      "deep_idle": "ACTIVE",
+      "screen_on": true,
+      "network_connected": true,
+      "powered": false,
+      "battery_percent": 100,
+      "package_stopped": false,
+      "local_network_permission_granted": true,
+      "resumed_packages": [
+        "com.google.android.apps.nexuslauncher"
+      ],
+      "private_capture_sha256": {
+        "idle": "7b942f8e00ffb954df7ec58ff46a25cf375076a1637c7db3b8c6d6c0b5334c20",
+        "battery": "b83111c6425d287f7675693b579f187ed228d9a6860dd544b75a5761667d66dc",
+        "activity": "8c475e258f5e125a029d629506ce8bdc2a31a8c47812e61b60e983b140ea33f7",
+        "package": "a5a2cfb49d9802238de79fe612487e393d8de9d4eadd0e9600208fe5ddaa5ffa",
+        "jobs": "f40f72ea9c98b50f257deeefbbc73cb76ecbadc7dcb8bcc61a3f395e0900515c"
+      }
+    },
+    {
+      "phase": "after-window",
+      "capture_complete_host_utc": "2026-11-07T11:37:30.942994Z",
+      "deep_idle": "ACTIVE",
+      "screen_on": true,
+      "network_connected": true,
+      "powered": false,
+      "battery_percent": 100,
+      "package_stopped": false,
+      "local_network_permission_granted": true,
+      "resumed_packages": [
+        "com.google.android.apps.nexuslauncher"
+      ],
+      "private_capture_sha256": {
+        "idle": "5135c3a984b5bbc2c3944634a4b73f257eb5a3e27c81c5b254373fdf9101360f",
+        "battery": "b83111c6425d287f7675693b579f187ed228d9a6860dd544b75a5761667d66dc",
+        "activity": "a00f7782726b3b98f1d54f1c9e9aee488fedc74b68752fde005f309592bbe776",
+        "package": "fb7c85e579e030285c6e2b0bf55f70a9ec7c48c8d18366c1750acc72bff05249",
+        "jobs": "b3f66fdb854c592755c5b61e7e5f308f3cacc1bd60373a307d5599a2c9336ae2"
+      }
+    },
+    {
+      "phase": "cleanup",
+      "capture_complete_host_utc": "2026-11-07T11:38:20.132354Z",
+      "deep_idle": "ACTIVE",
+      "screen_on": true,
+      "network_connected": true,
+      "powered": false,
+      "battery_percent": 100,
+      "package_stopped": false,
+      "local_network_permission_granted": true,
+      "resumed_packages": [
+        "com.google.android.apps.nexuslauncher"
+      ],
+      "private_capture_sha256": {
+        "idle": "5135c3a984b5bbc2c3944634a4b73f257eb5a3e27c81c5b254373fdf9101360f",
+        "battery": "b83111c6425d287f7675693b579f187ed228d9a6860dd544b75a5761667d66dc",
+        "activity": "ed15b5baafa46d18a20233c63313b673c1fbd21c7fbb75c446158ad764878491",
+        "package": "36c44c6d65c2e1e39d6786d58f2348034db09c5e3bf67558882693ab8f2824c5",
+        "jobs": "1e002b69a543b7cb5335392e538b885272d1870e84e7a590cbc017353e639a97"
+      }
+    }
+  ],
+  "cleanup_work_spec": [
+    {
+      "id": "82fe495d-dd51-4dce-96fc-5ed2c7407b66",
+      "state": 5,
+      "run_attempt_count": 0,
+      "period_count": 6
+    }
+  ],
+  "cleanup_active_periodic_work": 0,
+  "dedicated_server_stopped": true,
+  "server_store_lock_removed": true
+}

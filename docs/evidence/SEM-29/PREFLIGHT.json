@@ -1,0 +1,188 @@
+{
+  "data_kind": "OBSERVED",
+  "operator_alias": "Vinh5905",
+  "date": "2026-11-07",
+  "device_alias": "emulator-main",
+  "environment": {
+    "macos": "26.1",
+    "java": "21.0.11",
+    "gradle": "9.6.0",
+    "emulator": "37.1.11.0",
+    "workmanager": "2.12.0",
+    "room": "2.8.5",
+    "sdk": 37,
+    "build_tools": "36.0.0"
+  },
+  "device": {
+    "manufacturer": "Google",
+    "model": "sdk_gphone16k_arm64",
+    "android_release": "17",
+    "api_level": 37,
+    "security_patch": "2026-07-05",
+    "build_fingerprint": "google/sdk_gphone16k_arm64/emu64a16k:17/CP31.260623.012/16064790:user/dev-keys",
+    "abi": "arm64-v8a",
+    "page_size_bytes": 16384,
+    "kind": "EMULATOR",
+    "coloros": null,
+    "play_services_version": "26.33.32"
+  },
+  "initial_build": {
+    "app_commit": "a26646d72e8ee93f9e46a03b16d66f81be0552e0",
+    "server_commit": "a26646d72e8ee93f9e46a03b16d66f81be0552e0",
+    "files": {
+      "application_apk": {
+        "sha256": "af707162d2747202702be81e8bc15a7d04dabef93974e06b7d735b9c0d4d88a0",
+        "bytes": 14993783
+      },
+      "instrumentation_apk": {
+        "sha256": "f7e805248396e93e0df2e255a9d7288dc3d4cf37e19df12806bf29b080893e09",
+        "bytes": 1107432
+      },
+      "harness_source": {
+        "sha256": "0e2a901910dab68f04abedecde0667f1dce2b3f54fa5dc1c4354dd414730f839",
+        "bytes": 5395
+      },
+      "observer_source": {
+        "sha256": "1e707cb695b8c0d6c415a2aa3f71c60fdda1bc8c7c1e8dccf6a3bcde9aa2a2e2",
+        "bytes": 5663
+      }
+    },
+    "installed_apk_matches": true,
+    "unit_tests": {
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "corrected_build": {
+    "app_commit": "95eeecb6bfa1a0963a95e581b5322c15443711e4",
+    "server_commit": "a26646d72e8ee93f9e46a03b16d66f81be0552e0",
+    "files": {
+      "application_apk": {
+        "sha256": "ef60cd644f99e6da3c9c40648915606a753cf68908111f10f35a60a704e44cfd",
+        "bytes": 15605480
+      },
+      "instrumentation_apk": {
+        "sha256": "fae19edcee30ed18777f5d3982381486cffcc1e7f0d392413c5019eab931a4c3",
+        "bytes": 1117832
+      },
+      "harness_source": {
+        "sha256": "839f9adc456329a90d75ff5e53ede6afced6594211ca71cafa3d5a9c6c9c4caa",
+        "bytes": 5838
+      },
+      "observer_source": {
+        "sha256": "ff7857f674823d1b872c833879aeba52554fbf6cd20a0b62851f2972ae74d009",
+        "bytes": 5792
+      }
+    },
+    "installed_apk_matches": true,
+    "unit_tests": {
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "permission_check": {
+    "declared_in_initial_apk": false,
+    "declared_in_corrected_apk": true,
+    "denial_was_selected_in_system_dialog": true,
+    "denied_runtime_grant": false,
+    "denied_actual_client_probe": {
+      "expected_success": false,
+      "actual_success": false,
+      "raw_sha256": "b94d574d5a8116b7f1a8a2b8c2e60dd2d83f6953927fbf49c6d88d8c877ccc29"
+    },
+    "allow_was_selected_in_system_dialog": true,
+    "allowed_runtime_grant": true,
+    "allowed_actual_client_probe": {
+      "expected_success": true,
+      "actual_success": true,
+      "raw_sha256": "57ad90065f7a968d0c091865fd111cd9c7420b6cdccc1ae97d88ead2dd6fe573"
+    },
+    "official_reference": "https://developer.android.com/privacy-and-security/local-network-permission",
+    "below_api_37_runtime_status": "NOT_RUN"
+  },
+  "diagnostics": [
+    {
+      "result": {
+        "expected_success": true,
+        "actual_success": true,
+        "raw_sha256": "46561aeb1a4545c41c0820c45582825e1895732ffa44d6bee1556b7c2c480149"
+      },
+      "state": {
+        "captured_at_utc": "2026-11-07T10:01:29.054Z",
+        "elapsed_realtime_ms": 478839,
+        "run_id": "run-sem29-diagnostics-20261107",
+        "action": "diagnose",
+        "event_format": "legacy-room-v1",
+        "cached_version": null,
+        "mode": null,
+        "periodic_work": [
+          {
+            "work_id": "abe625e4-12aa-44d8-b498-82e7a5cf7bda",
+            "state": "CANCELLED",
+            "run_attempt_count": 1
+          }
+        ]
+      },
+      "assertions": [
+        "TWO_REGISTRATIONS_SAME_ACTIVE_ID",
+        "ONE_ACTIVE_UNIQUE_WORK",
+        "ZERO_ACTIVE_AFTER_CANCEL"
+      ]
+    },
+    {
+      "result": {
+        "expected_success": true,
+        "actual_success": true,
+        "raw_sha256": "09ea978cd3421b4a4ed16d90157a1e2ea2a15abcb29704763cb5c3c4cad8ad14"
+      },
+      "state": {
+        "captured_at_utc": "2026-11-07T10:07:19.657Z",
+        "elapsed_realtime_ms": 829442,
+        "run_id": "run-sem29-diagnostics-20261107-r2",
+        "action": "diagnose",
+        "event_format": "legacy-room-v1",
+        "cached_version": null,
+        "mode": "PERIODIC",
+        "periodic_work": [
+          {
+            "work_id": "fad638d9-eaf8-4e71-9f39-9c4776db2023",
+            "state": "CANCELLED",
+            "run_attempt_count": 1
+          }
+        ]
+      },
+      "assertions": [
+        "TWO_REGISTRATIONS_SAME_ACTIVE_ID",
+        "ONE_ACTIVE_UNIQUE_WORK",
+        "ZERO_ACTIVE_AFTER_CANCEL"
+      ]
+    }
+  ],
+  "scheduler_config": {
+    "observed_work_spec": [
+      {
+        "id": "82fe495d-dd51-4dce-96fc-5ed2c7407b66",
+        "state": 0,
+        "interval_duration": 900000,
+        "flex_duration": 900000,
+        "backoff_policy": 0,
+        "backoff_delay_duration": 30000,
+        "initial_delay": 0,
+        "required_network_type": 1,
+        "period_count": 1,
+        "run_attempt_count": 0
+      }
+    ]
+  },
+  "server_tests": {
+    "tests": 9,
+    "passed": 9,
+    "failed": 0
+  },
+  "server_store_scope": "DEDICATED_PRIVATE_SEM29",
+  "apk_installation_sha256_verified": true
+}

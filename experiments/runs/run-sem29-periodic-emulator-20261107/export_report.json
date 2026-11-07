@@ -1,0 +1,33 @@
+{
+  "exporter": "SEM-29 raw Room snapshot via PeriodicPilotControl",
+  "data_kind": "OBSERVED",
+  "android_format": "legacy-room-v1",
+  "server_format": "2.0.0",
+  "canonical_v2_compatible": false,
+  "canonical_v2_error": "EVENT_FIELDS_MISSING",
+  "android_raw_sha256": "4f63e5e806d35d0f69914194a882fcfd70e25566512661a068d85bea93b71576",
+  "server_export_sha256": "51825d96cd2bc1e44aa7dd175be5a7a055c763a31e9a27718512bc8356ffff5e",
+  "android_rows": 7,
+  "server_rows": 1,
+  "app_apk": {
+    "sha256": "af707162d2747202702be81e8bc15a7d04dabef93974e06b7d735b9c0d4d88a0",
+    "bytes": 14993783
+  },
+  "instrumentation_apk": {
+    "sha256": "f7e805248396e93e0df2e255a9d7288dc3d4cf37e19df12806bf29b080893e09",
+    "bytes": 1107432
+  },
+  "harness_source": {
+    "sha256": "0e2a901910dab68f04abedecde0667f1dce2b3f54fa5dc1c4354dd414730f839",
+    "bytes": 5395
+  },
+  "observer_source": {
+    "sha256": "1e707cb695b8c0d6c415a2aa3f71c60fdda1bc8c7c1e8dccf6a3bcde9aa2a2e2",
+    "bytes": 5663
+  },
+  "installed_apk_matches": true,
+  "instrumentation_during_window": false,
+  "ordering": "ROOM_OCCURRED_AT_EPOCH_MILLIS_THEN_EVENT_ID",
+  "raw_event_values_preserved": true,
+  "privacy_review": "Exact run ID is a date label; actual mapped device serial remains denied"
+}
