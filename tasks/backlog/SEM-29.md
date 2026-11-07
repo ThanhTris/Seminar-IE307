@@ -47,9 +47,17 @@ Status nguồn được đối chiếu Project lúc **2026-11-06 12:37:05 UTC**;
 
 ## Tiêu chí hoàn thành
 
-- [ ] Không force-run để bù lần chạy và không gọi pilot là tập chính.
-- [ ] Hoàn tất sau khi có hướng dẫn chẩn đoán SEM-31 và ghi commit/config thật.
+- [x] Không force-run để bù lần chạy và không gọi pilot là tập chính.
+- [x] Hoàn tất sau khi có hướng dẫn chẩn đoán SEM-31 và ghi commit/config thật.
 - [ ] Đầu ra và CHECKS có thật, link đọc được; chưa chạy phải ghi Not run, không tự chuyển Done từ kế hoạch.
+
+## Thực hiện ngày 07/11/2026
+
+- [CHECKS](../../docs/evidence/SEM-29/CHECKS.md), [tái lập](../../docs/evidence/SEM-29/REPRODUCE.md), [preflight](../../docs/evidence/SEM-29/PREFLIGHT.json), [OS/cleanup](../../docs/evidence/SEM-29/OS_CHECKS.json).
+- [Lượt đầu](../../experiments/runs/run-sem29-periodic-emulator-20261107/manifest.json) ABORTED vì lỗi quyền mạng Android 17, giữ log và lỗi thật.
+- [Pilot emulator r2](../../experiments/runs/run-sem29-periodic-emulator-20261107-r2/manifest.json) đủ 90 phút, 5 chu kỳ periodic mới và 1 recovery setup riêng, cache nhận version 3 ở background, cleanup đạt.
+- Bổ sung quyền mạng qua entrypoint app và harness androidTest để nhận/snapshot/hủy scheduler đã bàn giao.
+- Android log còn `legacy-room-v1`, producer canonical v2 chưa bàn giao. OPPO chưa chạy. Checklist này ghi tiến độ trên nhánh, Status Project tiếp tục được quản lý riêng.
 
 ## Task được mở khóa
 

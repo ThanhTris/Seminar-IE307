@@ -1,0 +1,16 @@
+{
+  "captured_at_utc": "2026-11-07T10:07:21.213Z",
+  "elapsed_realtime_ms": 830998,
+  "run_id": "run-sem29-periodic-emulator-20261107-r2",
+  "action": "register",
+  "event_format": "legacy-room-v1",
+  "cached_version": null,
+  "mode": "PERIODIC",
+  "periodic_work": [
+    {
+      "work_id": "82fe495d-dd51-4dce-96fc-5ed2c7407b66",
+      "state": "RUNNING",
+      "run_attempt_count": 1
+    }
+  ]
+}

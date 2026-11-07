@@ -1,0 +1,16 @@
+{
+  "captured_at_utc": "2026-11-07T11:38:11.385Z",
+  "elapsed_realtime_ms": 6281170,
+  "run_id": "run-sem29-periodic-emulator-20261107-r2",
+  "action": "cancel",
+  "event_format": "legacy-room-v1",
+  "cached_version": "3",
+  "mode": "PERIODIC",
+  "periodic_work": [
+    {
+      "work_id": "82fe495d-dd51-4dce-96fc-5ed2c7407b66",
+      "state": "CANCELLED",
+      "run_attempt_count": 0
+    }
+  ]
+}
