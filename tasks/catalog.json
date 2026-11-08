@@ -908,7 +908,7 @@
       "category": "practice",
       "title": "Chạy pilot periodic E01 trên hai thiết bị",
       "due": "2026-11-02",
-      "status": "Todo",
+      "status": "Done",
       "start_dependencies": [
         "SEM-16",
         "SEM-24",
@@ -1096,7 +1096,7 @@
       "category": "practice",
       "title": "Triển khai callback FCM và enqueue sync",
       "due": "2026-11-02",
-      "status": "Todo",
+      "status": "In Progress",
       "start_dependencies": [
         "SEM-15",
         "SEM-25",
@@ -1201,7 +1201,7 @@
             "android/ (messaging callback và enqueue adapter)"
           ],
           "checks": "docs/evidence/SEM-32/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "In Progress"
         }
       ],
       "due_at": "2026-11-03T14:00:00+07:00"
@@ -1271,7 +1271,7 @@
             "android/ (messaging callback và enqueue adapter)"
           ],
           "checks": "docs/evidence/SEM-32/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "In Progress"
         },
         {
           "source_task": "SEM-35",
@@ -1410,7 +1410,7 @@
             "experiments/runs/<periodic-pilot-run>/events.jsonl"
           ],
           "checks": "docs/evidence/SEM-29/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Done"
         },
         {
           "source_task": "SEM-30",
@@ -1430,7 +1430,7 @@
             "android/ (messaging callback và enqueue adapter)"
           ],
           "checks": "docs/evidence/SEM-32/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "In Progress"
         },
         {
           "source_task": "SEM-34",
@@ -1632,7 +1632,7 @@
             "android/ (messaging callback và enqueue adapter)"
           ],
           "checks": "docs/evidence/SEM-32/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "In Progress"
         },
         {
           "source_task": "SEM-33",
@@ -2911,7 +2911,7 @@
       "due_at": "2026-11-12T22:00:00+07:00"
     }
   ],
-  "snapshot_at": "2026-11-06 12:37:05 UTC",
+  "snapshot_at": "2026-11-08 15:21:59 UTC",
   "snapshot_source": "https://github.com/users/ThanhTris/projects/3/views/1",
   "timezone": "Asia/Ho_Chi_Minh",
   "deadline_at": "2026-11-13T22:00:00+07:00",

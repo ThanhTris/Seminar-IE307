@@ -20,7 +20,7 @@ SEM-01…SEM-10 chỉ còn là nhóm lịch sử với link tới task thay th�
 <!-- input-snapshot:start -->
 ## Trạng thái đối chiếu Project
 
-Snapshot **2026-11-06 12:37:05 UTC**. Status là tiến độ thực hiện; Input status là khả năng bắt đầu theo dependency: **Sẵn sàng 24**, **Chuẩn bị trước 7**, **Chờ đầu vào 14**.
+Snapshot **2026-11-08 15:21:59 UTC**. Status là tiến độ thực hiện; Input status là khả năng bắt đầu theo dependency: **Sẵn sàng 24**, **Chuẩn bị trước 7**, **Chờ đầu vào 14**.
 
 - Sẵn sàng: không có task dependency chưa Done; vẫn cần kiểm artifact/CHECKS khi nhận bàn giao.
 - Chuẩn bị trước: được làm phần độc lập nhưng còn gate hoàn tất chưa bàn giao.
@@ -49,10 +49,10 @@ Project là nguồn Status hiện hành. Sau khi đổi Status nguồn, chạy `
 | [SEM-26](backlog/SEM-26.md) — Chốt hợp đồng API và event schema | Tâm | Done | Sẵn sàng | 30/10/2026 17:00 (UTC+7) | 2 | [SEM-11](backlog/SEM-11.md), [SEM-13](backlog/SEM-13.md), [SEM-14](backlog/SEM-14.md) | Không có. |
 | [SEM-27](backlog/SEM-27.md) — Triển khai server snapshot và CLI cập nhật | Tâm | Done | Sẵn sàng | 31/10/2026 17:00 (UTC+7) | 4 | [SEM-13](backlog/SEM-13.md), [SEM-26](backlog/SEM-26.md) | Không có. |
 | [SEM-28](backlog/SEM-28.md) — Ghép manual sync đầu cuối và chốt hướng dẫn setup | Trí | Done | Sẵn sàng | 31/10/2026 22:00 (UTC+7) | 1 | [SEM-23](backlog/SEM-23.md), [SEM-24](backlog/SEM-24.md), [SEM-25](backlog/SEM-25.md), [SEM-27](backlog/SEM-27.md) | Không có. |
-| [SEM-29](backlog/SEM-29.md) — Chạy pilot periodic E01 trên hai thiết bị | Vinh | Todo | Sẵn sàng | 02/11/2026 22:00 (UTC+7) | 2 | [SEM-16](backlog/SEM-16.md), [SEM-24](backlog/SEM-24.md), [SEM-30](backlog/SEM-30.md) | [SEM-31](backlog/SEM-31.md) |
+| [SEM-29](backlog/SEM-29.md) — Chạy pilot periodic E01 trên hai thiết bị | Vinh | Done | Sẵn sàng | 02/11/2026 22:00 (UTC+7) | 2 | [SEM-16](backlog/SEM-16.md), [SEM-24](backlog/SEM-24.md), [SEM-30](backlog/SEM-30.md) | [SEM-31](backlog/SEM-31.md) |
 | [SEM-30](backlog/SEM-30.md) — Triển khai unique periodic work | Trung | Done | Sẵn sàng | 01/11/2026 18:00 (UTC+7) | 4 | [SEM-17](backlog/SEM-17.md), [SEM-25](backlog/SEM-25.md), [SEM-28](backlog/SEM-28.md) | Không có. |
 | [SEM-31](backlog/SEM-31.md) — Bàn giao chẩn đoán và tài liệu periodic | Trung | Done | Sẵn sàng | 02/11/2026 12:00 (UTC+7) | 3 | [SEM-30](backlog/SEM-30.md) | Không có. |
-| [SEM-32](backlog/SEM-32.md) — Triển khai callback FCM và enqueue sync | Trang | Todo | Sẵn sàng | 02/11/2026 18:00 (UTC+7) | 4 | [SEM-15](backlog/SEM-15.md), [SEM-25](backlog/SEM-25.md), [SEM-28](backlog/SEM-28.md) | Không có. |
+| [SEM-32](backlog/SEM-32.md) — Triển khai callback FCM và enqueue sync | Trang | In Progress | Sẵn sàng | 02/11/2026 18:00 (UTC+7) | 4 | [SEM-15](backlog/SEM-15.md), [SEM-25](backlog/SEM-25.md), [SEM-28](backlog/SEM-28.md) | Không có. |
 | [SEM-33](backlog/SEM-33.md) — Xử lý token refresh và bàn giao PUSH.md | Trang | Todo | Chờ đầu vào | 03/11/2026 14:00 (UTC+7) | 3 | [SEM-13](backlog/SEM-13.md), [SEM-32](backlog/SEM-32.md) | Không có. |
 | [SEM-34](backlog/SEM-34.md) — Chạy pilot push E02 và xác nhận cache nền | Vinh | Todo | Chờ đầu vào | 03/11/2026 22:00 (UTC+7) | 1 | [SEM-16](backlog/SEM-16.md), [SEM-24](backlog/SEM-24.md), [SEM-32](backlog/SEM-32.md), [SEM-35](backlog/SEM-35.md) | [SEM-33](backlog/SEM-33.md) |
 | [SEM-35](backlog/SEM-35.md) — Làm CLI gửi FCM data-only normal priority | Tâm | Needs Update | Sẵn sàng | 01/11/2026 15:00 (UTC+7) | 2 | [SEM-13](backlog/SEM-13.md), [SEM-18](backlog/SEM-18.md), [SEM-27](backlog/SEM-27.md) | Không có. |
