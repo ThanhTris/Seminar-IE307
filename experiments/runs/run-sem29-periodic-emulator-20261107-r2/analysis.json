@@ -1,0 +1,36 @@
+{
+  "run_id": "run-sem29-periodic-emulator-20261107-r2",
+  "event_format": "legacy-room-v1",
+  "window_duration_ms": 5400050,
+  "total_android_events": 15,
+  "setup_events": 2,
+  "post_window_events": 1,
+  "window_event_counts": {
+    "snapshot_applied": 1,
+    "snapshot_unchanged": 5,
+    "work_started": 6
+  },
+  "window_work_started_events": 6,
+  "setup_request_ids": [
+    "req-7ba7866c-aa45-47bf-b70b-1421aaf1805d"
+  ],
+  "new_periodic_cycle_request_ids": [
+    "req-0e40cf40-f8aa-414d-b691-18d651a6cc2e",
+    "req-2360c505-7183-4bfc-b98d-39e6de3a5a03",
+    "req-2b64b985-4250-44b0-95ba-d916817a2a65",
+    "req-af48eabf-6643-4156-a719-af2684334bfe",
+    "req-b030f1a1-3e80-4139-83a5-8d63e58f211b"
+  ],
+  "new_periodic_cycles": 5,
+  "initial_recovery_requests_in_window": [
+    "req-7ba7866c-aa45-47bf-b70b-1421aaf1805d"
+  ],
+  "work_id": "82fe495d-dd51-4dce-96fc-5ed2c7407b66",
+  "target_version": 3,
+  "target_applied_in_window": true,
+  "first_target_applied_android_utc": "2026-11-07T10:08:35.405Z",
+  "pilot_emulator_observation_passed": true,
+  "canonical_v2_handoff_ready": false,
+  "clock_controlled": false,
+  "cleanup_active_periodic_work": 0
+}

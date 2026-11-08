@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Seminar IE307</string>
+    <string name="local_network_permission_required">Cần quyền mạng cục bộ để kết nối máy chủ bản tin. Bạn có thể cấp quyền trong phần Quyền của ứng dụng.</string>
 </resources>
