@@ -8,6 +8,8 @@
 - Công sức: 2/100 — Cơ chế/thực hành.
 - Tách từ nhóm cũ: [SEM-08](SEM-08.md); nhóm cũ chỉ còn lưu lịch sử.
 
+> **Ghi chú tiến độ ngày 08/11/2026: SEM-45 CHƯA HOÀN THÀNH, đang chờ thêm đầu vào từ SEM-41 và SEM-42.** Ba bước công cụ đã thực hiện và kiểm bằng fixture; bước 4 phân tích tập chính chưa chạy, chưa có `experiments/results.csv` đo thật và chưa đủ điều kiện chuyển Done. Nhánh được push để lưu và review phần làm trước.
+
 ## Dependency — bấm mã task để mở yêu cầu
 
 - **Bắt đầu sau:** [SEM-24](SEM-24.md), [SEM-26](SEM-26.md)

@@ -2,7 +2,17 @@
 
 - Người thực hiện: Tuấn (`mtuan2491`), ngày 08/11/2026 (UTC+7).
 - Nhánh: `codex/SEM-45-log-parser`, tạo từ main `d29532ac19a2fba402d2d1c6d25dfb63a306a87a`.
-- Phạm vi hiện tại: hoàn thành phần công cụ bằng fixture; chưa có dữ liệu chính SEM-41/42, chưa nghiệm thu toàn task. Không push hoặc đổi Status Project trong lần làm này.
+- **Trạng thái hiện tại: CHƯA HOÀN THÀNH — đang chờ đầu vào từ SEM-41 và SEM-42.** Chỉ hoàn thành phần công cụ bằng fixture; bước 4 và tập chính Not run, chưa có `experiments/results.csv` đo thật, chưa đủ điều kiện nghiệm thu toàn task hoặc chuyển Done.
+- Cập nhật ngày 08/11/2026 theo yêu cầu của Tuấn: commit ghi chú và push nhánh để lưu/review phần làm trước; giữ nguyên Status Project.
+
+## Đầu vào đang chờ để tiếp tục bước 4
+
+| Task cung cấp | Người bàn giao | Đầu vào cần nhận |
+|---|---|---|
+| [SEM-41](../../../tasks/backlog/SEM-41.md) | Vinh | Manifest, events JSONL canonical v2 và CHECKS của tập chính emulator E01–E06; provenance candidate/build/config, cửa sổ và clock/evidence tương ứng |
+| [SEM-42](../../../tasks/backlog/SEM-42.md) | Trí | Manifest, events JSONL canonical v2 và CHECKS đối chiếu OPPO E01/E02; phần không thực hiện phải ghi NOT_RUN và lý do có căn cứ |
+
+Sau khi nhận và kiểm đúng đầu vào, tiếp tục phân tích tập chính, đối chiếu phase/evidence, sinh CSV thật và cập nhật CHECKS trước bàn giao. Test fixture đạt hoặc việc push nhánh không đồng nghĩa SEM-45 đã hoàn thành.
 
 ## Bốn bước và điều kiện thực hiện
 
@@ -10,7 +20,7 @@
 |---|---|---|
 | 1. Nhận contract, đọc và kiểm dữ liệu | Loader JSONL/manifest canonical; test routing, duplicate, version, phân loại dataset | **Hoàn tất — `85aab1c`** |
 | 2. Tính chỉ số và kiểm trường hợp biên | Correlation, cửa sổ/timeout/late, clock, counts; test bằng fixture | **Hoàn tất — `f7c1958`** |
-| 3. Xuất CSV và hướng dẫn bàn giao | CLI tái lập, nhóm thống kê, provenance/hash, [hướng dẫn](../../../experiments/ANALYSIS.md) và kiểm tích hợp | **Hoàn tất phần công cụ — commit bước 3** |
+| 3. Xuất CSV và hướng dẫn bàn giao | CLI tái lập, nhóm thống kê, provenance/hash, [hướng dẫn](../../../experiments/ANALYSIS.md) và kiểm tích hợp | **Hoàn tất phần công cụ — `eba13fe`** |
 | 4. Chạy trên tập chính và chốt SEM-45 | Nhận SEM-41/42 + CHECKS, sinh `experiments/results.csv`, bàn giao SEM-44 kiểm độc lập | **Chờ SEM-41/42; Not run** |
 
 Mỗi bước thực hiện xong có một commit riêng. SHA tra bằng `git log --oneline -- docs/evidence/SEM-45/CHECKS.md`, tránh tự ghi SHA của commit đang tạo.
@@ -63,4 +73,4 @@ Lệnh legacy **phải trả exit 2**, không phải failure runtime của pilot
 - Đã có [analyze.py](../../../experiments/scripts/analyze.py), [test_analyze.py](../../../experiments/scripts/tests/test_analyze.py) và ANALYSIS hướng dẫn schema/CLI/cột CSV/quy tắc clock/mẫu số. Không sửa exporter, contract hoặc artifact của owner khác.
 - Summary hiện tính whole-run; phase idle/offline E03/E04 phải đối chiếu milestones và hệ clock từ run thật với SEM-41/42/44, bổ sung mapping/test nếu cần aggregate theo phase. Metadata VALID không chứng minh OS condition hoặc race E05 đã được tạo đúng. E06 thiếu skip đúng target/update có cờ chặn eligible.
 - Bước 4 nhận SEM-41/42 + CHECKS, tự đối chiếu candidate/APK/config, target/window/clock/source/phase trước khi chốt CSV rồi bàn giao SEM-44 kiểm độc lập. SEM-44 là consumer sau SEM-45, không thêm làm gate đầu vào gây vòng phụ thuộc. Không tự đổi outcome để vượt gate hoặc gộp emulator thay OPPO.
-- Bàn giao phần công cụ để SEM-43/44/48/50 biết interface; **chưa mở khóa nghiệm thu toàn SEM-45**. Các task sau vẫn chờ CSV main thực và CHECKS bước 4. Status Project giữ nguyên; chưa push nhánh.
+- Bàn giao phần công cụ để SEM-43/44/48/50 biết interface; **chưa mở khóa nghiệm thu toàn SEM-45**. Các task sau vẫn chờ CSV main thực và CHECKS bước 4. Nhánh được push theo yêu cầu để review phần làm trước, Status Project giữ nguyên.
