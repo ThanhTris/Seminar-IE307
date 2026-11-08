@@ -33,8 +33,8 @@ Nhánh từ chối đã được thao tác qua hộp thoại quyền và tái hi
 | Run đầu | Giữ lỗi và ghi đúng outcome | Quan sát 113100 ms rồi ABORTED vì NETWORK_ERROR, giữ 2 retry cùng request setup | Fail — đã lưu |
 | Pilot r2 | Đủ 90 phút, ít nhất hai chu kỳ mới trong background | Từ 17 giờ 07 phút 30 giây đến 18 giờ 37 phút 30 giây. Android elapsed 5400050 ms, host monotonic 5400013 ms. Có 5 chu kỳ mới và 1 recovery của setup | Pass — emulator |
 | Cleanup | Cancel/drain và giữ baseline | WorkInfo CANCELLED, 4 WorkSpec lưu trữ đều terminal, 0 active. Cache 3, Home resumed, stopped=false, mạng connected, idle ACTIVE. Server riêng đã dừng và gỡ lock | Pass |
-| Producer Android → exporter v2 | Canonical JSONL đủ trường | Row thật bị validator SEM-24 từ chối `EVENT_FIELDS_MISSING` | Blocker |
-| OPPO | Pilot trên thiết bị thứ hai | Vinh chưa có OPPO theo thông tin đã nhận | Not run |
+| Bàn giao log pilot | Raw Room và manifest dùng được cho SEM-36 | `legacy-room-v1` được Trí chấp nhận ngày 08/11. Validator v2 trả `EVENT_FIELDS_MISSING`, producer v2 được bàn giao cho phần tích hợp SEM-36 | Accepted — legacy pilot |
+| OPPO | Thực hiện theo phân công SEM-42 của Trí | Chưa có lượt OPPO trong bộ evidence SEM-29 | Not run — SEM-42 |
 | Android API thấp hơn 37 | Kiểm nhánh quyền được bỏ qua theo guard SDK | Chưa có lượt runtime trên API thấp hơn 37 | Not run |
 
 ## Run và cách đọc dữ liệu
@@ -50,13 +50,17 @@ Lưu toàn bộ event cùng run, gồm setup và cleanup, giữ đúng tên cộ
 
 Run ID thực tế chứa đoạn `emulator-20261107`, được regex serial của SEM-24 đánh dấu. Đây là nhãn ngày trong run ID đã chọn. Đã rà riêng chính xác giá trị run ID, giữ nguyên dữ liệu và kiểm định danh serial thật từ mapping private trên các trường còn lại. Dump OS, DB, mapping và output thô được giữ private.
 
-## Blocker và bàn giao
+## Nghiệm thu và bàn giao cập nhật ngày 08/11/2026
 
-Producer Android còn thiếu mode/origin/device alias/boot/work attempt/network-call ID và cặp fetch events theo schema v2. Việc hoàn thiện thuộc handoff logging SEM-25/36. Raw legacy pilot cùng manifest có thể dùng để kiểm hành vi scheduler và lỗi tích hợp. Các consumer canonical v2 cần producer và lượt đo theo contract đã hoàn thiện.
+Trí đã xác nhận pilot emulator đủ nghiệm thu SEM-29, phần OPPO được chuyển hẳn sang SEM-42 của Trí. Bộ log SQLite raw và manifest pilot được chấp nhận bàn giao SEM-36 của Trung. Phản hồi đề nghị chuyển PR #19 sang Ready for review, sau merge nhóm sẽ cập nhật Project sang Done. [Phản hồi trên PR #19](https://github.com/ThanhTris/Seminar-IE307/pull/19#issuecomment-6721019303)
 
-SEM-29 vẫn còn phần OPPO theo yêu cầu hai thiết bị. SEM-42 hiện giao Trí trên Project. Chưa có evidence OPPO cho pilot này.
+Producer Android còn thiếu mode/origin/device alias/boot/work attempt/network-call ID và cặp fetch events theo schema v2. Trung tiếp nhận dữ liệu pilot để nâng cấp producer trong SEM-36. Giá trị `canonical_v2_handoff_ready=false` trong analysis mô tả khả năng đọc bằng consumer canonical v2. Bộ dữ liệu hiện tại được nghiệm thu theo format `legacy-room-v1` cho handoff pilot.
 
-Phần emulator đã đạt mục tiêu pilot và cleanup. Bàn giao cho SEM-36 gồm log legacy, manifest, lỗi quyền đã sửa và blocker producer v2. Tập chính cần candidate và producer logging hoàn thiện. Task SEM-29 còn phần OPPO và định dạng log canonical trước khi kiểm nhận đầy đủ. Chưa chuyển Project sang Done.
+Phần emulator đã đạt mục tiêu pilot và cleanup. Bàn giao SEM-36 gồm log legacy, manifest, lỗi quyền đã sửa và các trường producer v2 cần bổ sung. Tập chính cần candidate và producer logging hoàn thiện. SEM-29 đã đủ điều kiện nghiệm thu theo phạm vi được xác nhận.
+
+## Giữ nguyên byte JSONL khi checkout
+
+`.gitattributes` pin `*.jsonl text eol=lf` để giữ đúng SHA-256 của log Android và server trên Windows. Đã kiểm checkout với `core.autocrlf=true`, `core.eol=crlf`, đối chiếu từng file JSONL với blob Git và chạy lại audit hai run trong checkout đó.
 
 ## Lệnh kiểm artifact đã chạy
 

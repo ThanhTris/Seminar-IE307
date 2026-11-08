@@ -106,7 +106,9 @@ Mở ứng dụng rồi Home sau cleanup, kiểm package stopped đã được x
 
 ## Định dạng bàn giao
 
-Android hiện có format `legacy-room-v1`. Exporter SEM-24 yêu cầu canonical `2.0.0` với các trường đo bổ sung. File legacy cần manifest khai báo đúng format và CHECKS ghi phần producer còn thiếu. Server v2 xuất JSONL riêng. Bàn giao producer cho SEM-25/36 để hoàn thiện logging trước tập chính và parser v2.
+Android hiện có format `legacy-room-v1`, được Trí chấp nhận cùng manifest làm đầu vào pilot cho SEM-36. Trung tiếp nhận phần nâng cấp producer lên canonical `2.0.0` trước tập chính và parser v2. Server v2 xuất JSONL riêng. Phần OPPO thuộc SEM-42 của Trí. [Phạm vi nghiệm thu ngày 08/11](https://github.com/ThanhTris/Seminar-IE307/pull/19#issuecomment-6721019303)
+
+Repository pin `*.jsonl text eol=lf` trong `.gitattributes`. Giữ các file log ở LF để SHA-256 khớp `export_report.json` khi checkout trên Windows.
 
 Script kiểm pilot đọc dữ liệu đã bàn giao và tái tính riêng setup, retry phục hồi và chu kỳ periodic mới từ request ID cùng elapsed time.
 
