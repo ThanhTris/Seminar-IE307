@@ -2078,7 +2078,7 @@
         "Tái sinh được CSV từ log; fixture không lẫn main, không gán latency timeout bằng 0.",
         "Accepted/received/queue/sync không bị gộp thành một mốc."
       ],
-      "input_status": "Chuẩn bị trước",
+      "input_status": "Sẵn sàng",
       "inputs": [
         {
           "source_task": "SEM-24",
@@ -2155,7 +2155,7 @@
         "Lời dẫn khớp scope/candidate thật, ghi rõ live và playback.",
         "Không thêm tính năng hoặc lời hứa độ trễ chưa được evidence hỗ trợ."
       ],
-      "input_status": "Chuẩn bị trước",
+      "input_status": "Sẵn sàng",
       "inputs": [
         {
           "source_task": "SEM-14",
@@ -2212,7 +2212,7 @@
         "Nội dung demo nằm trong 4 phút và không coi 30 giây là bảo đảm FCM.",
         "Mỗi claim có nguồn/evidence hoặc ghi giả thuyết; chỉ giao file input riêng."
       ],
-      "input_status": "Chuẩn bị trước",
+      "input_status": "Sẵn sàng",
       "inputs": [
         {
           "source_task": "SEM-15",
@@ -2289,7 +2289,7 @@
         "Biểu đồ đúng số liệu main, có n_complete/n_total và không giấu kết quả trái giả thuyết.",
         "Không kết luận pin hoặc mọi Android từ request count/OPPO."
       ],
-      "input_status": "Chuẩn bị trước",
+      "input_status": "Sẵn sàng",
       "inputs": [
         {
           "source_task": "SEM-43",
@@ -2356,7 +2356,7 @@
         "Không đồng nhất skip-push với FCM mất tin hoặc accepted với delivered.",
         "Kiến trúc đúng code/contract đã bàn giao và lập luận paper được dẫn nguồn."
       ],
-      "input_status": "Chuẩn bị trước",
+      "input_status": "Sẵn sàng",
       "inputs": [
         {
           "source_task": "SEM-18",
@@ -2448,7 +2448,7 @@
         "Hai nghiên cứu có vai trò trong lập luận, DOI/metadata khớp và citations truy được.",
         "Số liệu/giới hạn khớp logs/CSV/SUMMARY; phần chưa chạy nêu rõ."
       ],
-      "input_status": "Chuẩn bị trước",
+      "input_status": "Sẵn sàng",
       "inputs": [
         {
           "source_task": "SEM-19",
@@ -2549,7 +2549,7 @@
         "Bộ slide chỉnh sửa được và PDF đọc được; không tăng tổng thời lượng vì chuyển người.",
         "Bản cuối chỉ dùng input/evidence đã bàn giao; không ghi đã có kết quả khi chưa có."
       ],
-      "input_status": "Chuẩn bị trước",
+      "input_status": "Sẵn sàng",
       "inputs": [
         {
           "source_task": "SEM-46",
@@ -2911,7 +2911,7 @@
       "due_at": "2026-11-12T22:00:00+07:00"
     }
   ],
-  "snapshot_at": "2026-11-08 15:37:44 UTC",
+  "snapshot_at": "2026-11-08 16:09:01 UTC",
   "snapshot_source": "https://github.com/users/ThanhTris/projects/3/views/1",
   "timezone": "Asia/Ho_Chi_Minh",
   "deadline_at": "2026-11-13T22:00:00+07:00",

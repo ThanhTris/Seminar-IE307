@@ -126,8 +126,6 @@ def input_status(task, statuses):
         return 'Đã hoàn thành'
     if any(statuses[d] != 'Done' for d in task['start_dependencies']):
         return 'Chờ đầu vào'
-    if any(statuses[d] != 'Done' for d in task['finish_dependencies']):
-        return 'Chuẩn bị trước'
     return 'Sẵn sàng'
 
 
@@ -203,12 +201,11 @@ def update_docs(catalog, by, statuses, stamp):
     body += f'''<!-- input-snapshot:start -->
 ## Trạng thái đối chiếu Project
 
-Snapshot **{stamp}**. Status là tiến độ thực hiện; Input status là khả năng bắt đầu theo dependency: **Đã hoàn thành {counts['Đã hoàn thành']}**, **Sẵn sàng {counts['Sẵn sàng']}**, **Chuẩn bị trước {counts['Chuẩn bị trước']}**, **Chờ đầu vào {counts['Chờ đầu vào']}**.
+Snapshot **{stamp}**. Status là tiến độ thực hiện; Input status là khả năng bắt đầu theo dependency: **Đã hoàn thành {counts['Đã hoàn thành']}**, **Sẵn sàng {counts['Sẵn sàng']}**, **Chờ đầu vào {counts['Chờ đầu vào']}**.
 
 - Đã hoàn thành: task đã hoàn tất và nghiệm thu; đầu ra đã sẵn sàng cho task sau.
-- Sẵn sàng: không có task dependency chưa Done; vẫn cần kiểm artifact/CHECKS khi nhận bàn giao.
-- Chuẩn bị trước: được làm phần độc lập nhưng còn gate hoàn tất chưa bàn giao.
-- Chờ đầu vào: còn gate bắt đầu chưa bàn giao.
+- Sẵn sàng: không còn task tiên quyết nào ở gate bắt đầu; có thể bắt tay thực hiện ngay.
+- Chờ đầu vào: còn gate bắt đầu chưa bàn giao; cần chờ task tiên quyết hoàn tất.
 
 Project là nguồn Status hiện hành. Sau khi đổi Status nguồn, chạy `python scripts/update_task_snapshot.py --apply` để đồng bộ Input status và tài liệu; `--check` chỉ kiểm độ khớp. Script giữ nguyên Status/Assignees/Owner/Deadline và không tạo thẻ.
 <!-- input-snapshot:end -->
@@ -353,7 +350,7 @@ def main():
         block = f'''<!-- input-snapshot:start -->
 ## Trạng thái đầu vào
 
-Đối chiếu **{stamp}**: Đã hoàn thành **{counts['Đã hoàn thành']}**, Sẵn sàng **{counts['Sẵn sàng']}**, Chuẩn bị trước **{counts['Chuẩn bị trước']}**, Chờ đầu vào **{counts['Chờ đầu vào']}**. Status vẫn là tiến độ thực tế trên Project; Input status chỉ mô tả gate dependency tại lần đồng bộ này.
+Đối chiếu **{stamp}**: Đã hoàn thành **{counts['Đã hoàn thành']}**, Sẵn sàng **{counts['Sẵn sàng']}**, Chờ đầu vào **{counts['Chờ đầu vào']}**. Status vẫn là tiến độ thực tế trên Project; Input status chỉ mô tả gate dependency tại lần đồng bộ này.
 
 Mỗi thẻ có bảng **Đầu vào cần nhận**: task nguồn bấm được, người bàn giao, file/artifact yêu cầu, CHECKS và Status nguồn. Chỉ dùng đầu ra sau khi nhận đúng artifact/version/CHECKS.
 

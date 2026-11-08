@@ -20,12 +20,11 @@ SEM-01…SEM-10 chỉ còn là nhóm lịch sử với link tới task thay th�
 <!-- input-snapshot:start -->
 ## Trạng thái đối chiếu Project
 
-Snapshot **2026-11-08 15:37:44 UTC**. Status là tiến độ thực hiện; Input status là khả năng bắt đầu theo dependency: **Đã hoàn thành 22**, **Sẵn sàng 2**, **Chuẩn bị trước 7**, **Chờ đầu vào 14**.
+Snapshot **2026-11-08 16:09:01 UTC**. Status là tiến độ thực hiện; Input status là khả năng bắt đầu theo dependency: **Đã hoàn thành 22**, **Sẵn sàng 9**, **Chờ đầu vào 14**.
 
 - Đã hoàn thành: task đã hoàn tất và nghiệm thu; đầu ra đã sẵn sàng cho task sau.
-- Sẵn sàng: không có task dependency chưa Done; vẫn cần kiểm artifact/CHECKS khi nhận bàn giao.
-- Chuẩn bị trước: được làm phần độc lập nhưng còn gate hoàn tất chưa bàn giao.
-- Chờ đầu vào: còn gate bắt đầu chưa bàn giao.
+- Sẵn sàng: không còn task tiên quyết nào ở gate bắt đầu; có thể bắt tay thực hiện ngay.
+- Chờ đầu vào: còn gate bắt đầu chưa bàn giao; cần chờ task tiên quyết hoàn tất.
 
 Project là nguồn Status hiện hành. Sau khi đổi Status nguồn, chạy `python scripts/update_task_snapshot.py --apply` để đồng bộ Input status và tài liệu; `--check` chỉ kiểm độ khớp. Script giữ nguyên Status/Assignees/Owner/Deadline và không tạo thẻ.
 <!-- input-snapshot:end -->
@@ -66,13 +65,13 @@ Project là nguồn Status hiện hành. Sau khi đổi Status nguồn, chạy `
 | [SEM-42](backlog/SEM-42.md) — Chạy đối chiếu OPPO E01/E02 và ghi giới hạn OEM | Trí | Todo | Chờ đầu vào | 07/11/2026 15:00 (UTC+7) | 3 | [SEM-12](backlog/SEM-12.md), [SEM-16](backlog/SEM-16.md), [SEM-24](backlog/SEM-24.md), [SEM-37](backlog/SEM-37.md) | Không có. |
 | [SEM-43](backlog/SEM-43.md) — Chốt SUMMARY và bộ evidence thực nghiệm | Vinh | Todo | Chờ đầu vào | 07/11/2026 22:00 (UTC+7) | 1 | [SEM-41](backlog/SEM-41.md), [SEM-42](backlog/SEM-42.md), [SEM-44](backlog/SEM-44.md), [SEM-45](backlog/SEM-45.md) | Không có. |
 | [SEM-44](backlog/SEM-44.md) — Kiểm độc lập trigger và phép tính dữ liệu main | Trang | Todo | Chờ đầu vào | 07/11/2026 19:00 (UTC+7) | 1 | [SEM-41](backlog/SEM-41.md), [SEM-42](backlog/SEM-42.md), [SEM-45](backlog/SEM-45.md) | Không có. |
-| [SEM-45](backlog/SEM-45.md) — Viết parser log và sinh results.csv | Tuấn | Todo | Chuẩn bị trước | 07/11/2026 17:00 (UTC+7) | 2 | [SEM-24](backlog/SEM-24.md), [SEM-26](backlog/SEM-26.md) | [SEM-41](backlog/SEM-41.md), [SEM-42](backlog/SEM-42.md) |
-| [SEM-46](backlog/SEM-46.md) — Viết phần mở bài và bàn giao lời dẫn thao tác demo | Tuấn | Todo | Chuẩn bị trước | 08/11/2026 16:00 (UTC+7) | 1 | Không có. | [SEM-14](backlog/SEM-14.md), [SEM-37](backlog/SEM-37.md) |
-| [SEM-47](backlog/SEM-47.md) — Viết phần silent push và lời dẫn demo 4 phút | Trang | Todo | Chuẩn bị trước | 08/11/2026 16:00 (UTC+7) | 2 | [SEM-15](backlog/SEM-15.md) | [SEM-33](backlog/SEM-33.md), [SEM-34](backlog/SEM-34.md), [SEM-38](backlog/SEM-38.md) |
-| [SEM-48](backlog/SEM-48.md) — Viết nội dung và biểu đồ kết quả cho bài nói | Vinh | Todo | Chuẩn bị trước | 08/11/2026 18:00 (UTC+7) | 1 | Không có. | [SEM-43](backlog/SEM-43.md), [SEM-44](backlog/SEM-44.md), [SEM-45](backlog/SEM-45.md) |
-| [SEM-49](backlog/SEM-49.md) — Viết phần kiến trúc và lập luận nghiên cứu thứ hai | Tâm | Todo | Chuẩn bị trước | 08/11/2026 16:00 (UTC+7) | 1 | [SEM-18](backlog/SEM-18.md) | [SEM-21](backlog/SEM-21.md), [SEM-27](backlog/SEM-27.md), [SEM-35](backlog/SEM-35.md), [SEM-40](backlog/SEM-40.md) |
-| [SEM-50](backlog/SEM-50.md) — Hoàn thiện báo cáo, bibliography và CLAIMS | Tuấn | Todo | Chuẩn bị trước | 09/11/2026 22:00 (UTC+7) | 2 | Không có. | [SEM-19](backlog/SEM-19.md), [SEM-20](backlog/SEM-20.md), [SEM-21](backlog/SEM-21.md), [SEM-22](backlog/SEM-22.md), [SEM-43](backlog/SEM-43.md), [SEM-45](backlog/SEM-45.md) |
-| [SEM-51](backlog/SEM-51.md) — Ghép deck 15 phút, PDF và speaker notes | Tuấn | Todo | Chuẩn bị trước | 10/11/2026 22:00 (UTC+7) | 3 | Không có. | [SEM-46](backlog/SEM-46.md), [SEM-47](backlog/SEM-47.md), [SEM-48](backlog/SEM-48.md), [SEM-49](backlog/SEM-49.md), [SEM-50](backlog/SEM-50.md) |
+| [SEM-45](backlog/SEM-45.md) — Viết parser log và sinh results.csv | Tuấn | Todo | Sẵn sàng | 07/11/2026 17:00 (UTC+7) | 2 | [SEM-24](backlog/SEM-24.md), [SEM-26](backlog/SEM-26.md) | [SEM-41](backlog/SEM-41.md), [SEM-42](backlog/SEM-42.md) |
+| [SEM-46](backlog/SEM-46.md) — Viết phần mở bài và bàn giao lời dẫn thao tác demo | Tuấn | Todo | Sẵn sàng | 08/11/2026 16:00 (UTC+7) | 1 | Không có. | [SEM-14](backlog/SEM-14.md), [SEM-37](backlog/SEM-37.md) |
+| [SEM-47](backlog/SEM-47.md) — Viết phần silent push và lời dẫn demo 4 phút | Trang | Todo | Sẵn sàng | 08/11/2026 16:00 (UTC+7) | 2 | [SEM-15](backlog/SEM-15.md) | [SEM-33](backlog/SEM-33.md), [SEM-34](backlog/SEM-34.md), [SEM-38](backlog/SEM-38.md) |
+| [SEM-48](backlog/SEM-48.md) — Viết nội dung và biểu đồ kết quả cho bài nói | Vinh | Todo | Sẵn sàng | 08/11/2026 18:00 (UTC+7) | 1 | Không có. | [SEM-43](backlog/SEM-43.md), [SEM-44](backlog/SEM-44.md), [SEM-45](backlog/SEM-45.md) |
+| [SEM-49](backlog/SEM-49.md) — Viết phần kiến trúc và lập luận nghiên cứu thứ hai | Tâm | Todo | Sẵn sàng | 08/11/2026 16:00 (UTC+7) | 1 | [SEM-18](backlog/SEM-18.md) | [SEM-21](backlog/SEM-21.md), [SEM-27](backlog/SEM-27.md), [SEM-35](backlog/SEM-35.md), [SEM-40](backlog/SEM-40.md) |
+| [SEM-50](backlog/SEM-50.md) — Hoàn thiện báo cáo, bibliography và CLAIMS | Tuấn | Todo | Sẵn sàng | 09/11/2026 22:00 (UTC+7) | 2 | Không có. | [SEM-19](backlog/SEM-19.md), [SEM-20](backlog/SEM-20.md), [SEM-21](backlog/SEM-21.md), [SEM-22](backlog/SEM-22.md), [SEM-43](backlog/SEM-43.md), [SEM-45](backlog/SEM-45.md) |
+| [SEM-51](backlog/SEM-51.md) — Ghép deck 15 phút, PDF và speaker notes | Tuấn | Todo | Sẵn sàng | 10/11/2026 22:00 (UTC+7) | 3 | Không có. | [SEM-46](backlog/SEM-46.md), [SEM-47](backlog/SEM-47.md), [SEM-48](backlog/SEM-48.md), [SEM-49](backlog/SEM-49.md), [SEM-50](backlog/SEM-50.md) |
 | [SEM-52](backlog/SEM-52.md) — Build APK bàn giao và viết DEMO_RUNBOOK | Trung | Todo | Chờ đầu vào | 11/11/2026 22:00 (UTC+7) | 1 | [SEM-37](backlog/SEM-37.md) | [SEM-43](backlog/SEM-43.md), [SEM-50](backlog/SEM-50.md), [SEM-51](backlog/SEM-51.md) |
 | [SEM-53](backlog/SEM-53.md) — Tái lập runbook và quay video dự phòng | Trí | Todo | Chờ đầu vào | 12/11/2026 15:00 (UTC+7) | 2 | [SEM-52](backlog/SEM-52.md) | Không có. |
 | [SEM-54](backlog/SEM-54.md) — Điều phối hai lần diễn tập và ghi thời lượng | Tuấn | Todo | Chờ đầu vào | 12/11/2026 19:00 (UTC+7) | 1 | [SEM-51](backlog/SEM-51.md), [SEM-52](backlog/SEM-52.md) | [SEM-53](backlog/SEM-53.md) |
