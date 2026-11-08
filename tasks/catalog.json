@@ -36,7 +36,7 @@
         "Lệnh kiểm công cụ có version và kết quả thực; không suy cấu hình máy từ kế hoạch.",
         "Nêu rõ baseline FCM v1/data-only/normal priority và giới hạn demo."
       ],
-      "input_status": "Sẵn sàng",
+      "input_status": "Đã hoàn thành",
       "inputs": [],
       "due_at": "2026-10-30T12:00:00+07:00"
     },
@@ -64,7 +64,7 @@
         "ADB nhận emulator và OPPO hoặc ghi blocker cụ thể; không tự mặc định phiên bản OS.",
         "Hồ sơ phân biệt mạng tới server với Internet/FCM, không dùng localhost PC làm địa chỉ OPPO."
       ],
-      "input_status": "Sẵn sàng",
+      "input_status": "Đã hoàn thành",
       "inputs": [],
       "due_at": "2026-10-30T12:00:00+07:00"
     },
@@ -92,7 +92,7 @@
         "Có phiên bản thực và kết quả quyền/kết nối hoặc blocker, không ghi đã gửi thành công nếu chưa gửi.",
         "Chỉ commit cấu hình mẫu; không đưa token/service-account key/google-services.json thật vào repo."
       ],
-      "input_status": "Sẵn sàng",
+      "input_status": "Đã hoàn thành",
       "inputs": [],
       "due_at": "2026-10-30T12:00:00+07:00"
     },
@@ -122,7 +122,7 @@
         "Periodic, push và manual cùng dùng một sync core; UI mở lại chỉ đọc cache.",
         "Có hình luồng và bảng input/output đủ để API, app và worker triển khai độc lập."
       ],
-      "input_status": "Sẵn sàng",
+      "input_status": "Đã hoàn thành",
       "inputs": [
         {
           "source_task": "SEM-11",
@@ -162,7 +162,7 @@
         "Có thể giải thích vì sao data-only không đồng nghĩa một thông báo bị tắt tiếng.",
         "Chỉ ra trường hợp trì hoãn/không nhận và không hứa push tức thì."
       ],
-      "input_status": "Sẵn sàng",
+      "input_status": "Đã hoàn thành",
       "inputs": [],
       "due_at": "2026-10-30T18:00:00+07:00"
     },
@@ -191,7 +191,7 @@
         "Giữ nguyên số lượt và cửa sổ cốt lõi E01–E06; dự trù ít nhất 10–12 giờ quan sát.",
         "Màn hình tắt không tự được gọi Doze; force-stop có mốc người dùng mở lại và cleanup."
       ],
-      "input_status": "Sẵn sàng",
+      "input_status": "Đã hoàn thành",
       "inputs": [],
       "due_at": "2026-10-30T18:00:00+07:00"
     },
@@ -219,7 +219,7 @@
         "Không coi chu kỳ cấu hình là cam kết chạy đúng từng mốc.",
         "Phân biệt periodic tự nhiên với force-run/test driver chỉ dùng debug."
       ],
-      "input_status": "Sẵn sàng",
+      "input_status": "Đã hoàn thành",
       "inputs": [],
       "due_at": "2026-10-30T18:00:00+07:00"
     },
@@ -247,7 +247,7 @@
         "Tách accepted, received, work_started và snapshot_applied thành các sự kiện riêng.",
         "Không bịa message_id khi API chưa trả và không quy accepted thành delivered."
       ],
-      "input_status": "Sẵn sàng",
+      "input_status": "Đã hoàn thành",
       "inputs": [],
       "due_at": "2026-10-30T18:00:00+07:00"
     },
@@ -285,7 +285,7 @@
         "Các phần tham chiếu đúng đầu ra riêng của SEM-14…18, không yêu cầu người khác cùng viết file tổng hợp.",
         "Cơ chế, API và cấu hình môi trường khớp; giải thích được hai luồng không cần đọc code."
       ],
-      "input_status": "Sẵn sàng",
+      "input_status": "Đã hoàn thành",
       "inputs": [
         {
           "source_task": "SEM-11",
@@ -400,7 +400,7 @@
         "Tên/tác giả/DOI khớp nguồn gốc; ít nhất một lập luận gắn được quyết định thử hoặc trade-off.",
         "Không dùng số đo paper làm số đo OPPO; phân biệt nguồn paper và tài liệu API."
       ],
-      "input_status": "Sẵn sàng",
+      "input_status": "Đã hoàn thành",
       "inputs": [
         {
           "source_task": "SEM-11",
@@ -454,7 +454,7 @@
         "Có ghi chú toàn văn, nguồn kiểm chứng và giới hạn áp dụng.",
         "Nếu không có PDF chia sẻ hợp lệ thì metadata/link vẫn đủ; không tải bản không được phép."
       ],
-      "input_status": "Sẵn sàng",
+      "input_status": "Đã hoàn thành",
       "inputs": [
         {
           "source_task": "SEM-11",
@@ -508,7 +508,7 @@
         "Mỗi dòng có nguồn/vị trí/version và giới hạn, không trộn kết quả paper với demo.",
         "Không yêu cầu paper hoàn tất mới bắt đầu đọc tài liệu API; chỉ gate bản đối chiếu cuối."
       ],
-      "input_status": "Sẵn sàng",
+      "input_status": "Đã hoàn thành",
       "inputs": [
         {
           "source_task": "SEM-15",
@@ -572,7 +572,7 @@
         "Build được debug APK; UI trạng thái rỗng và timeline hiển thị rõ trigger.",
         "Không auto-fetch khi mở app; nút manual phải dùng giao diện enqueue của task core khi được bàn giao."
       ],
-      "input_status": "Sẵn sàng",
+      "input_status": "Đã hoàn thành",
       "inputs": [
         {
           "source_task": "SEM-11",
@@ -618,7 +618,7 @@
         "Manifest có commit app/server, APK SHA256, OS/config, phase và outcome.",
         "Script không xuất token/serial/credential vào dữ liệu public, không sửa giá trị đo."
       ],
-      "input_status": "Sẵn sàng",
+      "input_status": "Đã hoàn thành",
       "inputs": [
         {
           "source_task": "SEM-12",
@@ -672,7 +672,7 @@
         "Manual enqueue chạy được worker, cache sống qua mở lại/offline và version không giảm.",
         "Periodic/push gọi cùng worker; UI không tạo engine hoặc auto-fetch riêng."
       ],
-      "input_status": "Sẵn sàng",
+      "input_status": "Đã hoàn thành",
       "inputs": [
         {
           "source_task": "SEM-23",
@@ -728,7 +728,7 @@
         "Snapshot/version/error rõ ràng, event accepted/received/started/applied riêng biệt.",
         "Core và server có thể triển khai theo contract mà không cần chờ code của nhau."
       ],
-      "input_status": "Sẵn sàng",
+      "input_status": "Đã hoàn thành",
       "inputs": [
         {
           "source_task": "SEM-11",
@@ -792,7 +792,7 @@
         "Đọc/update/restart không giảm version, payload và lỗi khớp API.md.",
         "Log đối chiếu được run/request; cấu hình thật giữ local."
       ],
-      "input_status": "Sẵn sàng",
+      "input_status": "Đã hoàn thành",
       "inputs": [
         {
           "source_task": "SEM-13",
@@ -849,7 +849,7 @@
         "Build debug/server chạy; MANUAL có nhãn và UI mở lại không phát sinh GET.",
         "M1 chỉ Pass khi có run thật; thiếu credential/mạng ghi blocker, không tự nghiệm thu từ tài liệu."
       ],
-      "input_status": "Sẵn sàng",
+      "input_status": "Đã hoàn thành",
       "inputs": [
         {
           "source_task": "SEM-23",
@@ -930,7 +930,7 @@
         "Không force-run để bù lần chạy và không gọi pilot là tập chính.",
         "Hoàn tất sau khi có hướng dẫn chẩn đoán SEM-31 và ghi commit/config thật."
       ],
-      "input_status": "Sẵn sàng",
+      "input_status": "Đã hoàn thành",
       "inputs": [
         {
           "source_task": "SEM-16",
@@ -1007,7 +1007,7 @@
         "Đăng ký lặp chỉ có một lịch active; tắt periodic không để lịch cũ tiếp tục gây nhiễu.",
         "Kiểm scheduler logic không được dùng để kết luận thời điểm chạy tự nhiên."
       ],
-      "input_status": "Sẵn sàng",
+      "input_status": "Đã hoàn thành",
       "inputs": [
         {
           "source_task": "SEM-17",
@@ -1072,7 +1072,7 @@
         "Có bằng chứng một lịch active và hành vi constraint/cancel, không chỉ tên hàm.",
         "Tài liệu nêu scheduler không bảo đảm chạy đúng từng mốc, giữ các giới hạn OS."
       ],
-      "input_status": "Sẵn sàng",
+      "input_status": "Đã hoàn thành",
       "inputs": [
         {
           "source_task": "SEM-30",
@@ -1676,7 +1676,7 @@
         "Version không giảm, không ghi trùng, không mất bản mới trong race.",
         "Logic checks có ý nghĩa chạy thật; retry không vô hạn, có lý do dừng."
       ],
-      "input_status": "Sẵn sàng",
+      "input_status": "Đã hoàn thành",
       "inputs": [
         {
           "source_task": "SEM-25",
@@ -2911,7 +2911,7 @@
       "due_at": "2026-11-12T22:00:00+07:00"
     }
   ],
-  "snapshot_at": "2026-11-08 15:21:59 UTC",
+  "snapshot_at": "2026-11-08 15:37:44 UTC",
   "snapshot_source": "https://github.com/users/ThanhTris/projects/3/views/1",
   "timezone": "Asia/Ho_Chi_Minh",
   "deadline_at": "2026-11-13T22:00:00+07:00",
