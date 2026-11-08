@@ -9,7 +9,7 @@
 | Bước | Đầu ra / kiểm chứng | Trạng thái |
 |---|---|---|
 | 1. Nhận contract, đọc và kiểm dữ liệu | Loader JSONL/manifest canonical; test routing, duplicate, version, phân loại dataset | **Hoàn tất — commit bước 1** |
-| 2. Tính chỉ số và kiểm trường hợp biên | Correlation, cửa sổ/timeout/late, clock, counts; test bằng fixture | Đủ đầu vào để làm |
+| 2. Tính chỉ số và kiểm trường hợp biên | Correlation, cửa sổ/timeout/late, clock, counts; test bằng fixture | **Hoàn tất — commit bước 2** |
 | 3. Xuất CSV và hướng dẫn bàn giao | CLI tái lập, nhóm thống kê, provenance/hash, hướng dẫn và kiểm tích hợp | Đủ đầu vào để làm |
 | 4. Chạy trên tập chính và chốt SEM-45 | Nhận SEM-41/42 + CHECKS, sinh `experiments/results.csv`, đối chiếu SEM-44 | **Chờ SEM-41/42; Not run** |
 
@@ -32,5 +32,8 @@ Máy kiểm Windows, Python **3.12.14**, standard library. Python alias của Wi
 | Check | Expected | Actual | Kết quả |
 |---|---|---|---|
 | Loader canonical | Không suy trường thiếu, không trộn route/schema/dataset, giữ giá trị và hash | 8 test đạt: fixture SEM-24 giữ nguyên, legacy bị từ chối, replay dedup, conflict/duplicate key/NaN/blank/future field/type sai bị chặn | Pass — synthetic/offline |
+| Chỉ số / correlation / clock | Không biến accepted/hint thành applied; không đo qua boot hoặc lấy host clock làm Android | Tổng 22 test đạt, gồm 14 test chỉ số: timeout/late, clock sign/uncertainty, ambiguous receipt, retry/GET ID, cycle dùng chung work ID, setup/MANUAL/window ngắn và nhóm phase/build/config/injection | Pass — synthetic/offline |
 
 Lệnh bước 1: `python -B -m unittest discover -s experiments/scripts/tests -p test_analyze.py -v`. Runtime Android/server/FCM/OPPO và tập chính **Not run**.
+
+Duration nội bộ dùng monotonic cùng alias/boot. Latency liên máy chỉ có estimate kèm uncertainty khi có clock ANDROID được khai và kiểm mẫu; thiếu dữ liệu để null. Counts là số event/GET start quan sát được, không phải tổng DB writes hoặc chứng nhận instrumentation đầy đủ. `eligible` sẽ dùng cho lọc thống kê main dựa trên manifest và các mâu thuẫn phát hiện được, không thay nghiệm thu OS/Doze/race của SEM-41/42/44.
