@@ -1,11 +1,16 @@
 #!/usr/bin/env python3
 """SEM-45: offline analysis of canonical SEM-24 exports. Python 3.9+."""
 
+import argparse
+import csv
 import hashlib
+import io
 import json
 from collections import Counter, defaultdict
 from datetime import datetime
 from pathlib import Path
+import statistics
+import sys
 
 import export_logs as contract
 
@@ -67,6 +72,8 @@ def load_run(directory, dataset):
         raise AnalysisError(str(error)) from None
     except (OSError, UnicodeError):
         raise AnalysisError("INPUT_UNREADABLE") from None
+    except (TypeError, KeyError, RecursionError):
+        raise AnalysisError("INPUT_TYPES_INVALID") from None
 
 
 def utc_ms(value):
@@ -97,8 +104,11 @@ def clock_estimate(clock):
             sent, received = utc_ms(sample["client_send_utc"]), utc_ms(sample["client_receive_utc"])
             error = (received - sent) / 2 + sample["resolution_ms"]
             estimate = utc_ms(sample["server_utc"]) - (sent + received) / 2
-            if uncertainty < error or abs(offset - estimate) > uncertainty + error:
+            if uncertainty < error + abs(offset - estimate):
                 return None
+    if max(utc_ms(s["client_receive_utc"]) for s in clock["before_samples"]) > min(
+            utc_ms(s["client_send_utc"]) for s in clock["after_samples"]):
+        return None
     before, after = clock["offset_before_ms"], clock["offset_after_ms"]
     return ((before + after) / 2,
             max(clock["uncertainty_before_ms"], clock["uncertainty_after_ms"]) + abs(after - before) / 2)
@@ -168,6 +178,8 @@ def analyze_run(run):
     expected_mode = {"E01": "PERIODIC", "E02": "PUSH", "E05": "PUSH", "E06": "HYBRID"}.get(m["case_id"])
     if expected_mode and m["mode"] != expected_mode:
         flags.add("CASE_MODE_MISMATCH")
+    if m["case_id"] in {"E03", "E04"} and m["mode"] not in {"PERIODIC", "PUSH"}:
+        flags.add("CASE_MODE_MISMATCH")
     if expected_source and any(e["source"] not in {expected_source, None} and
                                e["event_type"] != "trigger_rejected" for e in inside):
         flags.add("UNEXPECTED_BACKGROUND_SOURCE")
@@ -231,18 +243,45 @@ def analyze_run(run):
         flags.add("OUTCOME_EVIDENCE_CONFLICT")
 
     updated = only([e for e in events if e["event_type"] == "server_updated" and e["data_version"] == target])
-    end_to_end = cross_clock_delta(updated, completion, m["clock"])
+    if m["case_id"] == "E06" and (updated is None or not any(
+            e["event_type"] == "push_send_skipped" and e["data_version"] == target and
+            e["update_id"] == updated["update_id"] for e in events)):
+        flags.add("FAULT_SKIP_EVIDENCE_MISSING")
+    clock, clock_reason = m["clock"], None
+    estimate = clock_estimate(clock)
+    android = [e for e in events if e["origin"] == "ANDROID"]
+    if estimate and android:
+        before_end = max(utc_ms(s["client_receive_utc"]) for s in clock["before_samples"])
+        after_start = min(utc_ms(s["client_send_utc"]) for s in clock["after_samples"])
+        if before_end > min(utc_ms(e["timestamp_utc"]) for e in android) or after_start < max(
+                utc_ms(e["timestamp_utc"]) for e in android):
+            clock_reason = "CLOCK_SAMPLES_DO_NOT_BRACKET_EVENTS"
+        anchors = {}
+        for e in android:
+            if e["boot_session_id"]:
+                value = utc_ms(e["timestamp_utc"]) - e["elapsed_realtime_ms"]
+                anchor = anchors.setdefault(e["boot_session_id"], value)
+                if abs(value - anchor) > 2 * estimate[1]:
+                    clock_reason = "ANDROID_UTC_DISCONTINUITY"
+        if clock_reason:
+            estimate = None
+    if estimate is None:
+        clock_reason = clock_reason or "CLOCK_NOT_USABLE"
+        clock = {"controlled": False}
+    end_to_end = cross_clock_delta(updated, completion, clock)
     receipts = []
     if updated:
         signals = {s for e in events if e["origin"] == "SERVER" and e["source"] == "PUSH" and
                    e["data_version"] == target and e["update_id"] == updated["update_id"] for s in e["signal_ids"]}
         receipts = [e for e in inside if e["event_type"] == "push_received" and
                     set(e["signal_ids"]) & signals]
-    receive_delta = cross_clock_delta(updated, only(receipts), m["clock"])
+    receive_delta = cross_clock_delta(updated, only(receipts), clock)
 
     counts = Counter(e["event_type"] for e in inside if e["source"] != "MANUAL")
     natural_cycles = {e["request_id"] for e in inside if e["event_type"] == "work_started" and
                       e["source"] == "PERIODIC" and e["work_attempt"] == 0}
+    natural_cycles -= {e["request_id"] for e in events if e["event_type"] == "work_started" and
+                       e["source"] == "PERIODIC" and e["work_attempt"] == 0 and location(e) != "window"}
     attempts = {(e["request_id"], e["work_id"], e["work_attempt"]) for e in inside
                 if e["event_type"] == "work_started" and e["source"] != "MANUAL"}
     row = {k: m[k] for k in ("run_id", "data_kind", "run_phase", "case_id", "subscenario", "repetition",
@@ -272,6 +311,101 @@ def analyze_run(run):
     return {"row": row, "event_counts": dict(sorted(Counter(e["event_type"] for e in events).items())),
             "window_event_counts": dict(sorted(counts.items())), "fetches": fetch_details,
             "bucket_counts": {k: len(buckets[k]) for k in ("setup", "window", "late", "unknown", "server")},
-            "duplicates_ignored": run["duplicates"], "clock_estimate": clock_estimate(m["clock"]),
+            "duplicates_ignored": run["duplicates"], "clock_estimate": estimate, "clock_reason": clock_reason,
             "declared_reason_codes": m["reason_codes"], "group_identity": {k: m[k] for k in
                 ("build", "device", "config", "protocol_version", "event_schema_version")}}
+
+
+def summarize(analyses):
+    groups = defaultdict(list)
+    for analysis in analyses:
+        groups[analysis["row"]["group_id"]].append(analysis)
+    result = []
+    for group_id, group in sorted(groups.items()):
+        rows = [a["row"] for a in group]
+        eligible = [r for r in rows if r["eligible"]]
+        complete = [r for r in eligible if r["outcome"] == "SUCCESS" and r["target_applied_in_window"]]
+        metrics = {}
+        for key in ("update_to_applied_ms", "update_to_received_ms", "received_to_enqueue_ms", "queue_ms", "sync_ms"):
+            values = [r[key] for r in complete if r[key] is not None]
+            metrics[key] = {"n_measured": len(values), "n_missing": len(complete) - len(values),
+                            "median": statistics.median(values) if values else None,
+                            "min": min(values) if values else None, "max": max(values) if values else None}
+        result.append({"group_id": group_id, **{k: rows[0][k] for k in
+                       ("data_kind", "run_phase", "case_id", "subscenario", "device_alias", "mode", "intervention")},
+                       **group[0]["group_identity"], "n_input": len(rows), "n_eligible": len(eligible),
+                       "n_excluded": len(rows) - len(eligible), "n_complete": len(complete),
+                       "n_not_run": sum(r["execution_status"] == "NOT_RUN" for r in rows),
+                       "eligible_outcomes": dict(sorted(Counter(r["outcome"] for r in eligible).items())),
+                       "completion_rate": len(complete) / len(eligible) if eligible else None,
+                       "metrics": metrics})
+    return result
+
+
+def csv_text(analyses):
+    output = io.StringIO(newline="")
+    writer = csv.DictWriter(output, fieldnames=list(analyses[0]["row"]), lineterminator="\n")
+    writer.writeheader()
+    for analysis in analyses:
+        writer.writerow({k: str(v).lower() if type(v) is bool else v for k, v in analysis["row"].items()})
+    return output.getvalue()
+
+
+def publish(directories, dataset, output_base, batch_id):
+    require(contract.matches(r"[A-Za-z0-9][A-Za-z0-9._-]{0,63}", batch_id), "BATCH_ID_INVALID")
+    require(bool(directories), "RUN_REQUIRED")
+    analyses, seen = [], set()
+    for directory in directories:
+        run = load_run(directory, dataset)
+        identity = (run["manifest"]["run_id"], run["manifest"]["device_alias"])
+        require(identity not in seen, "DUPLICATE_RUN_INPUT")
+        seen.add(identity)
+        analyses.append(analyze_run(run))
+    analyses.sort(key=lambda a: (a["row"]["run_id"], a["row"]["device_alias"]))
+    summary = {"analysis_version": VERSION, "dataset": dataset, "groups": summarize(analyses)}
+    payloads = {"results.csv": csv_text(analyses),
+                "summary.json": json.dumps(summary, ensure_ascii=True, sort_keys=True, indent=2) + "\n"}
+    report = {"status": "COMPLETED", "analysis_version": VERSION, "dataset": dataset,
+              "batch_id": batch_id, "runtime_experiment_performed": False,
+              "analyzer_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+              "validator_sha256": hashlib.sha256(Path(contract.__file__).read_bytes()).hexdigest(),
+              "outputs_sha256": {name: hashlib.sha256(value.encode("utf-8")).hexdigest()
+                                 for name, value in payloads.items()}, "runs": analyses}
+    payloads["analysis_report.json"] = json.dumps(report, ensure_ascii=True, sort_keys=True, indent=2) + "\n"
+    directory = Path(output_base) / f"{dataset}_analysis" / batch_id
+    # All validation and analysis must succeed before creating an output batch.
+    try:
+        directory.mkdir(parents=True, exist_ok=False)
+    except FileExistsError:
+        raise AnalysisError("OUTPUT_EXISTS") from None
+    except OSError:
+        raise AnalysisError("OUTPUT_UNWRITABLE") from None
+    try:
+        for name, value in payloads.items():
+            # Explicit UTF-8/LF makes CSV, JSON and checksums reproducible on Windows.
+            with (directory / name).open("x", encoding="utf-8", newline="\n") as stream:
+                stream.write(value)
+    except OSError:
+        # A batch without the final COMPLETED report must not be consumed.
+        raise AnalysisError("OUTPUT_WRITE_FAILED") from None
+    return {"status": "COMPLETED", "dataset": dataset, "batch_id": batch_id, "runs": len(analyses)}
+
+
+def main(argv=None):
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--run", type=Path, action="append", required=True,
+                        help="Directory containing canonical manifest.json and events.jsonl; repeat per run")
+    parser.add_argument("--dataset", choices=("fixture", "pilot", "main"), default="main")
+    parser.add_argument("--output-base", type=Path, default=ROOT / "experiments")
+    parser.add_argument("--batch-id", required=True)
+    args = parser.parse_args(argv)
+    try:
+        print(json.dumps(publish(args.run, args.dataset, args.output_base, args.batch_id), sort_keys=True))
+        return 0
+    except AnalysisError as error:
+        print(f"SEM45_ANALYSIS_ERROR:{error}", file=sys.stderr)
+        return 2
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

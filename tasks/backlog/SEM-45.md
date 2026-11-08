@@ -51,6 +51,15 @@ Status nguồn được đối chiếu Project lúc **2026-11-08 15:21:59 UTC**;
 - [ ] Accepted/received/queue/sync không bị gộp thành một mốc.
 - [ ] Đầu ra và CHECKS có thật, link đọc được; chưa chạy phải ghi Not run, không tự chuyển Done từ kế hoạch.
 
+## Các bước thực hiện trên nhánh SEM-45
+
+Nhánh `codex/SEM-45-log-parser`, từ main `d29532a`, ngày 08/11/2026. Tiến độ công cụ không thay Status Project hoặc xác nhận có log tập chính.
+
+1. **Đã xong:** nhận contract và viết loader canonical có kiểm routing/schema/dataset/duplicate — commit `85aab1c`.
+2. **Đã xong:** tính chỉ số theo correlation, cửa sổ, timeout/late và clock — commit `f7c1958`.
+3. **Đã xong phần làm trước:** CLI xuất CSV/summary/report, kiểm tích hợp và [hướng dẫn tái lập](../../experiments/ANALYSIS.md). Commit bước 3 truy trong [CHECKS](../../docs/evidence/SEM-45/CHECKS.md).
+4. **Còn chờ:** nhận log/CHECKS tập chính SEM-41/42, đối chiếu phase/evidence rồi sinh và kiểm `experiments/results.csv` thật; bàn giao SEM-44 kiểm độc lập. Không dùng fixture hoặc legacy pilot thay đầu vào này.
+
 ## Task được mở khóa
 
 - [SEM-43](SEM-43.md) cần đầu ra này để **bắt đầu**.
