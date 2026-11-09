@@ -20,12 +20,12 @@ SEM-01…SEM-10 chỉ còn là nhóm lịch sử với link tới task thay th�
 <!-- input-snapshot:start -->
 ## Trạng thái đối chiếu Project
 
-Snapshot **2026-11-09 07:32:39 UTC**. Status là tiến độ thực hiện; Input status là trạng thái tương ứng theo từng cột:
+Snapshot **2026-11-09 08:05:03 UTC**. Status là tiến độ thực hiện; Input status là trạng thái tương ứng theo từng cột:
 - **Cột Todo:** Sẵn sàng **9**, Chờ đầu vào **11**.
 - **Cột In Progress:** Đang thực hiện **0**.
-- **Cột Review:** Chờ kiểm tra **1**.
+- **Cột Review:** Chờ kiểm tra **0**.
 - **Cột Needs Update:** Cần cập nhật **0**.
-- **Cột Done:** Đã hoàn thành **24**.
+- **Cột Done:** Đã hoàn thành **25**.
 
 - Đã hoàn thành: task đã hoàn tất và nghiệm thu ở cột Done; đầu ra sẵn sàng cho task sau.
 - Đang thực hiện: người được giao đang trực tiếp triển khai task ở cột In Progress.
@@ -68,7 +68,7 @@ Project là nguồn Status hiện hành. Sau khi đổi Status nguồn, chạy `
 | [SEM-37](backlog/SEM-37.md) — Chốt bản ứng viên và manifest phục vụ tập chính | Trung | Todo | Chờ đầu vào | 05/11/2026 22:00 (UTC+7) | 2 | [SEM-31](backlog/SEM-31.md), [SEM-33](backlog/SEM-33.md), [SEM-36](backlog/SEM-36.md), [SEM-38](backlog/SEM-38.md), [SEM-39](backlog/SEM-39.md), [SEM-40](backlog/SEM-40.md) | Không có. |
 | [SEM-38](backlog/SEM-38.md) — Xử lý duplicate và version hint của push | Trang | Todo | Chờ đầu vào | 05/11/2026 12:00 (UTC+7) | 2 | [SEM-32](backlog/SEM-32.md), [SEM-33](backlog/SEM-33.md) | Không có. |
 | [SEM-39](backlog/SEM-39.md) — Củng cố version guard, retry và race trong core | Trung | Done | Đã hoàn thành | 05/11/2026 12:00 (UTC+7) | 2 | [SEM-25](backlog/SEM-25.md), [SEM-30](backlog/SEM-30.md) | Không có. |
-| [SEM-40](backlog/SEM-40.md) — Thêm fault injection cố ý bỏ gửi push | Tâm | Review | Chờ kiểm tra | 04/11/2026 18:00 (UTC+7) | 1 | [SEM-27](backlog/SEM-27.md), [SEM-35](backlog/SEM-35.md) | Không có. |
+| [SEM-40](backlog/SEM-40.md) — Thêm fault injection cố ý bỏ gửi push | Tâm | Done | Đã hoàn thành | 04/11/2026 18:00 (UTC+7) | 1 | [SEM-27](backlog/SEM-27.md), [SEM-35](backlog/SEM-35.md) | Không có. |
 | [SEM-41](backlog/SEM-41.md) — Chạy tập chính E01–E06 trên emulator | Vinh | Todo | Chờ đầu vào | 07/11/2026 13:00 (UTC+7) | 3 | [SEM-16](backlog/SEM-16.md), [SEM-24](backlog/SEM-24.md), [SEM-37](backlog/SEM-37.md) | Không có. |
 | [SEM-42](backlog/SEM-42.md) — Chạy đối chiếu OPPO E01/E02 và ghi giới hạn OEM | Trí | Todo | Chờ đầu vào | 07/11/2026 15:00 (UTC+7) | 3 | [SEM-12](backlog/SEM-12.md), [SEM-16](backlog/SEM-16.md), [SEM-24](backlog/SEM-24.md), [SEM-37](backlog/SEM-37.md) | Không có. |
 | [SEM-43](backlog/SEM-43.md) — Chốt SUMMARY và bộ evidence thực nghiệm | Vinh | Todo | Chờ đầu vào | 07/11/2026 22:00 (UTC+7) | 1 | [SEM-41](backlog/SEM-41.md), [SEM-42](backlog/SEM-42.md), [SEM-44](backlog/SEM-44.md), [SEM-45](backlog/SEM-45.md) | Không có. |
