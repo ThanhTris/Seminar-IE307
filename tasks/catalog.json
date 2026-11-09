@@ -1282,7 +1282,7 @@
             "docs/setup/FCM_SENDER.md"
           ],
           "checks": "docs/evidence/SEM-35/CHECKS.md",
-          "source_status": "Review"
+          "source_status": "Done"
         },
         {
           "source_task": "SEM-33",
@@ -1307,7 +1307,7 @@
       "category": "practice",
       "title": "Làm CLI gửi FCM data-only normal priority",
       "due": "2026-11-01",
-      "status": "Review",
+      "status": "Done",
       "start_dependencies": [
         "SEM-13",
         "SEM-18",
@@ -1327,7 +1327,7 @@
         "CLI gửi có response thật hoặc blocker; ID có thể null nếu API chưa cấp.",
         "Payload không có notification block và không trộn AndroidConfigV2 EAP."
       ],
-      "input_status": "Chờ kiểm tra",
+      "input_status": "Đã hoàn thành",
       "inputs": [
         {
           "source_task": "SEM-13",
@@ -1452,7 +1452,7 @@
             "docs/setup/FCM_SENDER.md"
           ],
           "checks": "docs/evidence/SEM-35/CHECKS.md",
-          "source_status": "Review"
+          "source_status": "Done"
         },
         {
           "source_task": "SEM-38",
@@ -1730,7 +1730,7 @@
         "Update vẫn persist đúng version, log không có accepted cho lần đã skip.",
         "Phân biệt bỏ gửi có kiểm soát với delivery failure thật."
       ],
-      "input_status": "Chờ đầu vào",
+      "input_status": "Sẵn sàng",
       "inputs": [
         {
           "source_task": "SEM-27",
@@ -1752,7 +1752,7 @@
             "docs/setup/FCM_SENDER.md"
           ],
           "checks": "docs/evidence/SEM-35/CHECKS.md",
-          "source_status": "Review"
+          "source_status": "Done"
         }
       ],
       "due_at": "2026-11-04T18:00:00+07:00"
@@ -2399,7 +2399,7 @@
             "docs/setup/FCM_SENDER.md"
           ],
           "checks": "docs/evidence/SEM-35/CHECKS.md",
-          "source_status": "Review"
+          "source_status": "Done"
         },
         {
           "source_task": "SEM-40",
@@ -2911,7 +2911,7 @@
       "due_at": "2026-11-12T22:00:00+07:00"
     }
   ],
-  "snapshot_at": "2026-11-09 06:44:52 UTC",
+  "snapshot_at": "2026-11-09 06:55:48 UTC",
   "snapshot_source": "https://github.com/users/ThanhTris/projects/3/views/1",
   "timezone": "Asia/Ho_Chi_Minh",
   "deadline_at": "2026-11-13T22:00:00+07:00",
