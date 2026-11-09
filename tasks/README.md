@@ -20,11 +20,11 @@ SEM-01…SEM-10 chỉ còn là nhóm lịch sử với link tới task thay th�
 <!-- input-snapshot:start -->
 ## Trạng thái đối chiếu Project
 
-Snapshot **2026-11-09 01:33:07 UTC**. Status là tiến độ thực hiện; Input status là trạng thái tương ứng theo từng cột:
+Snapshot **2026-11-09 06:44:52 UTC**. Status là tiến độ thực hiện; Input status là trạng thái tương ứng theo từng cột:
 - **Cột Todo:** Sẵn sàng **7**, Chờ đầu vào **14**.
 - **Cột In Progress:** Đang thực hiện **0**.
-- **Cột Review:** Chờ kiểm tra **1**.
-- **Cột Needs Update:** Cần cập nhật **1**.
+- **Cột Review:** Chờ kiểm tra **2**.
+- **Cột Needs Update:** Cần cập nhật **0**.
 - **Cột Done:** Đã hoàn thành **22**.
 
 - Đã hoàn thành: task đã hoàn tất và nghiệm thu ở cột Done; đầu ra sẵn sàng cho task sau.
@@ -63,7 +63,7 @@ Project là nguồn Status hiện hành. Sau khi đổi Status nguồn, chạy `
 | [SEM-32](backlog/SEM-32.md) — Triển khai callback FCM và enqueue sync | Trang | Review | Chờ kiểm tra | 02/11/2026 18:00 (UTC+7) | 4 | [SEM-15](backlog/SEM-15.md), [SEM-25](backlog/SEM-25.md), [SEM-28](backlog/SEM-28.md) | Không có. |
 | [SEM-33](backlog/SEM-33.md) — Xử lý token refresh và bàn giao PUSH.md | Trang | Todo | Chờ đầu vào | 03/11/2026 14:00 (UTC+7) | 3 | [SEM-13](backlog/SEM-13.md), [SEM-32](backlog/SEM-32.md) | Không có. |
 | [SEM-34](backlog/SEM-34.md) — Chạy pilot push E02 và xác nhận cache nền | Vinh | Todo | Chờ đầu vào | 03/11/2026 22:00 (UTC+7) | 1 | [SEM-16](backlog/SEM-16.md), [SEM-24](backlog/SEM-24.md), [SEM-32](backlog/SEM-32.md), [SEM-35](backlog/SEM-35.md) | [SEM-33](backlog/SEM-33.md) |
-| [SEM-35](backlog/SEM-35.md) — Làm CLI gửi FCM data-only normal priority | Tâm | Needs Update | Cần cập nhật | 01/11/2026 15:00 (UTC+7) | 2 | [SEM-13](backlog/SEM-13.md), [SEM-18](backlog/SEM-18.md), [SEM-27](backlog/SEM-27.md) | Không có. |
+| [SEM-35](backlog/SEM-35.md) — Làm CLI gửi FCM data-only normal priority | Tâm | Review | Chờ kiểm tra | 01/11/2026 15:00 (UTC+7) | 2 | [SEM-13](backlog/SEM-13.md), [SEM-18](backlog/SEM-18.md), [SEM-27](backlog/SEM-27.md) | Không có. |
 | [SEM-36](backlog/SEM-36.md) — Tích hợp ba mode và pilot hybrid | Trung | Todo | Chờ đầu vào | 05/11/2026 18:00 (UTC+7) | 3 | [SEM-29](backlog/SEM-29.md), [SEM-30](backlog/SEM-30.md), [SEM-32](backlog/SEM-32.md), [SEM-34](backlog/SEM-34.md), [SEM-35](backlog/SEM-35.md) | [SEM-38](backlog/SEM-38.md), [SEM-39](backlog/SEM-39.md), [SEM-40](backlog/SEM-40.md) |
 | [SEM-37](backlog/SEM-37.md) — Chốt bản ứng viên và manifest phục vụ tập chính | Trung | Todo | Chờ đầu vào | 05/11/2026 22:00 (UTC+7) | 2 | [SEM-31](backlog/SEM-31.md), [SEM-33](backlog/SEM-33.md), [SEM-36](backlog/SEM-36.md), [SEM-38](backlog/SEM-38.md), [SEM-39](backlog/SEM-39.md), [SEM-40](backlog/SEM-40.md) | Không có. |
 | [SEM-38](backlog/SEM-38.md) — Xử lý duplicate và version hint của push | Trang | Todo | Chờ đầu vào | 05/11/2026 12:00 (UTC+7) | 2 | [SEM-32](backlog/SEM-32.md), [SEM-33](backlog/SEM-33.md) | Không có. |
