@@ -45,9 +45,17 @@ Status nguồn được đối chiếu Project lúc **2026-11-09 06:55:48 UTC**;
 
 ## Tiêu chí hoàn thành
 
-- [ ] Callback dẫn tới work_enqueued/start/applied theo correlation khi đủ điều kiện.
-- [ ] Không dùng high priority/EAP hoặc engine riêng để che độ trễ.
-- [ ] Đầu ra và CHECKS có thật, link đọc được; chưa chạy phải ghi Not run, không tự chuyển Done từ kế hoạch.
+- [x] Callback dẫn tới work_enqueued/start/applied theo correlation khi đủ điều kiện.
+- [x] Không dùng high priority/EAP hoặc engine riêng để che độ trễ.
+- [x] Đầu ra và CHECKS có thật, link đọc được; chưa chạy phải ghi Not run, không tự chuyển Done từ kế hoạch.
+
+## Đầu ra đã soát ngày 08/11/2026
+
+- `android/app/src/main/java/com/thanhtris/seminarie307/fcm/BulletinFirebaseMessagingService.kt`
+- `android/app/src/main/java/com/thanhtris/seminarie307/fcm/PushSyncEnqueueAdapter.kt`
+- `android/app/src/main/java/com/thanhtris/seminarie307/sync/SyncWorkEnqueuer.kt`
+- `android/app/src/test/java/com/thanhtris/seminarie307/fcm/PushSyncEnqueueAdapterTest.kt`
+- [CHECKS SEM-32](../../docs/evidence/SEM-32/CHECKS.md)
 
 ## Task được mở khóa
 

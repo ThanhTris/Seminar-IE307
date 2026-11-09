@@ -65,7 +65,7 @@ class SyncWorkEnqueuer(
                     occurredAtEpochMillis = now.toEpochMilli(),
                     occurredAtUtc = now.toString(),
                     runId = input.runId,
-                    version = null,
+                    version = input.versionHint,
                     outcome = "enqueued",
                     reason = null,
                     requestId = requestId,
