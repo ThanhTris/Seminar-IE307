@@ -8,6 +8,8 @@
 - Công sức: 2/100 — Nghiên cứu/lập luận.
 - Tách từ nhóm cũ: [SEM-09](SEM-09.md); nhóm cũ chỉ còn lưu lịch sử.
 
+> **WIP — SEM-50 CHƯA HOÀN THÀNH, CHƯA ĐỦ ĐIỀU KIỆN MERGE.** Phần nguồn, CLAIMS và báo cáo độc lập đã soạn để review. Đang chờ SEM-43/45 bàn giao SUMMARY, CSV tập chính và CHECKS để hoàn tất phần kết quả/kết luận.
+
 ## Dependency — bấm mã task để mở yêu cầu
 
 - **Bắt đầu sau:** Không có.
@@ -53,6 +55,12 @@ Status nguồn được đối chiếu Project lúc **2026-11-09 08:05:03 UTC**;
 - [ ] Hai nghiên cứu có vai trò trong lập luận, DOI/metadata khớp và citations truy được.
 - [ ] Số liệu/giới hạn khớp logs/CSV/SUMMARY; phần chưa chạy nêu rõ.
 - [ ] Đầu ra và CHECKS có thật, link đọc được; chưa chạy phải ghi Not run, không tự chuyển Done từ kế hoạch.
+
+## Các bước làm trước ngày 09/11/2026
+
+1. **Đã soạn và commit** bibliography, CLAIMS và đối chiếu nguồn, commit `0f364ce`.
+2. **Đã soạn phần độc lập** của [REPORT](../../report/REPORT.md), gồm cơ chế, hai nghiên cứu, phương pháp, khung kết quả và giới hạn. [CHECKS](../../docs/evidence/SEM-50/CHECKS.md) ghi các phép kiểm.
+3. **Chờ SEM-43/45** để nối kết quả thực với CSV/SUMMARY/evidence, cập nhật CLAIMS và chốt bản bàn giao SEM-51/52/55.
 
 ## Task được mở khóa
 

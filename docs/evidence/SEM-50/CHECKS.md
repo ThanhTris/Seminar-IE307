@@ -8,8 +8,8 @@ Tuấn (`mtuan2491`), ngày 09/11/2026. Nhánh `codex/SEM-50-report-claims` tạ
 
 | Bước | Đầu ra | Trạng thái |
 |---|---|---|
-| 1. Ghép nguồn và lập CLAIMS | references.bib, DOI/metadata/citation keys, ma trận claim và cách tiếp nhận SEM-22 | **Hoàn tất phần nguồn, commit bước 1** |
-| 2. Soạn báo cáo phần độc lập | Bối cảnh, hai nghiên cứu, cơ chế, phương pháp, khung kết quả/giới hạn và kiểm liên kết | Đủ đầu vào để thực hiện |
+| 1. Ghép nguồn và lập CLAIMS | references.bib, DOI/metadata/citation keys, ma trận claim và cách tiếp nhận SEM-22 | **Hoàn tất phần nguồn, `0f364ce`** |
+| 2. Soạn báo cáo phần độc lập | Bối cảnh, hai nghiên cứu, cơ chế, phương pháp, khung kết quả/giới hạn và kiểm liên kết | **Hoàn tất phần dự thảo độc lập, commit bước 2** |
 | 3. Chốt kết quả và báo cáo hoàn tất | Nhận SEM-43/45, nối CSV/SUMMARY/run/build/evidence, kiểm claims và kết luận cuối | **Chờ đầu vào, Not run** |
 
 Mỗi bước thực hiện xong có một commit riêng. `git log --oneline -- docs/evidence/SEM-50/CHECKS.md` cho biết các commit đã ghi nhận.
@@ -37,3 +37,15 @@ Nguồn trực tiếp gồm [EUDL](https://eudl.eu/doi/10.4108/eai.30-6-2017.152
 Artifact bước 1 là [CLAIMS](../../CLAIMS.md) và bibliography. Review claim dùng cùng source và case đã có, các kết quả runtime của SEM-50 hiện **Not run**.
 
 Citation.js core/BibTeX có sẵn ở `.local/sem20-tools` được dùng để parse 6 record, kiểm key duy nhất và đối chiếu đầy đủ hai article record với nguồn sau khi bỏ metadata nội bộ `_graph` của parser. DOI/title/họ tác giả/volume/năm khớp Crossref. Kiểm tĩnh 2 file Markdown đạt 41 link nội bộ và 5 bảng, whitespace hợp lệ. Có 16 claim và 7 quyết định tiếp nhận luận điểm nguồn trong CLAIMS.
+
+## Kiểm và phạm vi bàn giao bước 2
+
+| Check | Expected | Actual | Kết quả |
+|---|---|---|---|
+| Báo cáo / hai nghiên cứu | Hai bài có vai trò trong lập luận, nguồn truy được | REPORT §2 gắn hai paper với câu hỏi/case, §8 ánh xạ bibliography, CLAIMS giữ vị trí mục/trang | Đã review nội dung |
+| Cơ chế / phương pháp | Khớp scope/API/schema/protocol | REPORT §3–4 dùng endpoint/version/correlation theo contract và giữ window/số lượt ở mức thiết kế | Đã review nội dung |
+| Kết quả còn chờ | Có trạng thái và đầu vào cụ thể | REPORT §5 ghi PENDING_INPUT, các ô kết quả CHỜ, §6–7 chờ CSV/SUMMARY để chốt | **Chưa nghiệm thu toàn task** |
+| Run/clock/OEM/race/HYBRID của nhóm | Có evidence runtime bàn giao | Đang chờ SEM-43/45 | **Not run trong SEM-50** |
+| Link / citation / cấu trúc file | Đọc được nguồn và truy đúng bibliography | 4 file Markdown đạt 88 link nội bộ, 14 bảng, fence/whitespace hợp lệ, 6 citation key của REPORT có trong 6 record BibTeX, 16 claim duy nhất | Pass cho kiểm tĩnh |
+
+Báo cáo phần làm trước là [REPORT.md](../../../report/REPORT.md). Phần draft cho SEM-51/52/55 review cấu trúc và interface nguồn. Những task nhận vẫn chờ bản SEM-50 hoàn tất theo gate hiện hành. Các bước tiếp theo gồm nhận CSV/SUMMARY/CHECKS, nối run/group/build/config/phase, xử lý mâu thuẫn, điền kết quả, cập nhật claim và chốt kết luận. Ghi chú WIP ở REPORT, CLAIMS, task và CHECKS giúp nhận biết bản làm trước trên GitHub.
