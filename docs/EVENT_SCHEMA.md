@@ -73,7 +73,7 @@ Mọi quy tắc ở bảng trường chung vẫn áp dụng. `data_version`/`cac
 
 Với đăng ký periodic và work/snapshot event, `source=PERIODIC` chỉ được chạy trong mode PERIODIC/HYBRID; `source=PUSH` chỉ trong PUSH/HYBRID. `push_received`/`trigger_rejected` là ngoại lệ để quan sát và từ chối tín hiệu khi mode không cho phép. Không đồng nhất `server_updated` với `push_send_accepted`, accepted với received, enqueue với started, started với applied. Callback có thể được ghi trước khi server lưu response; không dựa vào thứ tự timestamp giữa hai máy để áp đặt trình tự này.
 
-`reason` tối thiểu: `MODE_DISABLED`, `INVALID_TRIGGER`, `VERSION_STALE`, `INVALID_RESPONSE`, `HTTP_ERROR`, `NETWORK_ERROR`, `TIMEOUT`, `STORE_UNAVAILABLE`, `INVALID_FCM_CONFIG`, `INVALID_PAYLOAD`, `FCM_REJECTED`, `FCM_RESPONSE_UNKNOWN`, `FAULT_INJECTION_SKIP`, `RETRY_EXHAUSTED`, `UNEXPECTED_ERROR`. Các mã là phân loại an toàn, không chép error text. Mã mới phải được ghi trong delta schema; `provider_code` không thay thế `reason`.
+`reason` tối thiểu: `MODE_DISABLED`, `INVALID_TRIGGER`, `VERSION_STALE`, `INVALID_RESPONSE`, `HTTP_ERROR`, `NETWORK_ERROR`, `TIMEOUT`, `STORE_UNAVAILABLE`, `INVALID_FCM_CONFIG`, `INVALID_PAYLOAD`, `FCM_REJECTED`, `FCM_RESPONSE_UNKNOWN`, `FAULT_INJECTION_SKIP`, `RETRY_EXHAUSTED`, `UNEXPECTED_ERROR`, `DUPLICATE_SIGNAL` (delta SEM-38: `trigger_rejected` cho push redelivery cùng `signal_id`/FCM message ID đã enqueue; không enqueue lần hai). Các mã là phân loại an toàn, không chép error text. Mã mới phải được ghi trong delta schema; `provider_code` không thay thế `reason`.
 
 ## Nối run, attempt, FCM và worker
 
