@@ -38,6 +38,8 @@ npm run update -- --update-id update-e01-01 --run run-e01-01 --mode PERIODIC --d
 
 `update_id`, `run`, `mode`, `device`, `title`, `body` là bắt buộc; `--request-id` tùy chọn là correlation header. CLI gửi HTTP tới `SERVER_URL` hoặc `--base-url` nếu truyền; nó không bao giờ ghi store trực tiếp. Sau timeout/lỗi không rõ kết quả, retry **cùng update_id và cùng toàn bộ nội dung**; dùng ID mới có thể tạo thêm update. Response replay giữ version của commit ban đầu, còn GET đọc snapshot hiện tại. Payload sai, ID xung đột hoặc store đầy được trả lỗi theo contract.
 
+Để đánh dấu bỏ gửi push có chủ ý trong E06, dùng `--skip-push` với `--mode HYBRID` và file `--events` riêng. Xem [SEM-40: fault injection](../evidence/SEM-40/FAULT_INJECTION.md) để lấy lệnh, cách retry và thu bằng chứng. POST vẫn chỉ cập nhật snapshot; flag không chặn sender được chạy riêng bởi process khác.
+
 ## Kết nối từ thiết bị
 
 - Emulator trên cùng host: base URL `http://10.0.2.2:3000`, server có thể giữ bind loopback. Chỉ kiểm khi emulator và app có cấu hình debug HTTP phù hợp.

@@ -1,8 +1,8 @@
 # SEM-32 — Triển khai callback FCM và enqueue sync
 
-- Trạng thái: **In Progress** (Project).
-- Trạng thái đầu vào: **Sẵn sàng**.
-- Đối chiếu Project: 2026-11-08 15:21:59 UTC.
+- Trạng thái: **Done** (Project).
+- Trạng thái đầu vào: **Đã hoàn thành**.
+- Đối chiếu Project: 2026-11-09 08:05:03 UTC.
 - Người thực hiện duy nhất: **Trang** (`rosy179`).
 - Hạn: **02/11/2026 18:00 (UTC+7)**.
 - Công sức: 4/100 — Cơ chế/thực hành.
@@ -28,7 +28,7 @@ Tài liệu nền đã có: [Kế hoạch/phạm vi](../../docs/PLAN.md).
 
 Đây là danh sách đầu ra cần bàn giao, chưa phải xác nhận các file đã tồn tại. Trước khi dùng, nhận đúng artifact/commit/config và CHECKS từ task nguồn.
 
-Status nguồn được đối chiếu Project lúc **2026-11-08 15:21:59 UTC**; mở link task nguồn để xem cập nhật mới hơn.
+Status nguồn được đối chiếu Project lúc **2026-11-09 08:05:03 UTC**; mở link task nguồn để xem cập nhật mới hơn.
 <!-- task-inputs:end -->
 
 
@@ -45,9 +45,17 @@ Status nguồn được đối chiếu Project lúc **2026-11-08 15:21:59 UTC**;
 
 ## Tiêu chí hoàn thành
 
-- [ ] Callback dẫn tới work_enqueued/start/applied theo correlation khi đủ điều kiện.
-- [ ] Không dùng high priority/EAP hoặc engine riêng để che độ trễ.
-- [ ] Đầu ra và CHECKS có thật, link đọc được; chưa chạy phải ghi Not run, không tự chuyển Done từ kế hoạch.
+- [x] Callback dẫn tới work_enqueued/start/applied theo correlation khi đủ điều kiện.
+- [x] Không dùng high priority/EAP hoặc engine riêng để che độ trễ.
+- [x] Đầu ra và CHECKS có thật, link đọc được; chưa chạy phải ghi Not run, không tự chuyển Done từ kế hoạch.
+
+## Đầu ra đã soát ngày 08/11/2026
+
+- `android/app/src/main/java/com/thanhtris/seminarie307/fcm/BulletinFirebaseMessagingService.kt`
+- `android/app/src/main/java/com/thanhtris/seminarie307/fcm/PushSyncEnqueueAdapter.kt`
+- `android/app/src/main/java/com/thanhtris/seminarie307/sync/SyncWorkEnqueuer.kt`
+- `android/app/src/test/java/com/thanhtris/seminarie307/fcm/PushSyncEnqueueAdapterTest.kt`
+- [CHECKS SEM-32](../../docs/evidence/SEM-32/CHECKS.md)
 
 ## Task được mở khóa
 
