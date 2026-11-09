@@ -20,12 +20,12 @@ SEM-01…SEM-10 chỉ còn là nhóm lịch sử với link tới task thay th�
 <!-- input-snapshot:start -->
 ## Trạng thái đối chiếu Project
 
-Snapshot **2026-11-09 15:07:47 UTC**. Status là tiến độ thực hiện; Input status là trạng thái tương ứng theo từng cột:
-- **Cột Todo:** Sẵn sàng **5**, Chờ đầu vào **10**.
+Snapshot **2026-11-09 15:47:06 UTC**. Status là tiến độ thực hiện; Input status là trạng thái tương ứng theo từng cột:
+- **Cột Todo:** Sẵn sàng **4**, Chờ đầu vào **10**.
 - **Cột In Progress:** Đang thực hiện **3**.
 - **Cột Review:** Chờ kiểm tra **0**.
 - **Cột Needs Update:** Cần cập nhật **0**.
-- **Cột Done:** Đã hoàn thành **27**.
+- **Cột Done:** Đã hoàn thành **28**.
 
 - Đã hoàn thành: task đã hoàn tất và nghiệm thu ở cột Done; đầu ra sẵn sàng cho task sau.
 - Đang thực hiện: người được giao đang trực tiếp triển khai task ở cột In Progress.
@@ -77,7 +77,7 @@ Project là nguồn Status hiện hành. Sau khi đổi Status nguồn, chạy `
 | [SEM-46](backlog/SEM-46.md) — Viết phần mở bài và bàn giao lời dẫn thao tác demo | Tuấn | In Progress | Đang thực hiện | 08/11/2026 16:00 (UTC+7) | 1 | Không có. | [SEM-14](backlog/SEM-14.md), [SEM-37](backlog/SEM-37.md) |
 | [SEM-47](backlog/SEM-47.md) — Viết phần silent push và lời dẫn demo 4 phút | Trang | Todo | Sẵn sàng | 08/11/2026 16:00 (UTC+7) | 2 | [SEM-15](backlog/SEM-15.md) | [SEM-33](backlog/SEM-33.md), [SEM-34](backlog/SEM-34.md), [SEM-38](backlog/SEM-38.md) |
 | [SEM-48](backlog/SEM-48.md) — Viết nội dung và biểu đồ kết quả cho bài nói | Vinh | Todo | Sẵn sàng | 08/11/2026 18:00 (UTC+7) | 1 | Không có. | [SEM-43](backlog/SEM-43.md), [SEM-44](backlog/SEM-44.md), [SEM-45](backlog/SEM-45.md) |
-| [SEM-49](backlog/SEM-49.md) — Viết phần kiến trúc và lập luận nghiên cứu thứ hai | Tâm | Todo | Sẵn sàng | 08/11/2026 16:00 (UTC+7) | 1 | [SEM-18](backlog/SEM-18.md) | [SEM-21](backlog/SEM-21.md), [SEM-27](backlog/SEM-27.md), [SEM-35](backlog/SEM-35.md), [SEM-40](backlog/SEM-40.md) |
+| [SEM-49](backlog/SEM-49.md) — Viết phần kiến trúc và lập luận nghiên cứu thứ hai | Tâm | Done | Đã hoàn thành | 08/11/2026 16:00 (UTC+7) | 1 | [SEM-18](backlog/SEM-18.md) | [SEM-21](backlog/SEM-21.md), [SEM-27](backlog/SEM-27.md), [SEM-35](backlog/SEM-35.md), [SEM-40](backlog/SEM-40.md) |
 | [SEM-50](backlog/SEM-50.md) — Hoàn thiện báo cáo, bibliography và CLAIMS | Tuấn | In Progress | Đang thực hiện | 09/11/2026 22:00 (UTC+7) | 2 | Không có. | [SEM-19](backlog/SEM-19.md), [SEM-20](backlog/SEM-20.md), [SEM-21](backlog/SEM-21.md), [SEM-22](backlog/SEM-22.md), [SEM-43](backlog/SEM-43.md), [SEM-45](backlog/SEM-45.md) |
 | [SEM-51](backlog/SEM-51.md) — Ghép deck 15 phút, PDF và speaker notes | Tuấn | Todo | Sẵn sàng | 10/11/2026 22:00 (UTC+7) | 3 | Không có. | [SEM-46](backlog/SEM-46.md), [SEM-47](backlog/SEM-47.md), [SEM-48](backlog/SEM-48.md), [SEM-49](backlog/SEM-49.md), [SEM-50](backlog/SEM-50.md) |
 | [SEM-52](backlog/SEM-52.md) — Build APK bàn giao và viết DEMO_RUNBOOK | Trung | Todo | Chờ đầu vào | 11/11/2026 22:00 (UTC+7) | 1 | [SEM-37](backlog/SEM-37.md) | [SEM-43](backlog/SEM-43.md), [SEM-50](backlog/SEM-50.md), [SEM-51](backlog/SEM-51.md) |
