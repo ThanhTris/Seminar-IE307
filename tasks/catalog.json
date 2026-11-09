@@ -1096,7 +1096,7 @@
       "category": "practice",
       "title": "Triển khai callback FCM và enqueue sync",
       "due": "2026-11-02",
-      "status": "Review",
+      "status": "Done",
       "start_dependencies": [
         "SEM-15",
         "SEM-25",
@@ -1115,7 +1115,7 @@
         "Callback dẫn tới work_enqueued/start/applied theo correlation khi đủ điều kiện.",
         "Không dùng high priority/EAP hoặc engine riêng để che độ trễ."
       ],
-      "input_status": "Chờ kiểm tra",
+      "input_status": "Đã hoàn thành",
       "inputs": [
         {
           "source_task": "SEM-15",
@@ -1181,7 +1181,7 @@
         "Có bằng chứng token refresh hoặc blocker được ghi thật, không chỉ token hardcode.",
         "PUSH.md đủ để chạy sender và phân biệt accepted/received/applied."
       ],
-      "input_status": "Chờ đầu vào",
+      "input_status": "Sẵn sàng",
       "inputs": [
         {
           "source_task": "SEM-13",
@@ -1201,7 +1201,7 @@
             "android/ (messaging callback và enqueue adapter)"
           ],
           "checks": "docs/evidence/SEM-32/CHECKS.md",
-          "source_status": "Review"
+          "source_status": "Done"
         }
       ],
       "due_at": "2026-11-03T14:00:00+07:00"
@@ -1238,7 +1238,7 @@
         "Không coi accepted là delivered và không dùng UI auto-refresh để tạo kết quả.",
         "Ghi điều kiện thiết bị/window/timeout thật; bản PUSH/token lifecycle đã được bàn giao."
       ],
-      "input_status": "Chờ đầu vào",
+      "input_status": "Sẵn sàng",
       "inputs": [
         {
           "source_task": "SEM-16",
@@ -1271,7 +1271,7 @@
             "android/ (messaging callback và enqueue adapter)"
           ],
           "checks": "docs/evidence/SEM-32/CHECKS.md",
-          "source_status": "Review"
+          "source_status": "Done"
         },
         {
           "source_task": "SEM-35",
@@ -1430,7 +1430,7 @@
             "android/ (messaging callback và enqueue adapter)"
           ],
           "checks": "docs/evidence/SEM-32/CHECKS.md",
-          "source_status": "Review"
+          "source_status": "Done"
         },
         {
           "source_task": "SEM-34",
@@ -1485,7 +1485,7 @@
             "docs/evidence/SEM-40/FAULT_INJECTION.md"
           ],
           "checks": "docs/evidence/SEM-40/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Review"
         }
       ],
       "due_at": "2026-11-05T18:00:00+07:00"
@@ -1589,7 +1589,7 @@
             "docs/evidence/SEM-40/FAULT_INJECTION.md"
           ],
           "checks": "docs/evidence/SEM-40/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Review"
         }
       ],
       "due_at": "2026-11-05T22:00:00+07:00"
@@ -1632,7 +1632,7 @@
             "android/ (messaging callback và enqueue adapter)"
           ],
           "checks": "docs/evidence/SEM-32/CHECKS.md",
-          "source_status": "Review"
+          "source_status": "Done"
         },
         {
           "source_task": "SEM-33",
@@ -1711,7 +1711,7 @@
       "category": "practice",
       "title": "Thêm fault injection cố ý bỏ gửi push",
       "due": "2026-11-04",
-      "status": "Todo",
+      "status": "Review",
       "start_dependencies": [
         "SEM-27",
         "SEM-35"
@@ -1730,7 +1730,7 @@
         "Update vẫn persist đúng version, log không có accepted cho lần đã skip.",
         "Phân biệt bỏ gửi có kiểm soát với delivery failure thật."
       ],
-      "input_status": "Sẵn sàng",
+      "input_status": "Chờ kiểm tra",
       "inputs": [
         {
           "source_task": "SEM-27",
@@ -2410,7 +2410,7 @@
             "docs/evidence/SEM-40/FAULT_INJECTION.md"
           ],
           "checks": "docs/evidence/SEM-40/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Review"
         }
       ],
       "due_at": "2026-11-08T16:00:00+07:00"
@@ -2911,7 +2911,7 @@
       "due_at": "2026-11-12T22:00:00+07:00"
     }
   ],
-  "snapshot_at": "2026-11-09 06:55:48 UTC",
+  "snapshot_at": "2026-11-09 07:32:39 UTC",
   "snapshot_source": "https://github.com/users/ThanhTris/projects/3/views/1",
   "timezone": "Asia/Ho_Chi_Minh",
   "deadline_at": "2026-11-13T22:00:00+07:00",

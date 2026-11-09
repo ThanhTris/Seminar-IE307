@@ -2,7 +2,7 @@
 
 - Trạng thái: **Todo** (Project).
 - Trạng thái đầu vào: **Sẵn sàng**.
-- Đối chiếu Project: 2026-11-09 06:55:48 UTC.
+- Đối chiếu Project: 2026-11-09 07:32:39 UTC.
 - Người thực hiện duy nhất: **Tâm** (`HoaiTam`).
 - Hạn: **08/11/2026 16:00 (UTC+7)**.
 - Công sức: 1/100 — Nghiên cứu/lập luận.
@@ -26,11 +26,11 @@ Tài liệu nền đã có: [Kế hoạch/phạm vi](../../docs/PLAN.md) · [K�
 | Hoàn tất | [SEM-21 — Đọc bài nghiên cứu thứ hai và ghi chú nguồn](SEM-21.md) | Tâm | `research/notes/PAPER_2.md`<br>`research/metadata/paper-2.bib` | `docs/evidence/SEM-21/CHECKS.md` | Done |
 | Hoàn tất | [SEM-27 — Triển khai server snapshot và CLI cập nhật](SEM-27.md) | Tâm | `server/ (API, snapshot store, update CLI)`<br>`docs/setup/SERVER.md` | `docs/evidence/SEM-27/CHECKS.md` | Done |
 | Hoàn tất | [SEM-35 — Làm CLI gửi FCM data-only normal priority](SEM-35.md) | Tâm | `server/ (FCM sender CLI)`<br>`docs/setup/FCM_SENDER.md` | `docs/evidence/SEM-35/CHECKS.md` | Done |
-| Hoàn tất | [SEM-40 — Thêm fault injection cố ý bỏ gửi push](SEM-40.md) | Tâm | `server/ (skip-push CLI)`<br>`docs/evidence/SEM-40/FAULT_INJECTION.md` | `docs/evidence/SEM-40/CHECKS.md` | Todo |
+| Hoàn tất | [SEM-40 — Thêm fault injection cố ý bỏ gửi push](SEM-40.md) | Tâm | `server/ (skip-push CLI)`<br>`docs/evidence/SEM-40/FAULT_INJECTION.md` | `docs/evidence/SEM-40/CHECKS.md` | Review |
 
 Đây là danh sách đầu ra cần bàn giao, chưa phải xác nhận các file đã tồn tại. Trước khi dùng, nhận đúng artifact/commit/config và CHECKS từ task nguồn.
 
-Status nguồn được đối chiếu Project lúc **2026-11-09 06:55:48 UTC**; mở link task nguồn để xem cập nhật mới hơn.
+Status nguồn được đối chiếu Project lúc **2026-11-09 07:32:39 UTC**; mở link task nguồn để xem cập nhật mới hơn.
 <!-- task-inputs:end -->
 
 

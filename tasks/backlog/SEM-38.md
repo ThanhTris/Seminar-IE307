@@ -2,7 +2,7 @@
 
 - Trạng thái: **Todo** (Project).
 - Trạng thái đầu vào: **Chờ đầu vào**.
-- Đối chiếu Project: 2026-11-09 06:55:48 UTC.
+- Đối chiếu Project: 2026-11-09 07:32:39 UTC.
 - Người thực hiện duy nhất: **Trang** (`rosy179`).
 - Hạn: **05/11/2026 12:00 (UTC+7)**.
 - Công sức: 2/100 — Cơ chế/thực hành.
@@ -22,12 +22,12 @@ Tài liệu nền đã có: [Kế hoạch/phạm vi](../../docs/PLAN.md).
 
 | Cần cho | Task cung cấp | Người bàn giao | Đầu ra phải nhận | Kiểm chứng bàn giao | Status nguồn |
 |---|---|---|---|---|---|
-| Bắt đầu | [SEM-32 — Triển khai callback FCM và enqueue sync](SEM-32.md) | Trang | `android/ (messaging callback và enqueue adapter)` | `docs/evidence/SEM-32/CHECKS.md` | Review |
+| Bắt đầu | [SEM-32 — Triển khai callback FCM và enqueue sync](SEM-32.md) | Trang | `android/ (messaging callback và enqueue adapter)` | `docs/evidence/SEM-32/CHECKS.md` | Done |
 | Bắt đầu | [SEM-33 — Xử lý token refresh và bàn giao PUSH.md](SEM-33.md) | Trang | `android/ (token lifecycle)`<br>`docs/PUSH.md` | `docs/evidence/SEM-33/CHECKS.md` | Todo |
 
 Đây là danh sách đầu ra cần bàn giao, chưa phải xác nhận các file đã tồn tại. Trước khi dùng, nhận đúng artifact/commit/config và CHECKS từ task nguồn.
 
-Status nguồn được đối chiếu Project lúc **2026-11-09 06:55:48 UTC**; mở link task nguồn để xem cập nhật mới hơn.
+Status nguồn được đối chiếu Project lúc **2026-11-09 07:32:39 UTC**; mở link task nguồn để xem cập nhật mới hơn.
 <!-- task-inputs:end -->
 
 
