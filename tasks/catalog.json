@@ -1463,7 +1463,7 @@
             "docs/evidence/SEM-38/PUSH_INPUT_CASES.md"
           ],
           "checks": "docs/evidence/SEM-38/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Done"
         },
         {
           "source_task": "SEM-39",
@@ -1567,7 +1567,7 @@
             "docs/evidence/SEM-38/PUSH_INPUT_CASES.md"
           ],
           "checks": "docs/evidence/SEM-38/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Done"
         },
         {
           "source_task": "SEM-39",
@@ -1603,7 +1603,7 @@
       "category": "practice",
       "title": "Xử lý duplicate và version hint của push",
       "due": "2026-11-05",
-      "status": "Todo",
+      "status": "Done",
       "start_dependencies": [
         "SEM-32",
         "SEM-33"
@@ -1622,7 +1622,7 @@
         "Tín hiệu trùng không gây notification hoặc sync engine riêng; bản mới không bị bỏ qua.",
         "Mỗi ca có input/expected/actual trên đúng revision; lỗi core chuyển đúng task SEM-39."
       ],
-      "input_status": "Sẵn sàng",
+      "input_status": "Đã hoàn thành",
       "inputs": [
         {
           "source_task": "SEM-32",
@@ -2255,7 +2255,7 @@
             "docs/evidence/SEM-38/PUSH_INPUT_CASES.md"
           ],
           "checks": "docs/evidence/SEM-38/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Done"
         }
       ],
       "due_at": "2026-11-08T16:00:00+07:00"
@@ -2911,7 +2911,7 @@
       "due_at": "2026-11-12T22:00:00+07:00"
     }
   ],
-  "snapshot_at": "2026-11-09 13:58:31 UTC",
+  "snapshot_at": "2026-11-09 15:07:47 UTC",
   "snapshot_source": "https://github.com/users/ThanhTris/projects/3/views/1",
   "timezone": "Asia/Ho_Chi_Minh",
   "deadline_at": "2026-11-13T22:00:00+07:00",
