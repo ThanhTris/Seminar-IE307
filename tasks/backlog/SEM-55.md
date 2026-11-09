@@ -2,8 +2,8 @@
 
 - Trạng thái: **Todo** (Project).
 - Trạng thái đầu vào: **Chờ đầu vào**.
-- Đối chiếu Project: 2026-11-05 08:02:58 UTC.
-- Người thực hiện duy nhất: **Trí** (`ThanhTris`).
+- Đối chiếu Project: 2026-11-09 01:33:07 UTC.
+- Người thực hiện duy nhất: **Tuấn** (`mtuan2491`).
 - Hạn: **12/11/2026 22:00 (UTC+7)**.
 - Công sức: 1/100 — Cơ chế/thực hành.
 - Tách từ nhóm cũ: [SEM-10](SEM-10.md); nhóm cũ chỉ còn lưu lịch sử.
@@ -25,17 +25,17 @@ Tài liệu nền đã có: [Kế hoạch/phạm vi](../../docs/PLAN.md) · [K�
 | Bắt đầu | [SEM-43 — Chốt SUMMARY và bộ evidence thực nghiệm](SEM-43.md) | Vinh | `experiments/SUMMARY.md` | `docs/evidence/SEM-43/CHECKS.md` | Todo |
 | Bắt đầu | [SEM-50 — Hoàn thiện báo cáo, bibliography và CLAIMS](SEM-50.md) | Tuấn | `report/REPORT.md`<br>`research/references.bib`<br>`docs/CLAIMS.md` | `docs/evidence/SEM-50/CHECKS.md` | Todo |
 | Bắt đầu | [SEM-51 — Ghép deck 15 phút, PDF và speaker notes](SEM-51.md) | Tuấn | `slides/seminar-ie307.pptx`<br>`slides/seminar-ie307.pdf`<br>`slides/SPEAKER_NOTES.md` | `docs/evidence/SEM-51/CHECKS.md` | Todo |
-| Bắt đầu | [SEM-52 — Build APK bàn giao và viết DEMO_RUNBOOK](SEM-52.md) | Trí | `release/BUILD_MANIFEST.json`<br>`docs/DEMO_RUNBOOK.md`<br>`release/ (APK hoặc liên kết tải)` | `docs/evidence/SEM-52/CHECKS.md` | Todo |
-| Bắt đầu | [SEM-53 — Tái lập runbook và quay video dự phòng](SEM-53.md) | Vinh | `release/VIDEO_MANIFEST.json`<br>`docs/evidence/SEM-53/REPRODUCTION.md`<br>`Video demo/fallback có liên kết tải` | `docs/evidence/SEM-53/CHECKS.md` | Todo |
+| Bắt đầu | [SEM-52 — Build APK bàn giao và viết DEMO_RUNBOOK](SEM-52.md) | Trung | `release/BUILD_MANIFEST.json`<br>`docs/DEMO_RUNBOOK.md`<br>`release/ (APK hoặc liên kết tải)` | `docs/evidence/SEM-52/CHECKS.md` | Todo |
+| Bắt đầu | [SEM-53 — Tái lập runbook và quay video dự phòng](SEM-53.md) | Trí | `release/VIDEO_MANIFEST.json`<br>`docs/evidence/SEM-53/REPRODUCTION.md`<br>`Video demo/fallback có liên kết tải` | `docs/evidence/SEM-53/CHECKS.md` | Todo |
 | Bắt đầu | [SEM-54 — Điều phối hai lần diễn tập và ghi thời lượng](SEM-54.md) | Tuấn | `docs/REHEARSAL.md` | `docs/evidence/SEM-54/CHECKS.md` | Todo |
 
 Đây là danh sách đầu ra cần bàn giao, chưa phải xác nhận các file đã tồn tại. Trước khi dùng, nhận đúng artifact/commit/config và CHECKS từ task nguồn.
 
-Status nguồn được đối chiếu Project lúc **2026-11-05 08:02:58 UTC**; mở link task nguồn để xem cập nhật mới hơn.
+Status nguồn được đối chiếu Project lúc **2026-11-09 01:33:07 UTC**; mở link task nguồn để xem cập nhật mới hơn.
 <!-- task-inputs:end -->
 
 
-## Việc Trí cần làm
+## Việc Tuấn cần làm
 
 1. Ghép chỉ mục APK/server/source/slide/report/video/checks thành manifest cuối.
 2. Rà link tải/checksum/version và danh mục phần còn thiếu, dành 13/11 sửa lỗi cuối.
@@ -59,4 +59,4 @@ Status nguồn được đối chiếu Project lúc **2026-11-05 08:02:58 UTC**;
 
 ## Ranh giới thực hiện
 
-Một task chỉ có Trí thực hiện và cập nhật phần việc này. Người nhận đầu ra làm task riêng được liên kết ở trên; không có đồng thực hiện hay reviewer được gán thêm vào thẻ. Lỗi thuộc đầu ra này trả về task này ở Needs Update. Không sửa phần do task khác sở hữu mà chưa cập nhật ranh giới/bàn giao.
+Một task chỉ có Tuấn thực hiện và cập nhật phần việc này. Người nhận đầu ra làm task riêng được liên kết ở trên; không có đồng thực hiện hay reviewer được gán thêm vào thẻ. Lỗi thuộc đầu ra này trả về task này ở Needs Update. Không sửa phần do task khác sở hữu mà chưa cập nhật ranh giới/bàn giao.

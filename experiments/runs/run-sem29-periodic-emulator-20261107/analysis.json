@@ -1,0 +1,29 @@
+{
+  "run_id": "run-sem29-periodic-emulator-20261107",
+  "event_format": "legacy-room-v1",
+  "window_duration_ms": 113100,
+  "total_android_events": 7,
+  "setup_events": 2,
+  "post_window_events": 1,
+  "window_event_counts": {
+    "sync_retrying": 2,
+    "work_started": 2
+  },
+  "window_work_started_events": 2,
+  "setup_request_ids": [
+    "req-79b6d130-35cf-48b7-8794-f9e9e7eed9cc"
+  ],
+  "new_periodic_cycle_request_ids": [],
+  "new_periodic_cycles": 0,
+  "initial_recovery_requests_in_window": [
+    "req-79b6d130-35cf-48b7-8794-f9e9e7eed9cc"
+  ],
+  "work_id": "67198472-53a5-4f2c-801e-ae354011ce65",
+  "target_version": 2,
+  "target_applied_in_window": false,
+  "first_target_applied_android_utc": null,
+  "pilot_emulator_observation_passed": false,
+  "canonical_v2_handoff_ready": false,
+  "clock_controlled": false,
+  "cleanup_active_periodic_work": 0
+}

@@ -1,8 +1,8 @@
 # SEM-30 — Triển khai unique periodic work
 
 - Trạng thái: **Done** (Project).
-- Trạng thái đầu vào: **Chờ đầu vào**.
-- Đối chiếu Project: 2026-11-05 08:02:58 UTC.
+- Trạng thái đầu vào: **Đã hoàn thành**.
+- Đối chiếu Project: 2026-11-09 01:33:07 UTC.
 - Người thực hiện duy nhất: **Trung** (`TrungNQ2645`).
 - Hạn: **01/11/2026 18:00 (UTC+7)**.
 - Công sức: 4/100 — Cơ chế/thực hành.
@@ -24,11 +24,11 @@ Tài liệu nền đã có: [Kế hoạch/phạm vi](../../docs/PLAN.md).
 |---|---|---|---|---|---|
 | Bắt đầu | [SEM-17 — Giải thích periodic WorkManager và constraints](SEM-17.md) | Trung | `docs/mechanisms/PERIODIC_FETCH.md` | `docs/evidence/SEM-17/CHECKS.md` | Done |
 | Bắt đầu | [SEM-25 — Xây Room, SyncRepository và SyncWorker dùng chung](SEM-25.md) | Trung | `android/ (data và sync core)`<br>`docs/SYNC_CORE_API.md` | `docs/evidence/SEM-25/CHECKS.md` | Done |
-| Bắt đầu | [SEM-28 — Ghép manual sync đầu cuối và chốt hướng dẫn setup](SEM-28.md) | Trí | `docs/SETUP.md`<br>`docs/ENVIRONMENT.md`<br>`docs/evidence/SEM-28/M1.md` | `docs/evidence/SEM-28/CHECKS.md` | In Progress |
+| Bắt đầu | [SEM-28 — Ghép manual sync đầu cuối và chốt hướng dẫn setup](SEM-28.md) | Trí | `docs/SETUP.md`<br>`docs/ENVIRONMENT.md`<br>`docs/evidence/SEM-28/M1.md` | `docs/evidence/SEM-28/CHECKS.md` | Done |
 
 Đây là danh sách đầu ra cần bàn giao, chưa phải xác nhận các file đã tồn tại. Trước khi dùng, nhận đúng artifact/commit/config và CHECKS từ task nguồn.
 
-Status nguồn được đối chiếu Project lúc **2026-11-05 08:02:58 UTC**; mở link task nguồn để xem cập nhật mới hơn.
+Status nguồn được đối chiếu Project lúc **2026-11-09 01:33:07 UTC**; mở link task nguồn để xem cập nhật mới hơn.
 <!-- task-inputs:end -->
 
 

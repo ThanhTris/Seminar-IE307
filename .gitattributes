@@ -1,0 +1,2 @@
+# Preserve the exact bytes used by JSONL evidence SHA-256 checks.
+*.jsonl text eol=lf

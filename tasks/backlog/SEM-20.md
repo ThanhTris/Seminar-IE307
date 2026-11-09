@@ -1,8 +1,8 @@
 # SEM-20 — Đọc bài nghiên cứu thứ nhất và ghi chú nguồn
 
 - Trạng thái: **Done** (Project).
-- Trạng thái đầu vào: **Sẵn sàng**.
-- Đối chiếu Project: 2026-11-05 08:02:58 UTC.
+- Trạng thái đầu vào: **Đã hoàn thành**.
+- Đối chiếu Project: 2026-11-09 01:33:07 UTC.
 - Người thực hiện duy nhất: **Tuấn** (`mtuan2491`).
 - Hạn: **01/11/2026 16:00 (UTC+7)**.
 - Công sức: 5/100 — Nghiên cứu/lập luận.
@@ -27,7 +27,7 @@ Tài liệu nền đã có: [Kế hoạch/phạm vi](../../docs/PLAN.md) · [Ngu
 
 Đây là danh sách đầu ra cần bàn giao, chưa phải xác nhận các file đã tồn tại. Trước khi dùng, nhận đúng artifact/commit/config và CHECKS từ task nguồn.
 
-Status nguồn được đối chiếu Project lúc **2026-11-05 08:02:58 UTC**; mở link task nguồn để xem cập nhật mới hơn.
+Status nguồn được đối chiếu Project lúc **2026-11-09 01:33:07 UTC**; mở link task nguồn để xem cập nhật mới hơn.
 <!-- task-inputs:end -->
 
 
