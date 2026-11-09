@@ -27,3 +27,8 @@ Thao tác kiểm dữ liệu dùng Python đọc artifact có sẵn và validato
 - Tài liệu kỹ thuật cũ như SYNC_CORE_API có nhận xét lịch sử “server v1”; SEM-49 đối chiếu source v2 trên base thay vì lặp lại trạng thái cũ. Không sửa tài liệu do task khác sở hữu.
 - Giữ cả run pilot aborted, không công bố success rate chung, không đo latency xuyên thiết bị khi clock offset chưa được kiểm soát. Khi nhận run mới, người ghép slide phải kiểm đúng commit/config/audit trước khi dùng.
 - Trưởng nhóm review và merge; không tự chuyển Done. Sau bàn giao chỉ sửa theo comment yêu cầu.
+
+## Đồng bộ bàn giao
+
+- Commit nội dung đã kiểm: `0b7bec9`; [PR #24](https://github.com/ThanhTris/Seminar-IE307/pull/24) đã tag `@ThanhTris`, chờ kiểm nhận để ghép SEM-51.
+- Đã chuyển SEM-49 sang Review. `python3 scripts/update_task_snapshot.py --apply` và `--check` exit 0: 45 task, 27 Done, 14 Todo, 3 In Progress, 1 Review; assignee khớp owner, không có chu trình dependency. Snapshot đối chiếu **15:41:01 UTC ngày 09/11/2026**.

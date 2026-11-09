@@ -2334,7 +2334,7 @@
       "category": "research",
       "title": "Viết phần kiến trúc và lập luận nghiên cứu thứ hai",
       "due": "2026-11-08",
-      "status": "Todo",
+      "status": "Review",
       "start_dependencies": [
         "SEM-18"
       ],
@@ -2356,7 +2356,7 @@
         "Không đồng nhất skip-push với FCM mất tin hoặc accepted với delivered.",
         "Kiến trúc đúng code/contract đã bàn giao và lập luận paper được dẫn nguồn."
       ],
-      "input_status": "Sẵn sàng",
+      "input_status": "Chờ kiểm tra",
       "inputs": [
         {
           "source_task": "SEM-18",
@@ -2591,7 +2591,7 @@
             "slides/inputs/TAM.md"
           ],
           "checks": "docs/evidence/SEM-49/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Review"
         },
         {
           "source_task": "SEM-50",
@@ -2911,7 +2911,7 @@
       "due_at": "2026-11-12T22:00:00+07:00"
     }
   ],
-  "snapshot_at": "2026-11-09 15:07:47 UTC",
+  "snapshot_at": "2026-11-09 15:41:01 UTC",
   "snapshot_source": "https://github.com/users/ThanhTris/projects/3/views/1",
   "timezone": "Asia/Ho_Chi_Minh",
   "deadline_at": "2026-11-13T22:00:00+07:00",
