@@ -8,6 +8,8 @@
 - Công sức: 1/100 — Nghiên cứu/lập luận.
 - Tách từ nhóm cũ: [SEM-09](SEM-09.md); nhóm cũ chỉ còn lưu lịch sử.
 
+> **WIP — SEM-46 CHƯA HOÀN THÀNH, CHƯA ĐỦ ĐIỀU KIỆN MERGE.** Tuấn đã soạn phần mở bài và khung thao tác để review. Đang chờ SEM-37 bàn giao candidate/build/config và CHECKS để chốt bước cuối.
+
 ## Dependency — bấm mã task để mở yêu cầu
 
 - **Bắt đầu sau:** Không có.
@@ -47,6 +49,12 @@ Status nguồn được đối chiếu Project lúc **2026-11-09 08:05:03 UTC**;
 - [ ] Lời dẫn khớp scope/candidate thật, ghi rõ live và playback.
 - [ ] Không thêm tính năng hoặc lời hứa độ trễ chưa được evidence hỗ trợ.
 - [ ] Đầu ra và CHECKS có thật, link đọc được; chưa chạy phải ghi Not run, không tự chuyển Done từ kế hoạch.
+
+## Các bước làm trước ngày 09/11/2026
+
+1. **Đã soạn và commit** mở bài, vai nói và mốc cơ chế trong TRI.md, commit `acf341e`.
+2. **Đã soạn phần độc lập** của kịch bản thao tác, live/playback và phiếu chờ candidate. [TRI.md](../../slides/inputs/TRI.md) và [CHECKS](../../docs/evidence/SEM-46/CHECKS.md) ghi kiểm chứng và commit.
+3. **Chờ SEM-37** để gắn candidate thật, kiểm thao tác và hoàn tất input SEM-51.
 
 ## Task được mở khóa
 
