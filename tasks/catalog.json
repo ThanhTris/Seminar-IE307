@@ -1096,7 +1096,7 @@
       "category": "practice",
       "title": "Triển khai callback FCM và enqueue sync",
       "due": "2026-11-02",
-      "status": "In Progress",
+      "status": "Review",
       "start_dependencies": [
         "SEM-15",
         "SEM-25",
@@ -1115,7 +1115,7 @@
         "Callback dẫn tới work_enqueued/start/applied theo correlation khi đủ điều kiện.",
         "Không dùng high priority/EAP hoặc engine riêng để che độ trễ."
       ],
-      "input_status": "Sẵn sàng",
+      "input_status": "Chờ kiểm tra",
       "inputs": [
         {
           "source_task": "SEM-15",
@@ -1201,7 +1201,7 @@
             "android/ (messaging callback và enqueue adapter)"
           ],
           "checks": "docs/evidence/SEM-32/CHECKS.md",
-          "source_status": "In Progress"
+          "source_status": "Review"
         }
       ],
       "due_at": "2026-11-03T14:00:00+07:00"
@@ -1271,7 +1271,7 @@
             "android/ (messaging callback và enqueue adapter)"
           ],
           "checks": "docs/evidence/SEM-32/CHECKS.md",
-          "source_status": "In Progress"
+          "source_status": "Review"
         },
         {
           "source_task": "SEM-35",
@@ -1327,7 +1327,7 @@
         "CLI gửi có response thật hoặc blocker; ID có thể null nếu API chưa cấp.",
         "Payload không có notification block và không trộn AndroidConfigV2 EAP."
       ],
-      "input_status": "Sẵn sàng",
+      "input_status": "Cần cập nhật",
       "inputs": [
         {
           "source_task": "SEM-13",
@@ -1430,7 +1430,7 @@
             "android/ (messaging callback và enqueue adapter)"
           ],
           "checks": "docs/evidence/SEM-32/CHECKS.md",
-          "source_status": "In Progress"
+          "source_status": "Review"
         },
         {
           "source_task": "SEM-34",
@@ -1632,7 +1632,7 @@
             "android/ (messaging callback và enqueue adapter)"
           ],
           "checks": "docs/evidence/SEM-32/CHECKS.md",
-          "source_status": "In Progress"
+          "source_status": "Review"
         },
         {
           "source_task": "SEM-33",
@@ -2911,7 +2911,7 @@
       "due_at": "2026-11-12T22:00:00+07:00"
     }
   ],
-  "snapshot_at": "2026-11-08 16:09:01 UTC",
+  "snapshot_at": "2026-11-09 01:33:07 UTC",
   "snapshot_source": "https://github.com/users/ThanhTris/projects/3/views/1",
   "timezone": "Asia/Ho_Chi_Minh",
   "deadline_at": "2026-11-13T22:00:00+07:00",

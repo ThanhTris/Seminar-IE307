@@ -2,7 +2,7 @@
 
 - Trạng thái: **Todo** (Project).
 - Trạng thái đầu vào: **Chờ đầu vào**.
-- Đối chiếu Project: 2026-11-08 16:09:01 UTC.
+- Đối chiếu Project: 2026-11-09 01:33:07 UTC.
 - Người thực hiện duy nhất: **Trung** (`TrungNQ2645`).
 - Hạn: **05/11/2026 18:00 (UTC+7)**.
 - Công sức: 3/100 — Cơ chế/thực hành.
@@ -24,7 +24,7 @@ Tài liệu nền đã có: [Kế hoạch/phạm vi](../../docs/PLAN.md).
 |---|---|---|---|---|---|
 | Bắt đầu | [SEM-29 — Chạy pilot periodic E01 trên hai thiết bị](SEM-29.md) | Vinh | `experiments/runs/<periodic-pilot-run>/manifest.json`<br>`experiments/runs/<periodic-pilot-run>/events.jsonl` | `docs/evidence/SEM-29/CHECKS.md` | Done |
 | Bắt đầu | [SEM-30 — Triển khai unique periodic work](SEM-30.md) | Trung | `android/ (periodic scheduler)` | `docs/evidence/SEM-30/CHECKS.md` | Done |
-| Bắt đầu | [SEM-32 — Triển khai callback FCM và enqueue sync](SEM-32.md) | Trang | `android/ (messaging callback và enqueue adapter)` | `docs/evidence/SEM-32/CHECKS.md` | In Progress |
+| Bắt đầu | [SEM-32 — Triển khai callback FCM và enqueue sync](SEM-32.md) | Trang | `android/ (messaging callback và enqueue adapter)` | `docs/evidence/SEM-32/CHECKS.md` | Review |
 | Bắt đầu | [SEM-34 — Chạy pilot push E02 và xác nhận cache nền](SEM-34.md) | Vinh | `experiments/runs/<push-pilot-run>/manifest.json`<br>`experiments/runs/<push-pilot-run>/events.jsonl` | `docs/evidence/SEM-34/CHECKS.md` | Todo |
 | Bắt đầu | [SEM-35 — Làm CLI gửi FCM data-only normal priority](SEM-35.md) | Tâm | `server/ (FCM sender CLI)`<br>`docs/setup/FCM_SENDER.md` | `docs/evidence/SEM-35/CHECKS.md` | Needs Update |
 | Hoàn tất | [SEM-38 — Xử lý duplicate và version hint của push](SEM-38.md) | Trang | `android/ (messaging input policy)`<br>`docs/evidence/SEM-38/PUSH_INPUT_CASES.md` | `docs/evidence/SEM-38/CHECKS.md` | Todo |
@@ -33,7 +33,7 @@ Tài liệu nền đã có: [Kế hoạch/phạm vi](../../docs/PLAN.md).
 
 Đây là danh sách đầu ra cần bàn giao, chưa phải xác nhận các file đã tồn tại. Trước khi dùng, nhận đúng artifact/commit/config và CHECKS từ task nguồn.
 
-Status nguồn được đối chiếu Project lúc **2026-11-08 16:09:01 UTC**; mở link task nguồn để xem cập nhật mới hơn.
+Status nguồn được đối chiếu Project lúc **2026-11-09 01:33:07 UTC**; mở link task nguồn để xem cập nhật mới hơn.
 <!-- task-inputs:end -->
 
 

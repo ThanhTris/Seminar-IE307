@@ -21,7 +21,15 @@ BOARD = 'https://github.com/users/ThanhTris/projects/3/views/1'
 REPO = 'https://github.com/ThanhTris/Seminar-IE307/blob/main/'
 INPUT_FIELD = 'Input status'
 DEADLINE_FIELD = 'Deadline (UTC+7)'
-READINESS = ('Sẵn sàng', 'Chuẩn bị trước', 'Chờ đầu vào', 'Đã hoàn thành')
+READINESS_SPECS = (
+    ('Sẵn sàng', 'GREEN', 'Cột Todo: Đủ đầu vào ở gate bắt đầu; có thể bắt tay thực hiện ngay.'),
+    ('Chờ đầu vào', 'ORANGE', 'Cột Todo: Còn task tiên quyết ở gate bắt đầu chưa Done; chờ đầu vào bàn giao.'),
+    ('Đang thực hiện', 'BLUE', 'Cột In Progress: Người được giao đang trực tiếp triển khai task.'),
+    ('Chờ kiểm tra', 'YELLOW', 'Cột Review: Đầu ra đã bàn giao, đang chờ kiểm tra nghiệm thu.'),
+    ('Cần cập nhật', 'RED', 'Cột Needs Update: Owner cần chỉnh sửa theo kết quả kiểm tra.'),
+    ('Đã hoàn thành', 'PURPLE', 'Cột Done: Task đã hoàn tất và nghiệm thu; đầu ra sẵn sàng cho task sau.'),
+)
+READINESS = tuple(name for name, _, _ in READINESS_SPECS)
 
 
 def format_deadline(task):
@@ -121,9 +129,42 @@ def audit(catalog, snapshot):
     return by, lookup
 
 
+def compute_todo_unlocks(tasks, prev_inputs, statuses):
+    unlocked = []
+    for t in tasks:
+        tid = t['id']
+        if statuses.get(tid) == 'Todo':
+            curr_inp = input_status(t, statuses)
+            prev_inp = prev_inputs.get(tid)
+            if prev_inp == 'Chờ đầu vào' and curr_inp == 'Sẵn sàng':
+                done_deps = [d for d in t['start_dependencies'] if statuses.get(d) == 'Done']
+                unlocked.append((t, done_deps))
+    return unlocked
+
+
+def sync_project_field_options(field_id, existing_options):
+    existing_by_name = {o['name']: o for o in existing_options}
+    specs_to_apply = []
+    for name, color, desc in READINESS_SPECS:
+        item = {'name': name, 'color': color, 'description': desc}
+        if name in existing_by_name:
+            item['id'] = existing_by_name[name]['id']
+        specs_to_apply.append(item)
+    res = gql('''mutation($input:UpdateProjectV2FieldInput!){updateProjectV2Field(input:$input){projectV2Field{... on ProjectV2SingleSelectField{options{id name}}}}}''',
+              {'input': {'fieldId': field_id, 'singleSelectOptions': specs_to_apply}})
+    return {o['name']: o['id'] for o in res['updateProjectV2Field']['projectV2Field']['options']}
+
+
 def input_status(task, statuses):
-    if statuses.get(task['id']) == 'Done':
+    st = statuses.get(task['id'])
+    if st == 'Done':
         return 'Đã hoàn thành'
+    if st == 'In Progress':
+        return 'Đang thực hiện'
+    if st == 'Review':
+        return 'Chờ kiểm tra'
+    if st == 'Needs Update':
+        return 'Cần cập nhật'
     if any(statuses[d] != 'Done' for d in task['start_dependencies']):
         return 'Chờ đầu vào'
     return 'Sẵn sàng'
@@ -201,13 +242,21 @@ def update_docs(catalog, by, statuses, stamp):
     body += f'''<!-- input-snapshot:start -->
 ## Trạng thái đối chiếu Project
 
-Snapshot **{stamp}**. Status là tiến độ thực hiện; Input status là khả năng bắt đầu theo dependency: **Đã hoàn thành {counts['Đã hoàn thành']}**, **Sẵn sàng {counts['Sẵn sàng']}**, **Chờ đầu vào {counts['Chờ đầu vào']}**.
+Snapshot **{stamp}**. Status là tiến độ thực hiện; Input status là trạng thái tương ứng theo từng cột:
+- **Cột Todo:** Sẵn sàng **{counts.get('Sẵn sàng', 0)}**, Chờ đầu vào **{counts.get('Chờ đầu vào', 0)}**.
+- **Cột In Progress:** Đang thực hiện **{counts.get('Đang thực hiện', 0)}**.
+- **Cột Review:** Chờ kiểm tra **{counts.get('Chờ kiểm tra', 0)}**.
+- **Cột Needs Update:** Cần cập nhật **{counts.get('Cần cập nhật', 0)}**.
+- **Cột Done:** Đã hoàn thành **{counts.get('Đã hoàn thành', 0)}**.
 
-- Đã hoàn thành: task đã hoàn tất và nghiệm thu; đầu ra đã sẵn sàng cho task sau.
-- Sẵn sàng: không còn task tiên quyết nào ở gate bắt đầu; có thể bắt tay thực hiện ngay.
-- Chờ đầu vào: còn gate bắt đầu chưa bàn giao; cần chờ task tiên quyết hoàn tất.
+- Đã hoàn thành: task đã hoàn tất và nghiệm thu ở cột Done; đầu ra sẵn sàng cho task sau.
+- Đang thực hiện: người được giao đang trực tiếp triển khai task ở cột In Progress.
+- Chờ kiểm tra: đầu ra đã sẵn sàng, đang chờ kiểm tra nghiệm thu ở cột Review.
+- Cần cập nhật: owner cần chỉnh sửa theo kết quả kiểm tra ở cột Needs Update.
+- Sẵn sàng: task ở cột Todo có toàn bộ đầu vào ở gate bắt đầu đã xong; có thể bắt tay thực hiện ngay.
+- Chờ đầu vào: task ở cột Todo còn task tiên quyết chưa qua cột Done; cần chờ bàn giao.
 
-Project là nguồn Status hiện hành. Sau khi đổi Status nguồn, chạy `python scripts/update_task_snapshot.py --apply` để đồng bộ Input status và tài liệu; `--check` chỉ kiểm độ khớp. Script giữ nguyên Status/Assignees/Owner/Deadline và không tạo thẻ.
+Project là nguồn Status hiện hành. Sau khi đổi Status nguồn, chạy `python scripts/update_task_snapshot.py --apply` để đồng bộ Input status và tài liệu; script tự động kiểm tra mở khóa các task ở cột Todo từ Chờ đầu vào sang Sẵn sàng khi task tiên quyết qua cột Done. `--check` chỉ kiểm độ khớp. Script giữ nguyên Status/Assignees/Owner/Deadline và không tạo thẻ.
 <!-- input-snapshot:end -->
 
 | Task | Người thực hiện | Status | Input status | Hạn (UTC+7) | Công sức | Bắt đầu sau | Hoàn tất còn cần |
@@ -308,14 +357,40 @@ def main():
     group = parser.add_mutually_exclusive_group()
     group.add_argument('--apply', action='store_true')
     group.add_argument('--check', action='store_true')
+    parser.add_argument('--set-status', action='append', metavar='SEM-XX=STATUS',
+                        help='Chuyển cột Status cho task trước khi đồng bộ (ví dụ: --set-status SEM-32=Done)')
     args = parser.parse_args()
     catalog = json.loads((ROOT / 'tasks/catalog.json').read_text(encoding='utf-8'))
     snapshot = project_snapshot()
     by, lookup = audit(catalog, snapshot)
     statuses = {tid: values(item)['Status'] for tid, item in lookup.items()}
+    if args.set_status:
+        if not args.apply:
+            parser.error('--set-status requires --apply')
+        fields = gh('project', 'field-list', '3', '--owner', 'ThanhTris', '--format', 'json', '--limit', '100')['fields']
+        status_field = next(f for f in fields if f['name'] == 'Status')
+        status_opts = {o['name']: o['id'] for o in status_field['options']}
+        for spec in args.set_status:
+            target_tid, target_st = spec.split('=')
+            assert target_tid in lookup, f'Unknown task {target_tid}'
+            assert target_st in status_opts, f'Unknown status {target_st}'
+            item_id = lookup[target_tid]['id']
+            gql('mutation($input:UpdateProjectV2ItemFieldValueInput!){updateProjectV2ItemFieldValue(input:$input){projectV2Item{id}}}',
+                {'input': {'projectId': PROJECT, 'itemId': item_id, 'fieldId': status_field['id'], 'value': {'singleSelectOptionId': status_opts[target_st]}}})
+            print(f"Set status: {target_tid} -> {target_st}")
+        snapshot = project_snapshot()
+        by, lookup = audit(catalog, snapshot)
+        statuses = {tid: values(item)['Status'] for tid, item in lookup.items()}
     if args.apply:
         stamp = datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S UTC')
+        prev_inputs = {t['id']: t.get('input_status') for t in catalog['tasks']}
         update_docs(catalog, by, statuses, stamp)
+        unlocked = compute_todo_unlocks(catalog['tasks'], prev_inputs, statuses)
+        if unlocked:
+            print(f"\n[MỞ KHÓA] Có {len(unlocked)} task ở cột Todo được mở khóa sang 'Sẵn sàng':")
+            for t, done_deps in unlocked:
+                print(f"  * {t['id']} — {t['title']} (Owner: {t['owner']})")
+                print(f"    -> Đã thỏa mãn toàn bộ gate bắt đầu: {', '.join(done_deps)}")
         fields = gh('project', 'field-list', '3', '--owner', 'ThanhTris', '--format', 'json', '--limit', '100')['fields']
         input_field = next((f for f in fields if f['name'] == INPUT_FIELD), None)
         if input_field is None:
@@ -324,6 +399,8 @@ def main():
             fields = gh('project', 'field-list', '3', '--owner', 'ThanhTris', '--format', 'json', '--limit', '100')['fields']
             input_field = next(f for f in fields if f['name'] == INPUT_FIELD)
         options = {o['name']: o['id'] for o in input_field['options']}
+        if set(options) != set(READINESS):
+            options = sync_project_field_options(input_field['id'], input_field['options'])
         assert set(options) == set(READINESS)
         tasks = catalog['tasks']
         for offset in range(0, len(tasks), 2):
@@ -350,11 +427,17 @@ def main():
         block = f'''<!-- input-snapshot:start -->
 ## Trạng thái đầu vào
 
-Đối chiếu **{stamp}**: Đã hoàn thành **{counts['Đã hoàn thành']}**, Sẵn sàng **{counts['Sẵn sàng']}**, Chờ đầu vào **{counts['Chờ đầu vào']}**. Status vẫn là tiến độ thực tế trên Project; Input status chỉ mô tả gate dependency tại lần đồng bộ này.
+Đối chiếu **{stamp}**: Đã hoàn thành **{counts.get('Đã hoàn thành', 0)}**, Đang thực hiện **{counts.get('Đang thực hiện', 0)}**, Chờ kiểm tra **{counts.get('Chờ kiểm tra', 0)}**, Cần cập nhật **{counts.get('Cần cập nhật', 0)}**, Sẵn sàng **{counts.get('Sẵn sàng', 0)}**, Chờ đầu vào **{counts.get('Chờ đầu vào', 0)}**. Status vẫn là tiến độ thực tế trên Project; Input status mô tả trạng thái tương ứng theo từng cột và tự động kiểm tra mở khóa task ở cột Todo khi task tiên quyết qua cột Done.
+
+- Cột Todo: Sẵn sàng (đủ gate bắt đầu), Chờ đầu vào (còn task tiên quyết chưa xong).
+- Cột In Progress: Đang thực hiện.
+- Cột Review: Chờ kiểm tra.
+- Cột Needs Update: Cần cập nhật.
+- Cột Done: Đã hoàn thành.
 
 Mỗi thẻ có bảng **Đầu vào cần nhận**: task nguồn bấm được, người bàn giao, file/artifact yêu cầu, CHECKS và Status nguồn. Chỉ dùng đầu ra sau khi nhận đúng artifact/version/CHECKS.
 
-Sau khi đổi Status nguồn, dùng `python scripts/update_task_snapshot.py --apply` để cập nhật lại Input status và tài liệu. Script không đổi workflow Status, Assignees, Owner hay Deadline. `--check` chỉ kiểm tra.
+Sau khi đổi Status nguồn, dùng `python scripts/update_task_snapshot.py --apply` để cập nhật lại Input status và tài liệu. Khi task chuyển qua cột Done, script tự động quét và mở khóa các task ở cột Todo từ Chờ đầu vào sang Sẵn sàng. `--check` chỉ kiểm tra.
 <!-- input-snapshot:end -->
 '''
         readme = re.sub(r'(?s)<!-- input-snapshot:start -->.*?<!-- input-snapshot:end -->\s*', '', snapshot['readme']).rstrip() + '\n\n' + block
