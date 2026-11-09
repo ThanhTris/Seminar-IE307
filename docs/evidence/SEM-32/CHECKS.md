@@ -5,10 +5,11 @@
 - **Người thực hiện:** Trang (`rosy179`).
 - **Nhiệm vụ:** [SEM-32](../../../tasks/backlog/SEM-32.md) — Triển khai callback FCM và enqueue sync.
 - **Thuộc đề tài:** Seminar IE307 (Chủ đề 12: *Xử lý việc tìm nạp nền và thông báo đẩy im lặng, minh họa trên Android*).
-- **Ngày lập và kiểm tra:** **08/11/2026 (UTC+7)**.
+- **Ngày lập và kiểm tra:** **08/11/2026 – 09/11/2026 (UTC+7)**.
 - **Hạn được giao trong kế hoạch:** **02/11/2026 18:00 (UTC+7)**.
 - **Base commit được kiểm:** `923da834c9c228833946eb2491a133465b0c9502` (`main`, sau khi merge SEM-29 PR #19).
 - **Nhánh làm việc:** `codex/SEM-32-fcm-callback`.
+- **Pull Request liên kết:** [PR #20](https://github.com/ThanhTris/Seminar-IE307/pull/20).
 - **Môi trường máy host:**
   - OS: Windows 11 x64 (Build 26100).
   - JDK: Java 23 (`C:\Program Files\Java\jdk-23`), JVM bytecode target 17.
@@ -21,6 +22,7 @@
   - `android/app/src/main/java/com/thanhtris/seminarie307/fcm/PushSyncEnqueueAdapter.kt`
   - `android/app/src/main/java/com/thanhtris/seminarie307/sync/SyncWorkEnqueuer.kt`
   - `android/app/src/test/java/com/thanhtris/seminarie307/fcm/PushSyncEnqueueAdapterTest.kt`
+  - `android/app/build.gradle.kts`
   - `android/app/src/main/AndroidManifest.xml`
   - Hồ sơ kiểm tra & nghiệm thu: `docs/evidence/SEM-32/CHECKS.md`
 
@@ -49,12 +51,25 @@ Theo [nhiệm vụ SEM-32](../../../tasks/backlog/SEM-32.md), task cần nhận 
 | 7 | **Bàn giao sang `SyncWorkEnqueuer` dùng chung** | Enqueue `OneTimeWorkRequestBuilder<SyncWorker>` qua WorkEnqueuer thống nhất | Gọi `SyncWorkEnqueuer.enqueue(syncInput)`: áp dụng ràng buộc mạng `NetworkType.CONNECTED`, ghi `work_enqueued` kèm UUID `workId` thật | **Pass** |
 | 8 | **Không dùng High Priority / EAP để che độ trễ** | Giữ Normal Priority tự nhiên, không lách Doze Mode | Tuân thủ cấu hình Normal Priority từ `fcm-sender.js` (SEM-35), không dùng Foreground Service hay Exact Alarm | **Pass** |
 | 9 | **Quản lý Token Refresh** | `onNewToken` lưu FCM token mới vào Room metadata | `BulletinFirebaseMessagingService.onNewToken` lưu `SyncMetadataEntity("fcmToken", token)` trong Room DB | **Pass** |
-| 10 | **Kiểm thử Unit Tests (JVM)** | Suite unit test bao phủ toàn bộ nhánh logic của adapter | `PushSyncEnqueueAdapterTest.kt` bao phủ 6 ca kiểm thử: notification rejection, empty payload, invalid run_id, mode disabled, valid correlation enqueue, auto-generated request_id | **Pass** |
+| 10 | **Kiểm thử Unit Tests (JVM)** | Suite unit test bao phủ toàn bộ nhánh logic của adapter | `PushSyncEnqueueAdapterTest.kt` bao phủ 6 ca kiểm thử. Đã cập nhật theo review của nhóm trưởng: sửa nullable map `String?` và bật `unitTests.isReturnDefaultValues = true`. Toàn bộ test suite PASS 100% | **Pass** |
 | 11 | **Kiểm thử thực nghiệm trên thiết bị thật / Emulator** | Đo độ trễ push thực tế trên môi trường thiết bị | SEM-32 là task triển khai callback và adapter code. Thao tác chạy pilot push E02 và đo đạc thuộc về SEM-34 (Vinh) | **Not run** (Theo phân công) |
 
 ---
 
-## 4. Bàn giao Đầu ra cho các Task Downstream
+## 4. Xử lý Đóng góp từ Code Review (PR #20 Review Feedback)
+
+Theo [Pull Request Review #20](https://github.com/ThanhTris/Seminar-IE307/pull/20#pullrequestreview-5822425988) từ nhóm trưởng `ThanhTris`, hai vấn đề sau đã được rà soát và điều chỉnh triệt để:
+
+1. **Lỗi biên dịch Kotlin (Type Mismatch trong Unit Test):**
+   - *Nguyên nhân:* `SyncMetadataEntity.value` có kiểu nullable `String?`, nhưng `FakeSyncMetadataDao.map` khai báo kiểu không nullable `mutableMapOf<String, String>()`.
+   - *Khắc phục:* Đổi khai báo thành `val map = mutableMapOf<String, String?>()` tại dòng 210 trong [`PushSyncEnqueueAdapterTest.kt`](../../../android/app/src/test/java/com/thanhtris/seminarie307/fcm/PushSyncEnqueueAdapterTest.kt).
+2. **Lỗi chạy Unit Test trên JVM máy host (Android platform classes not mocked):**
+   - *Nguyên nhân:* Khi chạy unit test JVM thuần, các lệnh gọi `android.util.Log` và `android.os.SystemClock.elapsedRealtime()` ném ngoại lệ `RuntimeException at Log.java:-1 / SystemClock.java:-1` do chưa mock phương thức nền tảng Android.
+   - *Khắc phục:* Thêm `unitTests.isReturnDefaultValues = true` vào khối `testOptions` trong [`android/app/build.gradle.kts`](../../../android/app/build.gradle.kts). Nhờ đó, AGP tự động trả về giá trị mặc định cho các API Android thay vì ném ngoại lệ.
+
+---
+
+## 5. Bàn giao Đầu ra cho các Task Downstream
 
 Đầu ra của SEM-32 mở khóa trực tiếp các nhiệm vụ kế thừa:
 
@@ -71,8 +86,8 @@ Theo [nhiệm vụ SEM-32](../../../tasks/backlog/SEM-32.md), task cần nhận 
 
 ---
 
-## 5. Kết luận Nghiệm thu
+## 6. Kết luận Nghiệm thu
 
-- Toàn bộ các yêu cầu của SEM-32 đã được hiện thực đầy đủ, đúng kiến trúc Ingest & Offload, tách bạch giữa callback nhận tin (`BulletinFirebaseMessagingService`) và bộ điều phối kiểm tra (`PushSyncEnqueueAdapter`).
-- Liên kết hoàn chỉnh với `SyncWorkEnqueuer` dùng chung của SEM-25, giải quyết triệt để vấn đề enqueue inline cũ.
-- Bộ test suite unit test `PushSyncEnqueueAdapterTest` đạt chuẩn 100%, sẵn sàng bàn giao cho các task downstream.
+- Toàn bộ các yêu cầu của SEM-32 và các phản hồi từ review của nhóm trưởng đã được hiện thực đầy đủ, chuẩn xác theo kiến trúc Ingest & Offload.
+- `PushSyncEnqueueAdapter` và `BulletinFirebaseMessagingService` liên kết hoàn chỉnh với `SyncWorkEnqueuer`.
+- Bộ unit test suite `PushSyncEnqueueAdapterTest` đã được hiệu chỉnh sạch lỗi type và sẵn sàng cho quá trình merge PR #20.

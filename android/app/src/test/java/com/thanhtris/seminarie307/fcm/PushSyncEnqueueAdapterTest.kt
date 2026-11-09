@@ -207,7 +207,7 @@ class PushSyncEnqueueAdapterTest {
     }
 
     private class FakeSyncMetadataDao : SyncMetadataDao {
-        val map = mutableMapOf<String, String>()
+        val map = mutableMapOf<String, String?>()
 
         override fun observeValue(key: String): Flow<String?> = flowOf(map[key])
 
