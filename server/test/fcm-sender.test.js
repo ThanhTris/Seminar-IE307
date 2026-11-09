@@ -60,5 +60,6 @@ test('event sender phù hợp validator SEM-24 cho accepted/rejected/unknown/loc
  d=sample(async()=>{throw Error('fixture');});d.write=e=>rows.push(e);await execute(input,d);
  d=sample(async()=>{});d.verify=async()=>{throw Error('fixture');};d.write=e=>rows.push(e);await execute(input,d);
  const script='import sys,json;sys.path.insert(0,"../experiments/scripts");from export_logs import validate_event;[validate_event(e) for e in json.load(sys.stdin)]';
- const r=spawnSync('python3',['-c',script],{input:JSON.stringify(rows),encoding:'utf8',cwd:process.cwd()});assert.equal(r.status,0,r.stderr);
+ const pythonCmd=process.env.PYTHON || (process.platform==='win32'?'python':'python3');
+ const r=spawnSync(pythonCmd,['-c',script],{input:JSON.stringify(rows),encoding:'utf8',cwd:process.cwd()});assert.equal(r.status,0,r.error?.message ?? r.stderr);
 });

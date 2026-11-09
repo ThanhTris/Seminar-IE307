@@ -5,8 +5,11 @@ CLI phát tín hiệu từ snapshot đã commit, dùng Firebase Admin Node **14.
 ## Điều kiện
 
 - Node.js 22+, `cd server && npm ci && npm run build`; `npm test` còn cần Python 3.10+ để đối chiếu validator SEM-24. Server SEM-27 chạy và đã commit update cùng `run_id`, `mode`, `device_alias`, `update_id`, `version` muốn báo; đường `--server-events` phải trỏ đúng file JSONL export của chính store server đó.
+
 - Firebase project và app Android phải được người quản lý xác nhận; máy gửi có quyền FCM HTTP v1, credential ADC/service-account local hợp lệ, thiết bị lấy được registration token thật. Theo [SEM-13](../environment/SERVER_FIREBASE.md) các điều kiện này chưa xác nhận; không tạo project, credential hay token giả làm kết quả thật.
 - Để ngoài Git: `GOOGLE_APPLICATION_CREDENTIALS` là đường dẫn credential local; `FIREBASE_PROJECT_ID` là project thật; `FCM_TOKEN_FILE` là đường dẫn file chỉ chứa token test. Không đưa token vào argument, log, manifest hoặc chat. Ví dụ đường dẫn phía dưới là placeholder, không phải cấu hình đang có.
+
+Test ưu tiên executable trong biến `PYTHON`; khi không đặt, dùng `python` trên Windows và `python3` trên macOS/Linux. Nếu máy chỉ có Python Launcher, đặt `PYTHON=py`; nếu cần chọn bản cụ thể, đặt đường dẫn executable Python 3.10+ (không kèm tham số). Ví dụ PowerShell: `$env:PYTHON = 'C:\Python312\python.exe'`, sau đó chạy `npm test`.
 
 ```sh
 export STORE_DIR="$PWD/../.local/sem35-store"
