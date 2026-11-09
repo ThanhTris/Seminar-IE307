@@ -3,8 +3,6 @@ package com.thanhtris.seminarie307.fcm
 import android.util.Log
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-import com.thanhtris.seminarie307.data.local.AppDatabase
-import com.thanhtris.seminarie307.data.local.SyncMetadataEntity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -18,11 +16,18 @@ import kotlinx.coroutines.launch
  *    preventing long-running network operations directly within the callback.
  * 3. Enforces normal priority push handling without displaying any foreground/tray notification.
  * 4. Preserves correlation IDs (run_id, request_id, version_hint, message_id).
+ *
+ * SEM-33: [onNewToken] delegates to [FcmTokenManager], which stores the refreshed token and
+ * never logs its raw value.
  */
 class BulletinFirebaseMessagingService : FirebaseMessagingService() {
 
     private val adapter by lazy {
         PushSyncEnqueueAdapter(applicationContext)
+    }
+
+    private val tokenManager by lazy {
+        FcmTokenManager(applicationContext)
     }
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
@@ -52,10 +57,13 @@ class BulletinFirebaseMessagingService : FirebaseMessagingService() {
     @Deprecated("Deprecated in Java")
     override fun onNewToken(token: String) {
         super.onNewToken(token)
-        Log.i(TAG, "New FCM Token received: $token")
-        val database = AppDatabase.getInstance(applicationContext)
+        // SEM-33: never log the raw token; FcmTokenManager logs only its fingerprint.
         CoroutineScope(Dispatchers.IO).launch {
-            database.metadataDao().setValue(SyncMetadataEntity("fcmToken", token))
+            try {
+                tokenManager.onTokenAvailable(token, FcmTokenSource.ON_NEW_TOKEN)
+            } catch (e: Exception) {
+                Log.e(TAG, "Failed to store refreshed FCM token", e)
+            }
         }
     }
 
