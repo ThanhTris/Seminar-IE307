@@ -29,3 +29,11 @@ Trưởng nhóm kiểm nhận/merge; task chỉ bàn giao đến Review, không 
 
 - Commit source/test được kiểm: `cc4ce58`; [PR #21](https://github.com/ThanhTris/Seminar-IE307/pull/21) đã tag `@ThanhTris`, chờ kiểm nhận.
 - SEM-40 đã chuyển Review. Script `--apply` và `--check` exit 0: 45 task, 23 Done, 20 Todo, 2 Review; assignee khớp owner, không có chu trình dependency. Snapshot lúc **07:09:48 UTC ngày 09/11/2026**.
+
+## Xử lý review ThanhTris — 09/11/2026
+
+- Review PR #21 xác nhận chức năng đạt 22/22 test và chỉ yêu cầu xử lý xung đột snapshot sau khi SEM-32 được merge.
+- Đã rebase lên `origin/main` tại `00171ce19b15af52fe24d0585401c649fb40fa5e`. Trong rebase giữ đúng 48 file snapshot từ main; không thay code chức năng. Commit triển khai sau rebase là `efa89f8`.
+- `git diff --exit-code` xác nhận CLI/module/test và hướng dẫn fault injection giữ nguyên so với head cũ `b99f042`; toàn bộ `tasks/` và `docs/TEAM_ASSIGNMENTS.md` khớp main.
+- `npm test` trên macOS ARM64 sau rebase: build thành công, **22/22 pass**. Windows native và E06 trên Android không chạy trong lần này.
+- `python3 scripts/update_task_snapshot.py --check` exit 0: 45 task, 24 Done, 20 Todo, 1 Review; assignee khớp owner, không có chu trình dependency. Snapshot main đã khớp Project nên giữ nguyên theo review, không sinh lại timestamp. SEM-40 tiếp tục ở Review; không merge PR hoặc chuyển Done.
