@@ -34,3 +34,11 @@ Nguồn đối chiếu ngày 05/11: [Admin send](https://firebase.google.com/doc
 
 - Commit nội dung được kiểm: `ea01a6a`; [PR #16](https://github.com/ThanhTris/Seminar-IE307/pull/16) đã tag `@ThanhTris`, chờ nhóm trưởng kiểm nhận.
 - SEM-35 đã chuyển Review. `python3 scripts/update_task_snapshot.py --apply` và `--check` exit 0: 45 task, 19 Done, 24 Todo, 1 In Progress, 1 Review; assignee khớp owner, không có vòng lặp dependency. Snapshot đối chiếu 08:02:58 UTC ngày 05/11/2026.
+
+## Cập nhật theo review ThanhTris — 09/11/2026
+
+- Review ngày 05/11 trên PR #16 yêu cầu sửa test validator khi Windows có lệnh `python` thay vì `python3`. Commit `aa1cf23` ưu tiên `process.env.PYTHON`; mặc định Windows dùng `python`, các nền tảng khác dùng `python3`. Tài liệu setup bổ sung cách chọn executable, kể cả Python Launcher `py`.
+- Đã nhập `origin/main` tại `9c4383f` vào nhánh PR bằng commit `cd8f7c7`; giải quyết 48 file snapshot xung đột bằng phiên bản mới từ main, rồi sinh lại theo Project. Không merge PR vào main.
+- `npm test` trên macOS ARM64: build thành công, **18/18 pass**. Chạy riêng test validator với `PYTHON` là đường dẫn executable lấy từ `command -v python3`: **1/1 pass**. Không gọi FCM thật trong các test này.
+- Windows native trên commit cập nhật: **Not run trong lần kiểm này**. Kết quả Windows/macOS của bản vá đề xuất trong review là bằng chứng do trưởng nhóm cung cấp; không trình bày thành lần chạy Windows của máy hiện tại.
+- `git diff --check` cho bản sửa không báo lỗi. Các dòng whitespace kế thừa từ main trong merge commit không thuộc bản sửa Python.
