@@ -42,3 +42,4 @@ Nguồn đối chiếu ngày 05/11: [Admin send](https://firebase.google.com/doc
 - `npm test` trên macOS ARM64: build thành công, **18/18 pass**. Chạy riêng test validator với `PYTHON` là đường dẫn executable lấy từ `command -v python3`: **1/1 pass**. Không gọi FCM thật trong các test này.
 - Windows native trên commit cập nhật: **Not run trong lần kiểm này**. Kết quả Windows/macOS của bản vá đề xuất trong review là bằng chứng do trưởng nhóm cung cấp; không trình bày thành lần chạy Windows của máy hiện tại.
 - `git diff --check` cho bản sửa không báo lỗi. Các dòng whitespace kế thừa từ main trong merge commit không thuộc bản sửa Python.
+- Đã chuyển SEM-35 từ Needs Update sang Review. Script `--apply` và `--check` đều exit 0, đối chiếu 45 task: 22 Done, 21 Todo, 2 Review; assignee khớp owner, không có chu trình dependency. Snapshot lúc **06:44:52 UTC ngày 09/11/2026**.
