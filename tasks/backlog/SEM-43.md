@@ -2,7 +2,7 @@
 
 - Trạng thái: **Todo** (Project).
 - Trạng thái đầu vào: **Chờ đầu vào**.
-- Đối chiếu Project: 2026-11-09 08:05:03 UTC.
+- Đối chiếu Project: 2026-11-09 13:58:31 UTC.
 - Người thực hiện duy nhất: **Vinh** (`Vinh5905`).
 - Hạn: **07/11/2026 22:00 (UTC+7)**.
 - Công sức: 1/100 — Cơ chế/thực hành.
@@ -25,11 +25,11 @@ Tài liệu nền đã có: [Kế hoạch/phạm vi](../../docs/PLAN.md) · [Pro
 | Bắt đầu | [SEM-41 — Chạy tập chính E01–E06 trên emulator](SEM-41.md) | Vinh | `experiments/runs/<emulator-main-run>/manifest.json`<br>`experiments/runs/<emulator-main-run>/events.jsonl` | `docs/evidence/SEM-41/CHECKS.md` | Todo |
 | Bắt đầu | [SEM-42 — Chạy đối chiếu OPPO E01/E02 và ghi giới hạn OEM](SEM-42.md) | Trí | `experiments/runs/<oppo-main-run>/manifest.json`<br>`experiments/runs/<oppo-main-run>/events.jsonl` | `docs/evidence/SEM-42/CHECKS.md` | Todo |
 | Bắt đầu | [SEM-44 — Kiểm độc lập trigger và phép tính dữ liệu main](SEM-44.md) | Trang | `experiments/AUDIT.md` | `docs/evidence/SEM-44/CHECKS.md` | Todo |
-| Bắt đầu | [SEM-45 — Viết parser log và sinh results.csv](SEM-45.md) | Tuấn | `experiments/scripts/analyze.*`<br>`experiments/results.csv` | `docs/evidence/SEM-45/CHECKS.md` | Todo |
+| Bắt đầu | [SEM-45 — Viết parser log và sinh results.csv](SEM-45.md) | Tuấn | `experiments/scripts/analyze.*`<br>`experiments/results.csv` | `docs/evidence/SEM-45/CHECKS.md` | In Progress |
 
 Đây là danh sách đầu ra cần bàn giao, chưa phải xác nhận các file đã tồn tại. Trước khi dùng, nhận đúng artifact/commit/config và CHECKS từ task nguồn.
 
-Status nguồn được đối chiếu Project lúc **2026-11-09 08:05:03 UTC**; mở link task nguồn để xem cập nhật mới hơn.
+Status nguồn được đối chiếu Project lúc **2026-11-09 13:58:31 UTC**; mở link task nguồn để xem cập nhật mới hơn.
 <!-- task-inputs:end -->
 
 

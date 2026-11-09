@@ -2,7 +2,7 @@
 
 - Trạng thái: **Todo** (Project).
 - Trạng thái đầu vào: **Sẵn sàng**.
-- Đối chiếu Project: 2026-11-09 08:05:03 UTC.
+- Đối chiếu Project: 2026-11-09 13:58:31 UTC.
 - Người thực hiện duy nhất: **Tuấn** (`mtuan2491`).
 - Hạn: **10/11/2026 22:00 (UTC+7)**.
 - Công sức: 3/100 — Nghiên cứu/lập luận.
@@ -22,15 +22,15 @@ Tài liệu nền đã có: [Kế hoạch/phạm vi](../../docs/PLAN.md) · [K�
 
 | Cần cho | Task cung cấp | Người bàn giao | Đầu ra phải nhận | Kiểm chứng bàn giao | Status nguồn |
 |---|---|---|---|---|---|
-| Hoàn tất | [SEM-46 — Viết phần mở bài và bàn giao lời dẫn thao tác demo](SEM-46.md) | Tuấn | `slides/inputs/TRI.md` | `docs/evidence/SEM-46/CHECKS.md` | Todo |
+| Hoàn tất | [SEM-46 — Viết phần mở bài và bàn giao lời dẫn thao tác demo](SEM-46.md) | Tuấn | `slides/inputs/TRI.md` | `docs/evidence/SEM-46/CHECKS.md` | In Progress |
 | Hoàn tất | [SEM-47 — Viết phần silent push và lời dẫn demo 4 phút](SEM-47.md) | Trang | `slides/inputs/TRANG.md`<br>`slides/DEMO_SCRIPT.md` | `docs/evidence/SEM-47/CHECKS.md` | Todo |
 | Hoàn tất | [SEM-48 — Viết nội dung và biểu đồ kết quả cho bài nói](SEM-48.md) | Vinh | `slides/inputs/VINH.md`<br>`slides/inputs/results/` | `docs/evidence/SEM-48/CHECKS.md` | Todo |
 | Hoàn tất | [SEM-49 — Viết phần kiến trúc và lập luận nghiên cứu thứ hai](SEM-49.md) | Tâm | `slides/inputs/TAM.md` | `docs/evidence/SEM-49/CHECKS.md` | Todo |
-| Hoàn tất | [SEM-50 — Hoàn thiện báo cáo, bibliography và CLAIMS](SEM-50.md) | Tuấn | `report/REPORT.md`<br>`research/references.bib`<br>`docs/CLAIMS.md` | `docs/evidence/SEM-50/CHECKS.md` | Todo |
+| Hoàn tất | [SEM-50 — Hoàn thiện báo cáo, bibliography và CLAIMS](SEM-50.md) | Tuấn | `report/REPORT.md`<br>`research/references.bib`<br>`docs/CLAIMS.md` | `docs/evidence/SEM-50/CHECKS.md` | In Progress |
 
 Đây là danh sách đầu ra cần bàn giao, chưa phải xác nhận các file đã tồn tại. Trước khi dùng, nhận đúng artifact/commit/config và CHECKS từ task nguồn.
 
-Status nguồn được đối chiếu Project lúc **2026-11-09 08:05:03 UTC**; mở link task nguồn để xem cập nhật mới hơn.
+Status nguồn được đối chiếu Project lúc **2026-11-09 13:58:31 UTC**; mở link task nguồn để xem cập nhật mới hơn.
 <!-- task-inputs:end -->
 
 

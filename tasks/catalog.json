@@ -1162,7 +1162,7 @@
       "category": "practice",
       "title": "Xử lý token refresh và bàn giao PUSH.md",
       "due": "2026-11-03",
-      "status": "Todo",
+      "status": "Done",
       "start_dependencies": [
         "SEM-13",
         "SEM-32"
@@ -1181,7 +1181,7 @@
         "Có bằng chứng token refresh hoặc blocker được ghi thật, không chỉ token hardcode.",
         "PUSH.md đủ để chạy sender và phân biệt accepted/received/applied."
       ],
-      "input_status": "Sẵn sàng",
+      "input_status": "Đã hoàn thành",
       "inputs": [
         {
           "source_task": "SEM-13",
@@ -1293,7 +1293,7 @@
             "docs/PUSH.md"
           ],
           "checks": "docs/evidence/SEM-33/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Done"
         }
       ],
       "due_at": "2026-11-03T22:00:00+07:00"
@@ -1544,7 +1544,7 @@
             "docs/PUSH.md"
           ],
           "checks": "docs/evidence/SEM-33/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Done"
         },
         {
           "source_task": "SEM-36",
@@ -1622,7 +1622,7 @@
         "Tín hiệu trùng không gây notification hoặc sync engine riêng; bản mới không bị bỏ qua.",
         "Mỗi ca có input/expected/actual trên đúng revision; lỗi core chuyển đúng task SEM-39."
       ],
-      "input_status": "Chờ đầu vào",
+      "input_status": "Sẵn sàng",
       "inputs": [
         {
           "source_task": "SEM-32",
@@ -1643,7 +1643,7 @@
             "docs/PUSH.md"
           ],
           "checks": "docs/evidence/SEM-33/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Done"
         }
       ],
       "due_at": "2026-11-05T12:00:00+07:00"
@@ -1976,7 +1976,7 @@
             "experiments/results.csv"
           ],
           "checks": "docs/evidence/SEM-45/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "In Progress"
         }
       ],
       "due_at": "2026-11-07T22:00:00+07:00"
@@ -2042,7 +2042,7 @@
             "experiments/results.csv"
           ],
           "checks": "docs/evidence/SEM-45/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "In Progress"
         }
       ],
       "due_at": "2026-11-07T19:00:00+07:00"
@@ -2056,7 +2056,7 @@
       "category": "practice",
       "title": "Viết parser log và sinh results.csv",
       "due": "2026-11-07",
-      "status": "Todo",
+      "status": "In Progress",
       "start_dependencies": [
         "SEM-24",
         "SEM-26"
@@ -2078,7 +2078,7 @@
         "Tái sinh được CSV từ log; fixture không lẫn main, không gán latency timeout bằng 0.",
         "Accepted/received/queue/sync không bị gộp thành một mốc."
       ],
-      "input_status": "Sẵn sàng",
+      "input_status": "Đang thực hiện",
       "inputs": [
         {
           "source_task": "SEM-24",
@@ -2137,7 +2137,7 @@
       "category": "research",
       "title": "Viết phần mở bài và bàn giao lời dẫn thao tác demo",
       "due": "2026-11-08",
-      "status": "Todo",
+      "status": "In Progress",
       "start_dependencies": [],
       "finish_dependencies": [
         "SEM-14",
@@ -2155,7 +2155,7 @@
         "Lời dẫn khớp scope/candidate thật, ghi rõ live và playback.",
         "Không thêm tính năng hoặc lời hứa độ trễ chưa được evidence hỗ trợ."
       ],
-      "input_status": "Sẵn sàng",
+      "input_status": "Đang thực hiện",
       "inputs": [
         {
           "source_task": "SEM-14",
@@ -2233,7 +2233,7 @@
             "docs/PUSH.md"
           ],
           "checks": "docs/evidence/SEM-33/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Done"
         },
         {
           "source_task": "SEM-34",
@@ -2320,7 +2320,7 @@
             "experiments/results.csv"
           ],
           "checks": "docs/evidence/SEM-45/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "In Progress"
         }
       ],
       "due_at": "2026-11-08T18:00:00+07:00"
@@ -2424,7 +2424,7 @@
       "category": "research",
       "title": "Hoàn thiện báo cáo, bibliography và CLAIMS",
       "due": "2026-11-09",
-      "status": "Todo",
+      "status": "In Progress",
       "start_dependencies": [],
       "finish_dependencies": [
         "SEM-19",
@@ -2448,7 +2448,7 @@
         "Hai nghiên cứu có vai trò trong lập luận, DOI/metadata khớp và citations truy được.",
         "Số liệu/giới hạn khớp logs/CSV/SUMMARY; phần chưa chạy nêu rõ."
       ],
-      "input_status": "Sẵn sàng",
+      "input_status": "Đang thực hiện",
       "inputs": [
         {
           "source_task": "SEM-19",
@@ -2512,7 +2512,7 @@
             "experiments/results.csv"
           ],
           "checks": "docs/evidence/SEM-45/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "In Progress"
         }
       ],
       "due_at": "2026-11-09T22:00:00+07:00"
@@ -2559,7 +2559,7 @@
             "slides/inputs/TRI.md"
           ],
           "checks": "docs/evidence/SEM-46/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "In Progress"
         },
         {
           "source_task": "SEM-47",
@@ -2603,7 +2603,7 @@
             "docs/CLAIMS.md"
           ],
           "checks": "docs/evidence/SEM-50/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "In Progress"
         }
       ],
       "due_at": "2026-11-10T22:00:00+07:00"
@@ -2673,7 +2673,7 @@
             "docs/CLAIMS.md"
           ],
           "checks": "docs/evidence/SEM-50/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "In Progress"
         },
         {
           "source_task": "SEM-51",
@@ -2859,7 +2859,7 @@
             "docs/CLAIMS.md"
           ],
           "checks": "docs/evidence/SEM-50/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "In Progress"
         },
         {
           "source_task": "SEM-51",
@@ -2911,7 +2911,7 @@
       "due_at": "2026-11-12T22:00:00+07:00"
     }
   ],
-  "snapshot_at": "2026-11-09 08:05:03 UTC",
+  "snapshot_at": "2026-11-09 13:58:31 UTC",
   "snapshot_source": "https://github.com/users/ThanhTris/projects/3/views/1",
   "timezone": "Asia/Ho_Chi_Minh",
   "deadline_at": "2026-11-13T22:00:00+07:00",

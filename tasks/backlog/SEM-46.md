@@ -1,8 +1,8 @@
 # SEM-46 — Viết phần mở bài và bàn giao lời dẫn thao tác demo
 
-- Trạng thái: **Todo** (Project).
-- Trạng thái đầu vào: **Sẵn sàng**.
-- Đối chiếu Project: 2026-11-09 08:05:03 UTC.
+- Trạng thái: **In Progress** (Project).
+- Trạng thái đầu vào: **Đang thực hiện**.
+- Đối chiếu Project: 2026-11-09 13:58:31 UTC.
 - Người thực hiện duy nhất: **Tuấn** (`mtuan2491`).
 - Hạn: **08/11/2026 16:00 (UTC+7)**.
 - Công sức: 1/100 — Nghiên cứu/lập luận.
@@ -27,7 +27,7 @@ Tài liệu nền đã có: [Kế hoạch/phạm vi](../../docs/PLAN.md) · [K�
 
 Đây là danh sách đầu ra cần bàn giao, chưa phải xác nhận các file đã tồn tại. Trước khi dùng, nhận đúng artifact/commit/config và CHECKS từ task nguồn.
 
-Status nguồn được đối chiếu Project lúc **2026-11-09 08:05:03 UTC**; mở link task nguồn để xem cập nhật mới hơn.
+Status nguồn được đối chiếu Project lúc **2026-11-09 13:58:31 UTC**; mở link task nguồn để xem cập nhật mới hơn.
 <!-- task-inputs:end -->
 
 
