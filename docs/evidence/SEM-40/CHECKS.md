@@ -24,3 +24,8 @@ Bằng chứng tái lập: [test/skip-push.test.js](../../../server/test/skip-pu
 Giới hạn: log CLI tách giao dịch khỏi server; crash sau commit trước ghi event cần retry cùng update ID. Lock cũ cần xác minh process dừng trước khi gỡ. Không chặn sender do một process/người khác chạy riêng; người đo kiểm soát luồng gửi trong cửa sổ E06. Không có blocker triển khai local; kết quả app/periodic phải do task thực nghiệm cung cấp.
 
 Trưởng nhóm kiểm nhận/merge; task chỉ bàn giao đến Review, không tự chuyển Done.
+
+## Đồng bộ bàn giao
+
+- Commit source/test được kiểm: `cc4ce58`; [PR #21](https://github.com/ThanhTris/Seminar-IE307/pull/21) đã tag `@ThanhTris`, chờ kiểm nhận.
+- SEM-40 đã chuyển Review. Script `--apply` và `--check` exit 0: 45 task, 23 Done, 20 Todo, 2 Review; assignee khớp owner, không có chu trình dependency. Snapshot lúc **07:09:48 UTC ngày 09/11/2026**.
