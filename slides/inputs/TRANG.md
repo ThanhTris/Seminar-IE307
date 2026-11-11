@@ -56,7 +56,7 @@ flowchart LR
   }
   ```
 - **TTL 24 giờ (`86400000` ms):** Thời gian FCM lưu tin khi máy offline, không phải thời gian chạy tối đa của worker.
-- **Bảo mật token ([`FcmTokenManager.kt`](../../android/app/src/main/java/com/thanhtris/seminarie307/fcm/FcmTokenManager.kt)):** Token đăng ký chỉ lưu trong Room `sync_metadata`, logcat chỉ in 16 hex `fingerprint` SHA-256 (`READY`, `FIREBASE_NOT_CONFIGURED`, `FETCH_FAILED`). Debug build ghi ra file riêng `files/fcm/device-token.txt` để lấy qua `adb exec-out run-as` vào `FCM_TOKEN_FILE`.
+- **Bảo mật token ([`FcmTokenManager.kt`](../../android/app/src/main/java/com/thanhtris/seminarie307/fcm/FcmTokenManager.kt)):** Token đăng ký và trạng thái an toàn (`fcmTokenStatus: READY / FIREBASE_NOT_CONFIGURED / FETCH_FAILED`) chỉ lưu trong Room `sync_metadata`. Logcat chỉ in dòng an toàn `FCM token stored: source=..., changed=..., fingerprint=<16-hex>` (SHA-256), tuyệt đối không in token thô. Debug build ghi ra file riêng `files/fcm/device-token.txt` để lấy qua `adb exec-out run-as` vào `FCM_TOKEN_FILE`.
 
 ### Input Policy tại Messaging (SEM-38) & Version Guard tại Core (SEM-39)
 

@@ -40,7 +40,7 @@ Theo [bảng đầu vào SEM-47](../../../tasks/backlog/SEM-47.md), trạng thá
 | 3 | **Mạch lời dẫn Demo gói gọn trong 4 phút (`07:00–11:00`) và đánh dấu `[LIVE]` / `[PLAYBACK]`** | Có kịch bản liền mạch 240 giây cho cả Push, Periodic và Doze/Hybrid; Trang dẫn xuyên suốt, Trí thao tác; gắn nhãn `[LIVE]` và `[PLAYBACK]` rõ ràng ở từng phân đoạn; lời nói ~345 từ (~135 wpm) chừa thời gian thao tác máy | [`slides/DEMO_SCRIPT.md`](../../../slides/DEMO_SCRIPT.md) Mục 1 & Mục 2 chia chính xác 5 phân đoạn (`30s + 60s + 60s + 60s + 30s = 240s`, kèm biến thể rút 30s còn `210s` cho phương án 13+2 phút) | **Pass** |
 | 4 | **Ngưỡng 30 giây đổi sang video dự phòng không bị coi là bảo đảm của FCM** | Ghi rõ chuyển sang bản ghi dự phòng nếu chưa `snapshot_applied` sau 30 giây từ lúc gửi; giải thích 30 giây là ngưỡng thời lượng trình bày, không phải SLA của FCM | [`slides/DEMO_SCRIPT.md`](../../../slides/DEMO_SCRIPT.md) Phân đoạn 2 (`0:30–1:30`) và [`slides/inputs/TRANG.md`](../../../slides/inputs/TRANG.md) Mục 4 khẳng định 30 giây là ngưỡng quản trị thời lượng thuyết trình | **Pass** |
 | 5 | **Phương án dự phòng khi chưa có run push bàn giao** | Nêu rõ phương án khi chưa có run push (do SEM-34 vướng Blocker B1): dùng TH5 với lệnh `--validate-only` và Room M1; chỉ chuyển PLAYBACK push khi SEM-34/SEM-53 đã hoàn tất | [`slides/DEMO_SCRIPT.md`](../../../slides/DEMO_SCRIPT.md) Phân đoạn 2 Nhánh B và bảng TH5 quy định rõ ràng | **Pass** |
-| 6 | **Thao tác thiết bị và giao diện thực tế** | Không giả định UI hiển thị token hoặc có bộ chọn mode; kiểm token qua logcat / metadata Room; ghi rõ chuyển mode phụ thuộc SEM-36 | [`slides/DEMO_SCRIPT.md`](../../../slides/DEMO_SCRIPT.md) Phân đoạn 1 bám sát `BulletinScreen.kt` (chỉ hiển thị `Version cache: v1` và `Mode: PUSH`), kiểm tra token qua `adb logcat -s FcmTokenManager` | **Pass** |
+| 6 | **Thao tác thiết bị và giao diện thực tế** | Không giả định UI hiển thị token hoặc có bộ chọn mode; kiểm token qua logcat / metadata Room; ghi rõ chuyển mode phụ thuộc SEM-36 | [`slides/DEMO_SCRIPT.md`](../../../slides/DEMO_SCRIPT.md) Phân đoạn 1 bám sát `BulletinScreen.kt` (hiển thị `Version cache: v1` và mặc định `Mode: HYBRID` do chưa nối bộ chọn mode SEM-36); đối chiếu dòng log thật `FCM token stored: ... fingerprint=...` qua `adb logcat -s FcmTokenManager` sau bước khởi động lại app; giải thích trạng thái bền vững `fcmTokenStatus = READY` trong Room | **Pass** |
 | 7 | **Lệnh CLI đầy đủ tham số** | Lệnh `npm run send-push` có `--send`, `--run`, `--mode`, `--device`, `--update-id`, `--signal-id`, `--version`; `npm run update` có đủ tham số; có phương án `--validate-only` | [`slides/DEMO_SCRIPT.md`](../../../slides/DEMO_SCRIPT.md) Phân đoạn 2 và 4 ghi đầy đủ lệnh CLI, không để trống tham số gây `INVALID_ARGUMENT` | **Pass** |
 | 8 | **Câu trả lời chuẩn "Vì sao `accepted` khác `delivered` và khác `applied`?"** | Tách biệt rõ `server_updated`, `push_send_accepted`, `push_received`, `work_enqueued`, `work_started` và `snapshot_applied`; có câu trả lời trực diện 20 giây | [`slides/inputs/TRANG.md`](../../../slides/inputs/TRANG.md) Mục 2, Mục 4 và [`slides/DEMO_SCRIPT.md`](../../../slides/DEMO_SCRIPT.md) Mục 4 cung cấp phân tích 3 khoảng trống độc lập | **Pass** |
 | 9 | **Dẫn chứng Pilot E01 chính xác nhãn và số liệu** | Ghi rõ nhãn `run_phase: pilot, validity: NOT_ASSESSED`, 5 chu kỳ mới + 1 recovery setup, khoảng cách 15 đến 20 phút (11:14:22 → 11:34:23 là tròn 20 phút) | [`slides/DEMO_SCRIPT.md`](../../../slides/DEMO_SCRIPT.md) Phân đoạn 3 ghi đúng thông số artifact `run-sem29-periodic-emulator-20261107-r2` | **Pass** |
@@ -68,10 +68,10 @@ git diff --check
 
 ## 5. Xử lý phản hồi Review của ThanhTris (PR #25)
 
-Theo [Pull Request Review #25](https://github.com/ThanhTris/Seminar-IE307/pull/25#pullrequestreview-5853296736), các điểm sau đã được rà soát và khắc phục triệt để:
+### 5.1. Xử lý Review lần 1 (commit `1e1276d` — [pullrequestreview-5853296736](https://github.com/ThanhTris/Seminar-IE307/pull/25#pullrequestreview-5853296736))
 
 1. **Chưa có bản ghi dự phòng cho push:** Đã cập nhật Phân đoạn 2 (Nhánh B) và bảng tình huống TH5 trong [`DEMO_SCRIPT.md`](../../../slides/DEMO_SCRIPT.md) nêu rõ: do SEM-34 vướng Blocker B1 và SEM-53 chưa quay video, phương án dự phòng khi live quá 30s là dùng lệnh `--validate-only` và đối chiếu bằng chứng Room M1 ([`M1.md`](../SEM-28/M1.md)). Chỉ chuyển sang `[PLAYBACK]` push khi SEM-34/SEM-53 đã bàn giao.
-2. **Thao tác UI thực tế:** Đã loại bỏ việc nói chỉ vào token trên UI (vì `BulletinScreen.kt` không in token để bảo mật). Chuyển sang kiểm tra trạng thái `fcmTokenStatus = READY` qua `adb logcat -s FcmTokenManager` hoặc metadata Room. Ghi rõ việc thiết lập ban đầu sang mode PUSH được cấu hình qua database và bộ chọn mode UI phụ thuộc vào SEM-36.
+2. **Thao tác UI thực tế:** Đã loại bỏ việc nói chỉ vào token trên UI (vì `BulletinScreen.kt` không in token để bảo mật).
 3. **Lệnh CLI đầy đủ tham số:** Đã bổ sung đầy đủ các tham số bắt buộc cho `npm run send-push` (`--send`, `--run`, `--mode`, `--device`, `--update-id`, `--signal-id`, `--version`) và `npm run update`, tránh lỗi `INVALID_ARGUMENT`. Cung cấp thêm biến thể `--validate-only` cho kịch bản dry-run.
 4. **Lời nói thuyết trình:** Đã tinh gọn lời nói xuống tốc độ chuẩn 130–140 từ/phút: Slide 4 còn ~250 từ (cho 120 giây); Slide 6 Demo còn ~345 từ (cho 240 giây) phân bổ đều theo 5 phân đoạn, đảm bảo Trí có đủ thời gian gõ lệnh CLI và chiếu dòng log.
 5. **Các lỗi nhỏ & Dung lượng:**
@@ -79,6 +79,16 @@ Theo [Pull Request Review #25](https://github.com/ThanhTris/Seminar-IE307/pull/2
    - Đã chỉnh sửa khoảng cách giữa các chu kỳ thành "15 đến 20 phút (khoảng 11:14:22 đến 11:34:23 là tròn 20 phút)".
    - Đã sửa lỗi gõ "protocolo" thành "protocol".
    - Đã cô đọng cả hai file từ hơn 9.600 từ xuống còn khoảng 3.520 từ (~1.617 từ cho `TRANG.md` và ~1.903 từ cho `DEMO_SCRIPT.md`), tập trung vào ý chính và kịch bản để Tuấn ([SEM-51](../../../tasks/backlog/SEM-51.md)) dễ dàng ghép vào deck.
+
+### 5.2. Xử lý Review lần 2 (commit hiện tại — [issuecomment-6793197880](https://github.com/ThanhTris/Seminar-IE307/pull/25#issuecomment-6793197880))
+
+1. **Khớp mode hiển thị trên màn hình với code:**
+   - Trong code hiện tại, `RealBulletinUiGateway.kt` chưa có nơi gọi `setMode` (chờ bộ chọn mode và controller của [SEM-36](../../../tasks/backlog/SEM-36.md)), nên khi bảng `sync_metadata` chưa có key `mode`, app lấy giá trị mặc định là **HYBRID**.
+   - Đã cập nhật [`DEMO_SCRIPT.md`](../../../slides/DEMO_SCRIPT.md) Phân đoạn 1 và lời dẫn: màn hình ban đầu hiển thị `Mode: HYBRID`. Ở chế độ HYBRID, app cho phép nhận push bình thường (vượt qua kiểm tra mode guard trong `PushSyncEnqueueAdapter`), đồng thời là nền tảng cho kịch bản Doze/Hybrid ở các phân đoạn sau.
+   - Bổ sung ghi chú thao tác: nếu môi trường có `sqlite3`, người chạy có thể gán `mode = PUSH` thủ công qua ADB, nhưng kịch bản chuẩn thống nhất dùng hiển thị `HYBRID` để chạy ổn định mà không phụ thuộc binary ngoài.
+2. **Khớp dòng Logcat và trạng thái token với code:**
+   - Sửa đúng nội dung logcat: [`FcmTokenManager.kt`](../../../android/app/src/main/java/com/thanhtris/seminarie307/fcm/FcmTokenManager.kt) ghi dòng `FCM token stored: source=STARTUP, changed=..., fingerprint=<16-hex>` (không ghi chuỗi `fcmTokenStatus = READY`).
+   - Làm rõ cơ chế lưu: `fcmTokenStatus = READY` được lưu bền vững trong bảng `sync_metadata` của Room. Vì Logcat chỉ ghi dòng `FCM token stored` tại thời điểm app khởi động và nhận token, kịch bản bổ sung bước chuẩn bị: khởi động lại app bằng `am force-stop` và `am start` trước khi bắt đầu demo để dòng log luôn mới nhất trong buffer, hoặc kiểm tra tính ổn định qua file debug token `.local/secrets/device-token.txt`.
 
 ---
 

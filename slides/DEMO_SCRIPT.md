@@ -40,11 +40,17 @@
 
 - **Nhãn màn hình:** `[LIVE — emulator-01 — run-demo-01]`
 - **Thao tác của Trí:**
-  1. Chiếu màn hình app: chỉ vào thẻ trạng thái `Version cache: v1` và `Mode: PUSH` (chế độ ban đầu được cấu hình qua database metadata; bộ chọn mode UI là phần phụ thuộc SEM-36 đang Todo).
-  2. Đối chiếu trạng thái token trên terminal qua logcat: `adb logcat -d -s FcmTokenManager` hiển thị `fcmTokenStatus = READY` kèm fingerprint 16 hex (giao diện `BulletinScreen` không in token để bảo mật).
+  1. Chiếu màn hình app: chỉ vào thẻ trạng thái `Version cache: v1` và `Mode: HYBRID`.
+     - *Khớp nối hiện trạng code:* Trong code hiện tại, `RealBulletinUiGateway.setMode` chưa có UI/CLI gọi (thuộc task tích hợp [SEM-36](../tasks/backlog/SEM-36.md) đang `Todo`), nên khi chưa ghi đè key `mode` trong Room, app lấy mặc định an toàn là **HYBRID**. Ở mode này, `PushSyncEnqueueAdapter` vẫn cho phép nhận push bình thường (vượt qua kiểm tra mode guard).
+     - *(Tùy chọn gán mode:* Nếu môi trường máy ảo có binary `sqlite3`, có thể gán `mode = PUSH` trước demo bằng lệnh: `adb shell "sqlite3 /data/data/com.thanhtris.seminarie307/databases/seminar_bulletin.db \"INSERT OR REPLACE INTO sync_metadata (key, value) VALUES ('mode', 'PUSH');\""` và mở lại app).*
+  2. Bước chuẩn bị và đối chiếu token:
+     - Trước demo, khởi động lại app một lần (`adb shell am force-stop com.thanhtris.seminarie307 && adb shell am start -n com.thanhtris.seminarie307/.MainActivity`) để `SeminarApp.onCreate()` kích hoạt lưu token vào Room.
+     - Trên terminal, chạy `adb logcat -d -s FcmTokenManager` đối chiếu dòng log thật:
+       `FCM token stored: source=STARTUP, changed=..., fingerprint=<16-hex>`
+       *(Lưu ý: mã trạng thái `fcmTokenStatus = READY` được lưu bền vững trong Room `sync_metadata`; Logcat chỉ ghi dòng `FCM token stored` tại thời điểm lưu token nên cần bước khởi động lại app để log nằm trong buffer. Trạng thái bền vững cũng được xác nhận qua file debug `.local/secrets/device-token.txt` có fingerprint khớp logcat).*
   3. Bấm **Home** đưa app về nền (`stopped=false`); mở sẵn hai khung log Server và Android đã lọc theo `run-demo-01`.
-- **Lời dẫn của Trang (45 từ, ~20 giây):**
-  > “Bây giờ là 4 phút demo luồng dữ liệu từ trigger đến Room cache. Trên màn hình là app ở chế độ **PUSH**, cache ban đầu là **version 1**. Trí vừa bấm nút **Home** đưa app về nền; logcat xác nhận token ở trạng thái `READY`, lịch định kỳ đã tắt.”
+- **Lời dẫn của Trang (50 từ, ~22 giây):**
+  > “Bây giờ là 4 phút demo luồng dữ liệu từ trigger đến Room cache. Trên màn hình là app với cache ban đầu là **version 1** và chế độ mặc định **HYBRID** cho phép nhận cả push lẫn periodic. Trí vừa bấm nút **Home** đưa app về nền; logcat xác nhận token đã lưu kèm fingerprint an toàn, sẵn sàng nhận tín hiệu ngầm.”
 
 ---
 
