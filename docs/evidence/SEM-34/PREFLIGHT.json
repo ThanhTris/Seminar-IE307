@@ -1,0 +1,207 @@
+{
+  "data_kind": "OBSERVED",
+  "checked_at_utc": "2026-11-11T18:46:57.858237Z",
+  "operator_alias": "Vinh5905",
+  "device_alias": "emulator-main",
+  "host_config": {
+    "env_config_present": {
+      "FIREBASE_PROJECT_ID": false,
+      "GOOGLE_APPLICATION_CREDENTIALS": false,
+      "FCM_TOKEN_FILE": false
+    },
+    "google_services_file_present": false,
+    "adc_default_present": false,
+    "example_service_account_present": false,
+    "example_token_present": false
+  },
+  "user_confirmed_firebase_not_configured": true,
+  "build": {
+    "app_commit": "decdef675e9eb11104bfb77cef57565d72df05d8",
+    "server_commit": "decdef675e9eb11104bfb77cef57565d72df05d8",
+    "files": {
+      "application_apk": {
+        "sha256": "39255f700a271d73d8bc4cd16f3741e11f1446980542125d5eb0efdf35dc2f39",
+        "bytes": 15010731
+      },
+      "instrumentation_apk": {
+        "sha256": "256586356d143e0667320197130dab5de00533e47ef3892b5f4a51f23395e5b8",
+        "bytes": 1116596
+      },
+      "harness_source": {
+        "sha256": "ecef0695b7a54e15e828915be1e9bc4e96d6860216b74ad5fdd6b6f3253c867f",
+        "bytes": 6321
+      }
+    },
+    "installed_apk_matches": true,
+    "unit_tests": {
+      "tests": 31,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "test_suites": [
+      {
+        "name": "com.thanhtris.seminarie307.fcm.PushSyncEnqueueAdapterTest",
+        "tests": 6,
+        "failures": 0
+      },
+      {
+        "name": "com.thanhtris.seminarie307.fcm.PushInputPolicyTest",
+        "tests": 15,
+        "failures": 0
+      },
+      {
+        "name": "com.thanhtris.seminarie307.ui.RunIdFilterTest",
+        "tests": 2,
+        "failures": 0
+      },
+      {
+        "name": "com.thanhtris.seminarie307.fcm.FcmTokenManagerTest",
+        "tests": 8,
+        "failures": 0
+      }
+    ],
+    "harness_commit": "9f7f0e53875df14b34b7e0ae91f8dcf10549dec0"
+  },
+  "device": {
+    "manufacturer": "Google",
+    "model": "sdk_gphone16k_arm64",
+    "android_release": "17",
+    "api_level": 37,
+    "security_patch": "2026-07-05",
+    "build_fingerprint": "google/sdk_gphone16k_arm64/emu64a16k:17/CP31.260623.012/16064790:user/dev-keys",
+    "abi": "arm64-v8a",
+    "kind": "EMULATOR",
+    "coloros": null,
+    "page_size_bytes": 16384,
+    "play_services_version": "26.43.30"
+  },
+  "android_preflight": {
+    "captured_at_utc": "2026-11-11T18:45:24.220Z",
+    "elapsed_realtime_ms": 201943,
+    "action": "preflight",
+    "run_id": "run-sem34-preflight-20261112",
+    "android_event_format": "legacy-room-v1",
+    "mode": "PERIODIC",
+    "cached_version": "3",
+    "fcm_token_status": "FIREBASE_NOT_CONFIGURED",
+    "debug_token_file_present": false,
+    "active_periodic_work_count": 0,
+    "active_sync_work_count": 0,
+    "active_app_notification_count": 0
+  },
+  "android_postflight": {
+    "captured_at_utc": "2026-11-11T18:45:57.540Z",
+    "elapsed_realtime_ms": 235250,
+    "action": "snapshot",
+    "run_id": "run-sem34-preflight-20261112",
+    "android_event_format": "legacy-room-v1",
+    "mode": "PERIODIC",
+    "cached_version": "3",
+    "fcm_token_status": "FIREBASE_NOT_CONFIGURED",
+    "debug_token_file_present": false,
+    "active_periodic_work_count": 0,
+    "active_sync_work_count": 0,
+    "active_app_notification_count": 0
+  },
+  "instrumentation": {
+    "preflight": "PASS",
+    "prepare_without_token": "EXPECTED_FAILURE_BEFORE_MODE_CHANGE",
+    "http_client_v2_probe": "PASS",
+    "snapshot": "PASS",
+    "configured_prepare_and_cleanup": "NOT_RUN"
+  },
+  "host_tests": {
+    "android_unit_tests": {
+      "tests": 31,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "server_tests": {
+      "tests": 22,
+      "passed": 22,
+      "failed": 0
+    }
+  },
+  "payload_validation": {
+    "status": "validated_locally",
+    "message": {
+      "data": {
+        "run_id": "run-sem34-fcm-config-20261112",
+        "mode": "PUSH",
+        "source": "PUSH",
+        "version_hint": "1",
+        "signal_id": "signal-sem34-config-20261112"
+      },
+      "android": {
+        "priority": "normal",
+        "ttl": 86400000
+      }
+    }
+  },
+  "sender_control": {
+    "run_id": "run-sem34-fcm-config-20261112",
+    "cli_exit_code": 1,
+    "status": "local_failure",
+    "reason": "INVALID_FCM_CONFIG",
+    "sdk_attempt_id": null,
+    "message_id": null
+  },
+  "postflight": {
+    "home_resumed": true,
+    "package_stopped": false,
+    "deep_idle": "ACTIVE",
+    "network_connected": true,
+    "mode_restored": true,
+    "mode_was_changed": false,
+    "active_sync_work": 0,
+    "active_app_notifications_at_checkpoint": 0,
+    "dedicated_server_stopped": true,
+    "server_lock_released": true
+  },
+  "pilot_runs": [
+    {
+      "run_id": "run-sem34-e02-20261112-01",
+      "execution_status": "NOT_RUN",
+      "planned_window_seconds": 120
+    },
+    {
+      "run_id": "run-sem34-e02-20261112-02",
+      "execution_status": "NOT_RUN",
+      "planned_window_seconds": 120
+    },
+    {
+      "run_id": "run-sem34-e02-20261112-03",
+      "execution_status": "NOT_RUN",
+      "planned_window_seconds": 120
+    },
+    {
+      "run_id": "run-sem34-e02-20261112-04",
+      "execution_status": "NOT_RUN",
+      "planned_window_seconds": 120
+    },
+    {
+      "run_id": "run-sem34-e02-20261112-05",
+      "execution_status": "NOT_RUN",
+      "planned_window_seconds": 120
+    }
+  ],
+  "private_capture_sha256": {
+    "preflight-state.json": "49a16aeab193184727447c6120a873617de96d069dd3fd6f6244e9721e0e5664",
+    "snapshot-state.json": "7be92dce4e641e21a7edb52d985ee8ebe822daf46a1777fdb84412c98a6f359b",
+    "preflight-events-legacy.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "snapshot-events-legacy.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "preflight-instrument.txt": "0929754c5ee5e6fbdd05da0a7337f5c4ca25398394be0276612c3f171cb00cae",
+    "prepare-instrument.txt": "ab6eb6e782b10e7b262dbe987d7dda6172f926cab4ad9a7ed452a77a5e922c35",
+    "snapshot-instrument.txt": "e38414bb5a8bcd6dbdab88c7728c19d1456d5a099300fb69258414db6c1546ee",
+    "http-probe-instrument.txt": "afa645622f1bb3d46a16155ffa75fb21fc600c4f8c53681e16bcf643344ccca3",
+    "after-activity.txt": "9d6ab50bfb9df89ce0a2f704dee8080fdcabe716a171bdee7b800c8feca5108e",
+    "after-package.txt": "0385b4fb373c7c7671fa19f5aa889c5d925aee986c13f9b01cb89b163a70bc02",
+    "after-idle.txt": "7b942f8e00ffb954df7ec58ff46a25cf375076a1637c7db3b8c6d6c0b5334c20",
+    "after-battery.txt": "4b4de2c1b617d5a089d3c66a0dde67d44067d1b43514320f1997822e71316c10",
+    "after-network.txt": "e6da19c450bcdfb822e897f784e64c70bb69b94b14e374671a3760435b9929df"
+  },
+  "e02_observation": "NOT_RUN",
+  "canonical_android_v2_producer": "NOT_AVAILABLE"
+}
