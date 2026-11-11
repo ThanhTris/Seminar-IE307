@@ -16,7 +16,7 @@ Hạn cuối 13/11/2026; bài nói 15 phút gồm demo. Tổng công sức giữ
 | Tuấn | `mtuan2491` | 8 | 19 |
 
 <!-- team-snapshot:start -->
-Status và Input status đối chiếu Project lúc **2026-11-11 02:38:12 UTC**. Mở từng task để xem cụ thể file đầu vào, người bàn giao và CHECKS phải nhận. [Cách làm mới trạng thái](../tasks/README.md#trạng-thái-đối-chiếu-project).
+Status và Input status đối chiếu Project lúc **2026-11-11 14:12:33 UTC**. Mở từng task để xem cụ thể file đầu vào, người bàn giao và CHECKS phải nhận. [Cách làm mới trạng thái](../tasks/README.md#trạng-thái-đối-chiếu-project).
 <!-- team-snapshot:end -->
 
 ## Trí
@@ -39,7 +39,7 @@ Status và Input status đối chiếu Project lúc **2026-11-11 02:38:12 UTC**.
 | [SEM-32](../tasks/backlog/SEM-32.md) | Triển khai callback FCM và enqueue sync | Done | Đã hoàn thành | 02/11/2026 18:00 (UTC+7) | [SEM-15](../tasks/backlog/SEM-15.md), [SEM-25](../tasks/backlog/SEM-25.md), [SEM-28](../tasks/backlog/SEM-28.md) | Không có. |
 | [SEM-33](../tasks/backlog/SEM-33.md) | Xử lý token refresh và bàn giao PUSH.md | Done | Đã hoàn thành | 03/11/2026 14:00 (UTC+7) | [SEM-13](../tasks/backlog/SEM-13.md), [SEM-32](../tasks/backlog/SEM-32.md) | Không có. |
 | [SEM-38](../tasks/backlog/SEM-38.md) | Xử lý duplicate và version hint của push | Done | Đã hoàn thành | 05/11/2026 12:00 (UTC+7) | [SEM-32](../tasks/backlog/SEM-32.md), [SEM-33](../tasks/backlog/SEM-33.md) | Không có. |
-| [SEM-47](../tasks/backlog/SEM-47.md) | Viết phần silent push và lời dẫn demo 4 phút | Todo | Sẵn sàng | 08/11/2026 16:00 (UTC+7) | [SEM-15](../tasks/backlog/SEM-15.md) | [SEM-33](../tasks/backlog/SEM-33.md), [SEM-34](../tasks/backlog/SEM-34.md), [SEM-38](../tasks/backlog/SEM-38.md) |
+| [SEM-47](../tasks/backlog/SEM-47.md) | Viết phần silent push và lời dẫn demo 4 phút | Done | Đã hoàn thành | 08/11/2026 16:00 (UTC+7) | [SEM-15](../tasks/backlog/SEM-15.md) | [SEM-33](../tasks/backlog/SEM-33.md), [SEM-34](../tasks/backlog/SEM-34.md), [SEM-38](../tasks/backlog/SEM-38.md) |
 
 ## Vinh
 
