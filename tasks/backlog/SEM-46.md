@@ -2,7 +2,7 @@
 
 - Trạng thái: **In Progress** (Project).
 - Trạng thái đầu vào: **Đang thực hiện**.
-- Đối chiếu Project: 2026-11-09 15:47:06 UTC.
+- Đối chiếu Project: 2026-11-11 02:38:12 UTC.
 - Người thực hiện duy nhất: **Tuấn** (`mtuan2491`).
 - Hạn: **08/11/2026 16:00 (UTC+7)**.
 - Công sức: 1/100 — Nghiên cứu/lập luận.
@@ -27,7 +27,7 @@ Tài liệu nền đã có: [Kế hoạch/phạm vi](../../docs/PLAN.md) · [K�
 
 Đây là danh sách đầu ra cần bàn giao, chưa phải xác nhận các file đã tồn tại. Trước khi dùng, nhận đúng artifact/commit/config và CHECKS từ task nguồn.
 
-Status nguồn được đối chiếu Project lúc **2026-11-09 15:47:06 UTC**; mở link task nguồn để xem cập nhật mới hơn.
+Status nguồn được đối chiếu Project lúc **2026-11-11 02:38:12 UTC**; mở link task nguồn để xem cập nhật mới hơn.
 <!-- task-inputs:end -->
 
 
@@ -35,7 +35,7 @@ Status nguồn được đối chiếu Project lúc **2026-11-09 15:47:06 UTC**;
 
 1. Viết nội dung mở bài/câu hỏi trigger-to-cache và thao tác thiết bị cho demo.
 2. Liên kết bản ứng viên, mode/reset và phương án mở log/video trong đúng phần nói.
-3. Bàn giao file nội dung riêng; không chỉnh deck chính của Tuấn.
+3. Bàn giao file nội dung riêng cho phần mở bài do Trí trình bày; deck chính được ghép ở SEM-51.
 
 ## Đầu ra bắt buộc
 

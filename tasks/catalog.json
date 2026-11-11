@@ -1960,7 +1960,7 @@
         {
           "source_task": "SEM-44",
           "required_for": "start",
-          "producer": "Trang",
+          "producer": "Tâm",
           "artifacts": [
             "experiments/AUDIT.md"
           ],
@@ -1984,8 +1984,8 @@
     {
       "id": "SEM-44",
       "source_group": "SEM-08",
-      "owner": "Trang",
-      "github": "rosy179",
+      "owner": "Tâm",
+      "github": "HoaiTam",
       "effort": 1,
       "category": "practice",
       "title": "Kiểm độc lập trigger và phép tính dữ liệu main",
@@ -2146,7 +2146,7 @@
       "work": [
         "Viết nội dung mở bài/câu hỏi trigger-to-cache và thao tác thiết bị cho demo.",
         "Liên kết bản ứng viên, mode/reset và phương án mở log/video trong đúng phần nói.",
-        "Bàn giao file nội dung riêng; không chỉnh deck chính của Tuấn."
+        "Bàn giao file nội dung riêng cho phần mở bài do Trí trình bày; deck chính được ghép ở SEM-51."
       ],
       "outputs": [
         "slides/inputs/TRI.md"
@@ -2304,7 +2304,7 @@
         {
           "source_task": "SEM-44",
           "required_for": "finish",
-          "producer": "Trang",
+          "producer": "Tâm",
           "artifacts": [
             "experiments/AUDIT.md"
           ],
@@ -2435,17 +2435,20 @@
         "SEM-45"
       ],
       "work": [
-        "Soạn khung report ngay; nhận notes/evidence rồi hoàn thiện cơ chế, phương pháp, kết quả và giới hạn.",
-        "Ghép metadata hai bài vào references.bib; tạo CLAIMS có nguồn/vị trí/case/evidence/trạng thái.",
-        "Đối chiếu các kết luận với SUMMARY và không trình bày giả thuyết như số đo."
+        "Viết báo cáo bằng template LaTeX của môn theo bố cục giảng viên yêu cầu trong docs/SUBMISSION_REQUIREMENTS.md: 1. Giới thiệu đề tài; 2. Hiện thực đề tài; 3. Kết luận và khuyến nghị; phụ lục Bảng phân công công việc lấy từ TEAM_ASSIGNMENTS.",
+        "Chương 2 có đủ: môi trường thực hiện, công cụ/công nghệ, các bước cài đặt, cấu hình, các bước triển khai/thực thi, kết quả đầu ra, minh họa chức năng/thành phần chính, vấn đề gặp phải và cách xử lý, mục Video demo (SEM-55 chèn link Drive khi đóng gói).",
+        "Chuyển nội dung bản nháp REPORT.md vào LaTeX; ghép metadata hai bài vào references.bib; tạo CLAIMS có nguồn/vị trí/case/evidence/trạng thái.",
+        "Đối chiếu các kết luận với SUMMARY, không trình bày giả thuyết như số đo; biên dịch PDF từ mã LaTeX đã commit."
       ],
       "outputs": [
-        "report/REPORT.md",
+        "report/latex/ (mã nguồn LaTeX theo template môn, gồm main.tex)",
+        "report/seminar-ie307.pdf",
         "research/references.bib",
         "docs/CLAIMS.md"
       ],
       "acceptance": [
-        "Hai nghiên cứu có vai trò trong lập luận, DOI/metadata khớp và citations truy được.",
+        "Bố cục đúng 3 chương và phụ lục Bảng phân công theo yêu cầu giảng viên; chương Hiện thực đủ 9 mục con.",
+        "PDF biên dịch được từ mã LaTeX trong repo; hai nghiên cứu có vai trò trong lập luận, DOI/metadata khớp và citations truy được.",
         "Số liệu/giới hạn khớp logs/CSV/SUMMARY; phần chưa chạy nêu rõ."
       ],
       "input_status": "Đang thực hiện",
@@ -2546,7 +2549,8 @@
         "slides/SPEAKER_NOTES.md"
       ],
       "acceptance": [
-        "Bộ slide chỉnh sửa được và PDF đọc được; không tăng tổng thời lượng vì chuyển người.",
+        "Bộ slide nộp ở dạng PPTX chỉnh sửa được và PDF đọc được; không tăng tổng thời lượng vì chuyển người.",
+        "Nội dung bám bố cục báo cáo: giới thiệu, hiện thực và demo, kết quả, kết luận và khuyến nghị.",
         "Bản cuối chỉ dùng input/evidence đã bàn giao; không ghi đã có kết quả khi chưa có."
       ],
       "input_status": "Sẵn sàng",
@@ -2598,7 +2602,8 @@
           "required_for": "finish",
           "producer": "Tuấn",
           "artifacts": [
-            "report/REPORT.md",
+            "report/latex/ (mã nguồn LaTeX theo template môn, gồm main.tex)",
+            "report/seminar-ie307.pdf",
             "research/references.bib",
             "docs/CLAIMS.md"
           ],
@@ -2668,7 +2673,8 @@
           "required_for": "finish",
           "producer": "Tuấn",
           "artifacts": [
-            "report/REPORT.md",
+            "report/latex/ (mã nguồn LaTeX theo template môn, gồm main.tex)",
+            "report/seminar-ie307.pdf",
             "research/references.bib",
             "docs/CLAIMS.md"
           ],
@@ -2706,16 +2712,17 @@
       "finish_dependencies": [],
       "work": [
         "Làm theo runbook trên thiết bị, ghi bước tái lập được và blocker/sai lệch để task SEM-52 sửa.",
-        "Quay video thật của đúng build; gắn nhãn playback và run/commit/checksum.",
-        "Xuất video manifest/link artifact; không commit media quá lớn hoặc lộ token/serial."
+        "Quay video demo thật của đúng build, minh họa đủ chức năng chính (PUSH live, PERIODIC, HYBRID khi bỏ gửi push); video này là mục Video demo phải nộp và cũng là bản dự phòng khi trình bày; gắn nhãn playback và run/commit/checksum.",
+        "Upload video lên Drive, chia sẻ quyền truy cập cho email giảng viên nêu trong thông báo seminar và kiểm link bằng tài khoản khác; ghi link vào VIDEO_MANIFEST để SEM-55 chèn vào báo cáo; không commit media lớn hoặc lộ token/serial."
       ],
       "outputs": [
         "release/VIDEO_MANIFEST.json",
         "docs/evidence/SEM-53/REPRODUCTION.md",
-        "Video demo/fallback có liên kết tải"
+        "Video demo trên Drive, đã chia sẻ cho giảng viên, có liên kết tải"
       ],
       "acceptance": [
-        "Video có metadata thật và không thay evidence thực nghiệm bằng mô phỏng.",
+        "Video có metadata thật, minh họa đủ chức năng chính và không thay evidence thực nghiệm bằng mô phỏng.",
+        "Link Drive mở được bằng tài khoản được chia sẻ; link có trong VIDEO_MANIFEST.",
         "Runbook tái lập được hoặc chỉ rõ phần cần hỗ trợ; dữ liệu nhạy cảm đã được loại."
       ],
       "input_status": "Chờ đầu vào",
@@ -2797,7 +2804,7 @@
           "artifacts": [
             "release/VIDEO_MANIFEST.json",
             "docs/evidence/SEM-53/REPRODUCTION.md",
-            "Video demo/fallback có liên kết tải"
+            "Video demo trên Drive, đã chia sẻ cho giảng viên, có liên kết tải"
           ],
           "checks": "docs/evidence/SEM-53/CHECKS.md",
           "source_status": "Todo"
@@ -2826,16 +2833,21 @@
       "finish_dependencies": [],
       "work": [
         "Ghép chỉ mục APK/server/source/slide/report/video/checks thành manifest cuối.",
-        "Rà link tải/checksum/version và danh mục phần còn thiếu, dành 13/11 sửa lỗi cuối.",
+        "Chèn link Drive của video và file lớn vào mục Video demo của báo cáo LaTeX, biên dịch lại PDF và kiểm link.",
+        "Đóng gói IE307.R11_Seminar_Nhom<X>.ZIP gồm PDF báo cáo, PPTX, mã nguồn code + LaTeX và demo (APK, link video); loại .env, service-account key, google-services.json, node_modules, build, .gradle và .local.",
+        "Rà theo docs/SUBMISSION_REQUIREMENTS.md: link tải/checksum/version, quyền chia sẻ Drive cho giảng viên và danh mục phần còn thiếu; dành 13/11 sửa lỗi cuối.",
         "Ghi quan hệ commit code đã đo và commit tài liệu cuối; không yêu cầu hai commit phải trùng."
       ],
       "outputs": [
         "release/MANIFEST.json",
-        "release/README.md"
+        "release/README.md",
+        "release/SUBMISSION_CHECKLIST.md",
+        "IE307.R11_Seminar_Nhom<X>.ZIP (không commit; SHA256 và nơi nộp ghi trong MANIFEST)"
       ],
       "acceptance": [
         "Mọi artifact truy được source/build/evidence và tải/đọc được.",
-        "Video/rehearsal/report/slide có thật trước khi Done, phần chưa thực hiện liệt kê rõ."
+        "ZIP đúng tên, giải nén có đủ PDF, PPTX, mã nguồn code + LaTeX và demo; không chứa credential.",
+        "Link Drive trong báo cáo mở được với tài khoản được chia sẻ; video/rehearsal/report/slide có thật trước khi Done, phần chưa thực hiện liệt kê rõ."
       ],
       "input_status": "Chờ đầu vào",
       "inputs": [
@@ -2854,7 +2866,8 @@
           "required_for": "start",
           "producer": "Tuấn",
           "artifacts": [
-            "report/REPORT.md",
+            "report/latex/ (mã nguồn LaTeX theo template môn, gồm main.tex)",
+            "report/seminar-ie307.pdf",
             "research/references.bib",
             "docs/CLAIMS.md"
           ],
@@ -2892,7 +2905,7 @@
           "artifacts": [
             "release/VIDEO_MANIFEST.json",
             "docs/evidence/SEM-53/REPRODUCTION.md",
-            "Video demo/fallback có liên kết tải"
+            "Video demo trên Drive, đã chia sẻ cho giảng viên, có liên kết tải"
           ],
           "checks": "docs/evidence/SEM-53/CHECKS.md",
           "source_status": "Todo"
@@ -2911,7 +2924,7 @@
       "due_at": "2026-11-12T22:00:00+07:00"
     }
   ],
-  "snapshot_at": "2026-11-09 15:47:06 UTC",
+  "snapshot_at": "2026-11-11 02:38:12 UTC",
   "snapshot_source": "https://github.com/users/ThanhTris/projects/3/views/1",
   "timezone": "Asia/Ho_Chi_Minh",
   "deadline_at": "2026-11-13T22:00:00+07:00",

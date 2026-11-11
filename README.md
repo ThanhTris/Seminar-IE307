@@ -11,6 +11,7 @@
 - [Phân công 6 thành viên](docs/TEAM_ASSIGNMENTS.md)
 - [Kịch bản thuyết trình 15 phút](docs/PRESENTATION_PLAN.md)
 - [Thiết kế kiểm thử](docs/EXPERIMENT_PROTOCOL.md)
+- [Yêu cầu báo cáo và gói nộp của giảng viên](docs/SUBMISSION_REQUIREMENTS.md)
 - [Tài liệu tham khảo](research/README.md)
 
 ## Đã chốt
@@ -26,4 +27,4 @@
 
 Tại lần rà soát 28/10/2026, repo có tài liệu kế hoạch; **chưa có code demo, APK, bài báo đã tuyển chọn hoặc kết quả đo**. Các đầu ra trong task là yêu cầu tương lai. Việc cập nhật kế hoạch không đồng nghĩa hoàn thành các task. Cập nhật 29/10/2026: đã chia 45 task SEM-11…SEM-55, mỗi task đúng một người; toàn bộ vẫn Todo.
 
-Bước tiếp theo: Trí làm SEM-11, Vinh làm SEM-12, Tâm làm SEM-13; Trang làm SEM-15, Trung làm SEM-17, Tuấn chuẩn bị SEM-19/20. Xem 45 task một người ở bảng hiện hành; 10 thẻ cũ đã archive. Theo dõi tiến độ trong task, chỉ chuyển done khi có đầu ra và kiểm chứng.
+Cập nhật 11/11/2026 (snapshot Project 09/11): 28/45 task Done, 3 In Progress, 14 Todo. Đã có app Android, server, CLI gửi push và pilot periodic; chưa có pilot push (SEM-34), tích hợp hybrid (SEM-36), bản ứng viên (SEM-37), các lần chạy chính (SEM-41/42), báo cáo LaTeX/PDF, PPTX, APK bàn giao, video demo và file ZIP nộp. Yêu cầu của giảng viên và phần còn lệch ghi tại [SUBMISSION_REQUIREMENTS](docs/SUBMISSION_REQUIREMENTS.md). Chỉ chuyển done khi có đầu ra và kiểm chứng.

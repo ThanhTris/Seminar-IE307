@@ -2,7 +2,7 @@
 
 - Trạng thái: **Todo** (Project).
 - Trạng thái đầu vào: **Chờ đầu vào**.
-- Đối chiếu Project: 2026-11-09 15:47:06 UTC.
+- Đối chiếu Project: 2026-11-11 02:38:12 UTC.
 - Người thực hiện duy nhất: **Trí** (`ThanhTris`).
 - Hạn: **12/11/2026 15:00 (UTC+7)**.
 - Công sức: 2/100 — Cơ chế/thực hành.
@@ -26,26 +26,27 @@ Tài liệu nền đã có: [Kế hoạch/phạm vi](../../docs/PLAN.md) · [K�
 
 Đây là danh sách đầu ra cần bàn giao, chưa phải xác nhận các file đã tồn tại. Trước khi dùng, nhận đúng artifact/commit/config và CHECKS từ task nguồn.
 
-Status nguồn được đối chiếu Project lúc **2026-11-09 15:47:06 UTC**; mở link task nguồn để xem cập nhật mới hơn.
+Status nguồn được đối chiếu Project lúc **2026-11-11 02:38:12 UTC**; mở link task nguồn để xem cập nhật mới hơn.
 <!-- task-inputs:end -->
 
 
 ## Việc Trí cần làm
 
 1. Làm theo runbook trên thiết bị, ghi bước tái lập được và blocker/sai lệch để task SEM-52 sửa.
-2. Quay video thật của đúng build; gắn nhãn playback và run/commit/checksum.
-3. Xuất video manifest/link artifact; không commit media quá lớn hoặc lộ token/serial.
+2. Quay video demo thật của đúng build, minh họa đủ chức năng chính (PUSH live, PERIODIC, HYBRID khi bỏ gửi push); video này là mục Video demo phải nộp và cũng là bản dự phòng khi trình bày; gắn nhãn playback và run/commit/checksum.
+3. Upload video lên Drive, chia sẻ quyền truy cập cho email giảng viên nêu trong thông báo seminar và kiểm link bằng tài khoản khác; ghi link vào VIDEO_MANIFEST để SEM-55 chèn vào báo cáo; không commit media lớn hoặc lộ token/serial.
 
 ## Đầu ra bắt buộc
 
 - `release/VIDEO_MANIFEST.json`
 - `docs/evidence/SEM-53/REPRODUCTION.md`
-- `Video demo/fallback có liên kết tải`
+- `Video demo trên Drive, đã chia sẻ cho giảng viên, có liên kết tải`
 - `docs/evidence/SEM-53/CHECKS.md`: commit/build/config, thao tác, expected/actual, Pass/Fail/Not run, evidence, blocker và đầu ra đã bàn giao.
 
 ## Tiêu chí hoàn thành
 
-- [ ] Video có metadata thật và không thay evidence thực nghiệm bằng mô phỏng.
+- [ ] Video có metadata thật, minh họa đủ chức năng chính và không thay evidence thực nghiệm bằng mô phỏng.
+- [ ] Link Drive mở được bằng tài khoản được chia sẻ; link có trong VIDEO_MANIFEST.
 - [ ] Runbook tái lập được hoặc chỉ rõ phần cần hỗ trợ; dữ liệu nhạy cảm đã được loại.
 - [ ] Đầu ra và CHECKS có thật, link đọc được; chưa chạy phải ghi Not run, không tự chuyển Done từ kế hoạch.
 

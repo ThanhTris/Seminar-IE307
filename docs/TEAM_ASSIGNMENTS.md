@@ -9,14 +9,14 @@ Hạn cuối 13/11/2026; bài nói 15 phút gồm demo. Tổng công sức giữ
 | Người | GitHub | Số task | Công sức / 100 |
 |---|---|---:|---:|
 | Trí | `ThanhTris` | 6 | 14 |
-| Trang | `rosy179` | 7 | 17 |
-| Vinh | `Vinh5905` | 8 | 13 |
+| Trang | `rosy179` | 6 | 16 |
+| Vinh | `Vinh5905` | 8 | 12 |
 | Trung | `TrungNQ2645` | 8 | 22 |
-| Tâm | `HoaiTam` | 8 | 16 |
-| Tuấn | `mtuan2491` | 8 | 18 |
+| Tâm | `HoaiTam` | 9 | 17 |
+| Tuấn | `mtuan2491` | 8 | 19 |
 
 <!-- team-snapshot:start -->
-Status và Input status đối chiếu Project lúc **2026-11-09 15:47:06 UTC**. Mở từng task để xem cụ thể file đầu vào, người bàn giao và CHECKS phải nhận. [Cách làm mới trạng thái](../tasks/README.md#trạng-thái-đối-chiếu-project).
+Status và Input status đối chiếu Project lúc **2026-11-11 02:38:12 UTC**. Mở từng task để xem cụ thể file đầu vào, người bàn giao và CHECKS phải nhận. [Cách làm mới trạng thái](../tasks/README.md#trạng-thái-đối-chiếu-project).
 <!-- team-snapshot:end -->
 
 ## Trí
@@ -39,7 +39,6 @@ Status và Input status đối chiếu Project lúc **2026-11-09 15:47:06 UTC**.
 | [SEM-32](../tasks/backlog/SEM-32.md) | Triển khai callback FCM và enqueue sync | Done | Đã hoàn thành | 02/11/2026 18:00 (UTC+7) | [SEM-15](../tasks/backlog/SEM-15.md), [SEM-25](../tasks/backlog/SEM-25.md), [SEM-28](../tasks/backlog/SEM-28.md) | Không có. |
 | [SEM-33](../tasks/backlog/SEM-33.md) | Xử lý token refresh và bàn giao PUSH.md | Done | Đã hoàn thành | 03/11/2026 14:00 (UTC+7) | [SEM-13](../tasks/backlog/SEM-13.md), [SEM-32](../tasks/backlog/SEM-32.md) | Không có. |
 | [SEM-38](../tasks/backlog/SEM-38.md) | Xử lý duplicate và version hint của push | Done | Đã hoàn thành | 05/11/2026 12:00 (UTC+7) | [SEM-32](../tasks/backlog/SEM-32.md), [SEM-33](../tasks/backlog/SEM-33.md) | Không có. |
-| [SEM-44](../tasks/backlog/SEM-44.md) | Kiểm độc lập trigger và phép tính dữ liệu main | Todo | Chờ đầu vào | 07/11/2026 19:00 (UTC+7) | [SEM-41](../tasks/backlog/SEM-41.md), [SEM-42](../tasks/backlog/SEM-42.md), [SEM-45](../tasks/backlog/SEM-45.md) | Không có. |
 | [SEM-47](../tasks/backlog/SEM-47.md) | Viết phần silent push và lời dẫn demo 4 phút | Todo | Sẵn sàng | 08/11/2026 16:00 (UTC+7) | [SEM-15](../tasks/backlog/SEM-15.md) | [SEM-33](../tasks/backlog/SEM-33.md), [SEM-34](../tasks/backlog/SEM-34.md), [SEM-38](../tasks/backlog/SEM-38.md) |
 
 ## Vinh
@@ -79,6 +78,7 @@ Status và Input status đối chiếu Project lúc **2026-11-09 15:47:06 UTC**.
 | [SEM-27](../tasks/backlog/SEM-27.md) | Triển khai server snapshot và CLI cập nhật | Done | Đã hoàn thành | 31/10/2026 17:00 (UTC+7) | [SEM-13](../tasks/backlog/SEM-13.md), [SEM-26](../tasks/backlog/SEM-26.md) | Không có. |
 | [SEM-35](../tasks/backlog/SEM-35.md) | Làm CLI gửi FCM data-only normal priority | Done | Đã hoàn thành | 01/11/2026 15:00 (UTC+7) | [SEM-13](../tasks/backlog/SEM-13.md), [SEM-18](../tasks/backlog/SEM-18.md), [SEM-27](../tasks/backlog/SEM-27.md) | Không có. |
 | [SEM-40](../tasks/backlog/SEM-40.md) | Thêm fault injection cố ý bỏ gửi push | Done | Đã hoàn thành | 04/11/2026 18:00 (UTC+7) | [SEM-27](../tasks/backlog/SEM-27.md), [SEM-35](../tasks/backlog/SEM-35.md) | Không có. |
+| [SEM-44](../tasks/backlog/SEM-44.md) | Kiểm độc lập trigger và phép tính dữ liệu main | Todo | Chờ đầu vào | 07/11/2026 19:00 (UTC+7) | [SEM-41](../tasks/backlog/SEM-41.md), [SEM-42](../tasks/backlog/SEM-42.md), [SEM-45](../tasks/backlog/SEM-45.md) | Không có. |
 | [SEM-49](../tasks/backlog/SEM-49.md) | Viết phần kiến trúc và lập luận nghiên cứu thứ hai | Done | Đã hoàn thành | 08/11/2026 16:00 (UTC+7) | [SEM-18](../tasks/backlog/SEM-18.md) | [SEM-21](../tasks/backlog/SEM-21.md), [SEM-27](../tasks/backlog/SEM-27.md), [SEM-35](../tasks/backlog/SEM-35.md), [SEM-40](../tasks/backlog/SEM-40.md) |
 
 ## Tuấn
@@ -96,8 +96,8 @@ Status và Input status đối chiếu Project lúc **2026-11-09 15:47:06 UTC**.
 
 ## Quy tắc bàn giao
 
-Mỗi owner chỉ sửa đầu ra của task mình. Tài liệu slide và kịch bản thuyết trình do Tuấn chuyên trách xây dựng và ghép hoàn thiện; Trung sở hữu toàn bộ mã nguồn Android, cơ chế đồng bộ, tích hợp push và đóng gói APK; Tâm sở hữu server, CLI bắn push, mô phỏng lỗi và báo cáo nghiên cứu tổng kết; Vinh sở hữu protocol/scripts thu log, dữ liệu chạy thực nghiệm và video demo; Trí điều phối tổng thể và chốt gói nghiệm thu cuối cùng.
+Mỗi owner chỉ sửa đầu ra của task mình. Theo `tasks/catalog.json` tại 11/11/2026: Tuấn phụ trách parser/CSV, báo cáo LaTeX/PDF, deck PPTX, diễn tập và gói nộp cuối (SEM-45, 46, 50, 51, 54, 55); Trung sở hữu sync core, periodic, tích hợp ba mode, bản ứng viên và APK/runbook (SEM-25, 30, 31, 36, 37, 39, 52); Trang sở hữu phần push trên Android và phụ slide silent push/lời dẫn demo (SEM-32, 33, 38, 47); Tâm sở hữu server, CLI gửi push, fault injection, nghiên cứu bài báo thứ hai, phần kiến trúc và kiểm độc lập dữ liệu (SEM-21, 27, 35, 40, 44, 49); Vinh sở hữu protocol, exporter, các lần chạy pilot/emulator, SUMMARY và phần kết quả (SEM-16, 24, 29, 34, 41, 43, 48); Trí làm scaffold, manual end-to-end, đối chiếu OPPO và tái lập runbook/video demo (SEM-23, 28, 42, 53). Gói nộp phải khớp [yêu cầu giảng viên](SUBMISSION_REQUIREMENTS.md).
 
-Mọi task cần CHECKS thật trước Done. Kiểm độc lập dữ liệu là task SEM-44 của Trung; tái lập runbook/video là SEM-53 của Vinh; điều phối và ghi bấm giờ diễn tập là SEM-54 của Tuấn. Đây là các task riêng, không gán thêm reviewer vào task triển khai. Vai nói trong buổi diễn tập theo PRESENTATION_PLAN; task SEM-54 chỉ giao Tuấn tổ chức/ghi nhận.
+Mọi task cần CHECKS thật trước Done. Kiểm độc lập dữ liệu là task SEM-44 của Tâm; tái lập runbook và video demo là SEM-53 của Trí; điều phối và ghi bấm giờ diễn tập là SEM-54 của Tuấn. Đây là các task riêng, không gán thêm reviewer vào task triển khai. Vai nói trong buổi diễn tập theo PRESENTATION_PLAN; task SEM-54 chỉ giao Tuấn tổ chức/ghi nhận.
 
 M1: SEM-28 trước 31/10. Candidate: SEM-37 cuối 05/11. Main runs: SEM-41/42 ngày 06–07/11. Data audit/CSV/SUMMARY: SEM-44/45/43 ngày 07/11. Input slide ngày 08/11, report ngày 09/11, deck ngày 10/11; APK/runbook ngày 11/11; video/diễn tập/gói cuối ngày 12/11; 13/11 dự phòng.

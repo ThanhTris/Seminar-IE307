@@ -2,7 +2,7 @@
 
 - Trạng thái: **In Progress** (Project).
 - Trạng thái đầu vào: **Đang thực hiện**.
-- Đối chiếu Project: 2026-11-09 15:47:06 UTC.
+- Đối chiếu Project: 2026-11-11 02:38:12 UTC.
 - Người thực hiện duy nhất: **Tuấn** (`mtuan2491`).
 - Hạn: **09/11/2026 22:00 (UTC+7)**.
 - Công sức: 2/100 — Nghiên cứu/lập luận.
@@ -31,26 +31,29 @@ Tài liệu nền đã có: [Kế hoạch/phạm vi](../../docs/PLAN.md) · [K�
 
 Đây là danh sách đầu ra cần bàn giao, chưa phải xác nhận các file đã tồn tại. Trước khi dùng, nhận đúng artifact/commit/config và CHECKS từ task nguồn.
 
-Status nguồn được đối chiếu Project lúc **2026-11-09 15:47:06 UTC**; mở link task nguồn để xem cập nhật mới hơn.
+Status nguồn được đối chiếu Project lúc **2026-11-11 02:38:12 UTC**; mở link task nguồn để xem cập nhật mới hơn.
 <!-- task-inputs:end -->
 
 
 ## Việc Tuấn cần làm
 
-1. Soạn khung report ngay; nhận notes/evidence rồi hoàn thiện cơ chế, phương pháp, kết quả và giới hạn.
-2. Ghép metadata hai bài vào references.bib; tạo CLAIMS có nguồn/vị trí/case/evidence/trạng thái.
-3. Đối chiếu các kết luận với SUMMARY và không trình bày giả thuyết như số đo.
+1. Viết báo cáo bằng template LaTeX của môn theo bố cục giảng viên yêu cầu trong docs/SUBMISSION_REQUIREMENTS.md: 1. Giới thiệu đề tài; 2. Hiện thực đề tài; 3. Kết luận và khuyến nghị; phụ lục Bảng phân công công việc lấy từ TEAM_ASSIGNMENTS.
+2. Chương 2 có đủ: môi trường thực hiện, công cụ/công nghệ, các bước cài đặt, cấu hình, các bước triển khai/thực thi, kết quả đầu ra, minh họa chức năng/thành phần chính, vấn đề gặp phải và cách xử lý, mục Video demo (SEM-55 chèn link Drive khi đóng gói).
+3. Chuyển nội dung bản nháp REPORT.md vào LaTeX; ghép metadata hai bài vào references.bib; tạo CLAIMS có nguồn/vị trí/case/evidence/trạng thái.
+4. Đối chiếu các kết luận với SUMMARY, không trình bày giả thuyết như số đo; biên dịch PDF từ mã LaTeX đã commit.
 
 ## Đầu ra bắt buộc
 
-- `report/REPORT.md`
+- `report/latex/ (mã nguồn LaTeX theo template môn, gồm main.tex)`
+- `report/seminar-ie307.pdf`
 - `research/references.bib`
 - `docs/CLAIMS.md`
 - `docs/evidence/SEM-50/CHECKS.md`: commit/build/config, thao tác, expected/actual, Pass/Fail/Not run, evidence, blocker và đầu ra đã bàn giao.
 
 ## Tiêu chí hoàn thành
 
-- [ ] Hai nghiên cứu có vai trò trong lập luận, DOI/metadata khớp và citations truy được.
+- [ ] Bố cục đúng 3 chương và phụ lục Bảng phân công theo yêu cầu giảng viên; chương Hiện thực đủ 9 mục con.
+- [ ] PDF biên dịch được từ mã LaTeX trong repo; hai nghiên cứu có vai trò trong lập luận, DOI/metadata khớp và citations truy được.
 - [ ] Số liệu/giới hạn khớp logs/CSV/SUMMARY; phần chưa chạy nêu rõ.
 - [ ] Đầu ra và CHECKS có thật, link đọc được; chưa chạy phải ghi Not run, không tự chuyển Done từ kế hoạch.
 
