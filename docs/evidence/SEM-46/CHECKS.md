@@ -1,47 +1,65 @@
-# WIP — SEM-46 chưa hoàn thành, chưa đủ điều kiện merge
+# SEM-46 — CHECKS hoàn tất và bàn giao tài liệu
 
-- Người soạn Tuấn (`mtuan2491`), ngày 09/11/2026 theo yêu cầu thực hiện SEM-46 của người dùng.
-- Nhánh `codex/SEM-46-opening-demo` tạo riêng từ main `54d48c2ed48588b59b16cc652a8d1b77912c15b7`.
-- Người nói mở bài và thao tác thiết bị là Trí theo PRESENTATION_PLAN. Việc soạn của Tuấn và vai nói của Trí được ghi riêng để người nhận dùng đúng file TRI.md.
-- Trạng thái tổng thể **CHƯA HOÀN THÀNH, CHỜ SEM-37**. Candidate manifest, candidate gate và CHECKS đang chờ bàn giao. Nhóm trưởng chỉ review phần chuẩn bị, chờ cập nhật hoàn tất trước khi merge task.
+Tuấn (`mtuan2491`), cập nhật ngày 12/11/2026. Nhánh `codex/SEM-46-opening-demo`.
 
-## Ba bước thực hiện
+**Đầu ra tài liệu SEM-46 đã hoàn tất để review và bàn giao SEM-51 theo quy tắc nhóm ngày 12/11.** Candidate SEM-37, live FCM, playback push/Doze/E06 trên Android và diễn tập thời lượng được ghi Not run tại lần chốt này. [Quy tắc task](../../../tasks/README.md)
 
-| Bước | Đầu ra | Trạng thái |
+## Revision và các bước đã hoàn tất
+
+- Nhánh được tạo từ main `54d48c2ed48588b59b16cc652a8d1b77912c15b7` ngày 09/11. Hai commit soạn ban đầu là `acf341e` và `1369893`.
+- Lần chốt này nhận main `cc2bd1cbaecbd8e2e235af7985bbe720a6e8f1ff`, trong đó đầu vào còn thiếu được ghi Not run/giới hạn khi owner chốt đầu ra của mình.
+- Người soạn là Tuấn. Trí nói mở bài và thao tác, Trang dẫn demo, Vinh nhận phần kết quả theo PRESENTATION_PLAN.
+
+| Bước trong lần chốt | Đầu ra / kết quả | Commit |
 |---|---|---|
-| 1. Soạn mở bài và mốc cơ chế | TRI.md có ngân sách 45 giây, câu chuyển người và mốc trigger-to-cache | **Hoàn tất phần soạn, `acf341e`** |
-| 2. Soạn khung thao tác và phương án dự phòng | Setup/mode/reset, lịch demo 4 phút, nhãn live/playback, bảng chờ candidate và kiểm bàn giao | **Hoàn tất phần dự thảo độc lập, commit bước 2** |
-| 3. Chốt trên candidate thật | Nhận SEM-37, điền commit/APK/config/công cụ thật, kiểm live/playback rồi chốt input cho SEM-51 | **Chờ SEM-37, Not run** |
+| 1. Cập nhật main | Nhận policy ngày 12/11, SEM-47/49 và source messaging/token mới | `107d271` |
+| 2. Hoàn thiện TRI.md | Lời mở bài, mode HYBRID mặc định, phối hợp SEM-47, lựa chọn evidence và lệnh CONTRACT đã chạy | `175257e` |
+| 3. Kiểm cuối và chốt bàn giao | Hồ sơ này và checklist SEM-46, ghi các phép kiểm và Not run | Tra commit bằng `git log --oneline -- docs/evidence/SEM-46/CHECKS.md` |
 
-Mỗi bước thực hiện xong được commit riêng. Dùng `git log --oneline -- docs/evidence/SEM-46/CHECKS.md` để truy các commit.
-
-## Nguồn đã đọc
+## Artifact và nguồn đã nhận
 
 | Nguồn | Artifact / kiểm chứng | Cách dùng |
 |---|---|---|
-| SEM-14, Done | [SHARED_SYNC](../../mechanisms/SHARED_SYNC.md), [CHECKS](../SEM-14/CHECKS.md) | Luồng trigger, worker, repository, Room và UI |
-| Kế hoạch | [SCOPE](../../SCOPE.md), [PRESENTATION_PLAN](../../PRESENTATION_PLAN.md) | Mở bài 45 giây, demo 4 phút, Trí thao tác và Trang dẫn |
-| SEM-19 | [MECHANISMS](../../MECHANISMS.md), [QUESTIONS](../../QUESTIONS.md) | Cách diễn giải event, giới hạn và nguồn |
-| SEM-37, Todo tại main nền | [Yêu cầu candidate](../../../tasks/backlog/SEM-37.md) | Đang chờ `release/CANDIDATE_MANIFEST.json`, CANDIDATE_GATE và CHECKS |
+| SEM-14, Done | [SHARED_SYNC](../../mechanisms/SHARED_SYNC.md), [CHECKS](../SEM-14/CHECKS.md) | Trigger, worker, transaction/version và UI |
+| Kế hoạch | [SCOPE](../../SCOPE.md), [PRESENTATION_PLAN](../../PRESENTATION_PLAN.md) | Mở bài 45 giây, demo 4 phút, vai nói/thao tác |
+| SEM-19, Done | [MECHANISMS](../../MECHANISMS.md), [QUESTIONS](../../QUESTIONS.md) | Cách gọi event và giới hạn nguồn |
+| SEM-47, Done | [TRANG.md](../../../slides/inputs/TRANG.md), [DEMO_SCRIPT](../../../slides/DEMO_SCRIPT.md), [CHECKS](../SEM-47/CHECKS.md) | Năm phân đoạn, nhịp phối hợp và đường CONTRACT khi thiếu Firebase |
+| SEM-28, Done | [M1](../SEM-28/M1.md) | Hồ sơ MANUAL và giao dịch cache, giữ nhãn M1 |
+| SEM-29, Done | [CHECKS](../SEM-29/CHECKS.md), [manifest r2](../../../experiments/runs/run-sem29-periodic-emulator-20261107-r2/manifest.json), [analysis r2](../../../experiments/runs/run-sem29-periodic-emulator-20261107-r2/analysis.json) | Playback pilot periodic có provenance |
+| Source token/mode/sender | [Gateway](../../../android/app/src/main/java/com/thanhtris/seminarie307/integration/RealBulletinUiGateway.kt), [adapter](../../../android/app/src/main/java/com/thanhtris/seminarie307/fcm/PushSyncEnqueueAdapter.kt), [token](../../../android/app/src/main/java/com/thanhtris/seminarie307/fcm/FcmTokenManager.kt), [sender](../../../server/bin/fcm-sender.js), [hướng dẫn sender](../../setup/FCM_SENDER.md) | Đối chiếu mode hiển thị, dòng Logcat và CLI |
 
-## Kiểm chứng bước 1
+Artifact bàn giao là [TRI.md](../../../slides/inputs/TRI.md), với lời mở bài, phiếu thao tác, bảng tình huống và các nhãn LIVE/CONTRACT/PLAYBACK/PROTOCOL.
 
-| Check | Expected | Actual | Kết quả |
+## Expected / actual
+
+| Check | Expected | Actual / evidence | Kết quả |
 |---|---|---|---|
-| Scope và câu mở | Bám bảng tin nền, shared core và version/cache | Lời dẫn đặt câu hỏi trigger-to-cache, bảng event tách accepted/received/enqueued/started/applied | Đã review nội dung |
-| Phân vai và thời lượng | Theo khung mở bài hiện hành | Trí nói 40 giây dự kiến, 5 giây chuyển Trung trong tổng 45 giây | Pass cho kế hoạch, chưa bấm giờ |
-| Candidate/runtime | Chốt sau khi nhận build/config thật | Đang chờ SEM-37 | **Not run** |
+| Scope / opening / phân vai | Khớp flow và kế hoạch nói | Mở bài 40 giây dự kiến + 5 giây chuyển Trung, Trí thao tác và Trang dẫn demo | Pass cho đối chiếu tài liệu |
+| Nhịp phối hợp SEM-47 | Giữ 5 phân đoạn, 240 giây tổng | Các đoạn dài 30, 60, 60, 60, 30 giây. TRI chia phần 60 giây push thành hai khoảng 30 giây | Pass cho kiểm ngân sách |
+| Mode / UI / log | Thao tác và lời nói khớp source | Gateway/adapter mặc định HYBRID, setMode thuộc tích hợp SEM-36. Log token dùng fingerprint, key READY ở metadata. Hướng dẫn live dùng mode đọc thực tế tại setup | Pass cho rà source |
+| CONTRACT CLI | Lệnh có đủ ID, mode/source và payload hợp lệ | Chạy lệnh mục dưới trả `validated_locally`, mode HYBRID, source PUSH, normal priority, TTL 86400000 ms, cấu trúc output chỉ có data/android | Pass local |
+| Playback periodic | Counts/provenance khớp run gốc | Validator SEM-29 audit cả hai run và so analysis đã lưu, cả hai khớp. R2 có 6 start trong window, gồm 5 cycle mới + 1 recovery setup, applied v3 thuộc recovery | Pass cho kiểm artifact |
+| Lựa chọn nội dung khi thiếu run | Phần trình bày có evidence hoặc nhãn tương ứng | CONTRACT dùng payload + MANUAL M1, PLAYBACK dùng periodic r2. Doze/E06 dùng PROTOCOL và source/test của SEM-40 khi run Android chưa nhận | Pass cho review tài liệu |
+| Link / bảng / format | File/link/nhãn đọc được, diff hợp lệ | TRI.md, CHECKS và task có 62 link nội bộ hợp lệ, 10 bảng đúng cấu trúc, fence/whitespace đạt, 3 tiêu chí có kết quả và git diff --check đạt | Pass cho kiểm tĩnh |
+| Candidate SEM-37 và live FCM | Có kiểm trên build/device thật khi công bố đã chạy | Candidate/config và credential/token thật chưa nhận cho lần này | **Not run** |
+| Playback push, Doze/E06 Android, video | Có run/video kèm metadata | Bộ evidence đang nhận chỉ có M1 và pilot periodic | **Not run** |
+| Diễn tập/bấm giờ thật | Có lượt nói/thao tác thực để chốt thời lượng | 45/240 giây là ngân sách biên tập, diễn tập thuộc SEM-54 | **Not run** |
 
-Artifact đang soạn là [TRI.md](../../../slides/inputs/TRI.md). Kiểm tĩnh bước 1 đạt 14 link nội bộ trong 2 file, nhãn WIP và whitespace hợp lệ. Ngân sách mở bài cộng chuyển người bằng 45 giây.
+## Lệnh đã kiểm và cách tái lập
 
-## Kiểm chứng bước 2 và bàn giao bản làm trước
+Máy kiểm Windows, Node 24.20.0, Python 3.12.14 có sẵn trong runtime. Cài dependency `server/` theo lockfile bằng `npm ci --ignore-scripts --no-audit --no-fund`, sau đó từ root repo chạy
 
-| Check | Expected | Actual | Kết quả |
-|---|---|---|---|
-| Thao tác / mode / reset | Có trình tự để đối chiếu candidate | Phiếu pin build/config/công cụ đang chờ, setup MANUAL ngoài window, run mới, drain và Home trước live | Pass cho dự thảo tài liệu |
-| Live / playback | Có nhãn, mốc chuyển và metadata | Khung 30+30+30+60+60+30 = 240 giây, chuyển playback sau 30 giây từ send, bảng câu dẫn theo event | Pass cho kế hoạch, chưa diễn tập |
-| Phân vai / chuyển người | Khớp kế hoạch toàn bài | Trí thao tác, Trang dẫn demo, chuyển Vinh ở cuối 4 phút | Pass cho đối chiếu tài liệu |
-| Candidate và thực hiện thiết bị | Được kiểm trên candidate thật khi nhận | Manifest/gate/CHECKS SEM-37 còn chờ, các trường pin được ghi CHỜ | **Not run** |
-| Kiểm file và liên kết | Bản draft đọc được, các link nguồn có thật | 3 file, 30 link nội bộ và 11 bảng đạt kiểm cấu trúc/whitespace, ngân sách mở bài 45 giây và demo 240 giây | Pass cho kiểm tĩnh |
+```powershell
+node server/bin/fcm-sender.js --validate-only --run run-sem46-contract --mode HYBRID --device emulator-01 --update-id update-sem46-contract --signal-id signal-sem46-contract --version 1
+python -B docs/evidence/SEM-29/validate_pilot.py experiments/runs/run-sem29-periodic-emulator-20261107
+python -B docs/evidence/SEM-29/validate_pilot.py experiments/runs/run-sem29-periodic-emulator-20261107-r2
+git diff --check
+```
 
-SEM-51 có thể nhận bản này để chuẩn bị bố cục và notes. Trước merge SEM-46 cần chốt bước 3 cùng candidate thật và cập nhật CHECKS. Status tổng thể vẫn WIP, đang chờ SEM-37.
+Kết quả CLI được đối chiếu từng trường payload. Đối với playback, gọi `audit(run_dir)` của validator và so toàn object với analysis.json đã commit, các phép kiểm hash/manifest/events đạt. Tool output lưu tại `.local/sem46/` để đối chiếu cục bộ. Lần kiểm này đọc các artifact đã bàn giao, live/candidate/diễn tập giữ trạng thái Not run trong bảng trên.
+
+## Bàn giao và cập nhật tiếp theo
+
+SEM-51 nhận TRI.md để ghép slide mở bài và notes thao tác trong demo 4 phút. SEM-46 áp dụng policy `cc2bd1c`, ghi nguồn/candidate thiếu dưới Not run và hoàn tất phần tài liệu của owner. Khi có candidate, run hoặc video mới, cập nhật phiếu cấu hình và CHECKS theo artifact thực tế.
+
+Các điều chỉnh so với bản ngày 09/11 gồm mode HYBRID mặc định, phương án CONTRACT khi thiếu push playback, nhận diện 5 cycle mới và 1 recovery của pilot r2, nhãn PROTOCOL cho Doze/E06 chưa có run. Quy định WIP/chờ SEM-37 bắt buộc ở bản cũ được thay bằng trạng thái Not run theo policy mới. Draft PR dùng cho Tuấn review trước khi gửi nhóm trưởng kiểm nhận.
