@@ -1,8 +1,9 @@
 # SEM-41 — Chạy tập chính E01–E06 trên emulator
 
 - Trạng thái: **Todo** (Project).
-- Trạng thái đầu vào: **Chờ đầu vào**.
-- Đối chiếu Project: 2026-11-09 08:05:03 UTC.
+- Trạng thái đầu vào: **Sẵn sàng**.
+- Còn chờ: Nên nhận: [SEM-37](SEM-37.md).
+- Đối chiếu Project: 2026-11-12 14:11:12 UTC.
 - Người thực hiện duy nhất: **Vinh** (`Vinh5905`).
 - Hạn: **07/11/2026 13:00 (UTC+7)**.
 - Công sức: 3/100 — Cơ chế/thực hành.
@@ -10,10 +11,10 @@
 
 ## Dependency — bấm mã task để mở yêu cầu
 
-- **Bắt đầu sau:** [SEM-16](SEM-16.md), [SEM-24](SEM-24.md), [SEM-37](SEM-37.md)
-- **Hoàn tất còn cần:** Không có.
+- **Bắt đầu sau:** [SEM-16](SEM-16.md), [SEM-24](SEM-24.md)
+- **Hoàn tất còn cần:** [SEM-37](SEM-37.md)
 
-Không có gate bắt đầu nghĩa là có thể chuẩn bị ngay. Gate hoàn tất chỉ chặn bàn giao cuối; bản nháp/fixture phải ghi đúng nhãn, không được gọi là kết quả chạy thật.
+Không có gate bắt đầu nghĩa là làm được ngay. Mục Hoàn tất còn cần là đầu vào nên dùng nếu đã có, không chặn chuyển Done: owner chuyển Done khi đầu ra và CHECKS của chính task có thật; đầu vào chưa có thì ghi Not run/giới hạn trong CHECKS. Bản nháp/fixture phải ghi đúng nhãn, không được gọi là kết quả chạy thật.
 
 <!-- task-inputs:start -->
 ## Đầu vào cần nhận
@@ -24,11 +25,11 @@ Tài liệu nền đã có: [Kế hoạch/phạm vi](../../docs/PLAN.md) · [Pro
 |---|---|---|---|---|---|
 | Bắt đầu | [SEM-16 — Lập ma trận lifecycle và protocol E01–E06](SEM-16.md) | Vinh | `experiments/PROTOCOL.md`<br>`experiments/RUN_SCHEDULE.md` | `docs/evidence/SEM-16/CHECKS.md` | Done |
 | Bắt đầu | [SEM-24 — Chuẩn bị bộ xuất log và run manifest](SEM-24.md) | Vinh | `experiments/RUN_MANIFEST_TEMPLATE.json`<br>`experiments/scripts/export_logs.*`<br>`experiments/README.md` | `docs/evidence/SEM-24/CHECKS.md` | Done |
-| Bắt đầu | [SEM-37 — Chốt bản ứng viên và manifest phục vụ tập chính](SEM-37.md) | Trung | `release/CANDIDATE_MANIFEST.json`<br>`docs/evidence/SEM-37/CANDIDATE_GATE.md` | `docs/evidence/SEM-37/CHECKS.md` | Todo |
+| Hoàn tất | [SEM-37 — Chốt bản ứng viên và manifest phục vụ tập chính](SEM-37.md) | Trung | `release/CANDIDATE_MANIFEST.json`<br>`docs/evidence/SEM-37/CANDIDATE_GATE.md` | `docs/evidence/SEM-37/CHECKS.md` | Todo |
 
 Đây là danh sách đầu ra cần bàn giao, chưa phải xác nhận các file đã tồn tại. Trước khi dùng, nhận đúng artifact/commit/config và CHECKS từ task nguồn.
 
-Status nguồn được đối chiếu Project lúc **2026-11-09 08:05:03 UTC**; mở link task nguồn để xem cập nhật mới hơn.
+Status nguồn được đối chiếu Project lúc **2026-11-12 14:11:12 UTC**; mở link task nguồn để xem cập nhật mới hơn.
 <!-- task-inputs:end -->
 
 
@@ -52,8 +53,8 @@ Status nguồn được đối chiếu Project lúc **2026-11-09 08:05:03 UTC**;
 
 ## Task được mở khóa
 
-- [SEM-43](SEM-43.md) cần đầu ra này để **bắt đầu**.
-- [SEM-44](SEM-44.md) cần đầu ra này để **bắt đầu**.
+- [SEM-43](SEM-43.md) cần đầu ra này để **hoàn tất**.
+- [SEM-44](SEM-44.md) cần đầu ra này để **hoàn tất**.
 - [SEM-45](SEM-45.md) cần đầu ra này để **hoàn tất**.
 
 ## Ranh giới thực hiện

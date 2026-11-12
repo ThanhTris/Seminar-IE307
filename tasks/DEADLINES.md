@@ -26,7 +26,6 @@ Do lần lập giờ diễn ra gần hết ngày 29/10 và SEM-11/12/13 vẫn To
 | [SEM-32](backlog/SEM-32.md) | Triển khai callback FCM và enqueue sync | 02/11/2026 18:00 (UTC+7) |
 | [SEM-33](backlog/SEM-33.md) | Xử lý token refresh và bàn giao PUSH.md | 03/11/2026 14:00 (UTC+7) |
 | [SEM-38](backlog/SEM-38.md) | Xử lý duplicate và version hint của push | 05/11/2026 12:00 (UTC+7) |
-| [SEM-44](backlog/SEM-44.md) | Kiểm độc lập trigger và phép tính dữ liệu main | 07/11/2026 19:00 (UTC+7) |
 | [SEM-47](backlog/SEM-47.md) | Viết phần silent push và lời dẫn demo 4 phút | 08/11/2026 16:00 (UTC+7) |
 
 ## Vinh
@@ -66,6 +65,7 @@ Do lần lập giờ diễn ra gần hết ngày 29/10 và SEM-11/12/13 vẫn To
 | [SEM-35](backlog/SEM-35.md) | Làm CLI gửi FCM data-only normal priority | 01/11/2026 15:00 (UTC+7) |
 | [SEM-21](backlog/SEM-21.md) | Đọc bài nghiên cứu thứ hai và ghi chú nguồn | 01/11/2026 16:00 (UTC+7) |
 | [SEM-40](backlog/SEM-40.md) | Thêm fault injection cố ý bỏ gửi push | 04/11/2026 18:00 (UTC+7) |
+| [SEM-44](backlog/SEM-44.md) | Kiểm độc lập trigger và phép tính dữ liệu main | 07/11/2026 19:00 (UTC+7) |
 | [SEM-49](backlog/SEM-49.md) | Viết phần kiến trúc và lập luận nghiên cứu thứ hai | 08/11/2026 16:00 (UTC+7) |
 
 ## Tuấn

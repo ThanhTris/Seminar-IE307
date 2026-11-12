@@ -1,8 +1,9 @@
 # SEM-55 — Chốt manifest và gói bàn giao seminar
 
 - Trạng thái: **Todo** (Project).
-- Trạng thái đầu vào: **Chờ đầu vào**.
-- Đối chiếu Project: 2026-11-09 08:05:03 UTC.
+- Trạng thái đầu vào: **Sẵn sàng**.
+- Còn chờ: Nên nhận: [SEM-43](SEM-43.md), [SEM-50](SEM-50.md), [SEM-51](SEM-51.md), [SEM-52](SEM-52.md), [SEM-53](SEM-53.md), [SEM-54](SEM-54.md).
+- Đối chiếu Project: 2026-11-12 14:11:12 UTC.
 - Người thực hiện duy nhất: **Tuấn** (`mtuan2491`).
 - Hạn: **12/11/2026 22:00 (UTC+7)**.
 - Công sức: 1/100 — Cơ chế/thực hành.
@@ -10,10 +11,10 @@
 
 ## Dependency — bấm mã task để mở yêu cầu
 
-- **Bắt đầu sau:** [SEM-43](SEM-43.md), [SEM-50](SEM-50.md), [SEM-51](SEM-51.md), [SEM-52](SEM-52.md), [SEM-53](SEM-53.md), [SEM-54](SEM-54.md)
-- **Hoàn tất còn cần:** Không có.
+- **Bắt đầu sau:** Không có.
+- **Hoàn tất còn cần:** [SEM-43](SEM-43.md), [SEM-50](SEM-50.md), [SEM-51](SEM-51.md), [SEM-52](SEM-52.md), [SEM-53](SEM-53.md), [SEM-54](SEM-54.md)
 
-Không có gate bắt đầu nghĩa là có thể chuẩn bị ngay. Gate hoàn tất chỉ chặn bàn giao cuối; bản nháp/fixture phải ghi đúng nhãn, không được gọi là kết quả chạy thật.
+Không có gate bắt đầu nghĩa là làm được ngay. Mục Hoàn tất còn cần là đầu vào nên dùng nếu đã có, không chặn chuyển Done: owner chuyển Done khi đầu ra và CHECKS của chính task có thật; đầu vào chưa có thì ghi Not run/giới hạn trong CHECKS. Bản nháp/fixture phải ghi đúng nhãn, không được gọi là kết quả chạy thật.
 
 <!-- task-inputs:start -->
 ## Đầu vào cần nhận
@@ -22,35 +23,40 @@ Tài liệu nền đã có: [Kế hoạch/phạm vi](../../docs/PLAN.md) · [K�
 
 | Cần cho | Task cung cấp | Người bàn giao | Đầu ra phải nhận | Kiểm chứng bàn giao | Status nguồn |
 |---|---|---|---|---|---|
-| Bắt đầu | [SEM-43 — Chốt SUMMARY và bộ evidence thực nghiệm](SEM-43.md) | Vinh | `experiments/SUMMARY.md` | `docs/evidence/SEM-43/CHECKS.md` | Todo |
-| Bắt đầu | [SEM-50 — Hoàn thiện báo cáo, bibliography và CLAIMS](SEM-50.md) | Tuấn | `report/REPORT.md`<br>`research/references.bib`<br>`docs/CLAIMS.md` | `docs/evidence/SEM-50/CHECKS.md` | Todo |
-| Bắt đầu | [SEM-51 — Ghép deck 15 phút, PDF và speaker notes](SEM-51.md) | Tuấn | `slides/seminar-ie307.pptx`<br>`slides/seminar-ie307.pdf`<br>`slides/SPEAKER_NOTES.md` | `docs/evidence/SEM-51/CHECKS.md` | Todo |
-| Bắt đầu | [SEM-52 — Build APK bàn giao và viết DEMO_RUNBOOK](SEM-52.md) | Trung | `release/BUILD_MANIFEST.json`<br>`docs/DEMO_RUNBOOK.md`<br>`release/ (APK hoặc liên kết tải)` | `docs/evidence/SEM-52/CHECKS.md` | Todo |
-| Bắt đầu | [SEM-53 — Tái lập runbook và quay video dự phòng](SEM-53.md) | Trí | `release/VIDEO_MANIFEST.json`<br>`docs/evidence/SEM-53/REPRODUCTION.md`<br>`Video demo/fallback có liên kết tải` | `docs/evidence/SEM-53/CHECKS.md` | Todo |
-| Bắt đầu | [SEM-54 — Điều phối hai lần diễn tập và ghi thời lượng](SEM-54.md) | Tuấn | `docs/REHEARSAL.md` | `docs/evidence/SEM-54/CHECKS.md` | Todo |
+| Hoàn tất | [SEM-43 — Chốt SUMMARY và bộ evidence thực nghiệm](SEM-43.md) | Vinh | `experiments/SUMMARY.md` | `docs/evidence/SEM-43/CHECKS.md` | Todo |
+| Hoàn tất | [SEM-50 — Hoàn thiện báo cáo, bibliography và CLAIMS](SEM-50.md) | Tuấn | `report/latex/ (mã nguồn LaTeX theo template môn, gồm main.tex)`<br>`report/seminar-ie307.pdf`<br>`research/references.bib`<br>`docs/CLAIMS.md` | `docs/evidence/SEM-50/CHECKS.md` | In Progress |
+| Hoàn tất | [SEM-51 — Ghép deck 15 phút, PDF và speaker notes](SEM-51.md) | Tuấn | `slides/seminar-ie307.pptx`<br>`slides/seminar-ie307.pdf`<br>`slides/SPEAKER_NOTES.md` | `docs/evidence/SEM-51/CHECKS.md` | Todo |
+| Hoàn tất | [SEM-52 — Build APK bàn giao và viết DEMO_RUNBOOK](SEM-52.md) | Trung | `release/BUILD_MANIFEST.json`<br>`docs/DEMO_RUNBOOK.md`<br>`release/ (APK hoặc liên kết tải)` | `docs/evidence/SEM-52/CHECKS.md` | Todo |
+| Hoàn tất | [SEM-53 — Tái lập runbook và quay video dự phòng](SEM-53.md) | Trí | `release/VIDEO_MANIFEST.json`<br>`docs/evidence/SEM-53/REPRODUCTION.md`<br>`Video demo trên Drive, đã chia sẻ cho giảng viên, có liên kết tải` | `docs/evidence/SEM-53/CHECKS.md` | Todo |
+| Hoàn tất | [SEM-54 — Điều phối hai lần diễn tập và ghi thời lượng](SEM-54.md) | Tuấn | `docs/REHEARSAL.md` | `docs/evidence/SEM-54/CHECKS.md` | Todo |
 
 Đây là danh sách đầu ra cần bàn giao, chưa phải xác nhận các file đã tồn tại. Trước khi dùng, nhận đúng artifact/commit/config và CHECKS từ task nguồn.
 
-Status nguồn được đối chiếu Project lúc **2026-11-09 08:05:03 UTC**; mở link task nguồn để xem cập nhật mới hơn.
+Status nguồn được đối chiếu Project lúc **2026-11-12 14:11:12 UTC**; mở link task nguồn để xem cập nhật mới hơn.
 <!-- task-inputs:end -->
 
 
 ## Việc Tuấn cần làm
 
 1. Ghép chỉ mục APK/server/source/slide/report/video/checks thành manifest cuối.
-2. Rà link tải/checksum/version và danh mục phần còn thiếu, dành 13/11 sửa lỗi cuối.
-3. Ghi quan hệ commit code đã đo và commit tài liệu cuối; không yêu cầu hai commit phải trùng.
+2. Chèn link Drive của video và file lớn vào mục Video demo của báo cáo LaTeX, biên dịch lại PDF và kiểm link.
+3. Đóng gói IE307.R11_Seminar_Nhom<X>.ZIP gồm PDF báo cáo, PPTX, mã nguồn code + LaTeX và demo (APK, link video); loại .env, service-account key, google-services.json, node_modules, build, .gradle và .local.
+4. Rà theo docs/SUBMISSION_REQUIREMENTS.md: link tải/checksum/version, quyền chia sẻ Drive cho giảng viên và danh mục phần còn thiếu; dành 13/11 sửa lỗi cuối.
+5. Ghi quan hệ commit code đã đo và commit tài liệu cuối; không yêu cầu hai commit phải trùng.
 
 ## Đầu ra bắt buộc
 
 - `release/MANIFEST.json`
 - `release/README.md`
+- `release/SUBMISSION_CHECKLIST.md`
+- `IE307.R11_Seminar_Nhom<X>.ZIP (không commit; SHA256 và nơi nộp ghi trong MANIFEST)`
 - `docs/evidence/SEM-55/CHECKS.md`: commit/build/config, thao tác, expected/actual, Pass/Fail/Not run, evidence, blocker và đầu ra đã bàn giao.
 
 ## Tiêu chí hoàn thành
 
 - [ ] Mọi artifact truy được source/build/evidence và tải/đọc được.
-- [ ] Video/rehearsal/report/slide có thật trước khi Done, phần chưa thực hiện liệt kê rõ.
+- [ ] ZIP đúng tên, giải nén có đủ PDF, PPTX, mã nguồn code + LaTeX và demo; không chứa credential.
+- [ ] Link Drive trong báo cáo mở được với tài khoản được chia sẻ; video/rehearsal/report/slide có thật trước khi Done, phần chưa thực hiện liệt kê rõ.
 - [ ] Đầu ra và CHECKS có thật, link đọc được; chưa chạy phải ghi Not run, không tự chuyển Done từ kế hoạch.
 
 ## Task được mở khóa

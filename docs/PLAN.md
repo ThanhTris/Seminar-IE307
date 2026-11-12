@@ -76,24 +76,26 @@ Các task thực hiện là SEM-11…SEM-55, tra dependency đầy đủ tại [
 | Nghiên cứu | SEM-20 Tuấn; SEM-21 Tâm; SEM-22 Trang | 01/11 |
 | Periodic | SEM-30/31 Trung; pilot SEM-29 Vinh | 01–02/11 |
 | Silent push | SEM-35 Tâm; SEM-32/33 Trang; pilot SEM-34 Vinh | 01–03/11 |
-| Robustness và hybrid | SEM-38 Trang; SEM-39 Trung; SEM-40 Tâm; SEM-36 Trí | 04–05/11 |
-| Chốt candidate | SEM-37 Trí | Cuối 05/11 |
-| Tập main | SEM-41/42 Vinh, từng ca/build/thiết bị riêng | 06–07/11 |
-| CSV/audit/SUMMARY | SEM-45 Tuấn → SEM-44 Trung → SEM-43 Vinh | 07/11 |
-| Nội dung bài nói | SEM-46 Trí; SEM-47 Trang; SEM-48 Vinh; SEM-49 Tâm | 08/11 |
-| Report và deck | SEM-50/51 Tuấn | 09–10/11 |
-| APK/runbook → video → diễn tập → manifest cuối | SEM-52 Trí → SEM-53 Vinh → SEM-54 Tuấn → SEM-55 Trí | 11–12/11 |
+| Robustness và hybrid | SEM-38 Trang; SEM-39 Trung; SEM-40 Tâm; SEM-36 Trung | 04–05/11 |
+| Chốt candidate | SEM-37 Trung | Cuối 05/11 |
+| Tập main | SEM-41 Vinh (emulator); SEM-42 Trí (OPPO), từng ca/build/thiết bị riêng | 06–07/11 |
+| CSV/audit/SUMMARY | SEM-45 Tuấn → SEM-44 Tâm → SEM-43 Vinh | 07/11 |
+| Nội dung bài nói | SEM-46 Tuấn; SEM-47 Trang; SEM-48 Vinh; SEM-49 Tâm | 08/11 |
+| Report LaTeX/PDF và deck PPTX | SEM-50/51 Tuấn | 09–10/11 |
+| APK/runbook → video demo trên Drive → diễn tập → manifest và ZIP nộp | SEM-52 Trung → SEM-53 Trí → SEM-54 Tuấn → SEM-55 Tuấn | 11–12/11 |
 | Dự phòng | Sửa lỗi cuối, không thêm tính năng | 13/11 |
 
 Deadline chi tiết từng task, gồm giờ UTC+7 và phân theo người, ở [tasks/DEADLINES.md](../tasks/DEADLINES.md). Ba task môi trường chuyển sang trưa 30/10 vì lần chốt giờ diễn ra gần hết 29/10 khi cả ba vẫn Todo; các ngày hạn còn lại giữ theo lịch hiện có. Candidate SEM-37 chốt 05/11 22:00; bản cuối SEM-55 chốt 12/11 22:00, dành 13/11 đến 22:00 dự phòng.
 
-Chỉ phần được ghi rõ chuẩn bị ngay mới được làm trước gate hoàn tất; task nhận đầu ra ghi artifact/version đã nhận. Mỗi người tự thực hiện và ghi CHECKS của task mình, không có cột Phối hợp/Reviewer. Task kiểm độc lập SEM-44 và tái lập SEM-53 có owner riêng.
+Gate hoàn tất không chặn chuyển Done (cập nhật 12/11/2026); task nhận đầu ra ghi artifact/version đã nhận. Mỗi người tự thực hiện và ghi CHECKS của task mình, không có cột Phối hợp/Reviewer. Task kiểm độc lập SEM-44 và tái lập SEM-53 có owner riêng.
+
+Điều chỉnh gate ngày 12/11/2026 để các nhánh không đứng chờ nhau sát hạn: SEM-36 bỏ phụ thuộc SEM-34 (pilot push vướng B1 Firebase; trạng thái push được ghi trong HYBRID_PILOT); SEM-37 chuyển từ gate bắt đầu sang gate hoàn tất của SEM-41/42/52; dữ liệu SEM-41/42/44/45 thành gate hoàn tất của SEM-43/44; SEM-52/53/54 và các đầu vào của SEM-55 cũng thành gate hoàn tất. Nghĩa là được chuẩn bị ngay (preflight thiết bị, khung runbook, khung SUMMARY/audit, kịch bản video, lịch diễn tập, cấu trúc ZIP), nhưng lần đo chính vẫn phải chạy trên bản ứng viên SEM-37. Cập nhật tối 12/11/2026: theo quyết định của nhóm, gate hoàn tất không còn chặn chuyển Done; mỗi task Done khi đầu ra và CHECKS của chính nó có thật, đầu vào chưa có thì ghi Not run/giới hạn. SEM-37 cũng không còn chờ SEM-36 để bắt đầu.
 
 Nếu 31/10 chưa có M1, báo blocker và ưu tiên thông luồng. Nếu 03/11 thiếu trigger, cắt UI/ca mở rộng; không bỏ hai cơ chế chính. Code/config ảnh hưởng đổi sau candidate phải chạy lại ca liên quan, không gộp log khác build. Thiếu số liệu ghi NOT_RUN, không dùng log giả; video chỉ thay thao tác live.
 
 ## 7. Phân bổ công sức
 
-Giữ nguyên 100 đơn vị, cơ chế/thực hành 80 và nghiên cứu/lập luận 20. Chi tiết từng task tại tasks/catalog.json; tổng theo người: Trí 17, Trang 16, Vinh 17, Trung 17, Tâm 16, Tuấn 17. Không chia đều số thẻ vì mỗi thẻ có quy mô khác nhau (1–5 đơn vị). Đây là ước lượng công sức, không phải giờ hoặc điểm đánh giá.
+Giữ nguyên 100 đơn vị, cơ chế/thực hành 80 và nghiên cứu/lập luận 20. Chi tiết từng task tại tasks/catalog.json; tổng theo người sau các lần chuyển task: Trí 14, Trang 16, Vinh 12, Trung 22, Tâm 17, Tuấn 19. Phân công 11/11: Trung chủ lực code, Tuấn chủ lực slide và báo cáo, Trang phụ slide, Tâm và Vinh phụ trách nghiên cứu và kiểm dữ liệu, giảm tải Trí và Trang. Không chia đều số thẻ vì mỗi thẻ có quy mô khác nhau (1–5 đơn vị). Đây là ước lượng công sức, không phải giờ hoặc điểm đánh giá.
 
 ## 8. Nghiệm thu chung
 
@@ -102,9 +104,10 @@ Giữ nguyên 100 đơn vị, cơ chế/thực hành 80 và nghiên cứu/lập 
 - M3: protocol cốt lõi có run thực tế, kể cả timeout/negative results, metadata và giới hạn.
 - M4: demo 4 phút, toàn bài 15 phút, có câu trả lời vì sao các ca trễ/không chạy.
 - M5: manifest nối được APK/server đã kiểm chứng (commit và checksum) với dữ liệu đo, hướng dẫn, báo cáo và slide. Commit tài liệu có thể mới hơn code đã đo; mọi thay đổi code phải được kiểm tra ảnh hưởng trước bàn giao.
+- M6: gói nộp đúng [yêu cầu giảng viên](SUBMISSION_REQUIREMENTS.md): báo cáo LaTeX và PDF đủ 3 chương cùng phụ lục phân công, PPTX, mã nguồn code + LaTeX, demo và video trên Drive, nén thành `IE307.R11_Seminar_Nhom<X>.ZIP`.
 
 Theo [task board](../tasks/README.md). Không đánh dấu task done chỉ vì đã tạo tài liệu yêu cầu. Một CHECKS.md cho mỗi task một người chứa cả kiểm chứng và bàn giao; không bắt buộc thêm HANDOFF.md trùng nội dung.
 
 ## 9. Thông tin còn phải đo hoặc cung cấp
 
-Đã xác nhận framework tự do, 15 phút gồm demo, OPPO Find X9 và máy ảo. Còn thiếu phiên bản thiết bị, Firebase project/quyền gửi test, môi trường build và rubric nếu giảng viên có riêng. SEM-11/12/13 kiểm tra từng phần này trước khi chốt môi trường; hạn 13/11 giữ nguyên.
+Đã xác nhận framework tự do, 15 phút gồm demo, OPPO Find X9 và máy ảo. Còn thiếu phiên bản thiết bị, Firebase project/quyền gửi test, môi trường build. SEM-11/12/13 kiểm tra từng phần này trước khi chốt môi trường; hạn 13/11 giữ nguyên. Cập nhật 11/11/2026: yêu cầu báo cáo và gói nộp của giảng viên đã có tại [SUBMISSION_REQUIREMENTS.md](SUBMISSION_REQUIREMENTS.md); còn thiếu số nhóm để đặt tên ZIP và file template LaTeX của môn.

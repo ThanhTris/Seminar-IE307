@@ -34,4 +34,4 @@ Xây một demo Android nhỏ dạng bảng tin môn học để quan sát việ
 - **SEM-13 (Tâm):** Node/Firebase project và quyền gửi test, cấu hình server, phương án kết nối LAN/ADB reverse/tunnel và kiểm tra Internet tới FCM.
 - Package ID được chọn cho scaffold Android: `com.thanhtris.seminarie307`.
 - Firebase project cụ thể, quyền truy cập và file cấu hình Firebase vẫn chờ SEM-13; không tạo hoặc lưu credential trong task này.
-- Rubric riêng của giảng viên chưa có trong repo; nếu được cung cấp, đối chiếu lại trước khi chốt slide.
+- Yêu cầu báo cáo và gói nộp của giảng viên được ghi tại [SUBMISSION_REQUIREMENTS.md](SUBMISSION_REQUIREMENTS.md) (cập nhật 11/11/2026); đối chiếu lại trước khi chốt báo cáo, slide và file ZIP.

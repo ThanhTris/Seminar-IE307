@@ -2,7 +2,8 @@
 
 - Trạng thái: **Todo** (Project).
 - Trạng thái đầu vào: **Sẵn sàng**.
-- Đối chiếu Project: 2026-11-09 08:05:03 UTC.
+- Còn chờ: Nên nhận: [SEM-46](SEM-46.md), [SEM-48](SEM-48.md), [SEM-50](SEM-50.md).
+- Đối chiếu Project: 2026-11-12 14:11:12 UTC.
 - Người thực hiện duy nhất: **Tuấn** (`mtuan2491`).
 - Hạn: **10/11/2026 22:00 (UTC+7)**.
 - Công sức: 3/100 — Nghiên cứu/lập luận.
@@ -13,7 +14,7 @@
 - **Bắt đầu sau:** Không có.
 - **Hoàn tất còn cần:** [SEM-46](SEM-46.md), [SEM-47](SEM-47.md), [SEM-48](SEM-48.md), [SEM-49](SEM-49.md), [SEM-50](SEM-50.md)
 
-Không có gate bắt đầu nghĩa là có thể chuẩn bị ngay. Gate hoàn tất chỉ chặn bàn giao cuối; bản nháp/fixture phải ghi đúng nhãn, không được gọi là kết quả chạy thật.
+Không có gate bắt đầu nghĩa là làm được ngay. Mục Hoàn tất còn cần là đầu vào nên dùng nếu đã có, không chặn chuyển Done: owner chuyển Done khi đầu ra và CHECKS của chính task có thật; đầu vào chưa có thì ghi Not run/giới hạn trong CHECKS. Bản nháp/fixture phải ghi đúng nhãn, không được gọi là kết quả chạy thật.
 
 <!-- task-inputs:start -->
 ## Đầu vào cần nhận
@@ -22,15 +23,15 @@ Tài liệu nền đã có: [Kế hoạch/phạm vi](../../docs/PLAN.md) · [K�
 
 | Cần cho | Task cung cấp | Người bàn giao | Đầu ra phải nhận | Kiểm chứng bàn giao | Status nguồn |
 |---|---|---|---|---|---|
-| Hoàn tất | [SEM-46 — Viết phần mở bài và bàn giao lời dẫn thao tác demo](SEM-46.md) | Tuấn | `slides/inputs/TRI.md` | `docs/evidence/SEM-46/CHECKS.md` | Todo |
-| Hoàn tất | [SEM-47 — Viết phần silent push và lời dẫn demo 4 phút](SEM-47.md) | Trang | `slides/inputs/TRANG.md`<br>`slides/DEMO_SCRIPT.md` | `docs/evidence/SEM-47/CHECKS.md` | Todo |
+| Hoàn tất | [SEM-46 — Viết phần mở bài và bàn giao lời dẫn thao tác demo](SEM-46.md) | Tuấn | `slides/inputs/TRI.md` | `docs/evidence/SEM-46/CHECKS.md` | In Progress |
+| Hoàn tất | [SEM-47 — Viết phần silent push và lời dẫn demo 4 phút](SEM-47.md) | Trang | `slides/inputs/TRANG.md`<br>`slides/DEMO_SCRIPT.md` | `docs/evidence/SEM-47/CHECKS.md` | Done |
 | Hoàn tất | [SEM-48 — Viết nội dung và biểu đồ kết quả cho bài nói](SEM-48.md) | Vinh | `slides/inputs/VINH.md`<br>`slides/inputs/results/` | `docs/evidence/SEM-48/CHECKS.md` | Todo |
-| Hoàn tất | [SEM-49 — Viết phần kiến trúc và lập luận nghiên cứu thứ hai](SEM-49.md) | Tâm | `slides/inputs/TAM.md` | `docs/evidence/SEM-49/CHECKS.md` | Todo |
-| Hoàn tất | [SEM-50 — Hoàn thiện báo cáo, bibliography và CLAIMS](SEM-50.md) | Tuấn | `report/REPORT.md`<br>`research/references.bib`<br>`docs/CLAIMS.md` | `docs/evidence/SEM-50/CHECKS.md` | Todo |
+| Hoàn tất | [SEM-49 — Viết phần kiến trúc và lập luận nghiên cứu thứ hai](SEM-49.md) | Tâm | `slides/inputs/TAM.md` | `docs/evidence/SEM-49/CHECKS.md` | Done |
+| Hoàn tất | [SEM-50 — Hoàn thiện báo cáo, bibliography và CLAIMS](SEM-50.md) | Tuấn | `report/latex/ (mã nguồn LaTeX theo template môn, gồm main.tex)`<br>`report/seminar-ie307.pdf`<br>`research/references.bib`<br>`docs/CLAIMS.md` | `docs/evidence/SEM-50/CHECKS.md` | In Progress |
 
 Đây là danh sách đầu ra cần bàn giao, chưa phải xác nhận các file đã tồn tại. Trước khi dùng, nhận đúng artifact/commit/config và CHECKS từ task nguồn.
 
-Status nguồn được đối chiếu Project lúc **2026-11-09 08:05:03 UTC**; mở link task nguồn để xem cập nhật mới hơn.
+Status nguồn được đối chiếu Project lúc **2026-11-12 14:11:12 UTC**; mở link task nguồn để xem cập nhật mới hơn.
 <!-- task-inputs:end -->
 
 
@@ -49,15 +50,16 @@ Status nguồn được đối chiếu Project lúc **2026-11-09 08:05:03 UTC**;
 
 ## Tiêu chí hoàn thành
 
-- [ ] Bộ slide chỉnh sửa được và PDF đọc được; không tăng tổng thời lượng vì chuyển người.
+- [ ] Bộ slide nộp ở dạng PPTX chỉnh sửa được và PDF đọc được; không tăng tổng thời lượng vì chuyển người.
+- [ ] Nội dung bám bố cục báo cáo: giới thiệu, hiện thực và demo, kết quả, kết luận và khuyến nghị.
 - [ ] Bản cuối chỉ dùng input/evidence đã bàn giao; không ghi đã có kết quả khi chưa có.
 - [ ] Đầu ra và CHECKS có thật, link đọc được; chưa chạy phải ghi Not run, không tự chuyển Done từ kế hoạch.
 
 ## Task được mở khóa
 
 - [SEM-52](SEM-52.md) cần đầu ra này để **hoàn tất**.
-- [SEM-54](SEM-54.md) cần đầu ra này để **bắt đầu**.
-- [SEM-55](SEM-55.md) cần đầu ra này để **bắt đầu**.
+- [SEM-54](SEM-54.md) cần đầu ra này để **hoàn tất**.
+- [SEM-55](SEM-55.md) cần đầu ra này để **hoàn tất**.
 
 ## Ranh giới thực hiện
 
