@@ -89,6 +89,7 @@ class SyncWorker(
 
     companion object {
         const val MAX_RETRY_COUNT = 3
+        const val SYNC_WORK_TAG = "com.thanhtris.seminarie307.sync"
         private val APP_ID_PATTERN = Regex("^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$")
         private fun isAppId(value: String) = APP_ID_PATTERN.matches(value)
         private fun periodicRequestIdKey(workId: String) = "periodic_request_id_$workId"

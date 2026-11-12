@@ -44,7 +44,7 @@ class BulletinScreenTest {
         var enqueueCount = 0
         composeRule.setContent {
             SeminarTheme {
-                BulletinScreen(viewState = BulletinViewState(), onManualSync = { enqueueCount++ })
+                BulletinScreen(viewState = BulletinViewState(), onManualSync = { enqueueCount++ }, onModeSelected = { _, _ -> })
             }
         }
 
@@ -64,7 +64,7 @@ class BulletinScreenTest {
         composeRule.setContent {
             SeminarTheme {
                 val viewState by viewModel.state.collectAsState()
-                BulletinScreen(viewState = viewState, onManualSync = viewModel::enqueueManual)
+                BulletinScreen(viewState = viewState, onManualSync = viewModel::enqueueManual, onModeSelected = viewModel::configureMode)
             }
         }
 
@@ -87,6 +87,7 @@ class BulletinScreenTest {
                 BulletinScreen(
                     viewState = BulletinViewState(data = sampleState(activeRunId = context.runId)),
                     onManualSync = { received = it },
+                    onModeSelected = { _, _ -> },
                 )
             }
         }
@@ -121,7 +122,7 @@ class BulletinScreenTest {
         composeRule.setContent {
             CompositionLocalProvider(LocalDensity provides Density(density = 1f, fontScale = 1.6f)) {
                 SeminarTheme(darkTheme = true) {
-                    BulletinScreen(viewState = BulletinViewState(data = state), onManualSync = {})
+                    BulletinScreen(viewState = BulletinViewState(data = state), onManualSync = {}, onModeSelected = { _, _ -> })
                 }
             }
         }
@@ -173,5 +174,7 @@ class BulletinScreenTest {
             receivedContext = context
             return ManualEnqueueResult.Accepted
         }
+
+        override suspend fun configureMode(mode: SyncMode, runId: String) = Unit
     }
 }

@@ -6,7 +6,7 @@
 
 `SyncWorker` giải mã `source`, `mode`, `run_id`, correlation IDs và `version_hint`. Input thiếu hoặc không hợp lệ bị từ chối; worker không tự tạo run giả. MANUAL được phép trong mọi mode; PERIODIC chỉ ở PERIODIC/HYBRID; PUSH chỉ ở PUSH/HYBRID. Worker nhận WorkManager `id`/`runAttemptCount`, gọi repository và ánh xạ applied/unchanged/stale thành success, lỗi tạm thời thành retry, lỗi cuối thành failure.
 
-`SyncWorkEnqueuer.enqueue(SyncInput)` là API chung cho ba source: PERIODIC được chuyển sang unique periodic scheduler; MANUAL/PUSH tạo one-time request cùng worker, cùng network constraint và cùng correlation fields. API trả WorkManager ID thật sau khi Operation hoàn tất. Các producer SEM-23/32 hiện còn enqueue inline; có thể chuyển sang API này khi họ ghép module để tránh ghi `work_enqueued` hai lần.
+`SyncWorkEnqueuer.enqueue(SyncInput)` là API chung cho ba source: PERIODIC được chuyển sang unique periodic scheduler; MANUAL/PUSH tạo one-time request cùng worker, cùng network constraint và cùng correlation fields. API trả WorkManager ID thật sau khi Operation hoàn tất. UI manual và FCM `PushSyncEnqueueAdapter` dùng API này; adapter FCM ghi `push_received`, kiểm mode và chính sách redelivery trước khi gọi enqueuer, nên event `work_enqueued` chỉ do shared API ghi.
 
 ## Kiểu dữ liệu
 

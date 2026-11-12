@@ -1,0 +1,31 @@
+{
+  "manifest_version": "1.0.0",
+  "status": "NOT_BUILT",
+  "source_base_commit": "cc2bd1c",
+  "source_commit": null,
+  "build": {
+    "command": ":app:testDebugUnitTest :app:assembleDebug :app:assembleDebugAndroidTest",
+    "gradle_wrapper": "9.6.0",
+    "jdk": "17.0.20.1",
+    "compile_sdk": 37,
+    "target_sdk": 37,
+    "build_tools": "36.0.0",
+    "package_name": "com.thanhtris.seminarie307"
+  },
+  "artifacts": {
+    "app_apk": null,
+    "app_apk_sha256": null,
+    "android_test_apk": null,
+    "android_test_apk_sha256": null
+  },
+  "verification": {
+    "android_unit_tests": "NOT_RUN",
+    "assemble_debug": "NOT_RUN",
+    "device_install": "NOT_RUN"
+  },
+  "blockers": [
+    "Android SDK platform 37 and Build Tools 36.0.0 are not installed in this environment.",
+    "Android SDK license agreements have not been accepted in this environment.",
+    "This manifest does not identify or claim a release APK."
+  ]
+}

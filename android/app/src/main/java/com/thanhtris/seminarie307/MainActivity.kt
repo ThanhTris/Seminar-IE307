@@ -39,6 +39,7 @@ class MainActivity : ComponentActivity() {
                 BulletinScreen(
                     viewState = state,
                     onManualSync = viewModel::enqueueManual,
+                    onModeSelected = viewModel::configureMode,
                 )
             }
         }

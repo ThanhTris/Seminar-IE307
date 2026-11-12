@@ -7,6 +7,7 @@ import com.thanhtris.seminarie307.integration.BulletinUiGateway
 import com.thanhtris.seminarie307.integration.BulletinUiState
 import com.thanhtris.seminarie307.integration.ManualEnqueueResult
 import com.thanhtris.seminarie307.integration.ManualSyncContext
+import com.thanhtris.seminarie307.integration.SyncMode
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -57,6 +58,29 @@ class BulletinViewModel(private val gateway: BulletinUiGateway) : ViewModel() {
                         is ManualEnqueueResult.Rejected -> "Không xếp được: ${result.reason}"
                     },
                 )
+            }
+        }
+    }
+
+    fun configureMode(mode: SyncMode, runId: String) {
+        val normalizedRunId = runId.trim()
+        if (normalizedRunId.isBlank()) {
+            mutableState.update { it.copy(manualFeedback = "Nhập run ID trước khi cấu hình mode.") }
+            return
+        }
+        viewModelScope.launch {
+            mutableState.update { it.copy(manualFeedback = null) }
+            try {
+                gateway.configureMode(mode, normalizedRunId)
+                mutableState.update {
+                    it.copy(manualFeedback = "Đã chuyển sang mode ${mode.name}; kiểm tra timeline trước khi đo.")
+                }
+            } catch (cancelled: CancellationException) {
+                throw cancelled
+            } catch (failure: Exception) {
+                mutableState.update {
+                    it.copy(manualFeedback = "Không đổi được mode: ${failure.message ?: "lỗi không xác định"}")
+                }
             }
         }
     }

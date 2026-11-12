@@ -45,6 +45,7 @@ class PeriodicSyncScheduler(
             .build()
         val request = PeriodicWorkRequestBuilder<SyncWorker>(repeatIntervalMinutes, TimeUnit.MINUTES)
             .setConstraints(constraints)
+            .addTag(SyncWorker.SYNC_WORK_TAG)
             .setInputData(
                 workDataOf(
                     SyncWorker.KEY_SOURCE to SyncSource.PERIODIC.name,

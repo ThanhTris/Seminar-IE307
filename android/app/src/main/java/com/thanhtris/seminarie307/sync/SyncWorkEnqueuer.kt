@@ -43,6 +43,7 @@ class SyncWorkEnqueuer(
                 .build()
             val request = OneTimeWorkRequestBuilder<SyncWorker>()
                 .setConstraints(constraints)
+                .addTag(SyncWorker.SYNC_WORK_TAG)
                 .setInputData(
                     workDataOf(
                         SyncWorker.KEY_SOURCE to input.source.name,

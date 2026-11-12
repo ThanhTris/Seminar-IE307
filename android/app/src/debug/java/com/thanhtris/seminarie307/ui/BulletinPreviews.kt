@@ -46,6 +46,7 @@ private fun BulletinPreview() {
         BulletinScreen(
             viewState = BulletinViewState(data = PreviewState),
             onManualSync = {},
+            onModeSelected = { _, _ -> },
         )
     }
 }
@@ -57,6 +58,7 @@ private fun EmptyBulletinPreview() {
         BulletinScreen(
             viewState = BulletinViewState(),
             onManualSync = {},
+            onModeSelected = { _, _ -> },
         )
     }
 }

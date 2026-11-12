@@ -75,4 +75,6 @@ interface BulletinUiGateway {
     val state: Flow<BulletinUiState>
 
     suspend fun enqueueManual(context: ManualSyncContext): ManualEnqueueResult
+
+    suspend fun configureMode(mode: SyncMode, runId: String)
 }

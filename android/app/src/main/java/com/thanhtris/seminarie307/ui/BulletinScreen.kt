@@ -27,6 +27,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Tab
 import androidx.compose.material3.PrimaryTabRow
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -57,6 +58,7 @@ private enum class BulletinTab(val label: String) {
 fun BulletinScreen(
     viewState: BulletinViewState,
     onManualSync: (ManualSyncContext) -> Unit,
+    onModeSelected: (SyncMode, String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     var selectedTabName by rememberSaveable { mutableStateOf(BulletinTab.BULLETIN.name) }
@@ -85,7 +87,7 @@ fun BulletinScreen(
                 .fillMaxSize()
                 .padding(contentPadding),
         ) {
-            StatusSummary(viewState.data)
+            StatusSummary(viewState.data, onModeSelected)
             PrimaryTabRow(selectedTabIndex = selectedTab.ordinal) {
                 BulletinTab.entries.forEach { tab ->
                     Tab(
@@ -116,7 +118,10 @@ fun BulletinScreen(
 }
 
 @Composable
-private fun StatusSummary(state: BulletinUiState) {
+private fun StatusSummary(state: BulletinUiState, onModeSelected: (SyncMode, String) -> Unit) {
+    var runId by rememberSaveable(state.activeRunId) {
+        mutableStateOf(state.activeRunId.orEmpty())
+    }
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -129,7 +134,29 @@ private fun StatusSummary(state: BulletinUiState) {
         ) {
             StatusLine("Version cache", state.cachedVersion?.let { "v$it" } ?: "—")
             StatusLine("Mode", state.mode?.label() ?: "Chưa cấu hình")
+            OutlinedTextField(
+                value = runId,
+                onValueChange = { runId = it },
+                modifier = Modifier.fillMaxWidth(),
+                label = { Text("Run ID") },
+                singleLine = true,
+                supportingText = { Text("Dùng run ID thật từ protocol; không dùng giá trị mẫu khi đo.") },
+            )
+            StatusLine("Run đang chọn", state.activeRunId ?: "Chưa cấu hình")
             StatusLine("Lần sync gần nhất", state.lastSyncAtUtc ?: "Chưa đồng bộ")
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+            ) {
+                SyncMode.entries.forEach { mode ->
+                    TextButton(
+                        onClick = { onModeSelected(mode, runId) },
+                        enabled = mode != state.mode && runId.isNotBlank(),
+                    ) {
+                        Text(mode.name)
+                    }
+                }
+            }
         }
     }
 }
