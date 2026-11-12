@@ -1,8 +1,8 @@
 # SEM-36 — Tích hợp ba mode và pilot hybrid
 
 - Trạng thái: **Todo** (Project).
-- Trạng thái đầu vào: **Chờ đầu vào**.
-- Đối chiếu Project: 2026-11-11 14:12:33 UTC.
+- Trạng thái đầu vào: **Sẵn sàng**.
+- Đối chiếu Project: 2026-11-12 13:54:39 UTC.
 - Người thực hiện duy nhất: **Trung** (`TrungNQ2645`).
 - Hạn: **05/11/2026 18:00 (UTC+7)**.
 - Công sức: 3/100 — Cơ chế/thực hành.
@@ -10,7 +10,7 @@
 
 ## Dependency — bấm mã task để mở yêu cầu
 
-- **Bắt đầu sau:** [SEM-29](SEM-29.md), [SEM-30](SEM-30.md), [SEM-32](SEM-32.md), [SEM-34](SEM-34.md), [SEM-35](SEM-35.md)
+- **Bắt đầu sau:** [SEM-29](SEM-29.md), [SEM-30](SEM-30.md), [SEM-32](SEM-32.md), [SEM-35](SEM-35.md)
 - **Hoàn tất còn cần:** [SEM-38](SEM-38.md), [SEM-39](SEM-39.md), [SEM-40](SEM-40.md)
 
 Không có gate bắt đầu nghĩa là có thể chuẩn bị ngay. Gate hoàn tất chỉ chặn bàn giao cuối; bản nháp/fixture phải ghi đúng nhãn, không được gọi là kết quả chạy thật.
@@ -25,7 +25,6 @@ Tài liệu nền đã có: [Kế hoạch/phạm vi](../../docs/PLAN.md).
 | Bắt đầu | [SEM-29 — Chạy pilot periodic E01 trên hai thiết bị](SEM-29.md) | Vinh | `experiments/runs/<periodic-pilot-run>/manifest.json`<br>`experiments/runs/<periodic-pilot-run>/events.jsonl` | `docs/evidence/SEM-29/CHECKS.md` | Done |
 | Bắt đầu | [SEM-30 — Triển khai unique periodic work](SEM-30.md) | Trung | `android/ (periodic scheduler)` | `docs/evidence/SEM-30/CHECKS.md` | Done |
 | Bắt đầu | [SEM-32 — Triển khai callback FCM và enqueue sync](SEM-32.md) | Trang | `android/ (messaging callback và enqueue adapter)` | `docs/evidence/SEM-32/CHECKS.md` | Done |
-| Bắt đầu | [SEM-34 — Chạy pilot push E02 và xác nhận cache nền](SEM-34.md) | Vinh | `experiments/runs/<push-pilot-run>/manifest.json`<br>`experiments/runs/<push-pilot-run>/events.jsonl` | `docs/evidence/SEM-34/CHECKS.md` | Todo |
 | Bắt đầu | [SEM-35 — Làm CLI gửi FCM data-only normal priority](SEM-35.md) | Tâm | `server/ (FCM sender CLI)`<br>`docs/setup/FCM_SENDER.md` | `docs/evidence/SEM-35/CHECKS.md` | Done |
 | Hoàn tất | [SEM-38 — Xử lý duplicate và version hint của push](SEM-38.md) | Trang | `android/ (messaging input policy)`<br>`docs/evidence/SEM-38/PUSH_INPUT_CASES.md` | `docs/evidence/SEM-38/CHECKS.md` | Done |
 | Hoàn tất | [SEM-39 — Củng cố version guard, retry và race trong core](SEM-39.md) | Trung | `android/ (sync robustness và logic checks)`<br>`docs/evidence/SEM-39/CORE_CASES.md` | `docs/evidence/SEM-39/CHECKS.md` | Done |
@@ -33,7 +32,7 @@ Tài liệu nền đã có: [Kế hoạch/phạm vi](../../docs/PLAN.md).
 
 Đây là danh sách đầu ra cần bàn giao, chưa phải xác nhận các file đã tồn tại. Trước khi dùng, nhận đúng artifact/commit/config và CHECKS từ task nguồn.
 
-Status nguồn được đối chiếu Project lúc **2026-11-11 14:12:33 UTC**; mở link task nguồn để xem cập nhật mới hơn.
+Status nguồn được đối chiếu Project lúc **2026-11-12 13:54:39 UTC**; mở link task nguồn để xem cập nhật mới hơn.
 <!-- task-inputs:end -->
 
 
@@ -41,7 +40,7 @@ Status nguồn được đối chiếu Project lúc **2026-11-11 14:12:33 UTC**;
 
 1. Tích hợp PERIODIC/PUSH/HYBRID; hủy lịch không cần và chờ worker kết thúc hoặc đánh dấu run bị nhiễu.
 2. Ghép output robustness của core/messaging và skip-push CLI vào bản tích hợp.
-3. Chạy E05/E06 pilot và ghi SYNC về version/concurrency/retry/mode transition.
+3. Chạy E05/E06 pilot và ghi SYNC về version/concurrency/retry/mode transition; ghi trạng thái pilot push SEM-34 (đã chạy hoặc NOT_RUN do B1) vào HYBRID_PILOT, không chờ SEM-34 để bắt đầu.
 
 ## Đầu ra bắt buộc
 

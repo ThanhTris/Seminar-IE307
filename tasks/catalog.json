@@ -1377,7 +1377,6 @@
         "SEM-29",
         "SEM-30",
         "SEM-32",
-        "SEM-34",
         "SEM-35"
       ],
       "finish_dependencies": [
@@ -1388,7 +1387,7 @@
       "work": [
         "Tích hợp PERIODIC/PUSH/HYBRID; hủy lịch không cần và chờ worker kết thúc hoặc đánh dấu run bị nhiễu.",
         "Ghép output robustness của core/messaging và skip-push CLI vào bản tích hợp.",
-        "Chạy E05/E06 pilot và ghi SYNC về version/concurrency/retry/mode transition."
+        "Chạy E05/E06 pilot và ghi SYNC về version/concurrency/retry/mode transition; ghi trạng thái pilot push SEM-34 (đã chạy hoặc NOT_RUN do B1) vào HYBRID_PILOT, không chờ SEM-34 để bắt đầu."
       ],
       "outputs": [
         "android/ (mode controller và tích hợp)",
@@ -1399,7 +1398,7 @@
         "E05 không rollback/ghi trùng/mất cập nhật ở race; E06 phục hồi từ PERIODIC khi bỏ gửi có chủ ý.",
         "Không coi hybrid là vượt Doze/force-stop; các nhánh code vẫn dùng cùng sync engine."
       ],
-      "input_status": "Chờ đầu vào",
+      "input_status": "Sẵn sàng",
       "inputs": [
         {
           "source_task": "SEM-29",
@@ -1431,17 +1430,6 @@
           ],
           "checks": "docs/evidence/SEM-32/CHECKS.md",
           "source_status": "Done"
-        },
-        {
-          "source_task": "SEM-34",
-          "required_for": "start",
-          "producer": "Vinh",
-          "artifacts": [
-            "experiments/runs/<push-pilot-run>/manifest.json",
-            "experiments/runs/<push-pilot-run>/events.jsonl"
-          ],
-          "checks": "docs/evidence/SEM-34/CHECKS.md",
-          "source_status": "Todo"
         },
         {
           "source_task": "SEM-35",
@@ -1769,10 +1757,11 @@
       "status": "Todo",
       "start_dependencies": [
         "SEM-16",
-        "SEM-24",
+        "SEM-24"
+      ],
+      "finish_dependencies": [
         "SEM-37"
       ],
-      "finish_dependencies": [],
       "work": [
         "Chạy E01–E06 theo đủ số lượt/cửa sổ protocol trên bản ứng viên và run_phase=main.",
         "Kiểm Doze trước/sau, tách trigger, reset/cleanup giữa run; giữ cả lỗi/timeout/NOT_RUN.",
@@ -1786,7 +1775,7 @@
         "Giữ E01 90 phút, E02 5 lượt/120 giây, E03 2/trigger, E04 3/trigger, E05 3/kịch bản, E06 2×45 phút.",
         "Không force-run cho kết quả tự nhiên, không trộn pilot/build hoặc loại timeout khỏi mẫu số."
       ],
-      "input_status": "Chờ đầu vào",
+      "input_status": "Sẵn sàng",
       "inputs": [
         {
           "source_task": "SEM-16",
@@ -1813,7 +1802,7 @@
         },
         {
           "source_task": "SEM-37",
-          "required_for": "start",
+          "required_for": "finish",
           "producer": "Trung",
           "artifacts": [
             "release/CANDIDATE_MANIFEST.json",
@@ -1838,10 +1827,11 @@
       "start_dependencies": [
         "SEM-12",
         "SEM-16",
-        "SEM-24",
+        "SEM-24"
+      ],
+      "finish_dependencies": [
         "SEM-37"
       ],
-      "finish_dependencies": [],
       "work": [
         "Chạy E01 phiên 90 phút và E02 5 lượt/120 giây trên OPPO với bản ứng viên.",
         "Ghi cấu hình pin/OS/mạng thật; nếu thử process death/recent-swipe/force-stop thì gắn nhãn riêng.",
@@ -1855,7 +1845,7 @@
         "Không lấy phiên bản OS từ tên model; phân biệt baseline với cấu hình pin thay đổi.",
         "Không suy rộng mọi Android từ OPPO; force-stop có mốc mở lại và không tuyên bố hybrid vượt giới hạn."
       ],
-      "input_status": "Chờ đầu vào",
+      "input_status": "Sẵn sàng",
       "inputs": [
         {
           "source_task": "SEM-12",
@@ -1892,7 +1882,7 @@
         },
         {
           "source_task": "SEM-37",
-          "required_for": "start",
+          "required_for": "finish",
           "producer": "Trung",
           "artifacts": [
             "release/CANDIDATE_MANIFEST.json",
@@ -1914,13 +1904,13 @@
       "title": "Chốt SUMMARY và bộ evidence thực nghiệm",
       "due": "2026-11-07",
       "status": "Todo",
-      "start_dependencies": [
+      "start_dependencies": [],
+      "finish_dependencies": [
         "SEM-41",
         "SEM-42",
         "SEM-44",
         "SEM-45"
       ],
-      "finish_dependencies": [],
       "work": [
         "Tổng hợp hypothesis → observation → explanation → limitation theo case/device/mode/build.",
         "Liên kết CSV, logs, run_id và audit, ghi đủ mẫu thiếu/timeout/run bị nhiễu.",
@@ -1933,11 +1923,11 @@
         "Mọi bảng truy được run/manifest/build; không trộn tập khác version.",
         "Median kèm n_complete/n_total, không suy pin từ số request và không so latency thiếu kiểm soát."
       ],
-      "input_status": "Chờ đầu vào",
+      "input_status": "Sẵn sàng",
       "inputs": [
         {
           "source_task": "SEM-41",
-          "required_for": "start",
+          "required_for": "finish",
           "producer": "Vinh",
           "artifacts": [
             "experiments/runs/<emulator-main-run>/manifest.json",
@@ -1948,7 +1938,7 @@
         },
         {
           "source_task": "SEM-42",
-          "required_for": "start",
+          "required_for": "finish",
           "producer": "Trí",
           "artifacts": [
             "experiments/runs/<oppo-main-run>/manifest.json",
@@ -1959,7 +1949,7 @@
         },
         {
           "source_task": "SEM-44",
-          "required_for": "start",
+          "required_for": "finish",
           "producer": "Tâm",
           "artifacts": [
             "experiments/AUDIT.md"
@@ -1969,7 +1959,7 @@
         },
         {
           "source_task": "SEM-45",
-          "required_for": "start",
+          "required_for": "finish",
           "producer": "Tuấn",
           "artifacts": [
             "experiments/scripts/analyze.*",
@@ -1991,12 +1981,12 @@
       "title": "Kiểm độc lập trigger và phép tính dữ liệu main",
       "due": "2026-11-07",
       "status": "Todo",
-      "start_dependencies": [
+      "start_dependencies": [],
+      "finish_dependencies": [
         "SEM-41",
         "SEM-42",
         "SEM-45"
       ],
-      "finish_dependencies": [],
       "work": [
         "Đối chiếu CSV với log/manifest, kiểm trigger PERIODIC/PUSH/MANUAL và phase/build.",
         "Kiểm mẫu số, timeout, clock offset/monotonic và các ca applied/unchanged.",
@@ -2009,11 +1999,11 @@
         "Có case/input/expected/actual/assertion và run_id/commit thật.",
         "Không tự ký Pass cho run chưa thực hiện hoặc chưa đủ log."
       ],
-      "input_status": "Chờ đầu vào",
+      "input_status": "Sẵn sàng",
       "inputs": [
         {
           "source_task": "SEM-41",
-          "required_for": "start",
+          "required_for": "finish",
           "producer": "Vinh",
           "artifacts": [
             "experiments/runs/<emulator-main-run>/manifest.json",
@@ -2024,7 +2014,7 @@
         },
         {
           "source_task": "SEM-42",
-          "required_for": "start",
+          "required_for": "finish",
           "producer": "Trí",
           "artifacts": [
             "experiments/runs/<oppo-main-run>/manifest.json",
@@ -2035,7 +2025,7 @@
         },
         {
           "source_task": "SEM-45",
-          "required_for": "start",
+          "required_for": "finish",
           "producer": "Tuấn",
           "artifacts": [
             "experiments/scripts/analyze.*",
@@ -2623,10 +2613,9 @@
       "title": "Build APK bàn giao và viết DEMO_RUNBOOK",
       "due": "2026-11-11",
       "status": "Todo",
-      "start_dependencies": [
-        "SEM-37"
-      ],
+      "start_dependencies": [],
       "finish_dependencies": [
+        "SEM-37",
         "SEM-43",
         "SEM-50",
         "SEM-51"
@@ -2645,11 +2634,11 @@
         "Commit/config/checksum nối được với candidate/dữ liệu đo; không tự lấy evidence bản cũ cho code mới.",
         "Runbook nêu ngưỡng đổi video 30 giây và cách khôi phục thiết bị."
       ],
-      "input_status": "Chờ đầu vào",
+      "input_status": "Sẵn sàng",
       "inputs": [
         {
           "source_task": "SEM-37",
-          "required_for": "start",
+          "required_for": "finish",
           "producer": "Trung",
           "artifacts": [
             "release/CANDIDATE_MANIFEST.json",
@@ -2706,10 +2695,10 @@
       "title": "Tái lập runbook và quay video dự phòng",
       "due": "2026-11-12",
       "status": "Todo",
-      "start_dependencies": [
+      "start_dependencies": [],
+      "finish_dependencies": [
         "SEM-52"
       ],
-      "finish_dependencies": [],
       "work": [
         "Làm theo runbook trên thiết bị, ghi bước tái lập được và blocker/sai lệch để task SEM-52 sửa.",
         "Quay video demo thật của đúng build, minh họa đủ chức năng chính (PUSH live, PERIODIC, HYBRID khi bỏ gửi push); video này là mục Video demo phải nộp và cũng là bản dự phòng khi trình bày; gắn nhãn playback và run/commit/checksum.",
@@ -2725,11 +2714,11 @@
         "Link Drive mở được bằng tài khoản được chia sẻ; link có trong VIDEO_MANIFEST.",
         "Runbook tái lập được hoặc chỉ rõ phần cần hỗ trợ; dữ liệu nhạy cảm đã được loại."
       ],
-      "input_status": "Chờ đầu vào",
+      "input_status": "Sẵn sàng",
       "inputs": [
         {
           "source_task": "SEM-52",
-          "required_for": "start",
+          "required_for": "finish",
           "producer": "Trung",
           "artifacts": [
             "release/BUILD_MANIFEST.json",
@@ -2752,11 +2741,10 @@
       "title": "Điều phối hai lần diễn tập và ghi thời lượng",
       "due": "2026-11-12",
       "status": "Todo",
-      "start_dependencies": [
-        "SEM-51",
-        "SEM-52"
-      ],
+      "start_dependencies": [],
       "finish_dependencies": [
+        "SEM-51",
+        "SEM-52",
         "SEM-53"
       ],
       "work": [
@@ -2771,11 +2759,11 @@
         "Có hai lượt bấm giờ thật, toàn bài ≤15 phút gồm demo và thời gian chuyển tiếp.",
         "Nêu lỗi còn tồn tại và cách xử lý; không ghi nhóm đã diễn tập khi chưa tổ chức."
       ],
-      "input_status": "Chờ đầu vào",
+      "input_status": "Sẵn sàng",
       "inputs": [
         {
           "source_task": "SEM-51",
-          "required_for": "start",
+          "required_for": "finish",
           "producer": "Tuấn",
           "artifacts": [
             "slides/seminar-ie307.pptx",
@@ -2787,7 +2775,7 @@
         },
         {
           "source_task": "SEM-52",
-          "required_for": "start",
+          "required_for": "finish",
           "producer": "Trung",
           "artifacts": [
             "release/BUILD_MANIFEST.json",
@@ -2822,7 +2810,8 @@
       "title": "Chốt manifest và gói bàn giao seminar",
       "due": "2026-11-12",
       "status": "Todo",
-      "start_dependencies": [
+      "start_dependencies": [],
+      "finish_dependencies": [
         "SEM-43",
         "SEM-50",
         "SEM-51",
@@ -2830,7 +2819,6 @@
         "SEM-53",
         "SEM-54"
       ],
-      "finish_dependencies": [],
       "work": [
         "Ghép chỉ mục APK/server/source/slide/report/video/checks thành manifest cuối.",
         "Chèn link Drive của video và file lớn vào mục Video demo của báo cáo LaTeX, biên dịch lại PDF và kiểm link.",
@@ -2849,11 +2837,11 @@
         "ZIP đúng tên, giải nén có đủ PDF, PPTX, mã nguồn code + LaTeX và demo; không chứa credential.",
         "Link Drive trong báo cáo mở được với tài khoản được chia sẻ; video/rehearsal/report/slide có thật trước khi Done, phần chưa thực hiện liệt kê rõ."
       ],
-      "input_status": "Chờ đầu vào",
+      "input_status": "Sẵn sàng",
       "inputs": [
         {
           "source_task": "SEM-43",
-          "required_for": "start",
+          "required_for": "finish",
           "producer": "Vinh",
           "artifacts": [
             "experiments/SUMMARY.md"
@@ -2863,7 +2851,7 @@
         },
         {
           "source_task": "SEM-50",
-          "required_for": "start",
+          "required_for": "finish",
           "producer": "Tuấn",
           "artifacts": [
             "report/latex/ (mã nguồn LaTeX theo template môn, gồm main.tex)",
@@ -2876,7 +2864,7 @@
         },
         {
           "source_task": "SEM-51",
-          "required_for": "start",
+          "required_for": "finish",
           "producer": "Tuấn",
           "artifacts": [
             "slides/seminar-ie307.pptx",
@@ -2888,7 +2876,7 @@
         },
         {
           "source_task": "SEM-52",
-          "required_for": "start",
+          "required_for": "finish",
           "producer": "Trung",
           "artifacts": [
             "release/BUILD_MANIFEST.json",
@@ -2900,7 +2888,7 @@
         },
         {
           "source_task": "SEM-53",
-          "required_for": "start",
+          "required_for": "finish",
           "producer": "Trí",
           "artifacts": [
             "release/VIDEO_MANIFEST.json",
@@ -2912,7 +2900,7 @@
         },
         {
           "source_task": "SEM-54",
-          "required_for": "start",
+          "required_for": "finish",
           "producer": "Tuấn",
           "artifacts": [
             "docs/REHEARSAL.md"
@@ -2924,7 +2912,7 @@
       "due_at": "2026-11-12T22:00:00+07:00"
     }
   ],
-  "snapshot_at": "2026-11-11 14:12:33 UTC",
+  "snapshot_at": "2026-11-12 13:54:39 UTC",
   "snapshot_source": "https://github.com/users/ThanhTris/projects/3/views/1",
   "timezone": "Asia/Ho_Chi_Minh",
   "deadline_at": "2026-11-13T22:00:00+07:00",

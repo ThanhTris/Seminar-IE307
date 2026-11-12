@@ -1,8 +1,8 @@
 # SEM-55 — Chốt manifest và gói bàn giao seminar
 
 - Trạng thái: **Todo** (Project).
-- Trạng thái đầu vào: **Chờ đầu vào**.
-- Đối chiếu Project: 2026-11-11 14:12:33 UTC.
+- Trạng thái đầu vào: **Sẵn sàng**.
+- Đối chiếu Project: 2026-11-12 13:54:39 UTC.
 - Người thực hiện duy nhất: **Tuấn** (`mtuan2491`).
 - Hạn: **12/11/2026 22:00 (UTC+7)**.
 - Công sức: 1/100 — Cơ chế/thực hành.
@@ -10,8 +10,8 @@
 
 ## Dependency — bấm mã task để mở yêu cầu
 
-- **Bắt đầu sau:** [SEM-43](SEM-43.md), [SEM-50](SEM-50.md), [SEM-51](SEM-51.md), [SEM-52](SEM-52.md), [SEM-53](SEM-53.md), [SEM-54](SEM-54.md)
-- **Hoàn tất còn cần:** Không có.
+- **Bắt đầu sau:** Không có.
+- **Hoàn tất còn cần:** [SEM-43](SEM-43.md), [SEM-50](SEM-50.md), [SEM-51](SEM-51.md), [SEM-52](SEM-52.md), [SEM-53](SEM-53.md), [SEM-54](SEM-54.md)
 
 Không có gate bắt đầu nghĩa là có thể chuẩn bị ngay. Gate hoàn tất chỉ chặn bàn giao cuối; bản nháp/fixture phải ghi đúng nhãn, không được gọi là kết quả chạy thật.
 
@@ -22,16 +22,16 @@ Tài liệu nền đã có: [Kế hoạch/phạm vi](../../docs/PLAN.md) · [K�
 
 | Cần cho | Task cung cấp | Người bàn giao | Đầu ra phải nhận | Kiểm chứng bàn giao | Status nguồn |
 |---|---|---|---|---|---|
-| Bắt đầu | [SEM-43 — Chốt SUMMARY và bộ evidence thực nghiệm](SEM-43.md) | Vinh | `experiments/SUMMARY.md` | `docs/evidence/SEM-43/CHECKS.md` | Todo |
-| Bắt đầu | [SEM-50 — Hoàn thiện báo cáo, bibliography và CLAIMS](SEM-50.md) | Tuấn | `report/latex/ (mã nguồn LaTeX theo template môn, gồm main.tex)`<br>`report/seminar-ie307.pdf`<br>`research/references.bib`<br>`docs/CLAIMS.md` | `docs/evidence/SEM-50/CHECKS.md` | In Progress |
-| Bắt đầu | [SEM-51 — Ghép deck 15 phút, PDF và speaker notes](SEM-51.md) | Tuấn | `slides/seminar-ie307.pptx`<br>`slides/seminar-ie307.pdf`<br>`slides/SPEAKER_NOTES.md` | `docs/evidence/SEM-51/CHECKS.md` | Todo |
-| Bắt đầu | [SEM-52 — Build APK bàn giao và viết DEMO_RUNBOOK](SEM-52.md) | Trung | `release/BUILD_MANIFEST.json`<br>`docs/DEMO_RUNBOOK.md`<br>`release/ (APK hoặc liên kết tải)` | `docs/evidence/SEM-52/CHECKS.md` | Todo |
-| Bắt đầu | [SEM-53 — Tái lập runbook và quay video dự phòng](SEM-53.md) | Trí | `release/VIDEO_MANIFEST.json`<br>`docs/evidence/SEM-53/REPRODUCTION.md`<br>`Video demo trên Drive, đã chia sẻ cho giảng viên, có liên kết tải` | `docs/evidence/SEM-53/CHECKS.md` | Todo |
-| Bắt đầu | [SEM-54 — Điều phối hai lần diễn tập và ghi thời lượng](SEM-54.md) | Tuấn | `docs/REHEARSAL.md` | `docs/evidence/SEM-54/CHECKS.md` | Todo |
+| Hoàn tất | [SEM-43 — Chốt SUMMARY và bộ evidence thực nghiệm](SEM-43.md) | Vinh | `experiments/SUMMARY.md` | `docs/evidence/SEM-43/CHECKS.md` | Todo |
+| Hoàn tất | [SEM-50 — Hoàn thiện báo cáo, bibliography và CLAIMS](SEM-50.md) | Tuấn | `report/latex/ (mã nguồn LaTeX theo template môn, gồm main.tex)`<br>`report/seminar-ie307.pdf`<br>`research/references.bib`<br>`docs/CLAIMS.md` | `docs/evidence/SEM-50/CHECKS.md` | In Progress |
+| Hoàn tất | [SEM-51 — Ghép deck 15 phút, PDF và speaker notes](SEM-51.md) | Tuấn | `slides/seminar-ie307.pptx`<br>`slides/seminar-ie307.pdf`<br>`slides/SPEAKER_NOTES.md` | `docs/evidence/SEM-51/CHECKS.md` | Todo |
+| Hoàn tất | [SEM-52 — Build APK bàn giao và viết DEMO_RUNBOOK](SEM-52.md) | Trung | `release/BUILD_MANIFEST.json`<br>`docs/DEMO_RUNBOOK.md`<br>`release/ (APK hoặc liên kết tải)` | `docs/evidence/SEM-52/CHECKS.md` | Todo |
+| Hoàn tất | [SEM-53 — Tái lập runbook và quay video dự phòng](SEM-53.md) | Trí | `release/VIDEO_MANIFEST.json`<br>`docs/evidence/SEM-53/REPRODUCTION.md`<br>`Video demo trên Drive, đã chia sẻ cho giảng viên, có liên kết tải` | `docs/evidence/SEM-53/CHECKS.md` | Todo |
+| Hoàn tất | [SEM-54 — Điều phối hai lần diễn tập và ghi thời lượng](SEM-54.md) | Tuấn | `docs/REHEARSAL.md` | `docs/evidence/SEM-54/CHECKS.md` | Todo |
 
 Đây là danh sách đầu ra cần bàn giao, chưa phải xác nhận các file đã tồn tại. Trước khi dùng, nhận đúng artifact/commit/config và CHECKS từ task nguồn.
 
-Status nguồn được đối chiếu Project lúc **2026-11-11 14:12:33 UTC**; mở link task nguồn để xem cập nhật mới hơn.
+Status nguồn được đối chiếu Project lúc **2026-11-12 13:54:39 UTC**; mở link task nguồn để xem cập nhật mới hơn.
 <!-- task-inputs:end -->
 
 

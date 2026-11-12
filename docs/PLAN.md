@@ -89,6 +89,8 @@ Deadline chi tiết từng task, gồm giờ UTC+7 và phân theo người, ở 
 
 Chỉ phần được ghi rõ chuẩn bị ngay mới được làm trước gate hoàn tất; task nhận đầu ra ghi artifact/version đã nhận. Mỗi người tự thực hiện và ghi CHECKS của task mình, không có cột Phối hợp/Reviewer. Task kiểm độc lập SEM-44 và tái lập SEM-53 có owner riêng.
 
+Điều chỉnh gate ngày 12/11/2026 để các nhánh không đứng chờ nhau sát hạn: SEM-36 bỏ phụ thuộc SEM-34 (pilot push vướng B1 Firebase; trạng thái push được ghi trong HYBRID_PILOT); SEM-37 chuyển từ gate bắt đầu sang gate hoàn tất của SEM-41/42/52; dữ liệu SEM-41/42/44/45 thành gate hoàn tất của SEM-43/44; SEM-52/53/54 và các đầu vào của SEM-55 cũng thành gate hoàn tất. Nghĩa là được chuẩn bị ngay (preflight thiết bị, khung runbook, khung SUMMARY/audit, kịch bản video, lịch diễn tập, cấu trúc ZIP), nhưng lần đo chính vẫn phải chạy trên bản ứng viên SEM-37 và không task nào được Done khi gate hoàn tất chưa xong. SEM-37 vẫn bắt đầu sau SEM-36.
+
 Nếu 31/10 chưa có M1, báo blocker và ưu tiên thông luồng. Nếu 03/11 thiếu trigger, cắt UI/ca mở rộng; không bỏ hai cơ chế chính. Code/config ảnh hưởng đổi sau candidate phải chạy lại ca liên quan, không gộp log khác build. Thiếu số liệu ghi NOT_RUN, không dùng log giả; video chỉ thay thao tác live.
 
 ## 7. Phân bổ công sức
