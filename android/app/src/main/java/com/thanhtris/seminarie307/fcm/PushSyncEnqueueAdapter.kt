@@ -109,6 +109,12 @@ class PushSyncEnqueueAdapter(
         val currentDeviceMode = metadataDao.getValue(SyncModeController.KEY_MODE)
             ?.let { runCatching { SyncMode.valueOf(it) }.getOrNull() }
             ?: return@withContext PushProcessingResult.Ignored("RUN_CONFIG_NOT_READY")
+        val payloadMode = data["mode"]?.let { runCatching { SyncMode.valueOf(it) }.getOrNull() }
+        val targetMode = if (payloadMode == SyncMode.PUSH || payloadMode == SyncMode.HYBRID) {
+            payloadMode
+        } else {
+            currentDeviceMode
+        }
         val deviceAlias = metadataDao.getValue(SyncModeController.KEY_DEVICE_ALIAS)?.takeIf(APP_ID_PATTERN::matches)
             ?: return@withContext PushProcessingResult.Ignored("RUN_CONFIG_NOT_READY")
         val signalId = data["signal_id"]?.takeIf(APP_ID_PATTERN::matches)
@@ -130,7 +136,7 @@ class PushSyncEnqueueAdapter(
                 workId = null,
                 messageId = messageId,
                 elapsedRealtimeMillis = elapsedRealtime,
-                mode = currentDeviceMode.name,
+                mode = targetMode.name,
                 deviceAlias = deviceAlias,
                 cachedVersion = cachedVersion,
                 versionHint = versionHint,
@@ -142,13 +148,11 @@ class PushSyncEnqueueAdapter(
         val pushAllowed = currentDeviceMode == SyncMode.PUSH || currentDeviceMode == SyncMode.HYBRID
         if (!pushAllowed) {
             Log.w(TAG, "Trigger rejected: push is disabled in active mode $currentDeviceMode for run $runId")
-            recordTriggerRejected(runId, versionHint, requestId, messageId, "MODE_DISABLED", currentDeviceMode, deviceAlias, listOfNotNull(signalId))
+            recordTriggerRejected(runId, versionHint, requestId, messageId, "MODE_DISABLED", targetMode, deviceAlias, listOfNotNull(signalId))
             return@withContext PushProcessingResult.Rejected("MODE_DISABLED", runId = runId)
         }
 
         // 7. Enqueue one-time SyncWorker with network constraint via shared enqueuer
-        val targetMode = currentDeviceMode
-
         val syncInput = SyncInput(
             source = SyncSource.PUSH,
             mode = targetMode,
@@ -172,7 +176,7 @@ class PushSyncEnqueueAdapter(
                 Log.i(TAG, "Duplicate push signal for run $runId: not enqueued again")
                 recordTriggerRejected(
                     runId, versionHint, requestId, messageId, PushInputPolicy.REASON_DUPLICATE_SIGNAL,
-                    currentDeviceMode, deviceAlias, listOfNotNull(signalId),
+                    targetMode, deviceAlias, listOfNotNull(signalId),
                 )
                 return@withLock PushProcessingResult.Rejected(PushInputPolicy.REASON_DUPLICATE_SIGNAL, runId = runId)
             }

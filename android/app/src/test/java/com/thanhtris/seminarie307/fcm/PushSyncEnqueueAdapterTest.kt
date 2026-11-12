@@ -135,7 +135,7 @@ class PushSyncEnqueueAdapterTest {
 
     @Test
     fun acceptsValidPayloadAndEnqueuesWorker() = runBlocking {
-        fakeMetadataDao.setValue(SyncMetadataEntity("mode", SyncMode.PUSH.name))
+        fakeMetadataDao.setValue(SyncMetadataEntity("mode", SyncMode.HYBRID.name))
 
         val result = adapter.processPushPayload(
             data = mapOf(
