@@ -3,7 +3,7 @@
 - Trạng thái: **Done** (Project).
 - Trạng thái đầu vào: **Đã hoàn thành**.
 - Còn chờ: Không.
-- Đối chiếu Project: 2026-11-12 14:03:40 UTC.
+- Đối chiếu Project: 2026-11-12 14:11:12 UTC.
 - Người thực hiện duy nhất: **Trí** (`ThanhTris`).
 - Hạn: **30/10/2026 14:00 (UTC+7)**.
 - Công sức: 1/100 — Cơ chế/thực hành.
@@ -14,7 +14,7 @@
 - **Bắt đầu sau:** [SEM-11](SEM-11.md)
 - **Hoàn tất còn cần:** Không có.
 
-Không có gate bắt đầu nghĩa là có thể chuẩn bị ngay. Gate hoàn tất chỉ chặn bàn giao cuối; bản nháp/fixture phải ghi đúng nhãn, không được gọi là kết quả chạy thật.
+Không có gate bắt đầu nghĩa là làm được ngay. Mục Hoàn tất còn cần là đầu vào nên dùng nếu đã có, không chặn chuyển Done: owner chuyển Done khi đầu ra và CHECKS của chính task có thật; đầu vào chưa có thì ghi Not run/giới hạn trong CHECKS. Bản nháp/fixture phải ghi đúng nhãn, không được gọi là kết quả chạy thật.
 
 <!-- task-inputs:start -->
 ## Đầu vào cần nhận
@@ -27,7 +27,7 @@ Tài liệu nền đã có: [Kế hoạch/phạm vi](../../docs/PLAN.md).
 
 Đây là danh sách đầu ra cần bàn giao, chưa phải xác nhận các file đã tồn tại. Trước khi dùng, nhận đúng artifact/commit/config và CHECKS từ task nguồn.
 
-Status nguồn được đối chiếu Project lúc **2026-11-12 14:03:40 UTC**; mở link task nguồn để xem cập nhật mới hơn.
+Status nguồn được đối chiếu Project lúc **2026-11-12 14:11:12 UTC**; mở link task nguồn để xem cập nhật mới hơn.
 <!-- task-inputs:end -->
 
 

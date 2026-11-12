@@ -171,7 +171,7 @@ def waiting_text(task, statuses, prefix=None):
     if start:
         parts.append('Bắt đầu: ' + ', '.join(map(fmt, start)))
     if finish:
-        parts.append('Hoàn tất: ' + ', '.join(map(fmt, finish)))
+        parts.append('Nên nhận: ' + ', '.join(map(fmt, finish)))
     return '; '.join(parts) or 'Không'
 
 
@@ -191,15 +191,8 @@ def report(catalog, statuses):
         for t in mine:
             start, finish = waiting_on(t, statuses)
             head = 'BỊ CHẶN bởi ' + who(start) if start else 'LÀM ĐƯỢC NGAY'
-            tail = f' | Done cần thêm: {who(finish)}' if finish else ''
+            tail = f' | Nên nhận (không chặn Done): {who(finish)}' if finish else ''
             lines.append(f"  {t['id']} [{statuses[t['id']]}] {head}{tail} — {t['title']}")
-    odd = []
-    for t in catalog['tasks']:
-        open_deps = [d for d in t['start_dependencies'] + t['finish_dependencies'] if statuses[d] != 'Done']
-        if statuses[t['id']] == 'Done' and open_deps:
-            odd.append(f"  {t['id']} đã Done nhưng gate {', '.join(open_deps)} chưa Done")
-    if odd:
-        lines += ['## Cần xem lại'] + odd
     return chr(10).join(lines)
 
 
@@ -306,7 +299,7 @@ Snapshot **{stamp}**. Status là tiến độ thực hiện; Input status là tr
 - Sẵn sàng: task ở cột Todo có toàn bộ đầu vào ở gate bắt đầu đã xong; có thể bắt tay thực hiện ngay.
 - Chờ đầu vào: task ở cột Todo còn task tiên quyết chưa qua cột Done; cần chờ bàn giao.
 
-Cột **Còn chờ task chưa Done** (và trường `Còn chờ` trên Project) ghi đích danh task tiên quyết chưa Done: `Bắt đầu:` là task đang chặn việc bắt đầu, `Hoàn tất:` là task phải Done trước khi task này được chuyển Done. Xem nhanh theo người bằng `python scripts/update_task_snapshot.py --report`. `--set-status SEM-XX=Done` bị từ chối khi task còn gate chưa Done, trừ khi thêm `--force`.
+Cột **Còn chờ task chưa Done** (và trường `Còn chờ` trên Project) ghi đích danh task liên quan chưa Done: `Bắt đầu:` là task đang chặn việc bắt đầu, `Nên nhận:` là đầu vào nên dùng nếu đã có nhưng **không chặn Done**. Owner chuyển Done khi đầu ra và CHECKS của chính task đã có thật; đầu vào chưa có thì ghi Not run/giới hạn trong CHECKS. Xem nhanh theo người bằng `python scripts/update_task_snapshot.py --report`.
 
 Project là nguồn Status hiện hành. Sau khi đổi Status nguồn, chạy `python scripts/update_task_snapshot.py --apply` để đồng bộ Input status và tài liệu; script tự động kiểm tra mở khóa các task ở cột Todo từ Chờ đầu vào sang Sẵn sàng khi task tiên quyết qua cột Done. `--check` chỉ kiểm độ khớp. Script giữ nguyên Status/Assignees/Owner/Deadline và không tạo thẻ.
 <!-- input-snapshot:end -->
@@ -411,8 +404,6 @@ def main():
     group.add_argument('--check', action='store_true')
     group.add_argument('--report', action='store_true',
                        help='Chỉ đọc: in theo người task làm được ngay và task đang chờ task nào chưa Done')
-    parser.add_argument('--force', action='store_true',
-                        help='Cho phép --set-status Done dù task còn gate chưa Done')
     parser.add_argument('--set-status', action='append', metavar='SEM-XX=STATUS',
                         help='Chuyển cột Status cho task trước khi đồng bộ (ví dụ: --set-status SEM-32=Done)')
     args = parser.parse_args()
@@ -433,11 +424,6 @@ def main():
             target_tid, target_st = spec.split('=')
             assert target_tid in lookup, f'Unknown task {target_tid}'
             assert target_st in status_opts, f'Unknown status {target_st}'
-            if target_st == 'Done' and not args.force:
-                start_wait, finish_wait = waiting_on(by[target_tid], {**statuses, target_tid: 'Todo'})
-                if start_wait or finish_wait:
-                    parser.error(f"{target_tid} chưa thể Done: còn chờ {', '.join(start_wait + finish_wait)} chưa Done. "
-                                 'Hoàn tất task đó trước hoặc thêm --force nếu đã chấp nhận ngoại lệ.')
             statuses[target_tid] = target_st
             item_id = lookup[target_tid]['id']
             gql('mutation($input:UpdateProjectV2ItemFieldValueInput!){updateProjectV2ItemFieldValue(input:$input){projectV2Item{id}}}',

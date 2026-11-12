@@ -1595,12 +1595,13 @@
       "start_dependencies": [
         "SEM-31",
         "SEM-33",
-        "SEM-36",
         "SEM-38",
         "SEM-39",
         "SEM-40"
       ],
-      "finish_dependencies": [],
+      "finish_dependencies": [
+        "SEM-36"
+      ],
       "work": [
         "Pin app/server commit, APK SHA256, dependency/config và danh sách ca pilot trên bản ứng viên.",
         "Build candidate, rà M1/hai trigger/hybrid và ghi cổng đủ để đo main.",
@@ -1614,7 +1615,7 @@
         "Truy được artifact tới đúng source/config và pilot đã ghi; không chỉ gửi APK không metadata.",
         "Chốt cuối 05/11 để tập chính 06–07/11; nếu trễ ghi blocker và điều chỉnh ca mở rộng."
       ],
-      "input_status": "Chờ đầu vào",
+      "input_status": "Sẵn sàng",
       "inputs": [
         {
           "source_task": "SEM-31",
@@ -1637,18 +1638,6 @@
           ],
           "checks": "docs/evidence/SEM-33/CHECKS.md",
           "source_status": "Done"
-        },
-        {
-          "source_task": "SEM-36",
-          "required_for": "start",
-          "producer": "Trung",
-          "artifacts": [
-            "android/ (mode controller và tích hợp)",
-            "docs/SYNC.md",
-            "docs/evidence/SEM-36/HYBRID_PILOT.md"
-          ],
-          "checks": "docs/evidence/SEM-36/CHECKS.md",
-          "source_status": "Todo"
         },
         {
           "source_task": "SEM-38",
@@ -1682,14 +1671,26 @@
           ],
           "checks": "docs/evidence/SEM-40/CHECKS.md",
           "source_status": "Done"
+        },
+        {
+          "source_task": "SEM-36",
+          "required_for": "finish",
+          "producer": "Trung",
+          "artifacts": [
+            "android/ (mode controller và tích hợp)",
+            "docs/SYNC.md",
+            "docs/evidence/SEM-36/HYBRID_PILOT.md"
+          ],
+          "checks": "docs/evidence/SEM-36/CHECKS.md",
+          "source_status": "Todo"
         }
       ],
       "due_at": "2026-11-05T22:00:00+07:00",
       "waiting_on": {
-        "start": [
+        "start": [],
+        "finish": [
           "SEM-36"
-        ],
-        "finish": []
+        ]
       }
     },
     {
@@ -3141,7 +3142,7 @@
       }
     }
   ],
-  "snapshot_at": "2026-11-12 14:03:40 UTC",
+  "snapshot_at": "2026-11-12 14:11:12 UTC",
   "snapshot_source": "https://github.com/users/ThanhTris/projects/3/views/1",
   "timezone": "Asia/Ho_Chi_Minh",
   "deadline_at": "2026-11-13T22:00:00+07:00",
