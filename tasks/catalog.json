@@ -38,7 +38,11 @@
       ],
       "input_status": "Đã hoàn thành",
       "inputs": [],
-      "due_at": "2026-10-30T12:00:00+07:00"
+      "due_at": "2026-10-30T12:00:00+07:00",
+      "waiting_on": {
+        "start": [],
+        "finish": []
+      }
     },
     {
       "id": "SEM-12",
@@ -66,7 +70,11 @@
       ],
       "input_status": "Đã hoàn thành",
       "inputs": [],
-      "due_at": "2026-10-30T12:00:00+07:00"
+      "due_at": "2026-10-30T12:00:00+07:00",
+      "waiting_on": {
+        "start": [],
+        "finish": []
+      }
     },
     {
       "id": "SEM-13",
@@ -94,7 +102,11 @@
       ],
       "input_status": "Đã hoàn thành",
       "inputs": [],
-      "due_at": "2026-10-30T12:00:00+07:00"
+      "due_at": "2026-10-30T12:00:00+07:00",
+      "waiting_on": {
+        "start": [],
+        "finish": []
+      }
     },
     {
       "id": "SEM-14",
@@ -136,7 +148,11 @@
           "source_status": "Done"
         }
       ],
-      "due_at": "2026-10-30T14:00:00+07:00"
+      "due_at": "2026-10-30T14:00:00+07:00",
+      "waiting_on": {
+        "start": [],
+        "finish": []
+      }
     },
     {
       "id": "SEM-15",
@@ -164,7 +180,11 @@
       ],
       "input_status": "Đã hoàn thành",
       "inputs": [],
-      "due_at": "2026-10-30T18:00:00+07:00"
+      "due_at": "2026-10-30T18:00:00+07:00",
+      "waiting_on": {
+        "start": [],
+        "finish": []
+      }
     },
     {
       "id": "SEM-16",
@@ -193,7 +213,11 @@
       ],
       "input_status": "Đã hoàn thành",
       "inputs": [],
-      "due_at": "2026-10-30T18:00:00+07:00"
+      "due_at": "2026-10-30T18:00:00+07:00",
+      "waiting_on": {
+        "start": [],
+        "finish": []
+      }
     },
     {
       "id": "SEM-17",
@@ -221,7 +245,11 @@
       ],
       "input_status": "Đã hoàn thành",
       "inputs": [],
-      "due_at": "2026-10-30T18:00:00+07:00"
+      "due_at": "2026-10-30T18:00:00+07:00",
+      "waiting_on": {
+        "start": [],
+        "finish": []
+      }
     },
     {
       "id": "SEM-18",
@@ -249,7 +277,11 @@
       ],
       "input_status": "Đã hoàn thành",
       "inputs": [],
-      "due_at": "2026-10-30T18:00:00+07:00"
+      "due_at": "2026-10-30T18:00:00+07:00",
+      "waiting_on": {
+        "start": [],
+        "finish": []
+      }
     },
     {
       "id": "SEM-19",
@@ -370,7 +402,11 @@
           "source_status": "Done"
         }
       ],
-      "due_at": "2026-10-30T22:00:00+07:00"
+      "due_at": "2026-10-30T22:00:00+07:00",
+      "waiting_on": {
+        "start": [],
+        "finish": []
+      }
     },
     {
       "id": "SEM-20",
@@ -424,7 +460,11 @@
           "source_status": "Done"
         }
       ],
-      "due_at": "2026-11-01T16:00:00+07:00"
+      "due_at": "2026-11-01T16:00:00+07:00",
+      "waiting_on": {
+        "start": [],
+        "finish": []
+      }
     },
     {
       "id": "SEM-21",
@@ -478,7 +518,11 @@
           "source_status": "Done"
         }
       ],
-      "due_at": "2026-11-01T16:00:00+07:00"
+      "due_at": "2026-11-01T16:00:00+07:00",
+      "waiting_on": {
+        "start": [],
+        "finish": []
+      }
     },
     {
       "id": "SEM-22",
@@ -543,7 +587,11 @@
           "source_status": "Done"
         }
       ],
-      "due_at": "2026-11-01T22:00:00+07:00"
+      "due_at": "2026-11-01T22:00:00+07:00",
+      "waiting_on": {
+        "start": [],
+        "finish": []
+      }
     },
     {
       "id": "SEM-23",
@@ -586,7 +634,11 @@
           "source_status": "Done"
         }
       ],
-      "due_at": "2026-10-31T12:00:00+07:00"
+      "due_at": "2026-10-31T12:00:00+07:00",
+      "waiting_on": {
+        "start": [],
+        "finish": []
+      }
     },
     {
       "id": "SEM-24",
@@ -642,7 +694,11 @@
           "source_status": "Done"
         }
       ],
-      "due_at": "2026-10-31T15:00:00+07:00"
+      "due_at": "2026-10-31T15:00:00+07:00",
+      "waiting_on": {
+        "start": [],
+        "finish": []
+      }
     },
     {
       "id": "SEM-25",
@@ -697,7 +753,11 @@
           "source_status": "Done"
         }
       ],
-      "due_at": "2026-10-31T17:00:00+07:00"
+      "due_at": "2026-10-31T17:00:00+07:00",
+      "waiting_on": {
+        "start": [],
+        "finish": []
+      }
     },
     {
       "id": "SEM-26",
@@ -762,7 +822,11 @@
           "source_status": "Done"
         }
       ],
-      "due_at": "2026-10-30T17:00:00+07:00"
+      "due_at": "2026-10-30T17:00:00+07:00",
+      "waiting_on": {
+        "start": [],
+        "finish": []
+      }
     },
     {
       "id": "SEM-27",
@@ -816,7 +880,11 @@
           "source_status": "Done"
         }
       ],
-      "due_at": "2026-10-31T17:00:00+07:00"
+      "due_at": "2026-10-31T17:00:00+07:00",
+      "waiting_on": {
+        "start": [],
+        "finish": []
+      }
     },
     {
       "id": "SEM-28",
@@ -897,7 +965,11 @@
           "source_status": "Done"
         }
       ],
-      "due_at": "2026-10-31T22:00:00+07:00"
+      "due_at": "2026-10-31T22:00:00+07:00",
+      "waiting_on": {
+        "start": [],
+        "finish": []
+      }
     },
     {
       "id": "SEM-29",
@@ -977,7 +1049,11 @@
           "source_status": "Done"
         }
       ],
-      "due_at": "2026-11-02T22:00:00+07:00"
+      "due_at": "2026-11-02T22:00:00+07:00",
+      "waiting_on": {
+        "start": [],
+        "finish": []
+      }
     },
     {
       "id": "SEM-30",
@@ -1043,7 +1119,11 @@
           "source_status": "Done"
         }
       ],
-      "due_at": "2026-11-01T18:00:00+07:00"
+      "due_at": "2026-11-01T18:00:00+07:00",
+      "waiting_on": {
+        "start": [],
+        "finish": []
+      }
     },
     {
       "id": "SEM-31",
@@ -1085,7 +1165,11 @@
           "source_status": "Done"
         }
       ],
-      "due_at": "2026-11-02T12:00:00+07:00"
+      "due_at": "2026-11-02T12:00:00+07:00",
+      "waiting_on": {
+        "start": [],
+        "finish": []
+      }
     },
     {
       "id": "SEM-32",
@@ -1151,7 +1235,11 @@
           "source_status": "Done"
         }
       ],
-      "due_at": "2026-11-02T18:00:00+07:00"
+      "due_at": "2026-11-02T18:00:00+07:00",
+      "waiting_on": {
+        "start": [],
+        "finish": []
+      }
     },
     {
       "id": "SEM-33",
@@ -1204,7 +1292,11 @@
           "source_status": "Done"
         }
       ],
-      "due_at": "2026-11-03T14:00:00+07:00"
+      "due_at": "2026-11-03T14:00:00+07:00",
+      "waiting_on": {
+        "start": [],
+        "finish": []
+      }
     },
     {
       "id": "SEM-34",
@@ -1296,7 +1388,11 @@
           "source_status": "Done"
         }
       ],
-      "due_at": "2026-11-03T22:00:00+07:00"
+      "due_at": "2026-11-03T22:00:00+07:00",
+      "waiting_on": {
+        "start": [],
+        "finish": []
+      }
     },
     {
       "id": "SEM-35",
@@ -1361,7 +1457,11 @@
           "source_status": "Done"
         }
       ],
-      "due_at": "2026-11-01T15:00:00+07:00"
+      "due_at": "2026-11-01T15:00:00+07:00",
+      "waiting_on": {
+        "start": [],
+        "finish": []
+      }
     },
     {
       "id": "SEM-36",
@@ -1476,7 +1576,11 @@
           "source_status": "Done"
         }
       ],
-      "due_at": "2026-11-05T18:00:00+07:00"
+      "due_at": "2026-11-05T18:00:00+07:00",
+      "waiting_on": {
+        "start": [],
+        "finish": []
+      }
     },
     {
       "id": "SEM-37",
@@ -1580,7 +1684,13 @@
           "source_status": "Done"
         }
       ],
-      "due_at": "2026-11-05T22:00:00+07:00"
+      "due_at": "2026-11-05T22:00:00+07:00",
+      "waiting_on": {
+        "start": [
+          "SEM-36"
+        ],
+        "finish": []
+      }
     },
     {
       "id": "SEM-38",
@@ -1634,7 +1744,11 @@
           "source_status": "Done"
         }
       ],
-      "due_at": "2026-11-05T12:00:00+07:00"
+      "due_at": "2026-11-05T12:00:00+07:00",
+      "waiting_on": {
+        "start": [],
+        "finish": []
+      }
     },
     {
       "id": "SEM-39",
@@ -1688,7 +1802,11 @@
           "source_status": "Done"
         }
       ],
-      "due_at": "2026-11-05T12:00:00+07:00"
+      "due_at": "2026-11-05T12:00:00+07:00",
+      "waiting_on": {
+        "start": [],
+        "finish": []
+      }
     },
     {
       "id": "SEM-40",
@@ -1743,7 +1861,11 @@
           "source_status": "Done"
         }
       ],
-      "due_at": "2026-11-04T18:00:00+07:00"
+      "due_at": "2026-11-04T18:00:00+07:00",
+      "waiting_on": {
+        "start": [],
+        "finish": []
+      }
     },
     {
       "id": "SEM-41",
@@ -1812,7 +1934,13 @@
           "source_status": "Todo"
         }
       ],
-      "due_at": "2026-11-07T13:00:00+07:00"
+      "due_at": "2026-11-07T13:00:00+07:00",
+      "waiting_on": {
+        "start": [],
+        "finish": [
+          "SEM-37"
+        ]
+      }
     },
     {
       "id": "SEM-42",
@@ -1892,7 +2020,13 @@
           "source_status": "Todo"
         }
       ],
-      "due_at": "2026-11-07T15:00:00+07:00"
+      "due_at": "2026-11-07T15:00:00+07:00",
+      "waiting_on": {
+        "start": [],
+        "finish": [
+          "SEM-37"
+        ]
+      }
     },
     {
       "id": "SEM-43",
@@ -1969,7 +2103,16 @@
           "source_status": "In Progress"
         }
       ],
-      "due_at": "2026-11-07T22:00:00+07:00"
+      "due_at": "2026-11-07T22:00:00+07:00",
+      "waiting_on": {
+        "start": [],
+        "finish": [
+          "SEM-41",
+          "SEM-42",
+          "SEM-44",
+          "SEM-45"
+        ]
+      }
     },
     {
       "id": "SEM-44",
@@ -2035,7 +2178,15 @@
           "source_status": "In Progress"
         }
       ],
-      "due_at": "2026-11-07T19:00:00+07:00"
+      "due_at": "2026-11-07T19:00:00+07:00",
+      "waiting_on": {
+        "start": [],
+        "finish": [
+          "SEM-41",
+          "SEM-42",
+          "SEM-45"
+        ]
+      }
     },
     {
       "id": "SEM-45",
@@ -2116,7 +2267,14 @@
           "source_status": "Todo"
         }
       ],
-      "due_at": "2026-11-07T17:00:00+07:00"
+      "due_at": "2026-11-07T17:00:00+07:00",
+      "waiting_on": {
+        "start": [],
+        "finish": [
+          "SEM-41",
+          "SEM-42"
+        ]
+      }
     },
     {
       "id": "SEM-46",
@@ -2169,7 +2327,13 @@
           "source_status": "Todo"
         }
       ],
-      "due_at": "2026-11-08T16:00:00+07:00"
+      "due_at": "2026-11-08T16:00:00+07:00",
+      "waiting_on": {
+        "start": [],
+        "finish": [
+          "SEM-37"
+        ]
+      }
     },
     {
       "id": "SEM-47",
@@ -2248,7 +2412,11 @@
           "source_status": "Done"
         }
       ],
-      "due_at": "2026-11-08T16:00:00+07:00"
+      "due_at": "2026-11-08T16:00:00+07:00",
+      "waiting_on": {
+        "start": [],
+        "finish": []
+      }
     },
     {
       "id": "SEM-48",
@@ -2313,7 +2481,15 @@
           "source_status": "In Progress"
         }
       ],
-      "due_at": "2026-11-08T18:00:00+07:00"
+      "due_at": "2026-11-08T18:00:00+07:00",
+      "waiting_on": {
+        "start": [],
+        "finish": [
+          "SEM-43",
+          "SEM-44",
+          "SEM-45"
+        ]
+      }
     },
     {
       "id": "SEM-49",
@@ -2403,7 +2579,11 @@
           "source_status": "Done"
         }
       ],
-      "due_at": "2026-11-08T16:00:00+07:00"
+      "due_at": "2026-11-08T16:00:00+07:00",
+      "waiting_on": {
+        "start": [],
+        "finish": []
+      }
     },
     {
       "id": "SEM-50",
@@ -2508,7 +2688,14 @@
           "source_status": "In Progress"
         }
       ],
-      "due_at": "2026-11-09T22:00:00+07:00"
+      "due_at": "2026-11-09T22:00:00+07:00",
+      "waiting_on": {
+        "start": [],
+        "finish": [
+          "SEM-43",
+          "SEM-45"
+        ]
+      }
     },
     {
       "id": "SEM-51",
@@ -2601,7 +2788,15 @@
           "source_status": "In Progress"
         }
       ],
-      "due_at": "2026-11-10T22:00:00+07:00"
+      "due_at": "2026-11-10T22:00:00+07:00",
+      "waiting_on": {
+        "start": [],
+        "finish": [
+          "SEM-46",
+          "SEM-48",
+          "SEM-50"
+        ]
+      }
     },
     {
       "id": "SEM-52",
@@ -2683,7 +2878,16 @@
           "source_status": "Todo"
         }
       ],
-      "due_at": "2026-11-11T22:00:00+07:00"
+      "due_at": "2026-11-11T22:00:00+07:00",
+      "waiting_on": {
+        "start": [],
+        "finish": [
+          "SEM-37",
+          "SEM-43",
+          "SEM-50",
+          "SEM-51"
+        ]
+      }
     },
     {
       "id": "SEM-53",
@@ -2729,7 +2933,13 @@
           "source_status": "Todo"
         }
       ],
-      "due_at": "2026-11-12T15:00:00+07:00"
+      "due_at": "2026-11-12T15:00:00+07:00",
+      "waiting_on": {
+        "start": [],
+        "finish": [
+          "SEM-52"
+        ]
+      }
     },
     {
       "id": "SEM-54",
@@ -2798,7 +3008,15 @@
           "source_status": "Todo"
         }
       ],
-      "due_at": "2026-11-12T19:00:00+07:00"
+      "due_at": "2026-11-12T19:00:00+07:00",
+      "waiting_on": {
+        "start": [],
+        "finish": [
+          "SEM-51",
+          "SEM-52",
+          "SEM-53"
+        ]
+      }
     },
     {
       "id": "SEM-55",
@@ -2909,10 +3127,21 @@
           "source_status": "Todo"
         }
       ],
-      "due_at": "2026-11-12T22:00:00+07:00"
+      "due_at": "2026-11-12T22:00:00+07:00",
+      "waiting_on": {
+        "start": [],
+        "finish": [
+          "SEM-43",
+          "SEM-50",
+          "SEM-51",
+          "SEM-52",
+          "SEM-53",
+          "SEM-54"
+        ]
+      }
     }
   ],
-  "snapshot_at": "2026-11-12 13:54:39 UTC",
+  "snapshot_at": "2026-11-12 14:03:40 UTC",
   "snapshot_source": "https://github.com/users/ThanhTris/projects/3/views/1",
   "timezone": "Asia/Ho_Chi_Minh",
   "deadline_at": "2026-11-13T22:00:00+07:00",
