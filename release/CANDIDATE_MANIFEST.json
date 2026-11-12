@@ -25,7 +25,7 @@
     "periodic_pilot": "HISTORICAL_ONLY: experiments/runs/run-sem29-periodic-emulator-20261107-r2/manifest.json; not requalified against this branch",
     "push_pilot": "NOT_RUN: Firebase B1 recorded by SEM-34 PR #26",
     "hybrid_pilot": "NOT_RUN: docs/evidence/SEM-36/HYBRID_PILOT.md",
-    "android_event_schema": "NOT_READY: Room timeline remains legacy-room-v1"
+    "android_event_schema": "NOT_RUN: strict schema-2 serializer and export action are implemented in this revision; historical rows remain legacy-room-v1 and unsupported periodic_cancelled rows are reported as omissions"
   },
   "release_gate": {
     "passed": false,
@@ -33,7 +33,7 @@
     "required_next_steps": [
       "Install Android SDK platform 37 and Build Tools 36.0.0 after accepting the SDK licenses.",
       "Build and test the exact source commit, then populate the APK path and SHA-256.",
-      "Run available integration/pilot checks and keep Firebase-dependent rows explicitly NOT_RUN if B1 remains."
+      "Run export-v2 and resolve or explicitly preserve its omission report; complete available integration/pilot checks and keep Firebase-dependent rows explicitly NOT_RUN if B1 remains."
     ]
   }
 }

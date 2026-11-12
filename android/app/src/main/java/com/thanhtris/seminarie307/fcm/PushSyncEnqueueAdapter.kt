@@ -10,6 +10,7 @@ import com.thanhtris.seminarie307.data.local.TimelineDao
 import com.thanhtris.seminarie307.data.local.TimelineEventEntity
 import com.thanhtris.seminarie307.integration.CorrelationUi
 import com.thanhtris.seminarie307.integration.SyncMode
+import com.thanhtris.seminarie307.integration.SyncModeController
 import com.thanhtris.seminarie307.integration.SyncSource
 import com.thanhtris.seminarie307.sync.SyncInput
 import com.thanhtris.seminarie307.sync.SyncWorkEnqueuer
@@ -105,6 +106,13 @@ class PushSyncEnqueueAdapter(
 
         val now = Instant.now()
         val elapsedRealtime = SystemClock.elapsedRealtime()
+        val currentDeviceMode = metadataDao.getValue(SyncModeController.KEY_MODE)
+            ?.let { runCatching { SyncMode.valueOf(it) }.getOrNull() }
+            ?: return@withContext PushProcessingResult.Ignored("RUN_CONFIG_NOT_READY")
+        val deviceAlias = metadataDao.getValue(SyncModeController.KEY_DEVICE_ALIAS)?.takeIf(APP_ID_PATTERN::matches)
+            ?: return@withContext PushProcessingResult.Ignored("RUN_CONFIG_NOT_READY")
+        val signalId = data["signal_id"]?.takeIf(APP_ID_PATTERN::matches)
+        val cachedVersion = metadataDao.getValue("cachedVersion")?.toLongOrNull()
 
         // 5. Record observed push_received event in Room (also for duplicates: the callback did happen)
         timelineDao.insert(
@@ -115,42 +123,39 @@ class PushSyncEnqueueAdapter(
                 occurredAtEpochMillis = now.toEpochMilli(),
                 occurredAtUtc = now.toString(),
                 runId = runId,
-                version = versionHint,
+                version = null,
                 outcome = "received",
-                reason = "Đã nhận silent push data-only qua FCM callback",
-                requestId = requestId,
+                reason = null,
+                requestId = null,
                 workId = null,
                 messageId = messageId,
                 elapsedRealtimeMillis = elapsedRealtime,
+                mode = currentDeviceMode.name,
+                deviceAlias = deviceAlias,
+                cachedVersion = cachedVersion,
+                versionHint = versionHint,
+                signalIdsJson = org.json.JSONArray(listOfNotNull(signalId)).toString(),
             )
         )
 
         // 6. Check active mode allowance
-        val currentDeviceMode = metadataDao.getValue("mode")
-            ?.let { runCatching { SyncMode.valueOf(it) }.getOrNull() }
-            ?: SyncMode.HYBRID
-
-        val payloadMode = data["mode"]?.let { runCatching { SyncMode.valueOf(it) }.getOrNull() }
-
         val pushAllowed = currentDeviceMode == SyncMode.PUSH || currentDeviceMode == SyncMode.HYBRID
         if (!pushAllowed) {
             Log.w(TAG, "Trigger rejected: push is disabled in active mode $currentDeviceMode for run $runId")
-            recordTriggerRejected(runId, versionHint, requestId, messageId, "MODE_DISABLED")
+            recordTriggerRejected(runId, versionHint, requestId, messageId, "MODE_DISABLED", currentDeviceMode, deviceAlias, listOfNotNull(signalId))
             return@withContext PushProcessingResult.Rejected("MODE_DISABLED", runId = runId)
         }
 
         // 7. Enqueue one-time SyncWorker with network constraint via shared enqueuer
-        val targetMode = if (payloadMode == SyncMode.PUSH || payloadMode == SyncMode.HYBRID) {
-            payloadMode
-        } else {
-            currentDeviceMode
-        }
+        val targetMode = currentDeviceMode
 
         val syncInput = SyncInput(
             source = SyncSource.PUSH,
             mode = targetMode,
             runId = runId,
+            deviceAlias = deviceAlias,
             versionHint = versionHint,
+            signalIds = listOfNotNull(signalId),
             correlation = CorrelationUi(
                 requestId = requestId,
                 messageId = messageId,
@@ -160,13 +165,14 @@ class PushSyncEnqueueAdapter(
         // SEM-38 input policy. The lock covers "check ledger -> enqueue -> record ledger" so two
         // concurrent callbacks for the same signal cannot both enqueue; different signals only
         // wait for the short ledger/enqueue step, never for a running worker.
-        val dedupeKeys = PushInputPolicy.keysFor(runId, data["signal_id"], messageId)
+        val dedupeKeys = PushInputPolicy.keysFor(runId, signalId, messageId)
         return@withContext ledgerLock.withLock {
             val ledger = PushInputPolicy.parseLedger(metadataDao.getValue(PushInputPolicy.LEDGER_KEY))
             if (PushInputPolicy.isDuplicate(ledger, dedupeKeys)) {
                 Log.i(TAG, "Duplicate push signal for run $runId: not enqueued again")
                 recordTriggerRejected(
                     runId, versionHint, requestId, messageId, PushInputPolicy.REASON_DUPLICATE_SIGNAL,
+                    currentDeviceMode, deviceAlias, listOfNotNull(signalId),
                 )
                 return@withLock PushProcessingResult.Rejected(PushInputPolicy.REASON_DUPLICATE_SIGNAL, runId = runId)
             }
@@ -196,9 +202,12 @@ class PushSyncEnqueueAdapter(
     private suspend fun recordTriggerRejected(
         runId: String,
         versionHint: Long?,
-        requestId: String,
+        requestId: String?,
         messageId: String?,
         reason: String,
+        mode: SyncMode,
+        deviceAlias: String,
+        signalIds: List<String> = emptyList(),
     ) {
         val rejectNow = Instant.now()
         timelineDao.insert(
@@ -209,13 +218,18 @@ class PushSyncEnqueueAdapter(
                 occurredAtEpochMillis = rejectNow.toEpochMilli(),
                 occurredAtUtc = rejectNow.toString(),
                 runId = runId,
-                version = versionHint,
+                version = null,
                 outcome = "rejected",
                 reason = reason,
                 requestId = requestId,
                 workId = null,
                 messageId = messageId,
                 elapsedRealtimeMillis = SystemClock.elapsedRealtime(),
+                mode = mode.name,
+                deviceAlias = deviceAlias,
+                cachedVersion = metadataDao.getValue("cachedVersion")?.toLongOrNull(),
+                versionHint = versionHint,
+                signalIdsJson = org.json.JSONArray(signalIds).toString(),
             )
         )
     }

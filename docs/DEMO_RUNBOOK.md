@@ -76,6 +76,8 @@ Keep the presentation within the 15-minute plan. Do not extend the live wait or 
 5. Re-open the app once and confirm the expected cached version/timeline. Return the device to the default presentation state and check notification tray contents.
 6. Export and validate logs. Label any raw Room timeline `legacy-room-v1` until the canonical schema-v2 adapter has been verified; do not feed legacy JSONL to the v2 consumer as if it were v2.
 
+For the Android instrumentation export, invoke `PeriodicPilotControl` with `-e sem29_action export-v2 -e sem29_run_id <run-id>`. It writes `events-v2.jsonl` plus `events-v2-export-report.json`; only rows passing the strict v2 checks enter the JSONL. Keep the raw legacy file and omission report with the run. A `PARTIAL` report is not a complete canonical run export.
+
 ## 7. Evidence checklist
 
 For every executed run, retain original manifest/events, build and server commits, APK SHA-256, device alias/OS, mode, versions before/target/after, actual observation window, cleanup state, and commands used. Keep serials, IPs, tokens, credentials, and raw private dumps out of the public evidence. Link the run from the task CHECKS and record failures/unknowns without editing the source logs.

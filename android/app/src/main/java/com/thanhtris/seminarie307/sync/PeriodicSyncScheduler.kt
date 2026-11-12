@@ -28,14 +28,16 @@ class PeriodicSyncScheduler(
 
     /** Returns the WorkManager ID only after unique registration is accepted and observable. */
     suspend fun schedulePeriodicSync(
-        mode: SyncMode = SyncMode.PERIODIC,
-        runId: String = "periodic-run",
+        mode: SyncMode,
+        runId: String,
+        deviceAlias: String,
         repeatIntervalMinutes: Long = MIN_REPEAT_INTERVAL_MINUTES,
     ): UUID? = withContext(Dispatchers.IO) {
         require(repeatIntervalMinutes >= MIN_REPEAT_INTERVAL_MINUTES) {
             "WorkManager periodic interval must be at least $MIN_REPEAT_INTERVAL_MINUTES minutes"
         }
         require(APP_ID.matches(runId)) { "runId must be a valid experiment run id" }
+        require(APP_ID.matches(deviceAlias)) { "deviceAlias must be a valid experiment device alias" }
         require(mode == SyncMode.PERIODIC || mode == SyncMode.HYBRID) {
             "Periodic work is only valid in PERIODIC or HYBRID mode"
         }
@@ -51,6 +53,7 @@ class PeriodicSyncScheduler(
                     SyncWorker.KEY_SOURCE to SyncSource.PERIODIC.name,
                     SyncWorker.KEY_MODE to mode.name,
                     SyncWorker.KEY_RUN_ID to runId,
+                    SyncWorker.KEY_DEVICE_ALIAS to deviceAlias,
                 )
             )
             .build()
@@ -72,6 +75,9 @@ class PeriodicSyncScheduler(
             eventType = "periodic_registered",
             outcome = "registered",
             reason = null,
+            mode = mode,
+            deviceAlias = deviceAlias,
+            cachedVersion = database.metadataDao().getValue("cachedVersion")?.toLongOrNull(),
         )
         workInfo.id
     }
@@ -101,6 +107,9 @@ class PeriodicSyncScheduler(
         eventType: String,
         outcome: String,
         reason: String?,
+        mode: SyncMode? = null,
+        deviceAlias: String? = null,
+        cachedVersion: Long? = null,
     ) {
         val now = Instant.now()
         database.timelineDao().insert(
@@ -118,6 +127,9 @@ class PeriodicSyncScheduler(
                 workId = workId,
                 messageId = null,
                 elapsedRealtimeMillis = SystemClock.elapsedRealtime(),
+                mode = mode?.name,
+                deviceAlias = deviceAlias,
+                cachedVersion = cachedVersion,
             )
         )
     }

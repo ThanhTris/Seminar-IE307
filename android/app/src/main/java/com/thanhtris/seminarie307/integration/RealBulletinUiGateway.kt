@@ -38,10 +38,15 @@ class RealBulletinUiGateway(
         )
     }
 
-    override val state: Flow<BulletinUiState> = baseState.combine(
+    override val state: Flow<BulletinUiState> = combine(
+        baseState,
         metadataDao.observeValue(SyncModeController.KEY_ACTIVE_RUN_ID),
-    ) { current, activeRunId ->
-        current.copy(activeRunId = activeRunId?.takeIf(String::isNotBlank))
+        metadataDao.observeValue(SyncModeController.KEY_DEVICE_ALIAS),
+    ) { current, activeRunId, deviceAlias ->
+        current.copy(
+            activeRunId = activeRunId?.takeIf(String::isNotBlank),
+            deviceAlias = deviceAlias?.takeIf(String::isNotBlank),
+        )
     }
 
     override suspend fun enqueueManual(context: ManualSyncContext): ManualEnqueueResult {
@@ -52,6 +57,7 @@ class RealBulletinUiGateway(
                     source = SyncSource.MANUAL,
                     mode = context.mode,
                     runId = context.runId,
+                    deviceAlias = context.deviceAlias,
                     correlation = CorrelationUi(requestId = requestId),
                 )
             )
@@ -65,7 +71,7 @@ class RealBulletinUiGateway(
         }
     }
 
-    override suspend fun configureMode(mode: SyncMode, runId: String) {
-        SyncModeController(context, database).configure(mode, runId)
+    override suspend fun configureMode(mode: SyncMode, runId: String, deviceAlias: String) {
+        SyncModeController(context, database).configure(mode, runId, deviceAlias)
     }
 }

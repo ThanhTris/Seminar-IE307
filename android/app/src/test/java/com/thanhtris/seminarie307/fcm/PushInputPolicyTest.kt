@@ -37,6 +37,7 @@ class PushInputPolicyTest {
         timeline = FakeTimelineDao()
         metadata = FakeSyncMetadataDao()
         metadata.map["mode"] = SyncMode.HYBRID.name
+        metadata.map["deviceAlias"] = "emulator-test-1"
         enqueued.clear()
         adapter = newAdapter()
     }
@@ -47,9 +48,10 @@ class PushInputPolicyTest {
         run: String = "run-e05",
         signal: String? = null,
         hint: String? = null,
+        mode: String = "HYBRID",
     ): Map<String, String> = buildMap {
         put("run_id", run)
-        put("mode", "PUSH")
+        put("mode", mode)
         put("source", "PUSH")
         signal?.let { put("signal_id", it) }
         hint?.let { put("version_hint", it) }
@@ -73,7 +75,8 @@ class PushInputPolicyTest {
         assertEquals("rejected", rejected.outcome)
         assertEquals("DUPLICATE_SIGNAL", rejected.reason)
         assertEquals("m-2", rejected.messageId)
-        assertEquals(6L, rejected.version)
+        assertEquals(null, rejected.version)
+        assertEquals(6L, rejected.versionHint)
     }
 
     @Test
@@ -158,7 +161,7 @@ class PushInputPolicyTest {
         assertEquals(PushProcessingResult.Rejected("MODE_DISABLED", "run-e05"), blocked)
 
         metadata.map["mode"] = SyncMode.PUSH.name
-        val later = adapter.processPushPayload(payload(signal = "sig-1"), messageId = "m-2")
+        val later = adapter.processPushPayload(payload(signal = "sig-1", mode = "PUSH"), messageId = "m-2")
 
         assertTrue(later is PushProcessingResult.Enqueued)
     }
@@ -255,6 +258,7 @@ class PushInputPolicyTest {
     private class FakeTimelineDao : TimelineDao {
         val events: MutableList<TimelineEventEntity> = Collections.synchronizedList(mutableListOf())
         override fun observeAll(): Flow<List<TimelineEventEntity>> = flowOf(events)
+        override suspend fun getAllForRun(runId: String): List<TimelineEventEntity> = events.filter { it.runId == runId }
         override suspend fun insert(event: TimelineEventEntity) {
             events.add(event)
         }

@@ -45,6 +45,7 @@ data class BulletinUiState(
     val cachedVersion: Long? = null,
     val mode: SyncMode? = null,
     val activeRunId: String? = null,
+    val deviceAlias: String? = null,
     val lastSyncAtUtc: String? = null,
     val snapshot: List<BulletinItem> = emptyList(),
     val timeline: List<TimelineEvent> = emptyList(),
@@ -53,7 +54,8 @@ data class BulletinUiState(
     fun manualContextOrNull(): ManualSyncContext? {
         val runId = activeRunId?.takeIf(String::isNotBlank) ?: return null
         val mode = mode ?: return null
-        return ManualSyncContext(runId = runId, mode = mode)
+        val deviceAlias = deviceAlias?.takeIf(String::isNotBlank) ?: return null
+        return ManualSyncContext(runId = runId, mode = mode, deviceAlias = deviceAlias)
     }
 
     val canEnqueueManual: Boolean
@@ -63,6 +65,7 @@ data class BulletinUiState(
 data class ManualSyncContext(
     val runId: String,
     val mode: SyncMode,
+    val deviceAlias: String,
 )
 
 sealed interface ManualEnqueueResult {
@@ -76,5 +79,5 @@ interface BulletinUiGateway {
 
     suspend fun enqueueManual(context: ManualSyncContext): ManualEnqueueResult
 
-    suspend fun configureMode(mode: SyncMode, runId: String)
+    suspend fun configureMode(mode: SyncMode, runId: String, deviceAlias: String)
 }

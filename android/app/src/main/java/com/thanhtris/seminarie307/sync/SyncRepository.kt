@@ -28,16 +28,41 @@ class SyncRepository(
         recordEvent(
             input = input,
             eventType = "work_started",
-            version = initialVersion,
+            version = null,
             outcome = "started",
             reason = null,
+            cachedVersion = initialVersion,
         )
 
         // 2. Fetch remote snapshot
+        val networkCallId = UUID.randomUUID().toString()
+        recordEvent(
+            input = input,
+            eventType = "snapshot_fetch_started",
+            version = null,
+            outcome = "started",
+            reason = null,
+            cachedVersion = initialVersion,
+            networkCallId = networkCallId,
+        )
         val remoteResult = remoteDataSource.fetchSnapshot(
             currentVersion = initialVersion,
             requestId = input.correlation.requestId,
         )
+        when (remoteResult) {
+            is RemoteSnapshotResult.Success -> recordEvent(
+                input, "snapshot_fetch_completed", remoteResult.version, "success", null,
+                cachedVersion = initialVersion, networkCallId = networkCallId, httpStatus = 200,
+            )
+            is RemoteSnapshotResult.NotModified -> recordEvent(
+                input, "snapshot_fetch_completed", null, "not_modified", null,
+                cachedVersion = initialVersion, networkCallId = networkCallId, httpStatus = remoteResult.statusCode,
+            )
+            is RemoteSnapshotResult.Failure -> recordEvent(
+                input, "snapshot_fetch_completed", null, "failure", remoteResult.message,
+                cachedVersion = initialVersion, networkCallId = networkCallId, httpStatus = remoteResult.statusCode,
+            )
+        }
 
         val nowUtc = Instant.now().toString()
 
@@ -58,6 +83,7 @@ class SyncRepository(
                             version = remoteResult.version,
                             outcome = "applied",
                             reason = null,
+                            cachedVersion = remoteResult.version,
                         )
 
                         SyncResult(
@@ -74,6 +100,7 @@ class SyncRepository(
                             version = lockedVersion,
                             outcome = "unchanged",
                             reason = null,
+                            cachedVersion = lockedVersion,
                         )
                         SyncResult(
                             outcome = SyncOutcomeType.UNCHANGED,
@@ -89,6 +116,7 @@ class SyncRepository(
                             version = remoteResult.version,
                             outcome = "stale",
                             reason = "VERSION_STALE",
+                            cachedVersion = lockedVersion,
                         )
                         SyncResult(
                             outcome = SyncOutcomeType.STALE,
@@ -99,9 +127,9 @@ class SyncRepository(
                 }
             }
 
-            RemoteSnapshotResult.NotModified -> {
+            is RemoteSnapshotResult.NotModified -> {
                 if (initialVersion == null) {
-                    recordEvent(input, "sync_failed", null, "failure", "INVALID_RESPONSE")
+                    recordEvent(input, "sync_failed", null, "failure", "INVALID_RESPONSE", cachedVersion = initialVersion)
                     return@withContext SyncResult(SyncOutcomeType.FAILURE, "INVALID_RESPONSE")
                 }
                 metadataDao.setValue(SyncMetadataEntity("cachedVersion", initialVersion.toString()))
@@ -109,9 +137,10 @@ class SyncRepository(
                 recordEvent(
                     input = input,
                     eventType = "snapshot_unchanged",
-                    version = initialVersion,
+                    version = null,
                     outcome = "unchanged",
                     reason = null,
+                    cachedVersion = initialVersion,
                 )
                 SyncResult(
                     outcome = SyncOutcomeType.UNCHANGED,
@@ -131,9 +160,10 @@ class SyncRepository(
                 recordEvent(
                     input = input,
                     eventType = if (canRetry) "sync_retrying" else "sync_failed",
-                    version = initialVersion,
+                    version = null,
                     outcome = if (canRetry) "retry" else "failure",
                     reason = if (remoteResult.isTransient && !canRetry) "RETRY_EXHAUSTED" else remoteResult.message,
+                    cachedVersion = initialVersion,
                 )
 
                 SyncResult(
@@ -151,6 +181,9 @@ class SyncRepository(
         version: Long?,
         outcome: String?,
         reason: String?,
+        cachedVersion: Long? = null,
+        networkCallId: String? = null,
+        httpStatus: Int? = null,
     ) {
         val now = Instant.now()
         val elapsedRealtime = SystemClock.elapsedRealtime()
@@ -168,6 +201,14 @@ class SyncRepository(
             workId = input.correlation.workId,
             messageId = input.correlation.messageId,
             elapsedRealtimeMillis = elapsedRealtime,
+            mode = input.mode.name,
+            deviceAlias = input.deviceAlias,
+            cachedVersion = cachedVersion,
+            versionHint = input.versionHint,
+            workAttempt = input.workAttempt,
+            networkCallId = networkCallId,
+            signalIdsJson = org.json.JSONArray(input.signalIds).toString(),
+            httpStatus = httpStatus,
         )
         timelineDao.insert(eventEntity)
     }

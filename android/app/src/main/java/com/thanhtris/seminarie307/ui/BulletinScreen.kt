@@ -58,7 +58,7 @@ private enum class BulletinTab(val label: String) {
 fun BulletinScreen(
     viewState: BulletinViewState,
     onManualSync: (ManualSyncContext) -> Unit,
-    onModeSelected: (SyncMode, String) -> Unit,
+    onModeSelected: (SyncMode, String, String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     var selectedTabName by rememberSaveable { mutableStateOf(BulletinTab.BULLETIN.name) }
@@ -118,9 +118,12 @@ fun BulletinScreen(
 }
 
 @Composable
-private fun StatusSummary(state: BulletinUiState, onModeSelected: (SyncMode, String) -> Unit) {
+private fun StatusSummary(state: BulletinUiState, onModeSelected: (SyncMode, String, String) -> Unit) {
     var runId by rememberSaveable(state.activeRunId) {
         mutableStateOf(state.activeRunId.orEmpty())
+    }
+    var deviceAlias by rememberSaveable(state.deviceAlias) {
+        mutableStateOf(state.deviceAlias.orEmpty())
     }
     Card(
         modifier = Modifier
@@ -140,9 +143,21 @@ private fun StatusSummary(state: BulletinUiState, onModeSelected: (SyncMode, Str
                 modifier = Modifier.fillMaxWidth(),
                 label = { Text("Run ID") },
                 singleLine = true,
-                supportingText = { Text("Dùng run ID thật từ protocol; không dùng giá trị mẫu khi đo.") },
+            )
+            OutlinedTextField(
+                value = deviceAlias,
+                onValueChange = { deviceAlias = it },
+                modifier = Modifier.fillMaxWidth(),
+                label = { Text("Device alias") },
+                singleLine = true,
+            )
+            Text(
+                "Dùng ID theo protocol; không nhập serial hoặc token.",
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
             StatusLine("Run đang chọn", state.activeRunId ?: "Chưa cấu hình")
+            StatusLine("Device alias đang chọn", state.deviceAlias ?: "Chưa cấu hình")
             StatusLine("Lần sync gần nhất", state.lastSyncAtUtc ?: "Chưa đồng bộ")
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -150,8 +165,9 @@ private fun StatusSummary(state: BulletinUiState, onModeSelected: (SyncMode, Str
             ) {
                 SyncMode.entries.forEach { mode ->
                     TextButton(
-                        onClick = { onModeSelected(mode, runId) },
-                        enabled = mode != state.mode && runId.isNotBlank(),
+                        onClick = { onModeSelected(mode, runId, deviceAlias) },
+                        enabled = (mode != state.mode || runId != state.activeRunId || deviceAlias != state.deviceAlias) &&
+                            runId.isNotBlank() && deviceAlias.isNotBlank(),
                     ) {
                         Text(mode.name)
                     }

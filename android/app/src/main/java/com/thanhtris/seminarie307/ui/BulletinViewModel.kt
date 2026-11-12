@@ -62,16 +62,17 @@ class BulletinViewModel(private val gateway: BulletinUiGateway) : ViewModel() {
         }
     }
 
-    fun configureMode(mode: SyncMode, runId: String) {
+    fun configureMode(mode: SyncMode, runId: String, deviceAlias: String) {
         val normalizedRunId = runId.trim()
-        if (normalizedRunId.isBlank()) {
-            mutableState.update { it.copy(manualFeedback = "Nhập run ID trước khi cấu hình mode.") }
+        val normalizedDeviceAlias = deviceAlias.trim()
+        if (normalizedRunId.isBlank() || normalizedDeviceAlias.isBlank()) {
+            mutableState.update { it.copy(manualFeedback = "Nhập run ID và device alias trước khi cấu hình mode.") }
             return
         }
         viewModelScope.launch {
             mutableState.update { it.copy(manualFeedback = null) }
             try {
-                gateway.configureMode(mode, normalizedRunId)
+                gateway.configureMode(mode, normalizedRunId, normalizedDeviceAlias)
                 mutableState.update {
                     it.copy(manualFeedback = "Đã chuyển sang mode ${mode.name}; kiểm tra timeline trước khi đo.")
                 }

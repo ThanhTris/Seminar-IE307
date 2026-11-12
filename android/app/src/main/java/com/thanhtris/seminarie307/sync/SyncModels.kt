@@ -8,9 +8,11 @@ data class SyncInput(
     val source: SyncSource,
     val mode: SyncMode,
     val runId: String,
+    val deviceAlias: String,
     val versionHint: Long? = null,
     val workAttempt: Int = 0,
     val correlation: CorrelationUi = CorrelationUi(),
+    val signalIds: List<String> = emptyList(),
 )
 
 enum class SyncOutcomeType {

@@ -28,11 +28,12 @@ class SyncWorkEnqueuer(
     suspend fun enqueue(input: SyncInput, repeatIntervalMinutes: Long = PeriodicSyncScheduler.MIN_REPEAT_INTERVAL_MINUTES): UUID? =
         withContext(Dispatchers.IO) {
             require(APP_ID.matches(input.runId)) { "runId must be a valid experiment run id" }
+            require(APP_ID.matches(input.deviceAlias)) { "deviceAlias must be a valid experiment device alias" }
             require(modeAllows(input.source, input.mode)) { "Trigger is disabled in the requested mode" }
 
             if (input.source == SyncSource.PERIODIC) {
                 return@withContext PeriodicSyncScheduler(appContext, database)
-                    .schedulePeriodicSync(input.mode, input.runId, repeatIntervalMinutes)
+                    .schedulePeriodicSync(input.mode, input.runId, input.deviceAlias, repeatIntervalMinutes)
             }
 
             val requestId = input.correlation.requestId
@@ -44,11 +45,14 @@ class SyncWorkEnqueuer(
             val request = OneTimeWorkRequestBuilder<SyncWorker>()
                 .setConstraints(constraints)
                 .addTag(SyncWorker.SYNC_WORK_TAG)
+                .addTag(SyncWorker.ONE_TIME_SYNC_WORK_TAG)
                 .setInputData(
                     workDataOf(
                         SyncWorker.KEY_SOURCE to input.source.name,
                         SyncWorker.KEY_MODE to input.mode.name,
                         SyncWorker.KEY_RUN_ID to input.runId,
+                        SyncWorker.KEY_DEVICE_ALIAS to input.deviceAlias,
+                        SyncWorker.KEY_SIGNAL_IDS to org.json.JSONArray(input.signalIds).toString(),
                         SyncWorker.KEY_REQUEST_ID to requestId,
                         SyncWorker.KEY_MESSAGE_ID to input.correlation.messageId,
                         SyncWorker.KEY_VERSION_HINT to (input.versionHint ?: -1L),
@@ -66,13 +70,18 @@ class SyncWorkEnqueuer(
                     occurredAtEpochMillis = now.toEpochMilli(),
                     occurredAtUtc = now.toString(),
                     runId = input.runId,
-                    version = input.versionHint,
+                    version = null,
                     outcome = "enqueued",
                     reason = null,
                     requestId = requestId,
                     workId = request.id.toString(),
                     messageId = input.correlation.messageId,
                     elapsedRealtimeMillis = SystemClock.elapsedRealtime(),
+                    mode = input.mode.name,
+                    deviceAlias = input.deviceAlias,
+                    cachedVersion = database.metadataDao().getValue("cachedVersion")?.toLongOrNull(),
+                    versionHint = input.versionHint,
+                    signalIdsJson = org.json.JSONArray(input.signalIds).toString(),
                 )
             )
             request.id

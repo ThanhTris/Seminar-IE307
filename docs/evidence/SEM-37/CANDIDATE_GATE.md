@@ -13,7 +13,7 @@
 
 | Requirement | State |
 |---|---|
-| SEM-36 integration/pilot | Todo; mode code/docs prepared; E05/E06 device pilots and schema-v2 export Not run |
+| SEM-36 integration/pilot | Todo; mode code/docs and strict schema-v2 serializer prepared; E05/E06 pilots and runtime export Not run |
 | SEM-33 token lifecycle | Done on live board |
 | SEM-38 push policy | Done on live board |
 | Android candidate build | Not run: SDK platform 37/Build Tools 36.0.0 are not installed and local SDK licenses were not accepted |

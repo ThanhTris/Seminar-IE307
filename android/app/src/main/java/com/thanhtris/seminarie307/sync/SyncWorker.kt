@@ -22,6 +22,8 @@ class SyncWorker(
             ?: return Result.failure(workDataOf(KEY_OUTCOME to "INVALID_TRIGGER"))
         val runId = inputData.getString(KEY_RUN_ID)?.takeIf { isAppId(it) }
             ?: return Result.failure(workDataOf(KEY_OUTCOME to "INVALID_TRIGGER"))
+        val deviceAlias = inputData.getString(KEY_DEVICE_ALIAS)?.takeIf { isAppId(it) }
+            ?: return Result.failure(workDataOf(KEY_OUTCOME to "INVALID_TRIGGER"))
         val triggerAllowed = when (source) {
             SyncSource.MANUAL -> true
             SyncSource.PERIODIC -> mode == SyncMode.PERIODIC || mode == SyncMode.HYBRID
@@ -31,6 +33,13 @@ class SyncWorker(
         val messageId = inputData.getString(KEY_MESSAGE_ID)
         val rawVersion = inputData.getLong(KEY_VERSION_HINT, -1L)
         val versionHint = rawVersion.takeIf { it >= 0 }
+        val signalIds = try {
+            org.json.JSONArray(inputData.getString(KEY_SIGNAL_IDS) ?: "[]")
+                .let { array -> (0 until array.length()).map { array.getString(it) } }
+        } catch (_: Exception) {
+            return Result.failure(workDataOf(KEY_OUTCOME to "INVALID_TRIGGER"))
+        }
+        if (signalIds.any { !isAppId(it) }) return Result.failure(workDataOf(KEY_OUTCOME to "INVALID_TRIGGER"))
         val database = AppDatabase.getInstance(applicationContext)
         val suppliedRequestId = inputData.getString(KEY_REQUEST_ID)?.takeIf { it.isNotBlank() }
         val periodicRequestKey = if (source == SyncSource.PERIODIC) periodicRequestIdKey(id.toString()) else null
@@ -53,8 +62,10 @@ class SyncWorker(
             source = source,
             mode = mode,
             runId = runId,
+            deviceAlias = deviceAlias,
             versionHint = versionHint,
             workAttempt = runAttemptCount,
+            signalIds = signalIds,
             correlation = CorrelationUi(
                 requestId = requestId,
                 workId = id.toString(),
@@ -90,12 +101,15 @@ class SyncWorker(
     companion object {
         const val MAX_RETRY_COUNT = 3
         const val SYNC_WORK_TAG = "com.thanhtris.seminarie307.sync"
+        const val ONE_TIME_SYNC_WORK_TAG = "com.thanhtris.seminarie307.sync.one_time"
         private val APP_ID_PATTERN = Regex("^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$")
         private fun isAppId(value: String) = APP_ID_PATTERN.matches(value)
         private fun periodicRequestIdKey(workId: String) = "periodic_request_id_$workId"
         const val KEY_SOURCE = "source"
         const val KEY_MODE = "mode"
         const val KEY_RUN_ID = "run_id"
+        const val KEY_DEVICE_ALIAS = "device_alias"
+        const val KEY_SIGNAL_IDS = "signal_ids"
         const val KEY_REQUEST_ID = "request_id"
         const val KEY_MESSAGE_ID = "message_id"
         const val KEY_VERSION_HINT = "version_hint"

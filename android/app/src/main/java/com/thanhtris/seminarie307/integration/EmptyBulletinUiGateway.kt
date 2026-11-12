@@ -10,7 +10,7 @@ class EmptyBulletinUiGateway : BulletinUiGateway {
     override suspend fun enqueueManual(context: ManualSyncContext): ManualEnqueueResult =
         ManualEnqueueResult.Rejected("Chưa có sync core được kết nối.")
 
-    override suspend fun configureMode(mode: SyncMode, runId: String) {
+    override suspend fun configureMode(mode: SyncMode, runId: String, deviceAlias: String) {
         throw IllegalStateException("Chưa có sync core được kết nối.")
     }
 }

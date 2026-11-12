@@ -6,13 +6,15 @@
 
 ## Selecting a mode
 
-The mode buttons in the app call `SyncModeController.configure(mode, runId)`:
+The mode buttons in the app call `SyncModeController.configure(mode, runId, deviceAlias)`. Both IDs must be supplied from the experiment protocol; the app does not manufacture defaults.
 
 - `PERIODIC`: register/update the unique connected-network periodic request; the worker rejects PUSH triggers in this mode.
 - `PUSH`: cancel the unique periodic request; the worker rejects PERIODIC triggers in this mode.
 - `HYBRID`: keep the unique periodic request and allow PUSH; both paths use `SyncWorker`/`SyncRepository`.
 
-Mode and active run ID are persisted together after the WorkManager operation completes. Mode changes are refused while a tagged sync worker is running; retry after it reaches a terminal state. The registered periodic request is not evidence that it has started. If the schedule/run is changed during an observation window, mark that run as contaminated before collecting results.
+Mode, active run ID, and device alias are persisted together after the WorkManager operation completes. Mode changes wait for one-time work to become terminal and refuse changes while any worker is running; an idle periodic registration can be updated or cancelled. The registered periodic request is not evidence that it has started. If the schedule/run is changed during an observation window, mark that run as contaminated before collecting results.
+
+New Room timeline rows capture the run mode, device alias, cache version, version hint, worker attempt, signal IDs, and per-request network call ID needed by the Android schema-2 adapter. The exporter fails closed for legacy rows or event types that lack canonical schema support; the instrumentation export writes a separate report listing omitted rows. Raw historical rows remain labeled `legacy-room-v1`.
 
 ## Interpretation limits
 
