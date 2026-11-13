@@ -9,6 +9,8 @@
 - Công sức: 1/100 — Nghiên cứu/lập luận.
 - Tách từ nhóm cũ: [SEM-09](SEM-09.md); nhóm cũ chỉ còn lưu lịch sử.
 
+> **Đầu ra tài liệu SEM-46 đã hoàn tất ngày 12/11/2026 để review và bàn giao SEM-51.** Áp dụng quy tắc `cc2bd1c`, candidate SEM-37, live FCM và diễn tập được ghi Not run/giới hạn trong CHECKS. Nhánh có TRI.md và hồ sơ kiểm cuối để Tuấn đọc trước khi gửi nhóm trưởng kiểm nhận.
+
 ## Dependency — bấm mã task để mở yêu cầu
 
 - **Bắt đầu sau:** Không có.
@@ -45,9 +47,15 @@ Status nguồn được đối chiếu Project lúc **2026-11-12 14:11:12 UTC**;
 
 ## Tiêu chí hoàn thành
 
-- [ ] Lời dẫn khớp scope/candidate thật, ghi rõ live và playback.
-- [ ] Không thêm tính năng hoặc lời hứa độ trễ chưa được evidence hỗ trợ.
-- [ ] Đầu ra và CHECKS có thật, link đọc được; chưa chạy phải ghi Not run, không tự chuyển Done từ kế hoạch.
+- [x] Lời dẫn đã đối chiếu với scope/source baseline, có nhãn LIVE/CONTRACT/PLAYBACK/PROTOCOL. Candidate thật ghi Not run theo quy tắc ngày 12/11 trong CHECKS.
+- [x] Nội dung bám các event và evidence đã nhận, ngưỡng chuyển 30 giây được ghi là ngân sách điều phối.
+- [x] TRI.md và CHECKS có thật, link đã kiểm, candidate/live/video/diễn tập ghi đúng Not run.
+
+## Các bước đã thực hiện
+
+1. **Đã soạn và commit** mở bài, vai nói và mốc cơ chế trong TRI.md, commit `acf341e`.
+2. **Đã soạn** kịch bản thao tác và phiếu cấu hình tại `1369893`, nhận main ngày 12/11 tại `107d271`, chốt mode/CLI/evidence và phương án phối hợp SEM-47 tại `175257e`.
+3. **Đã kiểm cuối và hoàn tất bàn giao** theo policy hiện hành, candidate và các run thiếu ghi Not run trong [CHECKS](../../docs/evidence/SEM-46/CHECKS.md). Nội dung dùng cho SEM-51 ở [TRI.md](../../slides/inputs/TRI.md).
 
 ## Task được mở khóa
 
