@@ -1,6 +1,6 @@
 # SEM-46 — Mở bài và thao tác demo
 
-Tuấn (`mtuan2491`) soạn ngày 09/11, chốt tài liệu ngày 12/11/2026 trên nhánh `codex/SEM-46-opening-demo`. Người trình bày mở bài và thao tác thiết bị là Trí theo PRESENTATION_PLAN. Tên file TRI.md giữ đúng đầu ra của task.
+Tuấn (`mtuan2491`) soạn ngày 09/11, chốt tài liệu ngày 12/11 và cập nhật theo review ngày 13/11/2026 trên nhánh `codex/SEM-46-opening-demo`. Người trình bày mở bài và thao tác thiết bị là Trí theo PRESENTATION_PLAN. Tên file TRI.md giữ đúng đầu ra của task.
 
 **Đầu ra tài liệu SEM-46 đã hoàn tất để review và bàn giao SEM-51.** Áp dụng quy tắc nhóm ngày 12/11 tại `cc2bd1c`, các đầu vào còn thiếu được ghi Not run/giới hạn trong CHECKS. Baseline đối chiếu là main `cc2bd1cbaecbd8e2e235af7985bbe720a6e8f1ff`. [Yêu cầu SEM-46](../../tasks/backlog/SEM-46.md), [quy tắc task](../../tasks/README.md), [CHECKS](../../docs/evidence/SEM-46/CHECKS.md)
 
@@ -71,6 +71,7 @@ Các giới hạn được bàn giao cùng tài liệu cho người ghép slide 
 | Playback periodic có sẵn | `run-sem29-periodic-emulator-20261107-r2`, `emulator-main`, pilot, validity NOT_ASSESSED | Manifest/events/analysis SEM-29 |
 | APK/source của playback periodic | App `95eeecb6bfa1a0963a95e581b5322c15443711e4`, server `a26646d`, APK SHA-256 trong manifest | Manifest và CHECKS của owner SEM-29 |
 | M1 | Luồng MANUAL đã bàn giao, dùng cho phần commit/cache | Hồ sơ M1 SEM-28 |
+| Playback skip-push SEM-40 | Chỉ phía server, chưa có run Android E06 | Log `server_updated` và `push_send_skipped` theo FAULT_INJECTION |
 | Playback push, Doze/E06 trên Android và video | Not run trong bộ evidence đã nhận | Bổ sung run/video có metadata khi bàn giao |
 
 Metadata playback được giữ theo run gốc. Phiếu live được điền ở lần chuẩn bị thực tế. Những dòng Not run tiếp tục đi cùng CHECKS để người ghép deck chọn đúng nhãn trình diễn. [Manifest playback](../../experiments/runs/run-sem29-periodic-emulator-20261107-r2/manifest.json), [FCM_SENDER](../../docs/setup/FCM_SENDER.md)
@@ -84,7 +85,7 @@ Trạng thái chạy thiết bị/candidate mới trong SEM-46 là **Not run**. 
 3. Chuẩn bị cache version N bằng thao tác MANUAL có nhãn ở ngoài cửa sổ live, chờ work hoàn tất. Đọc lại version server/cache và ghi baseline. Giữ server version tăng đơn điệu giữa các lượt.
 4. Đọc mode thực tại setup. Baseline mặc định dùng HYBRID, source của tín hiệu là PUSH, payload/update cùng mode được chọn. Kiểm trạng thái lịch qua công cụ đã bàn giao, ghi mọi periodic còn active và nguồn của từng apply, đưa app về Home và ghi mốc quan sát. Ca E02 chuẩn dùng PUSH sau khi cơ chế mode/reset được kiểm trên build thực.
 5. Chuẩn bị update N+1 và tín hiệu data-only normal priority qua entry point được bàn giao. Token và credential giữ trong cấu hình local. Trang dẫn nội dung, Trí thực hiện thao tác và ghi mốc gửi.
-6. Chuẩn bị playback periodic r2 và evidence M1 đã nhận. Phần push thiếu cấu hình dùng CONTRACT. Phần Doze/E06 thiếu run dùng PROTOCOL và source/test đã bàn giao. Chốt đoạn trích phù hợp 1 phút mỗi phần cùng nhãn hiển thị.
+6. Chuẩn bị playback periodic r2 và evidence M1 đã nhận. Phần push thiếu cấu hình dùng CONTRACT. Phần skip-push SEM-40 dùng PLAYBACK kèm ghi chú “chỉ phía server, chưa có run Android E06”. Phần Doze chưa có run dùng PROTOCOL. Chốt đoạn trích phù hợp 1 phút mỗi phần cùng nhãn hiển thị.
 
 Mode/source, run isolation, drain và version guard được đối chiếu theo SHARED_SYNC. Cách reset/cửa sổ/cleanup chi tiết dùng protocol. [SHARED_SYNC](../../docs/mechanisms/SHARED_SYNC.md), [PROTOCOL](../../experiments/PROTOCOL.md)
 
@@ -104,26 +105,27 @@ Mở `analysis.json`, `manifest.json` và `events.jsonl` của r2 với nhãn `P
 
 ## 7. Kịch bản phối hợp trong demo 4 phút
 
-Trang giữ lời dẫn suốt phần demo. Trí thao tác thiết bị, log và playback theo tín hiệu của Trang. DEMO_SCRIPT của SEM-47 đã được nhận, các câu dưới dùng cùng năm phân đoạn và bổ sung lựa chọn phù hợp bộ evidence hiện có. [PRESENTATION_PLAN](../../docs/PRESENTATION_PLAN.md), [DEMO_SCRIPT](../DEMO_SCRIPT.md)
+**Trang nói theo DEMO_SCRIPT của SEM-47 trong suốt 4 phút demo.** Hai bảng dưới ghi thao tác và tín hiệu phối hợp dành cho Trí. Trí theo nhịp dẫn của Trang để chuyển màn hình và chỉ các mốc bằng chứng trong cùng năm phân đoạn. [PRESENTATION_PLAN](../../docs/PRESENTATION_PLAN.md), [DEMO_SCRIPT](../DEMO_SCRIPT.md)
 
-| Mốc trong demo | Việc Trí thực hiện | Câu dẫn hoặc tín hiệu phối hợp |
+| Mốc trong demo | Việc Trí thực hiện | Tín hiệu phối hợp cho Trí |
 |---|---|---|
-| 00:00–00:30 | Hiển thị LIVE khi setup đủ hoặc CONTRACT khi dùng kiểm payload. Với LIVE, chỉ run/device/mode thực và cache N, đưa app về Home | “Mình xác nhận cấu hình và version cache cho đường trình diễn đang chọn.” |
-| 00:30–01:00 | LIVE dùng update/send theo cấu hình thật, ghi mốc và theo dõi event. CONTRACT chạy validate-only | “Mình đối chiếu kết quả của thao tác vừa thực hiện.” |
-| 01:00–01:30 | Có applied thì mở lại UI sau mốc đó. Tới ngưỡng chuyển bản ghi thì dùng playback push đã nhận hoặc CONTRACT + MANUAL M1 | Dùng câu phù hợp trong bảng xử lý bên dưới |
-| 01:30–02:30 | Mở timeline/log hoặc clip periodic đã chọn, đặt con trỏ ở đăng ký lịch, worker start và version | “Đây là PLAYBACK của run periodic trên thiết bị và build đang ghi ở màn hình.” |
-| 02:30–03:30 | Hiện PROTOCOL E03/E06 và source/test skip-push ở bộ evidence hiện có. Chọn PLAYBACK khi nhận run có OS/source/target tương ứng | “Đây là phần quy trình và cơ chế đã bàn giao. Lần chạy Doze/E06 trên Android đang ghi Not run.” |
-| 03:30–04:00 | Trở lại sơ đồ trigger-to-cache, sẵn sàng chuyển Vinh ở mốc 04:00 | “Các mốc trigger, worker và cache đã được đặt cạnh nhau để đối chiếu.” |
+| 00:00–00:30 | Hiển thị LIVE khi setup đủ hoặc CONTRACT khi dùng kiểm payload. Với LIVE, chỉ run/device/mode thực và cache N, đưa app về Home | Khi Trang giới thiệu baseline, trỏ vào mode/run/version trên màn hình |
+| 00:30–01:00 | LIVE dùng update/send theo cấu hình thật, ghi mốc và theo dõi event. CONTRACT chạy validate-only | Khi Trang chuyển sang trigger, thực hiện lệnh đã chuẩn bị và tô sáng kết quả thật |
+| 01:00–01:30 | Có applied thì mở lại UI sau mốc đó. Tới ngưỡng chuyển bản ghi thì dùng playback push đã nhận hoặc CONTRACT + MANUAL M1 | Theo nhánh Trang đang dẫn và tín hiệu tương ứng trong bảng tình huống bên dưới |
+| 01:30–02:30 | Mở timeline/log hoặc clip periodic đã chọn, đặt con trỏ ở đăng ký lịch, worker start và version | Khi Trang dẫn pilot E01, hiển thị nhãn PLAYBACK và metadata run r2 |
+| 02:30–03:30 | Mở log skip-push SEM-40 từ hướng dẫn FAULT_INJECTION với nhãn PLAYBACK — chỉ phía server, chưa có run Android E06. Phần Doze chưa có run hiển thị PROTOCOL E03 | Khi Trang dẫn skip-push, tô sáng `server_updated`, `push_send_skipped` và ghi chú phạm vi phía server |
+| 03:30–04:00 | Trở lại sơ đồ trigger-to-cache, sẵn sàng chuyển Vinh ở mốc 04:00 | Theo nhịp tổng kết của Trang, mở sơ đồ rồi chuyển slide kết quả ở mốc 04:00 |
 
 Ngưỡng biên tập chuyển playback là **30 giây kể từ lúc gửi** trong phần live. Người dẫn giữ mốc gửi thật khi nhận định ngưỡng đã tới. Khung 4 phút được giữ trong mốc 07:00–11:00 của toàn bài. [PRESENTATION_PLAN](../../docs/PRESENTATION_PLAN.md)
 
-| Tình huống nhìn thấy | Câu dùng khi chuyển | Bằng chứng cần hiển thị |
+| Tình huống nhìn thấy | Tín hiệu phối hợp cho Trí | Bằng chứng cần hiển thị |
 |---|---|---|
-| Applied có trước UI reopen | “Cache đã commit version N+1 ở mốc này. Bây giờ mở UI để đọc lại.” | Applied đúng source/run/version và mốc mở UI |
-| Chưa có applied sau ngưỡng 30 giây, có playback push | “Trong cửa sổ live vừa rồi chưa ghi nhận cập nhật. Mình chuyển sang bản ghi đã chuẩn bị.” | Mốc gửi/live hiện tại, nhãn PLAYBACK và metadata run phát lại |
-| Thiếu Firebase hoặc playback push | “Mình chuyển sang kiểm cấu trúc payload và hồ sơ giao dịch Room M1 đã bàn giao.” | `validated_locally`, nhãn CONTRACT và MANUAL M1 |
-| Có accepted nhưng thiếu receipt/start | “Ở đây đã thấy kết quả gửi. Các mốc phía Android được xem riêng trong timeline.” | Mỗi event đang thực sự có trong log |
-| Phần Doze/E06 chưa có run Android | “Mình trình bày quy trình và cơ chế skip đã bàn giao. Phần chạy thiết bị được ghi Not run.” | Nhãn PROTOCOL, source/test SEM-40 và trạng thái Not run |
+| Applied có trước UI reopen | Khi Trang dẫn nhánh TH1, tô sáng applied rồi mở UI | Applied đúng source/run/version và mốc mở UI |
+| Chưa có applied sau ngưỡng 30 giây, có playback push | Khi Trang chuyển nhánh TH2, mở bản ghi push đã nhận | Mốc gửi/live hiện tại, nhãn PLAYBACK và metadata run phát lại |
+| Thiếu Firebase hoặc playback push | Theo nhánh TH5 của Trang, chạy kiểm payload rồi mở hồ sơ M1 | `validated_locally`, nhãn CONTRACT và MANUAL M1 |
+| Có accepted nhưng thiếu receipt/start | Tô sáng các event hiện có khi Trang giải thích chuỗi sự kiện | Mỗi event đang thực sự có trong log |
+| Log skip-push SEM-40 | Khi Trang dẫn phân đoạn 4, mở log server và chỉ vào update/skip tương ứng | Nhãn PLAYBACK — chỉ phía server, chưa có run Android E06, cùng `server_updated` và `push_send_skipped` |
+| Doze chưa có run Android | Khi Trang đề cập điều kiện Doze, mở quy trình E03 | Nhãn PROTOCOL và trạng thái Not run |
 
 Sau phần live, lưu log và outcome trong cửa sổ đã khai, giữ event tới muộn để phân tích. Cleanup theo cơ chế cancel/drain và khôi phục môi trường trong protocol, ghi người thao tác và kết quả vào phiếu run. [PROTOCOL](../../experiments/PROTOCOL.md)
 
@@ -132,7 +134,7 @@ Sau phần live, lưu log và outcome trong cửa sổ đã khai, giữ event t�
 - [x] Chốt mở bài 45 giây, phân vai và nội dung slide mở đầu.
 - [x] Ghép thao tác cùng năm phân đoạn của SEM-47 và giữ ngân sách demo 240 giây.
 - [x] Đối chiếu mode mặc định HYBRID, CLI và log token theo source hiện hành.
-- [x] Chọn playback periodic/M1 có nguồn, bổ sung CONTRACT/PROTOCOL cho phần thiếu evidence.
+- [x] Chọn playback periodic/M1 và skip-push SEM-40 có nguồn, ghi phạm vi phía server của skip-push, bổ sung CONTRACT/PROTOCOL cho phần thiếu evidence.
 - [x] Ghi candidate/live/video/diễn tập Not run và nguồn kiểm trong CHECKS.
 
-SEM-51 nhận lời mở bài, phiếu thao tác, nhãn màn hình và các câu chuyển của tài liệu này. Khi candidate/run/video được bàn giao, điền phiếu cấu hình theo artifact đó và cập nhật phần Not run cùng CHECKS. [CHECKS SEM-46](../../docs/evidence/SEM-46/CHECKS.md), [SEM-40](../../docs/evidence/SEM-40/FAULT_INJECTION.md)
+SEM-51 nhận lời mở bài, phiếu thao tác, nhãn màn hình và tín hiệu phối hợp cho Trí trong tài liệu này. Trang dùng lời dẫn demo ở DEMO_SCRIPT đã nhận. Khi candidate/run/video được bàn giao, điền phiếu cấu hình theo artifact đó và cập nhật phần Not run cùng CHECKS. [CHECKS SEM-46](../../docs/evidence/SEM-46/CHECKS.md), [SEM-40](../../docs/evidence/SEM-40/FAULT_INJECTION.md)

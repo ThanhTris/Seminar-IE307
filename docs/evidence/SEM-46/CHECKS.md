@@ -1,6 +1,6 @@
 # SEM-46 — CHECKS hoàn tất và bàn giao tài liệu
 
-Tuấn (`mtuan2491`), cập nhật ngày 12/11/2026. Nhánh `codex/SEM-46-opening-demo`.
+Tuấn (`mtuan2491`), chốt ngày 12/11 và cập nhật theo review ngày 13/11/2026. Nhánh `codex/SEM-46-opening-demo`.
 
 **Đầu ra tài liệu SEM-46 đã hoàn tất để review và bàn giao SEM-51 theo quy tắc nhóm ngày 12/11.** Candidate SEM-37, live FCM, playback push/Doze/E06 trên Android và diễn tập thời lượng được ghi Not run tại lần chốt này. [Quy tắc task](../../../tasks/README.md)
 
@@ -39,10 +39,10 @@ Artifact bàn giao là [TRI.md](../../../slides/inputs/TRI.md), với lời mở
 | Mode / UI / log | Thao tác và lời nói khớp source | Gateway/adapter mặc định HYBRID, setMode thuộc tích hợp SEM-36. Log token dùng fingerprint, key READY ở metadata. Hướng dẫn live dùng mode đọc thực tế tại setup | Pass cho rà source |
 | CONTRACT CLI | Lệnh có đủ ID, mode/source và payload hợp lệ | Chạy lệnh mục dưới trả `validated_locally`, mode HYBRID, source PUSH, normal priority, TTL 86400000 ms, cấu trúc output chỉ có data/android | Pass local |
 | Playback periodic | Counts/provenance khớp run gốc | Validator SEM-29 audit cả hai run và so analysis đã lưu, cả hai khớp. R2 có 6 start trong window, gồm 5 cycle mới + 1 recovery setup, applied v3 thuộc recovery | Pass cho kiểm artifact |
-| Lựa chọn nội dung khi thiếu run | Phần trình bày có evidence hoặc nhãn tương ứng | CONTRACT dùng payload + MANUAL M1, PLAYBACK dùng periodic r2. Doze/E06 dùng PROTOCOL và source/test của SEM-40 khi run Android chưa nhận | Pass cho review tài liệu |
-| Link / bảng / format | File/link/nhãn đọc được, diff hợp lệ | TRI.md, CHECKS và task có 62 link nội bộ hợp lệ, 10 bảng đúng cấu trúc, fence/whitespace đạt, 3 tiêu chí có kết quả và git diff --check đạt | Pass cho kiểm tĩnh |
+| Lựa chọn nội dung khi thiếu run | Phần trình bày có evidence hoặc nhãn tương ứng | CONTRACT dùng payload + MANUAL M1, PLAYBACK dùng periodic r2 và log skip-push SEM-40 chỉ phía server. Doze dùng PROTOCOL, Android E06 ghi Not run | Pass cho review tài liệu |
+| Link / bảng / format | File/link/nhãn đọc được, diff hợp lệ | TRI.md, CHECKS và task có 62 link nội bộ hợp lệ, 11 bảng đúng cấu trúc, fence/whitespace đạt, 3 tiêu chí có kết quả và git diff --check đạt | Pass cho kiểm tĩnh |
 | Candidate SEM-37 và live FCM | Có kiểm trên build/device thật khi công bố đã chạy | Candidate/config và credential/token thật chưa nhận cho lần này | **Not run** |
-| Playback push, Doze/E06 Android, video | Có run/video kèm metadata | Bộ evidence đang nhận chỉ có M1 và pilot periodic | **Not run** |
+| Playback push, Doze/E06 Android, video | Có run/video kèm metadata | Các artifact đang nhận gồm M1, pilot periodic và log skip-push phía server của SEM-40 | **Not run** |
 | Diễn tập/bấm giờ thật | Có lượt nói/thao tác thực để chốt thời lượng | 45/240 giây là ngân sách biên tập, diễn tập thuộc SEM-54 | **Not run** |
 
 ## Lệnh đã kiểm và cách tái lập
@@ -62,4 +62,15 @@ Kết quả CLI được đối chiếu từng trường payload. Đối với p
 
 SEM-51 nhận TRI.md để ghép slide mở bài và notes thao tác trong demo 4 phút. SEM-46 áp dụng policy `cc2bd1c`, ghi nguồn/candidate thiếu dưới Not run và hoàn tất phần tài liệu của owner. Khi có candidate, run hoặc video mới, cập nhật phiếu cấu hình và CHECKS theo artifact thực tế.
 
-Các điều chỉnh so với bản ngày 09/11 gồm mode HYBRID mặc định, phương án CONTRACT khi thiếu push playback, nhận diện 5 cycle mới và 1 recovery của pilot r2, nhãn PROTOCOL cho Doze/E06 chưa có run. Quy định WIP/chờ SEM-37 bắt buộc ở bản cũ được thay bằng trạng thái Not run theo policy mới. Draft PR dùng cho Tuấn review trước khi gửi nhóm trưởng kiểm nhận.
+Các điều chỉnh so với bản ngày 09/11 gồm mode HYBRID mặc định, phương án CONTRACT khi thiếu push playback, nhận diện 5 cycle mới và 1 recovery của pilot r2, nhãn PLAYBACK cho log skip-push phía server và PROTOCOL cho phần Doze chưa có run. Quy định WIP/chờ SEM-37 bắt buộc ở bản cũ được thay bằng trạng thái Not run theo policy mới.
+
+## Xử lý review của Trí ngày 13/11/2026
+
+Review PR #27 trên commit `62bb765` yêu cầu thống nhất nhãn skip-push với DEMO_SCRIPT và làm rõ vai nói/thao tác trong phần demo.
+
+| Yêu cầu | Thay đổi đã thực hiện | Kết quả |
+|---|---|---|
+| Nhãn phân đoạn 02:30–03:30 và bảng tình huống | Dùng PLAYBACK cho log skip-push SEM-40, ghi rõ “chỉ phía server, chưa có run Android E06” trong phiếu cấu hình, setup và hai bảng mục 7 | Đã đối chiếu với phân đoạn 4 của DEMO_SCRIPT |
+| Một nguồn lời dẫn demo của Trang | Mục 7 ghi Trang nói theo DEMO_SCRIPT, đổi hai cột liên quan thành “Tín hiệu phối hợp cho Trí” và chuyển các câu nói thành chỉ dẫn thao tác theo nhịp Trang | Đã review cả hai bảng mục 7 |
+
+Kiểm cuối đạt 62 link nội bộ trong TRI.md/CHECKS/task, 11 bảng đúng cấu trúc, fence/whitespace và git diff --check sạch. Phần mở bài khớp nguyên văn commit được review `62bb765`, ngân sách demo 240 giây, hai cột phối hợp đã ghi rõ dành cho Trí.
