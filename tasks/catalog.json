@@ -2286,7 +2286,7 @@
       "category": "research",
       "title": "Viết phần mở bài và bàn giao lời dẫn thao tác demo",
       "due": "2026-11-08",
-      "status": "In Progress",
+      "status": "Done",
       "start_dependencies": [],
       "finish_dependencies": [
         "SEM-14",
@@ -2304,7 +2304,7 @@
         "Lời dẫn khớp scope/candidate thật, ghi rõ live và playback.",
         "Không thêm tính năng hoặc lời hứa độ trễ chưa được evidence hỗ trợ."
       ],
-      "input_status": "Đang thực hiện",
+      "input_status": "Đã hoàn thành",
       "inputs": [
         {
           "source_task": "SEM-14",
@@ -2331,9 +2331,7 @@
       "due_at": "2026-11-08T16:00:00+07:00",
       "waiting_on": {
         "start": [],
-        "finish": [
-          "SEM-37"
-        ]
+        "finish": []
       }
     },
     {
@@ -2741,7 +2739,7 @@
             "slides/inputs/TRI.md"
           ],
           "checks": "docs/evidence/SEM-46/CHECKS.md",
-          "source_status": "In Progress"
+          "source_status": "Done"
         },
         {
           "source_task": "SEM-47",
@@ -2793,7 +2791,6 @@
       "waiting_on": {
         "start": [],
         "finish": [
-          "SEM-46",
           "SEM-48",
           "SEM-50"
         ]
@@ -3142,7 +3139,7 @@
       }
     }
   ],
-  "snapshot_at": "2026-11-12 14:11:12 UTC",
+  "snapshot_at": "2026-11-13 16:49:37 UTC",
   "snapshot_source": "https://github.com/users/ThanhTris/projects/3/views/1",
   "timezone": "Asia/Ho_Chi_Minh",
   "deadline_at": "2026-11-13T22:00:00+07:00",
