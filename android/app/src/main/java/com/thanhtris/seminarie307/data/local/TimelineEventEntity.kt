@@ -2,6 +2,7 @@ package com.thanhtris.seminarie307.data.local
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import androidx.room.ColumnInfo
 import com.thanhtris.seminarie307.integration.CorrelationUi
 import com.thanhtris.seminarie307.integration.SyncSource
 import com.thanhtris.seminarie307.integration.TimelineEvent
@@ -21,6 +22,14 @@ data class TimelineEventEntity(
     val workId: String? = null,
     val messageId: String? = null,
     val elapsedRealtimeMillis: Long? = null,
+    val mode: String? = null,
+    val deviceAlias: String? = null,
+    val cachedVersion: Long? = null,
+    val versionHint: Long? = null,
+    val workAttempt: Int? = null,
+    val networkCallId: String? = null,
+    @ColumnInfo(defaultValue = "'[]'") val signalIdsJson: String = "[]",
+    val httpStatus: Int? = null,
 ) {
     fun toTimelineEvent(): TimelineEvent = TimelineEvent(
         eventId = eventId,

@@ -33,6 +33,10 @@ class PushSyncEnqueueAdapterTest {
     fun setUp() {
         fakeTimelineDao = FakeTimelineDao()
         fakeMetadataDao = FakeSyncMetadataDao()
+        runBlocking {
+            fakeMetadataDao.setValue(SyncMetadataEntity("mode", SyncMode.HYBRID.name))
+            fakeMetadataDao.setValue(SyncMetadataEntity("deviceAlias", "emulator-test-1"))
+        }
         enqueuedInputs.clear()
         adapter = PushSyncEnqueueAdapter(
             timelineDao = fakeTimelineDao,
@@ -70,6 +74,25 @@ class PushSyncEnqueueAdapterTest {
     }
 
     @Test
+    fun recordsRejectedCallbackWhenRunConfigurationIsMissing() = runBlocking {
+        fakeMetadataDao.deleteValue("mode")
+
+        val result = adapter.processPushPayload(
+            data = mapOf("run_id" to "run-001", "mode" to SyncMode.PUSH.name, "signal_id" to "signal-001"),
+            messageId = "msg-001",
+        )
+
+        assertTrue(result is PushProcessingResult.Rejected)
+        assertEquals("RUN_CONFIG_NOT_READY", (result as PushProcessingResult.Rejected).reason)
+        assertEquals(0, enqueuedInputs.size)
+        assertEquals(1, fakeTimelineDao.events.size)
+        assertEquals("trigger_rejected", fakeTimelineDao.events.single().eventType)
+        assertEquals("RUN_CONFIG_NOT_READY", fakeTimelineDao.events.single().reason)
+        assertEquals(null, fakeTimelineDao.events.single().mode)
+        assertEquals("emulator-test-1", fakeTimelineDao.events.single().deviceAlias)
+    }
+
+    @Test
     fun rejectsMissingOrInvalidRunIdWithoutBogusEvents() = runBlocking {
         val missingResult = adapter.processPushPayload(
             data = mapOf("version_hint" to "1"),
@@ -100,6 +123,8 @@ class PushSyncEnqueueAdapterTest {
                 "run_id" to "run-push-001",
                 "request_id" to "req-001",
                 "version_hint" to "2",
+                "mode" to "PUSH",
+                "signal_id" to "signal-001",
             ),
             messageId = "msg-001",
         )
@@ -114,8 +139,9 @@ class PushSyncEnqueueAdapterTest {
         assertEquals("push_received", pushReceived.eventType)
         assertEquals("received", pushReceived.outcome)
         assertEquals("run-push-001", pushReceived.runId)
-        assertEquals(2L, pushReceived.version)
-        assertEquals("req-001", pushReceived.requestId)
+        assertEquals(null, pushReceived.version)
+        assertEquals(2L, pushReceived.versionHint)
+        assertEquals(null, pushReceived.requestId)
         assertEquals("msg-001", pushReceived.messageId)
 
         val triggerRejected = fakeTimelineDao.events[1]
@@ -138,6 +164,7 @@ class PushSyncEnqueueAdapterTest {
                 "request_id" to "req-custom-100",
                 "version_hint" to "5",
                 "mode" to "PUSH",
+                "signal_id" to "signal-100",
             ),
             messageId = "projects/my-project/messages/12345",
         )
@@ -155,8 +182,9 @@ class PushSyncEnqueueAdapterTest {
         assertEquals("received", event.outcome)
         assertEquals(SyncSource.PUSH.name, event.source)
         assertEquals("run-push-100", event.runId)
-        assertEquals(5L, event.version)
-        assertEquals("req-custom-100", event.requestId)
+        assertEquals(null, event.version)
+        assertEquals(5L, event.versionHint)
+        assertEquals(null, event.requestId)
         assertEquals("projects/my-project/messages/12345", event.messageId)
 
         // Check enqueued input
@@ -165,6 +193,7 @@ class PushSyncEnqueueAdapterTest {
         assertEquals(SyncSource.PUSH, input.source)
         assertEquals(SyncMode.PUSH, input.mode)
         assertEquals("run-push-100", input.runId)
+        assertEquals("emulator-test-1", input.deviceAlias)
         assertEquals(5L, input.versionHint)
         assertEquals("req-custom-100", input.correlation.requestId)
         assertEquals("projects/my-project/messages/12345", input.correlation.messageId)
@@ -177,6 +206,8 @@ class PushSyncEnqueueAdapterTest {
         val result = adapter.processPushPayload(
             data = mapOf(
                 "run_id" to "run-push-200",
+                "mode" to "PUSH",
+                "signal_id" to "signal-200",
             ),
             messageId = "msg-200",
         )
@@ -196,6 +227,8 @@ class PushSyncEnqueueAdapterTest {
         val events = mutableListOf<TimelineEventEntity>()
 
         override fun observeAll(): Flow<List<TimelineEventEntity>> = flowOf(events)
+
+        override suspend fun getAllForRun(runId: String): List<TimelineEventEntity> = events.filter { it.runId == runId }
 
         override suspend fun insert(event: TimelineEventEntity) {
             events.add(event)

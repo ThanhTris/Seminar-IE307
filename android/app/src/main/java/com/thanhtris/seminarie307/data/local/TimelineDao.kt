@@ -11,6 +11,9 @@ interface TimelineDao {
     @Query("SELECT * FROM timeline_events ORDER BY occurredAtEpochMillis DESC")
     fun observeAll(): Flow<List<TimelineEventEntity>>
 
+    @Query("SELECT * FROM timeline_events WHERE runId = :runId ORDER BY occurredAtEpochMillis, eventId")
+    suspend fun getAllForRun(runId: String): List<TimelineEventEntity>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(event: TimelineEventEntity)
 
