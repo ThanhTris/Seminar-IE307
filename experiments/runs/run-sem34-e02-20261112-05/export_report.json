@@ -1,0 +1,11 @@
+{
+  "exporter_version": "1.0.0",
+  "data_kind": "OBSERVED",
+  "run_id": "run-sem34-e02-20261112-05",
+  "device_alias": "emulator-main",
+  "manifest_input_sha256": "143382fcc53e29dcf8c578075611344de015735d81e19ea34851b97ad9511de2",
+  "sources": [],
+  "events_exported": 0,
+  "ordering": "INPUT_ORDER_NOT_CAUSAL",
+  "analysis_performed": false
+}
