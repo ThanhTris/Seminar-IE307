@@ -9,6 +9,7 @@ import com.thanhtris.seminarie307.data.local.SyncMetadataEntity
 import com.thanhtris.seminarie307.data.local.TimelineDao
 import com.thanhtris.seminarie307.data.local.TimelineEventEntity
 import com.thanhtris.seminarie307.integration.CorrelationUi
+import com.thanhtris.seminarie307.integration.JsonStringArrayCodec
 import com.thanhtris.seminarie307.integration.SyncMode
 import com.thanhtris.seminarie307.integration.SyncModeController
 import com.thanhtris.seminarie307.integration.SyncSource
@@ -108,17 +109,30 @@ class PushSyncEnqueueAdapter(
         val elapsedRealtime = SystemClock.elapsedRealtime()
         val currentDeviceMode = metadataDao.getValue(SyncModeController.KEY_MODE)
             ?.let { runCatching { SyncMode.valueOf(it) }.getOrNull() }
-            ?: return@withContext PushProcessingResult.Ignored("RUN_CONFIG_NOT_READY")
         val payloadMode = data["mode"]?.let { runCatching { SyncMode.valueOf(it) }.getOrNull() }
+        val deviceAlias = metadataDao.getValue(SyncModeController.KEY_DEVICE_ALIAS)?.takeIf(APP_ID_PATTERN::matches)
+        val signalId = data["signal_id"]?.takeIf(APP_ID_PATTERN::matches)
+        val cachedVersion = metadataDao.getValue("cachedVersion")?.toLongOrNull()
+
+        if (currentDeviceMode == null || deviceAlias == null) {
+            recordTriggerRejected(
+                runId = runId,
+                versionHint = versionHint,
+                requestId = requestId,
+                messageId = messageId,
+                reason = "RUN_CONFIG_NOT_READY",
+                mode = currentDeviceMode,
+                deviceAlias = deviceAlias,
+                signalIds = listOfNotNull(signalId),
+            )
+            return@withContext PushProcessingResult.Rejected("RUN_CONFIG_NOT_READY", runId = runId)
+        }
+
         val targetMode = if (payloadMode == SyncMode.PUSH || payloadMode == SyncMode.HYBRID) {
             payloadMode
         } else {
             currentDeviceMode
         }
-        val deviceAlias = metadataDao.getValue(SyncModeController.KEY_DEVICE_ALIAS)?.takeIf(APP_ID_PATTERN::matches)
-            ?: return@withContext PushProcessingResult.Ignored("RUN_CONFIG_NOT_READY")
-        val signalId = data["signal_id"]?.takeIf(APP_ID_PATTERN::matches)
-        val cachedVersion = metadataDao.getValue("cachedVersion")?.toLongOrNull()
 
         // 5. Record observed push_received event in Room (also for duplicates: the callback did happen)
         timelineDao.insert(
@@ -140,7 +154,7 @@ class PushSyncEnqueueAdapter(
                 deviceAlias = deviceAlias,
                 cachedVersion = cachedVersion,
                 versionHint = versionHint,
-                signalIdsJson = org.json.JSONArray(listOfNotNull(signalId)).toString(),
+                signalIdsJson = JsonStringArrayCodec.encode(listOfNotNull(signalId)),
             )
         )
 
@@ -209,8 +223,8 @@ class PushSyncEnqueueAdapter(
         requestId: String?,
         messageId: String?,
         reason: String,
-        mode: SyncMode,
-        deviceAlias: String,
+        mode: SyncMode?,
+        deviceAlias: String?,
         signalIds: List<String> = emptyList(),
     ) {
         val rejectNow = Instant.now()
@@ -229,11 +243,11 @@ class PushSyncEnqueueAdapter(
                 workId = null,
                 messageId = messageId,
                 elapsedRealtimeMillis = SystemClock.elapsedRealtime(),
-                mode = mode.name,
+                mode = mode?.name,
                 deviceAlias = deviceAlias,
                 cachedVersion = metadataDao.getValue("cachedVersion")?.toLongOrNull(),
                 versionHint = versionHint,
-                signalIdsJson = org.json.JSONArray(signalIds).toString(),
+                signalIdsJson = JsonStringArrayCodec.encode(signalIds),
             )
         )
     }

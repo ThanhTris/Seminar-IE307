@@ -8,6 +8,7 @@ import com.thanhtris.seminarie307.data.local.SyncMetadataEntity
 import com.thanhtris.seminarie307.data.local.TimelineEventEntity
 import com.thanhtris.seminarie307.data.remote.RemoteSnapshotResult
 import com.thanhtris.seminarie307.data.remote.SnapshotRemoteDataSource
+import com.thanhtris.seminarie307.integration.JsonStringArrayCodec
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.time.Instant
@@ -207,7 +208,7 @@ class SyncRepository(
             versionHint = input.versionHint,
             workAttempt = input.workAttempt,
             networkCallId = networkCallId,
-            signalIdsJson = org.json.JSONArray(input.signalIds).toString(),
+            signalIdsJson = JsonStringArrayCodec.encode(input.signalIds),
             httpStatus = httpStatus,
         )
         timelineDao.insert(eventEntity)

@@ -9,13 +9,15 @@
 - The local snapshot server, network access, and a private Firebase configuration/credential only if demonstrating PUSH. Follow [`docs/PUSH.md`](PUSH.md); keep `google-services.json`, service-account credentials, and device token outside Git and the presentation recording.
 - The candidate manifest and exact app commit/build/checksum. Current candidate is **not built**; see [`CANDIDATE_GATE.md`](evidence/SEM-37/CANDIDATE_GATE.md).
 - A real `run_id`, `device_alias`, and the selected mode from the approved experiment protocol. Do not use the UI's sample/default run as a measured run.
+- After installing or upgrading the app, configure the selected mode again from the UI using that real run ID and device alias. Re-select PERIODIC to replace schedules created by older versions that did not include `device_alias`.
 
 ## 2. Build and verify the candidate
 
 From PowerShell at the repository root, set `ANDROID_HOME` to the installed SDK path and build the exact commit listed in the candidate manifest:
 
 ```powershell
-$env:ANDROID_HOME = 'D:\Android\Sdk'
+$env:ANDROID_HOME = Join-Path $env:LOCALAPPDATA 'Android\Sdk'
+# If Android Studio installed the SDK elsewhere, set ANDROID_HOME to that exact path.
 $env:ANDROID_SDK_ROOT = $env:ANDROID_HOME
 cd android
 .\gradlew.bat :app:testDebugUnitTest :app:assembleDebug :app:assembleDebugAndroidTest
@@ -41,7 +43,7 @@ Check `http://127.0.0.1:3000/health`. For an emulator, the app uses `http://10.0
 
 ## 4. Select a mode and run
 
-Open the installed app, select the mode, and verify the displayed mode and active run ID before starting. A mode transition that overlaps active work contaminates the measurement window; wait for terminal WorkManager state or mark the run invalid. All three triggers use the same worker/core and Room cache.
+Open the installed app, enter the real run ID and device alias, select the mode, and verify all three displayed values before starting. A mode transition that overlaps active work contaminates the measurement window; wait for terminal WorkManager state or mark the run invalid. All three triggers use the same worker/core and Room cache. If a push callback arrives before configuration is ready, Room records `trigger_rejected/RUN_CONFIG_NOT_READY`; canonical export omits that diagnostic because mode/device alias are unavailable.
 
 ### Manual baseline
 

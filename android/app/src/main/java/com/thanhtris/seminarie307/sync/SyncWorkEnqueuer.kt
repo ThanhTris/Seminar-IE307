@@ -10,6 +10,7 @@ import androidx.work.workDataOf
 import com.thanhtris.seminarie307.data.local.AppDatabase
 import com.thanhtris.seminarie307.data.local.TimelineEventEntity
 import com.thanhtris.seminarie307.integration.SyncMode
+import com.thanhtris.seminarie307.integration.JsonStringArrayCodec
 import com.thanhtris.seminarie307.integration.SyncSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -52,7 +53,7 @@ class SyncWorkEnqueuer(
                         SyncWorker.KEY_MODE to input.mode.name,
                         SyncWorker.KEY_RUN_ID to input.runId,
                         SyncWorker.KEY_DEVICE_ALIAS to input.deviceAlias,
-                        SyncWorker.KEY_SIGNAL_IDS to org.json.JSONArray(input.signalIds).toString(),
+                        SyncWorker.KEY_SIGNAL_IDS to input.signalIds.joinToString(","),
                         SyncWorker.KEY_REQUEST_ID to requestId,
                         SyncWorker.KEY_MESSAGE_ID to input.correlation.messageId,
                         SyncWorker.KEY_VERSION_HINT to (input.versionHint ?: -1L),
@@ -81,7 +82,7 @@ class SyncWorkEnqueuer(
                     deviceAlias = input.deviceAlias,
                     cachedVersion = database.metadataDao().getValue("cachedVersion")?.toLongOrNull(),
                     versionHint = input.versionHint,
-                    signalIdsJson = org.json.JSONArray(input.signalIds).toString(),
+                    signalIdsJson = JsonStringArrayCodec.encode(input.signalIds),
                 )
             )
             request.id

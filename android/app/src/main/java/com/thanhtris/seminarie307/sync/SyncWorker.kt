@@ -6,6 +6,7 @@ import androidx.work.WorkerParameters
 import androidx.work.workDataOf
 import com.thanhtris.seminarie307.data.local.AppDatabase
 import com.thanhtris.seminarie307.integration.CorrelationUi
+import com.thanhtris.seminarie307.integration.JsonStringArrayCodec
 import com.thanhtris.seminarie307.integration.SyncMode
 import com.thanhtris.seminarie307.integration.SyncSource
 import java.util.UUID
@@ -33,10 +34,16 @@ class SyncWorker(
         val messageId = inputData.getString(KEY_MESSAGE_ID)
         val rawVersion = inputData.getLong(KEY_VERSION_HINT, -1L)
         val versionHint = rawVersion.takeIf { it >= 0 }
+        val rawSignalIds = inputData.getString(KEY_SIGNAL_IDS).orEmpty()
         val signalIds = try {
-            org.json.JSONArray(inputData.getString(KEY_SIGNAL_IDS) ?: "[]")
-                .let { array -> (0 until array.length()).map { array.getString(it) } }
-        } catch (_: Exception) {
+            when {
+                rawSignalIds.isEmpty() -> emptyList()
+                rawSignalIds.startsWith("[") -> JsonStringArrayCodec.decode(rawSignalIds)
+                else -> rawSignalIds.split(',')
+            }
+        } catch (_: IllegalArgumentException) {
+            return Result.failure(workDataOf(KEY_OUTCOME to "INVALID_TRIGGER"))
+        } catch (_: IllegalStateException) {
             return Result.failure(workDataOf(KEY_OUTCOME to "INVALID_TRIGGER"))
         }
         if (signalIds.any { !isAppId(it) }) return Result.failure(workDataOf(KEY_OUTCOME to "INVALID_TRIGGER"))

@@ -33,8 +33,10 @@ class PushSyncEnqueueAdapterTest {
     fun setUp() {
         fakeTimelineDao = FakeTimelineDao()
         fakeMetadataDao = FakeSyncMetadataDao()
-        fakeMetadataDao.setValue(SyncMetadataEntity("mode", SyncMode.HYBRID.name))
-        fakeMetadataDao.setValue(SyncMetadataEntity("deviceAlias", "emulator-test-1"))
+        runBlocking {
+            fakeMetadataDao.setValue(SyncMetadataEntity("mode", SyncMode.HYBRID.name))
+            fakeMetadataDao.setValue(SyncMetadataEntity("deviceAlias", "emulator-test-1"))
+        }
         enqueuedInputs.clear()
         adapter = PushSyncEnqueueAdapter(
             timelineDao = fakeTimelineDao,
@@ -69,6 +71,25 @@ class PushSyncEnqueueAdapterTest {
         assertEquals("EMPTY_DATA_PAYLOAD", (result as PushProcessingResult.Ignored).reason)
         assertEquals(0, fakeTimelineDao.events.size)
         assertEquals(0, enqueuedInputs.size)
+    }
+
+    @Test
+    fun recordsRejectedCallbackWhenRunConfigurationIsMissing() = runBlocking {
+        fakeMetadataDao.deleteValue("mode")
+
+        val result = adapter.processPushPayload(
+            data = mapOf("run_id" to "run-001", "mode" to SyncMode.PUSH.name, "signal_id" to "signal-001"),
+            messageId = "msg-001",
+        )
+
+        assertTrue(result is PushProcessingResult.Rejected)
+        assertEquals("RUN_CONFIG_NOT_READY", (result as PushProcessingResult.Rejected).reason)
+        assertEquals(0, enqueuedInputs.size)
+        assertEquals(1, fakeTimelineDao.events.size)
+        assertEquals("trigger_rejected", fakeTimelineDao.events.single().eventType)
+        assertEquals("RUN_CONFIG_NOT_READY", fakeTimelineDao.events.single().reason)
+        assertEquals(null, fakeTimelineDao.events.single().mode)
+        assertEquals("emulator-test-1", fakeTimelineDao.events.single().deviceAlias)
     }
 
     @Test

@@ -1,7 +1,6 @@
 package com.thanhtris.seminarie307.data.local
 
-import org.json.JSONArray
-import org.json.JSONObject
+import com.thanhtris.seminarie307.integration.JsonStringArrayCodec
 import java.time.Instant
 
 /** Serializes only rows that carry enough captured provenance to satisfy EVENT_SCHEMA 2.0.0. */
@@ -32,8 +31,8 @@ object CanonicalTimelineExporter {
         require(event.reason == null || reasonCode.matches(event.reason)) {
             "Unsafe/noncanonical reason for event ${event.eventId}"
         }
-        val signalIds = JSONArray(event.signalIdsJson)
-        require((0 until signalIds.length()).all { signalIds.optString(it).let(appId::matches) }) {
+        val signalIds = JsonStringArrayCodec.decode(event.signalIdsJson)
+        require(signalIds.all(appId::matches)) {
             "Invalid signal_ids for event ${event.eventId}"
         }
         require(event.occurredAtUtc.endsWith("Z")) { "Non-UTC timestamp for event ${event.eventId}" }
@@ -52,7 +51,7 @@ object CanonicalTimelineExporter {
         require(event.httpStatus == null || event.httpStatus in 100..599)
         require(
             when (event.eventType) {
-                "push_received" -> source == "PUSH" && outcome == "received" && signalIds.length() == 1
+                "push_received" -> source == "PUSH" && outcome == "received" && signalIds.size == 1
                 "trigger_rejected" -> outcome == "rejected" && event.reason != null
                 "periodic_registered" -> source == "PERIODIC" && outcome == "registered" && event.requestId == null && event.workId != null
                 "work_enqueued" -> source in setOf("MANUAL", "PUSH") && outcome == "enqueued" && event.requestId != null && event.workId != null
@@ -81,39 +80,46 @@ object CanonicalTimelineExporter {
             require(event.reason != null)
         }
 
-        JSONObject().apply {
-            put("schema_version", "2.0.0")
-            put("event_id", event.eventId)
-            put("event_type", event.eventType)
-            put("origin", "ANDROID")
-            put("run_id", runId)
-            put("mode", mode)
-            put("source", source)
-            put("device_alias", deviceAlias)
-            put("timestamp_utc", event.occurredAtUtc)
-            putNullable("elapsed_realtime_ms", event.elapsedRealtimeMillis)
-            put("boot_session_id", JSONObject.NULL)
-            putNullable("data_version", event.version)
-            putNullable("cached_version", event.cachedVersion)
-            putNullable("version_hint", event.versionHint)
-            putNullable("request_id", event.requestId)
-            putNullable("work_id", event.workId)
-            putNullable("work_attempt", event.workAttempt)
-            putNullable("network_call_id", event.networkCallId)
-            put("update_id", JSONObject.NULL)
-            put("signal_ids", signalIds)
-            put("send_attempt_id", JSONObject.NULL)
-            putNullable("message_id", event.messageId)
-            put("ttl_ms", JSONObject.NULL)
-            putNullable("http_status", event.httpStatus)
-            put("provider_code", JSONObject.NULL)
-            put("outcome", outcome)
-            putNullable("reason", event.reason)
-        }.toString()
+        fun json(value: String): String = JsonStringArrayCodec.quoteString(value)
+        fun nullable(value: Any?): String = value?.let { jsonScalar(it) } ?: "null"
+        JsonStringArrayCodec.objectOf(
+            listOf(
+                "schema_version" to json("2.0.0"),
+                "event_id" to json(event.eventId),
+                "event_type" to json(event.eventType),
+                "origin" to json("ANDROID"),
+                "run_id" to json(runId),
+                "mode" to json(mode),
+                "source" to json(source),
+                "device_alias" to json(deviceAlias),
+                "timestamp_utc" to json(event.occurredAtUtc),
+                "elapsed_realtime_ms" to nullable(event.elapsedRealtimeMillis),
+                "boot_session_id" to "null",
+                "data_version" to nullable(event.version),
+                "cached_version" to nullable(event.cachedVersion),
+                "version_hint" to nullable(event.versionHint),
+                "request_id" to nullable(event.requestId),
+                "work_id" to nullable(event.workId),
+                "work_attempt" to nullable(event.workAttempt),
+                "network_call_id" to nullable(event.networkCallId),
+                "update_id" to "null",
+                "signal_ids" to JsonStringArrayCodec.encode(signalIds),
+                "send_attempt_id" to "null",
+                "message_id" to nullable(event.messageId),
+                "ttl_ms" to "null",
+                "http_status" to nullable(event.httpStatus),
+                "provider_code" to "null",
+                "outcome" to json(outcome),
+                "reason" to nullable(event.reason),
+            ),
+        )
     }
 
-    private fun JSONObject.putNullable(key: String, value: Any?) {
-        put(key, value ?: JSONObject.NULL)
+    private fun jsonScalar(value: Any): String = when (value) {
+        is String -> JsonStringArrayCodec.quoteString(value)
+        is Number -> value.toString()
+        is Boolean -> value.toString()
+        else -> error("Unsupported JSON scalar ${value::class.simpleName}")
     }
 
     private fun hasWorkerCorrelation(event: TimelineEventEntity): Boolean =
