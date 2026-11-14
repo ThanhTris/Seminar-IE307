@@ -24,8 +24,8 @@
     "device_install": "NOT_RUN"
   },
   "blockers": [
-    "ANDROID_HOME is unset and the default SDK directory at %LOCALAPPDATA%\\Android\\Sdk is absent; platform 37 and Build Tools 36.0.0 are unavailable.",
-    "The current source revision has not been built or unit-tested on this workstation because no Android SDK is installed.",
+    "Gradle found D:\\Android\\Sdk but could not install platforms;android-37.0 and build-tools;36.0.0 because their SDK license agreements are not accepted.",
+    "The current source revision has not been compiled or unit-tested on this workstation.",
     "This manifest does not identify or claim a release APK."
   ]
 }
