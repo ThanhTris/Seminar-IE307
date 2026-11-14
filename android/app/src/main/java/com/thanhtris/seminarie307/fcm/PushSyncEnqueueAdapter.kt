@@ -62,7 +62,8 @@ class PushSyncEnqueueAdapter(
      * 2. Rejects empty payload maps.
      * 3. Validates correlation IDs (run_id, request_id, version_hint). Missing/invalid run_id
      *    is rejected without creating false experiment run events.
-     * 4. Always records [push_received] in Room when runId is valid.
+     * 4. Records [push_received] when run configuration is complete; with a valid runId but
+     *    missing mode/device alias, records [trigger_rejected] with RUN_CONFIG_NOT_READY instead.
      * 5. Checks mode compatibility: If current device mode disables push (e.g. PERIODIC mode),
      *    records [trigger_rejected] with reason "MODE_DISABLED" and halts.
      * 6. Input policy ([PushInputPolicy]): an exact redelivery (same run + signal_id or FCM

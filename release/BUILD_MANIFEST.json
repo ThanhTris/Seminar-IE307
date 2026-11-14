@@ -1,8 +1,8 @@
 {
   "manifest_version": "1.0.0",
   "status": "NOT_BUILT",
-  "source_base_commit": "cc2bd1c",
-  "source_commit": null,
+  "source_base_commit": "c77772e426c00ae464240f00942f8368c638aaa8",
+  "source_commit": "5fb52bbbf45c165b2168237b9fb1fbe04bc80d5d",
   "build": {
     "command": ":app:testDebugUnitTest :app:assembleDebug :app:assembleDebugAndroidTest",
     "gradle_wrapper": "9.6.0",
@@ -24,8 +24,8 @@
     "device_install": "NOT_RUN"
   },
   "blockers": [
-    "Android SDK platform 37 and Build Tools 36.0.0 are not installed in this environment.",
-    "Android SDK license agreements have not been accepted in this environment.",
+    "ANDROID_HOME is unset and the default SDK directory at %LOCALAPPDATA%\\Android\\Sdk is absent; platform 37 and Build Tools 36.0.0 are unavailable.",
+    "The current source revision has not been built or unit-tested on this workstation because no Android SDK is installed.",
     "This manifest does not identify or claim a release APK."
   ]
 }

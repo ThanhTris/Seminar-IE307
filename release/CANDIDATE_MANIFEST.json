@@ -1,8 +1,8 @@
 {
   "manifest_version": "1.0.0",
   "candidate_status": "NOT_READY",
-  "app_source_commit": null,
-  "server_source_commit": null,
+  "app_source_commit": "5fb52bbbf45c165b2168237b9fb1fbe04bc80d5d",
+  "server_source_commit": "c77772e426c00ae464240f00942f8368c638aaa8",
   "app_config": {
     "package_name": "com.thanhtris.seminarie307",
     "compile_sdk": 37,
@@ -29,7 +29,7 @@
   },
   "release_gate": {
     "passed": false,
-    "reason": "Current SEM-36 source changes have not been built or exercised on a device; no APK checksum exists for this revision.",
+    "reason": "PR source 5fb52bbbf45c165b2168237b9fb1fbe04bc80d5d has not been built or exercised on a device; no APK checksum exists for this revision.",
     "required_next_steps": [
       "Install Android SDK platform 37 and Build Tools 36.0.0 after accepting the SDK licenses.",
       "Build and test the exact source commit, then populate the APK path and SHA-256.",

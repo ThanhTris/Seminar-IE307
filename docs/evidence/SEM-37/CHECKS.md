@@ -7,4 +7,6 @@
 | Required pilot evidence | SEM-36 E05/E06, runtime canonical export and push/token evidence | SEM-36 is Todo; SEM-34 E02 is NOT_RUN due Firebase B1; Android `export-v2` is implemented but not run; SEM-33/38 are Done | Not run |
 | Candidate manifest | Manifest points to exact artifact and evidence | `release/CANDIDATE_MANIFEST.json` exists as explicit `NOT_READY` with null artifact/checksum | Pass (honest gate artifact) |
 
-**Conclusion:** no candidate is ready; keep the release gate false until the exact-branch APK and pilot evidence exist. This task is owner-assigned to Trung on the live board.
+Current branch after rebasing on `main` `c77772e426c00ae464240f00942f8368c638aaa8`: app source pinned as `5fb52bbbf45c165b2168237b9fb1fbe04bc80d5d`; server source is unchanged from base. Attempted `:app:testDebugUnitTest` on Windows/JDK 17.0.20.1; Gradle stopped before task configuration because `ANDROID_HOME` is unset and `%LOCALAPPDATA%\Android\Sdk` does not exist. No source was compiled.
+
+**Conclusion:** no candidate is ready; keep the release gate false until the exact-branch APK and pilot evidence exist. The candidate manifest pins the current source while leaving artifact/checksum fields empty. This task is owner-assigned to Trung on the live board.
