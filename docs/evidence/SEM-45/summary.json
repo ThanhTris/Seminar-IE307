@@ -122,9 +122,7 @@
         "server_store_epoch": "pilots-20261115-r2"
       },
       "subscenario": "PERIODIC_BASELINE",
-      "valid_completed_declared_outcomes": {
-        "SUCCESS": 1
-      }
+      "valid_completed_declared_outcomes": {}
     },
     {
       "build": {
@@ -245,9 +243,7 @@
         "server_store_epoch": "pilots-20261115-r3"
       },
       "subscenario": "PERIODIC_BASELINE",
-      "valid_completed_declared_outcomes": {
-        "TIMEOUT": 1
-      }
+      "valid_completed_declared_outcomes": {}
     },
     {
       "build": {
@@ -489,9 +485,7 @@
         "server_store_epoch": "pilots-20261115-r3"
       },
       "subscenario": "CONTROLLED_SKIP",
-      "valid_completed_declared_outcomes": {
-        "TIMEOUT": 2
-      }
+      "valid_completed_declared_outcomes": {}
     },
     {
       "build": {
@@ -612,9 +606,7 @@
         "server_store_epoch": "pilots-20261115-r3"
       },
       "subscenario": "PERIODIC_BASELINE",
-      "valid_completed_declared_outcomes": {
-        "SUCCESS": 1
-      }
+      "valid_completed_declared_outcomes": {}
     },
     {
       "build": {
@@ -736,10 +728,7 @@
         "server_store_epoch": "pilots-20261115-r3"
       },
       "subscenario": "PERIODIC_BASELINE",
-      "valid_completed_declared_outcomes": {
-        "SUCCESS": 2,
-        "TIMEOUT": 1
-      }
+      "valid_completed_declared_outcomes": {}
     },
     {
       "build": {

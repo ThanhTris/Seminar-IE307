@@ -1,11 +1,11 @@
 {
   "analysis_version": "0.2.0",
   "analyzer_sha256": "cc17e669d6a4ac8ab549f3366bb47018c2c1b0f871f396a39f86db83b8c3c53e",
-  "batch_id": "sem45-handoff",
+  "batch_id": "handoff",
   "dataset": "pilot",
   "outputs_sha256": {
-    "results.csv": "6587970d33b1a0212e71d4cc71ffad7e3378bea384a94c53bea7061c1bb43e2a",
-    "summary.json": "aabc993b5fb30aefe741fb2f41903d1e41094f21c95d5cefd2ef0f5e22f8e0df"
+    "results.csv": "49d4f9e7c533f50f17fd429783fabb4afde15f27ad7a0c1e0e0c3fc3958fe8b0",
+    "summary.json": "4b340643871dc7ce054f2c7e53cc5969cef2e5f989eaadec67149e4072725a02"
   },
   "runs": [
     {
@@ -25,7 +25,9 @@
         "CLOCK_UNCONTROLLED",
         "CLEANUP_EVENT_OMITTED",
         "AUDIT_BASELINE_CACHE_MATCHES_SERVER",
-        "BASELINE_PAYLOAD_MISMATCH"
+        "AUDIT_SCHEDULER_OBSERVATION_NON_MUTATING",
+        "BASELINE_PAYLOAD_MISMATCH",
+        "IN_WINDOW_JOB_DUMP_CAN_REEVALUATE_TIMERS"
       ],
       "duplicates_ignored": 0,
       "event_counts": {
@@ -129,7 +131,7 @@
         "group_id": "978971916d265b34e021d5fdbeadd6647bf8d14d889fdc0354b9106ebe1e28c1",
         "intervention": "NONE",
         "late_target_applied_count": null,
-        "manifest_sha256": "e3ed4a3639f7fc220e9a20f167c3821e6498f5a2ceb94ddcf8817ded9427540b",
+        "manifest_sha256": "4819eeee398046c2137f18e1d8ca2b3580e137fdcdb7ec994f6c939188386c50",
         "mode": "PERIODIC",
         "natural_periodic_cycles": null,
         "observed_completion": "UNCERTAIN_WINDOW",
@@ -181,6 +183,7 @@
         "CLOCK_UNCONTROLLED",
         "CLEANUP_EVENT_OMITTED",
         "AUDIT_BASELINE_CACHE_MATCHES_SERVER",
+        "AUDIT_SCHEDULER_OBSERVATION_NON_MUTATING",
         "AUDIT_BACKGROUND_AND_END_EVIDENCE",
         "AUDIT_SINGLE_REGISTRATION",
         "AUDIT_FULL_WINDOW",
@@ -273,7 +276,7 @@
         "group_id": "f86e8300e87a3d550eb8c2cd82402d5fdf3009351660ecd9a6b43a85dd29d505",
         "intervention": "NONE",
         "late_target_applied_count": null,
-        "manifest_sha256": "447ee7d2c9591f25720c5664052bae99f75b44325607d43ea4d90f12b3466f64",
+        "manifest_sha256": "6eb306e1cb8c6304de4a224b59de4dc394811889edaf71247c329eb4b6ca6ccb",
         "mode": "PERIODIC",
         "natural_periodic_cycles": null,
         "observed_completion": "UNCERTAIN_WINDOW",
@@ -324,7 +327,9 @@
         "NATURAL_CYCLE_TARGET_NOT_MET",
         "CANDIDATE_NOT_READY",
         "CLOCK_UNCONTROLLED",
-        "CLEANUP_EVENT_OMITTED"
+        "CLEANUP_EVENT_OMITTED",
+        "AUDIT_SCHEDULER_OBSERVATION_NON_MUTATING",
+        "IN_WINDOW_JOB_DUMP_CAN_REEVALUATE_TIMERS"
       ],
       "duplicates_ignored": 0,
       "event_counts": {
@@ -428,7 +433,7 @@
         "group_id": "29c3860586e2053afae5d2271bf8f210ea525bb9051fbbea4a447c1a83e47504",
         "intervention": "NONE",
         "late_target_applied_count": null,
-        "manifest_sha256": "a86de5fba3b14096cfa5e308dfe95cffb19055bf041141358ac6e7a9c82cb0f3",
+        "manifest_sha256": "08f530deb91beb4f1ed65e53e62322929b17cebb9a5ecdd0ac9cd8f0cad1f4f7",
         "mode": "PERIODIC",
         "natural_periodic_cycles": null,
         "observed_completion": "UNCERTAIN_WINDOW",
@@ -455,7 +460,7 @@
         "update_to_applied_uncertainty_ms": null,
         "update_to_received_ms": null,
         "update_to_received_uncertainty_ms": null,
-        "validity": "VALID",
+        "validity": "INVALID",
         "window_basis": "ANDROID_MONOTONIC",
         "window_events_verified": false,
         "work_attempt_count": null,
@@ -477,7 +482,9 @@
       "declared_reason_codes": [
         "CANDIDATE_NOT_READY",
         "CLOCK_UNCONTROLLED",
-        "CLEANUP_EVENT_OMITTED"
+        "CLEANUP_EVENT_OMITTED",
+        "AUDIT_SCHEDULER_OBSERVATION_NON_MUTATING",
+        "IN_WINDOW_JOB_DUMP_CAN_REEVALUATE_TIMERS"
       ],
       "duplicates_ignored": 0,
       "event_counts": {
@@ -588,7 +595,7 @@
         "group_id": "22dc78296a4179ff6e748d3ce4201f28d9ac2d873c30b9fb5c4ef176c3ed7c80",
         "intervention": "INJECTED",
         "late_target_applied_count": null,
-        "manifest_sha256": "031a0a91590c5cd5751253bce2503fbd48f0d9b49155b76e360302a80662fa68",
+        "manifest_sha256": "54844ec731c1cf0d2d6bf886c00c5e91128c08de4146d8b2f4b9c4d1fb37f74e",
         "mode": "PERIODIC",
         "natural_periodic_cycles": null,
         "observed_completion": "UNCERTAIN_WINDOW",
@@ -615,7 +622,7 @@
         "update_to_applied_uncertainty_ms": null,
         "update_to_received_ms": null,
         "update_to_received_uncertainty_ms": null,
-        "validity": "VALID",
+        "validity": "INVALID",
         "window_basis": "ANDROID_MONOTONIC",
         "window_events_verified": false,
         "work_attempt_count": null,
@@ -639,9 +646,11 @@
         "CANDIDATE_NOT_READY",
         "CLOCK_UNCONTROLLED",
         "CLEANUP_EVENT_OMITTED",
+        "AUDIT_SCHEDULER_OBSERVATION_NON_MUTATING",
         "AUDIT_BACKGROUND_AND_END_EVIDENCE",
         "AUDIT_FULL_WINDOW",
-        "AUDIT_DOZE_PHASES"
+        "AUDIT_DOZE_PHASES",
+        "IN_WINDOW_JOB_DUMP_CAN_REEVALUATE_TIMERS"
       ],
       "duplicates_ignored": 0,
       "event_counts": {
@@ -745,7 +754,7 @@
         "group_id": "22dc78296a4179ff6e748d3ce4201f28d9ac2d873c30b9fb5c4ef176c3ed7c80",
         "intervention": "INJECTED",
         "late_target_applied_count": null,
-        "manifest_sha256": "0aea0b74bcbe5616d8e03680408278a5abb786fd46f33015a99ab167baa2f4f0",
+        "manifest_sha256": "962e7ce97a703860ec229479cff2bb94a6c9940a7c8ebade32d39c1ddc87f5d2",
         "mode": "PERIODIC",
         "natural_periodic_cycles": null,
         "observed_completion": "UNCERTAIN_WINDOW",
@@ -794,7 +803,9 @@
       "declared_reason_codes": [
         "CANDIDATE_NOT_READY",
         "CLOCK_UNCONTROLLED",
-        "CLEANUP_EVENT_OMITTED"
+        "CLEANUP_EVENT_OMITTED",
+        "AUDIT_SCHEDULER_OBSERVATION_NON_MUTATING",
+        "IN_WINDOW_JOB_DUMP_CAN_REEVALUATE_TIMERS"
       ],
       "duplicates_ignored": 0,
       "event_counts": {
@@ -906,7 +917,7 @@
         "group_id": "a92f5e78c06c0bc0d3419028265be7564205e025f73425f92284382bd9c6866b",
         "intervention": "INJECTED",
         "late_target_applied_count": null,
-        "manifest_sha256": "4bf8dbe41cd35832aa9b6e0152bfb587c458e8dffe93ab6caf90aed12579a8f1",
+        "manifest_sha256": "000145e039ee712b1dd1236e5b4cffa66a7e236ae409645d6ad2ec9cc3b17a8c",
         "mode": "PERIODIC",
         "natural_periodic_cycles": null,
         "observed_completion": "UNCERTAIN_WINDOW",
@@ -933,7 +944,7 @@
         "update_to_applied_uncertainty_ms": null,
         "update_to_received_ms": null,
         "update_to_received_uncertainty_ms": null,
-        "validity": "VALID",
+        "validity": "INVALID",
         "window_basis": "ANDROID_MONOTONIC",
         "window_events_verified": false,
         "work_attempt_count": null,
@@ -957,7 +968,9 @@
         "CLOCK_UNCONTROLLED",
         "CLEANUP_EVENT_OMITTED",
         "AUDIT_BASELINE_CACHE_MATCHES_SERVER",
-        "BASELINE_PAYLOAD_MISMATCH"
+        "AUDIT_SCHEDULER_OBSERVATION_NON_MUTATING",
+        "BASELINE_PAYLOAD_MISMATCH",
+        "IN_WINDOW_JOB_DUMP_CAN_REEVALUATE_TIMERS"
       ],
       "duplicates_ignored": 0,
       "event_counts": {
@@ -1069,7 +1082,7 @@
         "group_id": "a92f5e78c06c0bc0d3419028265be7564205e025f73425f92284382bd9c6866b",
         "intervention": "INJECTED",
         "late_target_applied_count": null,
-        "manifest_sha256": "8b5621a5a2129a04c92eb735cb4f1f545d2b525c4f010621db8c0464af83a545",
+        "manifest_sha256": "d02bf376c4e7682700e3710befbf91099aca2001fc12ffac53929327214c9add",
         "mode": "PERIODIC",
         "natural_periodic_cycles": null,
         "observed_completion": "UNCERTAIN_WINDOW",
@@ -1118,7 +1131,9 @@
       "declared_reason_codes": [
         "CANDIDATE_NOT_READY",
         "CLOCK_UNCONTROLLED",
-        "CLEANUP_EVENT_OMITTED"
+        "CLEANUP_EVENT_OMITTED",
+        "AUDIT_SCHEDULER_OBSERVATION_NON_MUTATING",
+        "IN_WINDOW_JOB_DUMP_CAN_REEVALUATE_TIMERS"
       ],
       "duplicates_ignored": 0,
       "event_counts": {
@@ -1230,7 +1245,7 @@
         "group_id": "bc29d30ac2ea8034f5748b3ce00a646f6dd92074c4d50b3facd1aea28347db18",
         "intervention": "NONE",
         "late_target_applied_count": null,
-        "manifest_sha256": "1ae4c815ba8969b1d0c3717bbf63dadf7b470b0f787ba7518a5f44b807661989",
+        "manifest_sha256": "cd5f6d5fa9f72962ce149cbcba677f7c1e05328f990613ce6b8e1ecd431f32be",
         "mode": "PERIODIC",
         "natural_periodic_cycles": null,
         "observed_completion": "UNCERTAIN_WINDOW",
@@ -1257,7 +1272,7 @@
         "update_to_applied_uncertainty_ms": null,
         "update_to_received_ms": null,
         "update_to_received_uncertainty_ms": null,
-        "validity": "VALID",
+        "validity": "INVALID",
         "window_basis": "ANDROID_MONOTONIC",
         "window_events_verified": false,
         "work_attempt_count": null,
@@ -1280,7 +1295,9 @@
         "TARGET_NOT_APPLIED_IN_WINDOW",
         "CANDIDATE_NOT_READY",
         "CLOCK_UNCONTROLLED",
-        "CLEANUP_EVENT_OMITTED"
+        "CLEANUP_EVENT_OMITTED",
+        "AUDIT_SCHEDULER_OBSERVATION_NON_MUTATING",
+        "IN_WINDOW_JOB_DUMP_CAN_REEVALUATE_TIMERS"
       ],
       "duplicates_ignored": 0,
       "event_counts": {
@@ -1384,7 +1401,7 @@
         "group_id": "bc29d30ac2ea8034f5748b3ce00a646f6dd92074c4d50b3facd1aea28347db18",
         "intervention": "NONE",
         "late_target_applied_count": null,
-        "manifest_sha256": "ed7dcfaf0447557ed16f11b69bd3ef257d715367abde495a493c60a230297c68",
+        "manifest_sha256": "f240d0ecad0c538b966cbe818ec146947449b582599ac3ab296a5d59bd9fcc82",
         "mode": "PERIODIC",
         "natural_periodic_cycles": null,
         "observed_completion": "UNCERTAIN_WINDOW",
@@ -1411,7 +1428,7 @@
         "update_to_applied_uncertainty_ms": null,
         "update_to_received_ms": null,
         "update_to_received_uncertainty_ms": null,
-        "validity": "VALID",
+        "validity": "INVALID",
         "window_basis": "ANDROID_MONOTONIC",
         "window_events_verified": false,
         "work_attempt_count": null,
@@ -1433,7 +1450,9 @@
       "declared_reason_codes": [
         "CANDIDATE_NOT_READY",
         "CLOCK_UNCONTROLLED",
-        "CLEANUP_EVENT_OMITTED"
+        "CLEANUP_EVENT_OMITTED",
+        "AUDIT_SCHEDULER_OBSERVATION_NON_MUTATING",
+        "IN_WINDOW_JOB_DUMP_CAN_REEVALUATE_TIMERS"
       ],
       "duplicates_ignored": 0,
       "event_counts": {
@@ -1544,7 +1563,7 @@
         "group_id": "bc29d30ac2ea8034f5748b3ce00a646f6dd92074c4d50b3facd1aea28347db18",
         "intervention": "NONE",
         "late_target_applied_count": null,
-        "manifest_sha256": "3d010c84441c4f5876daff113e58a1089e0eeea040f6dbf45a8ad9f09fcc354a",
+        "manifest_sha256": "13c11db978db5e44475b62c65958cffeec7985d095bb48f5201e6af95cba42de",
         "mode": "PERIODIC",
         "natural_periodic_cycles": null,
         "observed_completion": "UNCERTAIN_WINDOW",
@@ -1571,7 +1590,7 @@
         "update_to_applied_uncertainty_ms": null,
         "update_to_received_ms": null,
         "update_to_received_uncertainty_ms": null,
-        "validity": "VALID",
+        "validity": "INVALID",
         "window_basis": "ANDROID_MONOTONIC",
         "window_events_verified": false,
         "work_attempt_count": null,
@@ -1594,7 +1613,9 @@
         "TARGET_NOT_APPLIED_IN_WINDOW",
         "CANDIDATE_NOT_READY",
         "CLOCK_UNCONTROLLED",
-        "CLEANUP_EVENT_OMITTED"
+        "CLEANUP_EVENT_OMITTED",
+        "AUDIT_SCHEDULER_OBSERVATION_NON_MUTATING",
+        "IN_WINDOW_JOB_DUMP_CAN_REEVALUATE_TIMERS"
       ],
       "duplicates_ignored": 0,
       "event_counts": {
@@ -1699,7 +1720,7 @@
         "group_id": "a3dad4a9a48731bfed7fb29cc033217828581a13da9427fa3c3c9af9b35e2769",
         "intervention": "INJECTED",
         "late_target_applied_count": null,
-        "manifest_sha256": "6d962652ff2e9501660bdab17de17113fbc7f953e376176a955ae88c59cd48f6",
+        "manifest_sha256": "90d2c9c8434b1bee538a970c94e4fb010ba169512538701cba76719b45a8c56e",
         "mode": "HYBRID",
         "natural_periodic_cycles": null,
         "observed_completion": "UNCERTAIN_WINDOW",
@@ -1726,7 +1747,7 @@
         "update_to_applied_uncertainty_ms": null,
         "update_to_received_ms": null,
         "update_to_received_uncertainty_ms": null,
-        "validity": "VALID",
+        "validity": "INVALID",
         "window_basis": "ANDROID_MONOTONIC",
         "window_events_verified": false,
         "work_attempt_count": null,
@@ -1749,7 +1770,9 @@
         "TARGET_NOT_APPLIED_IN_WINDOW",
         "CANDIDATE_NOT_READY",
         "CLOCK_UNCONTROLLED",
-        "CLEANUP_EVENT_OMITTED"
+        "CLEANUP_EVENT_OMITTED",
+        "AUDIT_SCHEDULER_OBSERVATION_NON_MUTATING",
+        "IN_WINDOW_JOB_DUMP_CAN_REEVALUATE_TIMERS"
       ],
       "duplicates_ignored": 0,
       "event_counts": {
@@ -1854,7 +1877,7 @@
         "group_id": "a3dad4a9a48731bfed7fb29cc033217828581a13da9427fa3c3c9af9b35e2769",
         "intervention": "INJECTED",
         "late_target_applied_count": null,
-        "manifest_sha256": "3b294f279fd3a7256c5ea53c03144065f8bb60c037df4f59773a186872d643e0",
+        "manifest_sha256": "2845d457bdd36e93d7e06d8b600eccaae5999602b88f555167a684023a98a73d",
         "mode": "HYBRID",
         "natural_periodic_cycles": null,
         "observed_completion": "UNCERTAIN_WINDOW",
@@ -1881,7 +1904,7 @@
         "update_to_applied_uncertainty_ms": null,
         "update_to_received_ms": null,
         "update_to_received_uncertainty_ms": null,
-        "validity": "VALID",
+        "validity": "INVALID",
         "window_basis": "ANDROID_MONOTONIC",
         "window_events_verified": false,
         "work_attempt_count": null,
@@ -1897,98 +1920,117 @@
     "evidence": [
       {
         "path": "docs/evidence/SEM-41/CHECKS.md",
-        "sha256": "0b6e5edc5fcbce6985515d28f6bf1e8fb06ba07e10127f44547ed38357c0a515"
+        "sha256": "5838e3776b608f8ece5d720bf4c386d2a2a664f8e05fb0953dd3cdebe3f2cdc5"
       },
       {
         "path": "docs/evidence/SEM-41/PILOT_RESULTS.json",
-        "sha256": "af140dbf5518641c871288aebb242bc33f3ca4651c4c76ea4f410826f491902a"
+        "sha256": "18e9591e62190aa02c03d029ef46c06d1d467726b989ec3ed90bb25609ea191f"
       },
       {
-        "path": "docs/evidence/SEM-41/FINAL_VERIFICATION.json",
-        "sha256": "f210de179773b3a3fef599e0b20b18312f41e2884411fa827fbdbf2cb39c5932"
+        "path": "docs/evidence/SEM-41/SCHEDULER_OBSERVER_AUDIT.json",
+        "sha256": "073712bae48c64f9e598b11137673828ac7582c82dc8d5d38d4c43e207c8d3cb"
       },
       {
         "path": "experiments/plans/SEM-41/EMULATOR_PLAN.json",
         "sha256": "3ad77818754c95cbdc16bf267bc4ef52c466f32f7f9b8dfcaa0faae29d39cff6"
       }
     ],
-    "index_sha256": "7c8833a38e9b7d92df75e503c9612c99409a8e0e08e903e3855b9135196e16c7",
+    "index_sha256": "849fe6df1ea7f6cc169d4cb1e80ff63ec797a60fd3450a86017d90faefee7bab",
     "index_version": "1.0.0",
     "runs": [
       {
         "directory": "experiments/pilots/run-sem41-pilot-e01-1-20261115-760217",
         "events_sha256": "fe6b56b8729c5619d2c353a38bcfe8e4b9355d27bd06adf8f503612482c85f66",
-        "manifest_sha256": "e3ed4a3639f7fc220e9a20f167c3821e6498f5a2ceb94ddcf8817ded9427540b",
+        "manifest_sha256": "4819eeee398046c2137f18e1d8ca2b3580e137fdcdb7ec994f6c939188386c50",
         "server_store_epoch": "pilots-20261115-r2"
       },
       {
         "directory": "experiments/pilots/run-sem41-pilot-e01-1-20261115-89b884",
         "events_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-        "manifest_sha256": "447ee7d2c9591f25720c5664052bae99f75b44325607d43ea4d90f12b3466f64",
+        "manifest_sha256": "6eb306e1cb8c6304de4a224b59de4dc394811889edaf71247c329eb4b6ca6ccb",
         "server_store_epoch": null
       },
       {
         "directory": "experiments/pilots/run-sem41-pilot-e01-1-20261115-9a8b41",
         "events_sha256": "9fcacd5f56ab42d37675f443ec035b6ffad90f5fa8dc56f798c9f43f7799e6bf",
-        "manifest_sha256": "a86de5fba3b14096cfa5e308dfe95cffb19055bf041141358ac6e7a9c82cb0f3",
+        "manifest_sha256": "08f530deb91beb4f1ed65e53e62322929b17cebb9a5ecdd0ac9cd8f0cad1f4f7",
         "server_store_epoch": "pilots-20261115-r3"
       },
       {
         "directory": "experiments/pilots/run-sem41-pilot-e03-1-20261115-5db4eb",
         "events_sha256": "75df33f9ff9ef10fd17dbbe1b243b9a5d052fe12e20917e13aacfd879677d5f8",
-        "manifest_sha256": "031a0a91590c5cd5751253bce2503fbd48f0d9b49155b76e360302a80662fa68",
+        "manifest_sha256": "54844ec731c1cf0d2d6bf886c00c5e91128c08de4146d8b2f4b9c4d1fb37f74e",
         "server_store_epoch": "pilots-20261115-r2"
       },
       {
         "directory": "experiments/pilots/run-sem41-pilot-e03-2-20261115-0d277e",
         "events_sha256": "e41763ad9ff79d2d9bc022bcf42d541844460411ca1e94dd40c7ba6a2a45811d",
-        "manifest_sha256": "0aea0b74bcbe5616d8e03680408278a5abb786fd46f33015a99ab167baa2f4f0",
+        "manifest_sha256": "962e7ce97a703860ec229479cff2bb94a6c9940a7c8ebade32d39c1ddc87f5d2",
         "server_store_epoch": "pilots-20261115-r2"
       },
       {
         "directory": "experiments/pilots/run-sem41-pilot-e03-2-20261115-33a460",
         "events_sha256": "851975a5d274ee2e600a96f088b9d394182a18724193c9b82dcf7bd39b9b207e",
-        "manifest_sha256": "4bf8dbe41cd35832aa9b6e0152bfb587c458e8dffe93ab6caf90aed12579a8f1",
+        "manifest_sha256": "000145e039ee712b1dd1236e5b4cffa66a7e236ae409645d6ad2ec9cc3b17a8c",
         "server_store_epoch": "pilots-20261115-r3"
       },
       {
         "directory": "experiments/pilots/run-sem41-pilot-e03-2-20261115-c12a28",
         "events_sha256": "ac09651ff2d88f8a58545138f4b5b3a21d79fb4cf5203d4c9c9d1649712456ae",
-        "manifest_sha256": "8b5621a5a2129a04c92eb735cb4f1f545d2b525c4f010621db8c0464af83a545",
+        "manifest_sha256": "d02bf376c4e7682700e3710befbf91099aca2001fc12ffac53929327214c9add",
         "server_store_epoch": "pilots-20261115-r3"
       },
       {
         "directory": "experiments/pilots/run-sem41-pilot-e04-1-20261115-a52b51",
         "events_sha256": "a6d94d0f582951c8e9012892ab66fecec371e987414f957457766fcf75d17f7c",
-        "manifest_sha256": "1ae4c815ba8969b1d0c3717bbf63dadf7b470b0f787ba7518a5f44b807661989",
+        "manifest_sha256": "cd5f6d5fa9f72962ce149cbcba677f7c1e05328f990613ce6b8e1ecd431f32be",
         "server_store_epoch": "pilots-20261115-r3"
       },
       {
         "directory": "experiments/pilots/run-sem41-pilot-e04-2-20261115-b5e415",
         "events_sha256": "eb229c7d00001f92c4ca6c2aca9f009086fb5b5c411954296eec6cb9ed61fd21",
-        "manifest_sha256": "ed7dcfaf0447557ed16f11b69bd3ef257d715367abde495a493c60a230297c68",
+        "manifest_sha256": "f240d0ecad0c538b966cbe818ec146947449b582599ac3ab296a5d59bd9fcc82",
         "server_store_epoch": "pilots-20261115-r3"
       },
       {
         "directory": "experiments/pilots/run-sem41-pilot-e04-3-20261115-f9f6a0",
         "events_sha256": "9d0cd90c8c112e579ed67d8907ad2d939bf96dc6e832aa5d6b2d5b27185a169f",
-        "manifest_sha256": "3d010c84441c4f5876daff113e58a1089e0eeea040f6dbf45a8ad9f09fcc354a",
+        "manifest_sha256": "13c11db978db5e44475b62c65958cffeec7985d095bb48f5201e6af95cba42de",
         "server_store_epoch": "pilots-20261115-r3"
       },
       {
         "directory": "experiments/pilots/run-sem41-pilot-e06-1-20261115-18fec8",
         "events_sha256": "fa4438d6e087a0024354c1a2334bf74b63d7e7ed049b908bb78c4440d5a284a0",
-        "manifest_sha256": "6d962652ff2e9501660bdab17de17113fbc7f953e376176a955ae88c59cd48f6",
+        "manifest_sha256": "90d2c9c8434b1bee538a970c94e4fb010ba169512538701cba76719b45a8c56e",
         "server_store_epoch": "pilots-20261115-r3"
       },
       {
         "directory": "experiments/pilots/run-sem41-pilot-e06-2-20261115-f56fc9",
         "events_sha256": "e8f8e91fec9f633b0571053d874a792945cd8b94f5768db0d8aac577e5423f91",
-        "manifest_sha256": "3b294f279fd3a7256c5ea53c03144065f8bb60c037df4f59773a186872d643e0",
+        "manifest_sha256": "2845d457bdd36e93d7e06d8b600eccaae5999602b88f555167a684023a98a73d",
         "server_store_epoch": "pilots-20261115-r3"
       }
     ],
-    "source_commit": "0e293c1483d961eb4233b8ad381765ea4cdacf1d",
+    "selection_scope": {
+      "cohort": "ORIGINAL_SEM45_HANDOFF_AT_dec00b7",
+      "excluded_new_run_directories": [
+        "experiments/pilots/run-sem41-pilot-e01-1-20261115-575a7a",
+        "experiments/pilots/run-sem41-pilot-e03-1-20261115-dc9cc9",
+        "experiments/pilots/run-sem41-pilot-e03-2-20261115-7f63e0",
+        "experiments/pilots/run-sem41-pilot-e04-1-20261115-cda576",
+        "experiments/pilots/run-sem41-pilot-e04-2-20261115-3bde4f",
+        "experiments/pilots/run-sem41-pilot-e04-3-20261115-54c1a9"
+      ],
+      "exclusion_reason": "REQUALIFICATION_RUNS_OUTSIDE_ORIGINAL_REVIEWED_COHORT",
+      "previous_source_commit": "0e293c1483d961eb4233b8ad381765ea4cdacf1d",
+      "qualification_status": "REVOKED_AFTER_SCHEDULER_COLLECTOR_AUDIT",
+      "selected_invalid_runs": 12,
+      "selected_run_count": 12,
+      "selected_valid_completed_runs": 0,
+      "upstream_requalification_batch_status": "RUNNING",
+      "upstream_requalification_valid_completed_runs": 6
+    },
+    "source_commit": "42ca000da1de2b7465851e1485fec2631f4b1a3c",
     "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/29",
     "source_review_status": "DRAFT_AT_IMPORT"
   },

@@ -21,15 +21,17 @@
       "passed": true
     }
   },
-  "csv_sha256": "6587970d33b1a0212e71d4cc71ffad7e3378bea384a94c53bea7061c1bb43e2a",
-  "git_diff_check_passed": true,
+  "csv_sha256": "49d4f9e7c533f50f17fd429783fabb4afde15f27ad7a0c1e0e0c3fc3958fe8b0",
+  "declared_outcomes_all_runs": {
+    "FAILURE": 2,
+    "SUCCESS": 5,
+    "TIMEOUT": 5
+  },
+  "excluded_requalification_run_count": 6,
   "group_count": 7,
-  "index_sha256": "7c8833a38e9b7d92df75e503c9612c99409a8e0e08e903e3855b9135196e16c7",
-  "internal_links_checked": 52,
-  "invalid_attempts_retained": 4,
+  "index_sha256": "849fe6df1ea7f6cc169d4cb1e80ff63ec797a60fd3450a86017d90faefee7bab",
+  "invalid_attempts_retained": 12,
   "main_eligible": 0,
-  "markdown_fences_passed": true,
-  "markdown_tables_checked": 8,
   "matches_local_source_exports": true,
   "not_run": [
     "main_emulator",
@@ -38,25 +40,39 @@
     "phase_specific_metrics",
     "independent_SEM44_review"
   ],
+  "original_csv_values_preserved_except_validity_and_manifest_hash": true,
+  "original_event_bytes_preserved": true,
   "python_39_syntax_passed": true,
   "python_version": "3.12.14",
+  "qualification_status": "REVOKED_AFTER_SCHEDULER_COLLECTOR_AUDIT",
   "reproduced_byte_for_byte": true,
   "run_count": 12,
   "runtime_experiment_performed": false,
-  "scope": "SEM45_OFFLINE_ANALYSIS",
-  "source_commit": "0e293c1483d961eb4233b8ad381765ea4cdacf1d",
+  "scope": "SEM45_OFFLINE_ANALYSIS_ORIGINAL_12_RUN_COHORT",
+  "sem19_docs_check": {
+    "files": 5,
+    "internal_links": 174,
+    "passed": true
+  },
+  "source_commit": "42ca000da1de2b7465851e1485fec2631f4b1a3c",
   "source_epochs_match_pinned_pilot_results": true,
   "source_review_status": "DRAFT_AT_IMPORT",
-  "summary_sha256": "aabc993b5fb30aefe741fb2f41903d1e41094f21c95d5cefd2ef0f5e22f8e0df",
+  "summary_sha256": "4b340643871dc7ce054f2c7e53cc5969cef2e5f989eaadec67149e4072725a02",
+  "task_snapshot_check": {
+    "passed": true,
+    "verified_tasks": 45
+  },
   "uncertain_window_rows": 12,
   "unit_tests": {
+    "analyzer_tests": 45,
+    "exporter_tests": 36,
     "failures": 0,
     "passed": 81
   },
-  "valid_completed_declared_outcomes": {
-    "SUCCESS": 4,
-    "TIMEOUT": 4
-  },
-  "verification_date": "2026-11-15",
+  "upstream_requalification_batch_status": "RUNNING",
+  "upstream_requalification_valid_completed_runs": 6,
+  "valid_completed_declared_outcomes": {},
+  "valid_completed_runs": 0,
+  "verification_date": "2026-11-16",
   "windows_index_checkout_reproduced": true
 }
