@@ -68,7 +68,7 @@ Khi candidate/pilot đã qua, điền manifest mới từ template với `run_ph
 
 ## Pilot tự động khi chưa có Firebase
 
-[Runner](../../../experiments/scripts/run_sem41_periodic_pilots.py) thực hiện tuần tự E01×1, E03 PERIODIC×2, E04 PERIODIC×3 và E06×2. Tổng cửa sổ là 346 phút; cộng thêm setup/cleanup. Runner chỉ tạo phase pilot, đối chiếu hash APK đã cài với PREFLIGHT, cấu hình run/alias/mode qua UI và ghi checkpoint OS mỗi 5 phút. Không force-run job. Cửa sổ vẫn được giữ dù target đã applied sớm.
+[Runner](../../../experiments/scripts/run_sem41_periodic_pilots.py) thực hiện tuần tự E01×1, E03 PERIODIC×2, E04 PERIODIC×3 và E06×2. Tổng cửa sổ là 346 phút; cộng thêm setup/cleanup và thời gian của các lần thử bị dừng/lượt thay thế nếu có. Runner chỉ tạo phase pilot, đối chiếu hash APK đã cài với PREFLIGHT, cấu hình run/alias/mode qua UI và ghi checkpoint OS mỗi 5 phút. Không force-run job. Cửa sổ vẫn được giữ dù target đã applied sớm.
 
 Chuẩn bị `device-map.json` và `deny-values.json` private có alias/serial và các giá trị nhạy cảm thật. Port 3000 phải trống; app/test APK phải đúng revision đã kiểm, baseline mạng hoạt động, airplane off và deep idle ACTIVE. Dành riêng emulator trong suốt batch, giữ máy mở, không thao tác app. Output phải là thư mục mới. Ví dụ trên macOS, từ root repo:
 
