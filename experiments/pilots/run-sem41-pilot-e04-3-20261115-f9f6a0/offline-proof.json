@@ -1,0 +1,8 @@
+{
+  "collector": "PILOT_RUNNER_READ_ONLY_ADB",
+  "utc": "2026-11-15T07:39:12.158Z",
+  "elapsed_realtime_ms": 17080720,
+  "default_network_absent": true,
+  "guest_server_http_reachable": false,
+  "same_boot_as_batch": true
+}
