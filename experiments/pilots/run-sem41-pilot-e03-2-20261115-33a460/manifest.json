@@ -13,11 +13,13 @@
   "mode": "PERIODIC",
   "execution_status": "COMPLETED",
   "outcome": "SUCCESS",
-  "validity": "VALID",
+  "validity": "INVALID",
   "reason_codes": [
     "CANDIDATE_NOT_READY",
     "CLOCK_UNCONTROLLED",
-    "CLEANUP_EVENT_OMITTED"
+    "CLEANUP_EVENT_OMITTED",
+    "AUDIT_SCHEDULER_OBSERVATION_NON_MUTATING",
+    "IN_WINDOW_JOB_DUMP_CAN_REEVALUATE_TIMERS"
   ],
   "intervention": "INJECTED",
   "build": {
@@ -141,6 +143,7 @@
     "idle-restore-1-transition.json",
     "observation.json",
     "runner-identity.json",
+    "scheduler-observation-proof.json",
     "state-after.json",
     "window-end-checkpoint.json"
   ]

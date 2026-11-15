@@ -19,9 +19,11 @@
     "CANDIDATE_NOT_READY",
     "CLOCK_UNCONTROLLED",
     "CLEANUP_EVENT_OMITTED",
+    "AUDIT_SCHEDULER_OBSERVATION_NON_MUTATING",
     "AUDIT_BACKGROUND_AND_END_EVIDENCE",
     "AUDIT_FULL_WINDOW",
-    "AUDIT_DOZE_PHASES"
+    "AUDIT_DOZE_PHASES",
+    "IN_WINDOW_JOB_DUMP_CAN_REEVALUATE_TIMERS"
   ],
   "intervention": "INJECTED",
   "build": {
@@ -141,6 +143,7 @@
     "collector-boot.json",
     "observation.json",
     "runner-identity.json",
+    "scheduler-observation-proof.json",
     "state-after.json"
   ]
 }

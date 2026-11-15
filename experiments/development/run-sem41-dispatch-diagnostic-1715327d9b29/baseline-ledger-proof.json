@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "reason": "BASELINE_MATCH",
+  "cache_version": 14,
+  "server_version": 14,
+  "cache_item_count": 14,
+  "server_item_count": 14,
+  "cache_items_sha256": "581aa1567cba5bad8f1775efcdf90a82adf2ad0384add164d5d8bad4be1828ea",
+  "server_items_sha256": "581aa1567cba5bad8f1775efcdf90a82adf2ad0384add164d5d8bad4be1828ea",
+  "server_store_epoch": "pilots-20261115-r3",
+  "source": "CAPTURED_SQLITE_AND_RETAINED_LEDGER",
+  "normalization": "SORT_ID_JSON_SORT_KEYS_COMPACT_UTF8"
+}

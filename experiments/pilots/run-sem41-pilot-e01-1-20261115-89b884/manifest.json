@@ -20,6 +20,7 @@
     "CLOCK_UNCONTROLLED",
     "CLEANUP_EVENT_OMITTED",
     "AUDIT_BASELINE_CACHE_MATCHES_SERVER",
+    "AUDIT_SCHEDULER_OBSERVATION_NON_MUTATING",
     "AUDIT_BACKGROUND_AND_END_EVIDENCE",
     "AUDIT_SINGLE_REGISTRATION",
     "AUDIT_FULL_WINDOW",
@@ -136,6 +137,7 @@
     "collector-boot.json",
     "observation.json",
     "runner-identity.json",
+    "scheduler-observation-proof.json",
     "setup-diagnostic.json",
     "state-after.json"
   ]

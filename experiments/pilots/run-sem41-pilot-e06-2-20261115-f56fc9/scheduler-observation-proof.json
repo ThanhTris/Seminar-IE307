@@ -1,0 +1,109 @@
+{
+  "status": "FAIL",
+  "reason": "IN_WINDOW_JOB_DUMP_CAN_REEVALUATE_TIMERS",
+  "checkpoints_without_clock": [],
+  "in_window_dump_count": 9,
+  "timer_transition_count": 1,
+  "in_window_dumps": [
+    {
+      "checkpoint": "CONTROLLED_SKIP_PERIODIC_RECOVERY-22031970-checkpoint.json",
+      "elapsed_realtime_ms": 22032190,
+      "capture_present": true,
+      "timer_transition_pattern": false,
+      "capture_file": "CONTROLLED_SKIP_PERIODIC_RECOVERY-22031970-jobs.txt",
+      "capture_sha256": "2d947aa2fe215e710b270007bb97b9e23b869e7b1543cafc493ebaed15047f01",
+      "timing_delay_printed_unsatisfied": true,
+      "ready_printed": false,
+      "time_controller_has_tracked_job": true
+    },
+    {
+      "checkpoint": "CONTROLLED_SKIP_PERIODIC_RECOVERY-22333370-checkpoint.json",
+      "elapsed_realtime_ms": 22333620,
+      "capture_present": true,
+      "timer_transition_pattern": false,
+      "capture_file": "CONTROLLED_SKIP_PERIODIC_RECOVERY-22333370-jobs.txt",
+      "capture_sha256": "d4c4f1683b2f9e840f4e954f16c97a0fb2d9437866bf294e70b3c73bbae33844",
+      "timing_delay_printed_unsatisfied": true,
+      "ready_printed": false,
+      "time_controller_has_tracked_job": true
+    },
+    {
+      "checkpoint": "CONTROLLED_SKIP_PERIODIC_RECOVERY-22635320-checkpoint.json",
+      "elapsed_realtime_ms": 22635550,
+      "capture_present": true,
+      "timer_transition_pattern": true,
+      "capture_file": "CONTROLLED_SKIP_PERIODIC_RECOVERY-22635320-jobs.txt",
+      "capture_sha256": "1d380775b1462ca6f918b4782ae6b66d2b43a7662201f6336f7226fbcaa982af",
+      "timing_delay_printed_unsatisfied": true,
+      "ready_printed": true,
+      "time_controller_has_tracked_job": false
+    },
+    {
+      "checkpoint": "CONTROLLED_SKIP_PERIODIC_RECOVERY-22936890-checkpoint.json",
+      "elapsed_realtime_ms": 22937000,
+      "capture_present": true,
+      "timer_transition_pattern": false,
+      "capture_file": "CONTROLLED_SKIP_PERIODIC_RECOVERY-22936890-jobs.txt",
+      "capture_sha256": "5edbf30e0fa29994fc945948df44e781a9c168e9144123e80c933f474f2a4ad7",
+      "timing_delay_printed_unsatisfied": false,
+      "ready_printed": true,
+      "time_controller_has_tracked_job": false
+    },
+    {
+      "checkpoint": "CONTROLLED_SKIP_PERIODIC_RECOVERY-23238860-checkpoint.json",
+      "elapsed_realtime_ms": 23239040,
+      "capture_present": true,
+      "timer_transition_pattern": false,
+      "capture_file": "CONTROLLED_SKIP_PERIODIC_RECOVERY-23238860-jobs.txt",
+      "capture_sha256": "c36e280ff9e875ffba48e9fb8733d88727b1be161262de40a3100c47cb2ce180",
+      "timing_delay_printed_unsatisfied": false,
+      "ready_printed": true,
+      "time_controller_has_tracked_job": false
+    },
+    {
+      "checkpoint": "CONTROLLED_SKIP_PERIODIC_RECOVERY-23540920-checkpoint.json",
+      "elapsed_realtime_ms": 23541040,
+      "capture_present": true,
+      "timer_transition_pattern": false,
+      "capture_file": "CONTROLLED_SKIP_PERIODIC_RECOVERY-23540920-jobs.txt",
+      "capture_sha256": "19201a5c74a9c6e3ed4e5b2bbb2d52b133e18f36ebd9419b373cbf1333023cb6",
+      "timing_delay_printed_unsatisfied": false,
+      "ready_printed": true,
+      "time_controller_has_tracked_job": false
+    },
+    {
+      "checkpoint": "CONTROLLED_SKIP_PERIODIC_RECOVERY-23843590-checkpoint.json",
+      "elapsed_realtime_ms": 23843700,
+      "capture_present": true,
+      "timer_transition_pattern": false,
+      "capture_file": "CONTROLLED_SKIP_PERIODIC_RECOVERY-23843590-jobs.txt",
+      "capture_sha256": "201acf45f34ffe2888fc46e69ae69cb32f4268b81254dab83eeca864386efd5b",
+      "timing_delay_printed_unsatisfied": false,
+      "ready_printed": true,
+      "time_controller_has_tracked_job": false
+    },
+    {
+      "checkpoint": "CONTROLLED_SKIP_PERIODIC_RECOVERY-24146250-checkpoint.json",
+      "elapsed_realtime_ms": 24146460,
+      "capture_present": true,
+      "timer_transition_pattern": false,
+      "capture_file": "CONTROLLED_SKIP_PERIODIC_RECOVERY-24146250-jobs.txt",
+      "capture_sha256": "85e3951338505306eb52e6e8ca265036522e370e5db9d9ce84025453c4b14476",
+      "timing_delay_printed_unsatisfied": false,
+      "ready_printed": true,
+      "time_controller_has_tracked_job": false
+    },
+    {
+      "checkpoint": "CONTROLLED_SKIP_PERIODIC_RECOVERY-end-checkpoint.json",
+      "elapsed_realtime_ms": 24431160,
+      "capture_present": true,
+      "timer_transition_pattern": false,
+      "capture_file": "CONTROLLED_SKIP_PERIODIC_RECOVERY-end-jobs.txt",
+      "capture_sha256": "b54597a76f645ed189ed9127408455fc686afec2dc554e806e8d5a80f336ccf4",
+      "timing_delay_printed_unsatisfied": false,
+      "ready_printed": true,
+      "time_controller_has_tracked_job": false
+    }
+  ],
+  "events_or_outcomes_modified": false
+}

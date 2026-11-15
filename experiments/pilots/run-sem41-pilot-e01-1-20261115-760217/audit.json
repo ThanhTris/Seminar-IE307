@@ -2,6 +2,7 @@
   "run_id": "run-sem41-pilot-e01-1-20261115-760217",
   "checks": {
     "baseline_cache_matches_server": false,
+    "scheduler_observation_non_mutating": false,
     "only_cleanup_omitted": true,
     "background_and_end_evidence": true,
     "cleanup": true,
@@ -85,6 +86,214 @@
     "server_store_epoch": "pilots-20261115-r2",
     "source": "CAPTURED_SQLITE_AND_RETAINED_LEDGER",
     "normalization": "SORT_ID_JSON_SORT_KEYS_COMPACT_UTF8"
+  },
+  "scheduler_observation": {
+    "status": "FAIL",
+    "reason": "IN_WINDOW_JOB_DUMP_CAN_REEVALUATE_TIMERS",
+    "checkpoints_without_clock": [],
+    "in_window_dump_count": 18,
+    "timer_transition_count": 1,
+    "in_window_dumps": [
+      {
+        "checkpoint": "NATURAL_PERIODIC-2108800-checkpoint.json",
+        "elapsed_realtime_ms": 2108970,
+        "capture_present": true,
+        "timer_transition_pattern": false,
+        "capture_file": "NATURAL_PERIODIC-2108800-jobs.txt",
+        "capture_sha256": "5573064bb67f5951a4042d6ee5a7b2a6526df54027b807841eaa01cbb9ac62f7",
+        "timing_delay_printed_unsatisfied": true,
+        "ready_printed": false,
+        "time_controller_has_tracked_job": true
+      },
+      {
+        "checkpoint": "NATURAL_PERIODIC-2411100-checkpoint.json",
+        "elapsed_realtime_ms": 2411300,
+        "capture_present": true,
+        "timer_transition_pattern": false,
+        "capture_file": "NATURAL_PERIODIC-2411100-jobs.txt",
+        "capture_sha256": "7aa105ba7735d3336662b3d5b48ed37e064ba6c93ef1479178e258957a773098",
+        "timing_delay_printed_unsatisfied": true,
+        "ready_printed": false,
+        "time_controller_has_tracked_job": true
+      },
+      {
+        "checkpoint": "NATURAL_PERIODIC-2713500-checkpoint.json",
+        "elapsed_realtime_ms": 2713650,
+        "capture_present": true,
+        "timer_transition_pattern": true,
+        "capture_file": "NATURAL_PERIODIC-2713500-jobs.txt",
+        "capture_sha256": "ae09087fa713247826bc23e1d6917bb60ed1128193f3091be56c3b8bd56aaeae",
+        "timing_delay_printed_unsatisfied": true,
+        "ready_printed": true,
+        "time_controller_has_tracked_job": false
+      },
+      {
+        "checkpoint": "NATURAL_PERIODIC-3015310-checkpoint.json",
+        "elapsed_realtime_ms": 3015480,
+        "capture_present": true,
+        "timer_transition_pattern": false,
+        "capture_file": "NATURAL_PERIODIC-3015310-jobs.txt",
+        "capture_sha256": "8c3a28dc838c5f486bbc9db6472d35a6524ea3232bf9864e5e656467fff7e808",
+        "timing_delay_printed_unsatisfied": false,
+        "ready_printed": true,
+        "time_controller_has_tracked_job": false
+      },
+      {
+        "checkpoint": "NATURAL_PERIODIC-3317090-checkpoint.json",
+        "elapsed_realtime_ms": 3317220,
+        "capture_present": true,
+        "timer_transition_pattern": false,
+        "capture_file": "NATURAL_PERIODIC-3317090-jobs.txt",
+        "capture_sha256": "40d33f1743b5c55e37c4f9c1621ec61ddc43d6d2a920356a8a2df6bcfe587944",
+        "timing_delay_printed_unsatisfied": false,
+        "ready_printed": true,
+        "time_controller_has_tracked_job": false
+      },
+      {
+        "checkpoint": "NATURAL_PERIODIC-3618000-checkpoint.json",
+        "elapsed_realtime_ms": 3618160,
+        "capture_present": true,
+        "timer_transition_pattern": false,
+        "capture_file": "NATURAL_PERIODIC-3618000-jobs.txt",
+        "capture_sha256": "169885b2c77186534479bad85f39e85285f2c044a0adc244c6e2ca5ffdb5d627",
+        "timing_delay_printed_unsatisfied": false,
+        "ready_printed": true,
+        "time_controller_has_tracked_job": false
+      },
+      {
+        "checkpoint": "NATURAL_PERIODIC-3918920-checkpoint.json",
+        "elapsed_realtime_ms": 3919090,
+        "capture_present": true,
+        "timer_transition_pattern": false,
+        "capture_file": "NATURAL_PERIODIC-3918920-jobs.txt",
+        "capture_sha256": "9c41806e5446a54640745baef7801cef89e92cd94c4012d300345b0403efcfe0",
+        "timing_delay_printed_unsatisfied": false,
+        "ready_printed": true,
+        "time_controller_has_tracked_job": false
+      },
+      {
+        "checkpoint": "NATURAL_PERIODIC-4220340-checkpoint.json",
+        "elapsed_realtime_ms": 4220470,
+        "capture_present": true,
+        "timer_transition_pattern": false,
+        "capture_file": "NATURAL_PERIODIC-4220340-jobs.txt",
+        "capture_sha256": "03e8722693eb936185274c16d3a842a0234ab031cc299c642d9422ee160ba584",
+        "timing_delay_printed_unsatisfied": false,
+        "ready_printed": true,
+        "time_controller_has_tracked_job": false
+      },
+      {
+        "checkpoint": "NATURAL_PERIODIC-4522910-checkpoint.json",
+        "elapsed_realtime_ms": 4523030,
+        "capture_present": true,
+        "timer_transition_pattern": false,
+        "capture_file": "NATURAL_PERIODIC-4522910-jobs.txt",
+        "capture_sha256": "ce6a5f59a9e4b947b5d2d36fe92a8baeae20e1f9c331834f4c9ad6d0978a2370",
+        "timing_delay_printed_unsatisfied": false,
+        "ready_printed": true,
+        "time_controller_has_tracked_job": false
+      },
+      {
+        "checkpoint": "NATURAL_PERIODIC-4824350-checkpoint.json",
+        "elapsed_realtime_ms": 4824520,
+        "capture_present": true,
+        "timer_transition_pattern": false,
+        "capture_file": "NATURAL_PERIODIC-4824350-jobs.txt",
+        "capture_sha256": "68a445f188e9fd5f208597c2f5a64c5702fd269b14780cafffe76415d7383d75",
+        "timing_delay_printed_unsatisfied": false,
+        "ready_printed": true,
+        "time_controller_has_tracked_job": false
+      },
+      {
+        "checkpoint": "NATURAL_PERIODIC-5127480-checkpoint.json",
+        "elapsed_realtime_ms": 5127680,
+        "capture_present": true,
+        "timer_transition_pattern": false,
+        "capture_file": "NATURAL_PERIODIC-5127480-jobs.txt",
+        "capture_sha256": "7bf6a0526d92d799710a9fc587b8c6283ef66994e9477cffd4ff53c36cbd72d0",
+        "timing_delay_printed_unsatisfied": false,
+        "ready_printed": true,
+        "time_controller_has_tracked_job": false
+      },
+      {
+        "checkpoint": "NATURAL_PERIODIC-5429540-checkpoint.json",
+        "elapsed_realtime_ms": 5429670,
+        "capture_present": true,
+        "timer_transition_pattern": false,
+        "capture_file": "NATURAL_PERIODIC-5429540-jobs.txt",
+        "capture_sha256": "41850c03661fa7c49e84ac69954aaf08da283bc2ffaf60517c823cb27a80190c",
+        "timing_delay_printed_unsatisfied": false,
+        "ready_printed": true,
+        "time_controller_has_tracked_job": false
+      },
+      {
+        "checkpoint": "NATURAL_PERIODIC-5732350-checkpoint.json",
+        "elapsed_realtime_ms": 5732520,
+        "capture_present": true,
+        "timer_transition_pattern": false,
+        "capture_file": "NATURAL_PERIODIC-5732350-jobs.txt",
+        "capture_sha256": "b39e5462f27514fc304ae31da8af22f8abc34963debd3a93fd358552fcd856f1",
+        "timing_delay_printed_unsatisfied": false,
+        "ready_printed": true,
+        "time_controller_has_tracked_job": false
+      },
+      {
+        "checkpoint": "NATURAL_PERIODIC-6035570-checkpoint.json",
+        "elapsed_realtime_ms": 6035800,
+        "capture_present": true,
+        "timer_transition_pattern": false,
+        "capture_file": "NATURAL_PERIODIC-6035570-jobs.txt",
+        "capture_sha256": "a10efe02242345611c0b18a84abb72ba91c7f791f82b48e3589a6959213efcb0",
+        "timing_delay_printed_unsatisfied": false,
+        "ready_printed": true,
+        "time_controller_has_tracked_job": false
+      },
+      {
+        "checkpoint": "NATURAL_PERIODIC-6338220-checkpoint.json",
+        "elapsed_realtime_ms": 6338370,
+        "capture_present": true,
+        "timer_transition_pattern": false,
+        "capture_file": "NATURAL_PERIODIC-6338220-jobs.txt",
+        "capture_sha256": "837b06f0240f88c5007999a0c4dd1420db97c695a06d2815ea22ba67cbfc57ed",
+        "timing_delay_printed_unsatisfied": false,
+        "ready_printed": true,
+        "time_controller_has_tracked_job": false
+      },
+      {
+        "checkpoint": "NATURAL_PERIODIC-6640670-checkpoint.json",
+        "elapsed_realtime_ms": 6640780,
+        "capture_present": true,
+        "timer_transition_pattern": false,
+        "capture_file": "NATURAL_PERIODIC-6640670-jobs.txt",
+        "capture_sha256": "ece4ade652e36b2f3a19732c3f8c68a1a7471d59c92eabcf3ca1087396d8bdb4",
+        "timing_delay_printed_unsatisfied": false,
+        "ready_printed": true,
+        "time_controller_has_tracked_job": false
+      },
+      {
+        "checkpoint": "NATURAL_PERIODIC-6942660-checkpoint.json",
+        "elapsed_realtime_ms": 6942790,
+        "capture_present": true,
+        "timer_transition_pattern": false,
+        "capture_file": "NATURAL_PERIODIC-6942660-jobs.txt",
+        "capture_sha256": "f3aa6558c6d6708004ed9bb9306e9670bf982e2aa89bb63bc6d9f26748a1c60f",
+        "timing_delay_printed_unsatisfied": false,
+        "ready_printed": true,
+        "time_controller_has_tracked_job": false
+      },
+      {
+        "checkpoint": "NATURAL_PERIODIC-end-checkpoint.json",
+        "elapsed_realtime_ms": 7208240,
+        "capture_present": true,
+        "timer_transition_pattern": false,
+        "capture_file": "NATURAL_PERIODIC-end-jobs.txt",
+        "capture_sha256": "46ca69c45327da0f653fa14b7dfbefbaa9062a21c10d91df1b1d41b250f0fb6e",
+        "timing_delay_printed_unsatisfied": false,
+        "ready_printed": true,
+        "time_controller_has_tracked_job": false
+      }
+    ],
+    "events_or_outcomes_modified": false
   },
   "validity": "INVALID",
   "actual_duration_ms": 5400420,

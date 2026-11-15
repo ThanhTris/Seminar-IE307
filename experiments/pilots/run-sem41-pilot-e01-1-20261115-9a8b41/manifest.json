@@ -13,13 +13,15 @@
   "mode": "PERIODIC",
   "execution_status": "COMPLETED",
   "outcome": "TIMEOUT",
-  "validity": "VALID",
+  "validity": "INVALID",
   "reason_codes": [
     "TARGET_NOT_APPLIED_IN_WINDOW",
     "NATURAL_CYCLE_TARGET_NOT_MET",
     "CANDIDATE_NOT_READY",
     "CLOCK_UNCONTROLLED",
-    "CLEANUP_EVENT_OMITTED"
+    "CLEANUP_EVENT_OMITTED",
+    "AUDIT_SCHEDULER_OBSERVATION_NON_MUTATING",
+    "IN_WINDOW_JOB_DUMP_CAN_REEVALUATE_TIMERS"
   ],
   "intervention": "NONE",
   "build": {
@@ -152,6 +154,7 @@
     "collector-boot.json",
     "observation.json",
     "runner-identity.json",
+    "scheduler-observation-proof.json",
     "state-after.json",
     "window-end-checkpoint.json"
   ]

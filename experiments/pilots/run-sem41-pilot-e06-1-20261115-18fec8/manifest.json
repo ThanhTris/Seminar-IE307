@@ -13,12 +13,14 @@
   "mode": "HYBRID",
   "execution_status": "COMPLETED",
   "outcome": "TIMEOUT",
-  "validity": "VALID",
+  "validity": "INVALID",
   "reason_codes": [
     "TARGET_NOT_APPLIED_IN_WINDOW",
     "CANDIDATE_NOT_READY",
     "CLOCK_UNCONTROLLED",
-    "CLEANUP_EVENT_OMITTED"
+    "CLEANUP_EVENT_OMITTED",
+    "AUDIT_SCHEDULER_OBSERVATION_NON_MUTATING",
+    "IN_WINDOW_JOB_DUMP_CAN_REEVALUATE_TIMERS"
   ],
   "intervention": "INJECTED",
   "build": {
@@ -141,6 +143,7 @@
     "collector-boot.json",
     "observation.json",
     "runner-identity.json",
+    "scheduler-observation-proof.json",
     "state-after.json",
     "window-end-checkpoint.json"
   ]

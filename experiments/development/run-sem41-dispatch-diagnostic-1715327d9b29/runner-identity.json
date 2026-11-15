@@ -1,0 +1,15 @@
+{
+  "observer_commit": "0d4307e3c29e05032f491a527a2ce1203d98e2c0",
+  "sources_sha256": {
+    "experiments/scripts/run_sem41_dispatch_diagnostic.py": "5b10e74781f27ec4790c4f01c3a9ff561c5ad9d37193c33abc07b131e8643562",
+    "experiments/scripts/probe_sem41_jobs.py": "d6c58e1ec92fbf42dea815ed257a58a2c04c7da8de71931aeafccb78867fd332",
+    "experiments/scripts/android/Sem41JobProbe.java": "5326f54fbadf28e8d0bfdae3fd34a04e47db21bcf99b3845e804ab56caffe454",
+    "experiments/scripts/run_sem41_periodic_pilots.py": "5fa0bc0c1b480a5a93fb5b097671ee4665851f423e5e7232617ec860aef8bb48",
+    "experiments/scripts/sem41_baseline.py": "7eb953585bf2cc11532f44e10960d37f9a05ad51e0dc58480a9ac4ba1967bc24"
+  },
+  "probe_dex_sha256": "526437810fb9fce101fd6dfa866ecdd5af3b7283f9c89cd9f23d941a58854326",
+  "phase": "development",
+  "candidate_gate_passed": false,
+  "direct_dispatch_permitted": true,
+  "not_a_natural_e01_sample": true
+}

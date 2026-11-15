@@ -2,6 +2,7 @@
   "run_id": "run-sem41-pilot-e03-2-20261115-33a460",
   "checks": {
     "baseline_cache_matches_server": true,
+    "scheduler_observation_non_mutating": false,
     "only_cleanup_omitted": true,
     "background_and_end_evidence": true,
     "cleanup": true,
@@ -53,7 +54,105 @@
     "source": "CAPTURED_SQLITE_AND_RETAINED_LEDGER",
     "normalization": "SORT_ID_JSON_SORT_KEYS_COMPACT_UTF8"
   },
-  "validity": "VALID",
+  "scheduler_observation": {
+    "status": "FAIL",
+    "reason": "IN_WINDOW_JOB_DUMP_CAN_REEVALUATE_TIMERS",
+    "checkpoints_without_clock": [],
+    "in_window_dump_count": 8,
+    "timer_transition_count": 1,
+    "in_window_dumps": [
+      {
+        "checkpoint": "BASELINE-25513070-checkpoint.json",
+        "elapsed_realtime_ms": 25513210,
+        "capture_present": true,
+        "timer_transition_pattern": false,
+        "capture_file": "BASELINE-25513070-jobs.txt",
+        "capture_sha256": "2d6ba2ee7a350fe02b4d3153ec23c5d8de6da733006715412951790f8bc3c78d",
+        "timing_delay_printed_unsatisfied": true,
+        "ready_printed": false,
+        "time_controller_has_tracked_job": true
+      },
+      {
+        "checkpoint": "BASELINE-end-checkpoint.json",
+        "elapsed_realtime_ms": 25514000,
+        "capture_present": true,
+        "timer_transition_pattern": false,
+        "capture_file": "BASELINE-end-jobs.txt",
+        "capture_sha256": "c2b83e3d7710b9b2bd6124ca2b00003756df25fb03c43174a37b47f9347c2bc7",
+        "timing_delay_printed_unsatisfied": true,
+        "ready_printed": false,
+        "time_controller_has_tracked_job": true
+      },
+      {
+        "checkpoint": "CONFIRMED_DOZE-25816570-checkpoint.json",
+        "elapsed_realtime_ms": 25816700,
+        "capture_present": true,
+        "timer_transition_pattern": false,
+        "capture_file": "CONFIRMED_DOZE-25816570-jobs.txt",
+        "capture_sha256": "38c71bed35ade12cfbe7097956d4f04489b45ad236a5c9494f5a2e0480e3ee5d",
+        "timing_delay_printed_unsatisfied": true,
+        "ready_printed": false,
+        "time_controller_has_tracked_job": true
+      },
+      {
+        "checkpoint": "CONFIRMED_DOZE-26119110-checkpoint.json",
+        "elapsed_realtime_ms": 26119260,
+        "capture_present": true,
+        "timer_transition_pattern": true,
+        "capture_file": "CONFIRMED_DOZE-26119110-jobs.txt",
+        "capture_sha256": "35479620a8cdd83b678df2867bf6841dc75add19011ef4b7594ed55326bc1f10",
+        "timing_delay_printed_unsatisfied": true,
+        "ready_printed": false,
+        "time_controller_has_tracked_job": false
+      },
+      {
+        "checkpoint": "CONFIRMED_DOZE-26421240-checkpoint.json",
+        "elapsed_realtime_ms": 26421410,
+        "capture_present": true,
+        "timer_transition_pattern": false,
+        "capture_file": "CONFIRMED_DOZE-26421240-jobs.txt",
+        "capture_sha256": "9af2adb7b8f1f050196e2436ce7b249431045ebbc8226e7642ca94d001385a0a",
+        "timing_delay_printed_unsatisfied": false,
+        "ready_printed": false,
+        "time_controller_has_tracked_job": false
+      },
+      {
+        "checkpoint": "CONFIRMED_DOZE-end-checkpoint.json",
+        "elapsed_realtime_ms": 26715210,
+        "capture_present": true,
+        "timer_transition_pattern": false,
+        "capture_file": "CONFIRMED_DOZE-end-jobs.txt",
+        "capture_sha256": "1fc6a633d6b081268358966b91fcc73985901edb606d6b7dcd484cc3d2f3454a",
+        "timing_delay_printed_unsatisfied": false,
+        "ready_printed": false,
+        "time_controller_has_tracked_job": false
+      },
+      {
+        "checkpoint": "POST_DOZE-27018040-checkpoint.json",
+        "elapsed_realtime_ms": 27018210,
+        "capture_present": true,
+        "timer_transition_pattern": false,
+        "capture_file": "POST_DOZE-27018040-jobs.txt",
+        "capture_sha256": "ea568f21d569eb6e4e3812fda6af84c7c6389645a5335f2c695dc2b2e0f72ea0",
+        "timing_delay_printed_unsatisfied": true,
+        "ready_printed": false,
+        "time_controller_has_tracked_job": true
+      },
+      {
+        "checkpoint": "POST_DOZE-end-checkpoint.json",
+        "elapsed_realtime_ms": 27316490,
+        "capture_present": true,
+        "timer_transition_pattern": false,
+        "capture_file": "POST_DOZE-end-jobs.txt",
+        "capture_sha256": "2fa69074eb06a9742ad4b44fa4d593e7c26da5e90de71b63b0bbbf19ff920a26",
+        "timing_delay_printed_unsatisfied": true,
+        "ready_printed": false,
+        "time_controller_has_tracked_job": true
+      }
+    ],
+    "events_or_outcomes_modified": false
+  },
+  "validity": "INVALID",
   "actual_duration_ms": 2103500,
   "new_periodic_cycles": 1,
   "applied_target_count_in_window": 1,

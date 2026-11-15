@@ -1,7 +1,5 @@
 # SEM-41 — Emulator main readiness và kiểm candidate
 
-> Cập nhật sau lượt chẩn đoán 19:52 ngày 15/11: phát hiện collector gọi `dumpsys jobscheduler` trong window, có thể satisfy/remove timing constraint mà không enqueue job. Tám qualification cũ đang bị thu hồi để đo lại bằng observer không gọi lệnh này trong window; các bảng/snapshot trước đó là lịch sử, không dùng làm số mẫu hợp lệ hiện hành. Giữ nguyên raw/events/outcome.
-
 ## Nhận dạng và đầu vào
 
 - Vinh (`Vinh5905`) thực hiện ngày **15/11/2026, UTC+7**. Nhánh `codex/SEM-41-emulator-main` từ main `6e87411b60e8504d431cd06e577be94b7bb2244f`, sau merge SEM-34 PR #26. Hạn gốc 07/11/2026 13 giờ được giữ trong task.
@@ -50,59 +48,54 @@ Sau control development lúc 03:00 UTC, emulator giữ APK development của rev
 
 Đầu vào thứ tự được ghi trong [REPRODUCE](REPRODUCE.md). Các ca main hiện Not run. Task SEM-41 tiếp tục Todo trên Project trong lần bàn giao này.
 
-## Kiểm artifact bàn giao
+## Thu hồi qualification do collector và đo lại
 
-50 tests công cụ và 32/32 Android unit tests follow-up đạt. Đã kiểm 27 slot main/582 phút còn NOT_RUN, 8 slot pilot hợp lệ và 4 lần thử INVALID giữ riêng, control development với 9 canonical event và raw accounting đầy đủ. Mọi pilot tái xuất manifest/events/export report giống từng byte; 56 link nội bộ, JSON/JSONL và scan định danh/secret đạt. Hai candidate worktree giữ sạch tại revision đã kiểm. `git diff --check` đạt.
+Snapshot `FINAL_VERIFICATION.json` lúc 12:00 UTC là lịch sử ở commit `0e293c1`, trước khi phát hiện tác động của collector. **Không dùng số 8 valid trong snapshot đó làm trạng thái hiện hành.** [PILOT_RESULTS.json](PILOT_RESULTS.json) và [SCHEDULER_OBSERVER_AUDIT.json](SCHEDULER_OBSERVER_AUDIT.json) là index/audit mới. Giữ nguyên mọi raw event, timestamp, version, SUCCESS/TIMEOUT; chỉ sửa validity/reason và evidence review.
 
-Sau phiên đã fetch origin: main vẫn `6e87411b60e8504d431cd06e577be94b7bb2244f` và là ancestor của nhánh SEM-41. PR #29 không có issue comment, inline review comment hoặc review mới; không có CI check được cấu hình trên PR. Trạng thái draft được giữ vì main chưa chạy.
+### Phát hiện từ control thật
 
-## Pilot thật không cần Firebase — đã đóng các cửa sổ khả thi
+[Control dispatch](../../../experiments/development/run-sem41-dispatch-diagnostic-1715327d9b29/manifest.json) dùng đúng APK đã đo, mode PERIODIC, phase **development/CONTROL/INJECTED**. Trong 1.200.440 ms trước direct dispatch không có cycle mới, target 15 chưa applied (cache 14). Sau một lệnh `jobscheduler run --satisfied` cho đúng namespace/job/work ID, worker fetch và apply target 15, cache 14→15. Không dùng `--force`; command accepted được đối chiếu với event apply thật. Đây là kiểm đường dispatch/worker/core, **không phải thành công tự nhiên của E01**. Raw 10 row = 9 canonical Android + 1 omitted cancel; thêm một server update. [DISPATCH_DIAGNOSTIC.json](DISPATCH_DIAGNOSTIC.json) ghi hash/provenance và phân vùng trước/sau điều khiển.
 
-Đã thu đủ **8 slot pilot hợp lệ**: E01×1, E03 PERIODIC×2, E04 PERIODIC×3 và E06×2, giữ nguyên cả SUCCESS/TIMEOUT. Bốn lần thử sai điều kiện được giữ riêng dưới INVALID; tổng 12 lần thử, không chọn lại mẫu theo kết quả. Đây là `run_phase=pilot`, `candidate_gate_passed=false`; **27 slot main vẫn NOT_RUN**. [PILOT_RESULTS.json](PILOT_RESULTS.json) là index đầy đủ. Raw DB/OS dump, mapping và retained store gốc giữ private.
+Các API pending-reason không thống nhất sau mốc 15 phút: current reason vẫn MINIMUM_LATENCY, history có APP, trong khi dump in READY và không còn entry timer. Không diễn giải APP thành lỗi ứng dụng hoặc cộng các duration thành latency. Probe không đổi PID app trong mọi truy vấn; không mở app/instrumentation trong pha 20 phút. [JobScheduler API](https://developer.android.com/reference/android/app/job/JobScheduler) giải thích phạm vi của reasons/history/stats.
 
-Tổng window danh định của 8 slot hợp lệ là **346 phút (5 giờ 46 phút)**. Setup/cleanup và các lần thử INVALID làm thời gian thực dài hơn. Thời gian bị thiếu của run cũ không được nối vào run thay thế.
+### Collector có thể thay đổi trạng thái đang đo
 
-| Slot hợp lệ | Window thực tế UTC+7; Android elapsed | Cache trước → sau; target | Cycle nền mới | Outcome |
-|---|---|---|---:|---|
-| [E01:1](../../../experiments/pilots/run-sem41-pilot-e01-1-20261115-9a8b41/manifest.json) | 17:30:37–19:00:37; 5,400,630 ms | 13→13; V=14 | 0 | **TIMEOUT** |
-| [E03:1](../../../experiments/pilots/run-sem41-pilot-e03-1-20261115-5db4eb/manifest.json) | 11:54:58–12:30:02; 2,103,340 ms | 5→6; V=6 | 1 | **SUCCESS** |
-| [E03:2](../../../experiments/pilots/run-sem41-pilot-e03-2-20261115-33a460/manifest.json) | 16:54:44–17:29:47; 2,103,500 ms | 12→13; V=13 | 1 | **SUCCESS** |
-| [E04:1](../../../experiments/pilots/run-sem41-pilot-e04-1-20261115-a52b51/manifest.json) | 13:34:15–14:06:24; 1,929,360 ms | 7→8; V=8 | 1 | **SUCCESS** |
-| [E04:2](../../../experiments/pilots/run-sem41-pilot-e04-2-20261115-b5e415/manifest.json) | 14:06:41–14:38:50; 1,928,740 ms | 8→8; V=9 | 0 | **TIMEOUT** |
-| [E04:3](../../../experiments/pilots/run-sem41-pilot-e04-3-20261115-f9f6a0/manifest.json) | 14:39:06–15:11:15; 1,928,830 ms | 9→10; V=10 | 1 | **SUCCESS** |
-| [E06:1](../../../experiments/pilots/run-sem41-pilot-e06-1-20261115-18fec8/manifest.json) | 15:11:28–15:56:29; 2,700,780 ms | 10→10; V=11 | 0 | **TIMEOUT** |
-| [E06:2](../../../experiments/pilots/run-sem41-pilot-e06-2-20261115-f56fc9/manifest.json) | 15:56:41–16:41:42; 2,701,060 ms | 11→11; V=12 | 0 | **TIMEOUT** |
+Trong mã [JobSchedulerService của AOSP](https://android.googlesource.com/platform/frameworks/base/+/refs/heads/main/apex/jobscheduler/service/java/com/android/server/job/JobSchedulerService.java), readiness evaluation từ dump có thể gọi controller evaluation. [TimeController](https://android.googlesource.com/platform/frameworks/base/+/main/apex/jobscheduler/service/java/com/android/server/job/controllers/TimeController.java) có đường satisfy timing delay rồi bỏ entry theo dõi mà không phát callback chạy job trong đường evaluate này. Trên image đã đo, các dump trong window in TIMING_DELAY chưa thỏa ở đầu dump nhưng sau evaluation timer không còn trong danh sách theo dõi. Đây là bằng chứng collector có side effect, phù hợp với source AOSP; không coi READY trong dump là một phép quan sát thuần túy.
 
-Không có snapshot_applied target sau window trong các log đã xuất; mọi work_started sau clock vẫn được giữ và tách khỏi cycle tự nhiên.
+Cả 10 phiên cũ đã đóng và phiên Doze aborted có dấu vết chuyển timer như vậy. Tám qualification từng được ghi VALID được thu hồi thận trọng về INVALID; hai run lỗi baseline và hai lần abort vốn đã INVALID giữ mọi lý do cũ. Không chọn loại chỉ các timeout: cả SUCCESS cũ cũng bị loại khỏi mẫu scheduler hợp lệ. Mỗi run có `scheduler-observation-proof.json` với tên/hash capture và mốc clock; capture OS đầy đủ giữ private, không công bố raw UID/định danh.
 
-E01 ghi **0 cycle tự nhiên mới trong 90 phút**; chu kỳ setup trước Home và event sau đóng window được giữ nhưng không cộng vào số này. Chưa đạt mục tiêu ≥3 cycle của protocol. Giữ phiên hợp lệ cùng outcome thật; cần phiên bổ sung riêng 90 phút trên candidate/profile đã chốt sau khi rà điều kiện scheduler. Không force-run hoặc lặp lại chỉ để thay TIMEOUT bằng kết quả đẹp.
+Observer commit **`db98fa8d275c3ca2d10895daa61f00bf53f59cd7`** bỏ mọi `dumpsys jobscheduler` trong window, checkpoint chỉ đọc idle/activity/package/battery. Guard từ chối dump scheduler khi clock chưa đóng. Snapshot scheduler chỉ ở setup hoặc sau end. Regression tests kiểm guard trước ADB và review từ chối artifact có dump trong window, kể cả label tự xưng read-only. App/test APK, interval, source server và dữ liệu không đổi. Không điều chỉnh quota/policy để ép chạy.
 
-E03 tách đủ 5 phút baseline, 20 phút **confirmed IDLE**, 10 phút sau thoát; ADB force-idle mang nhãn INJECTED. Đọc `phase_event_counts` trong audit từng run để phân biệt event trước/trong/sau idle. E04 có proof guest không còn default network và HTTP tới server thất bại, giữ đủ 2 phút offline và 30 phút sau reconnect, rồi khôi phục từng transport baseline. Cả ba lần lặp và timeout được giữ trong mẫu hợp lệ.
+### Batch đo lại với collector đã sửa
 
-E06 có `push_send_skipped`, reason `FAULT_INJECTION_SKIP`, không tạo message/send-attempt giả; mỗi lượt đủ 45 phút sau update. Profile này có **FIREBASE_NOT_CONFIGURED**, chỉ kiểm deliberate skip và quan sát periodic trong mode HYBRID. Chưa kiểm callback/token hoặc hybrid trên APK đã cấu hình Firebase; không diễn giải skip thành FCM mất tin. Main E06 vẫn phải nhận đúng candidate/profile cuối.
+Đã có **0/8 slot hợp lệ** trong batch r6; còn 8 slot. Trạng thái: `RUNNING`. Toàn bộ 8 cửa sổ là 346 phút, không tính setup/cleanup. Main vẫn 27 slot NOT_RUN.
 
-### Các lần thử INVALID được giữ nguyên
+Lượt E01 90 phút đầu đang chạy; chưa có slot r6 hoàn tất. Không lấy dữ liệu development/control thay thế.
 
-| Lần thử | Outcome quan sát được | Lý do loại khỏi mẫu hợp lệ |
+### Các lần thử cũ được giữ dưới INVALID
+
+| Lượt | Outcome thật | Lý do qualification bị loại |
 |---|---|---|
-| [E01:1 / 89b884](../../../experiments/pilots/run-sem41-pilot-e01-1-20261115-89b884/manifest.json) | ABORTED / FAILURE | Chưa bắt đầu clock: Ctrl+A không clear Compose text, run ID bị nối. Guard chặn; giữ setup diagnostic/raw của run ID thực tế. |
-| [E01:1 / 760217](../../../experiments/pilots/run-sem41-pilot-e01-1-20261115-760217/manifest.json) | COMPLETED / TIMEOUT | Đủ 90 phút nhưng baseline version 4 có payload khác store r2; audit toàn nội dung phát hiện sau đo. |
-| [E03:2 / 0d277e](../../../experiments/pilots/run-sem41-pilot-e03-2-20261115-0d277e/manifest.json) | ABORTED / FAILURE | Đã baseline/20 phút IDLE nhưng đọc ACTIVE quá sớm sau wakeup, abort trước đủ 10 phút post-idle; cleanup retry phục hồi đạt. |
-| [E03:2 / c12a28](../../../experiments/pilots/run-sem41-pilot-e03-2-20261115-c12a28/manifest.json) | COMPLETED / SUCCESS | Đủ 35 phút, observed SUCCESS nhưng baseline version 6 có payload khác store r3; audit phát hiện sau đo. |
+| [E01:1 / 89b884](../../../experiments/pilots/run-sem41-pilot-e01-1-20261115-89b884/manifest.json) | ABORTED/FAILURE | aborted; giữ lý do gốc trong manifest |
+| [E01:1 / 760217](../../../experiments/pilots/run-sem41-pilot-e01-1-20261115-760217/manifest.json) | COMPLETED/TIMEOUT | collector dump trong window; BASELINE_PAYLOAD_MISMATCH |
+| [E03:1 / 5db4eb](../../../experiments/pilots/run-sem41-pilot-e03-1-20261115-5db4eb/manifest.json) | COMPLETED/SUCCESS | collector dump trong window |
+| [E03:2 / 0d277e](../../../experiments/pilots/run-sem41-pilot-e03-2-20261115-0d277e/manifest.json) | ABORTED/FAILURE | collector dump trong window; aborted; giữ lý do gốc trong manifest |
+| [E03:2 / c12a28](../../../experiments/pilots/run-sem41-pilot-e03-2-20261115-c12a28/manifest.json) | COMPLETED/SUCCESS | collector dump trong window; BASELINE_PAYLOAD_MISMATCH |
+| [E04:1 / a52b51](../../../experiments/pilots/run-sem41-pilot-e04-1-20261115-a52b51/manifest.json) | COMPLETED/SUCCESS | collector dump trong window |
+| [E04:2 / b5e415](../../../experiments/pilots/run-sem41-pilot-e04-2-20261115-b5e415/manifest.json) | COMPLETED/TIMEOUT | collector dump trong window |
+| [E04:3 / f9f6a0](../../../experiments/pilots/run-sem41-pilot-e04-3-20261115-f9f6a0/manifest.json) | COMPLETED/SUCCESS | collector dump trong window |
+| [E06:1 / 18fec8](../../../experiments/pilots/run-sem41-pilot-e06-1-20261115-18fec8/manifest.json) | COMPLETED/TIMEOUT | collector dump trong window |
+| [E06:2 / f56fc9](../../../experiments/pilots/run-sem41-pilot-e06-2-20261115-f56fc9/manifest.json) | COMPLETED/TIMEOUT | collector dump trong window |
+| [E03:2 / 33a460](../../../experiments/pilots/run-sem41-pilot-e03-2-20261115-33a460/manifest.json) | COMPLETED/SUCCESS | collector dump trong window |
+| [E01:1 / 9a8b41](../../../experiments/pilots/run-sem41-pilot-e01-1-20261115-9a8b41/manifest.json) | COMPLETED/TIMEOUT | collector dump trong window |
 
-Runner cũ tạo store mới rồi seed tới cached version, khiến cùng version/ETag trỏ tới nội dung khác. Hai run `760217` và `c12a28` được hạ validity thành INVALID; **timestamps, versions, outcomes, raw/canonical events không đổi**. `baseline-content-proof.json` so capture SQLite với response lịch sử trong retained ledger, không suy baseline từ version hoặc snapshot hiện tại. Các run còn lại đều qua cùng phép so sánh toàn payload.
+Baseline vẫn phải khớp **cả version lẫn toàn payload**. Hai lỗi cùng-version/khác-payload từ các epoch r2/r3 giữ nguyên proof/INVALID; runner dùng retained store r3 liên tục, không seed/xóa ledger/cache. Hash payload chỉ để đối chiếu; cache items/DB gốc giữ private. Control MANUAL ngoài window đưa cache về snapshot hiện hành khi cần.
 
-Commit `ffecae09411ce6113e6dc2c4259fb846cc1b54b1` bỏ seed theo số version; client có cache phải nhận retained store, từ chối server lùi dưới cache, kiểm version và hash toàn bộ item payload trước clock. R2/r3 là hai epoch server riêng, không ghép timeline chỉ bằng version. Các lượt E04/E06 r3 có baseline khớp snapshot r3. R4/r5 giữ chính ledger/store r3 liên tục; MANUAL control ngoài window đưa cache về snapshot hiện hành, kiểm payload khớp và WorkManager đã drain trước đo. Không xóa cache/store hoặc sửa ledger lịch sử.
+Review đối chiếu raw/canonical/omitted ID, source/work/fetch provenance, full window/phases, baseline và collector side effect. Event trước/sau window và cancel omitted được giữ, không biến thành cycle tự nhiên. Boot alias collector cùng boot được xác minh; event boot_session_id null giữ nguyên. Clock controlled=false, không tính latency liên máy.
 
-### Provenance, export và giới hạn
+E06 chỉ kiểm deliberate skip thật `FAULT_INJECTION_SKIP` và periodic trong mode HYBRID trên profile **FIREBASE_NOT_CONFIGURED**. Không tạo send/message giả, không kiểm callback/token hoặc diễn giải skip thành FCM mất tin. Main/profile Firebase vẫn chờ candidate và requalification riêng.
 
-Mỗi run có `runner-identity.json` ghi full observer commit/SHA-256; bản mới còn ghi hash module baseline. Observer r2 là `0808b6fe98d6eb924785d9a3d78114ddaf58c802`; r3 là `056e7896fdd87d71fdd753f96736ae87e06ac378`; r4/r5 ghi identity thực tế trong artifact, dùng code đã sửa baseline. Clear text đã đổi sang MOVE_END/DEL và kiểm UI text trước chọn mode; thoát Doze chờ ACTIVE có giới hạn và lưu transition. Code/app/server không đổi trong từng window.
-
-Audit kiểm raw/canonical/omitted ID accounting, single registration/work identity, request/fetch/applied provenance, full window, OS checkpoints, baseline payload và cleanup. Các event ngoài window vẫn được xuất; instrumentation cancel/export chỉ chạy sau khi clock đóng. `periodic_cancelled` chưa hỗ trợ canonical được report omitted, raw giữ nguyên. Không dùng work_started trong giai đoạn đóng run/control làm cycle tự nhiên.
-
-Manifest giữ boot alias collector từ hash kernel boot ID thực tế, cùng boot được observer kiểm tại checkpoint. Event `boot_session_id=null` giữ đúng producer; không bổ sung ID hoặc tính event latency từ nó. Clock controlled=false, không tính latency liên máy. Không trộn pilot/main hoặc build/epoch/config khác nhau; không rút kết luận lỗi OS/app từ việc một job ready mà chưa chạy.
-
-**50 tests công cụ đạt**: 36 exporter, 9 review/baseline, 5 control. Test tổng hợp không phải số liệu thực nghiệm. [FINAL_VERIFICATION.json](FINAL_VERIFICATION.json) ghi đối chiếu lại mọi audit/provenance/metadata, scan privacy, link và tái xuất manifest/events/export report giống từng byte; [DEVICE_CLEANUP.json](DEVICE_CLEANUP.json) ghi kiểm app/test APK, toàn bộ sync work và trạng thái thiết bị/server sau phiên.
+**67 tests công cụ đạt** sau sửa collector; 32/32 Android unit tests follow-up là phép kiểm source runtime không đổi trước đó. `DISPATCH_DEVICE_CLEANUP.json` ghi cleanup sau control; `DEVICE_CLEANUP.json` lúc 12:00 là snapshot cũ. Batch r6 đang giữ thiết bị/server độc quyền; cleanup cuối sẽ ghi riêng khi batch đóng. Kết quả tổng hợp test không phải số liệu thực nghiệm.
 
 ### Candidate follow-up đã nhận
 

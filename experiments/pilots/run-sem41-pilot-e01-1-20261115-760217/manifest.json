@@ -21,7 +21,9 @@
     "CLOCK_UNCONTROLLED",
     "CLEANUP_EVENT_OMITTED",
     "AUDIT_BASELINE_CACHE_MATCHES_SERVER",
-    "BASELINE_PAYLOAD_MISMATCH"
+    "AUDIT_SCHEDULER_OBSERVATION_NON_MUTATING",
+    "BASELINE_PAYLOAD_MISMATCH",
+    "IN_WINDOW_JOB_DUMP_CAN_REEVALUATE_TIMERS"
   ],
   "intervention": "NONE",
   "build": {
@@ -153,6 +155,7 @@
     "collector-boot.json",
     "observation.json",
     "runner-identity.json",
+    "scheduler-observation-proof.json",
     "state-after.json",
     "window-end-checkpoint.json"
   ]
