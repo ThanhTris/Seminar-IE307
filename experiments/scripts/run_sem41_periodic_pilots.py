@@ -133,11 +133,14 @@ class PilotBatch:
             raise RuntimeError("RUN_CONFIGURATION_FIELDS_UNAVAILABLE")
         for node, value in zip(fields, [run, "emulator-main"]):
             self.tap(node)
-            self.shell("input", "keycombination", "KEYCODE_CTRL_LEFT", "KEYCODE_A")
-            self.shell("input", "keyevent", "KEYCODE_DEL")
+            self.shell("input", "keyevent", "KEYCODE_MOVE_END")
+            self.shell("input", "keyevent", "--delay", "0", *(["KEYCODE_DEL"] * 140))
             self.shell("input", "text", value)
             self.shell("input", "keyevent", "KEYCODE_BACK")
         ui = self.ui("filled-configure")
+        filled = [node.get("text") for node in ui.iter("node") if node.get("class") == "android.widget.EditText"]
+        if filled != [run, "emulator-main"]:
+            raise RuntimeError("RUN_CONFIGURATION_TEXT_NOT_CONFIRMED")
         buttons = [node for node in ui.iter("node") if node.get("text") == mode
                    and int(re.findall(r"\d+", node.get("bounds"))[1]) > 900]
         if len(buttons) != 1:
