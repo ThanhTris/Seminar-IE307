@@ -41,7 +41,7 @@ Sau control development lúc 03:00 UTC, emulator giữ APK development của rev
 ## Phần cần nhận để chạy main
 
 1. **Chốt artifact/gate trước main.** SEM-37 đã Done/merge về source, nhưng release manifest vẫn NOT_READY/gate false, chưa freeze APK/checksum/profile. Follow-up `1f79ee9` đã sửa assertion theo review PR #28, kiểm thực tế trên máy Vinh đạt 32/32 unit tests. Hash của kiểm development này là artifact đầu vào để đối chiếu, không tự thay thế freeze của SEM-37.
-2. **Pilot theo từng loại ca** trên revision/profile sẽ đo. Hiện có 2/8 slot được qualify lại bằng collector đã sửa; E01 đã đạt 5 cycle tự nhiên/90phút. Ca PUSH/profile Firebase chưa kiểm; requalify ca bị ảnh hưởng nếu candidate cuối đổi code/config.
+2. **Pilot theo từng loại ca** trên revision/profile sẽ đo. Hiện có 3/8 slot được qualify lại bằng collector đã sửa; E01 đã đạt 5 cycle tự nhiên/90phút. Ca PUSH/profile Firebase chưa kiểm; requalify ca bị ảnh hưởng nếu candidate cuối đổi code/config.
 3. **Firebase** cho 19 slot PUSH thuộc E02/E03/E04/E05, gồm google-services.json, credential project, token emulator hiện hành. Tám slot PERIODIC/HYBRID skip vẫn cần candidate/pilot đúng ca.
 4. **E05 race** cần hook/barrier và bằng chứng worker đang chạy khi tín hiệu mới tới. Đặt INJECTED cho nhóm đó và nhận test logic SEM-38/39. B1 còn thiếu thì giữ các slot push/race NOT_RUN.
 5. **Export v2** được kiểm lại theo revision cuối, ghi raw/omission nếu có, giữ các event ngoài window. Main valid yêu cầu đúng candidate và metadata, các run sai điều kiện/timeout vẫn được giữ riêng theo kết quả thật.
@@ -70,12 +70,13 @@ Observer commit **`db98fa8d275c3ca2d10895daa61f00bf53f59cd7`** bỏ mọi `dumps
 
 [Đối chứng collector](COLLECTOR_COMPARISON.json): ở phút20 của E01 mới đã có 1 cycle tự chạy/apply target16, xảy ra trước lần copyRoom; không directdispatch/instrumentation/jobdump. Đây là capture giữa phiên, không thay cho window90phút.
 
-Đã có **2/8 slot hợp lệ** trong batch r6; còn 6 slot. Trạng thái: `RUNNING`. Toàn bộ 8 cửa sổ là 346 phút, không tính setup/cleanup. Main vẫn 27 slot NOT_RUN.
+Đã có **3/8 slot hợp lệ** trong batch r6; còn 5 slot. Trạng thái: `RUNNING`. Toàn bộ 8 cửa sổ là 346 phút, không tính setup/cleanup. Main vẫn 27 slot NOT_RUN.
 
 | Slot hợp lệ mới | Window UTC+7; duration | Cache trước→sau; target | Cycle mới | Outcome |
 |---|---|---|---:|---|
 | [E01:1](../../../experiments/pilots/run-sem41-pilot-e01-1-20261115-575a7a/manifest.json) | 15/11 20:03:29–15/11 21:33:30; 5,400,720 ms | 15→16; V=16 | 5 | SUCCESS |
 | [E03:1](../../../experiments/pilots/run-sem41-pilot-e03-1-20261115-dc9cc9/manifest.json) | 15/11 21:33:43–15/11 22:08:47; 2,103,830 ms | 16→17; V=17 | 1 | SUCCESS |
+| [E03:2](../../../experiments/pilots/run-sem41-pilot-e03-2-20261115-7f63e0/manifest.json) | 15/11 22:09:04–15/11 22:44:07; 2,103,090 ms | 17→18; V=18 | 1 | SUCCESS |
 
 Không có snapshot_applied target sau window trong các slot mới đã đóng; event setup/post-window vẫn được giữ và tách khỏi cycle nền.
 
