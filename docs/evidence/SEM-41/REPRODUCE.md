@@ -98,6 +98,35 @@ python3 experiments/scripts/export_sem41_pilots.py \
 
 Artifacts pilot nằm trong `experiments/pilots/<run_id>/`, riêng với tập main. Đọc `audit.json` và mọi reason code trước dùng kết quả. Manifest có boot alias của collector, dẫn xuất từ hash kernel boot ID trong baseline private; observer kiểm cùng boot tại từng checkpoint. Nhờ đó duration giữa hai mốc `/proc/uptime` của collector có cùng boot đã xác minh. Helper không bổ sung boot session ID vào event: các event vẫn giữ null, không tính event latency từ các trường đó. Clock controlled=false giữ nguyên, không tính latency liên máy. E03 force-idle và E06 deliberate skip mang nhãn INJECTED. Thời gian idle là điều kiện điều khiển, không đại diện Doze tự nhiên.
 
+## Chẩn đoán job đã đến hạn nhưng chưa chạy
+
+Chỉ dùng ngoài tập main, trên debug APK/API 36 trở lên. [Probe](../../../experiments/scripts/probe_sem41_jobs.py) chạy DEX framework dưới `run-as`, đọc `getPendingJobReasons`, history và stats (API 37). Không dùng instrumentation để lấy lý do vì instrumentation khởi động lại app, có thể reconcile/start work trước khi đọc. Bootstrap `ActivityThread.systemMain` là hidden API, đã kiểm trên image này; image từ chối thì giữ lỗi probe, không fallback mở app trong window. Không bật root hoặc đổi policy hệ thống.
+
+Từ root repo, build vào storage local và deploy trước phép chẩn đoán. Không đổi app/test APK. DEX chỉ được nạp read-only; output giới hạn package/namespace/field, không xuất dump hoặc định danh thiết bị.
+
+```sh
+python3 experiments/scripts/probe_sem41_jobs.py build \
+  --sdk "$HOME/Library/Android/sdk" --output /private/tmp/sem41-job-probe-new
+python3 experiments/scripts/probe_sem41_jobs.py deploy \
+  --adb "$HOME/Library/Android/sdk/platform-tools/adb" \
+  --device-map .local/sem41/device-map.json \
+  --dex /private/tmp/sem41-job-probe-new/dex/classes.dex
+```
+
+Đưa cache về đúng snapshot của retained store bằng control MANUAL ngoài window và drain work trước khi bắt đầu. [Diagnostic runner](../../../experiments/scripts/run_sem41_dispatch_diagnostic.py) dùng lại guard baseline/hash/OS của pilot runner, hard-code `development/CONTROL/INJECTED`. Nó quan sát 20 phút, query mỗi phút và ghi checkpoint OS mỗi 5 phút. Đây **không phải E01 90 phút** và không cộng vào 8 slot pilot hoặc main. Ví dụ output mới:
+
+```sh
+caffeinate -i python3 experiments/scripts/run_sem41_dispatch_diagnostic.py \
+  --adb "$HOME/Library/Android/sdk/platform-tools/adb" \
+  --device-map .local/sem41/device-map.json \
+  --store-dir .local/sem41/pilots-20261115-r3/store \
+  --dex /private/tmp/sem41-job-probe-new/dex/classes.dex \
+  --private-output .local/sem41/dispatch-diagnostic-new \
+  --permit-direct-dispatch
+```
+
+`--permit-direct-dispatch` chỉ cho phép **một** lệnh `jobscheduler run --satisfied` sau 20 phút nếu target chưa applied, đúng namespace/job/work ID, và không có query race. Không bypass constraint bằng `--force`, không retry. Tách rõ event trước/sau mốc direct dispatch; thành công sau thao tác này chỉ kiểm đường dispatch/worker/core, không phải cycle tự nhiên hoặc latency E01. Hủy/export bằng instrumentation sau khi đóng clock; giữ mọi lỗi và event muộn. Khi xong dùng action `remove` của probe với đúng mapping/DEX để gỡ file đã deploy.
+
 ## Đóng run và export
 
 Lưu raw client/server và snapshot state trước reset. Đóng nhận trigger, cancel/drain đúng work, kiểm idle/network/pin/stopped và trả baseline. Khi drain chưa đạt, giữ thiết bị được khóa. Ghi cleanup theo evidence OS/WorkInfo. Các mapping reverse/rule chỉ được gỡ nếu do phiên tạo.
