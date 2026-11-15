@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "samples": [
+    {
+      "utc": "2026-11-15T14:58:46.012Z",
+      "deep_idle": "IDLE"
+    },
+    {
+      "utc": "2026-11-15T14:58:46.536Z",
+      "deep_idle": "ACTIVE"
+    }
+  ]
+}

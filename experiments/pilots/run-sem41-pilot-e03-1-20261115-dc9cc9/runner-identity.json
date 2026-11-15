@@ -1,0 +1,19 @@
+{
+  "observer_commit": "db98fa8d275c3ca2d10895daa61f00bf53f59cd7",
+  "observer_source_sha256": "50e4a979a7f34b2ff779247771b8d4718b6e321cbd3a2f92c9ec144c7b8b77a1",
+  "support_sources_sha256": {
+    "sem41_baseline.py": "7eb953585bf2cc11532f44e10960d37f9a05ad51e0dc58480a9ac4ba1967bc24"
+  },
+  "phase": "pilot",
+  "candidate_gate_passed": false,
+  "case_sequence": [
+    "E01:1",
+    "E03:1",
+    "E03:2",
+    "E04:1",
+    "E04:2",
+    "E04:3",
+    "E06:1",
+    "E06:2"
+  ]
+}
