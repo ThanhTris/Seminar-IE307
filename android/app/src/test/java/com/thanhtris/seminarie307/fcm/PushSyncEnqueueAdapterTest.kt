@@ -216,10 +216,11 @@ class PushSyncEnqueueAdapterTest {
         val enqueued = result as PushProcessingResult.Enqueued
         assertTrue(enqueued.requestId.startsWith("req-"))
 
-        val event = fakeTimelineDao.events[0]
-        assertEquals(enqueued.requestId, event.requestId)
+        val receivedEvent = fakeTimelineDao.events.single()
+        assertEquals("push_received", receivedEvent.eventType)
+        assertEquals(null, receivedEvent.requestId)
 
-        val input = enqueuedInputs[0]
+        val input = enqueuedInputs.single()
         assertEquals(enqueued.requestId, input.correlation.requestId)
     }
 

@@ -16,8 +16,8 @@
 | SEM-36 integration/pilot | Todo; mode code/docs and strict schema-v2 serializer prepared; E05/E06 pilots and runtime export Not run |
 | SEM-33 token lifecycle | Done on live board |
 | SEM-38 push policy | Done on live board |
-| Android candidate build | Not run on source `9e7e55b76c646ff113a152022cc23317a202e533`; Gradle found `D:\Android\Sdk` but stopped before compilation because licenses for platform 37 and Build Tools 36.0.0 are not accepted |
+| Android candidate build | Repo owner reports `assembleDebug` and `assembleDebugAndroidTest` passed on review head `051f6b0`; unit tests were 31/32 with one stale assertion, now corrected in a follow-up. Current workstation cannot rerun because platform 37 / Build Tools 36 licenses are not accepted |
 | APK and SHA-256 | Not available; no candidate artifact |
 | Main-run manifest | Not created; no measurements are being represented as real |
 
-The manifest pins app source `9e7e55b76c646ff113a152022cc23317a202e533` and server source `c77772e426c00ae464240f00942f8368c638aaa8`, but is explicitly `NOT_READY` with no APK path/hash. Do not distribute it as a candidate. Populate the fields only after an exact-revision build and required run evidence are available.
+The manifest pins app source `9e7e55b76c646ff113a152022cc23317a202e533` and server source `c77772e426c00ae464240f00942f8368c638aaa8`, but is explicitly `NOT_READY`: no APK/checksum was handed off, the latest unit-test assertion fix has not been rerun, and required run evidence is absent. Do not distribute it as a candidate.

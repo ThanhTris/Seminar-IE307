@@ -25,7 +25,7 @@ cd ..
 Get-FileHash -Algorithm SHA256 android\app\build\outputs\apk\debug\app-debug.apk
 ```
 
-Record build output, app commit, server commit, package/version, SDK levels, dependency lock state, and APK SHA-256 in `release/BUILD_MANIFEST.json`. Install only that APK. For SEM-34 instrumentation, install the matching `app-debug-androidTest.apk` as well. On the current workspace, this build has **not run** because the Android platform/build-tools packages and accepted SDK licenses are unavailable.
+Record build output, app commit, server commit, package/version, SDK levels, dependency lock state, and APK SHA-256 in `release/BUILD_MANIFEST.json`. Install only that APK. For SEM-34 instrumentation, install the matching `app-debug-androidTest.apk` as well. The repo owner reports both assemble tasks passed on review head `051f6b0`; the current workstation cannot rerun them because SDK licenses are not accepted, no APK/checksum was handed off, and the final test assertion fix still needs verification.
 
 ## 3. Start the snapshot server
 
