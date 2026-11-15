@@ -90,6 +90,8 @@ def review(folder):
     if record["case_id"] == "E04":
         offline, online = record.get("offline_elapsed_realtime_ms"), record.get("reconnect_elapsed_realtime_ms")
         checks["offline_and_reconnect_windows"] = all(value is not None for value in (offline, online, end)) and online - offline >= 120000 and end - online >= 1800000
+        proof = load(folder / "offline-proof.json") if (folder / "offline-proof.json").exists() else {}
+        checks["guest_offline_evidence"] = proof.get("default_network_absent") is True and proof.get("guest_server_http_reachable") is False and proof.get("same_boot_as_batch") is True and offline is not None and online is not None and offline <= proof.get("elapsed_realtime_ms", -1) < online
     if record["case_id"] == "E06":
         skips = [event for event in lines(folder / "skip-events.jsonl") if event["run_id"] == record["run_id"]]
         checks["deliberate_skip"] = record.get("skip_confirmed") is True and len(skips) == 1 and skips[0]["event_type"] == "push_send_skipped" and skips[0]["reason"] == "FAULT_INJECTION_SKIP" and skips[0]["message_id"] is None and skips[0]["send_attempt_id"] is None
@@ -124,8 +126,9 @@ def export_one(folder, output, deny_path):
     clean = audit["checks"]["cleanup"]
     manifest["cleanup"].update(status="PASS" if clean else "FAIL", work_drained=clean, idle_restored=clean, network_restored=clean, package_stopped_cleared=clean)
     extras = {"android-events-raw.jsonl": (folder / "export-v2-events-legacy.jsonl").read_text(), "canonical-export-report.json": (folder / "events-v2-export-report.json").read_text(), "state-after.json": (folder / "export-v2-state.json").read_text(), "observation.json": (folder / "observation.json").read_text(), "runner-identity.json": (folder.parent / "runner-identity.json").read_text()}
-    if (folder / "offline-proof.json").exists():
-        extras["offline-proof.json"] = (folder / "offline-proof.json").read_text()
+    for name in ("offline-proof.json", "setup-diagnostic.json"):
+        if (folder / name).exists():
+            extras[name] = (folder / name).read_text()
     extras["audit.json"] = json.dumps(audit, indent=2) + "\n"
     for path in sorted(folder.glob("*-checkpoint.json")):
         extras[path.name] = path.read_text()
