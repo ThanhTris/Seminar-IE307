@@ -57,7 +57,7 @@ Status nguồn được đối chiếu Project lúc **2026-11-15 02:50:58 UTC**;
 - Build app/test APK được trên máy Vinh. Đã kiểm installed APK hash, migration Room 1→2 giữ nguyên 30 event cũ và kiểm manual → cache → export canonical bằng một control development.
 - [Ma trận](../../experiments/plans/SEM-41/EMULATOR_PLAN.json) gồm 27 slot PLANNED/NOT_RUN, 582 phút quan sát. Phase main chờ candidate freeze và pilot đúng revision, các ca PUSH còn thiếu Firebase.
 - [CHECKS](../../docs/evidence/SEM-41/CHECKS.md), [PREFLIGHT](../../docs/evidence/SEM-41/PREFLIGHT.json), [quy trình thực hiện](../../docs/evidence/SEM-41/REPRODUCE.md), [control development](../../experiments/development/run-sem41-v2-smoke-20261115/manifest.json).
-- Đang chạy batch pilot không cần Firebase. E01 đã đóng đủ 90 phút, VALID/TIMEOUT, 0 cycle nền mới, cache 4→4 trong khi target 5; giữ setup lỗi trước đó dưới INVALID/ABORTED. [Kết quả pilot](../../docs/evidence/SEM-41/PILOT_RESULTS.json) và CHECKS ghi rõ. E03 tiếp tục; phase main chưa chạy, cần chẩn đoán scheduler/requalify candidate trước main.
+- Đang chạy batch pilot không cần Firebase. E01 đã đóng đủ 90 phút, VALID/TIMEOUT, 0 cycle nền mới, cache 4→4 trong khi target 5. E03 lượt 1 VALID/SUCCESS, applied target 6 sau thoát idle; lượt 2 ABORTED/INVALID do kiểm thoát idle quá sớm, đã cleanup và đang chạy run thay thế sau sửa bounded wait. Giữ cả setup lỗi và lượt bị dừng. [Kết quả pilot](../../docs/evidence/SEM-41/PILOT_RESULTS.json) và CHECKS ghi rõ; 45 tests công cụ đạt. Phase main chưa chạy, cần chẩn đoán scheduler/requalify candidate trước main.
 
 ## Task được mở khóa
 

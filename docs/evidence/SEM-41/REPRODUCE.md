@@ -81,7 +81,11 @@ caffeinate -i python3 experiments/scripts/run_sem41_periodic_pilots.py \
 
 Theo dõi `status.json`, `heartbeat.json` và `observation.json` trong private output. Nếu không chứng minh được guest offline, runner giữ lượt E04 aborted, khôi phục mạng, ghi blocker và bỏ qua những lượt E04 còn lại. Lỗi khác dừng batch sau cleanup. Giữ cả lần setup sai hoặc bị gián đoạn và dùng run ID mới khi thử lại. Trên Android 17 dùng `cmd wifi set-wifi-enabled`, `cmd phone data`, `cmd connectivity airplane-mode`; không dựa vào lệnh `svc` không có trên image này.
 
-Ghi `runner-identity.json` ở batch root với full observer commit và SHA-256 của file runner tại lúc khởi động, phase pilot và candidate gate false. Sau mỗi lượt FINISHED, [review/export helper](../../../experiments/scripts/export_sem41_pilots.py) đối chiếu raw/canonical/omitted IDs, window, source, work/fetch provenance, checkpoint và cleanup; tái xuất hai lần để so từng byte. Helper chỉ hỗ trợ build/config trong control SEM-41 đã kiểm và từ chối run còn chạy. Ví dụ:
+Runner hiện tự ghi `runner-identity.json` ở batch root với full observer commit và SHA-256 source tại lúc khởi động, phase pilot và candidate gate false. Source runner phải được commit. Runner kiểm hash cả app/test APK, đối chiếu source server với commit ghim rồi build server trước setup. Trong batch giữ nguyên code/app/server, dùng private output mới. E04 tự lưu `offline-proof.json`; restore-idle chờ ACTIVE tối đa 10 giây và giữ các mẫu trong `*-transition.json`.
+
+Sau khi một batch lỗi đã cleanup đạt, có thể chọn những lượt còn lại bằng `--runs E03:2 E04:1 E04:2 E04:3 E06:1 E06:2` trên lệnh khởi động mới. Mỗi lượt vẫn có run ID mới và đủ toàn bộ window. Giữ run lỗi dưới INVALID và ghi quan hệ thay thế; không nối phần thời gian còn thiếu vào run cũ.
+
+Sau mỗi lượt FINISHED, [review/export helper](../../../experiments/scripts/export_sem41_pilots.py) đối chiếu raw/canonical/omitted IDs, window, source, work/fetch provenance, checkpoint và cleanup; tái xuất hai lần để so từng byte của ba file canonical. Helper chỉ hỗ trợ build/config trong control SEM-41 đã kiểm và từ chối run còn chạy. Ví dụ:
 
 ```sh
 python3 experiments/scripts/export_sem41_pilots.py \
