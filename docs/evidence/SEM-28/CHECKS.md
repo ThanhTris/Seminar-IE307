@@ -42,7 +42,7 @@
 | **Offline Persistence (Không Auto-fetch)** | Tắt app, ngắt mạng và mở lại: hiển thị từ SQLite, không phát sinh HTTP request. | `MainActivity` chỉ thu thập Room Flow, không có logic fetch khi khởi chạy lạnh (Cold start). | **Pass** |
 | **Log Exporter Tool Test** | Bộ trích xuất log thực nghiệm hoạt động chuẩn xác theo schema SEM-24. | `python experiments/scripts/tests/test_export_logs.py`: 36/36 tests pass. | **Pass** |
 | **Chỉ mục SETUP & ENVIRONMENT** | Tổng hợp đầy đủ từ 3 hồ sơ môi trường và 2 hướng dẫn thiết lập. | Đã tạo và đối chiếu hoàn chỉnh `docs/SETUP.md` và `docs/ENVIRONMENT.md`. | **Pass** |
-| **Thiết bị thật OPPO A3s (SEM-12)** | Kiểm tra trên thiết bị phần cứng thật. | Rào cản ủy quyền ColorOS USB chống brick; ghi nhận trung thực theo hồ sơ SEM-12. | **Not run / Blocker** |
+| **Thiết bị thật OPPO Find X9 (SEM-12)** | Kiểm tra trên thiết bị phần cứng thật. | Rào cản ủy quyền ColorOS USB chống brick; ghi nhận trung thực theo hồ sơ SEM-12. | **Not run / Blocker** |
 
 ---
 

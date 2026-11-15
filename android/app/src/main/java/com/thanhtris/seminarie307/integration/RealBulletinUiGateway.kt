@@ -2,7 +2,6 @@ package com.thanhtris.seminarie307.integration
 
 import android.content.Context
 import com.thanhtris.seminarie307.data.local.AppDatabase
-import com.thanhtris.seminarie307.data.local.SyncMetadataEntity
 import com.thanhtris.seminarie307.sync.SyncInput
 import com.thanhtris.seminarie307.sync.SyncWorkEnqueuer
 import kotlinx.coroutines.flow.Flow
@@ -19,25 +18,34 @@ class RealBulletinUiGateway(
     private val timelineDao = database.timelineDao()
     private val metadataDao = database.metadataDao()
 
-    override val state: Flow<BulletinUiState> = combine(
+    private val baseState: Flow<BulletinUiState> = combine(
         bulletinDao.observeAll(),
         timelineDao.observeAll(),
         metadataDao.observeValue("cachedVersion"),
         metadataDao.observeValue("lastSyncAtUtc"),
-        metadataDao.observeValue("mode"),
+        metadataDao.observeValue(SyncModeController.KEY_MODE),
     ) { items, events, cachedVersionStr, lastSyncAtUtc, modeStr ->
         val version = cachedVersionStr?.toLongOrNull() ?: items.firstOrNull()?.version
-        val mode = modeStr?.let { runCatching { SyncMode.valueOf(it) }.getOrNull() } ?: SyncMode.HYBRID
-        val activeRun = "run-manual-live"
+        val mode = modeStr?.let { runCatching { SyncMode.valueOf(it) }.getOrNull() }
 
         BulletinUiState(
             cachedVersion = version,
             mode = mode,
-            activeRunId = activeRun,
             lastSyncAtUtc = lastSyncAtUtc,
             snapshot = items.map { it.toBulletinItem() },
             timeline = events.map { it.toTimelineEvent() },
             manualAvailable = true,
+        )
+    }
+
+    override val state: Flow<BulletinUiState> = combine(
+        baseState,
+        metadataDao.observeValue(SyncModeController.KEY_ACTIVE_RUN_ID),
+        metadataDao.observeValue(SyncModeController.KEY_DEVICE_ALIAS),
+    ) { current, activeRunId, deviceAlias ->
+        current.copy(
+            activeRunId = activeRunId?.takeIf(String::isNotBlank),
+            deviceAlias = deviceAlias?.takeIf(String::isNotBlank),
         )
     }
 
@@ -49,6 +57,7 @@ class RealBulletinUiGateway(
                     source = SyncSource.MANUAL,
                     mode = context.mode,
                     runId = context.runId,
+                    deviceAlias = context.deviceAlias,
                     correlation = CorrelationUi(requestId = requestId),
                 )
             )
@@ -62,7 +71,7 @@ class RealBulletinUiGateway(
         }
     }
 
-    suspend fun setMode(mode: SyncMode) {
-        metadataDao.setValue(SyncMetadataEntity("mode", mode.name))
+    override suspend fun configureMode(mode: SyncMode, runId: String, deviceAlias: String) {
+        SyncModeController(context, database).configure(mode, runId, deviceAlias)
     }
 }

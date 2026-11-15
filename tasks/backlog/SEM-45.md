@@ -1,8 +1,9 @@
 # SEM-45 — Viết parser log và sinh results.csv
 
-- Trạng thái: **Todo** (Project).
-- Trạng thái đầu vào: **Sẵn sàng**.
-- Đối chiếu Project: 2026-11-09 08:05:03 UTC.
+- Trạng thái: **In Progress** (Project).
+- Trạng thái đầu vào: **Đang thực hiện**.
+- Còn chờ: Nên nhận: [SEM-41](SEM-41.md), [SEM-42](SEM-42.md).
+- Đối chiếu Project: 2026-11-15 12:27:57 UTC.
 - Người thực hiện duy nhất: **Tuấn** (`mtuan2491`).
 - Hạn: **07/11/2026 17:00 (UTC+7)**.
 - Công sức: 2/100 — Cơ chế/thực hành.
@@ -15,7 +16,7 @@
 - **Bắt đầu sau:** [SEM-24](SEM-24.md), [SEM-26](SEM-26.md)
 - **Hoàn tất còn cần:** [SEM-41](SEM-41.md), [SEM-42](SEM-42.md)
 
-Không có gate bắt đầu nghĩa là có thể chuẩn bị ngay. Gate hoàn tất chỉ chặn bàn giao cuối; bản nháp/fixture phải ghi đúng nhãn, không được gọi là kết quả chạy thật.
+Không có gate bắt đầu nghĩa là làm được ngay. Mục Hoàn tất còn cần là đầu vào nên dùng nếu đã có, không chặn chuyển Done: owner chuyển Done khi đầu ra và CHECKS của chính task có thật; đầu vào chưa có thì ghi Not run/giới hạn trong CHECKS. Bản nháp/fixture phải ghi đúng nhãn, không được gọi là kết quả chạy thật.
 
 <!-- task-inputs:start -->
 ## Đầu vào cần nhận
@@ -31,7 +32,7 @@ Tài liệu nền đã có: [Kế hoạch/phạm vi](../../docs/PLAN.md) · [Pro
 
 Đây là danh sách đầu ra cần bàn giao, chưa phải xác nhận các file đã tồn tại. Trước khi dùng, nhận đúng artifact/commit/config và CHECKS từ task nguồn.
 
-Status nguồn được đối chiếu Project lúc **2026-11-09 08:05:03 UTC**; mở link task nguồn để xem cập nhật mới hơn.
+Status nguồn được đối chiếu Project lúc **2026-11-15 12:27:57 UTC**; mở link task nguồn để xem cập nhật mới hơn.
 <!-- task-inputs:end -->
 
 
@@ -64,8 +65,8 @@ Nhánh `codex/SEM-45-log-parser`, từ main `d29532a`, ngày 08/11/2026. Tiến 
 
 ## Task được mở khóa
 
-- [SEM-43](SEM-43.md) cần đầu ra này để **bắt đầu**.
-- [SEM-44](SEM-44.md) cần đầu ra này để **bắt đầu**.
+- [SEM-43](SEM-43.md) cần đầu ra này để **hoàn tất**.
+- [SEM-44](SEM-44.md) cần đầu ra này để **hoàn tất**.
 - [SEM-48](SEM-48.md) cần đầu ra này để **hoàn tất**.
 - [SEM-50](SEM-50.md) cần đầu ra này để **hoàn tất**.
 

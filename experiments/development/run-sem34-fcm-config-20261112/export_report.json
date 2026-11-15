@@ -1,0 +1,21 @@
+{
+  "exporter_version": "1.0.0",
+  "data_kind": "OBSERVED",
+  "run_id": "run-sem34-fcm-config-20261112",
+  "device_alias": "emulator-main",
+  "manifest_input_sha256": "c441be02cd69a22f4f4806b601d3847a4754dd47076b25db3233015c24c93fa9",
+  "sources": [
+    {
+      "origin": "SERVER",
+      "sha256": "d0fd0fcf9215d41220883bc35fde9d1f608e98fa4b74397585a750cad15654b2",
+      "lines": 2,
+      "selected": 2,
+      "other_run_or_device": 0,
+      "duplicates": 0,
+      "extra_fields_omitted": 0
+    }
+  ],
+  "events_exported": 2,
+  "ordering": "INPUT_ORDER_NOT_CAUSAL",
+  "analysis_performed": false
+}

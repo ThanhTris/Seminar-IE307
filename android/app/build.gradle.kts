@@ -4,6 +4,12 @@ plugins {
     alias(libs.plugins.ksp)
 }
 
+// SEM-33: apply Google Services only when a local, git-ignored google-services.json exists, so
+// clones without Firebase credentials still build and the app reports FIREBASE_NOT_CONFIGURED.
+if (file("google-services.json").exists()) {
+    apply(plugin = "com.google.gms.google-services")
+}
+
 android {
     namespace = "com.thanhtris.seminarie307"
     compileSdk = 37

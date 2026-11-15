@@ -20,6 +20,7 @@ PROJECT = 'PVT_kwHOCnL5Fs4BpUDU'
 BOARD = 'https://github.com/users/ThanhTris/projects/3/views/1'
 REPO = 'https://github.com/ThanhTris/Seminar-IE307/blob/main/'
 INPUT_FIELD = 'Input status'
+WAITING_FIELD = 'Còn chờ'
 DEADLINE_FIELD = 'Deadline (UTC+7)'
 READINESS_SPECS = (
     ('Sẵn sàng', 'GREEN', 'Cột Todo: Đủ đầu vào ở gate bắt đầu; có thể bắt tay thực hiện ngay.'),
@@ -155,6 +156,46 @@ def sync_project_field_options(field_id, existing_options):
     return {o['name']: o['id'] for o in res['updateProjectV2Field']['projectV2Field']['options']}
 
 
+def waiting_on(task, statuses):
+    """Unfinished prerequisites of an open task: (start gate, finish gate)."""
+    if statuses.get(task['id']) == 'Done':
+        return [], []
+    return ([d for d in task['start_dependencies'] if statuses[d] != 'Done'],
+            [d for d in task['finish_dependencies'] if statuses[d] != 'Done'])
+
+
+def waiting_text(task, statuses, prefix=None):
+    start, finish = waiting_on(task, statuses)
+    fmt = (lambda i: f'[{i}]({prefix}{i}.md)') if prefix is not None else (lambda i: i)
+    parts = []
+    if start:
+        parts.append('Bắt đầu: ' + ', '.join(map(fmt, start)))
+    if finish:
+        parts.append('Nên nhận: ' + ', '.join(map(fmt, finish)))
+    return '; '.join(parts) or 'Không'
+
+
+def report(catalog, statuses):
+    """Per-owner summary: what can start now and which unfinished task each gate waits on."""
+    by = {t['id']: t for t in catalog['tasks']}
+
+    def who(ids):
+        return ', '.join(f"{i} ({by[i]['owner']}, {statuses[i]})" for i in ids)
+
+    lines = []
+    for name in catalog['members']:
+        mine = [t for t in catalog['tasks'] if t['owner'] == name and statuses[t['id']] != 'Done']
+        lines.append(f'## {name}')
+        if not mine:
+            lines.append('  Không còn task mở.')
+        for t in mine:
+            start, finish = waiting_on(t, statuses)
+            head = 'BỊ CHẶN bởi ' + who(start) if start else 'LÀM ĐƯỢC NGAY'
+            tail = f' | Nên nhận (không chặn Done): {who(finish)}' if finish else ''
+            lines.append(f"  {t['id']} [{statuses[t['id']]}] {head}{tail} — {t['title']}")
+    return chr(10).join(lines)
+
+
 def input_status(task, statuses):
     st = statuses.get(task['id'])
     if st == 'Done':
@@ -205,6 +246,8 @@ def update_docs(catalog, by, statuses, stamp):
     for t in catalog['tasks']:
         t['status'] = statuses[t['id']]
         t['input_status'] = input_status(t, statuses)
+        start_wait, finish_wait = waiting_on(t, statuses)
+        t['waiting_on'] = {'start': start_wait, 'finish': finish_wait}
         t['inputs'] = [{'source_task': dep, 'required_for': phase,
                         'producer': by[dep]['owner'], 'artifacts': by[dep]['outputs'],
                         'checks': f'docs/evidence/{dep}/CHECKS.md', 'source_status': statuses[dep]}
@@ -214,9 +257,9 @@ def update_docs(catalog, by, statuses, stamp):
         body = p.read_text(encoding='utf-8')
         body = re.sub(r'(?m)^- Trạng thái:.*$', f"- Trạng thái: **{t['status']}** (Project).", body)
         body = re.sub(r'(?m)^- Hạn:.*$', f"- Hạn: **{format_deadline(t)}**.", body)
-        body = re.sub(r'(?m)^- (Trạng thái đầu vào|Đối chiếu Project):.*\n', '', body)
+        body = re.sub(r'(?m)^- (Trạng thái đầu vào|Còn chờ|Đối chiếu Project):.*\n', '', body)
         body = body.replace(f"- Trạng thái: **{t['status']}** (Project).\n",
-                            f"- Trạng thái: **{t['status']}** (Project).\n- Trạng thái đầu vào: **{t['input_status']}**.\n- Đối chiếu Project: {stamp}.\n", 1)
+                            f"- Trạng thái: **{t['status']}** (Project).\n- Trạng thái đầu vào: **{t['input_status']}**.\n- Còn chờ: {waiting_text(t, statuses, '')}.\n- Đối chiếu Project: {stamp}.\n", 1)
         body = re.sub(r'(?s)<!-- task-inputs:start -->.*?<!-- task-inputs:end -->\s*', '', body)
         at = body.index('\n## Việc ')
         body = body[:at] + '\n' + input_section(t, by, statuses, stamp) + body[at:]
@@ -256,14 +299,16 @@ Snapshot **{stamp}**. Status là tiến độ thực hiện; Input status là tr
 - Sẵn sàng: task ở cột Todo có toàn bộ đầu vào ở gate bắt đầu đã xong; có thể bắt tay thực hiện ngay.
 - Chờ đầu vào: task ở cột Todo còn task tiên quyết chưa qua cột Done; cần chờ bàn giao.
 
+Cột **Còn chờ task chưa Done** (và trường `Còn chờ` trên Project) ghi đích danh task liên quan chưa Done: `Bắt đầu:` là task đang chặn việc bắt đầu, `Nên nhận:` là đầu vào nên dùng nếu đã có nhưng **không chặn Done**. Owner chuyển Done khi đầu ra và CHECKS của chính task đã có thật; đầu vào chưa có thì ghi Not run/giới hạn trong CHECKS. Xem nhanh theo người bằng `python scripts/update_task_snapshot.py --report`.
+
 Project là nguồn Status hiện hành. Sau khi đổi Status nguồn, chạy `python scripts/update_task_snapshot.py --apply` để đồng bộ Input status và tài liệu; script tự động kiểm tra mở khóa các task ở cột Todo từ Chờ đầu vào sang Sẵn sàng khi task tiên quyết qua cột Done. `--check` chỉ kiểm độ khớp. Script giữ nguyên Status/Assignees/Owner/Deadline và không tạo thẻ.
 <!-- input-snapshot:end -->
 
-| Task | Người thực hiện | Status | Input status | Hạn (UTC+7) | Công sức | Bắt đầu sau | Hoàn tất còn cần |
-|---|---|---|---|---|---:|---|---|
+| Task | Người thực hiện | Status | Input status | Còn chờ task chưa Done | Hạn (UTC+7) | Công sức | Bắt đầu sau | Hoàn tất còn cần |
+|---|---|---|---|---|---|---:|---|---|
 '''
     for t in catalog['tasks']:
-        body += f"| [{t['id']}](backlog/{t['id']}.md) — {t['title']} | {t['owner']} | {t['status']} | {t['input_status']} | {format_deadline(t)} | {t['effort']} | {refs(t['start_dependencies'], 'backlog/')} | {refs(t['finish_dependencies'], 'backlog/')} |\n"
+        body += f"| [{t['id']}](backlog/{t['id']}.md) — {t['title']} | {t['owner']} | {t['status']} | {t['input_status']} | {waiting_text(t, statuses, 'backlog/')} | {format_deadline(t)} | {t['effort']} | {refs(t['start_dependencies'], 'backlog/')} | {refs(t['finish_dependencies'], 'backlog/')} |\n"
     # Older snapshots used a different header; future runs use the same anchor.
     body = body.replace('| Task | Người thực hiện | Status |', '| Task | Người thực hiện duy nhất | Status |', 1)
     p.write_text(body, encoding='utf-8')
@@ -274,11 +319,11 @@ Project là nguồn Status hiện hành. Sau khi đổi Status nguồn, chạy `
         end = body.find('\n## ', start + 4)
         if end < 0:
             end = len(body)
-        part = f'## {name}\n\n| Task | Đầu việc duy nhất | Status | Input status | Hạn (UTC+7) | Bắt đầu sau | Hoàn tất còn cần |\n|---|---|---|---|---|---|---|\n'
+        part = f'## {name}\n\n| Task | Đầu việc duy nhất | Status | Input status | Còn chờ task chưa Done | Hạn (UTC+7) | Bắt đầu sau | Hoàn tất còn cần |\n|---|---|---|---|---|---|---|---|\n'
         for t in catalog['tasks']:
             if t['owner'] != name:
                 continue
-            part += f"| [{t['id']}](../tasks/backlog/{t['id']}.md) | {t['title']} | {t['status']} | {t['input_status']} | {format_deadline(t)} | {refs(t['start_dependencies'], '../tasks/backlog/')} | {refs(t['finish_dependencies'], '../tasks/backlog/')} |\n"
+            part += f"| [{t['id']}](../tasks/backlog/{t['id']}.md) | {t['title']} | {t['status']} | {t['input_status']} | {waiting_text(t, statuses, '../tasks/backlog/')} | {format_deadline(t)} | {refs(t['start_dependencies'], '../tasks/backlog/')} | {refs(t['finish_dependencies'], '../tasks/backlog/')} |\n"
         body = body[:start] + part + body[end:]
     body = re.sub(r'(?s)<!-- team-snapshot:start -->.*?<!-- team-snapshot:end -->\s*', '', body)
     at = body.index('## Trí\n')
@@ -318,7 +363,7 @@ def render(t, lookup):
 
 
 def generated_parts(body):
-    metadata = re.search(r'(?m)^- Trạng thái:.*\n- Trạng thái đầu vào:.*\n- Đối chiếu Project:.*\n', body)
+    metadata = re.search(r'(?m)^- Trạng thái:.*\n- Trạng thái đầu vào:.*\n- Còn chờ:.*\n- Đối chiếu Project:.*\n', body)
     inputs = re.search(r'(?s)<!-- task-inputs:start -->.*?<!-- task-inputs:end -->', body)
     deadline = re.search(r'(?m)^- Hạn:.*$', body)
     assert metadata and inputs and deadline, 'Missing generated input/status/deadline sections.'
@@ -329,7 +374,7 @@ def merge_card_snapshot(t, item, lookup):
     """Refresh generated sections while retaining owner notes and manual body edits."""
     expected_meta, expected_inputs, expected_deadline = generated_parts(render(t, lookup))
     body = item['content']['body']
-    metadata = re.compile(r'(?m)^- Trạng thái:.*(?:\n- Trạng thái đầu vào:.*)?(?:\n- Đối chiếu Project:.*)?\n')
+    metadata = re.compile(r'(?m)^- Trạng thái:.*(?:\n- Trạng thái đầu vào:.*)?(?:\n- Còn chờ:.*)?(?:\n- Đối chiếu Project:.*)?\n')
     assert metadata.search(body), (t['id'], 'Missing status block; review task description before applying.')
     body = metadata.sub(lambda _: expected_meta, body, count=1)
     assert re.search(r'(?m)^- Hạn:.*$', body), (t['id'], 'Missing deadline line')
@@ -357,6 +402,8 @@ def main():
     group = parser.add_mutually_exclusive_group()
     group.add_argument('--apply', action='store_true')
     group.add_argument('--check', action='store_true')
+    group.add_argument('--report', action='store_true',
+                       help='Chỉ đọc: in theo người task làm được ngay và task đang chờ task nào chưa Done')
     parser.add_argument('--set-status', action='append', metavar='SEM-XX=STATUS',
                         help='Chuyển cột Status cho task trước khi đồng bộ (ví dụ: --set-status SEM-32=Done)')
     args = parser.parse_args()
@@ -364,6 +411,9 @@ def main():
     snapshot = project_snapshot()
     by, lookup = audit(catalog, snapshot)
     statuses = {tid: values(item)['Status'] for tid, item in lookup.items()}
+    if args.report:
+        print(report(catalog, statuses))
+        return
     if args.set_status:
         if not args.apply:
             parser.error('--set-status requires --apply')
@@ -374,6 +424,7 @@ def main():
             target_tid, target_st = spec.split('=')
             assert target_tid in lookup, f'Unknown task {target_tid}'
             assert target_st in status_opts, f'Unknown status {target_st}'
+            statuses[target_tid] = target_st
             item_id = lookup[target_tid]['id']
             gql('mutation($input:UpdateProjectV2ItemFieldValueInput!){updateProjectV2ItemFieldValue(input:$input){projectV2Item{id}}}',
                 {'input': {'projectId': PROJECT, 'itemId': item_id, 'fieldId': status_field['id'], 'value': {'singleSelectOptionId': status_opts[target_st]}}})
@@ -398,6 +449,12 @@ def main():
                '--data-type', 'SINGLE_SELECT', '--single-select-options', ','.join(READINESS), '--format', 'json')
             fields = gh('project', 'field-list', '3', '--owner', 'ThanhTris', '--format', 'json', '--limit', '100')['fields']
             input_field = next(f for f in fields if f['name'] == INPUT_FIELD)
+        waiting_field = next((f for f in fields if f['name'] == WAITING_FIELD), None)
+        if waiting_field is None:
+            gh('project', 'field-create', '3', '--owner', 'ThanhTris', '--name', WAITING_FIELD,
+               '--data-type', 'TEXT', '--format', 'json')
+            fields = gh('project', 'field-list', '3', '--owner', 'ThanhTris', '--format', 'json', '--limit', '100')['fields']
+            waiting_field = next(f for f in fields if f['name'] == WAITING_FIELD)
         options = {o['name']: o['id'] for o in input_field['options']}
         if set(options) != set(READINESS):
             options = sync_project_field_options(input_field['id'], input_field['options'])
@@ -412,13 +469,16 @@ def main():
                      {'draftIssueId': item['content']['id'], 'body': merge_card_snapshot(t, item, lookup)}, 'draftIssue{id}'),
                     ('updateProjectV2ItemFieldValue', 'UpdateProjectV2ItemFieldValueInput',
                      {'projectId': PROJECT, 'itemId': item['id'], 'fieldId': input_field['id'],
-                      'value': {'singleSelectOptionId': options[t['input_status']]}}, 'projectV2Item{id}')
+                      'value': {'singleSelectOptionId': options[t['input_status']]}}, 'projectV2Item{id}'),
+                    ('updateProjectV2ItemFieldValue', 'UpdateProjectV2ItemFieldValueInput',
+                     {'projectId': PROJECT, 'itemId': item['id'], 'fieldId': waiting_field['id'],
+                      'value': {'text': waiting_text(t, statuses)}}, 'projectV2Item{id}')
                 ])
             batch(ops)
             print('Updated inputs: ' + ', '.join(t['id'] for t in tasks[offset:offset + 2]), flush=True)
         field_ids = {f['name']: f['id'] for f in fields}
         deadline_name = DEADLINE_FIELD if DEADLINE_FIELD in field_ids else 'Deadline'
-        visible = [field_ids[n] for n in ('Title', 'Owner', deadline_name, 'Status', 'Input status', 'Assignees', 'Depends on', 'Unblocks')]
+        visible = [field_ids[n] for n in ('Title', 'Owner', deadline_name, 'Status', 'Input status', WAITING_FIELD, 'Assignees', 'Depends on', 'Unblocks')]
         for view in snapshot['views']['nodes']:
             if view['number'] in (1, 2):
                 gql('mutation($input:UpdateProjectV2ViewInput!){updateProjectV2View(input:$input){projectV2View{id}}}',
@@ -451,6 +511,7 @@ Sau khi đổi Status nguồn, dùng `python scripts/update_task_snapshot.py --a
         expected = input_status(t, statuses)
         assert t['status'] == statuses[tid], (tid, 'Local Status stale; run --apply')
         assert t.get('input_status') == values(item).get(INPUT_FIELD) == expected, (tid, 'Input status stale; run --apply')
+        assert values(item).get(WAITING_FIELD) == waiting_text(t, statuses), (tid, 'Waiting field stale; run --apply')
         assert generated_parts(item['content']['body']) == generated_parts(render(t, lookup)), (tid, 'Input/status snapshot differs; review or refresh')
         for phase, deps in [('start', t['start_dependencies']), ('finish', t['finish_dependencies'])]:
             for dep in deps:

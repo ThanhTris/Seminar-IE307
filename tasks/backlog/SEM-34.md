@@ -1,8 +1,9 @@
 # SEM-34 — Chạy pilot push E02 và xác nhận cache nền
 
-- Trạng thái: **Todo** (Project).
-- Trạng thái đầu vào: **Sẵn sàng**.
-- Đối chiếu Project: 2026-11-09 08:05:03 UTC.
+- Trạng thái: **Done** (Project).
+- Trạng thái đầu vào: **Đã hoàn thành**.
+- Còn chờ: Không.
+- Đối chiếu Project: 2026-11-15 12:27:57 UTC.
 - Người thực hiện duy nhất: **Vinh** (`Vinh5905`).
 - Hạn: **03/11/2026 22:00 (UTC+7)**.
 - Công sức: 1/100 — Cơ chế/thực hành.
@@ -13,7 +14,7 @@
 - **Bắt đầu sau:** [SEM-16](SEM-16.md), [SEM-24](SEM-24.md), [SEM-32](SEM-32.md), [SEM-35](SEM-35.md)
 - **Hoàn tất còn cần:** [SEM-33](SEM-33.md)
 
-Không có gate bắt đầu nghĩa là có thể chuẩn bị ngay. Gate hoàn tất chỉ chặn bàn giao cuối; bản nháp/fixture phải ghi đúng nhãn, không được gọi là kết quả chạy thật.
+Không có gate bắt đầu nghĩa là làm được ngay. Mục Hoàn tất còn cần là đầu vào nên dùng nếu đã có, không chặn chuyển Done: owner chuyển Done khi đầu ra và CHECKS của chính task có thật; đầu vào chưa có thì ghi Not run/giới hạn trong CHECKS. Bản nháp/fixture phải ghi đúng nhãn, không được gọi là kết quả chạy thật.
 
 <!-- task-inputs:start -->
 ## Đầu vào cần nhận
@@ -26,11 +27,11 @@ Tài liệu nền đã có: [Kế hoạch/phạm vi](../../docs/PLAN.md) · [Pro
 | Bắt đầu | [SEM-24 — Chuẩn bị bộ xuất log và run manifest](SEM-24.md) | Vinh | `experiments/RUN_MANIFEST_TEMPLATE.json`<br>`experiments/scripts/export_logs.*`<br>`experiments/README.md` | `docs/evidence/SEM-24/CHECKS.md` | Done |
 | Bắt đầu | [SEM-32 — Triển khai callback FCM và enqueue sync](SEM-32.md) | Trang | `android/ (messaging callback và enqueue adapter)` | `docs/evidence/SEM-32/CHECKS.md` | Done |
 | Bắt đầu | [SEM-35 — Làm CLI gửi FCM data-only normal priority](SEM-35.md) | Tâm | `server/ (FCM sender CLI)`<br>`docs/setup/FCM_SENDER.md` | `docs/evidence/SEM-35/CHECKS.md` | Done |
-| Hoàn tất | [SEM-33 — Xử lý token refresh và bàn giao PUSH.md](SEM-33.md) | Trang | `android/ (token lifecycle)`<br>`docs/PUSH.md` | `docs/evidence/SEM-33/CHECKS.md` | Todo |
+| Hoàn tất | [SEM-33 — Xử lý token refresh và bàn giao PUSH.md](SEM-33.md) | Trang | `android/ (token lifecycle)`<br>`docs/PUSH.md` | `docs/evidence/SEM-33/CHECKS.md` | Done |
 
 Đây là danh sách đầu ra cần bàn giao, chưa phải xác nhận các file đã tồn tại. Trước khi dùng, nhận đúng artifact/commit/config và CHECKS từ task nguồn.
 
-Status nguồn được đối chiếu Project lúc **2026-11-09 08:05:03 UTC**; mở link task nguồn để xem cập nhật mới hơn.
+Status nguồn được đối chiếu Project lúc **2026-11-15 12:27:57 UTC**; mở link task nguồn để xem cập nhật mới hơn.
 <!-- task-inputs:end -->
 
 
@@ -52,9 +53,16 @@ Status nguồn được đối chiếu Project lúc **2026-11-09 08:05:03 UTC**;
 - [ ] Ghi điều kiện thiết bị/window/timeout thật; bản PUSH/token lifecycle đã được bàn giao.
 - [ ] Đầu ra và CHECKS có thật, link đọc được; chưa chạy phải ghi Not run, không tự chuyển Done từ kế hoạch.
 
+## Tiến độ ngày 12/11/2026
+
+- Đã nhận source mới, build app/test APK đạt, 31 unit tests Android và 22 server tests đạt. APK cài trên emulator khớp SHA-256.
+- Runtime preflight báo `FIREBASE_NOT_CONFIGURED`, token file chưa có, 0 periodic/sync work active. Người dùng xác nhận chưa có cấu hình Firebase.
+- Sender trên store riêng ghi `push_send_failed_local` với reason `INVALID_FCM_CONFIG`, chưa có SDK attempt/message ID.
+- Đã ghi 5 slot E02 dự kiến 120 giây/lượt, chờ config Firebase, credential gửi và token emulator thật. Sau review ngày 15/11, slot được chuyển sang [E02_PLAN](../../experiments/plans/SEM-34/E02_PLAN.json) mang nhãn PLANNED/NOT_RUN, run ID để null.
+- [CHECKS](../../docs/evidence/SEM-34/CHECKS.md), [PREFLIGHT](../../docs/evidence/SEM-34/PREFLIGHT.json), [quy trình tiếp tục](../../docs/evidence/SEM-34/REPRODUCE.md), [control cấu hình](../../experiments/development/run-sem34-fcm-config-20261112/manifest.json).
+
 ## Task được mở khóa
 
-- [SEM-36](SEM-36.md) cần đầu ra này để **bắt đầu**.
 - [SEM-47](SEM-47.md) cần đầu ra này để **hoàn tất**.
 
 ## Ranh giới thực hiện

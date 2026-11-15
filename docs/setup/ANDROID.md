@@ -53,4 +53,4 @@ SEM-25/28 thay binding trong `app/src/main/java/com/thanhtris/seminarie307/confi
 
 Compose Preview fixture nằm trong `app/src/debug/` và các test fixture trong source set test. App khởi chạy không dùng dữ liệu mẫu. Model UI là presentation model, chưa định nghĩa JSON hoặc schema server của SEM-26.
 
-Firebase, Room, WorkManager và KSP đã được pin trong version catalog để bàn giao tiếp theo; scaffold chưa áp dụng plugin Google Services, chưa khởi tạo Firebase và không cần `google-services.json`.
+Firebase, Room, WorkManager và KSP đã được pin trong version catalog. Từ SEM-33, plugin Google Services chỉ được áp dụng khi có `android/app/google-services.json` local (đã gitignore); nếu thiếu file, app vẫn build và ghi trạng thái token `FIREBASE_NOT_CONFIGURED`. Cách lấy token và chạy sender xem [PUSH.md](../PUSH.md).

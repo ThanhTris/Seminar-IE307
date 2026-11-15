@@ -17,7 +17,7 @@ sealed interface RemoteSnapshotResult {
         val items: List<BulletinItem>,
     ) : RemoteSnapshotResult
 
-    data object NotModified : RemoteSnapshotResult
+    data class NotModified(val statusCode: Int = 304) : RemoteSnapshotResult
 
     data class Failure(
         val statusCode: Int?,
@@ -75,7 +75,7 @@ class SnapshotRemoteDataSource(
                 if (expectedEtag == null || connection.getHeaderField("ETag") != expectedEtag) {
                     return@withContext permanentFailure("INVALID_RESPONSE", statusCode)
                 }
-                return@withContext RemoteSnapshotResult.NotModified
+                return@withContext RemoteSnapshotResult.NotModified(statusCode)
             }
 
             if (statusCode == HttpURLConnection.HTTP_OK) {

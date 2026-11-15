@@ -68,4 +68,4 @@ Repo public chỉ nhận bản dữ liệu đã loại FCM token, service-accoun
 
 ## Task một người dùng protocol
 
-SEM-16 Vinh chuẩn bị protocol; SEM-24 Vinh exporter/manifest; SEM-29 Vinh pilot periodic; SEM-34 Vinh pilot push; SEM-41 Vinh main emulator; SEM-42 Vinh main OPPO; SEM-45 Tuấn parser/CSV; SEM-44 Trung kiểm độc lập; SEM-43 Vinh chốt SUMMARY. Không có task nhiều người cùng thực hiện.
+SEM-16 Vinh chuẩn bị protocol; SEM-24 Vinh exporter/manifest; SEM-29 Vinh pilot periodic; SEM-34 Vinh pilot push; SEM-41 Vinh main emulator; SEM-42 Trí main OPPO; SEM-45 Tuấn parser/CSV; SEM-44 Tâm kiểm độc lập; SEM-43 Vinh chốt SUMMARY. Không có task nhiều người cùng thực hiện.

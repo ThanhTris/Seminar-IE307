@@ -5,6 +5,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.work.WorkManager
 import com.thanhtris.seminarie307.data.local.AppDatabase
+import com.thanhtris.seminarie307.data.local.CanonicalTimelineExporter
 import com.thanhtris.seminarie307.data.local.SyncMetadataEntity
 import com.thanhtris.seminarie307.data.remote.RemoteSnapshotResult
 import com.thanhtris.seminarie307.data.remote.SnapshotRemoteDataSource
@@ -33,7 +34,7 @@ class PeriodicPilotControl {
         assumeTrue("SEM-29 requires an explicit action", action != null)
         val runId = requireNotNull(arguments.getString("sem29_run_id"))
         require(Regex("^[A-Za-z0-9][A-Za-z0-9._-]{0,100}$").matches(runId))
-        require(action in setOf("probe", "diagnose", "register", "snapshot", "cancel"))
+        require(action in setOf("probe", "diagnose", "register", "snapshot", "cancel", "export-v2"))
 
         val context = InstrumentationRegistry.getInstrumentation().targetContext
         val database = AppDatabase.getInstance(context)
@@ -47,9 +48,9 @@ class PeriodicPilotControl {
             }
             "diagnose" -> {
                 assertTrue("Existing periodic work needs a separate handoff", activeIds(manager).isEmpty())
-                val first = scheduler.schedulePeriodicSync(SyncMode.PERIODIC, runId)
+                val first = scheduler.schedulePeriodicSync(SyncMode.PERIODIC, runId, "emulator-main")
                 assertNotNull(first)
-                val second = scheduler.schedulePeriodicSync(SyncMode.PERIODIC, runId)
+                val second = scheduler.schedulePeriodicSync(SyncMode.PERIODIC, runId, "emulator-main")
                 assertEquals(first, second)
                 assertEquals(listOf(first.toString()), activeIds(manager))
                 scheduler.cancelPeriodicSync(runId)
@@ -58,7 +59,8 @@ class PeriodicPilotControl {
             "register" -> {
                 assertTrue("An existing schedule would contaminate this run", activeIds(manager).isEmpty())
                 database.metadataDao().setValue(SyncMetadataEntity("mode", "PERIODIC"))
-                assertNotNull(scheduler.schedulePeriodicSync(SyncMode.PERIODIC, runId))
+                assertNotNull(scheduler.schedulePeriodicSync(SyncMode.PERIODIC, runId, "emulator-main"))
+                database.metadataDao().setValue(SyncMetadataEntity("deviceAlias", "emulator-main"))
                 assertEquals(1, activeIds(manager).size)
             }
             "cancel" -> {
@@ -91,6 +93,37 @@ class PeriodicPilotControl {
         File(directory, "$action-events-legacy.jsonl").writeText(
             rows.joinToString(separator = "\n", postfix = if (rows.isEmpty()) "" else "\n") { it.toString() }
         )
+        if (action == "export-v2") {
+            val events = database.timelineDao().getAllForRun(runId)
+            val canonical = mutableListOf<String>()
+            val omitted = mutableListOf<JSONObject>()
+            events.forEach { event ->
+                runCatching { CanonicalTimelineExporter.export(listOf(event)) }
+                    .onSuccess { canonical.add(it) }
+                    .onFailure { failure ->
+                        omitted += JSONObject().apply {
+                            put("event_id", event.eventId)
+                            put("event_type", event.eventType)
+                            put("reason", failure.message ?: "CANONICAL_VALIDATION_FAILED")
+                        }
+                    }
+            }
+            File(directory, "events-v2.jsonl").writeText(
+                canonical.joinToString(separator = "\n", postfix = if (canonical.isEmpty()) "" else "\n")
+            )
+            File(directory, "events-v2-export-report.json").writeText(JSONObject().apply {
+                put("schema_version", "2.0.0")
+                put("status", when {
+                    events.isEmpty() -> "EMPTY"
+                    omitted.isNotEmpty() -> "PARTIAL"
+                    else -> "COMPLETE"
+                })
+                put("exported_event_count", canonical.size)
+                put("omitted_event_count", omitted.size)
+                put("omitted_events", JSONArray(omitted))
+                put("source_format", "legacy-room-v1 plus captured schema-2 fields")
+            }.toString(2) + "\n")
+        }
         val works = JSONArray()
         manager.getWorkInfosForUniqueWork(PeriodicSyncScheduler.PERIODIC_WORK_NAME).get().forEach { work ->
             works.put(JSONObject().apply {
@@ -104,7 +137,7 @@ class PeriodicPilotControl {
             put("elapsed_realtime_ms", SystemClock.elapsedRealtime())
             put("run_id", runId)
             put("action", action)
-            put("event_format", "legacy-room-v1")
+            put("event_format", if (action == "export-v2") "canonical-2.0.0-export-attempt" else "legacy-room-v1")
             put("cached_version", database.metadataDao().getValue("cachedVersion") ?: JSONObject.NULL)
             put("mode", database.metadataDao().getValue("mode") ?: JSONObject.NULL)
             put("periodic_work", works)
