@@ -14,7 +14,7 @@
 |---|---|---|---|
 | Toolchain máy Vinh | Có SDK/license để build revision candidate | JDK 21.0.11, Gradle 9.6.0, SDK 37, Build Tools 36.0.0 và license có sẵn | Pass |
 | Assemble app/test APK | Có artifact từ source ghim | `assembleDebug` và `assembleDebugAndroidTest` tạo APK trên local | Pass — build artifact |
-| Unit tests candidate | Toàn bộ suite đạt trước freeze | 32 tests, **31 pass / 1 fail**, command exit 1. `autoGeneratesRequestIdWhenMissingInPayload` còn đòi request ID trên `push_received`, nơi contract mới giữ null | Fail — trùng review lần 2 PR #28 |
+| Unit tests tại source `9e7e55b` | Toàn bộ suite đạt trước freeze | 32 tests, **31 pass / 1 fail**, command exit 1. `autoGeneratesRequestIdWhenMissingInPayload` còn đòi request ID trên `push_received`, nơi contract mới giữ null | Fail tại revision đã kiểm ban đầu; xem follow-up bên dưới |
 | Cài đúng APK | Installed APK khớp hash file build | App SHA-256 `bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23`, hash thiết bị khớp. Test APK `6d38f794e7df9225926941394ae63db0afce9d365080ab3e69899d402992b4d8` | Pass — development |
 | Migration Room | Giữ dữ liệu v1 khi lên v2 | Schema 1→2, 30 event trước/sau, mọi cột cũ giữ đúng giá trị, cache trước/sau 3 | Pass — development |
 | Cấu hình qua UI | Nhận run ID/device alias/mode đúng thao tác | Nhập run `run-sem41-v2-smoke-20261115`, alias `emulator-main`, chọn PUSH qua giao diện. Periodic không active | Pass — development |
@@ -40,7 +40,7 @@ Sau control development lúc 03:00 UTC, emulator giữ APK development của rev
 
 ## Phần cần nhận để chạy main
 
-1. **SEM-37 của Trung** sửa assertion còn fail theo review PR #28, build/test lại revision cuối, chốt APK/checksum và gate cùng pilot liên quan. Hash của kiểm development này là artifact đầu vào để đối chiếu, không tự thay thế freeze của SEM-37.
+1. **SEM-37 của Trung** bàn giao revision cuối, build/test và chốt APK/checksum/gate cùng pilot liên quan. Follow-up `1f79ee9` đã sửa assertion theo review PR #28; cần kiểm lại suite trên source đó. Hash của kiểm development này là artifact đầu vào để đối chiếu, không tự thay thế freeze của SEM-37.
 2. **Pilot theo từng loại ca** trên revision sẽ đo. SEM-29 là kết quả lịch sử trước thay đổi mode/provenance; E03–E06 trên revision hiện tại chưa có pilot đủ evidence. Requalify ca bị ảnh hưởng trước main theo protocol.
 3. **Firebase** cho 19 slot PUSH thuộc E02/E03/E04/E05, gồm google-services.json, credential project, token emulator hiện hành. Tám slot PERIODIC/HYBRID skip vẫn cần candidate/pilot đúng ca.
 4. **E05 race** cần hook/barrier và bằng chứng worker đang chạy khi tín hiệu mới tới. Đặt INJECTED cho nhóm đó và nhận test logic SEM-38/39. B1 còn thiếu thì giữ các slot push/race NOT_RUN.
@@ -81,3 +81,7 @@ Sau batch r3 sẽ giữ nguyên store r3 để chạy E03:2 và E01:1 thay thế
 Batch r2 dùng observer commit `0808b6fe98d6eb924785d9a3d78114ddaf58c802`, SHA-256 source ghi trong từng artifact; setup lỗi dùng observer cũ `9e38c0b`. Runner giữ nguyên code đã load trong quá trình đo. Sau khi r2 đã dừng và server/idle/work cleanup đạt, commit `056e7896fdd87d71fdd753f96736ae87e06ac378` sửa restore-idle thành chờ xác nhận ACTIVE tối đa 10 giây, ghi các mẫu transition, hỗ trợ chọn những lượt còn lại và tự ghi observer identity/offline proof. Batch r3 bắt đầu 12:58 UTC+7, E03:2 thay thế đã đóng SUCCESS rồi tiếp tục E04×3/E06×2 trên cùng app/test APK, kiểm cả hai hash và build lại nguồn server ghim trước batch. Run ID thay thế là `run-sem41-pilot-e03-2-20261115-c12a28`; đây là một run 35 phút mới, không nối thêm thời gian vào run bị dừng. E04 lượt đầu đã giữ đủ offline/post-reconnect và đóng SUCCESS; đang thực hiện các lượt lặp tiếp theo.
 
 Review/export và baseline có 9 test tổng hợp; control có 5 test gồm transition và bảo toàn store/ledger. Cùng 36 test exporter hiện có, **50 tests đạt**. Các test mới chặn cùng-version/khác-payload, đọc đúng baseline lịch sử khi snapshot đã tiến, từ chối store mới khi có cache và không sửa ledger lúc resume. Test tổng hợp không phải kết quả thực nghiệm.
+
+### Candidate follow-up đã nhận
+
+Đã kiểm lại PR #28 và fetch head `1f79ee93e9a52af2b21c82372f23a6ac684d3ceb`, cập nhật lúc 06:14 UTC. Android diff so với head đã kiểm trước chỉ có `PushSyncEnqueueAdapterTest.kt`; app runtime/AndroidTest source không đổi. Assertion được chuyển sang enqueued input theo contract. Manifest upstream vẫn NOT_READY/gate false, chưa có APK/checksum và chưa chạy lại unit test ở workstation nguồn. Đã tạo worktree riêng cho follow-up; phép kiểm unit mới sẽ thực hiện ngoài cửa sổ quan sát để giữ host baseline. Các lượt đang đo tiếp tục gắn đúng APK/source `9e7e55b` đã cài, không đổi provenance theo head tài liệu mới.
