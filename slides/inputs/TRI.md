@@ -43,7 +43,7 @@ Hình dùng chung sơ đồ đã nhận trong SHARED_SYNC để giữ cách gọ
 
 Mode PERIODIC dùng trigger định kỳ, PUSH dùng tín hiệu data-only normal priority, HYBRID nhận cả hai. Source MANUAL được ghi riêng khi chuẩn bị hoặc chẩn đoán. Cơ chế ứng dụng phải kiểm version hiện hành khi áp dụng snapshot. Những câu dẫn ở đây diễn giải contract và chỉ dùng thì quá khứ khi có event thật tương ứng trên màn hình. [SHARED_SYNC](../../docs/mechanisms/SHARED_SYNC.md), [EVENT_SCHEMA](../../docs/EVENT_SCHEMA.md)
 
-Trong code tại baseline, UI và adapter lấy mode mặc định HYBRID khi thiếu key mode. Hàm `setMode` hiện được khai báo ở gateway, bộ điều khiển chọn mode thuộc SEM-36. Khi minh họa từ trạng thái mặc định, ghi mode HYBRID và source PUSH trên nhãn, đọc lại mode thực ở UI trước thao tác. Tên `work_enqueued` dùng ở phần mô tả contract, source hiện ghi dòng Logcat enqueue với work/request/run IDs và event Room. [Gateway](../../android/app/src/main/java/com/thanhtris/seminarie307/integration/RealBulletinUiGateway.kt), [adapter](../../android/app/src/main/java/com/thanhtris/seminarie307/fcm/PushSyncEnqueueAdapter.kt), [SEM-47](../DEMO_SCRIPT.md)
+Tại baseline lịch sử của SEM-46, UI và adapter dùng HYBRID khi thiếu key mode. Sau tích hợp SEM-36, app yêu cầu chọn mode cùng run ID và device alias thực; không còn mode mặc định. Trước thao tác phải đọc lại đủ ba giá trị ở UI. Callback PUSH đến trước khi cấu hình được ghi thành `trigger_rejected/RUN_CONFIG_NOT_READY`, không enqueue. Tên `work_enqueued` dùng ở phần mô tả contract, source hiện ghi dòng Logcat enqueue với work/request/run IDs và event Room. [Gateway](../../android/app/src/main/java/com/thanhtris/seminarie307/integration/RealBulletinUiGateway.kt), [adapter](../../android/app/src/main/java/com/thanhtris/seminarie307/fcm/PushSyncEnqueueAdapter.kt), [SEM-47](../DEMO_SCRIPT.md)
 
 ## 4. Nguồn đã nhận và giới hạn vận hành
 
@@ -65,7 +65,7 @@ Các giới hạn được bàn giao cùng tài liệu cho người ghép slide 
 |---|---|---|
 | App/server commit và APK của lần live | Not run, candidate SEM-37 chưa nhận | Candidate manifest và CHECKS khi có |
 | Package | `com.thanhtris.seminarie307` | SCOPE và source |
-| Mode của baseline source | HYBRID mặc định, đối chiếu giá trị UI tại setup | Gateway/adapter và bộ điều khiển mode khi nhận SEM-36 |
+| Mode trên candidate hiện hành | Operator chọn tường minh cùng run ID/device alias; không mặc định | UI/controller và adapter SEM-36; đối chiếu ở setup |
 | Entry point update/send | `server/bin/update-cli.js`, `server/bin/fcm-sender.js` | FCM_SENDER và lệnh CONTRACT ở mục 6 |
 | Run live, alias và version baseline/target | Ghi từ lần setup và response update, live hiện Not run | Manifest và log của lần thực hiện |
 | Playback periodic có sẵn | `run-sem29-periodic-emulator-20261107-r2`, `emulator-main`, pilot, validity NOT_ASSESSED | Manifest/events/analysis SEM-29 |
@@ -83,7 +83,7 @@ Trạng thái chạy thiết bị/candidate mới trong SEM-46 là **Not run**. 
 1. Ghi nhãn màn hình cho đường đang dùng, build/alias/run và bằng chứng tương ứng vào phiếu trên. Với LIVE, đối chiếu build/config thật trước khi ghi live-ready. Mở sẵn log theo run và che thông tin local trước khi chia sẻ màn hình.
 2. Chọn run mới, đóng trigger của run trước, hủy lịch và drain work qua cơ chế được candidate bàn giao. Ghi work cũ còn active hoặc việc drain chưa xác nhận vào phiếu blocker trước khi tiếp tục chuẩn bị.
 3. Chuẩn bị cache version N bằng thao tác MANUAL có nhãn ở ngoài cửa sổ live, chờ work hoàn tất. Đọc lại version server/cache và ghi baseline. Giữ server version tăng đơn điệu giữa các lượt.
-4. Đọc mode thực tại setup. Baseline mặc định dùng HYBRID, source của tín hiệu là PUSH, payload/update cùng mode được chọn. Kiểm trạng thái lịch qua công cụ đã bàn giao, ghi mọi periodic còn active và nguồn của từng apply, đưa app về Home và ghi mốc quan sát. Ca E02 chuẩn dùng PUSH sau khi cơ chế mode/reset được kiểm trên build thực.
+4. Chọn mode theo ca và đọc lại mode thực tại setup; không dựa vào HYBRID mặc định. Source của tín hiệu là PUSH, payload/update cùng mode được chọn. Kiểm trạng thái lịch qua công cụ đã bàn giao, ghi mọi periodic còn active và nguồn của từng apply, đưa app về Home và ghi mốc quan sát. Ca E02 chuẩn dùng PUSH sau khi cơ chế mode/reset được kiểm trên build thực.
 5. Chuẩn bị update N+1 và tín hiệu data-only normal priority qua entry point được bàn giao. Token và credential giữ trong cấu hình local. Trang dẫn nội dung, Trí thực hiện thao tác và ghi mốc gửi.
 6. Chuẩn bị playback periodic r2 và evidence M1 đã nhận. Phần push thiếu cấu hình dùng CONTRACT. Phần skip-push SEM-40 dùng PLAYBACK kèm ghi chú “chỉ phía server, chưa có run Android E06”. Phần Doze chưa có run dùng PROTOCOL. Chốt đoạn trích phù hợp 1 phút mỗi phần cùng nhãn hiển thị.
 
@@ -133,7 +133,7 @@ Sau phần live, lưu log và outcome trong cửa sổ đã khai, giữ event t�
 
 - [x] Chốt mở bài 45 giây, phân vai và nội dung slide mở đầu.
 - [x] Ghép thao tác cùng năm phân đoạn của SEM-47 và giữ ngân sách demo 240 giây.
-- [x] Đối chiếu mode mặc định HYBRID, CLI và log token theo source hiện hành.
+- [x] Đối chiếu yêu cầu chọn mode tường minh, CLI và log token theo candidate SEM-36; ghi rõ HYBRID là hành vi tại baseline lịch sử SEM-46.
 - [x] Chọn playback periodic/M1 và skip-push SEM-40 có nguồn, ghi phạm vi phía server của skip-push, bổ sung CONTRACT/PROTOCOL cho phần thiếu evidence.
 - [x] Ghi candidate/live/video/diễn tập Not run và nguồn kiểm trong CHECKS.
 

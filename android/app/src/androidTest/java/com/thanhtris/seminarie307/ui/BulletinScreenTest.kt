@@ -44,7 +44,7 @@ class BulletinScreenTest {
         var enqueueCount = 0
         composeRule.setContent {
             SeminarTheme {
-                BulletinScreen(viewState = BulletinViewState(), onManualSync = { enqueueCount++ })
+                BulletinScreen(viewState = BulletinViewState(), onManualSync = { enqueueCount++ }, onModeSelected = { _, _, _ -> })
             }
         }
 
@@ -58,13 +58,13 @@ class BulletinScreenTest {
 
     @Test
     fun manualUsesActiveRunContextAndAcceptedMessageDoesNotClaimApplied() {
-        val expectedContext = ManualSyncContext(runId = "run-live-7", mode = SyncMode.HYBRID)
+        val expectedContext = ManualSyncContext(runId = "run-live-7", mode = SyncMode.HYBRID, deviceAlias = "emulator-test-1")
         val gateway = RecordingGateway(sampleState(activeRunId = expectedContext.runId))
         val viewModel = BulletinViewModel(gateway)
         composeRule.setContent {
             SeminarTheme {
                 val viewState by viewModel.state.collectAsState()
-                BulletinScreen(viewState = viewState, onManualSync = viewModel::enqueueManual)
+                BulletinScreen(viewState = viewState, onManualSync = viewModel::enqueueManual, onModeSelected = viewModel::configureMode)
             }
         }
 
@@ -80,13 +80,14 @@ class BulletinScreenTest {
     @Test
     fun runFilterRestoresAfterRecreationAndDoesNotChangeManualRun() {
         val restorationTester = StateRestorationTester(composeRule)
-        val context = ManualSyncContext(runId = "run-live-7", mode = SyncMode.HYBRID)
+        val context = ManualSyncContext(runId = "run-live-7", mode = SyncMode.HYBRID, deviceAlias = "emulator-test-1")
         var received: ManualSyncContext? = null
         restorationTester.setContent {
             SeminarTheme {
                 BulletinScreen(
                     viewState = BulletinViewState(data = sampleState(activeRunId = context.runId)),
                     onManualSync = { received = it },
+                    onModeSelected = { _, _, _ -> },
                 )
             }
         }
@@ -121,7 +122,7 @@ class BulletinScreenTest {
         composeRule.setContent {
             CompositionLocalProvider(LocalDensity provides Density(density = 1f, fontScale = 1.6f)) {
                 SeminarTheme(darkTheme = true) {
-                    BulletinScreen(viewState = BulletinViewState(data = state), onManualSync = {})
+                    BulletinScreen(viewState = BulletinViewState(data = state), onManualSync = {}, onModeSelected = { _, _, _ -> })
                 }
             }
         }
@@ -135,6 +136,7 @@ class BulletinScreenTest {
         cachedVersion = 41,
         mode = SyncMode.HYBRID,
         activeRunId = activeRunId,
+        deviceAlias = "emulator-test-1",
         lastSyncAtUtc = "2026-10-31T05:00:00Z",
         snapshot = listOf(BulletinItem("item-1", "Tin mẫu", "Fixture cho UI test.", 41)),
         timeline = listOf(
@@ -173,5 +175,7 @@ class BulletinScreenTest {
             receivedContext = context
             return ManualEnqueueResult.Accepted
         }
+
+        override suspend fun configureMode(mode: SyncMode, runId: String, deviceAlias: String) = Unit
     }
 }
