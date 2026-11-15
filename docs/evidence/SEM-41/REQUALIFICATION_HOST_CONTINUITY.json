@@ -1,0 +1,13 @@
+{
+  "data_kind": "OBSERVED",
+  "scope": "HOST_CONTINUITY_DURING_R6",
+  "window_start_utc": "2026-11-15T13:03:29.619000+00:00",
+  "window_end_utc": "2026-11-15T18:51:55.496000+00:00",
+  "host_guard_sample_count": 645,
+  "largest_guard_gap_seconds": 30.031,
+  "guard_started_utc": "2026-11-15T13:29:54.330Z",
+  "power_log_sleep_events_during_batch": 0,
+  "power_log_sha256": "c2df69e931a280e513b2a2c42001cc8f2676b80fa9e254ca350656e7b68a433f",
+  "raw_power_log_published": false,
+  "outcome": "PASS"
+}

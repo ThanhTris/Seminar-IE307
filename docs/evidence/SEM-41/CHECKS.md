@@ -2,7 +2,7 @@
 
 ## Nhận dạng và đầu vào
 
-- Vinh (`Vinh5905`) thực hiện ngày **15/11/2026, UTC+7**. Nhánh `codex/SEM-41-emulator-main` từ main `6e87411b60e8504d431cd06e577be94b7bb2244f`, sau merge SEM-34 PR #26. Hạn gốc 07/11/2026 13 giờ được giữ trong task.
+- Vinh (`Vinh5905`) thực hiện ngày **15–16/11/2026, UTC+7**. Nhánh `codex/SEM-41-emulator-main` từ main `6e87411b60e8504d431cd06e577be94b7bb2244f`, sau merge SEM-34 PR #26. Hạn gốc 07/11/2026 13 giờ được giữ trong task.
 - [SEM-16](../SEM-16/CHECKS.md) và [SEM-24](../SEM-24/CHECKS.md) đã nhận. Task SEM-41 hiện cho phép bắt đầu trước SEM-37, còn [protocol](../../../experiments/PROTOCOL.md) yêu cầu candidate trước khi ghi phase `main`.
 - SEM-41 dùng **emulator**. Máy OPPO do Trí thực hiện tại [SEM-42](../../../tasks/backlog/SEM-42.md).
 - Source ứng viên ở [PR #28](https://github.com/ThanhTris/Seminar-IE307/pull/28), head đã kiểm `1f79ee93e9a52af2b21c82372f23a6ac684d3ceb`, đã merge lúc 12:21 UTC. SEM-37 được ghi Done trên Project ở snapshot main `bcc7c58853fb5de59bb9bd599cd12fe41e5ee0eb` (12:27 UTC), **không kèm APK freeze**. Manifest nguồn ghim app `9e7e55b76c646ff113a152022cc23317a202e533`, server `c77772e426c00ae464240f00942f8368c638aaa8`, `candidate_status=NOT_READY`, `release_gate.passed=false`, APK/hash để null.
@@ -41,7 +41,7 @@ Sau control development lúc 03:00 UTC, emulator giữ APK development của rev
 ## Phần cần nhận để chạy main
 
 1. **Chốt artifact/gate trước main.** SEM-37 đã Done/merge về source, nhưng release manifest vẫn NOT_READY/gate false, chưa freeze APK/checksum/profile. Follow-up `1f79ee9` đã sửa assertion theo review PR #28, kiểm thực tế trên máy Vinh đạt 32/32 unit tests. Hash của kiểm development này là artifact đầu vào để đối chiếu, không tự thay thế freeze của SEM-37.
-2. **Pilot theo từng loại ca** trên revision/profile sẽ đo. Hiện có 7/8 slot được qualify lại bằng collector đã sửa; E01 đã đạt 5 cycle tự nhiên/90phút. Ca PUSH/profile Firebase chưa kiểm; requalify ca bị ảnh hưởng nếu candidate cuối đổi code/config.
+2. **Pilot theo từng loại ca** trên revision/profile sẽ đo. Hiện có 8/8 slot được qualify lại bằng collector đã sửa; E01 đã đạt 5 cycle tự nhiên/90phút. Ca PUSH/profile Firebase chưa kiểm; requalify ca bị ảnh hưởng nếu candidate cuối đổi code/config.
 3. **Firebase** cho 19 slot PUSH thuộc E02/E03/E04/E05, gồm google-services.json, credential project, token emulator hiện hành. Tám slot PERIODIC/HYBRID skip vẫn cần candidate/pilot đúng ca.
 4. **E05 race** cần hook/barrier và bằng chứng worker đang chạy khi tín hiệu mới tới. Đặt INJECTED cho nhóm đó và nhận test logic SEM-38/39. B1 còn thiếu thì giữ các slot push/race NOT_RUN.
 5. **Export v2** được kiểm lại theo revision cuối, ghi raw/omission nếu có, giữ các event ngoài window. Main valid yêu cầu đúng candidate và metadata, các run sai điều kiện/timeout vẫn được giữ riêng theo kết quả thật.
@@ -70,7 +70,7 @@ Observer commit **`db98fa8d275c3ca2d10895daa61f00bf53f59cd7`** bỏ mọi `dumps
 
 [Đối chứng collector](COLLECTOR_COMPARISON.json): ở phút20 của E01 mới đã có 1 cycle tự chạy/apply target16, xảy ra trước lần copyRoom; không directdispatch/instrumentation/jobdump. Đây là capture giữa phiên, không thay cho window90phút.
 
-Đã có **7/8 slot hợp lệ** trong batch r6; còn 1 slot. Trạng thái: `RUNNING`. Toàn bộ 8 cửa sổ là 346 phút, không tính setup/cleanup. Main vẫn 27 slot NOT_RUN.
+Đã hoàn tất **8/8 slot hợp lệ, 8 SUCCESS, 0 TIMEOUT** trong batch r6. Trạng thái: `COMPLETED_WITH_RECORDED_OUTCOMES`. Toàn bộ 8 cửa sổ là 346 phút, không tính setup/cleanup. Main vẫn 27 slot NOT_RUN.
 
 | Slot hợp lệ mới | Window UTC+7; duration | Cache trước→sau; target | Cycle mới | Outcome |
 |---|---|---|---:|---|
@@ -81,6 +81,7 @@ Observer commit **`db98fa8d275c3ca2d10895daa61f00bf53f59cd7`** bỏ mọi `dumps
 | [E04:2](../../../experiments/pilots/run-sem41-pilot-e04-2-20261115-3bde4f/manifest.json) | 15/11 23:16:53–15/11 23:49:01; 1,928,540 ms | 19→20; V=20 | 1 | SUCCESS |
 | [E04:3](../../../experiments/pilots/run-sem41-pilot-e04-3-20261115-54c1a9/manifest.json) | 15/11 23:49:13–16/11 00:21:21; 1,928,690 ms | 20→21; V=21 | 1 | SUCCESS |
 | [E06:1](../../../experiments/pilots/run-sem41-pilot-e06-1-20261116-aa16ca/manifest.json) | 16/11 00:21:38–16/11 01:06:39; 2,700,870 ms | 21→22; V=22 | 2 | SUCCESS |
+| [E06:2](../../../experiments/pilots/run-sem41-pilot-e06-2-20261116-8f734c/manifest.json) | 16/11 01:06:54–16/11 01:51:55; 2,700,670 ms | 22→23; V=23 | 2 | SUCCESS |
 
 Không có snapshot_applied target sau window trong các slot mới đã đóng; event setup/post-window vẫn được giữ và tách khỏi cycle nền.
 
@@ -107,10 +108,16 @@ Review đối chiếu raw/canonical/omitted ID, source/work/fetch provenance, fu
 
 E06 chỉ kiểm deliberate skip thật `FAULT_INJECTION_SKIP` và periodic trong mode HYBRID trên profile **FIREBASE_NOT_CONFIGURED**. Không tạo send/message giả, không kiểm callback/token hoặc diễn giải skip thành FCM mất tin. Main/profile Firebase vẫn chờ candidate và requalification riêng.
 
-**67 tests công cụ đạt** sau sửa collector; 32/32 Android unit tests follow-up là phép kiểm source runtime không đổi trước đó. `DISPATCH_DEVICE_CLEANUP.json` ghi cleanup sau control; `DEVICE_CLEANUP.json` lúc 12:00 là snapshot cũ. Batch r6 đang giữ thiết bị/server độc quyền; cleanup cuối sẽ ghi riêng khi batch đóng. Kết quả tổng hợp test không phải số liệu thực nghiệm.
+**67 tests công cụ đạt** sau sửa collector; 32/32 Android unit tests follow-up là phép kiểm source runtime không đổi trước đó. `DISPATCH_DEVICE_CLEANUP.json` ghi cleanup sau control; `DEVICE_CLEANUP.json` lúc 12:00 là snapshot cũ. Batch r6 đã đóng đủ8slot, thiết bị/server cleanup đạt; xem [REQUALIFICATION_DEVICE_CLEANUP.json](REQUALIFICATION_DEVICE_CLEANUP.json) và [REQUALIFICATION_VERIFICATION.json](REQUALIFICATION_VERIFICATION.json). [Kiểm host continuity](REQUALIFICATION_HOST_CONTINUITY.json) không ghi nhận máy ngủ trong batch. Kết quả tổng hợp test không phải số liệu thực nghiệm.
+
+E01 sau sửa collector có **5 cycle mới/90phút**; đạt mục tiêu ≥3. Không sử dụng direct dispatch trong các pilot r6.
 
 ### Candidate follow-up đã nhận
 
 Đã kiểm lại PR #28 và fetch head `1f79ee93e9a52af2b21c82372f23a6ac684d3ceb`, cập nhật lúc 06:14 UTC. Android diff so với source APK đã đo chỉ có `PushSyncEnqueueAdapterTest.kt`; app runtime/AndroidTest source không đổi. Assertion được chuyển sang enqueued input theo contract. **Đã chạy `:app:testDebugUnitTest` trên source follow-up: 32 tests, 0 failure/error/skip, exit 0**, kết thúc 09:42:30 UTC, sau cleanup batch r3 và trước replacement r4. [UNIT_FOLLOWUP.json](UNIT_FOLLOWUP.json) ghi source, diff và hash XML/build log. Lỗi 31/32 trong PREFLIGHT là kết quả lịch sử ở source cũ, đã được follow-up giải quyết.
 
 Manifest upstream vẫn NOT_READY/gate false, chưa có APK/checksum freeze. Không cài APK mới; các lượt đo giữ app/source `9e7e55b` và hash đã kiểm, không đổi provenance theo head tài liệu mới. Build chạy trong worktree riêng ngoài cửa sổ quan sát.
+
+### Artifact local đã chuẩn bị bàn giao
+
+[LOCAL_ARTIFACT_HANDOFF.json](LOCAL_ARTIFACT_HANDOFF.json) ghi hai APK debug đã đo, checksum và kết quả unit follow-up. Binary cùng `HANDOFF.json` nằm private tại `.local/sem41/candidate-handoff-nofirebase/`, hash khớp APK cài trên emulator. Không chứa credential hoặc dữ liệu ứng dụng. Đây là đầu vào cho owner SEM-37 chốt candidate; release manifest vẫn NOT_READY/gate false.

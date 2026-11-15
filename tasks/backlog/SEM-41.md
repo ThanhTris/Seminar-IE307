@@ -51,13 +51,15 @@ Status nguồn được đối chiếu Project lúc **2026-11-15 12:27:57 UTC**;
 - [ ] Không force-run cho kết quả tự nhiên, không trộn pilot/build hoặc loại timeout khỏi mẫu số.
 - [ ] Đầu ra và CHECKS có thật, link đọc được; chưa chạy phải ghi Not run, không tự chuyển Done từ kế hoạch.
 
-## Tiến độ ngày 15/11/2026
+## Tiến độ ngày 15–16/11/2026
 
 - Đã nhận main sau merge SEM-34, kiểm candidate ở PR #28. Candidate vẫn NOT_READY; follow-up `1f79ee9` đã sửa assertion theo review, máy Vinh kiểm lại đạt 32/32 unit tests. Kết quả 31/32 trong PREFLIGHT là capture lịch sử.
 - Build app/test APK được trên máy Vinh. Đã kiểm installed APK hash, migration Room 1→2 giữ nguyên 30 event cũ và kiểm manual → cache → export canonical bằng một control development.
 - [Ma trận](../../experiments/plans/SEM-41/EMULATOR_PLAN.json) gồm 27 slot PLANNED/NOT_RUN, 582 phút quan sát. Phase main chờ candidate freeze và pilot đúng revision, các ca PUSH còn thiếu Firebase.
 - [CHECKS](../../docs/evidence/SEM-41/CHECKS.md), [PREFLIGHT](../../docs/evidence/SEM-41/PREFLIGHT.json), [quy trình thực hiện](../../docs/evidence/SEM-41/REPRODUCE.md), [control development](../../experiments/development/run-sem41-v2-smoke-20261115/manifest.json).
-- Qualification pilot cũ đã thu hồi do collector dump scheduler trong window có thể đổi timer; raw/events/outcome giữ nguyên và gắn INVALID, kể cả SUCCESS. Observer `db98fa8` đã chặn lệnh dump trong clock mở, 67 tests đạt. Đang đo lại batch r6: **7/8 slot hợp lệ mới**, còn 1 slot; xem [PILOT_RESULTS](../../docs/evidence/SEM-41/PILOT_RESULTS.json) và [audit collector](../../docs/evidence/SEM-41/SCHEDULER_OBSERVER_AUDIT.json). Control development xác nhận worker/core apply được khi direct dispatch; không tính làm cycle tự nhiên. Main vẫn 27 slot NOT_RUN, chờ candidate/Firebase/race inputs và requalification đúng profile.
+- Qualification pilot cũ đã thu hồi do collector dump scheduler trong window có thể đổi timer; raw/events/outcome giữ nguyên và gắn INVALID, kể cả SUCCESS. Observer `db98fa8` đã chặn lệnh dump trong clock mở, 67 tests đạt. Đã đo lại xong batch r6: **8/8 slot hợp lệ mới, 8 SUCCESS**; xem [PILOT_RESULTS](../../docs/evidence/SEM-41/PILOT_RESULTS.json) và [audit collector](../../docs/evidence/SEM-41/SCHEDULER_OBSERVER_AUDIT.json). Control development xác nhận worker/core apply được khi direct dispatch; không tính làm cycle tự nhiên. Main vẫn 27 slot NOT_RUN, chờ candidate/Firebase/race inputs và requalification đúng profile.
+
+- Đã kiểm toàn vẹn 20 lần thử (8 hợp lệ mới, 12 INVALID cũ), giữ nguyên 60 file evidence gốc. Cleanup emulator/server đạt; [kiểm cuối](../../docs/evidence/SEM-41/REQUALIFICATION_VERIFICATION.json). Đã chuẩn bị [APK/checksum local](../../docs/evidence/SEM-41/LOCAL_ARTIFACT_HANDOFF.json) cho owner chốt candidate.
 
 ## Task được mở khóa
 

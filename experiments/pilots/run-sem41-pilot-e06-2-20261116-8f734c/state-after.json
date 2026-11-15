@@ -1,0 +1,16 @@
+{
+  "captured_at_utc": "2026-11-15T18:52:00.106Z",
+  "elapsed_realtime_ms": 57448734,
+  "run_id": "run-sem41-pilot-e06-2-20261116-8f734c",
+  "action": "export-v2",
+  "event_format": "canonical-2.0.0-export-attempt",
+  "cached_version": "23",
+  "mode": "HYBRID",
+  "periodic_work": [
+    {
+      "work_id": "ac66cb61-6c9e-4ef9-a8bf-dc7f749f77f6",
+      "state": "CANCELLED",
+      "run_attempt_count": 0
+    }
+  ]
+}

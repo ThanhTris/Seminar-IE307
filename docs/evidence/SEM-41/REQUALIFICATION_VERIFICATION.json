@@ -1,0 +1,228 @@
+{
+  "old_immutable_files_verified": 60,
+  "tool_tests": {
+    "tests": 67,
+    "outcome": "PASS",
+    "raw_log_sha256": "c17542b1edb79771db01b32ec2f27317e93ff0e8afa6ce0665d98670ed3330c9"
+  },
+  "android_unit_followup": {
+    "tests": 32,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "utc": "2026-11-15T18:52:18.402Z",
+  "data_kind": "OBSERVED",
+  "scope": "SEM41_NONMUTATING_COLLECTOR_REQUALIFICATION",
+  "supersedes": "docs/evidence/SEM-41/FINAL_VERIFICATION.json",
+  "observer_commit": "db98fa8d275c3ca2d10895daa61f00bf53f59cd7",
+  "pilot_attempts": 20,
+  "valid_completed_pilot_slots": 8,
+  "invalid_attempts_retained": 12,
+  "main_slots_not_run": 27,
+  "firebase_dependent_main_slots": 19,
+  "internal_links_checked": 70,
+  "cross_device_latency_calculated": false,
+  "runs": [
+    {
+      "run_id": "run-sem41-pilot-e01-1-20261115-89b884",
+      "validity": "INVALID",
+      "outcome": "FAILURE",
+      "canonical_roundtrip_identical": true,
+      "observer_source_verified": true,
+      "manifest_sha256": "6eb306e1cb8c6304de4a224b59de4dc394811889edaf71247c329eb4b6ca6ccb",
+      "events_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "audit_sha256": "ab552fc1e726809512b90f3af32e960a3f5b6ccb6310505bd717ae0ea7b66700"
+    },
+    {
+      "run_id": "run-sem41-pilot-e01-1-20261115-760217",
+      "validity": "INVALID",
+      "outcome": "TIMEOUT",
+      "canonical_roundtrip_identical": true,
+      "observer_source_verified": true,
+      "manifest_sha256": "4819eeee398046c2137f18e1d8ca2b3580e137fdcdb7ec994f6c939188386c50",
+      "events_sha256": "fe6b56b8729c5619d2c353a38bcfe8e4b9355d27bd06adf8f503612482c85f66",
+      "audit_sha256": "e20f83c52a0fbabbc6a5434175df82e5f3ee7857b8cadb9e593337b31f03e13e"
+    },
+    {
+      "run_id": "run-sem41-pilot-e03-1-20261115-5db4eb",
+      "validity": "INVALID",
+      "outcome": "SUCCESS",
+      "canonical_roundtrip_identical": true,
+      "observer_source_verified": true,
+      "manifest_sha256": "54844ec731c1cf0d2d6bf886c00c5e91128c08de4146d8b2f4b9c4d1fb37f74e",
+      "events_sha256": "75df33f9ff9ef10fd17dbbe1b243b9a5d052fe12e20917e13aacfd879677d5f8",
+      "audit_sha256": "8cd5a164a4f46965a09280e8deab42061cd41dec5092d7f6028821b7c4d51bde"
+    },
+    {
+      "run_id": "run-sem41-pilot-e03-2-20261115-0d277e",
+      "validity": "INVALID",
+      "outcome": "FAILURE",
+      "canonical_roundtrip_identical": true,
+      "observer_source_verified": true,
+      "manifest_sha256": "962e7ce97a703860ec229479cff2bb94a6c9940a7c8ebade32d39c1ddc87f5d2",
+      "events_sha256": "e41763ad9ff79d2d9bc022bcf42d541844460411ca1e94dd40c7ba6a2a45811d",
+      "audit_sha256": "20f2f93f4c52e28f21162909731e19605362c4e423b3cbaf3c8e00962f1aae1f"
+    },
+    {
+      "run_id": "run-sem41-pilot-e03-2-20261115-c12a28",
+      "validity": "INVALID",
+      "outcome": "SUCCESS",
+      "canonical_roundtrip_identical": true,
+      "observer_source_verified": true,
+      "manifest_sha256": "d02bf376c4e7682700e3710befbf91099aca2001fc12ffac53929327214c9add",
+      "events_sha256": "ac09651ff2d88f8a58545138f4b5b3a21d79fb4cf5203d4c9c9d1649712456ae",
+      "audit_sha256": "0d18b24e1c9e4fb5e6c98997c16bfaa146c2f68daddb6130a80032e1a9b5984c"
+    },
+    {
+      "run_id": "run-sem41-pilot-e04-1-20261115-a52b51",
+      "validity": "INVALID",
+      "outcome": "SUCCESS",
+      "canonical_roundtrip_identical": true,
+      "observer_source_verified": true,
+      "manifest_sha256": "cd5f6d5fa9f72962ce149cbcba677f7c1e05328f990613ce6b8e1ecd431f32be",
+      "events_sha256": "a6d94d0f582951c8e9012892ab66fecec371e987414f957457766fcf75d17f7c",
+      "audit_sha256": "7b5b38cf1f48e9801b8b0f5cdb885bfca1521fdb63754af6f14d04c9aebd047b"
+    },
+    {
+      "run_id": "run-sem41-pilot-e04-2-20261115-b5e415",
+      "validity": "INVALID",
+      "outcome": "TIMEOUT",
+      "canonical_roundtrip_identical": true,
+      "observer_source_verified": true,
+      "manifest_sha256": "f240d0ecad0c538b966cbe818ec146947449b582599ac3ab296a5d59bd9fcc82",
+      "events_sha256": "eb229c7d00001f92c4ca6c2aca9f009086fb5b5c411954296eec6cb9ed61fd21",
+      "audit_sha256": "45ec4639f1f54d3fd8bba560695f516bfea042ea22b75f4b5511b0c7ce9fa4a8"
+    },
+    {
+      "run_id": "run-sem41-pilot-e04-3-20261115-f9f6a0",
+      "validity": "INVALID",
+      "outcome": "SUCCESS",
+      "canonical_roundtrip_identical": true,
+      "observer_source_verified": true,
+      "manifest_sha256": "13c11db978db5e44475b62c65958cffeec7985d095bb48f5201e6af95cba42de",
+      "events_sha256": "9d0cd90c8c112e579ed67d8907ad2d939bf96dc6e832aa5d6b2d5b27185a169f",
+      "audit_sha256": "5301de7ab68509a1ed6f6d014c5ae80241767165f03277693316fa9effad8cc7"
+    },
+    {
+      "run_id": "run-sem41-pilot-e06-1-20261115-18fec8",
+      "validity": "INVALID",
+      "outcome": "TIMEOUT",
+      "canonical_roundtrip_identical": true,
+      "observer_source_verified": true,
+      "manifest_sha256": "90d2c9c8434b1bee538a970c94e4fb010ba169512538701cba76719b45a8c56e",
+      "events_sha256": "fa4438d6e087a0024354c1a2334bf74b63d7e7ed049b908bb78c4440d5a284a0",
+      "audit_sha256": "477940036d49d3cec9fa2eec903e6a29ef82cc7222e7ee85dec436de2caeb179"
+    },
+    {
+      "run_id": "run-sem41-pilot-e06-2-20261115-f56fc9",
+      "validity": "INVALID",
+      "outcome": "TIMEOUT",
+      "canonical_roundtrip_identical": true,
+      "observer_source_verified": true,
+      "manifest_sha256": "2845d457bdd36e93d7e06d8b600eccaae5999602b88f555167a684023a98a73d",
+      "events_sha256": "e8f8e91fec9f633b0571053d874a792945cd8b94f5768db0d8aac577e5423f91",
+      "audit_sha256": "5ed0aa0a31734f3dc79a00a78d102bdc62135d07d624e246e9e5f24d3e0ce02f"
+    },
+    {
+      "run_id": "run-sem41-pilot-e03-2-20261115-33a460",
+      "validity": "INVALID",
+      "outcome": "SUCCESS",
+      "canonical_roundtrip_identical": true,
+      "observer_source_verified": true,
+      "manifest_sha256": "000145e039ee712b1dd1236e5b4cffa66a7e236ae409645d6ad2ec9cc3b17a8c",
+      "events_sha256": "851975a5d274ee2e600a96f088b9d394182a18724193c9b82dcf7bd39b9b207e",
+      "audit_sha256": "f005c054c0e24ed5dbe3d028d7562cf521f2bb827622539d24fbd84859d3ce1c"
+    },
+    {
+      "run_id": "run-sem41-pilot-e01-1-20261115-9a8b41",
+      "validity": "INVALID",
+      "outcome": "TIMEOUT",
+      "canonical_roundtrip_identical": true,
+      "observer_source_verified": true,
+      "manifest_sha256": "08f530deb91beb4f1ed65e53e62322929b17cebb9a5ecdd0ac9cd8f0cad1f4f7",
+      "events_sha256": "9fcacd5f56ab42d37675f443ec035b6ffad90f5fa8dc56f798c9f43f7799e6bf",
+      "audit_sha256": "a7a781c0d8da83c20a8f0f1f3473d4e8f917adb89c429e506ba371fe7df04d1d"
+    },
+    {
+      "run_id": "run-sem41-pilot-e01-1-20261115-575a7a",
+      "validity": "VALID",
+      "outcome": "SUCCESS",
+      "canonical_roundtrip_identical": true,
+      "observer_source_verified": true,
+      "manifest_sha256": "56b44dafede1f36eff5f2ec3c386859125e93e339f5029a62300154e7e89f7b7",
+      "events_sha256": "1ac6374c10f1ab8ce2202a6fee35ef21a7de13f847158d1491c5b17f406a42e3",
+      "audit_sha256": "f2c6801897183fd66bdd3ad4f1b1981e72416c269d40a2b20e979de1214c8d26"
+    },
+    {
+      "run_id": "run-sem41-pilot-e03-1-20261115-dc9cc9",
+      "validity": "VALID",
+      "outcome": "SUCCESS",
+      "canonical_roundtrip_identical": true,
+      "observer_source_verified": true,
+      "manifest_sha256": "26db2be6c56932f608360a1ca7d42e04260df13d0b1881c0b4eb7d8921ef2ba6",
+      "events_sha256": "005d5546bbda922da1796dc1fa8316f90ba48f489d248a703c22942f6832dfc0",
+      "audit_sha256": "5db599010bc40e929f6d8b0ef4a5f82fa084048b4f135539f6d03ee14efd129d"
+    },
+    {
+      "run_id": "run-sem41-pilot-e03-2-20261115-7f63e0",
+      "validity": "VALID",
+      "outcome": "SUCCESS",
+      "canonical_roundtrip_identical": true,
+      "observer_source_verified": true,
+      "manifest_sha256": "8ea9c55b833289ebdcc8a0f6a9fc27b393b78c6465ae707b11745f8285baa60b",
+      "events_sha256": "633ed8778ce64a72e85be1fd3313aae479ecd98baf133bba17ee7668fb66af2a",
+      "audit_sha256": "6dc4c98f657d5501ced65f5cbfea573e46651011d0d263b039798d571985efc0"
+    },
+    {
+      "run_id": "run-sem41-pilot-e04-1-20261115-cda576",
+      "validity": "VALID",
+      "outcome": "SUCCESS",
+      "canonical_roundtrip_identical": true,
+      "observer_source_verified": true,
+      "manifest_sha256": "409a5f7d214744e5fe1a0c1bf18513ff0fcd009eb6628a7685b528c6bc7ac050",
+      "events_sha256": "a2748149eb7d28eeac00bab8131563216ceeba37663d36e8acabf44888a18605",
+      "audit_sha256": "c73594f1e585453f9e14b46a8778e1e788f00f91889d8f266c4c83d627020574"
+    },
+    {
+      "run_id": "run-sem41-pilot-e04-2-20261115-3bde4f",
+      "validity": "VALID",
+      "outcome": "SUCCESS",
+      "canonical_roundtrip_identical": true,
+      "observer_source_verified": true,
+      "manifest_sha256": "6f7d6f5acbd682ea6c358dfe0c9a290be28329bfd76668d3aebb145ea8a85567",
+      "events_sha256": "ce655a4579cd37d0e41a23e2438b3b24d824f0e874f8cf9a73edf6310a457ffd",
+      "audit_sha256": "14b822615f5363b5ee4da941d1b0712d3b1c345cbcd2dbbbd69a7ec6aa82da94"
+    },
+    {
+      "run_id": "run-sem41-pilot-e04-3-20261115-54c1a9",
+      "validity": "VALID",
+      "outcome": "SUCCESS",
+      "canonical_roundtrip_identical": true,
+      "observer_source_verified": true,
+      "manifest_sha256": "dff7fd0448c39c838ed23db01b2e542a0c22404bbf6b29dfbf0c70784a372bd0",
+      "events_sha256": "1aae38bf8aff01244d2c29fbad6abe8bdb60d21da2948b603b7766ffd3cb1f54",
+      "audit_sha256": "336cc8e8d351f61ac746f7c2aa5a539cde931cefc4bc9dee8126c3013ce36f72"
+    },
+    {
+      "run_id": "run-sem41-pilot-e06-1-20261116-aa16ca",
+      "validity": "VALID",
+      "outcome": "SUCCESS",
+      "canonical_roundtrip_identical": true,
+      "observer_source_verified": true,
+      "manifest_sha256": "60fc6e6b6a9fec258652d0f3032d95f8f0c80896b5c51962d64f765176a00cc9",
+      "events_sha256": "00eb51ef2260e7564d452bae7fc38e4f65c13fba255c081b8e8adb4d20b21af4",
+      "audit_sha256": "352b475ddc766cf26e617919ad7ba5dc094d6c8bfbbcae4490ab4c0c76e28d71"
+    },
+    {
+      "run_id": "run-sem41-pilot-e06-2-20261116-8f734c",
+      "validity": "VALID",
+      "outcome": "SUCCESS",
+      "canonical_roundtrip_identical": true,
+      "observer_source_verified": true,
+      "manifest_sha256": "8d9ca31e4042250e8924c0c4222fb9d5a2bbd3477e0185a47f2d1b76585b1c6e",
+      "events_sha256": "e893e119932f9920f2e731f0914f4d6c4ed7e4d946a3af70707c24f01d599559",
+      "audit_sha256": "d18159dac0d864d289a0f169b2ede696ef7ceb58f88949972ad034db2f4bb8c0"
+    }
+  ]
+}

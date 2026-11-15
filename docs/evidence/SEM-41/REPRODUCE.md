@@ -140,3 +140,7 @@ python3 experiments/scripts/export_logs.py \
 ```
 
 Exporter ghi `experiments/runs/<run_id>/`, từ chối ghi đè. Consumer phân tích tập chính chọn phase main và chia theo build/config/device/case; raw development trong CHECKS này giữ đường dẫn development. Trước bàn giao SEM-43/44/45, rà link/hash, count, window và provenance của từng run, kèm mọi omission/timeout/Not run còn lại.
+
+## Handoff local sau batch đo lại
+
+Batch r6 đã hoàn tất 8/8 slot hợp lệ; kết quả hiện hành tại [PILOT_RESULTS](PILOT_RESULTS.json), kiểm toàn vẹn tại [REQUALIFICATION_VERIFICATION](REQUALIFICATION_VERIFICATION.json). [LOCAL_ARTIFACT_HANDOFF](LOCAL_ARTIFACT_HANDOFF.json) ghi hash hai APK đã đo; binary giữ trong `.local/sem41/candidate-handoff-nofirebase/` (gitignored). Owner SEM-37 có thể đối chiếu binary/source/profile để chốt bản ứng viên. Các file này không tự mở gate main; không đổi nhãn pilot đã thu thành main.
