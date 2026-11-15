@@ -10,11 +10,12 @@ from collections import Counter, defaultdict
 from datetime import datetime
 from pathlib import Path
 import statistics
+import subprocess
 import sys
 
 import export_logs as contract
 
-VERSION = "0.1.0"
+VERSION = "0.2.0"
 ROOT = Path(__file__).resolve().parents[2]
 
 
@@ -29,11 +30,18 @@ def require(condition, code):
 
 def load_run(directory, dataset):
     """Read one explicit dataset; reject mixed routes, legacy and fake observed data."""
-    require(dataset in {"fixture", "pilot", "main"}, "DATASET_INVALID")
     directory = Path(directory)
     try:
-        manifest_bytes = (directory / "manifest.json").read_bytes()
-        event_bytes = (directory / "events.jsonl").read_bytes()
+        return load_run_bytes((directory / "manifest.json").read_bytes(),
+                              (directory / "events.jsonl").read_bytes(), dataset)
+    except OSError:
+        raise AnalysisError("INPUT_UNREADABLE") from None
+
+
+def load_run_bytes(manifest_bytes, event_bytes, dataset):
+    """Use the same contract for local exports and immutable Git inputs."""
+    require(dataset in {"fixture", "pilot", "main"}, "DATASET_INVALID")
+    try:
         raw = contract.parse_json(manifest_bytes.decode("utf-8"))
         require(isinstance(raw, dict), "MANIFEST_OBJECT_REQUIRED")
         require(raw.get("protocol_version") == "1.0.0", "PROTOCOL_VERSION_UNSUPPORTED")
@@ -74,6 +82,55 @@ def load_run(directory, dataset):
         raise AnalysisError("INPUT_UNREADABLE") from None
     except (TypeError, KeyError, RecursionError):
         raise AnalysisError("INPUT_TYPES_INVALID") from None
+
+
+def source_bytes(commit, path):
+    """Read an exact repository object without checkout, network or source edits."""
+    require(isinstance(path, str) and bool(path) and
+            all(part not in {"", ".", ".."} for part in path.split("/")) and
+            not any(c in path for c in ("\\", ":", "\x00", "\n", "\r")), "SOURCE_PATH_INVALID")
+    try:
+        return subprocess.run(["git", "show", f"{commit}:{path}"], cwd=ROOT,
+                              check=True, capture_output=True).stdout
+    except (OSError, subprocess.CalledProcessError):
+        raise AnalysisError("SOURCE_OBJECT_UNAVAILABLE") from None
+
+
+def load_source_index(path, dataset):
+    """Verify pinned source bytes, including the upstream review evidence."""
+    try:
+        index_bytes = Path(path).read_bytes()
+        index = contract.parse_json(index_bytes.decode("utf-8"))
+        require(isinstance(index, dict) and index.get("index_version") == "1.0.0",
+                "SOURCE_INDEX_INVALID")
+        require(index.get("dataset") == dataset, "DATASET_PHASE_MISMATCH")
+        commit = index.get("source_commit")
+        require(contract.matches(r"[0-9a-f]{40}", commit), "SOURCE_COMMIT_INVALID")
+        require(isinstance(index.get("runs"), list) and bool(index["runs"]) and
+                isinstance(index.get("evidence"), list), "SOURCE_INDEX_INVALID")
+
+        def checked_bytes(path, expected):
+            require(contract.matches(r"[0-9a-f]{64}", expected), "SOURCE_HASH_INVALID")
+            value = source_bytes(commit, path)
+            require(hashlib.sha256(value).hexdigest() == expected, "SOURCE_HASH_MISMATCH")
+            return value
+
+        for evidence in index["evidence"]:
+            checked_bytes(evidence["path"], evidence["sha256"])
+        runs = []
+        for entry in index["runs"]:
+            directory = entry["directory"]
+            require(isinstance(directory, str), "SOURCE_PATH_INVALID")
+            manifest = checked_bytes(directory + "/manifest.json", entry["manifest_sha256"])
+            events = checked_bytes(directory + "/events.jsonl", entry["events_sha256"])
+            runs.append(load_run_bytes(manifest, events, dataset))
+        return runs, {"index_sha256": hashlib.sha256(index_bytes).hexdigest(), **index}
+    except contract.ExportError as error:
+        raise AnalysisError(str(error)) from None
+    except (OSError, UnicodeError):
+        raise AnalysisError("INPUT_UNREADABLE") from None
+    except (TypeError, KeyError, RecursionError):
+        raise AnalysisError("SOURCE_INDEX_INVALID") from None
 
 
 def utc_ms(value):
@@ -171,6 +228,7 @@ def analyze_run(run):
         buckets[location(event)].append(event)
     if buckets["unknown"]:
         flags.add("ANDROID_WINDOW_OR_BOOT_UNKNOWN")
+    window_verified = has_window and not buckets["unknown"]
     inside = buckets["window"]
     if any(e["source"] == "MANUAL" for e in inside):
         flags.add("MANUAL_IN_WINDOW")
@@ -240,7 +298,8 @@ def analyze_run(run):
                         monotonic_delta(e, enqueued) is not None]
             receipt_enqueue_ms = monotonic_delta(only(receipts), enqueued)
     if m["execution_status"] == "COMPLETED" and ((m["outcome"] == "SUCCESS") != bool(applied)):
-        flags.add("OUTCOME_EVIDENCE_CONFLICT")
+        flags.add("OUTCOME_EVIDENCE_UNVERIFIED" if not applied and not window_verified else
+                  "OUTCOME_EVIDENCE_CONFLICT")
 
     updated = only([e for e in events if e["event_type"] == "server_updated" and e["data_version"] == target])
     if m["case_id"] == "E06" and (updated is None or not any(
@@ -290,17 +349,26 @@ def analyze_run(run):
                 **{k: m["build"][k] for k in ("app_commit", "server_commit", "apk_sha256")},
                 "manifest_sha256": run["manifest_sha256"], "events_sha256": run["events_sha256"],
                 "target_version": target, "declared_cached_version_after": obs["cached_version_after"],
+                "declared_natural_periodic_cycles": obs["natural_periodic_cycles"],
                 "window_basis": "ANDROID_MONOTONIC" if has_window else "UNAVAILABLE",
+                "window_events_verified": bool(window_verified),
                 "observed_completion": ("NOT_RUN" if m["execution_status"] == "NOT_RUN" else
                                         "APPLIED_TARGET" if applied else "LATE_TARGET" if late else
-                                        "NO_TARGET_EVIDENCE" if has_window else "UNCERTAIN_WINDOW"),
+                                        "NO_TARGET_EVIDENCE" if window_verified else "UNCERTAIN_WINDOW"),
                 "eligible": (m["data_kind"] == "OBSERVED" and m["run_phase"] == "main" and
                              m["validity"] == "VALID" and m["execution_status"] == "COMPLETED" and not flags),
-                "target_applied_in_window": bool(applied), "late_target_applied_count": len(late),
-                "natural_periodic_cycles": len(natural_cycles), "work_attempt_count": len(attempts),
+                "target_applied_in_window": bool(applied) if window_verified or applied else None,
+                "late_target_applied_count": len(late) if window_verified else None,
+                "natural_periodic_cycles": len(natural_cycles) if window_verified else None,
+                "work_attempt_count": len(attempts) if window_verified else None,
                 "get_started_count": len({e["network_call_id"] for e in inside if
-                                          e["event_type"] == "snapshot_fetch_started" and e["source"] != "MANUAL"}),
-                "retry_event_count": counts["sync_retrying"], "applied_event_count": counts["snapshot_applied"],
+                                          e["event_type"] == "snapshot_fetch_started" and e["source"] != "MANUAL"})
+                                     if window_verified else None,
+                "retry_event_count": counts["sync_retrying"] if window_verified else None,
+                "applied_event_count": counts["snapshot_applied"] if window_verified else None,
+                **{kind + "_event_count_all": sum(e["event_type"] == kind for e in events) for kind in
+                   ("server_updated", "push_send_accepted", "push_send_skipped", "push_received",
+                    "work_enqueued", "work_started", "snapshot_fetch_started", "snapshot_applied")},
                 "db_write_count": None, "received_to_enqueue_ms": receipt_enqueue_ms,
                 "queue_ms": queue_ms, "sync_ms": sync_ms,
                 "update_to_applied_ms": end_to_end["estimate_ms"] if end_to_end else None,
@@ -336,6 +404,9 @@ def summarize(analyses):
                        **group[0]["group_identity"], "n_input": len(rows), "n_eligible": len(eligible),
                        "n_excluded": len(rows) - len(eligible), "n_complete": len(complete),
                        "n_not_run": sum(r["execution_status"] == "NOT_RUN" for r in rows),
+                       "declared_outcomes": dict(sorted(Counter(r["outcome"] for r in rows).items())),
+                       "valid_completed_declared_outcomes": dict(sorted(Counter(r["outcome"] for r in rows
+                           if r["validity"] == "VALID" and r["execution_status"] == "COMPLETED").items())),
                        "eligible_outcomes": dict(sorted(Counter(r["outcome"] for r in eligible).items())),
                        "completion_rate": len(complete) / len(eligible) if eligible else None,
                        "metrics": metrics})
@@ -351,12 +422,17 @@ def csv_text(analyses):
     return output.getvalue()
 
 
-def publish(directories, dataset, output_base, batch_id):
+def publish(directories, dataset, output_base, batch_id, source_index=None):
     require(contract.matches(r"[A-Za-z0-9][A-Za-z0-9._-]{0,63}", batch_id), "BATCH_ID_INVALID")
-    require(bool(directories), "RUN_REQUIRED")
+    require(bool(directories) or source_index is not None, "RUN_REQUIRED")
+    require(not directories or source_index is None, "RUN_INPUT_CONFLICT")
+    source = None
+    if source_index is not None:
+        runs, source = load_source_index(source_index, dataset)
+    else:
+        runs = [load_run(directory, dataset) for directory in directories]
     analyses, seen = [], set()
-    for directory in directories:
-        run = load_run(directory, dataset)
+    for run in runs:
         identity = (run["manifest"]["run_id"], run["manifest"]["device_alias"])
         require(identity not in seen, "DUPLICATE_RUN_INPUT")
         seen.add(identity)
@@ -371,6 +447,8 @@ def publish(directories, dataset, output_base, batch_id):
               "validator_sha256": hashlib.sha256(Path(contract.__file__).read_bytes()).hexdigest(),
               "outputs_sha256": {name: hashlib.sha256(value.encode("utf-8")).hexdigest()
                                  for name, value in payloads.items()}, "runs": analyses}
+    if source is not None:
+        report["source"] = source
     payloads["analysis_report.json"] = json.dumps(report, ensure_ascii=True, sort_keys=True, indent=2) + "\n"
     directory = Path(output_base) / f"{dataset}_analysis" / batch_id
     # All validation and analysis must succeed before creating an output batch.
@@ -393,14 +471,18 @@ def publish(directories, dataset, output_base, batch_id):
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--run", type=Path, action="append", required=True,
+    inputs = parser.add_mutually_exclusive_group(required=True)
+    inputs.add_argument("--run", type=Path, action="append",
                         help="Directory containing canonical manifest.json and events.jsonl; repeat per run")
+    inputs.add_argument("--source-index", type=Path,
+                        help="JSON index of exact Git source commit, paths and SHA-256 hashes")
     parser.add_argument("--dataset", choices=("fixture", "pilot", "main"), default="main")
     parser.add_argument("--output-base", type=Path, default=ROOT / "experiments")
     parser.add_argument("--batch-id", required=True)
     args = parser.parse_args(argv)
     try:
-        print(json.dumps(publish(args.run, args.dataset, args.output_base, args.batch_id), sort_keys=True))
+        print(json.dumps(publish(args.run, args.dataset, args.output_base, args.batch_id,
+                                 args.source_index), sort_keys=True))
         return 0
     except AnalysisError as error:
         print(f"SEM45_ANALYSIS_ERROR:{error}", file=sys.stderr)

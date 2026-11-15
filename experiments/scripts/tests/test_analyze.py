@@ -3,8 +3,10 @@
 import copy
 from contextlib import redirect_stderr, redirect_stdout
 from datetime import datetime, timedelta, timezone
+import csv
 import importlib.util
 import io
+import hashlib
 import json
 from pathlib import Path
 import sys
@@ -185,6 +187,40 @@ class MetricTests(unittest.TestCase):
                 self.assertIsNone(row["sync_ms"])
                 self.assertFalse(row["target_applied_in_window"])
                 self.assertIn("ANDROID_WINDOW_OR_BOOT_UNKNOWN", row["flags"])
+
+    def test_missing_event_boot_keeps_window_counts_unknown_and_raw_stages_separate(self):
+        for event in self.events:
+            if event["origin"] == "ANDROID":
+                event["boot_session_id"] = None
+        row = self.analyze()["row"]
+        self.assertEqual(row["outcome"], "SUCCESS")
+        self.assertEqual(row["observed_completion"], "UNCERTAIN_WINDOW")
+        self.assertFalse(row["window_events_verified"])
+        self.assertIsNone(row["target_applied_in_window"])
+        for field in ("natural_periodic_cycles", "work_attempt_count", "get_started_count",
+                      "retry_event_count", "applied_event_count", "late_target_applied_count"):
+            self.assertIsNone(row[field])
+        for kind in ("server_updated", "push_send_accepted", "push_received", "work_enqueued",
+                     "work_started", "snapshot_applied"):
+            self.assertEqual(row[kind + "_event_count_all"], 1)
+        self.assertIn("OUTCOME_EVIDENCE_UNVERIFIED", row["flags"])
+        self.assertNotIn("OUTCOME_EVIDENCE_CONFLICT", row["flags"])
+
+    def test_missing_boot_timeout_keeps_declared_outcome_and_no_zero_duration(self):
+        self.manifest.update(outcome="TIMEOUT", reason_codes=["TIMEOUT"])
+        self.manifest["observation"]["natural_periodic_cycles"] = 2
+        for event in self.events:
+            event["boot_session_id"] = None
+        result = self.analyze()
+        row = result["row"]
+        self.assertEqual(row["outcome"], "TIMEOUT")
+        self.assertEqual(row["declared_natural_periodic_cycles"], 2)
+        self.assertIsNone(row["natural_periodic_cycles"])
+        self.assertIsNone(row["sync_ms"])
+        self.assertIsNone(row["update_to_applied_ms"])
+        csv_row = next(csv.DictReader(io.StringIO(analyzer.csv_text([result]))))
+        self.assertEqual(csv_row["natural_periodic_cycles"], "")
+        self.assertEqual(csv_row["target_applied_in_window"], "")
 
     def test_clock_offset_sign_and_uncertainty(self):
         self.controlled_clock()
@@ -434,6 +470,97 @@ class OutputTests(unittest.TestCase):
         row = analyzer.analyze_run(self.load("main"))["row"]
         self.assertFalse(row["eligible"])
         self.assertIn("OUTCOME_EVIDENCE_CONFLICT", row["flags"])
+
+    def test_pilot_declared_outcomes_are_visible_with_zero_main_denominator(self):
+        self.manifest.update(data_kind="OBSERVED", run_phase="pilot")
+        self.events = [e for e in self.events if e["event_type"] != "push_send_accepted"]
+        success = analyzer.analyze_run(self.load("pilot"))
+        self.manifest.update(outcome="TIMEOUT", reason_codes=["TIMEOUT"])
+        timeout = analyzer.analyze_run(self.load("pilot"))
+        self.manifest.update(validity="INVALID")
+        invalid = analyzer.analyze_run(self.load("pilot"))
+        group = analyzer.summarize([success, timeout, invalid])[0]
+        self.assertEqual(group["declared_outcomes"], {"SUCCESS": 1, "TIMEOUT": 2})
+        self.assertEqual(group["valid_completed_declared_outcomes"], {"SUCCESS": 1, "TIMEOUT": 1})
+        self.assertEqual(group["n_eligible"], 0)
+        self.assertIsNone(group["completion_rate"])
+
+
+class SourceIndexTests(unittest.TestCase):
+    setUp = InputTests.setUp
+    load = InputTests.load
+
+    def index_input(self):
+        self.load()
+        self.source_files = {
+            "exports/run/manifest.json": (self.directory / "manifest.json").read_bytes(),
+            "exports/run/events.jsonl": (self.directory / "events.jsonl").read_bytes(),
+            "checks.md": b"Synthetic source review evidence\n"}
+        def digest(path):
+            return hashlib.sha256(self.source_files[path]).hexdigest()
+
+        self.index = {"index_version": "1.0.0", "dataset": "fixture", "source_commit": "a" * 40,
+                      "evidence": [{"path": "checks.md", "sha256": digest("checks.md")}],
+                      "runs": [{"directory": "exports/run",
+                                "manifest_sha256": digest("exports/run/manifest.json"),
+                                "events_sha256": digest("exports/run/events.jsonl")}]}
+        return self.write_index()
+
+    def write_index(self):
+        path = self.directory / "index.json"
+        path.write_text(json.dumps(self.index), encoding="utf-8")
+        return path
+
+    def test_pinned_input_matches_local_output_and_report_records_provenance(self):
+        path = self.index_input()
+        with patch.object(analyzer, "source_bytes", side_effect=lambda commit, p: self.source_files[p]):
+            analyzer.publish(None, "fixture", self.directory / "out", "pinned", path)
+        analyzer.publish([self.directory], "fixture", self.directory / "out", "local")
+        root = self.directory / "out/fixture_analysis"
+        for name in ("results.csv", "summary.json"):
+            self.assertEqual((root / "pinned" / name).read_bytes(), (root / "local" / name).read_bytes())
+        report = json.loads((root / "pinned/analysis_report.json").read_text())
+        self.assertEqual(report["source"]["source_commit"], "a" * 40)
+        self.assertEqual(report["source"]["index_sha256"], hashlib.sha256(path.read_bytes()).hexdigest())
+
+    def test_changed_source_or_evidence_hash_aborts_before_output(self):
+        for name in ("exports/run/manifest.json", "exports/run/events.jsonl", "checks.md"):
+            path = self.index_input()
+            self.source_files[name] += b"\n"
+            with self.subTest(name=name), patch.object(analyzer, "source_bytes",
+                    side_effect=lambda commit, p: self.source_files[p]):
+                with self.assertRaisesRegex(analyzer.AnalysisError, "SOURCE_HASH_MISMATCH"):
+                    analyzer.publish(None, "fixture", self.directory / "out", "bad", path)
+            self.assertFalse((self.directory / "out").exists())
+
+    def test_unpinned_revision_and_dataset_change_are_rejected(self):
+        self.index_input()
+        self.index["source_commit"] = "origin/main"
+        with self.assertRaisesRegex(analyzer.AnalysisError, "SOURCE_COMMIT_INVALID"):
+            analyzer.load_source_index(self.write_index(), "fixture")
+        self.index["source_commit"] = "a" * 40
+        with self.assertRaisesRegex(analyzer.AnalysisError, "DATASET_PHASE_MISMATCH"):
+            analyzer.load_source_index(self.write_index(), "main")
+
+    def test_bad_source_paths_never_invoke_git(self):
+        for path in ("/absolute", "../outside", "safe/../outside", "C:/outside", "a\\b", "a\nother"):
+            with self.subTest(path=path), patch.object(analyzer.subprocess, "run") as run:
+                with self.assertRaisesRegex(analyzer.AnalysisError, "SOURCE_PATH_INVALID"):
+                    analyzer.source_bytes("a" * 40, path)
+                run.assert_not_called()
+
+    def test_missing_git_object_has_static_error(self):
+        with patch.object(analyzer.subprocess, "run", side_effect=FileNotFoundError):
+            with self.assertRaisesRegex(analyzer.AnalysisError, "SOURCE_OBJECT_UNAVAILABLE"):
+                analyzer.source_bytes("a" * 40, "safe/path")
+
+    def test_duplicate_runs_from_index_are_rejected(self):
+        self.index_input()
+        self.index["runs"] *= 2
+        with patch.object(analyzer, "source_bytes", side_effect=lambda commit, p: self.source_files[p]):
+            with self.assertRaisesRegex(analyzer.AnalysisError, "DUPLICATE_RUN_INPUT"):
+                analyzer.publish(None, "fixture", self.directory / "out", "bad", self.write_index())
+        self.assertFalse((self.directory / "out").exists())
 
 
 if __name__ == "__main__":
