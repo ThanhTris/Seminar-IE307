@@ -4,7 +4,7 @@
 
 ## Kiểm trước phiên
 
-Nhận `release/CANDIDATE_MANIFEST.json`, `docs/evidence/SEM-37/CANDIDATE_GATE.md`, CHECKS và APK từ Trung. Đối chiếu full source commit, APK SHA-256, config và trạng thái gate. Tại lần kiểm 15/11, các file này chỉ có trên PR #28 ở trạng thái NOT_READY. Khi chỉ kiểm source chưa freeze, ghi development/pilot.
+Nhận `release/CANDIDATE_MANIFEST.json`, `docs/evidence/SEM-37/CANDIDATE_GATE.md`, CHECKS và APK từ Trung. Đối chiếu full source commit, APK SHA-256, config và trạng thái gate. PR #28 đã merge ngày 15/11; trên upstream main `bcc7c588` các file vẫn NOT_READY/gate false, không có APK freeze, dù task SEM-37 được ghi Done. Nhánh đo giữ nguyên source đến khi batch đóng rồi mới đồng bộ main. Khi chỉ kiểm source chưa freeze, ghi development/pilot.
 
 Ví dụ tái lập build đúng revision đã kiểm trên máy Vinh, từ root repo. Thư mục worktree phải chưa tồn tại.
 

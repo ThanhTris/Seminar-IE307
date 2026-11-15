@@ -5,7 +5,7 @@
 - Vinh (`Vinh5905`) thực hiện ngày **15/11/2026, UTC+7**. Nhánh `codex/SEM-41-emulator-main` từ main `6e87411b60e8504d431cd06e577be94b7bb2244f`, sau merge SEM-34 PR #26. Hạn gốc 07/11/2026 13 giờ được giữ trong task.
 - [SEM-16](../SEM-16/CHECKS.md) và [SEM-24](../SEM-24/CHECKS.md) đã nhận. Task SEM-41 hiện cho phép bắt đầu trước SEM-37, còn [protocol](../../../experiments/PROTOCOL.md) yêu cầu candidate trước khi ghi phase `main`.
 - SEM-41 dùng **emulator**. Máy OPPO do Trí thực hiện tại [SEM-42](../../../tasks/backlog/SEM-42.md).
-- Candidate đang ở [PR #28](https://github.com/ThanhTris/Seminar-IE307/pull/28), draft, branch `codex/SEM-36-37-52-trung-final`, head mới đã kiểm `1f79ee93e9a52af2b21c82372f23a6ac684d3ceb`. Manifest nguồn ghim app `9e7e55b76c646ff113a152022cc23317a202e533`, server `c77772e426c00ae464240f00942f8368c638aaa8`, `candidate_status=NOT_READY`, `release_gate.passed=false`, APK/hash để null.
+- Source ứng viên ở [PR #28](https://github.com/ThanhTris/Seminar-IE307/pull/28), head đã kiểm `1f79ee93e9a52af2b21c82372f23a6ac684d3ceb`, đã merge lúc 12:21 UTC. SEM-37 được ghi Done trên Project ở snapshot main `bcc7c58853fb5de59bb9bd599cd12fe41e5ee0eb` (12:27 UTC), **không kèm APK freeze**. Manifest nguồn ghim app `9e7e55b76c646ff113a152022cc23317a202e533`, server `c77772e426c00ae464240f00942f8368c638aaa8`, `candidate_status=NOT_READY`, `release_gate.passed=false`, APK/hash để null.
 - Đã build đúng app revision ghim trong worktree detached, kiểm runtime Android/server không đổi so với head PR #28. File nguồn của task Trung được giữ trong worktree riêng để kiểm, phần thay đổi SEM-41 gồm plan và evidence.
 
 ## Kiểm thực tế ngày 15/11
@@ -22,7 +22,7 @@
 | Omission report | Giữ lý do event chưa xuất được | Run smoke có 1 `periodic_cancelled` bị loại khỏi canonical và được ghi rõ trong report, raw Room giữ đủ 6 row | Pass — partial export được ghi rõ |
 | Legacy sau migration | Các row thiếu provenance giữ format cũ | Lượt SEM-29 r2 xuất 0 canonical, báo 15 omitted do thiếu captured mode hoặc periodic_cancelled chưa hỗ trợ | Pass — legacy không được nâng nhãn |
 | Firebase | Có project/config/token trước các ca PUSH | App báo `FIREBASE_NOT_CONFIGURED`; người dùng đã xác nhận chưa có cấu hình trong SEM-34 | Blocker |
-| Candidate gate | Manifest đã freeze cùng APK/config/pilot | Nguồn SEM-37 vẫn NOT_READY; chưa freeze APK/checksum/profile. Unit suite follow-up đã đạt 32/32 | Blocker — bàn giao candidate |
+| Candidate gate | Manifest đã freeze cùng APK/config/pilot | Task SEM-37 Done, release manifest vẫn NOT_READY; chưa freeze APK/checksum/profile. Unit suite follow-up đã đạt 32/32 | Blocker — bàn giao candidate |
 | Main E01–E06 | Đủ số lượt/window trên candidate | 27 slot PLANNED/NOT_RUN, chưa tạo run main | Not run |
 | Cleanup | Thiết bị/server không còn work chạy của control | Home resumed, stopped=false, mạng connected, idle ACTIVE, 0 active sync work. Server riêng đã dừng và gỡ lock | Pass — development |
 
@@ -40,7 +40,7 @@ Sau control development lúc 03:00 UTC, emulator giữ APK development của rev
 
 ## Phần cần nhận để chạy main
 
-1. **SEM-37 của Trung** bàn giao revision cuối và chốt APK/checksum/gate cùng pilot liên quan. Follow-up `1f79ee9` đã sửa assertion theo review PR #28, kiểm thực tế trên máy Vinh đạt 32/32 unit tests. Hash của kiểm development này là artifact đầu vào để đối chiếu, không tự thay thế freeze của SEM-37.
+1. **Chốt artifact/gate trước main.** SEM-37 đã Done/merge về source, nhưng release manifest vẫn NOT_READY/gate false, chưa freeze APK/checksum/profile. Follow-up `1f79ee9` đã sửa assertion theo review PR #28, kiểm thực tế trên máy Vinh đạt 32/32 unit tests. Hash của kiểm development này là artifact đầu vào để đối chiếu, không tự thay thế freeze của SEM-37.
 2. **Pilot theo từng loại ca** trên revision/profile sẽ đo. Hiện có 1/8 slot được qualify lại bằng collector đã sửa; E01 đã đạt 5 cycle tự nhiên/90phút. Ca PUSH/profile Firebase chưa kiểm; requalify ca bị ảnh hưởng nếu candidate cuối đổi code/config.
 3. **Firebase** cho 19 slot PUSH thuộc E02/E03/E04/E05, gồm google-services.json, credential project, token emulator hiện hành. Tám slot PERIODIC/HYBRID skip vẫn cần candidate/pilot đúng ca.
 4. **E05 race** cần hook/barrier và bằng chứng worker đang chạy khi tín hiệu mới tới. Đặt INJECTED cho nhóm đó và nhận test logic SEM-38/39. B1 còn thiếu thì giữ các slot push/race NOT_RUN.
