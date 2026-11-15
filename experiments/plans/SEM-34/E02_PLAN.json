@@ -1,0 +1,58 @@
+{
+  "plan_version": "1.0.0",
+  "data_kind": "PLANNED",
+  "task_id": "SEM-34",
+  "case_id": "E02",
+  "run_phase": "pilot",
+  "mode": "PUSH",
+  "device_alias": "emulator-main",
+  "planned_window_seconds": 120,
+  "planned_configuration": {
+    "push_priority": "normal",
+    "push_payload_kind": "DATA_ONLY",
+    "ttl_ms": 86400000,
+    "collapse_key": null
+  },
+  "required_inputs": [
+    "FIREBASE_ANDROID_CONFIG",
+    "FCM_SENDER_CREDENTIALS",
+    "CURRENT_DEVICE_TOKEN",
+    "PUSH_MODE_WITH_PERIODIC_DISABLED"
+  ],
+  "app_commit": null,
+  "server_commit": null,
+  "apk_sha256": null,
+  "evidence_reference": "../../../docs/evidence/SEM-34/PREFLIGHT.json",
+  "slots": [
+    {
+      "slot_id": "planned-slot-sem34-e02-01",
+      "run_id": null,
+      "execution_status": "NOT_RUN",
+      "previous_placeholder_id": "run-sem34-e02-20261112-01"
+    },
+    {
+      "slot_id": "planned-slot-sem34-e02-02",
+      "run_id": null,
+      "execution_status": "NOT_RUN",
+      "previous_placeholder_id": "run-sem34-e02-20261112-02"
+    },
+    {
+      "slot_id": "planned-slot-sem34-e02-03",
+      "run_id": null,
+      "execution_status": "NOT_RUN",
+      "previous_placeholder_id": "run-sem34-e02-20261112-03"
+    },
+    {
+      "slot_id": "planned-slot-sem34-e02-04",
+      "run_id": null,
+      "execution_status": "NOT_RUN",
+      "previous_placeholder_id": "run-sem34-e02-20261112-04"
+    },
+    {
+      "slot_id": "planned-slot-sem34-e02-05",
+      "run_id": null,
+      "execution_status": "NOT_RUN",
+      "previous_placeholder_id": "run-sem34-e02-20261112-05"
+    }
+  ]
+}
