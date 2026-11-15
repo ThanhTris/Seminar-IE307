@@ -182,5 +182,9 @@
     }
   ],
   "comparison_reference": "docs/evidence/SEM-41/COLLECTOR_COMPARISON.json",
-  "first_corrected_window_has_native_cycle_before20min": true
+  "first_corrected_window_has_native_cycle_before20min": true,
+  "corrected_e01_cycles": 5,
+  "corrected_e01_cycle_goal_met": true,
+  "requalification_completed": false,
+  "new_valid_completed_slots": 1
 }

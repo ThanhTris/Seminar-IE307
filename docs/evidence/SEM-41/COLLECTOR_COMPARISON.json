@@ -56,6 +56,44 @@
     "2026-11-15T13:19:23.106Z"
   ],
   "room_capture_tar_sha256": "8d05477088ad245a951f9927a925112fbadb2e539abb6261f15ca9c22ea3282e",
-  "full_e01_window_completed": false,
-  "interpretation": "Natural periodic dispatch observed after collector fix; keep full90min and qualify only after closure. No OS binary source equivalence or cross-device latency claimed."
+  "full_e01_window_completed": true,
+  "interpretation": "Natural periodic dispatch observed after collector fix; keep full90min and qualify only after closure. No OS binary source equivalence or cross-device latency claimed.",
+  "after_fix_partial_e01_minute60": {
+    "utc": "2026-11-15T14:04:23.326Z",
+    "data_kind": "OBSERVED",
+    "scope": "PARTIAL_ONGOING_E01_WINDOW",
+    "run_id": "run-sem41-pilot-e01-1-20261115-575a7a",
+    "elapsed_since_window_start_ms": 3653680,
+    "read_only_room_copy": true,
+    "instrumentation_used": false,
+    "scheduler_dump_used": false,
+    "new_periodic_cycles": 3,
+    "target_version": 16,
+    "target_applied": true,
+    "cache_version": 16,
+    "all_sources_periodic": true,
+    "collector_proof": {
+      "status": "PASS",
+      "reason": "NO_IN_WINDOW_JOB_DUMP",
+      "checkpoints_without_clock": [],
+      "in_window_dump_count": 0,
+      "timer_transition_count": 0,
+      "in_window_dumps": [],
+      "events_or_outcomes_modified": false
+    },
+    "candidate_gate_passed": false,
+    "main_samples_added": 0,
+    "pilot_window_finished": false
+  },
+  "completed_e01_result": {
+    "run_id": "run-sem41-pilot-e01-1-20261115-575a7a",
+    "manifest_reference": "experiments/pilots/run-sem41-pilot-e01-1-20261115-575a7a/manifest.json",
+    "actual_duration_ms": 5400720,
+    "new_periodic_cycles": 5,
+    "outcome": "SUCCESS",
+    "goal_at_least3_cycles_met": true,
+    "cache_version_after": 16,
+    "direct_dispatch_used": false,
+    "in_window_scheduler_dumps": 0
+  }
 }
