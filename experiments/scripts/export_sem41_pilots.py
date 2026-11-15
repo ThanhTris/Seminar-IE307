@@ -62,9 +62,10 @@ def review(folder):
     checks["only_cleanup_omitted"] = all(event["event_type"] == "periodic_cancelled" for event in omitted)
     checkpoints = {path.stem: load(path) for path in folder.glob("*-checkpoint.json")}
     checks["background_and_end_evidence"] = {"background-checkpoint", "window-end-checkpoint"} <= set(checkpoints)
-    clean = checkpoints["cleanup-checkpoint"]
+    clean = checkpoints.get("cleanup-checkpoint")
+    checks["cleanup_evidence"] = clean is not None
     state = load(folder / "export-v2-state.json")
-    checks["cleanup"] = record.get("cleanup_passed") is True and not clean["package_stopped"] and not clean["app_resumed"] and clean["network_connected"] and clean["idle"] == "ACTIVE" and not any(work["state"] not in {"CANCELLED", "SUCCEEDED", "FAILED"} for work in state["periodic_work"])
+    checks["cleanup"] = clean is not None and record.get("cleanup_passed") is True and not clean["package_stopped"] and not clean["app_resumed"] and clean["network_connected"] and clean["idle"] == "ACTIVE" and not any(work["state"] not in {"CANCELLED", "SUCCEEDED", "FAILED"} for work in state["periodic_work"])
     start, end = record.get("start_elapsed_realtime_ms"), record.get("end_elapsed_realtime_ms")
     within = [event for event in events if start is not None and start <= event["elapsed_realtime_ms"] <= end]
     setup = [event for event in events if start is not None and event["elapsed_realtime_ms"] < start]
@@ -97,6 +98,9 @@ def review(folder):
     if record["case_id"] == "E04":
         offline, online = record.get("offline_elapsed_realtime_ms"), record.get("reconnect_elapsed_realtime_ms")
         checks["offline_and_reconnect_windows"] = all(value is not None for value in (offline, online, end)) and online - offline >= 120000 and end - online >= 1800000
+        # Target recovery belongs to the post-reconnect phase. Keep producer
+        # events/outcome intact, but reject an early apply as a protocol failure.
+        checks["target_applied_after_reconnect"] = online is not None and all(event["elapsed_realtime_ms"] >= online for event in applied)
         proof = load(folder / "offline-proof.json") if (folder / "offline-proof.json").exists() else {}
         checks["guest_offline_evidence"] = proof.get("default_network_absent") is True and proof.get("guest_server_http_reachable") is False and proof.get("same_boot_as_batch") is True and offline is not None and online is not None and offline <= proof.get("elapsed_realtime_ms", -1) < online
     if record["case_id"] == "E06":

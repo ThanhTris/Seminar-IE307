@@ -55,6 +55,65 @@ class PilotReviewTests(unittest.TestCase):
         (self.folder / "background-checkpoint.json").unlink()
         self.assertEqual(self.review()["validity"], "INVALID")
 
+    def test_aborted_capture_without_cleanup_evidence_is_retained(self):
+        self.record.update(execution_status="ABORTED", outcome="FAILURE", cleanup_passed=False)
+        (self.folder / "cleanup-checkpoint.json").unlink()
+        audit = self.review()
+        self.assertEqual(audit["validity"], "INVALID")
+        self.assertFalse(audit["checks"]["cleanup_evidence"])
+        self.assertFalse(audit["checks"]["cleanup"])
+        self.assertEqual(reviewer.load(self.folder / "observation.json")["outcome"], "FAILURE")
+
+    def test_completed_capture_cannot_pass_without_cleanup_evidence(self):
+        (self.folder / "cleanup-checkpoint.json").unlink()
+        self.assertEqual(self.review()["validity"], "INVALID")
+
+    def offline_case(self, applied_at=None):
+        self.record.update(case_id="E04", offline_elapsed_realtime_ms=2000,
+                           reconnect_elapsed_realtime_ms=122000, end_elapsed_realtime_ms=1922000)
+        reviewer.save(self.folder / "offline-proof.json", {
+            "default_network_absent": True, "guest_server_http_reachable": False,
+            "same_boot_as_batch": True, "elapsed_realtime_ms": 2100})
+        if applied_at is not None:
+            self.record.update(outcome="SUCCESS", new_periodic_cycles=1)
+            for offset, kind in enumerate(("work_started", "snapshot_fetch_started",
+                                           "snapshot_fetch_completed", "snapshot_applied")):
+                event = {"event_id": "synthetic-" + kind, "event_type": kind,
+                         "request_id": "synthetic-request", "source": "PERIODIC",
+                         "work_id": "synthetic-work", "elapsed_realtime_ms": applied_at - 3 + offset,
+                         "data_version": 2, "outcome": "success", "network_call_id": "synthetic-fetch"}
+                self.events.append(event)
+                self.raw.append({"eventId": event["event_id"]})
+            self.report["exported_event_count"] = len(self.events)
+
+    def test_offline_target_apply_invalidates_otherwise_successful_e04(self):
+        self.offline_case(applied_at=120000)
+        audit = self.review()
+        self.assertEqual(audit["validity"], "INVALID")
+        self.assertFalse(audit["checks"]["target_applied_after_reconnect"])
+        self.assertTrue(audit["checks"]["applied_fetch_provenance"])
+        self.assertTrue(audit["checks"]["record_outcome"])
+        self.assertEqual(audit["applied_target_count_in_window"], 1)
+
+    def test_e04_target_apply_after_reconnect_is_valid(self):
+        self.offline_case(applied_at=122004)
+        self.assertEqual(self.review()["validity"], "VALID")
+
+    def test_e04_target_apply_at_reconnect_boundary_is_valid(self):
+        self.offline_case(applied_at=122000)
+        self.assertEqual(self.review()["validity"], "VALID")
+
+    def test_e04_full_window_timeout_remains_valid(self):
+        self.offline_case()
+        audit = self.review()
+        self.assertEqual(audit["validity"], "VALID")
+        self.assertEqual(audit["applied_target_count_in_window"], 0)
+
+    def test_e04_missing_reconnect_cannot_qualify(self):
+        self.offline_case(applied_at=122004)
+        self.record.pop("reconnect_elapsed_realtime_ms")
+        self.assertEqual(self.review()["validity"], "INVALID")
+
     def test_equal_version_with_different_cache_payload_is_invalid(self):
         connection = sqlite3.connect(str(self.folder / "setup-db/seminar_bulletin.db"))
         connection.execute("UPDATE bulletin_items SET body='different epoch'")
