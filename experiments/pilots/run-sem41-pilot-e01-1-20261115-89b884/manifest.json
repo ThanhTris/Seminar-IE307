@@ -19,9 +19,11 @@
     "CANDIDATE_NOT_READY",
     "CLOCK_UNCONTROLLED",
     "CLEANUP_EVENT_OMITTED",
+    "AUDIT_BASELINE_CACHE_MATCHES_SERVER",
     "AUDIT_BACKGROUND_AND_END_EVIDENCE",
     "AUDIT_SINGLE_REGISTRATION",
-    "AUDIT_FULL_WINDOW"
+    "AUDIT_FULL_WINDOW",
+    "MEASUREMENT_NOT_STARTED"
   ],
   "intervention": "NONE",
   "build": {
@@ -128,6 +130,7 @@
   "evidence_files": [
     "android-events-raw.jsonl",
     "audit.json",
+    "baseline-content-proof.json",
     "canonical-export-report.json",
     "cleanup-checkpoint.json",
     "collector-boot.json",

@@ -13,11 +13,13 @@
   "mode": "PERIODIC",
   "execution_status": "COMPLETED",
   "outcome": "SUCCESS",
-  "validity": "VALID",
+  "validity": "INVALID",
   "reason_codes": [
     "CANDIDATE_NOT_READY",
     "CLOCK_UNCONTROLLED",
-    "CLEANUP_EVENT_OMITTED"
+    "CLEANUP_EVENT_OMITTED",
+    "AUDIT_BASELINE_CACHE_MATCHES_SERVER",
+    "BASELINE_PAYLOAD_MISMATCH"
   ],
   "intervention": "INJECTED",
   "build": {
@@ -133,6 +135,7 @@
     "android-events-raw.jsonl",
     "audit.json",
     "background-checkpoint.json",
+    "baseline-content-proof.json",
     "canonical-export-report.json",
     "cleanup-checkpoint.json",
     "collector-boot.json",

@@ -1,6 +1,7 @@
 {
   "run_id": "run-sem41-pilot-e03-1-20261115-5db4eb",
   "checks": {
+    "baseline_cache_matches_server": true,
     "only_cleanup_omitted": true,
     "background_and_end_evidence": true,
     "cleanup": true,
@@ -38,6 +39,19 @@
     "doze_phases": true,
     "record_outcome": true,
     "record_cycle_count": true
+  },
+  "baseline_content": {
+    "status": "PASS",
+    "reason": "BASELINE_MATCH",
+    "cache_version": 5,
+    "server_version": 5,
+    "cache_item_count": 5,
+    "server_item_count": 5,
+    "cache_items_sha256": "27ce1704e0935d2af536c53caf8c1fab0aa38bdd2013872ee5b23810a5fe2bfe",
+    "server_items_sha256": "27ce1704e0935d2af536c53caf8c1fab0aa38bdd2013872ee5b23810a5fe2bfe",
+    "server_store_epoch": "pilots-20261115-r2",
+    "source": "CAPTURED_SQLITE_AND_RETAINED_LEDGER",
+    "normalization": "SORT_ID_JSON_SORT_KEYS_COMPACT_UTF8"
   },
   "validity": "VALID",
   "actual_duration_ms": 2103340,

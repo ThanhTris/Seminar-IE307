@@ -1,0 +1,13 @@
+{
+  "status": "FAIL",
+  "reason": "BASELINE_PAYLOAD_MISMATCH",
+  "cache_version": 4,
+  "server_version": 4,
+  "cache_item_count": 4,
+  "server_item_count": 4,
+  "cache_items_sha256": "c78ce87b0f2c7c57924d8619ee38cbc311d8236fc3f9d707c5f5868c4c5de9bf",
+  "server_items_sha256": "f66b800a2422f83b3df1144559ecf65e52160a5aa26deb4678c705d756fcc722",
+  "server_store_epoch": "pilots-20261115-r2",
+  "source": "CAPTURED_SQLITE_AND_RETAINED_LEDGER",
+  "normalization": "SORT_ID_JSON_SORT_KEYS_COMPACT_UTF8"
+}

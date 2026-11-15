@@ -3,7 +3,7 @@
   "data_kind": "OBSERVED",
   "run_id": "run-sem41-pilot-e01-1-20261115-89b884",
   "device_alias": "emulator-main",
-  "manifest_input_sha256": "d3f0215cd2ad098271d223b7d90ad9d4c548270dc11e90280e5f2e0f8595aee5",
+  "manifest_input_sha256": "447ee7d2c9591f25720c5664052bae99f75b44325607d43ea4d90f12b3466f64",
   "sources": [
     {
       "origin": "ANDROID",

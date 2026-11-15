@@ -131,6 +131,7 @@
     "android-events-raw.jsonl",
     "audit.json",
     "background-checkpoint.json",
+    "baseline-content-proof.json",
     "canonical-export-report.json",
     "cleanup-checkpoint.json",
     "collector-boot.json",

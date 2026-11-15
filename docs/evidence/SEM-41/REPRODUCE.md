@@ -76,12 +76,15 @@ Chuẩn bị `device-map.json` và `deny-values.json` private có alias/serial v
 caffeinate -i python3 experiments/scripts/run_sem41_periodic_pilots.py \
   --adb "$HOME/Library/Android/sdk/platform-tools/adb" \
   --device-map .local/sem41/device-map.json \
+  --store-dir .local/sem41/pilots-20261115-r3/store \
   --private-output .local/sem41/pilots-new-batch
 ```
 
 Theo dõi `status.json`, `heartbeat.json` và `observation.json` trong private output. Nếu không chứng minh được guest offline, runner giữ lượt E04 aborted, khôi phục mạng, ghi blocker và bỏ qua những lượt E04 còn lại. Lỗi khác dừng batch sau cleanup. Giữ cả lần setup sai hoặc bị gián đoạn và dùng run ID mới khi thử lại. Trên Android 17 dùng `cmd wifi set-wifi-enabled`, `cmd phone data`, `cmd connectivity airplane-mode`; không dựa vào lệnh `svc` không có trên image này.
 
 Runner hiện tự ghi `runner-identity.json` ở batch root với full observer commit và SHA-256 source tại lúc khởi động, phase pilot và candidate gate false. Source runner phải được commit. Runner kiểm hash cả app/test APK, đối chiếu source server với commit ghim rồi build server trước setup. Trong batch giữ nguyên code/app/server, dùng private output mới. E04 tự lưu `offline-proof.json`; restore-idle chờ ACTIVE tối đa 10 giây và giữ các mẫu trong `*-transition.json`.
+
+`--store-dir` trỏ tới store thật đã được giữ sau run trước, chỉ khởi động khi server cũ đã dừng/port trống. Client có cache thì bắt buộc dùng retained store; không tạo lại payload khác với cùng version/ETag. Cache rỗng mới được tạo store rỗng mới. Sau cấu hình UI, runner đối chiếu cached version và hash toàn bộ items với snapshot server trước clock, ghi `baseline-content-proof.json`; không khớp thì dừng setup. Đưa cache về snapshot hiện hành ngoài window và drain work trước khi đo. Review helper kiểm lại baseline từ capture SQLite và response lịch sử trong ledger, kể cả khi server đã có update sau đó. Giữ cùng store/ledger qua restart, không seed theo cached version.
 
 Sau khi một batch lỗi đã cleanup đạt, có thể chọn những lượt còn lại bằng `--runs E03:2 E04:1 E04:2 E04:3 E06:1 E06:2` trên lệnh khởi động mới. Mỗi lượt vẫn có run ID mới và đủ toàn bộ window. Giữ run lỗi dưới INVALID và ghi quan hệ thay thế; không nối phần thời gian còn thiếu vào run cũ.
 

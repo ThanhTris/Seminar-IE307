@@ -1,6 +1,7 @@
 {
   "run_id": "run-sem41-pilot-e01-1-20261115-89b884",
   "checks": {
+    "baseline_cache_matches_server": false,
     "only_cleanup_omitted": true,
     "background_and_end_evidence": false,
     "cleanup": true,
@@ -11,6 +12,10 @@
     "full_window": false,
     "record_outcome": true,
     "record_cycle_count": true
+  },
+  "baseline_content": {
+    "status": "NOT_ASSESSED",
+    "reason": "MEASUREMENT_NOT_STARTED"
   },
   "validity": "INVALID",
   "actual_duration_ms": null,
