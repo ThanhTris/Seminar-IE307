@@ -1,8 +1,8 @@
 # SEM-45 — Kiểm parser và bàn giao kết quả offline
 
-- Người thực hiện Tuấn (`mtuan2491`), cập nhật **15/11/2026 (UTC+7)**.
+- Người thực hiện Tuấn (`mtuan2491`), cập nhật **16/11/2026 (UTC+7)** theo review của Trí trên `dec00b7`.
 - Nhánh `codex/SEM-45-log-parser`, tạo từ main `d29532ac19a2fba402d2d1c6d25dfb63a306a87a` ngày 08/11. Đã nhận main `bcc7c58` bằng merge commit `0d4a0e9`.
-- **Đầu ra của SEM-45 đã hoàn thiện để review Draft PR**, gồm parser, CSV pilot, index nguồn, summary/report và hướng dẫn tái lập. Trạng thái Project vẫn In Progress trong lần bàn giao này.
+- **Đầu ra SEM-45 được sửa theo review**, gồm parser, CSV của 12 lượt pilot lịch sử, index nguồn, summary/report và hướng dẫn tái lập. Bộ được chọn hiện có **0 VALID / 12 INVALID** do thu hồi qualification. Trạng thái Project vẫn In Progress trong lần bàn giao này.
 - Chính sách task hiện hành cho phép bàn giao đầu ra có thật cùng Not run/giới hạn cho đầu vào chưa nhận. Ghi chú chờ toàn bộ SEM-41/42 ngày 08/11 đã được thay bằng phạm vi kiểm chứng dưới đây. [Quy định SEM-45](../../../tasks/backlog/SEM-45.md).
 
 ## Các bước và commit
@@ -12,9 +12,17 @@
 | 1. Cập nhật nền | Merge main mới nhất và kiểm lại 71 test cũ | `0d4a0e9` |
 | 2. Kiểm parser với đầu vào mới | Giữ dữ liệu thiếu boot ở trạng thái chưa xác minh, thêm nguồn pinned/hash và outcome khai báo. 80 test đạt | `c8ae2fe` |
 | 3. Sinh artifact thật | CSV 12 dòng pilot và report tái lập từ nguồn cố định, giữ các lượt INVALID | `fd3aa8c` |
-| 4. Rà bàn giao | Tách nhóm epoch store, giữ LF để checksum ổn định, chạy 81 test, sinh lại artifact, ghi giới hạn và chuẩn bị Draft PR | Commit chứa bản CHECKS này, tra `git log -1 -- docs/evidence/SEM-45/CHECKS.md` |
+| 4. Rà bàn giao | Tách nhóm epoch store, giữ LF để checksum ổn định, chạy 81 test, sinh lại artifact, ghi giới hạn và chuẩn bị Draft PR | `dec00b7` |
 
 Lịch sử công cụ ngày 08/11 gồm loader `85aab1c`, metrics `f7c1958`, CLI/tests/docs `eba13fe` và ghi chú tiến độ `648c81c`. Merge nền trước lần cập nhật này là `559c87c`. Các kiểm thử synthetic lịch sử đạt 71/71.
+
+## Sửa theo review ngày 16/11
+
+| Bước | Kết quả | Commit |
+|---|---|---|
+| 1. Nhận revision nguồn mới | Pin `42ca000`, kiểm 12 manifest hiện INVALID, giữ nguyên event bytes, ghi rõ phạm vi 12 lượt cũ và 6 lượt mới ngoài bộ chọn | `d202701` |
+| 2. Tái sinh và kiểm artifact | CSV/summary/report/VERIFICATION mới, 81 test đạt, tái lập và checksum khớp, VALID = 0 và INVALID = 12 | `0629f24` |
+| 3. Đồng bộ tài liệu bàn giao | Sửa số liệu, lý do thu hồi và giới hạn trong CHECKS/ANALYSIS/task, kiểm snapshot/link/whitespace | Commit chứa bản CHECKS này, tra `git log -1 -- docs/evidence/SEM-45/CHECKS.md` |
 
 ## Đầu vào và provenance
 
@@ -23,10 +31,14 @@ Lịch sử công cụ ngày 08/11 gồm loader `85aab1c`, metrics `f7c1958`, CL
 | SEM-24 / Done | [Exporter](../../../experiments/scripts/export_logs.py), [template](../../../experiments/RUN_MANIFEST_TEMPLATE.json), [CHECKS](../SEM-24/CHECKS.md). Tái sử dụng validator của exporter |
 | SEM-26 / Done | [EVENT_SCHEMA](../../EVENT_SCHEMA.md), [API](../../API.md), [CHECKS](../SEM-26/CHECKS.md). Event 2.0.0 có 27 key |
 | Protocol | [PROTOCOL 1.0.0](../../../experiments/PROTOCOL.md) và [EXPERIMENT_PROTOCOL](../../EXPERIMENT_PROTOCOL.md) |
-| SEM-41 / nguồn Draft | 12 cặp manifest/events canonical v2 tại commit `0e293c1483d961eb4233b8ad381765ea4cdacf1d`. CHECKS, PILOT_RESULTS, FINAL_VERIFICATION và EMULATOR_PLAN nguồn đều được pin/hash trong [INPUTS.json](INPUTS.json) |
+| SEM-41 / nguồn Draft | 12 cặp manifest/events canonical v2 tại commit `42ca000da1de2b7465851e1485fec2631f4b1a3c`. CHECKS, PILOT_RESULTS, SCHEDULER_OBSERVER_AUDIT và EMULATOR_PLAN nguồn đều được pin/hash trong [INPUTS.json](INPUTS.json) |
 | SEM-42 | Chưa nhận bộ manifest/events OPPO cho lần bàn giao này. Phân tích OPPO **Not run** |
 
 Nguồn SEM-41 tại lúc nhận là Draft PR #29. Phạm vi SEM-45 dùng dữ liệu từ commit đã pin, giữ nguyên outcome/validity của nguồn. Khi nguồn được review hoặc sửa validity, cần cập nhật index và tái sinh artifact theo revision mới. [PR nguồn](https://github.com/ThanhTris/Seminar-IE307/pull/29).
+
+Audit mới thu hồi qualification của 8 lượt từng VALID với `scheduler_observation_status=FAIL` và lý do `IN_WINDOW_JOB_DUMP_CAN_REEVALUATE_TIMERS`. `FINAL_VERIFICATION.json` của SEM-41 vẫn là snapshot lịch sử trước audit và đã được nguồn ghi là superseded. Index lần này dùng SCHEDULER_OBSERVER_AUDIT để truy vết việc thu hồi. [Audit collector](https://github.com/ThanhTris/Seminar-IE307/blob/42ca000da1de2b7465851e1485fec2631f4b1a3c/docs/evidence/SEM-41/SCHEDULER_OBSERVER_AUDIT.json).
+
+PILOT_RESULTS tại revision đã pin có thêm 6 lượt chạy lại VALID và batch đo lại còn RUNNING. Bộ SEM-45 giữ nguyên cohort 12 lượt đã review tại `dec00b7`, cập nhật validity theo nguồn mới. Sáu lượt mới được liệt kê ngoài phạm vi tại `selection_scope.excluded_new_run_directories`; số 0 VALID trong CHECKS chỉ áp dụng cho 12 lượt được chọn. Khi nhận batch đo lại, cần pin commit và kiểm evidence riêng.
 
 Build đo trong manifest nguồn có app commit `9e7e55b76c646ff113a152022cc23317a202e533`, server commit `c77772e426c00ae464240f00942f8368c638aaa8`, APK SHA-256 `bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23`, package `com.thanhtris.seminarie307`, version 0.1.0/1, SDK 24/37/37 và `candidate_gate_passed=false`. Config/provenance đầy đủ của từng nhóm được giữ trong report. Các epoch r2/r3 và epoch chưa biết được tách thành 7 nhóm. [analysis_report.json](analysis_report.json).
 
@@ -34,13 +46,13 @@ Build đo trong manifest nguồn có app commit `9e7e55b76c646ff113a152022cc2331
 
 | Case và mode | Tổng dòng | VALID/COMPLETED | Outcome của các lượt VALID/COMPLETED | INVALID được giữ |
 |---|---|---|---|---|
-| E01 PERIODIC | 3 | 1 | 1 TIMEOUT | 2 |
-| E03 PERIODIC | 4 | 2 | 2 SUCCESS | 2 |
-| E04 PERIODIC | 3 | 3 | 2 SUCCESS, 1 TIMEOUT | 0 |
-| E06 HYBRID | 2 | 2 | 2 TIMEOUT | 0 |
-| Tổng | 12 | 8 | 4 SUCCESS, 4 TIMEOUT | 4 |
+| E01 PERIODIC | 3 | 0 | Không có | 3 |
+| E03 PERIODIC | 4 | 0 | Không có | 4 |
+| E04 PERIODIC | 3 | 0 | Không có | 3 |
+| E06 HYBRID | 2 | 0 | Không có | 2 |
+| Tổng | 12 | 0 | Không có | 12 |
 
-Các outcome trong bảng là khai báo của người chạy. Event Android đều thiếu boot ID, nên analyzer giữ 12 dòng `UNCERTAIN_WINDOW`, `window_events_verified=false` và các metric/count trong cửa sổ chưa xác minh là null. Các raw event count toàn export và giá trị khai báo vẫn đọc được riêng. Mẫu số main bằng **0**, completion_rate main là **null**. [results.csv](../../../experiments/results.csv) · [summary.json](summary.json).
+Outcome lịch sử của toàn bộ 12 lượt gồm 5 SUCCESS, 5 TIMEOUT và 2 FAILURE, đều đi cùng validity INVALID. Event Android đều thiếu boot ID, nên analyzer giữ 12 dòng `UNCERTAIN_WINDOW`, `window_events_verified=false` và các metric/count trong cửa sổ chưa xác minh là null. Các raw event count toàn export và giá trị khai báo vẫn đọc được riêng. Mẫu số main bằng **0**, completion_rate main là **null**. [results.csv](../../../experiments/results.csv) · [summary.json](summary.json).
 
 ## Các phép kiểm đã chạy
 
@@ -51,13 +63,15 @@ Môi trường Windows, Python **3.12.14**, standard library. TEMP/TMP/TMPDIR c�
 | Unit/regression và tích hợp exporter | Giữ contract, correlation, timeout, clock, dataset, provenance và nhóm epoch | **81/81 test đạt**, gồm 45 SEM-45 và 36 exporter | Pass — synthetic/offline |
 | Nguồn pinned | Hash đúng cho 12 manifest, 12 JSONL và 4 evidence nguồn | Đọc Git object trực tiếp tại full commit, tất cả hash khớp index | Pass — dữ liệu pilot thật |
 | Giá trị nguồn | Giữ manifest/events và kết quả giống đọc thư mục canonical | Toàn bộ 12 analysis khớp khi đọc export được trích nguyên byte, có cùng metadata epoch | Pass — offline |
-| Tái lập | CSV/summary ổn định, report chỉ khác batch ID | Hai batch `sem45-handoff`, `sem45-handoff-repeat` cho CSV/summary giống từng byte, report khớp sau chuẩn hóa batch ID | Pass |
+| Tái lập | CSV/summary ổn định, report chỉ khác batch ID | Hai batch `handoff`, `repeat` trong `.local/sem45-review-20261116` và bản checkout Windows cho CSV/summary giống từng byte, report khớp sau chuẩn hóa batch ID | Pass |
 | Checksum artifact | CSV/summary/index/analyzer/validator khớp report | Hash kiểm trên byte file bàn giao | Pass |
-| Dataset và mẫu số | Giữ 12 pilot, loại INVALID và toàn bộ pilot khỏi main | 8 VALID/COMPLETED, 4 INVALID, 7 nhóm, n_eligible main = 0 | Pass |
+| Dataset và mẫu số | Giữ 12 pilot, loại INVALID và toàn bộ pilot khỏi main | 0 VALID/COMPLETED, 12 INVALID, 7 nhóm, n_eligible main = 0; valid_completed_declared_outcomes rỗng ở cả 7 nhóm | Pass |
+| Thu hồi qualification | Theo validity mới và giữ lịch sử đo | Tám qualification bị thu hồi; cả 12 dòng hiện INVALID. Event bytes/outcome/timing/count gốc được giữ | Pass |
 | Boot/clock thiếu | Completion/duration/count window chưa biết là null, outcome khai báo giữ nguyên | 12 UNCERTAIN_WINDOW, latency và count cửa sổ rỗng | Pass |
 | Fixture | Fixture giữ NOT_RUN và mẫu số 0 | CLI fixture đạt, nguồn fixture có nhãn riêng | Pass |
 | Kiểm từ chối | Pilot bị chặn khi chọn main, legacy bị chặn, batch cũ không bị ghi đè | Các lệnh trả exit 2 với mã lỗi tương ứng | Pass |
 | Syntax/tài liệu/whitespace | Python 3.9 syntax, link nội bộ hợp lệ, diff sạch | AST, link/fence/table và `git diff --check` được kiểm trước commit cuối | Pass |
+| Snapshot và tài liệu nền | Metadata task và tài liệu SEM-19 hợp lệ | `update_task_snapshot.py --check` đạt 45 task; validator SEM-19 đạt 174 link nội bộ | Pass |
 | Runtime main, OPPO và các phase | Có log/clock/evidence thật trước công bố kết quả | Chưa chạy các phép đo này trong SEM-45 | **Not run** |
 
 Chi tiết máy kiểm và kết quả assertions được ghi trong [VERIFICATION.json](VERIFICATION.json). Lệnh tái lập nằm trong [ANALYSIS.md](../../../experiments/ANALYSIS.md). Runtime Android/server/FCM không được chạy thêm trong SEM-45.
@@ -70,19 +84,19 @@ Chi tiết máy kiểm và kết quả assertions được ghi trong [VERIFICATI
 | OPPO | Chưa nhận log/CHECKS OPPO E01/E02. So sánh emulator–OPPO và kết luận OEM **Not run** | Trí / SEM-42 |
 | Boot ID event | Producer để null dù manifest có boot collector. Chưa xác minh được membership/timing từng event từ canonical input. Count window và completion để null | Producer/exporter và owner SEM-41/42, kèm evidence cùng boot |
 | Clock liên máy | controlled=false, không có mẫu offset/drift đủ căn cứ. Latency server → Android để null | Owner run SEM-41/42 |
-| Kết quả khai báo | 4 SUCCESS và 4 TIMEOUT hợp lệ theo nguồn. Analyzer chưa xác nhận độc lập SUCCESS trong window vì thiếu boot trên event | Review source PR #29 và SEM-44 |
-| E01 | Nguồn khai báo 0 cycle tự nhiên mới trong 90 phút, mục tiêu ≥3 chưa đạt. Cần phiên bổ sung theo protocol. Count analyzer vẫn null do boot thiếu | Vinh / SEM-41 |
+| Kết quả khai báo | Toàn bộ 12 lượt cũ INVALID sau audit collector, qualification trước đây bị thu hồi. Outcome giữ để truy vết; chưa có mẫu scheduler hợp lệ trong bộ này | Review source PR #29 và SEM-44 |
+| E01 và batch đo lại | Các phiên E01 cũ INVALID. Nguồn có lượt chạy lại đạt 5 cycle/90 phút trong 6 lượt mới, nhưng các lượt mới nằm ngoài bộ chọn hiện tại và batch còn RUNNING | Vinh / SEM-41, nhận batch mới theo revision/evidence riêng |
 | E03/E04 | Nguồn có audit idle/offline và checkpoint. SEM-45 chưa ánh xạ phase riêng bằng hệ clock đã kiểm, summary hiện whole-run | Owner run và SEM-44 khi cần biểu đồ theo phase |
 | Firebase/E02/E05/E06 | Profile đo FIREBASE_NOT_CONFIGURED. E06 có event deliberate skip, callback/token/push thật và hybrid trên profile Firebase **Not run**. E02/E05 chưa có pilot trong bộ này | Owner runtime và SEM-41/42 |
 | Candidate | Manifest nguồn gate=false, release main vẫn NOT_READY/NOT_BUILT tại nền cập nhật. Hash APK đo pilot đã có trong manifest nguồn, freeze/bàn giao main còn thiếu | Trung / SEM-37, SEM-52 |
 | DB writes và năng lượng | Chưa instrument số write SQL/items, `db_write_count=null`. Chưa có phép đo mAh | Owner instrumentation/run khi có phép đo tương ứng |
 | Review độc lập | SEM-44 chưa kiểm bộ CSV này trong lần bàn giao | Tâm / SEM-44 |
 
-Các lượt INVALID được giữ gồm `89b884` chưa bắt đầu measurement, `760217` và `c12a28` có baseline payload mismatch, `0d277e` bị cắt cửa sổ post-idle. Outcome gốc của chúng được giữ, kể cả SUCCESS ở lượt INVALID. Epoch được lấy từ PILOT_RESULTS đã pin và đối chiếu theo artifact_directory. [Đối chiếu nguồn](https://github.com/ThanhTris/Seminar-IE307/blob/0e293c1483d961eb4233b8ad381765ea4cdacf1d/docs/evidence/SEM-41/CHECKS.md).
+Các lý do INVALID cũ vẫn được giữ, gồm `89b884` chưa bắt đầu measurement, `760217` và `c12a28` có baseline payload mismatch, `0d277e` bị cắt cửa sổ post-idle. Audit scheduler bổ sung lý do thu hồi 8 qualification và giữ đủ 12 lượt INVALID. Outcome gốc được giữ, kể cả SUCCESS ở lượt INVALID. Epoch được lấy từ PILOT_RESULTS đã pin và đối chiếu theo artifact_directory. [Đối chiếu nguồn](https://github.com/ThanhTris/Seminar-IE307/blob/42ca000da1de2b7465851e1485fec2631f4b1a3c/docs/evidence/SEM-41/CHECKS.md).
 
 ## Đầu ra bàn giao và điều kiện cập nhật
 
 - [analyze.py](../../../experiments/scripts/analyze.py), [tests](../../../experiments/scripts/tests/test_analyze.py) và [hướng dẫn](../../../experiments/ANALYSIS.md).
 - [results.csv](../../../experiments/results.csv), [INPUTS.json](INPUTS.json), [summary.json](summary.json), [analysis_report.json](analysis_report.json) và [VERIFICATION.json](VERIFICATION.json).
-- SEM-43/44/48/50 nhận bộ pilot cùng provenance/giới hạn ở đây. Khi viết báo cáo hoặc biểu đồ, dùng đúng nhãn OBSERVED/pilot và outcome khai báo, đọc cờ chất lượng trước sử dụng metric.
+- SEM-43/44/48/50 nhận bộ pilot/INVALID cùng provenance/giới hạn ở đây để kiểm pipeline và truy vết. Bộ này có 0 mẫu scheduler hợp lệ sau thu hồi qualification. Các lượt đo lại được tiếp nhận riêng khi có revision/evidence phù hợp.
 - Khi nhận main/OPPO hoặc nguồn sửa kết quả, cập nhật index theo đúng commit, chạy lại analyzer, kiểm clock/window/mẫu số rồi cập nhật artifact và CHECKS. Bản bàn giao này được đưa lên Draft PR để Tuấn review.

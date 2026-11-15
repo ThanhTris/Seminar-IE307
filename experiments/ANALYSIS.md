@@ -1,19 +1,21 @@
 # Phân tích manifest/JSONL — SEM-45
 
-Phiên bản công cụ **0.2.0**, Tuấn (`mtuan2491`), cập nhật 15/11/2026. Python **3.9+**, standard library và Git khi dùng index nguồn. Đã kiểm trên Windows với Python 3.12.14. Analyzer đọc dữ liệu offline và xuất CSV, summary, report có checksum. [Yêu cầu SEM-45](../tasks/backlog/SEM-45.md) · [CHECKS](../docs/evidence/SEM-45/CHECKS.md).
+Phiên bản công cụ **0.2.0**, Tuấn (`mtuan2491`), cập nhật 16/11/2026 theo review của Trí. Python **3.9+**, standard library và Git khi dùng index nguồn. Đã kiểm trên Windows với Python 3.12.14. Analyzer đọc dữ liệu offline và xuất CSV, summary, report có checksum. [Yêu cầu SEM-45](../tasks/backlog/SEM-45.md) · [CHECKS](../docs/evidence/SEM-45/CHECKS.md).
 
 ## Bộ kết quả bàn giao
 
-[results.csv](results.csv) có **12 dòng OBSERVED/pilot** từ SEM-41, lấy tại commit `0e293c1483d961eb4233b8ad381765ea4cdacf1d` của Draft PR #29. Trong đó 8 lượt VALID/COMPLETED có outcome nguồn khai báo gồm 4 SUCCESS và 4 TIMEOUT. Cả 4 lượt INVALID được giữ để truy vết. `eligible=false` ở cả 12 dòng và mẫu số main bằng 0. [Nguồn SEM-41](https://github.com/ThanhTris/Seminar-IE307/blob/0e293c1483d961eb4233b8ad381765ea4cdacf1d/docs/evidence/SEM-41/CHECKS.md).
+[results.csv](results.csv) giữ **12 dòng OBSERVED/pilot đã bàn giao tại `dec00b7`**, đọc lại theo commit `42ca000da1de2b7465851e1485fec2631f4b1a3c` của Draft PR #29. Bộ này có **0 VALID / 12 INVALID** sau audit collector. Nguồn thu hồi qualification của 8 lượt từng VALID vì `dumpsys jobscheduler` trong cửa sổ có thể tác động timer, với lý do `IN_WINDOW_JOB_DUMP_CAN_REEVALUATE_TIMERS`. `eligible=false` ở cả 12 dòng và mẫu số main bằng 0. [Nguồn SEM-41](https://github.com/ThanhTris/Seminar-IE307/blob/42ca000da1de2b7465851e1485fec2631f4b1a3c/docs/evidence/SEM-41/CHECKS.md).
 
-Event Android trong bộ này có `boot_session_id=null`. CSV giữ `observed_completion=UNCERTAIN_WINDOW`, các count trong cửa sổ, completion và duration chưa xác minh để rỗng. `outcome`, `validity`, cached version và số cycle do người chạy khai báo được giữ riêng. Nguồn còn ghi 27 slot main chưa chạy, E01 chưa đạt mục tiêu 3 cycle và profile đo chưa cấu hình Firebase. OPPO chưa có bộ log nhận cho lần bàn giao này. [Giới hạn và phần Not run](../docs/evidence/SEM-45/CHECKS.md).
+Revision nguồn còn có 6 lượt chạy lại được đánh dấu VALID, batch đo lại đang RUNNING. Lần sửa theo review này giữ phạm vi 12 lượt cũ. Sáu lượt mới nằm ngoài CSV và được liệt kê tại `selection_scope.excluded_new_run_directories` trong index. Qualification của bộ cũ là `REVOKED_AFTER_SCHEDULER_COLLECTOR_AUDIT`. [INPUTS.json](../docs/evidence/SEM-45/INPUTS.json).
+
+Event Android trong bộ này có `boot_session_id=null`. CSV giữ `observed_completion=UNCERTAIN_WINDOW`, các count trong cửa sổ, completion và duration chưa xác minh để rỗng. Outcome lịch sử gồm 5 SUCCESS, 5 TIMEOUT và 2 FAILURE được giữ cùng validity INVALID để truy vết. Nguồn còn ghi 27 slot main chưa chạy và profile đo chưa cấu hình Firebase. OPPO chưa có bộ log nhận cho lần bàn giao này. [Giới hạn và phần Not run](../docs/evidence/SEM-45/CHECKS.md).
 
 ## Tái lập bộ kết quả
 
 Từ root repo, dùng Python 3.9+ đang hoạt động. Khi Windows alias không hoạt động, thay `python` bằng đường dẫn executable đã cài. Các lệnh dưới dùng cú pháp shell hỗ trợ `\` để xuống dòng, trên PowerShell có thể viết mỗi lệnh thành một dòng.
 
 ```sh
-git fetch origin 0e293c1483d961eb4233b8ad381765ea4cdacf1d
+git fetch origin 42ca000da1de2b7465851e1485fec2631f4b1a3c
 
 python -B experiments/scripts/analyze.py --dataset pilot \
   --source-index docs/evidence/SEM-45/INPUTS.json \
@@ -52,7 +54,7 @@ python -B experiments/scripts/analyze.py --dataset fixture \
 Mỗi `--run` nhận một thư mục chứa manifest.json và events.jsonl canonical. Lặp tham số để phân tích nhiều run. `--run` và `--source-index` là hai cách cung cấp đầu vào cho cùng loader. Dataset mặc định là `main`, cần chọn `pilot` hoặc `fixture` khi phân tích bộ tương ứng. Output luôn ở `<output-base>/<dataset>_analysis/<batch-id>/`.
 
 - `main` nhận OBSERVED/main với candidate gate hợp lệ theo validator SEM-24.
-- `pilot` nhận OBSERVED/pilot. Bộ bàn giao ngày 15/11 dùng lựa chọn này.
+- `pilot` nhận OBSERVED/pilot. Bộ cập nhật ngày 16/11 dùng lựa chọn này.
 - `fixture` nhận FIXTURE/development. Fixture SEM-24 giữ outcome NOT_RUN và mẫu số main bằng 0.
 
 Loader tái sử dụng validator SEM-24, nhận manifest/protocol 1.0.0 và API/event 2.0.0, đúng 27 key/event. Schema lạ, field/type sai, route run/device/mode lẫn nhau, duplicate ID xung đột và JSON không hợp lệ bị từ chối. Replay cùng ID/giá trị được dedup và có count trong report. Pilot SEM-29 dùng `legacy-room-v1` trả `CONTRACT_VERSION_UNSUPPORTED`. [Exporter](README.md) · [Event schema](../docs/EVENT_SCHEMA.md).
@@ -92,8 +94,8 @@ Nhóm dùng case/subscenario/device/mode/build/OS/config/protocol/schema/phase/i
 
 `eligible=true` chỉ cho OBSERVED/main, VALID, COMPLETED, có cửa sổ đầy đủ và không có cờ chất lượng đã phát hiện. TIMEOUT/FAILURE/UNKNOWN hợp lệ được giữ trong mẫu số main. NOT_RUN/ABORTED/INVALID/NOT_ASSESSED/fixture/pilot có hàng kết quả và thống kê loại riêng.
 
-Summary có `declared_outcomes` và `valid_completed_declared_outcomes` để đọc outcome nguồn. `n_complete`, completion_rate và median/min/max dùng tập eligible có applied target đã xác minh, mỗi metric có n_measured/n_missing. Bộ pilot hiện có `n_eligible=0`, completion_rate=null. Chưa có cơ sở xuất tỷ lệ hoặc latency main.
+Summary có `declared_outcomes` và `valid_completed_declared_outcomes` để đọc outcome nguồn. Sau thu hồi qualification, `valid_completed_declared_outcomes` rỗng ở cả 7 nhóm. `n_complete`, completion_rate và median/min/max dùng tập eligible có applied target đã xác minh, mỗi metric có n_measured/n_missing. Bộ pilot hiện có `n_eligible=0`, completion_rate=null. Chưa có cơ sở xuất tỷ lệ hoặc latency main.
 
 Report lưu hash, raw/window event counts, bucket setup/window/late/unknown, fetch pairs và lý do clock. Summary hiện là whole-run. Phân tích riêng phase idle/offline E03/E04, race E05, callback FCM và so sánh OPPO vẫn Not run trong SEM-45. Các audit OS của người chạy được tham chiếu theo commit nguồn.
 
-Khi có main logs từ SEM-41/42, nhận commit/build/config/clock/CHECKS, chạy `--dataset main` với danh sách run cụ thể, kiểm cờ và mẫu số rồi cập nhật bộ CSV/report/index. SEM-43/44/48/50 có thể nhận bộ hiện tại với nhãn pilot và các giới hạn được ghi trong CHECKS. SEM-44 tiếp nhận để kiểm độc lập.
+Khi có main logs từ SEM-41/42, nhận commit/build/config/clock/CHECKS, chạy `--dataset main` với danh sách run cụ thể, kiểm cờ và mẫu số rồi cập nhật bộ CSV/report/index. SEM-43/44/48/50 nhận bộ hiện tại với nhãn pilot/INVALID để kiểm pipeline và truy vết lịch sử. Qualification bị thu hồi khiến bộ này chưa có mẫu scheduler hợp lệ cho kết luận thực nghiệm. SEM-44 tiếp nhận để kiểm độc lập. Các lượt đo lại cần được nhận riêng theo commit/evidence của batch tương ứng.

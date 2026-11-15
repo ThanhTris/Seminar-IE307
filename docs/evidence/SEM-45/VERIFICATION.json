@@ -28,10 +28,14 @@
     "TIMEOUT": 5
   },
   "excluded_requalification_run_count": 6,
+  "git_diff_check_passed": true,
   "group_count": 7,
   "index_sha256": "849fe6df1ea7f6cc169d4cb1e80ff63ec797a60fd3450a86017d90faefee7bab",
+  "internal_links_checked": 53,
   "invalid_attempts_retained": 12,
   "main_eligible": 0,
+  "markdown_fences_passed": true,
+  "markdown_tables_checked": 9,
   "matches_local_source_exports": true,
   "not_run": [
     "main_emulator",

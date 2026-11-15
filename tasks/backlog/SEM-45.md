@@ -9,7 +9,7 @@
 - Công sức: 2/100 — Cơ chế/thực hành.
 - Tách từ nhóm cũ: [SEM-08](SEM-08.md); nhóm cũ chỉ còn lưu lịch sử.
 
-> **Cập nhật 15/11/2026. Đầu ra SEM-45 đã hoàn thiện để review Draft PR.** Đã cập nhật main, kiểm parser và sinh `experiments/results.csv` từ 12 lượt OBSERVED/pilot của SEM-41 tại commit nguồn cố định. 4 lượt INVALID được giữ để truy vết, mẫu số main bằng 0. Main emulator, OPPO và các phép đo thiếu clock/boot được ghi Not run/giới hạn trong CHECKS. Trạng thái Project hiện vẫn In Progress, chờ Tuấn review bản bàn giao.
+> **Cập nhật 16/11/2026 theo review của Trí.** Bộ `experiments/results.csv` giữ 12 lượt OBSERVED/pilot đã bàn giao, cập nhật theo nguồn SEM-41 `42ca000` thành **0 VALID / 12 INVALID** sau audit collector thu hồi 8 qualification. Sáu lượt chạy lại mới của nguồn nằm ngoài bộ chọn hiện tại và được liệt kê trong INPUTS. Mẫu số main bằng 0; main emulator 27 slot Not run, OPPO chưa có log, kiểm độc lập SEM-44 và các phép đo thiếu clock/boot ghi Not run/giới hạn trong CHECKS. Trạng thái Project hiện vẫn In Progress, chờ review bản sửa.
 
 ## Dependency — bấm mã task để mở yêu cầu
 
@@ -61,9 +61,15 @@ Nhánh `codex/SEM-45-log-parser`, từ main `d29532a` ngày 08/11/2026. Lịch s
 1. **Đã xong** cập nhật main `bcc7c58`, chạy lại 71 test cũ — merge commit `0d4a0e9`.
 2. **Đã xong** kiểm đầu vào thật, thêm index nguồn pinned/hash, giữ uncertainty khi thiếu boot và tách outcome khai báo — `c8ae2fe`.
 3. **Đã xong** sinh CSV 12 dòng pilot, summary/report có provenance, đối chiếu và tái lập giống từng byte — `fd3aa8c`.
-4. **Đã xong** rà nhóm epoch store và LF/checksum, kiểm 81 test, cập nhật hướng dẫn/CHECKS/Not run và chuẩn bị Draft PR. Commit cuối tra trong lịch sử file CHECKS.
+4. **Đã xong** rà nhóm epoch store và LF/checksum, kiểm 81 test, cập nhật hướng dẫn/CHECKS/Not run và chuẩn bị Draft PR — `dec00b7`.
 
-Đầu vào SEM-41 được tham chiếu từ Draft PR #29 tại commit `0e293c1483d961eb4233b8ad381765ea4cdacf1d`. CSV hiện có nhãn pilot. Main/OPPO chưa nhận được bộ đo cho lần bàn giao này. SEM-43/44/48/50 dùng output cùng giới hạn đã ghi, cập nhật bộ kết quả khi nhận thêm dữ liệu phù hợp.
+Đầu vào SEM-41 được tham chiếu từ Draft PR #29 tại commit `42ca000da1de2b7465851e1485fec2631f4b1a3c`. CSV hiện có nhãn pilot và cả 12 dòng INVALID. Main/OPPO chưa nhận được bộ đo cho lần bàn giao này. SEM-43/44/48/50 dùng bộ lịch sử cùng giới hạn đã ghi để kiểm pipeline và truy vết. Batch đo lại của nguồn đang RUNNING, các lượt mới được nhận riêng theo revision/evidence phù hợp.
+
+### Ba bước sửa theo review ngày 16/11
+
+1. **Đã xong** cập nhật pin/hash theo nguồn mới, audit thu hồi và phạm vi 12 lượt cũ — `d202701`.
+2. **Đã xong** tái sinh CSV/summary/report/VERIFICATION với 0 VALID/12 INVALID, kiểm 81 test và tái lập — `0629f24`.
+3. **Đã xong** sửa CHECKS/ANALYSIS/task theo qualification mới, ghi rõ 6 lượt đo lại nằm ngoài bộ chọn và phần Not run. Commit cuối tra trong lịch sử file CHECKS.
 
 ## Task được mở khóa
 
