@@ -27,6 +27,7 @@ ROOT = Path(__file__).resolve().parents[2]
 PACKAGE = "com.thanhtris.seminarie307"
 CONTROL = PACKAGE + ".experiments.PeriodicPilotControl#control"
 RUNNER = PACKAGE + ".test/androidx.test.runner.AndroidJUnitRunner"
+DEFAULT_RUNS = ["E01:1", "E03:1", "E03:2", "E04:1", "E04:2", "E04:3", "E06:1", "E06:2"]
 
 
 def utc():
@@ -47,6 +48,16 @@ class PilotBatch:
         self.folder = args.private_output.resolve()
         self.folder.mkdir(parents=True, exist_ok=False)
         self.folder.chmod(0o700)
+        observer_path = "experiments/scripts/run_sem41_periodic_pilots.py"
+        if subprocess.run(["git", "diff", "--quiet", "HEAD", "--", observer_path], cwd=ROOT).returncode:
+            raise RuntimeError("OBSERVER_SOURCE_NOT_COMMITTED")
+        observer_commit = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT).decode().strip()
+        write_json(self.folder / "runner-identity.json", {
+            "observer_commit": observer_commit,
+            "observer_source_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+            "phase": "pilot", "candidate_gate_passed": False,
+            "case_sequence": args.runs,
+        })
         self.server = None
         self.current = None
         self.network_changed = False
@@ -247,9 +258,20 @@ class PilotBatch:
         self.shell("dumpsys", "deviceidle", "unforce")
         self.shell("dumpsys", "battery", "reset")
         self.shell("input", "keyevent", "KEYCODE_WAKEUP")
-        if self.shell("dumpsys", "deviceidle", "get", "deep") == "IDLE":
-            raise RuntimeError("IDLE_RESTORE_NOT_CONFIRMED")
-        self.idle_changed = False
+        self.idle_restore_count = getattr(self, "idle_restore_count", 0) + 1
+        proof_path = self.current / ("idle-restore-" + str(self.idle_restore_count) + "-transition.json")
+        states = []
+        deadline = time.monotonic() + 10
+        while time.monotonic() < deadline:
+            state = self.shell("dumpsys", "deviceidle", "get", "deep")
+            states.append({"utc": utc(), "deep_idle": state})
+            if state == "ACTIVE":
+                self.idle_changed = False
+                write_json(proof_path, {"status": "PASS", "samples": states})
+                return
+            time.sleep(0.5)
+        write_json(proof_path, {"status": "FAIL", "samples": states})
+        raise RuntimeError("IDLE_RESTORE_NOT_CONFIRMED")
 
     def run_one(self, case, repetition):
         day = datetime.now(timezone(timedelta(hours=7))).strftime("%Y%m%d")
@@ -289,9 +311,18 @@ class PilotBatch:
                 self.shell("cmd", "wifi", "set-wifi-enabled", "disabled")
                 time.sleep(5)
                 network = self.capture("offline-network", "dumpsys", "connectivity")
-                if self.reachable() or not re.search(r"Active default network:\s*(?:none|null|\(none\))", network, re.I):
+                reachable = self.reachable()
+                offline_utc, offline_elapsed = utc(), self.elapsed()
+                default_absent = bool(re.search(r"Active default network:\s*(?:none|null|\(none\))", network, re.I))
+                write_json(self.current / "offline-proof.json", {
+                    "collector": "PILOT_RUNNER_READ_ONLY_ADB", "utc": offline_utc,
+                    "elapsed_realtime_ms": offline_elapsed, "default_network_absent": default_absent,
+                    "guest_server_http_reachable": reachable,
+                    "same_boot_as_batch": hashlib.sha256(self.shell("cat", "/proc/sys/kernel/random/boot_id").encode()).hexdigest() == self.baseline["boot_hash"],
+                })
+                if reachable or not default_absent:
                     raise RuntimeError("GUEST_OFFLINE_NOT_CONFIRMED")
-                self.record.update(offline_utc=utc(), offline_elapsed_realtime_ms=self.elapsed())
+                self.record.update(offline_utc=offline_utc, offline_elapsed_realtime_ms=offline_elapsed)
                 self.update("PERIODIC")
                 self.observe(120, "CONFIRMED_OFFLINE")
                 self.restore_network()
@@ -333,10 +364,18 @@ class PilotBatch:
             self.persist("FINISHED")
 
     def run(self):
-        path = self.adb("shell", "pm", "path", PACKAGE).strip().removeprefix("package:")
-        installed = subprocess.check_output([str(self.args.adb), "-s", self.serial, "exec-out", "cat", path], timeout=60)
-        if hashlib.sha256(installed).hexdigest() != self.identity["apk_artifacts"]["application_apk"]["sha256"]:
-            raise RuntimeError("INSTALLED_APK_HASH_MISMATCH")
+        for package, key in [(PACKAGE, "application_apk"), (PACKAGE + ".test", "instrumentation_apk")]:
+            path = self.adb("shell", "pm", "path", package).strip().removeprefix("package:")
+            installed = subprocess.check_output([str(self.args.adb), "-s", self.serial, "exec-out", "cat", path], timeout=60)
+            if hashlib.sha256(installed).hexdigest() != self.identity["apk_artifacts"][key]["sha256"]:
+                raise RuntimeError("INSTALLED_APK_HASH_MISMATCH")
+        expected_server = self.identity["server_source_commit"]
+        if subprocess.run(["git", "diff", "--quiet", expected_server, "--", "server/src", "server/bin", "server/package.json", "server/package-lock.json", "server/tsconfig.json"], cwd=ROOT).returncode:
+            raise RuntimeError("SERVER_SOURCE_COMMIT_MISMATCH")
+        build = subprocess.run(["npm", "run", "build"], cwd=ROOT / "server", capture_output=True, timeout=60)
+        (self.folder / "server-build.txt").write_bytes(build.stdout + build.stderr)
+        if build.returncode:
+            raise RuntimeError("SERVER_BUILD_FAILED")
         self.baseline = {key: self.shell("settings", "get", "global", key) for key in ["wifi_on", "mobile_data", "airplane_mode_on"]}
         self.baseline["boot_hash"] = hashlib.sha256(self.shell("cat", "/proc/sys/kernel/random/boot_id").encode()).hexdigest()
         if self.baseline["airplane_mode_on"] != "0" or self.shell("dumpsys", "deviceidle", "get", "deep") != "ACTIVE":
@@ -373,16 +412,21 @@ class PilotBatch:
                     "--title", "SEM-41 pilot baseline", "--body", "Dedicated store baseline"], cwd=ROOT, capture_output=True, timeout=20)
                 if result.returncode:
                     raise RuntimeError("BASELINE_UPDATE_FAILED")
-            for case, count in [("E01", 1), ("E03", 2), ("E04", 3), ("E06", 2)]:
-                for repetition in range(1, count + 1):
-                    try:
-                        self.run_one(case, repetition)
-                    except RuntimeError as error:
-                        if str(error) == "GUEST_OFFLINE_NOT_CONFIRMED":
-                            write_json(self.folder / "e04-blocker.json", {"case_id": "E04", "execution_status": "NOT_RUN",
-                                       "reason": str(error), "remaining_repetitions": count - repetition})
-                            break
-                        raise
+            blocked = set()
+            for position, selection in enumerate(self.args.runs):
+                case, repetition = selection.split(":")
+                if case in blocked:
+                    continue
+                try:
+                    self.run_one(case, int(repetition))
+                except RuntimeError as error:
+                    if str(error) == "GUEST_OFFLINE_NOT_CONFIRMED":
+                        blocked.add(case)
+                        remaining = sum(item.startswith(case + ":") for item in self.args.runs[position + 1:])
+                        write_json(self.folder / "e04-blocker.json", {"case_id": "E04", "execution_status": "NOT_RUN",
+                                   "reason": str(error), "remaining_repetitions": remaining})
+                        continue
+                    raise
             write_json(self.folder / "batch-complete.json", {"utc": utc(), "status": "COMPLETED_WITH_RECORDED_OUTCOMES", "phase": "pilot"})
         finally:
             self.server.terminate()
@@ -398,7 +442,11 @@ def main():
     parser.add_argument("--device-map", type=Path, required=True)
     parser.add_argument("--preflight", type=Path, default=ROOT / "docs/evidence/SEM-41/PREFLIGHT.json")
     parser.add_argument("--private-output", type=Path, required=True)
+    parser.add_argument("--runs", nargs="+", choices=DEFAULT_RUNS, default=DEFAULT_RUNS,
+                        help="Ordered CASE:repetition selections, also used for replacement runs")
     args = parser.parse_args()
+    if len(args.runs) != len(set(args.runs)):
+        parser.error("DUPLICATE_RUN_SELECTION")
     def interrupted(_signum, _frame):
         raise RuntimeError("BATCH_INTERRUPTED")
     signal.signal(signal.SIGINT, interrupted)

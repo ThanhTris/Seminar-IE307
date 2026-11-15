@@ -137,6 +137,8 @@ def export_one(folder, output, deny_path):
     extras["audit.json"] = json.dumps(audit, indent=2) + "\n"
     for path in sorted(folder.glob("*-checkpoint.json")):
         extras[path.name] = path.read_text()
+    for path in sorted(folder.glob("*-transition.json")):
+        extras[path.name] = path.read_text()
     manifest["evidence_files"] = sorted(extras)
     canonical.public_safe([manifest, audit] + [canonical.parse_json(text) for name, text in extras.items() if not name.endswith(".jsonl")] + [lines(folder / "export-v2-events-legacy.jsonl")], deny)
     with tempfile.TemporaryDirectory(prefix="sem41-export-") as temporary:
