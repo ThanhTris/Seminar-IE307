@@ -1,0 +1,30 @@
+{
+  "exporter_version": "1.0.0",
+  "data_kind": "OBSERVED",
+  "run_id": "run-sem41-v2-smoke-20261115",
+  "device_alias": "emulator-main",
+  "manifest_input_sha256": "75e2c18b41aa92c1b3490fad5db822c81335c8135a88e4f2eefd96e817d22b96",
+  "sources": [
+    {
+      "origin": "ANDROID",
+      "sha256": "e3f8937c353bc3e6dde8116039e8dc7b35d3292488158485961a3042741e3d2f",
+      "lines": 5,
+      "selected": 5,
+      "other_run_or_device": 0,
+      "duplicates": 0,
+      "extra_fields_omitted": 0
+    },
+    {
+      "origin": "SERVER",
+      "sha256": "cb403f3791117a9cd64417c513116624e930a764b76fdf1501d42f242171fee7",
+      "lines": 4,
+      "selected": 4,
+      "other_run_or_device": 0,
+      "duplicates": 0,
+      "extra_fields_omitted": 0
+    }
+  ],
+  "events_exported": 9,
+  "ordering": "INPUT_ORDER_NOT_CAUSAL",
+  "analysis_performed": false
+}

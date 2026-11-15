@@ -51,6 +51,13 @@ Status nguồn được đối chiếu Project lúc **2026-11-15 02:50:58 UTC**;
 - [ ] Không force-run cho kết quả tự nhiên, không trộn pilot/build hoặc loại timeout khỏi mẫu số.
 - [ ] Đầu ra và CHECKS có thật, link đọc được; chưa chạy phải ghi Not run, không tự chuyển Done từ kế hoạch.
 
+## Tiến độ ngày 15/11/2026
+
+- Đã nhận main sau merge SEM-34, kiểm candidate ở PR #28. Candidate NOT_READY, unit test tái hiện 31/32 đạt, 1 fail theo review.
+- Build app/test APK được trên máy Vinh. Đã kiểm installed APK hash, migration Room 1→2 giữ nguyên 30 event cũ và kiểm manual → cache → export canonical bằng một control development.
+- [Ma trận](../../experiments/plans/SEM-41/EMULATOR_PLAN.json) gồm 27 slot PLANNED/NOT_RUN, 582 phút quan sát. Phase main chờ candidate freeze và pilot đúng revision, các ca PUSH còn thiếu Firebase.
+- [CHECKS](../../docs/evidence/SEM-41/CHECKS.md), [PREFLIGHT](../../docs/evidence/SEM-41/PREFLIGHT.json), [quy trình thực hiện](../../docs/evidence/SEM-41/REPRODUCE.md), [control development](../../experiments/development/run-sem41-v2-smoke-20261115/manifest.json).
+
 ## Task được mở khóa
 
 - [SEM-43](SEM-43.md) cần đầu ra này để **hoàn tất**.
