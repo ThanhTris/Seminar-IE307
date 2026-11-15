@@ -1,13 +1,13 @@
 {
-  "snapshot_utc": "2026-11-15T09:09:03.880Z",
+  "snapshot_utc": "2026-11-15T10:00:04.060Z",
   "run_phase": "pilot",
   "data_kind": "OBSERVED",
   "candidate_gate_passed": false,
   "review_helper_commit": "ffecae09411ce6113e6dc2c4259fb846cc1b54b1",
   "planned_firebase_independent_runs": 8,
   "planned_observation_seconds": 20760,
-  "completed_pilot_runs": 7,
-  "valid_completed_runs": 5,
+  "completed_pilot_runs": 8,
+  "valid_completed_runs": 6,
   "aborted_setup_attempts": 1,
   "aborted_measurement_attempts": 1,
   "main_runs_completed": 0,
@@ -145,8 +145,7 @@
       "baseline_content_status": "FAIL",
       "baseline_content_reason": "BASELINE_PAYLOAD_MISMATCH",
       "server_store_epoch": "pilots-20261115-r3",
-      "firebase_token_status": "FIREBASE_NOT_CONFIGURED",
-      "replaces_run_id": "run-sem41-pilot-e03-2-20261115-0d277e"
+      "firebase_token_status": "FIREBASE_NOT_CONFIGURED"
     },
     {
       "run_id": "run-sem41-pilot-e04-1-20261115-a52b51",
@@ -256,13 +255,40 @@
       "server_store_epoch": "pilots-20261115-r3",
       "firebase_token_status": "FIREBASE_NOT_CONFIGURED",
       "deliberate_skip_confirmed": true
+    },
+    {
+      "run_id": "run-sem41-pilot-e06-2-20261115-f56fc9",
+      "case_id": "E06",
+      "repetition": 2,
+      "mode": "HYBRID",
+      "execution_status": "COMPLETED",
+      "outcome": "TIMEOUT",
+      "validity": "VALID",
+      "actual_duration_ms": 2701060,
+      "new_periodic_cycles": 0,
+      "raw_rows": 6,
+      "canonical_android_events": 5,
+      "omitted_rows": 1,
+      "artifact_directory": "experiments/pilots/run-sem41-pilot-e06-2-20261115-f56fc9",
+      "observer_commit": "056e7896fdd87d71fdd753f96736ae87e06ac378",
+      "collector_boot_session_id": "boot-sem41-cdcb3ce6c37d2751",
+      "canonical_android_region_counts": {
+        "SETUP": 5,
+        "WINDOW": 0,
+        "POST_WINDOW": 0,
+        "NO_WINDOW_STARTED": 0
+      },
+      "baseline_content_status": "PASS",
+      "baseline_content_reason": "BASELINE_MATCH",
+      "server_store_epoch": "pilots-20261115-r3",
+      "firebase_token_status": "FIREBASE_NOT_CONFIGURED",
+      "deliberate_skip_confirmed": true
     }
   ],
-  "remaining_firebase_independent_runs": 3,
+  "remaining_firebase_independent_runs": 2,
   "unfulfilled_pilot_slots": [
     "E01:1",
-    "E03:2",
-    "E06:2"
+    "E03:2"
   ],
   "batch_status": "RUNNING",
   "firebase_dependent_main_slots_not_run": 19,

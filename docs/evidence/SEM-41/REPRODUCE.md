@@ -16,7 +16,7 @@ ANDROID_HOME="$HOME/Library/Android/sdk" sh gradlew --no-daemon --max-workers=2 
   :app:assembleDebug :app:assembleDebugAndroidTest :app:testDebugUnitTest
 ```
 
-Revision trên còn 1/32 unit test fail. Với candidate mới, dùng commit được bàn giao và kiểm lại test/config, lấy APK hash của chính lần build đó. Build tạo APK chưa đồng nghĩa candidate gate đã qua.
+Revision trên còn 1/32 unit test fail; follow-up `1f79ee93e9a52af2b21c82372f23a6ac684d3ceb` chỉ sửa Android unit test assertion, đã kiểm lại 32/32 đạt, xem [UNIT_FOLLOWUP](UNIT_FOLLOWUP.json). Khi nhận candidate cuối, dùng commit được bàn giao và kiểm test/config, lấy APK hash của chính lần build đó. Build tạo APK chưa đồng nghĩa candidate gate đã qua.
 
 Từ root source được nhận, kiểm hash và cài app/test APK. Serial lấy từ mapping private. Trước upgrade, lưu DB/capture cũ vào storage private, xác nhận work đã drain và slot thiết bị/server được khóa.
 

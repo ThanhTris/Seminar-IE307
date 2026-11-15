@@ -53,11 +53,11 @@ Status nguồn được đối chiếu Project lúc **2026-11-15 02:50:58 UTC**;
 
 ## Tiến độ ngày 15/11/2026
 
-- Đã nhận main sau merge SEM-34, kiểm candidate ở PR #28. Candidate NOT_READY, unit test tái hiện 31/32 đạt, 1 fail theo review.
+- Đã nhận main sau merge SEM-34, kiểm candidate ở PR #28. Candidate vẫn NOT_READY; follow-up `1f79ee9` đã sửa assertion theo review, máy Vinh kiểm lại đạt 32/32 unit tests. Kết quả 31/32 trong PREFLIGHT là capture lịch sử.
 - Build app/test APK được trên máy Vinh. Đã kiểm installed APK hash, migration Room 1→2 giữ nguyên 30 event cũ và kiểm manual → cache → export canonical bằng một control development.
 - [Ma trận](../../experiments/plans/SEM-41/EMULATOR_PLAN.json) gồm 27 slot PLANNED/NOT_RUN, 582 phút quan sát. Phase main chờ candidate freeze và pilot đúng revision, các ca PUSH còn thiếu Firebase.
 - [CHECKS](../../docs/evidence/SEM-41/CHECKS.md), [PREFLIGHT](../../docs/evidence/SEM-41/PREFLIGHT.json), [quy trình thực hiện](../../docs/evidence/SEM-41/REPRODUCE.md), [control development](../../experiments/development/run-sem41-v2-smoke-20261115/manifest.json).
-- Đang chạy pilot không cần Firebase. E03 lượt 1 và E04 lượt 1 hợp lệ/SUCCESS; E04 lượt 2 hợp lệ/TIMEOUT. Audit nội dung baseline phát hiện E01 đầu (TIMEOUT) và E03 thay thế đầu (SUCCESS) dùng cùng-version/khác-payload sau tạo store mới: đã hạ hai lượt này thành INVALID, giữ nguyên outcome/log, sửa runner giữ retained store và so sánh cả payload. E04/E06 tiếp tục trên epoch r3 đã đồng bộ cache; sẽ chạy E03:2/E01:1 thay thế trên cùng store sau batch. [Kết quả pilot](../../docs/evidence/SEM-41/PILOT_RESULTS.json) và CHECKS giữ mọi lần thử; 50 tests công cụ đạt. Main vẫn chưa chạy, chờ candidate/Firebase và requalification.
+- Pilot không cần Firebase đã có 6 slot hợp lệ: E03:1 SUCCESS, E04×3 SUCCESS/TIMEOUT/SUCCESS, E06×2 TIMEOUT/TIMEOUT trong profile chưa cấu hình Firebase. Giữ 4 lần thử INVALID, gồm hai lượt cùng-version/khác-payload phát hiện qua audit. Runner đã sửa giữ retained store, kiểm toàn payload trước clock; đang chạy E03:2 rồi E01:1 thay thế (35 + 90 phút). [Kết quả pilot](../../docs/evidence/SEM-41/PILOT_RESULTS.json) giữ mọi lần thử; 50 tests công cụ đạt. Main 27 slot vẫn NOT_RUN, còn chờ candidate/Firebase và requalification.
 
 ## Task được mở khóa
 
