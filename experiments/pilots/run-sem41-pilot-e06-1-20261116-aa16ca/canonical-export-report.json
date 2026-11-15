@@ -1,0 +1,14 @@
+{
+  "schema_version": "2.0.0",
+  "status": "PARTIAL",
+  "exported_event_count": 13,
+  "omitted_event_count": 1,
+  "omitted_events": [
+    {
+      "event_id": "f2cb9568-c76a-4f17-96ae-77a9b8fd6f47",
+      "event_type": "periodic_cancelled",
+      "reason": "Unsupported event_type 'periodic_cancelled'; cannot export canonical schema 2.0.0"
+    }
+  ],
+  "source_format": "legacy-room-v1 plus captured schema-2 fields"
+}

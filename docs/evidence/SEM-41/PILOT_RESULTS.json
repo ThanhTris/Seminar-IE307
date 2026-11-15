@@ -1,13 +1,13 @@
 {
-  "snapshot_utc": "2026-11-15T17:21:31.618Z",
+  "snapshot_utc": "2026-11-15T18:06:54.026Z",
   "run_phase": "pilot",
   "data_kind": "OBSERVED",
   "candidate_gate_passed": false,
   "review_helper_commit": "db98fa8d275c3ca2d10895daa61f00bf53f59cd7",
   "planned_firebase_independent_runs": 8,
   "planned_observation_seconds": 20760,
-  "completed_pilot_runs": 16,
-  "valid_completed_runs": 6,
+  "completed_pilot_runs": 17,
+  "valid_completed_runs": 7,
   "aborted_setup_attempts": 1,
   "aborted_measurement_attempts": 1,
   "main_runs_completed": 0,
@@ -580,11 +580,44 @@
       "replaces_run_ids": [
         "run-sem41-pilot-e04-3-20261115-f9f6a0"
       ]
+    },
+    {
+      "run_id": "run-sem41-pilot-e06-1-20261116-aa16ca",
+      "case_id": "E06",
+      "repetition": 1,
+      "mode": "HYBRID",
+      "execution_status": "COMPLETED",
+      "outcome": "SUCCESS",
+      "validity": "VALID",
+      "actual_duration_ms": 2700870,
+      "new_periodic_cycles": 2,
+      "raw_rows": 14,
+      "canonical_android_events": 13,
+      "omitted_rows": 1,
+      "artifact_directory": "experiments/pilots/run-sem41-pilot-e06-1-20261116-aa16ca",
+      "observer_commit": "db98fa8d275c3ca2d10895daa61f00bf53f59cd7",
+      "collector_boot_session_id": "boot-sem41-cdcb3ce6c37d2751",
+      "canonical_android_region_counts": {
+        "SETUP": 5,
+        "WINDOW": 8,
+        "POST_WINDOW": 0,
+        "NO_WINDOW_STARTED": 0
+      },
+      "baseline_content_status": "PASS",
+      "baseline_content_reason": "BASELINE_MATCH",
+      "scheduler_observation_status": "PASS",
+      "in_window_scheduler_dump_count": 0,
+      "timer_transition_count": 0,
+      "server_store_epoch": "pilots-20261115-r3",
+      "firebase_token_status": "FIREBASE_NOT_CONFIGURED",
+      "deliberate_skip_confirmed": true,
+      "replaces_run_ids": [
+        "run-sem41-pilot-e06-1-20261115-18fec8"
+      ]
     }
   ],
-  "remaining_firebase_independent_runs": 2,
+  "remaining_firebase_independent_runs": 1,
   "unfulfilled_pilot_slots": [
-    "E06:1",
     "E06:2"
   ],
   "batch_status": "RUNNING",
