@@ -68,6 +68,8 @@ Observer commit **`db98fa8d275c3ca2d10895daa61f00bf53f59cd7`** bỏ mọi `dumps
 
 ### Batch đo lại với collector đã sửa
 
+[Đối chứng collector](COLLECTOR_COMPARISON.json): ở phút20 của E01 mới đã có 1 cycle tự chạy/apply target16, xảy ra trước lần copyRoom; không directdispatch/instrumentation/jobdump. Đây là capture giữa phiên, không thay cho window90phút.
+
 Đã có **0/8 slot hợp lệ** trong batch r6; còn 8 slot. Trạng thái: `RUNNING`. Toàn bộ 8 cửa sổ là 346 phút, không tính setup/cleanup. Main vẫn 27 slot NOT_RUN.
 
 Lượt E01 90 phút đầu đang chạy; chưa có slot r6 hoàn tất. Không lấy dữ liệu development/control thay thế.

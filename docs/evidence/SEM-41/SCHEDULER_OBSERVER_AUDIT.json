@@ -180,5 +180,7 @@
         }
       ]
     }
-  ]
+  ],
+  "comparison_reference": "docs/evidence/SEM-41/COLLECTOR_COMPARISON.json",
+  "first_corrected_window_has_native_cycle_before20min": true
 }
