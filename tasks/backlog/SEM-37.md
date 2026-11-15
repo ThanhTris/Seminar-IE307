@@ -1,9 +1,9 @@
 # SEM-37 — Chốt bản ứng viên và manifest phục vụ tập chính
 
-- Trạng thái: **Todo** (Project).
-- Trạng thái đầu vào: **Sẵn sàng**.
-- Còn chờ: Nên nhận: [SEM-36](SEM-36.md).
-- Đối chiếu Project: 2026-11-15 02:50:58 UTC.
+- Trạng thái: **Done** (Project).
+- Trạng thái đầu vào: **Đã hoàn thành**.
+- Còn chờ: Không.
+- Đối chiếu Project: 2026-11-15 12:27:57 UTC.
 - Người thực hiện duy nhất: **Trung** (`TrungNQ2645`).
 - Hạn: **05/11/2026 22:00 (UTC+7)**.
 - Công sức: 2/100 — Cơ chế/thực hành.
@@ -28,11 +28,11 @@ Tài liệu nền đã có: [Kế hoạch/phạm vi](../../docs/PLAN.md).
 | Bắt đầu | [SEM-38 — Xử lý duplicate và version hint của push](SEM-38.md) | Trang | `android/ (messaging input policy)`<br>`docs/evidence/SEM-38/PUSH_INPUT_CASES.md` | `docs/evidence/SEM-38/CHECKS.md` | Done |
 | Bắt đầu | [SEM-39 — Củng cố version guard, retry và race trong core](SEM-39.md) | Trung | `android/ (sync robustness và logic checks)`<br>`docs/evidence/SEM-39/CORE_CASES.md` | `docs/evidence/SEM-39/CHECKS.md` | Done |
 | Bắt đầu | [SEM-40 — Thêm fault injection cố ý bỏ gửi push](SEM-40.md) | Tâm | `server/ (skip-push CLI)`<br>`docs/evidence/SEM-40/FAULT_INJECTION.md` | `docs/evidence/SEM-40/CHECKS.md` | Done |
-| Hoàn tất | [SEM-36 — Tích hợp ba mode và pilot hybrid](SEM-36.md) | Trung | `android/ (mode controller và tích hợp)`<br>`docs/SYNC.md`<br>`docs/evidence/SEM-36/HYBRID_PILOT.md` | `docs/evidence/SEM-36/CHECKS.md` | Todo |
+| Hoàn tất | [SEM-36 — Tích hợp ba mode và pilot hybrid](SEM-36.md) | Trung | `android/ (mode controller và tích hợp)`<br>`docs/SYNC.md`<br>`docs/evidence/SEM-36/HYBRID_PILOT.md` | `docs/evidence/SEM-36/CHECKS.md` | Done |
 
 Đây là danh sách đầu ra cần bàn giao, chưa phải xác nhận các file đã tồn tại. Trước khi dùng, nhận đúng artifact/commit/config và CHECKS từ task nguồn.
 
-Status nguồn được đối chiếu Project lúc **2026-11-15 02:50:58 UTC**; mở link task nguồn để xem cập nhật mới hơn.
+Status nguồn được đối chiếu Project lúc **2026-11-15 12:27:57 UTC**; mở link task nguồn để xem cập nhật mới hơn.
 <!-- task-inputs:end -->
 
 

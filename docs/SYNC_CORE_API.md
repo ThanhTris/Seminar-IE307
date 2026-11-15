@@ -6,7 +6,7 @@
 
 `SyncWorker` giải mã `source`, `mode`, `run_id`, correlation IDs và `version_hint`. Input thiếu hoặc không hợp lệ bị từ chối; worker không tự tạo run giả. MANUAL được phép trong mọi mode; PERIODIC chỉ ở PERIODIC/HYBRID; PUSH chỉ ở PUSH/HYBRID. Worker nhận WorkManager `id`/`runAttemptCount`, gọi repository và ánh xạ applied/unchanged/stale thành success, lỗi tạm thời thành retry, lỗi cuối thành failure.
 
-`SyncWorkEnqueuer.enqueue(SyncInput)` là API chung cho ba source: PERIODIC được chuyển sang unique periodic scheduler; MANUAL/PUSH tạo one-time request cùng worker, cùng network constraint và cùng correlation fields. API trả WorkManager ID thật sau khi Operation hoàn tất. Các producer SEM-23/32 hiện còn enqueue inline; có thể chuyển sang API này khi họ ghép module để tránh ghi `work_enqueued` hai lần.
+`SyncWorkEnqueuer.enqueue(SyncInput)` là API chung cho ba source: PERIODIC được chuyển sang unique periodic scheduler; MANUAL/PUSH tạo one-time request cùng worker, cùng network constraint và cùng correlation fields. API trả WorkManager ID thật sau khi Operation hoàn tất. UI manual và FCM `PushSyncEnqueueAdapter` dùng API này; adapter FCM ghi `push_received`, kiểm mode và chính sách redelivery trước khi gọi enqueuer, nên event `work_enqueued` chỉ do shared API ghi.
 
 ## Kiểu dữ liệu
 
@@ -69,7 +69,7 @@ Periodic lifecycle, unique name, interval validation, cancel/query: [`PeriodicSy
 
 ## Timestamps và event contract
 
-Runtime timeline hiện giữ UTC (`Instant`) và Android monotonic `SystemClock.elapsedRealtime()` cho local event; Room transaction lưu event cùng với snapshot apply. Chi tiết periodic source/start/apply đọc ở [EVENT_SCHEMA.md](EVENT_SCHEMA.md).
+Runtime timeline giữ UTC (`Instant`) và Android monotonic `SystemClock.elapsedRealtime()` cho local event; Room transaction lưu event cùng với snapshot apply. Room v2 capture mode, device alias, cache/version hint, attempt, signal IDs và network call ID. `CanonicalTimelineExporter` chỉ xuất JSONL 2.0.0 khi trường bắt buộc và quy tắc event hợp lệ; event legacy hoặc type chưa có trong contract được liệt kê riêng trong omission report. Chi tiết đọc ở [EVENT_SCHEMA.md](EVENT_SCHEMA.md).
 
 **Tích hợp còn mở trước run main:** Room `TimelineEventEntity` hiện là dạng legacy 1.0 (event ID, source, type, UTC/epoch, run/version, outcome/reason, request/work/message ID, elapsed time). Chưa có serializer/runtime event đầy đủ cho schema phẳng 2.0.0, bao gồm `origin`, `device_alias`, `boot_session_id`, `work_attempt`, `network_call_id`, `signal_ids`, HTTP status/provider reason và cặp fetch started/completed. Không xuất/nhập log main như schema 2.0 cho tới khi adapter và migration của các producer/consumer được hoàn tất. Không điền placeholder thành dữ liệu thật. Snapshot client hiện yêu cầu API major 2; server trong checkout vẫn là v1 và cần SEM-27 nâng cấp trước khi end-to-end hoạt động.
 

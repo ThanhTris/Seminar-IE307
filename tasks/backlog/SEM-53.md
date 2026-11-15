@@ -2,8 +2,8 @@
 
 - Trạng thái: **Todo** (Project).
 - Trạng thái đầu vào: **Sẵn sàng**.
-- Còn chờ: Nên nhận: [SEM-52](SEM-52.md).
-- Đối chiếu Project: 2026-11-15 02:50:58 UTC.
+- Còn chờ: Không.
+- Đối chiếu Project: 2026-11-15 12:27:57 UTC.
 - Người thực hiện duy nhất: **Trí** (`ThanhTris`).
 - Hạn: **12/11/2026 15:00 (UTC+7)**.
 - Công sức: 2/100 — Cơ chế/thực hành.
@@ -23,11 +23,11 @@ Tài liệu nền đã có: [Kế hoạch/phạm vi](../../docs/PLAN.md) · [K�
 
 | Cần cho | Task cung cấp | Người bàn giao | Đầu ra phải nhận | Kiểm chứng bàn giao | Status nguồn |
 |---|---|---|---|---|---|
-| Hoàn tất | [SEM-52 — Build APK bàn giao và viết DEMO_RUNBOOK](SEM-52.md) | Trung | `release/BUILD_MANIFEST.json`<br>`docs/DEMO_RUNBOOK.md`<br>`release/ (APK hoặc liên kết tải)` | `docs/evidence/SEM-52/CHECKS.md` | Todo |
+| Hoàn tất | [SEM-52 — Build APK bàn giao và viết DEMO_RUNBOOK](SEM-52.md) | Trung | `release/BUILD_MANIFEST.json`<br>`docs/DEMO_RUNBOOK.md`<br>`release/ (APK hoặc liên kết tải)` | `docs/evidence/SEM-52/CHECKS.md` | Done |
 
 Đây là danh sách đầu ra cần bàn giao, chưa phải xác nhận các file đã tồn tại. Trước khi dùng, nhận đúng artifact/commit/config và CHECKS từ task nguồn.
 
-Status nguồn được đối chiếu Project lúc **2026-11-15 02:50:58 UTC**; mở link task nguồn để xem cập nhật mới hơn.
+Status nguồn được đối chiếu Project lúc **2026-11-15 12:27:57 UTC**; mở link task nguồn để xem cập nhật mới hơn.
 <!-- task-inputs:end -->
 
 

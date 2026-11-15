@@ -120,8 +120,9 @@ Dự án cung cấp công cụ tự động hóa xuất log và đối chiếu m
 # Kiểm tra bộ test xuất log
 python experiments/scripts/tests/test_export_logs.py
 
-# Xuất log từ SQLite Android và Server logcat về tệp JSONL
-python experiments/scripts/export_logs.py --run-id run-manual-live --manifest experiments/RUN_MANIFEST_TEMPLATE.json --output-dir experiments/exports/run-manual-live
+# Xuất log từ SQLite Android và Server logcat về tệp JSONL bằng run ID thật trong protocol
+RUN_ID="replace-with-real-protocol-run-id"
+python experiments/scripts/export_logs.py --run-id "$RUN_ID" --manifest experiments/RUN_MANIFEST_TEMPLATE.json --output-dir "experiments/exports/$RUN_ID"
 ```
 
 ---
