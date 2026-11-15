@@ -58,8 +58,8 @@ Status nguồn được đối chiếu Project lúc **2026-11-13 16:49:37 UTC**;
 - Đã nhận source mới, build app/test APK đạt, 31 unit tests Android và 22 server tests đạt. APK cài trên emulator khớp SHA-256.
 - Runtime preflight báo `FIREBASE_NOT_CONFIGURED`, token file chưa có, 0 periodic/sync work active. Người dùng xác nhận chưa có cấu hình Firebase.
 - Sender trên store riêng ghi `push_send_failed_local` với reason `INVALID_FCM_CONFIG`, chưa có SDK attempt/message ID.
-- Đã lưu 5 slot E02 `NOT_RUN`, mỗi slot dự kiến 120 giây, log rỗng. Tiếp tục khi có config Firebase, credential gửi và token emulator thật.
-- [CHECKS](../../docs/evidence/SEM-34/CHECKS.md), [PREFLIGHT](../../docs/evidence/SEM-34/PREFLIGHT.json), [quy trình tiếp tục](../../docs/evidence/SEM-34/REPRODUCE.md), [control cấu hình](../../experiments/runs/run-sem34-fcm-config-20261112/manifest.json).
+- Đã ghi 5 slot E02 dự kiến 120 giây/lượt, chờ config Firebase, credential gửi và token emulator thật. Sau review ngày 15/11, slot được chuyển sang [E02_PLAN](../../experiments/plans/SEM-34/E02_PLAN.json) mang nhãn PLANNED/NOT_RUN, run ID để null.
+- [CHECKS](../../docs/evidence/SEM-34/CHECKS.md), [PREFLIGHT](../../docs/evidence/SEM-34/PREFLIGHT.json), [quy trình tiếp tục](../../docs/evidence/SEM-34/REPRODUCE.md), [control cấu hình](../../experiments/development/run-sem34-fcm-config-20261112/manifest.json).
 
 ## Task được mở khóa
 

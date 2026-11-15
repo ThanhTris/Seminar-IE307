@@ -2,6 +2,8 @@
 
 Theo [task SEM-34](../../../tasks/backlog/SEM-34.md), [protocol E02](../../../experiments/PROTOCOL.md), [PUSH](../../PUSH.md) và [FCM sender](../../setup/FCM_SENDER.md). Lần kiểm ngày 12/11/2026 đang chờ Firebase, kết quả đã thực hiện nằm trong [CHECKS](CHECKS.md).
 
+Năm slot ở [E02_PLAN.json](../../../experiments/plans/SEM-34/E02_PLAN.json) mang nhãn PLANNED/NOT_RUN. Tạo run ID mới và ghi build/config khi thực hiện từng lượt. Control cấu hình ngày 12/11 nằm trong [development](../../../experiments/development/run-sem34-fcm-config-20261112/manifest.json). Chọn `run_phase=main` khi consumer tính số liệu tập chính.
+
 ## 1. Nhận cấu hình và build
 
 Nhận `android/app/google-services.json` đúng package `com.thanhtris.seminarie307`, project ID và credential local có quyền gửi FCM. File config được gitignore. Đặt biến môi trường theo đường dẫn private trên máy gửi. Lấy token theo PUSH.md sau khi cài và mở app, đối chiếu fingerprint với token file hiện hành.
@@ -114,4 +116,4 @@ adb -s "$pilot_serial" shell input keyevent KEYCODE_HOME
 
 Kiểm lại stopped, mode, work, mạng/idle/pin và notification. Nếu trước phiên có lịch periodic được phép khôi phục, đăng ký lại theo bàn giao của scheduler sau khi đã giải phóng slot E02. Dừng server do phiên tạo sau khi lưu state/outbox và sender log. Giữ target/version đơn điệu khi tiếp tục trên cùng store.
 
-Lặp lại với **5 run ID riêng**, mỗi lượt đủ 120 giây. Ghi manifest, events, report và CHECKS theo kết quả thật cho từng lượt. Bộ NOT_RUN ngày 12/11 giữ lịch sử cấu hình thiếu, các lượt tiếp theo có ID/build/config của lần thực hiện mới.
+Lặp lại với **5 run ID riêng**, mỗi lượt đủ 120 giây. Ghi manifest, events, report và CHECKS theo kết quả thật cho từng lượt vào `experiments/runs/<run_id>/`. Mỗi slot trong E02_PLAN dùng để theo dõi lượt cần thực hiện, build/checksum hiện hành được ghi vào manifest khi chạy.

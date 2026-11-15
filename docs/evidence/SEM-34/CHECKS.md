@@ -23,7 +23,7 @@
 | Payload sender | Data-only, normal, TTL 86400000 ms | CLI `--validate-only` đạt, payload đã loại token được lưu trong PREFLIGHT | Pass — kiểm input |
 | Sender chưa cấu hình | Ghi local failure sau kiểm snapshot | Store commit version 1 thật. CLI trả `local_failure`, event `push_send_failed_local`, reason `INVALID_FCM_CONFIG`, attempt/message ID null | Pass — tái hiện blocker |
 | Gửi FCM và callback thật | Có response/provider ID, receipt và cache evidence | Người dùng xác nhận chưa có Firebase. Credential/project/token chưa được cung cấp | Not run |
-| E02, 5 lượt × 120 giây | Nhận và apply target trong background | 5 manifest `NOT_RUN`, log rỗng, thời điểm/window thực chưa có | Not run |
+| E02, 5 lượt × 120 giây | Nhận và apply target trong background | 5 slot `PLANNED/NOT_RUN` trong E02_PLAN, run ID và build cho lần chạy thực để null | Not run |
 | Notification | Đối chiếu trước/trong/sau E02 | Checkpoint preflight ghi 0 notification của app. Chưa có cửa sổ push để đánh giá | Not run — E02 |
 | Cleanup preflight | Work/OS và kho server được trả về trạng thái an toàn | 0 active sync/periodic work, Home resumed, stopped=false, network connected, idle ACTIVE. Mode giữ PERIODIC, cache giữ 3 từ lượt cũ. Server riêng đã dừng, lock được giải phóng | Pass — preflight |
 | Prepare/cleanup có token | Bật PUSH, chặn trigger khác, restore mode sau pilot | Nhánh có Firebase/token thật chưa thực hiện | Not run |
@@ -35,26 +35,43 @@ Các unit test chạy trên JVM với cấu hình `unitTests.isReturnDefaultValu
 - [PREFLIGHT.json](PREFLIGHT.json) lưu build/checksum, trạng thái token đã lọc, số work và notification, kết quả test, payload validation, sender failure và hash capture private.
 - [PushPilotControl.kt](../../../android/app/src/androidTest/java/com/thanhtris/seminarie307/experiments/PushPilotControl.kt) cung cấp `preflight`, `prepare`, `snapshot`, `cleanup` qua instrumentation. Bước prepare yêu cầu token READY, file token hiện diện, drain one-time work và tắt periodic trước khi ghi mode PUSH. Snapshot xuất đúng các cột Room legacy, status/token-file boolean và số work/notification. Raw token được giữ trong storage riêng của app.
 - [REPRODUCE.md](REPRODUCE.md) ghi quy trình tiếp tục khi có cấu hình, 5 lượt 120 giây, cách đọc sender/callback/cache và cleanup.
-- [Control cấu hình](../../../experiments/runs/run-sem34-fcm-config-20261112/manifest.json) mang `case_id=CONTROL`, `run_phase=development`, `COMPLETED/FAILURE/INVALID`. Hai event server thực là `server_updated` và `push_send_failed_local`. Snapshot target của control là version 1 trên store riêng. Cache emulator trước/sau vẫn 3.
+- [Control cấu hình](../../../experiments/development/run-sem34-fcm-config-20261112/manifest.json) mang `case_id=CONTROL`, `run_phase=development`, `COMPLETED/FAILURE/INVALID`. Hai event server thực là `server_updated` và `push_send_failed_local`. Snapshot target của control là version 1 trên store riêng. Cache emulator trước/sau vẫn 3.
 
-| Lượt E02 | Manifest | Event hiện có |
+| Lượt E02 | Slot kế hoạch | Trạng thái |
 |---|---|---|
-| 1 | [NOT_RUN](../../../experiments/runs/run-sem34-e02-20261112-01/manifest.json) | 0 |
-| 2 | [NOT_RUN](../../../experiments/runs/run-sem34-e02-20261112-02/manifest.json) | 0 |
-| 3 | [NOT_RUN](../../../experiments/runs/run-sem34-e02-20261112-03/manifest.json) | 0 |
-| 4 | [NOT_RUN](../../../experiments/runs/run-sem34-e02-20261112-04/manifest.json) | 0 |
-| 5 | [NOT_RUN](../../../experiments/runs/run-sem34-e02-20261112-05/manifest.json) | 0 |
+| 1 | `planned-slot-sem34-e02-01` | NOT_RUN |
+| 2 | `planned-slot-sem34-e02-02` | NOT_RUN |
+| 3 | `planned-slot-sem34-e02-03` | NOT_RUN |
+| 4 | `planned-slot-sem34-e02-04` | NOT_RUN |
+| 5 | `planned-slot-sem34-e02-05` | NOT_RUN |
 
-Các slot E02 ghi `planned_window_seconds=120`, normal/data-only/TTL theo protocol. Start/end, target/cache trong run và duration thực để null. Thông tin thiết bị/build lấy từ preflight đã quan sát. Exporter SEM-24 sinh cả 6 bộ manifest/events/report, kiểm contract v2 cho hai event SERVER của control.
+Danh sách nằm trong [E02_PLAN.json](../../../experiments/plans/SEM-34/E02_PLAN.json), ghi cửa sổ dự kiến 120 giây, normal/data-only/TTL theo protocol. Format kế hoạch có `data_kind=PLANNED`, `plan_version=1.0.0`, các slot có `run_id=null`, commit/APK cho lần chạy thực để null. Các ID cũ được giữ ở `previous_placeholder_id` để tra lịch sử. PREFLIGHT ngày 12/11 giữ bản ghi tên slot đã chọn lúc kiểm ban đầu.
 
 ## Blocker cần nhận tiếp
 
 **B1 — Firebase thực tế.** Người dùng xác nhận chưa có cấu hình Firebase. Trên máy kiểm chưa thấy `android/app/google-services.json`, credential/token ở đường dẫn mẫu hoặc ADC mặc định, các biến `FIREBASE_PROJECT_ID`, `GOOGLE_APPLICATION_CREDENTIALS`, `FCM_TOKEN_FILE` chưa đặt. Phạm vi kiểm là các vị trí cấu hình chuẩn và môi trường tiến trình. Cần người quản lý project bàn giao config đúng package, credential gửi FCM và quyền project qua kênh riêng. Sau đó build lại với Google Services, lấy token của emulator và kiểm fingerprint theo PUSH.md.
 
-**B2 — Producer log Android.** Timeline còn `legacy-room-v1`, thiếu các trường và fetch events của canonical schema 2.0.0. SEM-36 tiếp nhận phần chuẩn hóa producer. Các file E02 rỗng hiện được exporter chấp nhận dưới NOT_RUN. Lượt có callback thật cần lưu raw legacy đúng nhãn và kiểm nhận đường bàn giao trước khi đưa vào consumer v2.
+**B2 — Producer log Android.** Timeline còn `legacy-room-v1`, thiếu các trường và fetch events của canonical schema 2.0.0. SEM-36 tiếp nhận phần chuẩn hóa producer. Lượt có callback thật cần lưu raw legacy đúng nhãn và kiểm nhận đường bàn giao trước khi đưa vào consumer v2.
 
 **B3 — Thực nghiệm chưa chạy.** Chưa có bằng chứng accepted/received/applied, cache nền do push, delivery window hoặc notification trong E02. SEM-34 còn mở cho đến khi có lượt pilot thật và evidence tương ứng. Đây là đầu vào SEM-36 cần nhận tiếp.
 
 ## Kiểm artifact
 
-Đã kiểm manifest/report bằng exporter và tái xuất control cùng 5 slot NOT_RUN để đối chiếu byte. Event control đúng source SERVER, không có FCM message/send attempt. JSONL E02 rỗng và có lý do B1. Đã rà link nội bộ, cú pháp shell, whitespace và giá trị nhạy cảm trước commit. Capture thô, database và mapping giữ trong `.local/sem34/` được gitignore. Trạng thái Project tiếp tục Todo trong lúc chờ B1 và pilot.
+Lần kiểm ngày 12/11 đã tái xuất control và 5 placeholder để đối chiếu byte. Sau review, 5 placeholder được thay bằng kế hoạch PLANNED ngoài thư mục runs. Control được chuyển sang development, giữ nguyên byte của manifest, events và report. Event control đúng source SERVER, không có FCM message/send attempt. Capture thô, database và mapping giữ trong `.local/sem34/` được gitignore. Trạng thái Project tiếp tục Todo trong lúc chờ B1 và pilot.
+
+## Cập nhật theo review ngày 15/11/2026
+
+Review của Trí ngày 12/11 xác nhận preflight và guard phù hợp, các lưu ý về kế hoạch không chặn merge. Nhánh đã nhận main tại `c77772e426c00ae464240f00942f8368c638aaa8`. [Review PR #26](https://github.com/ThanhTris/Seminar-IE307/pull/26#pullrequestreview-5867500531)
+
+1. Thay 5 manifest OBSERVED chưa chạy bằng E02_PLAN với `data_kind=PLANNED`, slot ID thể hiện kế hoạch và `run_id=null`. Exporter SEM-24 hiện nhận OBSERVED/FIXTURE cho run manifest, nên format kế hoạch được đặt ở `experiments/plans/SEM-34/`.
+2. Chuyển control đã quan sát sang `experiments/development/`, giữ nguyên log và hash. Auditor quét `experiments/runs/` giờ không thu control hoặc slot kế hoạch SEM-34.
+3. Báo cáo audit mặc định vẫn ghi hai `MANIFEST_CONTRACT_INVALID` của SEM-29 legacy có từ trước. Kết quả được ghi trong review, thuộc đầu vào SEM-29 và consumer SEM-44/45.
+4. Android pilot thật tiếp tục lưu raw legacy đúng nhãn cho đến khi có producer v2. Cấu hình Firebase và 5 lượt E02 thực tế còn chờ bàn giao.
+
+Kiểm sau sửa có 36/36 tests exporter đạt, 5 slot PLANNED đúng trạng thái và 38 link nội bộ cùng 9 block shell hợp lệ. Byte control/PREFLIGHT khớp bản trước review. Auditor trả exit 2 với hai loại vấn đề hiện có `MANIFEST_CONTRACT_INVALID` từ hai run SEM-29 và `RESULTS_CSV_MISSING`. Sáu mục SEM-34 đã ra khỏi kết quả quét runs, mã `NON_MAIN_RUN_IN_RUNS_DIRECTORY` không còn xuất hiện trong lần kiểm này.
+
+```sh
+PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s experiments/scripts/tests -v
+python3 experiments/scripts/audit_main_runs.py --output .local/sem34-review/AUDIT_RESULTS.md
+git diff --check
+```
