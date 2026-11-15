@@ -12,6 +12,7 @@ from datetime import datetime
 import hashlib
 import json
 from pathlib import Path
+import re
 import shutil
 import tempfile
 from types import SimpleNamespace
@@ -111,6 +112,9 @@ def export_one(folder, output, deny_path):
     record, audit = review(folder)
     deny = load(deny_path)
     base = load(ROOT / "experiments/development/run-sem41-v2-smoke-20261115/manifest.json")
+    baseline = load(folder.parent / "baseline.json")
+    canonical.require(isinstance(baseline.get("boot_hash"), str) and re.fullmatch(r"[0-9a-f]{64}", baseline["boot_hash"]) is not None and "DEVICE_REBOOTED_DURING_BATCH" not in record["reason_codes"], "COLLECTOR_BOOT_EVIDENCE_REQUIRED")
+    collector_boot = "boot-sem41-" + baseline["boot_hash"][:16]
     canonical.require(record["app_source_commit"] == base["build"]["app_commit"] and record["server_source_commit"] == base["build"]["server_commit"] and record["apk_sha256"] == base["build"]["apk_sha256"], "SNAPSHOT_BUILD_CONFIG_MISMATCH")
     manifest = deepcopy(base)
     manifest.update(case_id=record["case_id"], subscenario="CONTROLLED_SKIP" if record["case_id"] == "E06" else "PERIODIC_BASELINE", repetition=record["repetition"], run_id=record["run_id"], run_phase="pilot", mode=record["mode"], execution_status=record["execution_status"], outcome=record["outcome"], validity=audit["validity"], reason_codes=list(record["reason_codes"]) + ["CANDIDATE_NOT_READY", "CLOCK_UNCONTROLLED", "CLEANUP_EVENT_OMITTED"], intervention="INJECTED" if record["case_id"] in {"E03", "E06"} else "NONE")
@@ -120,12 +124,13 @@ def export_one(folder, output, deny_path):
     obs = manifest["observation"]
     for key in ("start_utc", "end_utc", "start_elapsed_realtime_ms", "end_elapsed_realtime_ms", "cached_version_before", "target_version", "cached_version_after"):
         obs[key] = record.get(key)
-    obs.update(planned_window_seconds=WINDOWS[record["case_id"]], actual_duration_ms=audit["actual_duration_ms"], server_version_before=record["target_version"] - 1 if record.get("target_version") else None, natural_periodic_cycles=audit["new_periodic_cycles"])
+    obs.update(planned_window_seconds=WINDOWS[record["case_id"]], actual_duration_ms=audit["actual_duration_ms"], server_version_before=record["target_version"] - 1 if record.get("target_version") else None, natural_periodic_cycles=audit["new_periodic_cycles"], boot_session_id=collector_boot)
     for key in obs["milestones"]:
         obs["milestones"][key] = record.get(key)
     clean = audit["checks"]["cleanup"]
     manifest["cleanup"].update(status="PASS" if clean else "FAIL", work_drained=clean, idle_restored=clean, network_restored=clean, package_stopped_cleared=clean)
     extras = {"android-events-raw.jsonl": (folder / "export-v2-events-legacy.jsonl").read_text(), "canonical-export-report.json": (folder / "events-v2-export-report.json").read_text(), "state-after.json": (folder / "export-v2-state.json").read_text(), "observation.json": (folder / "observation.json").read_text(), "runner-identity.json": (folder.parent / "runner-identity.json").read_text()}
+    extras["collector-boot.json"] = json.dumps({"boot_session_id": collector_boot, "identity_source": "SHA256_OF_KERNEL_BOOT_ID", "verified_by_observer_at_each_checkpoint": True, "raw_boot_id_published": False, "event_boot_session_ids_modified": False, "event_latency_calculated": False}, indent=2) + "\n"
     for name in ("offline-proof.json", "setup-diagnostic.json"):
         if (folder / name).exists():
             extras[name] = (folder / name).read_text()

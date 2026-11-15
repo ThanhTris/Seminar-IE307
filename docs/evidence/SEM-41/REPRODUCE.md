@@ -89,7 +89,7 @@ python3 experiments/scripts/export_sem41_pilots.py \
   --deny-values .local/sem41/deny-values.json
 ```
 
-Artifacts pilot nằm trong `experiments/pilots/<run_id>/`, riêng với tập main. Đọc `audit.json` và mọi reason code trước dùng kết quả. Clock controlled=false giữ nguyên; helper không tính latency liên máy và không bổ sung boot session ID vào event. E03 force-idle và E06 deliberate skip mang nhãn INJECTED. Thời gian idle là điều kiện điều khiển, không đại diện Doze tự nhiên.
+Artifacts pilot nằm trong `experiments/pilots/<run_id>/`, riêng với tập main. Đọc `audit.json` và mọi reason code trước dùng kết quả. Manifest có boot alias của collector, dẫn xuất từ hash kernel boot ID trong baseline private; observer kiểm cùng boot tại từng checkpoint. Nhờ đó duration giữa hai mốc `/proc/uptime` của collector có cùng boot đã xác minh. Helper không bổ sung boot session ID vào event: các event vẫn giữ null, không tính event latency từ các trường đó. Clock controlled=false giữ nguyên, không tính latency liên máy. E03 force-idle và E06 deliberate skip mang nhãn INJECTED. Thời gian idle là điều kiện điều khiển, không đại diện Doze tự nhiên.
 
 ## Đóng run và export
 
