@@ -542,6 +542,17 @@ class SourceIndexTests(unittest.TestCase):
         with self.assertRaisesRegex(analyzer.AnalysisError, "DATASET_PHASE_MISMATCH"):
             analyzer.load_source_index(self.write_index(), "main")
 
+    def test_server_store_epochs_from_reviewed_index_stay_in_separate_groups(self):
+        self.index_input()
+        analyses = []
+        for epoch in ("store-r2", "store-r3"):
+            self.index["runs"][0]["server_store_epoch"] = epoch
+            with patch.object(analyzer, "source_bytes", side_effect=lambda commit, p: self.source_files[p]):
+                runs, _ = analyzer.load_source_index(self.write_index(), "fixture")
+            analyses.append(analyzer.analyze_run(runs[0]))
+        self.assertEqual([r["row"]["server_store_epoch"] for r in analyses], ["store-r2", "store-r3"])
+        self.assertEqual(len(analyzer.summarize(analyses)), 2)
+
     def test_bad_source_paths_never_invoke_git(self):
         for path in ("/absolute", "../outside", "safe/../outside", "C:/outside", "a\\b", "a\nother"):
             with self.subTest(path=path), patch.object(analyzer.subprocess, "run") as run:

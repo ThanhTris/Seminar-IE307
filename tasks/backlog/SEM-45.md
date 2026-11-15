@@ -9,7 +9,7 @@
 - Công sức: 2/100 — Cơ chế/thực hành.
 - Tách từ nhóm cũ: [SEM-08](SEM-08.md); nhóm cũ chỉ còn lưu lịch sử.
 
-> **Ghi chú tiến độ ngày 08/11/2026: SEM-45 CHƯA HOÀN THÀNH, đang chờ thêm đầu vào từ SEM-41 và SEM-42.** Ba bước công cụ đã thực hiện và kiểm bằng fixture; bước 4 phân tích tập chính chưa chạy, chưa có `experiments/results.csv` đo thật và chưa đủ điều kiện chuyển Done. Nhánh được push để lưu và review phần làm trước.
+> **Cập nhật 15/11/2026. Đầu ra SEM-45 đã hoàn thiện để review Draft PR.** Đã cập nhật main, kiểm parser và sinh `experiments/results.csv` từ 12 lượt OBSERVED/pilot của SEM-41 tại commit nguồn cố định. 4 lượt INVALID được giữ để truy vết, mẫu số main bằng 0. Main emulator, OPPO và các phép đo thiếu clock/boot được ghi Not run/giới hạn trong CHECKS. Trạng thái Project hiện vẫn In Progress, chờ Tuấn review bản bàn giao.
 
 ## Dependency — bấm mã task để mở yêu cầu
 
@@ -50,18 +50,20 @@ Status nguồn được đối chiếu Project lúc **2026-11-15 12:27:57 UTC**;
 
 ## Tiêu chí hoàn thành
 
-- [ ] Tái sinh được CSV từ log; fixture không lẫn main, không gán latency timeout bằng 0.
-- [ ] Accepted/received/queue/sync không bị gộp thành một mốc.
-- [ ] Đầu ra và CHECKS có thật, link đọc được; chưa chạy phải ghi Not run, không tự chuyển Done từ kế hoạch.
+- [x] Tái sinh được CSV từ log; fixture không lẫn main, không gán latency timeout bằng 0.
+- [x] Accepted/received/queue/sync không bị gộp thành một mốc.
+- [x] Đầu ra và CHECKS có thật, link đọc được; chưa chạy phải ghi Not run, không tự chuyển Done từ kế hoạch.
 
 ## Các bước thực hiện trên nhánh SEM-45
 
-Nhánh `codex/SEM-45-log-parser`, từ main `d29532a`, ngày 08/11/2026. Tiến độ công cụ không thay Status Project hoặc xác nhận có log tập chính.
+Nhánh `codex/SEM-45-log-parser`, từ main `d29532a` ngày 08/11/2026. Lịch sử loader/metrics/CLI đã làm được giữ trong [CHECKS](../../docs/evidence/SEM-45/CHECKS.md). Lần tiếp tục ngày 15/11 có bốn bước, mỗi bước một commit.
 
-1. **Đã xong:** nhận contract và viết loader canonical có kiểm routing/schema/dataset/duplicate — commit `85aab1c`.
-2. **Đã xong:** tính chỉ số theo correlation, cửa sổ, timeout/late và clock — commit `f7c1958`.
-3. **Đã xong phần làm trước:** CLI xuất CSV/summary/report, kiểm tích hợp và [hướng dẫn tái lập](../../experiments/ANALYSIS.md). Commit bước 3 truy trong [CHECKS](../../docs/evidence/SEM-45/CHECKS.md).
-4. **Còn chờ:** nhận log/CHECKS tập chính SEM-41/42, đối chiếu phase/evidence rồi sinh và kiểm `experiments/results.csv` thật; bàn giao SEM-44 kiểm độc lập. Không dùng fixture hoặc legacy pilot thay đầu vào này.
+1. **Đã xong** cập nhật main `bcc7c58`, chạy lại 71 test cũ — merge commit `0d4a0e9`.
+2. **Đã xong** kiểm đầu vào thật, thêm index nguồn pinned/hash, giữ uncertainty khi thiếu boot và tách outcome khai báo — `c8ae2fe`.
+3. **Đã xong** sinh CSV 12 dòng pilot, summary/report có provenance, đối chiếu và tái lập giống từng byte — `fd3aa8c`.
+4. **Đã xong** rà nhóm epoch store và LF/checksum, kiểm 81 test, cập nhật hướng dẫn/CHECKS/Not run và chuẩn bị Draft PR. Commit cuối tra trong lịch sử file CHECKS.
+
+Đầu vào SEM-41 được tham chiếu từ Draft PR #29 tại commit `0e293c1483d961eb4233b8ad381765ea4cdacf1d`. CSV hiện có nhãn pilot. Main/OPPO chưa nhận được bộ đo cho lần bàn giao này. SEM-43/44/48/50 dùng output cùng giới hạn đã ghi, cập nhật bộ kết quả khi nhận thêm dữ liệu phù hợp.
 
 ## Task được mở khóa
 

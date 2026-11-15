@@ -53,7 +53,7 @@
       "data_kind": "OBSERVED",
       "declared_outcomes": {
         "FAILURE": 1,
-        "SUCCESS": 3
+        "SUCCESS": 1
       },
       "device": {
         "abi": "arm64-v8a",
@@ -71,7 +71,7 @@
       "device_alias": "emulator-main",
       "eligible_outcomes": {},
       "event_schema_version": "2.0.0",
-      "group_id": "7818584f685daa64a97c2a37e5c382f7783b4bfa3beecc76d7a2912c37275e59",
+      "group_id": "22dc78296a4179ff6e748d3ce4201f28d9ac2d873c30b9fb5c4ef176c3ed7c80",
       "intervention": "INJECTED",
       "metrics": {
         "queue_ms": {
@@ -113,14 +113,17 @@
       "mode": "PERIODIC",
       "n_complete": 0,
       "n_eligible": 0,
-      "n_excluded": 4,
-      "n_input": 4,
+      "n_excluded": 2,
+      "n_input": 2,
       "n_not_run": 0,
       "protocol_version": "1.0.0",
       "run_phase": "pilot",
+      "source_context": {
+        "server_store_epoch": "pilots-20261115-r2"
+      },
       "subscenario": "PERIODIC_BASELINE",
       "valid_completed_declared_outcomes": {
-        "SUCCESS": 2
+        "SUCCESS": 1
       }
     },
     {
@@ -173,8 +176,7 @@
       },
       "data_kind": "OBSERVED",
       "declared_outcomes": {
-        "FAILURE": 1,
-        "TIMEOUT": 2
+        "TIMEOUT": 1
       },
       "device": {
         "abi": "arm64-v8a",
@@ -192,7 +194,7 @@
       "device_alias": "emulator-main",
       "eligible_outcomes": {},
       "event_schema_version": "2.0.0",
-      "group_id": "c1fd97526f1f45471221787c01cdd2c1e17041b8464b9ec495222e9f5da2f94f",
+      "group_id": "29c3860586e2053afae5d2271bf8f210ea525bb9051fbbea4a447c1a83e47504",
       "intervention": "NONE",
       "metrics": {
         "queue_ms": {
@@ -234,14 +236,384 @@
       "mode": "PERIODIC",
       "n_complete": 0,
       "n_eligible": 0,
-      "n_excluded": 3,
-      "n_input": 3,
+      "n_excluded": 1,
+      "n_input": 1,
       "n_not_run": 0,
       "protocol_version": "1.0.0",
       "run_phase": "pilot",
+      "source_context": {
+        "server_store_epoch": "pilots-20261115-r3"
+      },
       "subscenario": "PERIODIC_BASELINE",
       "valid_completed_declared_outcomes": {
         "TIMEOUT": 1
+      }
+    },
+    {
+      "build": {
+        "api_version": "2.0.0",
+        "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
+        "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
+        "candidate_gate_passed": false,
+        "compile_sdk": 37,
+        "min_sdk": 24,
+        "package_name": "com.thanhtris.seminarie307",
+        "server_commit": "c77772e426c00ae464240f00942f8368c638aaa8",
+        "target_sdk": 37,
+        "version_code": 1,
+        "version_name": "0.1.0"
+      },
+      "case_id": "E01",
+      "completion_rate": null,
+      "config": {
+        "battery_optimization": null,
+        "battery_percent": 100,
+        "battery_saver": false,
+        "collapse_key": null,
+        "connect_timeout_ms": 5000,
+        "deep_idle_after": "ACTIVE",
+        "deep_idle_before": "ACTIVE",
+        "deep_idle_during": "ACTIVE",
+        "idle_method": "NATURAL",
+        "network_constraint": "CONNECTED",
+        "network_transports": [
+          "WIFI",
+          "CELLULAR"
+        ],
+        "package_stopped_before": false,
+        "periodic_flex_minutes": 15,
+        "periodic_initial_delay_ms": 0,
+        "periodic_interval_minutes": 15,
+        "periodic_policy": "UPDATE",
+        "periodic_unique_name": "periodic_bulletin_sync",
+        "powered": false,
+        "push_payload_kind": null,
+        "push_priority": null,
+        "read_timeout_ms": 5000,
+        "retry_backoff_ms": 30000,
+        "retry_backoff_policy": "EXPONENTIAL",
+        "retry_max_attempts": 4,
+        "screen_state": "ON",
+        "server_route": "EMULATOR_HOST_HTTP",
+        "ttl_ms": null
+      },
+      "data_kind": "OBSERVED",
+      "declared_outcomes": {
+        "TIMEOUT": 1
+      },
+      "device": {
+        "abi": "arm64-v8a",
+        "android_release": "17",
+        "api_level": 37,
+        "build_fingerprint": "google/sdk_gphone16k_arm64/emu64a16k:17/CP31.260623.012/16064790:user/dev-keys",
+        "coloros": null,
+        "kind": "EMULATOR",
+        "manufacturer": "Google",
+        "model": "sdk_gphone16k_arm64",
+        "page_size_bytes": 16384,
+        "play_services_version": "26.43.30",
+        "security_patch": "2026-07-05"
+      },
+      "device_alias": "emulator-main",
+      "eligible_outcomes": {},
+      "event_schema_version": "2.0.0",
+      "group_id": "978971916d265b34e021d5fdbeadd6647bf8d14d889fdc0354b9106ebe1e28c1",
+      "intervention": "NONE",
+      "metrics": {
+        "queue_ms": {
+          "max": null,
+          "median": null,
+          "min": null,
+          "n_measured": 0,
+          "n_missing": 0
+        },
+        "received_to_enqueue_ms": {
+          "max": null,
+          "median": null,
+          "min": null,
+          "n_measured": 0,
+          "n_missing": 0
+        },
+        "sync_ms": {
+          "max": null,
+          "median": null,
+          "min": null,
+          "n_measured": 0,
+          "n_missing": 0
+        },
+        "update_to_applied_ms": {
+          "max": null,
+          "median": null,
+          "min": null,
+          "n_measured": 0,
+          "n_missing": 0
+        },
+        "update_to_received_ms": {
+          "max": null,
+          "median": null,
+          "min": null,
+          "n_measured": 0,
+          "n_missing": 0
+        }
+      },
+      "mode": "PERIODIC",
+      "n_complete": 0,
+      "n_eligible": 0,
+      "n_excluded": 1,
+      "n_input": 1,
+      "n_not_run": 0,
+      "protocol_version": "1.0.0",
+      "run_phase": "pilot",
+      "source_context": {
+        "server_store_epoch": "pilots-20261115-r2"
+      },
+      "subscenario": "PERIODIC_BASELINE",
+      "valid_completed_declared_outcomes": {}
+    },
+    {
+      "build": {
+        "api_version": "2.0.0",
+        "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
+        "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
+        "candidate_gate_passed": false,
+        "compile_sdk": 37,
+        "min_sdk": 24,
+        "package_name": "com.thanhtris.seminarie307",
+        "server_commit": "c77772e426c00ae464240f00942f8368c638aaa8",
+        "target_sdk": 37,
+        "version_code": 1,
+        "version_name": "0.1.0"
+      },
+      "case_id": "E06",
+      "completion_rate": null,
+      "config": {
+        "battery_optimization": null,
+        "battery_percent": 100,
+        "battery_saver": false,
+        "collapse_key": null,
+        "connect_timeout_ms": 5000,
+        "deep_idle_after": "ACTIVE",
+        "deep_idle_before": "ACTIVE",
+        "deep_idle_during": "ACTIVE",
+        "idle_method": "NATURAL",
+        "network_constraint": "CONNECTED",
+        "network_transports": [
+          "WIFI",
+          "CELLULAR"
+        ],
+        "package_stopped_before": false,
+        "periodic_flex_minutes": 15,
+        "periodic_initial_delay_ms": 0,
+        "periodic_interval_minutes": 15,
+        "periodic_policy": "UPDATE",
+        "periodic_unique_name": "periodic_bulletin_sync",
+        "powered": false,
+        "push_payload_kind": null,
+        "push_priority": null,
+        "read_timeout_ms": 5000,
+        "retry_backoff_ms": 30000,
+        "retry_backoff_policy": "EXPONENTIAL",
+        "retry_max_attempts": 4,
+        "screen_state": "ON",
+        "server_route": "EMULATOR_HOST_HTTP",
+        "ttl_ms": null
+      },
+      "data_kind": "OBSERVED",
+      "declared_outcomes": {
+        "TIMEOUT": 2
+      },
+      "device": {
+        "abi": "arm64-v8a",
+        "android_release": "17",
+        "api_level": 37,
+        "build_fingerprint": "google/sdk_gphone16k_arm64/emu64a16k:17/CP31.260623.012/16064790:user/dev-keys",
+        "coloros": null,
+        "kind": "EMULATOR",
+        "manufacturer": "Google",
+        "model": "sdk_gphone16k_arm64",
+        "page_size_bytes": 16384,
+        "play_services_version": "26.43.30",
+        "security_patch": "2026-07-05"
+      },
+      "device_alias": "emulator-main",
+      "eligible_outcomes": {},
+      "event_schema_version": "2.0.0",
+      "group_id": "a3dad4a9a48731bfed7fb29cc033217828581a13da9427fa3c3c9af9b35e2769",
+      "intervention": "INJECTED",
+      "metrics": {
+        "queue_ms": {
+          "max": null,
+          "median": null,
+          "min": null,
+          "n_measured": 0,
+          "n_missing": 0
+        },
+        "received_to_enqueue_ms": {
+          "max": null,
+          "median": null,
+          "min": null,
+          "n_measured": 0,
+          "n_missing": 0
+        },
+        "sync_ms": {
+          "max": null,
+          "median": null,
+          "min": null,
+          "n_measured": 0,
+          "n_missing": 0
+        },
+        "update_to_applied_ms": {
+          "max": null,
+          "median": null,
+          "min": null,
+          "n_measured": 0,
+          "n_missing": 0
+        },
+        "update_to_received_ms": {
+          "max": null,
+          "median": null,
+          "min": null,
+          "n_measured": 0,
+          "n_missing": 0
+        }
+      },
+      "mode": "HYBRID",
+      "n_complete": 0,
+      "n_eligible": 0,
+      "n_excluded": 2,
+      "n_input": 2,
+      "n_not_run": 0,
+      "protocol_version": "1.0.0",
+      "run_phase": "pilot",
+      "source_context": {
+        "server_store_epoch": "pilots-20261115-r3"
+      },
+      "subscenario": "CONTROLLED_SKIP",
+      "valid_completed_declared_outcomes": {
+        "TIMEOUT": 2
+      }
+    },
+    {
+      "build": {
+        "api_version": "2.0.0",
+        "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
+        "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
+        "candidate_gate_passed": false,
+        "compile_sdk": 37,
+        "min_sdk": 24,
+        "package_name": "com.thanhtris.seminarie307",
+        "server_commit": "c77772e426c00ae464240f00942f8368c638aaa8",
+        "target_sdk": 37,
+        "version_code": 1,
+        "version_name": "0.1.0"
+      },
+      "case_id": "E03",
+      "completion_rate": null,
+      "config": {
+        "battery_optimization": null,
+        "battery_percent": 100,
+        "battery_saver": false,
+        "collapse_key": null,
+        "connect_timeout_ms": 5000,
+        "deep_idle_after": "ACTIVE",
+        "deep_idle_before": "ACTIVE",
+        "deep_idle_during": "IDLE",
+        "idle_method": "ADB_FORCE_IDLE",
+        "network_constraint": "CONNECTED",
+        "network_transports": [
+          "WIFI",
+          "CELLULAR"
+        ],
+        "package_stopped_before": false,
+        "periodic_flex_minutes": 15,
+        "periodic_initial_delay_ms": 0,
+        "periodic_interval_minutes": 15,
+        "periodic_policy": "UPDATE",
+        "periodic_unique_name": "periodic_bulletin_sync",
+        "powered": false,
+        "push_payload_kind": null,
+        "push_priority": null,
+        "read_timeout_ms": 5000,
+        "retry_backoff_ms": 30000,
+        "retry_backoff_policy": "EXPONENTIAL",
+        "retry_max_attempts": 4,
+        "screen_state": "ON",
+        "server_route": "EMULATOR_HOST_HTTP",
+        "ttl_ms": null
+      },
+      "data_kind": "OBSERVED",
+      "declared_outcomes": {
+        "SUCCESS": 2
+      },
+      "device": {
+        "abi": "arm64-v8a",
+        "android_release": "17",
+        "api_level": 37,
+        "build_fingerprint": "google/sdk_gphone16k_arm64/emu64a16k:17/CP31.260623.012/16064790:user/dev-keys",
+        "coloros": null,
+        "kind": "EMULATOR",
+        "manufacturer": "Google",
+        "model": "sdk_gphone16k_arm64",
+        "page_size_bytes": 16384,
+        "play_services_version": "26.43.30",
+        "security_patch": "2026-07-05"
+      },
+      "device_alias": "emulator-main",
+      "eligible_outcomes": {},
+      "event_schema_version": "2.0.0",
+      "group_id": "a92f5e78c06c0bc0d3419028265be7564205e025f73425f92284382bd9c6866b",
+      "intervention": "INJECTED",
+      "metrics": {
+        "queue_ms": {
+          "max": null,
+          "median": null,
+          "min": null,
+          "n_measured": 0,
+          "n_missing": 0
+        },
+        "received_to_enqueue_ms": {
+          "max": null,
+          "median": null,
+          "min": null,
+          "n_measured": 0,
+          "n_missing": 0
+        },
+        "sync_ms": {
+          "max": null,
+          "median": null,
+          "min": null,
+          "n_measured": 0,
+          "n_missing": 0
+        },
+        "update_to_applied_ms": {
+          "max": null,
+          "median": null,
+          "min": null,
+          "n_measured": 0,
+          "n_missing": 0
+        },
+        "update_to_received_ms": {
+          "max": null,
+          "median": null,
+          "min": null,
+          "n_measured": 0,
+          "n_missing": 0
+        }
+      },
+      "mode": "PERIODIC",
+      "n_complete": 0,
+      "n_eligible": 0,
+      "n_excluded": 2,
+      "n_input": 2,
+      "n_not_run": 0,
+      "protocol_version": "1.0.0",
+      "run_phase": "pilot",
+      "source_context": {
+        "server_store_epoch": "pilots-20261115-r3"
+      },
+      "subscenario": "PERIODIC_BASELINE",
+      "valid_completed_declared_outcomes": {
+        "SUCCESS": 1
       }
     },
     {
@@ -313,7 +685,7 @@
       "device_alias": "emulator-main",
       "eligible_outcomes": {},
       "event_schema_version": "2.0.0",
-      "group_id": "f7aced47d80c40b428996d04a657a8e3cea36e26135b57f845b463b681508d49",
+      "group_id": "bc29d30ac2ea8034f5748b3ce00a646f6dd92074c4d50b3facd1aea28347db18",
       "intervention": "NONE",
       "metrics": {
         "queue_ms": {
@@ -360,6 +732,9 @@
       "n_not_run": 0,
       "protocol_version": "1.0.0",
       "run_phase": "pilot",
+      "source_context": {
+        "server_store_epoch": "pilots-20261115-r3"
+      },
       "subscenario": "PERIODIC_BASELINE",
       "valid_completed_declared_outcomes": {
         "SUCCESS": 2,
@@ -380,7 +755,7 @@
         "version_code": 1,
         "version_name": "0.1.0"
       },
-      "case_id": "E06",
+      "case_id": "E01",
       "completion_rate": null,
       "config": {
         "battery_optimization": null,
@@ -416,7 +791,7 @@
       },
       "data_kind": "OBSERVED",
       "declared_outcomes": {
-        "TIMEOUT": 2
+        "FAILURE": 1
       },
       "device": {
         "abi": "arm64-v8a",
@@ -434,8 +809,8 @@
       "device_alias": "emulator-main",
       "eligible_outcomes": {},
       "event_schema_version": "2.0.0",
-      "group_id": "fd15528b8ac17b6164f371399f79ad5bd8e334c9325b8d4a64dda376d2f673ff",
-      "intervention": "INJECTED",
+      "group_id": "f86e8300e87a3d550eb8c2cd82402d5fdf3009351660ecd9a6b43a85dd29d505",
+      "intervention": "NONE",
       "metrics": {
         "queue_ms": {
           "max": null,
@@ -473,18 +848,19 @@
           "n_missing": 0
         }
       },
-      "mode": "HYBRID",
+      "mode": "PERIODIC",
       "n_complete": 0,
       "n_eligible": 0,
-      "n_excluded": 2,
-      "n_input": 2,
+      "n_excluded": 1,
+      "n_input": 1,
       "n_not_run": 0,
       "protocol_version": "1.0.0",
       "run_phase": "pilot",
-      "subscenario": "CONTROLLED_SKIP",
-      "valid_completed_declared_outcomes": {
-        "TIMEOUT": 2
-      }
+      "source_context": {
+        "server_store_epoch": null
+      },
+      "subscenario": "PERIODIC_BASELINE",
+      "valid_completed_declared_outcomes": {}
     }
   ]
 }

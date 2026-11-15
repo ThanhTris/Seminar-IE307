@@ -1,0 +1,62 @@
+{
+  "cli_checks": {
+    "fixture": {
+      "exit_code": 0,
+      "expected_error": null,
+      "passed": true
+    },
+    "legacy": {
+      "exit_code": 2,
+      "expected_error": "CONTRACT_VERSION_UNSUPPORTED",
+      "passed": true
+    },
+    "overwrite": {
+      "exit_code": 2,
+      "expected_error": "OUTPUT_EXISTS",
+      "passed": true
+    },
+    "phase": {
+      "exit_code": 2,
+      "expected_error": "DATASET_PHASE_MISMATCH",
+      "passed": true
+    }
+  },
+  "csv_sha256": "6587970d33b1a0212e71d4cc71ffad7e3378bea384a94c53bea7061c1bb43e2a",
+  "git_diff_check_passed": true,
+  "group_count": 7,
+  "index_sha256": "7c8833a38e9b7d92df75e503c9612c99409a8e0e08e903e3855b9135196e16c7",
+  "internal_links_checked": 52,
+  "invalid_attempts_retained": 4,
+  "main_eligible": 0,
+  "markdown_fences_passed": true,
+  "markdown_tables_checked": 8,
+  "matches_local_source_exports": true,
+  "not_run": [
+    "main_emulator",
+    "oppo",
+    "firebase_runtime",
+    "phase_specific_metrics",
+    "independent_SEM44_review"
+  ],
+  "python_39_syntax_passed": true,
+  "python_version": "3.12.14",
+  "reproduced_byte_for_byte": true,
+  "run_count": 12,
+  "runtime_experiment_performed": false,
+  "scope": "SEM45_OFFLINE_ANALYSIS",
+  "source_commit": "0e293c1483d961eb4233b8ad381765ea4cdacf1d",
+  "source_epochs_match_pinned_pilot_results": true,
+  "source_review_status": "DRAFT_AT_IMPORT",
+  "summary_sha256": "aabc993b5fb30aefe741fb2f41903d1e41094f21c95d5cefd2ef0f5e22f8e0df",
+  "uncertain_window_rows": 12,
+  "unit_tests": {
+    "failures": 0,
+    "passed": 81
+  },
+  "valid_completed_declared_outcomes": {
+    "SUCCESS": 4,
+    "TIMEOUT": 4
+  },
+  "verification_date": "2026-11-15",
+  "windows_index_checkout_reproduced": true
+}

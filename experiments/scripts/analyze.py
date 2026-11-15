@@ -123,7 +123,12 @@ def load_source_index(path, dataset):
             require(isinstance(directory, str), "SOURCE_PATH_INVALID")
             manifest = checked_bytes(directory + "/manifest.json", entry["manifest_sha256"])
             events = checked_bytes(directory + "/events.jsonl", entry["events_sha256"])
-            runs.append(load_run_bytes(manifest, events, dataset))
+            run = load_run_bytes(manifest, events, dataset)
+            if "server_store_epoch" in entry:
+                epoch = entry["server_store_epoch"]
+                require(epoch is None or contract.matches(contract.ID, epoch), "SOURCE_EPOCH_INVALID")
+                run["source_context"] = {"server_store_epoch": epoch}
+            runs.append(run)
         return runs, {"index_sha256": hashlib.sha256(index_bytes).hexdigest(), **index}
     except contract.ExportError as error:
         raise AnalysisError(str(error)) from None
@@ -187,10 +192,12 @@ def only(events):
     return events[0] if len(events) == 1 else None
 
 
-def group_identity(manifest):
+def group_identity(manifest, source_context=None):
     identity = {k: manifest[k] for k in ("data_kind", "run_phase", "case_id", "subscenario",
                 "device_alias", "mode", "protocol_version", "event_schema_version", "intervention",
                 "build", "device", "config")}
+    if source_context is not None:
+        identity["source_context"] = source_context
     return hashlib.sha256(json.dumps(identity, sort_keys=True, ensure_ascii=True,
                                     separators=(",", ":")).encode()).hexdigest()
 
@@ -345,7 +352,9 @@ def analyze_run(run):
                 if e["event_type"] == "work_started" and e["source"] != "MANUAL"}
     row = {k: m[k] for k in ("run_id", "data_kind", "run_phase", "case_id", "subscenario", "repetition",
                             "device_alias", "mode", "execution_status", "outcome", "validity", "intervention")}
-    row.update({"analysis_version": VERSION, "group_id": group_identity(m),
+    source_context = run.get("source_context")
+    row.update({"analysis_version": VERSION, "group_id": group_identity(m, source_context),
+                "server_store_epoch": (source_context or {}).get("server_store_epoch"),
                 **{k: m["build"][k] for k in ("app_commit", "server_commit", "apk_sha256")},
                 "manifest_sha256": run["manifest_sha256"], "events_sha256": run["events_sha256"],
                 "target_version": target, "declared_cached_version_after": obs["cached_version_after"],
@@ -380,8 +389,9 @@ def analyze_run(run):
             "window_event_counts": dict(sorted(counts.items())), "fetches": fetch_details,
             "bucket_counts": {k: len(buckets[k]) for k in ("setup", "window", "late", "unknown", "server")},
             "duplicates_ignored": run["duplicates"], "clock_estimate": estimate, "clock_reason": clock_reason,
-            "declared_reason_codes": m["reason_codes"], "group_identity": {k: m[k] for k in
-                ("build", "device", "config", "protocol_version", "event_schema_version")}}
+            "declared_reason_codes": m["reason_codes"], "group_identity": {
+                **{k: m[k] for k in ("build", "device", "config", "protocol_version", "event_schema_version")},
+                "source_context": source_context}}
 
 
 def summarize(analyses):
