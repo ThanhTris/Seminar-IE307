@@ -5,6 +5,7 @@
     "scheduler_observation_non_mutating": false,
     "only_cleanup_omitted": true,
     "background_and_end_evidence": false,
+    "cleanup_evidence": true,
     "cleanup": true,
     "no_manual_or_push_sync": true,
     "single_registration": false,

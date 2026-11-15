@@ -59,7 +59,7 @@ Status nguồn được đối chiếu Project lúc **2026-11-15 12:27:57 UTC**;
 - [CHECKS](../../docs/evidence/SEM-41/CHECKS.md), [PREFLIGHT](../../docs/evidence/SEM-41/PREFLIGHT.json), [quy trình thực hiện](../../docs/evidence/SEM-41/REPRODUCE.md), [control development](../../experiments/development/run-sem41-v2-smoke-20261115/manifest.json).
 - Qualification pilot cũ đã thu hồi do collector dump scheduler trong window có thể đổi timer; raw/events/outcome giữ nguyên và gắn INVALID, kể cả SUCCESS. Observer `db98fa8` đã chặn lệnh dump trong clock mở, 67 tests đạt. Đã đo lại xong batch r6: **8/8 slot hợp lệ mới, 8 SUCCESS**; xem [PILOT_RESULTS](../../docs/evidence/SEM-41/PILOT_RESULTS.json) và [audit collector](../../docs/evidence/SEM-41/SCHEDULER_OBSERVER_AUDIT.json). Control development xác nhận worker/core apply được khi direct dispatch; không tính làm cycle tự nhiên. Main vẫn 27 slot NOT_RUN, chờ candidate/Firebase/race inputs và requalification đúng profile.
 
-- Đã kiểm toàn vẹn 20 lần thử (8 hợp lệ mới, 12 INVALID cũ), giữ nguyên 60 file evidence gốc. Cleanup emulator/server đạt; [kiểm cuối](../../docs/evidence/SEM-41/REQUALIFICATION_VERIFICATION.json). Đã chuẩn bị [APK/checksum local](../../docs/evidence/SEM-41/LOCAL_ARTIFACT_HANDOFF.json) cho owner chốt candidate.
+- Đã sửa hai lỗi audit theo review PR #29, đạt 74/74 tests công cụ. Đã kiểm toàn vẹn 20 lần thử (8 hợp lệ mới, 12 INVALID cũ), giữ nguyên 60 file evidence gốc. Cleanup emulator/server đạt; [kiểm cuối](../../docs/evidence/SEM-41/REQUALIFICATION_VERIFICATION.json). Đã chuẩn bị [APK/checksum local](../../docs/evidence/SEM-41/LOCAL_ARTIFACT_HANDOFF.json) cho owner chốt candidate.
 
 ## Task được mở khóa
 

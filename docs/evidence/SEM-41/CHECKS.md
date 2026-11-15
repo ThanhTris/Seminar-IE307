@@ -8,6 +8,8 @@
 - Source ứng viên ở [PR #28](https://github.com/ThanhTris/Seminar-IE307/pull/28), head đã kiểm `1f79ee93e9a52af2b21c82372f23a6ac684d3ceb`, đã merge lúc 12:21 UTC. SEM-37 được ghi Done trên Project ở snapshot main `bcc7c58853fb5de59bb9bd599cd12fe41e5ee0eb` (12:27 UTC), **không kèm APK freeze**. Manifest nguồn ghim app `9e7e55b76c646ff113a152022cc23317a202e533`, server `c77772e426c00ae464240f00942f8368c638aaa8`, `candidate_status=NOT_READY`, `release_gate.passed=false`, APK/hash để null.
 - Đã build đúng app revision ghim trong worktree detached, kiểm runtime Android/server không đổi so với head PR #28. File nguồn của task Trung được giữ trong worktree riêng để kiểm, phần thay đổi SEM-41 gồm plan và evidence.
 
+Đã merge main `bcc7c58853fb5de59bb9bd599cd12fe41e5ee0eb` sau khi đóng toàn bộ window và cleanup. Android/server trong nhánh khớp main; production và unit-test source khớp follow-up `1f79ee9` đã kiểm 32/32. Test APK đã đo vẫn ghim source/hash cũ; không đổi provenance theo merge tài liệu/code.
+
 ## Kiểm thực tế ngày 15/11
 
 | Hạng mục | Expected | Actual | Kết quả |
@@ -121,3 +123,7 @@ Manifest upstream vẫn NOT_READY/gate false, chưa có APK/checksum freeze. Kh�
 ### Artifact local đã chuẩn bị bàn giao
 
 [LOCAL_ARTIFACT_HANDOFF.json](LOCAL_ARTIFACT_HANDOFF.json) ghi hai APK debug đã đo, checksum và kết quả unit follow-up. Binary cùng `HANDOFF.json` nằm private tại `.local/sem41/candidate-handoff-nofirebase/`, hash khớp APK cài trên emulator. Không chứa credential hoặc dữ liệu ứng dụng. Đây là đầu vào cho owner SEM-37 chốt candidate; release manifest vẫn NOT_READY/gate false.
+
+### Sửa theo review PR #29
+
+Đã sửa hai lỗi audit ở `7ce599d`: E04 có target applied trước reconnect bị INVALID dù producer ghi SUCCESS; thiếu `cleanup-checkpoint.json` được giữ INVALID với reason `AUDIT_CLEANUP_EVIDENCE` thay vì KeyError. Thêm 7 regression tests cho các biên phase/timeout/cleanup; tổng **74/74 tests công cụ đạt**. Đã review và tái xuất lại đủ 20 lần thử: 8 VALID/SUCCESS mới, 12 INVALID cũ, không đổi event/outcome/clock. Ba lượt E04 thật đều apply sau reconnect; xem [PR_REVIEW_FIXES.json](PR_REVIEW_FIXES.json).

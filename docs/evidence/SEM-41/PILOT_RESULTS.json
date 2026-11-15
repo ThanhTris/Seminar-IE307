@@ -1,9 +1,9 @@
 {
-  "snapshot_utc": "2026-11-15T18:52:06.787Z",
+  "snapshot_utc": "2026-11-15T18:56:02.539Z",
   "run_phase": "pilot",
   "data_kind": "OBSERVED",
   "candidate_gate_passed": false,
-  "review_helper_commit": "db98fa8d275c3ca2d10895daa61f00bf53f59cd7",
+  "review_helper_commit": "7ce599d52ba5035bbd62f9d1045ee72bf71f0ba2",
   "planned_firebase_independent_runs": 8,
   "planned_observation_seconds": 20760,
   "completed_pilot_runs": 18,

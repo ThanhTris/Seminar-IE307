@@ -96,6 +96,8 @@ python3 experiments/scripts/export_sem41_pilots.py \
   --deny-values .local/sem41/deny-values.json
 ```
 
+Review E04 kiểm target applied tại hoặc sau mốc reconnect; apply sớm làm run INVALID và giữ nguyên outcome gốc. Thiếu checkpoint cleanup cũng giữ INVALID với reason audit, không bỏ lần thử khỏi inventory.
+
 Artifacts pilot nằm trong `experiments/pilots/<run_id>/`, riêng với tập main. Đọc `audit.json` và mọi reason code trước dùng kết quả. Manifest có boot alias của collector, dẫn xuất từ hash kernel boot ID trong baseline private; observer kiểm cùng boot tại từng checkpoint. Nhờ đó duration giữa hai mốc `/proc/uptime` của collector có cùng boot đã xác minh. Helper không bổ sung boot session ID vào event: các event vẫn giữ null, không tính event latency từ các trường đó. Clock controlled=false giữ nguyên, không tính latency liên máy. E03 force-idle và E06 deliberate skip mang nhãn INJECTED. Thời gian idle là điều kiện điều khiển, không đại diện Doze tự nhiên.
 
 ## Chẩn đoán job đã đến hạn nhưng chưa chạy

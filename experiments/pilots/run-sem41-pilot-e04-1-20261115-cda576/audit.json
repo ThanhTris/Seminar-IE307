@@ -5,6 +5,7 @@
     "scheduler_observation_non_mutating": true,
     "only_cleanup_omitted": true,
     "background_and_end_evidence": true,
+    "cleanup_evidence": true,
     "cleanup": true,
     "no_manual_or_push_sync": true,
     "single_registration": true,
@@ -36,6 +37,7 @@
     "POST_RECONNECT-47845080-checkpoint-active": true,
     "POST_RECONNECT-47845080-checkpoint-network": true,
     "offline_and_reconnect_windows": true,
+    "target_applied_after_reconnect": true,
     "guest_offline_evidence": true,
     "record_outcome": true,
     "record_cycle_count": true
