@@ -23,6 +23,8 @@ import uuid
 import xml.etree.ElementTree as ET
 import os
 
+from sem41_baseline import attach_store, compare_capture
+
 ROOT = Path(__file__).resolve().parents[2]
 PACKAGE = "com.thanhtris.seminarie307"
 CONTROL = PACKAGE + ".experiments.PeriodicPilotControl#control"
@@ -49,12 +51,15 @@ class PilotBatch:
         self.folder.mkdir(parents=True, exist_ok=False)
         self.folder.chmod(0o700)
         observer_path = "experiments/scripts/run_sem41_periodic_pilots.py"
-        if subprocess.run(["git", "diff", "--quiet", "HEAD", "--", observer_path], cwd=ROOT).returncode:
+        if subprocess.run(["git", "diff", "--quiet", "HEAD", "--", observer_path,
+                           "experiments/scripts/sem41_baseline.py"], cwd=ROOT).returncode:
             raise RuntimeError("OBSERVER_SOURCE_NOT_COMMITTED")
         observer_commit = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT).decode().strip()
         write_json(self.folder / "runner-identity.json", {
             "observer_commit": observer_commit,
             "observer_source_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+            "support_sources_sha256": {"sem41_baseline.py": hashlib.sha256(
+                Path(__file__).with_name("sem41_baseline.py").read_bytes()).hexdigest()},
             "phase": "pilot", "candidate_gate_passed": False,
             "case_sequence": args.runs,
         })
@@ -167,6 +172,13 @@ class PilotBatch:
             raise RuntimeError("PERIODIC_REGISTRATION_NOT_CONFIRMED")
         self.record["work_id"] = registered[0]["workId"]
         self.record["cached_version_before"] = int(metadata["cachedVersion"]) if metadata.get("cachedVersion") else None
+        store = self.folder / "store"
+        snapshot = json.loads((store / "state.json").read_text())["snapshot"]
+        proof = compare_capture(self.current / "setup-db/seminar_bulletin.db", snapshot,
+                                store.resolve().parent.name, "CAPTURED_SQLITE_AND_LIVE_STORE")
+        write_json(self.current / "baseline-content-proof.json", proof)
+        if proof["status"] != "PASS":
+            raise RuntimeError(proof["reason"])
         checkpoint = self.checkpoint("background")
         if checkpoint["app_resumed"] or checkpoint["package_stopped"] or not checkpoint["network_connected"]:
             raise RuntimeError("BACKGROUND_BASELINE_INVALID")
@@ -215,7 +227,7 @@ class PilotBatch:
         run = self.record["run_id"]
         command = ["node", "server/bin/update-cli.js", "--update-id", "update-" + run, "--run", run,
                    "--mode", mode, "--device", "emulator-main", "--title", "SEM-41 pilot target",
-                   "--body", "Firebase-independent periodic observation"]
+                   "--body", "Firebase-independent periodic observation", "--base-url", "http://127.0.0.1:3000"]
         if skip:
             command += ["--skip-push", "--events", str(self.folder / "skip-events.jsonl")]
         result = subprocess.run(command, cwd=ROOT, capture_output=True, timeout=25)
@@ -388,6 +400,7 @@ class PilotBatch:
         cached = int(metadata.get("cachedVersion") or 0)
         if cached > 90:
             raise RuntimeError("CACHE_TOO_HIGH_FOR_DEDICATED_STORE_CAPACITY")
+        attach_store(self.folder, cached, self.args.store_dir)
         with socket.socket() as probe:
             probe.bind(("127.0.0.1", 3000))
         server_log = (self.folder / "server-output.txt").open("wb")
@@ -405,13 +418,7 @@ class PilotBatch:
                     time.sleep(0.5)
             else:
                 raise RuntimeError("SERVER_HEALTH_NOT_CONFIRMED")
-            # Bring the dedicated store to the existing cache baseline before measuring.
-            for index in range(1, cached + 1):
-                result = subprocess.run(["node", "server/bin/update-cli.js", "--update-id", "sem41-pilot-seed-" + str(index),
-                    "--run", "sem41-pilot-setup", "--mode", "PERIODIC", "--device", "emulator-main",
-                    "--title", "SEM-41 pilot baseline", "--body", "Dedicated store baseline"], cwd=ROOT, capture_output=True, timeout=20)
-                if result.returncode:
-                    raise RuntimeError("BASELINE_UPDATE_FAILED")
+            # The retained store keeps version/ETag meanings and ledger entries intact.
             blocked = set()
             for position, selection in enumerate(self.args.runs):
                 case, repetition = selection.split(":")
@@ -442,6 +449,8 @@ def main():
     parser.add_argument("--device-map", type=Path, required=True)
     parser.add_argument("--preflight", type=Path, default=ROOT / "docs/evidence/SEM-41/PREFLIGHT.json")
     parser.add_argument("--private-output", type=Path, required=True)
+    parser.add_argument("--store-dir", type=Path,
+                        help="Retained store directory; required when the app already has cache")
     parser.add_argument("--runs", nargs="+", choices=DEFAULT_RUNS, default=DEFAULT_RUNS,
                         help="Ordered CASE:repetition selections, also used for replacement runs")
     args = parser.parse_args()
