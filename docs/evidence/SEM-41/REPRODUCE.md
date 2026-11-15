@@ -66,6 +66,31 @@ Khóa một emulator/app và một snapshot store cho từng run, gồm setup/wi
 
 Khi candidate/pilot đã qua, điền manifest mới từ template với `run_phase=main`, `data_kind=OBSERVED`, commit/checksum/candidate gate thật. Copy slot kế hoạch thành run ID riêng của lần đo. `planned-slot` chỉ theo dõi lịch, mọi mốc và kết quả actual được ghi từ lần chạy.
 
+## Pilot tự động khi chưa có Firebase
+
+[Runner](../../../experiments/scripts/run_sem41_periodic_pilots.py) thực hiện tuần tự E01×1, E03 PERIODIC×2, E04 PERIODIC×3 và E06×2. Tổng cửa sổ là 346 phút; cộng thêm setup/cleanup. Runner chỉ tạo phase pilot, đối chiếu hash APK đã cài với PREFLIGHT, cấu hình run/alias/mode qua UI và ghi checkpoint OS mỗi 5 phút. Không force-run job. Cửa sổ vẫn được giữ dù target đã applied sớm.
+
+Chuẩn bị `device-map.json` và `deny-values.json` private có alias/serial và các giá trị nhạy cảm thật. Port 3000 phải trống; app/test APK phải đúng revision đã kiểm, baseline mạng hoạt động, airplane off và deep idle ACTIVE. Dành riêng emulator trong suốt batch, giữ máy mở, không thao tác app. Output phải là thư mục mới. Ví dụ trên macOS, từ root repo:
+
+```sh
+caffeinate -i python3 experiments/scripts/run_sem41_periodic_pilots.py \
+  --adb "$HOME/Library/Android/sdk/platform-tools/adb" \
+  --device-map .local/sem41/device-map.json \
+  --private-output .local/sem41/pilots-new-batch
+```
+
+Theo dõi `status.json`, `heartbeat.json` và `observation.json` trong private output. Nếu không chứng minh được guest offline, runner giữ lượt E04 aborted, khôi phục mạng, ghi blocker và bỏ qua những lượt E04 còn lại. Lỗi khác dừng batch sau cleanup. Giữ cả lần setup sai hoặc bị gián đoạn và dùng run ID mới khi thử lại. Trên Android 17 dùng `cmd wifi set-wifi-enabled`, `cmd phone data`, `cmd connectivity airplane-mode`; không dựa vào lệnh `svc` không có trên image này.
+
+Ghi `runner-identity.json` ở batch root với full observer commit và SHA-256 của file runner tại lúc khởi động, phase pilot và candidate gate false. Sau mỗi lượt FINISHED, [review/export helper](../../../experiments/scripts/export_sem41_pilots.py) đối chiếu raw/canonical/omitted IDs, window, source, work/fetch provenance, checkpoint và cleanup; tái xuất hai lần để so từng byte. Helper chỉ hỗ trợ build/config trong control SEM-41 đã kiểm và từ chối run còn chạy. Ví dụ:
+
+```sh
+python3 experiments/scripts/export_sem41_pilots.py \
+  --run-folder .local/sem41/pilots-new-batch/run-id-da-hoan-tat \
+  --deny-values .local/sem41/deny-values.json
+```
+
+Artifacts pilot nằm trong `experiments/pilots/<run_id>/`, riêng với tập main. Đọc `audit.json` và mọi reason code trước dùng kết quả. Clock controlled=false giữ nguyên; helper không tính latency liên máy và không bổ sung boot session ID vào event. E03 force-idle và E06 deliberate skip mang nhãn INJECTED. Thời gian idle là điều kiện điều khiển, không đại diện Doze tự nhiên.
+
 ## Đóng run và export
 
 Lưu raw client/server và snapshot state trước reset. Đóng nhận trigger, cancel/drain đúng work, kiểm idle/network/pin/stopped và trả baseline. Khi drain chưa đạt, giữ thiết bị được khóa. Ghi cleanup theo evidence OS/WorkInfo. Các mapping reverse/rule chỉ được gỡ nếu do phiên tạo.
