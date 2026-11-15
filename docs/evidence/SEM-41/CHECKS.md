@@ -51,3 +51,18 @@ Emulator sau kiểm đang cài APK development của revision candidate nêu tr�
 ## Kiểm artifact bàn giao
 
 36 tests exporter hiện có đạt. Đã kiểm 27 slot/582 phút, số lượt từng nhóm, 9 canonical event của control, 6 raw row đối chiếu 5 exported + 1 omitted, tái xuất ba file manifest/events/report giống từng byte. Có 36 link nội bộ và 4 block shell hợp lệ, JSON/JSONL và scan định danh/secret đạt. Candidate worktree giữ sạch tại revision đã build. `git diff --check` đạt.
+
+## Pilot thật không cần Firebase — đang thực hiện
+
+Theo yêu cầu tiếp tục phần khả thi, đã bắt đầu batch tuần tự E01×1, E03 PERIODIC×2, E04 PERIODIC×3 và E06×2 trên APK development đã kiểm. Tổng cửa sổ dự trù **346 phút**, không tính setup/cleanup. Main vẫn 27 slot NOT_RUN. [PILOT_RESULTS.json](PILOT_RESULTS.json) là snapshot các lượt đã đóng; raw DB/OS dump gốc và mapping tiếp tục giữ private.
+
+| Lượt đã đóng | Điều kiện/window | Kết quả thật | Đánh giá |
+|---|---|---|---|
+| [Setup lần đầu](../../../experiments/pilots/run-sem41-pilot-e01-1-20261115-89b884/manifest.json) | Chưa bắt đầu window; thao tác Ctrl+A không chọn hết text Compose, run ID bị nối vào giá trị cũ | Guard phát hiện metadata khác run ID mong đợi, ABORTED/FAILURE, cleanup đạt | INVALID; giữ [diagnostic và raw của run ID thực tế](../../../experiments/pilots/run-sem41-pilot-e01-1-20261115-89b884/setup-diagnostic.json). Runner đã sửa clear text bằng MOVE_END/DEL và kiểm UI text trước khi chọn mode |
+| [E01 chạy lại](../../../experiments/pilots/run-sem41-pilot-e01-1-20261115-760217/manifest.json) | 10:24:39–11:54:39 UTC+7, Android elapsed **5.400.420 ms**, mạng connected, idle ACTIVE, app background, stopped=false | **0 cycle mới**, target 5 chưa applied, cache 4→4, **TIMEOUT**; 1 cycle trước Home được giữ ở setup | Dữ liệu VALID, mục tiêu runtime Fail. Không force-run hoặc kéo dài window hồi tố |
+
+E01 có 7 raw row: 6 canonical Android event thuộc setup/registration và 1 cancel sau window được report omitted; thêm 1 server update target. [Audit](../../../experiments/pilots/run-sem41-pilot-e01-1-20261115-760217/audit.json) đối chiếu ID/count/source/work, đủ window, checkpoint và cleanup. Không có MANUAL/PUSH sync trong run. Ba file manifest/events/export report tái xuất giống từng byte. Clock controlled=false; không tính latency liên máy. Event boot_session_id null được giữ nguyên.
+
+Trong kiểm read-only giữa phiên, JobScheduler trả `ready` cho job đã đăng ký nhưng chưa có work_started nền. Chưa kết luận nguyên nhân thuộc OS hay scheduler từ snapshot này. **Trước main cần chẩn đoán và chạy lại E01 trên candidate cuối**; không dùng kết quả lịch sử SEM-29 để thay kết quả timeout hiện tại. E03 đang tiếp tục trên cùng build, các kết quả tiếp theo sẽ được bổ sung sau khi đóng run.
+
+Batch r2 dùng observer commit `0808b6fe98d6eb924785d9a3d78114ddaf58c802`, SHA-256 source ghi trong từng artifact; setup lỗi dùng observer cũ `9e38c0b`. Runner giữ nguyên code đã load trong quá trình đo. Review/export helper có 7 test tổng hợp bổ sung (ngắn window, MANUAL, mất raw/evidence, omission quan trọng, run chưa đóng và timeout hợp lệ); cùng 36 test exporter hiện có, **43 tests đạt**. Test tổng hợp không phải kết quả thực nghiệm.

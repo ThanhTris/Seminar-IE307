@@ -1,0 +1,26 @@
+{
+  "run_id": "run-sem41-pilot-e01-1-20261115-89b884",
+  "checks": {
+    "only_cleanup_omitted": true,
+    "background_and_end_evidence": false,
+    "cleanup": true,
+    "no_manual_or_push_sync": true,
+    "single_registration": false,
+    "single_work_identity": true,
+    "applied_fetch_provenance": true,
+    "full_window": false,
+    "record_outcome": true,
+    "record_cycle_count": true
+  },
+  "validity": "INVALID",
+  "actual_duration_ms": null,
+  "new_periodic_cycles": 0,
+  "applied_target_count_in_window": 0,
+  "raw_rows": 1,
+  "canonical_android_events": 0,
+  "omitted_rows": 1,
+  "phase_event_counts": {},
+  "clock_controlled": false,
+  "cross_device_latency_calculated": false,
+  "event_boot_session_ids_preserved": true
+}

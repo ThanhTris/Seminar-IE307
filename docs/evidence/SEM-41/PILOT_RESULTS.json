@@ -1,0 +1,51 @@
+{
+  "snapshot_utc": "2026-11-15T04:57:04.952Z",
+  "run_phase": "pilot",
+  "data_kind": "OBSERVED",
+  "candidate_gate_passed": false,
+  "observer_commit": "0808b6fe98d6eb924785d9a3d78114ddaf58c802",
+  "review_helper_commit": "dacc2450efa58b5da8ba20b774eef77b48ac64bd",
+  "planned_firebase_independent_runs": 8,
+  "planned_observation_seconds": 20760,
+  "completed_pilot_runs": 1,
+  "aborted_setup_attempts": 1,
+  "main_runs_completed": 0,
+  "runs": [
+    {
+      "run_id": "run-sem41-pilot-e01-1-20261115-89b884",
+      "case_id": "E01",
+      "repetition": 1,
+      "mode": "PERIODIC",
+      "execution_status": "ABORTED",
+      "outcome": "FAILURE",
+      "validity": "INVALID",
+      "actual_duration_ms": null,
+      "new_periodic_cycles": 0,
+      "raw_rows": 1,
+      "canonical_android_events": 0,
+      "omitted_rows": 1,
+      "artifact_directory": "experiments/pilots/run-sem41-pilot-e01-1-20261115-89b884",
+      "observer_commit": "9e38c0bf800483c2ed711f33e6977848e94fa391"
+    },
+    {
+      "run_id": "run-sem41-pilot-e01-1-20261115-760217",
+      "case_id": "E01",
+      "repetition": 1,
+      "mode": "PERIODIC",
+      "execution_status": "COMPLETED",
+      "outcome": "TIMEOUT",
+      "validity": "VALID",
+      "actual_duration_ms": 5400420,
+      "new_periodic_cycles": 0,
+      "raw_rows": 7,
+      "canonical_android_events": 6,
+      "omitted_rows": 1,
+      "artifact_directory": "experiments/pilots/run-sem41-pilot-e01-1-20261115-760217",
+      "observer_commit": "0808b6fe98d6eb924785d9a3d78114ddaf58c802"
+    }
+  ],
+  "remaining_firebase_independent_runs": 7,
+  "batch_status": "RUNNING",
+  "firebase_dependent_main_slots_not_run": 19,
+  "cross_device_latency_calculated": false
+}

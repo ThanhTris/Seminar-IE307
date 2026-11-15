@@ -1,0 +1,16 @@
+{
+  "observer_commit": "9e38c0bf800483c2ed711f33e6977848e94fa391",
+  "observer_source_sha256": "1e72a4ba0e09b009645d17b57a965af5544a9710afe6678c732a732a2dfa5b59",
+  "phase": "pilot",
+  "candidate_gate_passed": false,
+  "case_sequence": [
+    "E01",
+    "E03",
+    "E03",
+    "E04",
+    "E04",
+    "E04",
+    "E06",
+    "E06"
+  ]
+}

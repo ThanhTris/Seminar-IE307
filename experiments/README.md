@@ -104,3 +104,7 @@ Exporter chỉ đọc log, không clear logcat/cache, force-stop, cancel work, t
 Clock phải được thu trước/sau run bởi công cụ/đồng hồ được kiểm nhận và ghi trong manifest; exporter không tự lấy mẫu hay xác nhận offset. Source server hiện có `server_time_utc` trong health, nhưng [API v2](../docs/API.md#get-health) không bảo đảm field đó: chỉ dùng sau khi xác nhận đúng implementation/độ phân giải và client clock, không coi GET health/ADB reverse là clock calibration.
 
 Task nhận: SEM-28 (M1/export), SEM-29/34 (pilot), SEM-41/42 (main), SEM-45 (parser). Ghi version exporter/manifest/schema/protocol và commit artifact khi bàn giao; exporter không tự cập nhật Project hoặc chuyển Done. Thiếu OPPO vẫn giữ blocker; kiểm fixture cho công cụ SEM-24 không phụ thuộc có OPPO.
+
+## 6. Pilot emulator của SEM-41
+
+[Hướng dẫn SEM-41](../docs/evidence/SEM-41/REPRODUCE.md#pilot-tự-động-khi-chưa-có-firebase) mô tả runner tuần tự cho E01/E03/E04 PERIODIC và E06 HYBRID deliberate skip, với cửa sổ thật và capture private. [Review helper](scripts/export_sem41_pilots.py) dùng lại validator/exporter SEM-24, đối chiếu raw/omission/window/provenance rồi đặt dữ liệu đã kiểm trong `experiments/pilots/<run_id>/`. Thư mục này giữ `run_phase=pilot`, `data_kind=OBSERVED` và candidate gate false khi chưa freeze. Consumer tập chính chọn phase main từ manifest; không cộng pilot, control development hoặc fixture vào mẫu số main. Helper từ chối build ngoài snapshot đã kiểm và run còn chạy; xem audit cùng reason codes trước sử dụng dữ liệu.
