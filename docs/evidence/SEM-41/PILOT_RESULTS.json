@@ -26,7 +26,13 @@
       "omitted_rows": 1,
       "artifact_directory": "experiments/pilots/run-sem41-pilot-e01-1-20261115-89b884",
       "observer_commit": "9e38c0bf800483c2ed711f33e6977848e94fa391",
-      "collector_boot_session_id": "boot-sem41-cdcb3ce6c37d2751"
+      "collector_boot_session_id": "boot-sem41-cdcb3ce6c37d2751",
+      "canonical_android_region_counts": {
+        "SETUP": 0,
+        "WINDOW": 0,
+        "POST_WINDOW": 0,
+        "NO_WINDOW_STARTED": 0
+      }
     },
     {
       "run_id": "run-sem41-pilot-e01-1-20261115-760217",
@@ -43,7 +49,13 @@
       "omitted_rows": 1,
       "artifact_directory": "experiments/pilots/run-sem41-pilot-e01-1-20261115-760217",
       "observer_commit": "0808b6fe98d6eb924785d9a3d78114ddaf58c802",
-      "collector_boot_session_id": "boot-sem41-cdcb3ce6c37d2751"
+      "collector_boot_session_id": "boot-sem41-cdcb3ce6c37d2751",
+      "canonical_android_region_counts": {
+        "SETUP": 5,
+        "WINDOW": 0,
+        "POST_WINDOW": 1,
+        "NO_WINDOW_STARTED": 0
+      }
     },
     {
       "run_id": "run-sem41-pilot-e03-1-20261115-5db4eb",
@@ -60,7 +72,13 @@
       "omitted_rows": 1,
       "artifact_directory": "experiments/pilots/run-sem41-pilot-e03-1-20261115-5db4eb",
       "observer_commit": "0808b6fe98d6eb924785d9a3d78114ddaf58c802",
-      "collector_boot_session_id": "boot-sem41-cdcb3ce6c37d2751"
+      "collector_boot_session_id": "boot-sem41-cdcb3ce6c37d2751",
+      "canonical_android_region_counts": {
+        "SETUP": 5,
+        "WINDOW": 4,
+        "POST_WINDOW": 0,
+        "NO_WINDOW_STARTED": 0
+      }
     },
     {
       "run_id": "run-sem41-pilot-e03-2-20261115-0d277e",
@@ -77,7 +95,13 @@
       "omitted_rows": 1,
       "artifact_directory": "experiments/pilots/run-sem41-pilot-e03-2-20261115-0d277e",
       "observer_commit": "0808b6fe98d6eb924785d9a3d78114ddaf58c802",
-      "collector_boot_session_id": "boot-sem41-cdcb3ce6c37d2751"
+      "collector_boot_session_id": "boot-sem41-cdcb3ce6c37d2751",
+      "canonical_android_region_counts": {
+        "SETUP": 5,
+        "WINDOW": 0,
+        "POST_WINDOW": 1,
+        "NO_WINDOW_STARTED": 0
+      }
     }
   ],
   "remaining_firebase_independent_runs": 6,
