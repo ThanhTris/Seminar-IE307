@@ -1307,7 +1307,7 @@
       "category": "practice",
       "title": "Chạy pilot push E02 và xác nhận cache nền",
       "due": "2026-11-03",
-      "status": "Todo",
+      "status": "Done",
       "start_dependencies": [
         "SEM-16",
         "SEM-24",
@@ -1330,7 +1330,7 @@
         "Không coi accepted là delivered và không dùng UI auto-refresh để tạo kết quả.",
         "Ghi điều kiện thiết bị/window/timeout thật; bản PUSH/token lifecycle đã được bàn giao."
       ],
-      "input_status": "Sẵn sàng",
+      "input_status": "Đã hoàn thành",
       "inputs": [
         {
           "source_task": "SEM-16",
@@ -2397,7 +2397,7 @@
             "experiments/runs/<push-pilot-run>/events.jsonl"
           ],
           "checks": "docs/evidence/SEM-34/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Done"
         },
         {
           "source_task": "SEM-38",
@@ -3139,7 +3139,7 @@
       }
     }
   ],
-  "snapshot_at": "2026-11-13 16:49:37 UTC",
+  "snapshot_at": "2026-11-15 02:50:58 UTC",
   "snapshot_source": "https://github.com/users/ThanhTris/projects/3/views/1",
   "timezone": "Asia/Ho_Chi_Minh",
   "deadline_at": "2026-11-13T22:00:00+07:00",

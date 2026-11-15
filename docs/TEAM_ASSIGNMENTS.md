@@ -16,7 +16,7 @@ Hạn cuối 13/11/2026; bài nói 15 phút gồm demo. Tổng công sức giữ
 | Tuấn | `mtuan2491` | 8 | 19 |
 
 <!-- team-snapshot:start -->
-Status và Input status đối chiếu Project lúc **2026-11-13 16:49:37 UTC**. Mở từng task để xem cụ thể file đầu vào, người bàn giao và CHECKS phải nhận. [Cách làm mới trạng thái](../tasks/README.md#trạng-thái-đối-chiếu-project).
+Status và Input status đối chiếu Project lúc **2026-11-15 02:50:58 UTC**. Mở từng task để xem cụ thể file đầu vào, người bàn giao và CHECKS phải nhận. [Cách làm mới trạng thái](../tasks/README.md#trạng-thái-đối-chiếu-project).
 <!-- team-snapshot:end -->
 
 ## Trí
@@ -49,7 +49,7 @@ Status và Input status đối chiếu Project lúc **2026-11-13 16:49:37 UTC**.
 | [SEM-16](../tasks/backlog/SEM-16.md) | Lập ma trận lifecycle và protocol E01–E06 | Done | Đã hoàn thành | Không | 30/10/2026 18:00 (UTC+7) | Không có. | Không có. |
 | [SEM-24](../tasks/backlog/SEM-24.md) | Chuẩn bị bộ xuất log và run manifest | Done | Đã hoàn thành | Không | 31/10/2026 15:00 (UTC+7) | [SEM-12](../tasks/backlog/SEM-12.md) | [SEM-26](../tasks/backlog/SEM-26.md) |
 | [SEM-29](../tasks/backlog/SEM-29.md) | Chạy pilot periodic E01 trên hai thiết bị | Done | Đã hoàn thành | Không | 02/11/2026 22:00 (UTC+7) | [SEM-16](../tasks/backlog/SEM-16.md), [SEM-24](../tasks/backlog/SEM-24.md), [SEM-30](../tasks/backlog/SEM-30.md) | [SEM-31](../tasks/backlog/SEM-31.md) |
-| [SEM-34](../tasks/backlog/SEM-34.md) | Chạy pilot push E02 và xác nhận cache nền | Todo | Sẵn sàng | Không | 03/11/2026 22:00 (UTC+7) | [SEM-16](../tasks/backlog/SEM-16.md), [SEM-24](../tasks/backlog/SEM-24.md), [SEM-32](../tasks/backlog/SEM-32.md), [SEM-35](../tasks/backlog/SEM-35.md) | [SEM-33](../tasks/backlog/SEM-33.md) |
+| [SEM-34](../tasks/backlog/SEM-34.md) | Chạy pilot push E02 và xác nhận cache nền | Done | Đã hoàn thành | Không | 03/11/2026 22:00 (UTC+7) | [SEM-16](../tasks/backlog/SEM-16.md), [SEM-24](../tasks/backlog/SEM-24.md), [SEM-32](../tasks/backlog/SEM-32.md), [SEM-35](../tasks/backlog/SEM-35.md) | [SEM-33](../tasks/backlog/SEM-33.md) |
 | [SEM-41](../tasks/backlog/SEM-41.md) | Chạy tập chính E01–E06 trên emulator | Todo | Sẵn sàng | Nên nhận: [SEM-37](../tasks/backlog/SEM-37.md) | 07/11/2026 13:00 (UTC+7) | [SEM-16](../tasks/backlog/SEM-16.md), [SEM-24](../tasks/backlog/SEM-24.md) | [SEM-37](../tasks/backlog/SEM-37.md) |
 | [SEM-43](../tasks/backlog/SEM-43.md) | Chốt SUMMARY và bộ evidence thực nghiệm | Todo | Sẵn sàng | Nên nhận: [SEM-41](../tasks/backlog/SEM-41.md), [SEM-42](../tasks/backlog/SEM-42.md), [SEM-44](../tasks/backlog/SEM-44.md), [SEM-45](../tasks/backlog/SEM-45.md) | 07/11/2026 22:00 (UTC+7) | Không có. | [SEM-41](../tasks/backlog/SEM-41.md), [SEM-42](../tasks/backlog/SEM-42.md), [SEM-44](../tasks/backlog/SEM-44.md), [SEM-45](../tasks/backlog/SEM-45.md) |
 | [SEM-48](../tasks/backlog/SEM-48.md) | Viết nội dung và biểu đồ kết quả cho bài nói | Todo | Sẵn sàng | Nên nhận: [SEM-43](../tasks/backlog/SEM-43.md), [SEM-44](../tasks/backlog/SEM-44.md), [SEM-45](../tasks/backlog/SEM-45.md) | 08/11/2026 18:00 (UTC+7) | Không có. | [SEM-43](../tasks/backlog/SEM-43.md), [SEM-44](../tasks/backlog/SEM-44.md), [SEM-45](../tasks/backlog/SEM-45.md) |
