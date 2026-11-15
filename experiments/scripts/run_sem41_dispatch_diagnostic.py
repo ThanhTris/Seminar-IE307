@@ -38,6 +38,8 @@ def window_events(rows, start, end):
 
 
 class DispatchDiagnostic(PilotBatch):
+    RUN_PHASE = "development"
+
     def __init__(self, args):
         super().__init__(args)
         sources = [Path(__file__).resolve(), Path(probe.__file__).resolve(), probe.SOURCE.resolve(),

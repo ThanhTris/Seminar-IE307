@@ -43,6 +43,8 @@ def write_json(path, value):
 
 
 class PilotBatch:
+    RUN_PHASE = "pilot"
+
     def __init__(self, args):
         self.args = args
         self.serial = json.loads(args.device_map.read_text())["emulator-main"]
@@ -60,7 +62,7 @@ class PilotBatch:
             "observer_source_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
             "support_sources_sha256": {"sem41_baseline.py": hashlib.sha256(
                 Path(__file__).with_name("sem41_baseline.py").read_bytes()).hexdigest()},
-            "phase": "pilot", "candidate_gate_passed": False,
+            "phase": self.RUN_PHASE, "candidate_gate_passed": False,
             "case_sequence": args.runs,
         })
         self.server = None
@@ -434,7 +436,7 @@ class PilotBatch:
                                    "reason": str(error), "remaining_repetitions": remaining})
                         continue
                     raise
-            write_json(self.folder / "batch-complete.json", {"utc": utc(), "status": "COMPLETED_WITH_RECORDED_OUTCOMES", "phase": "pilot"})
+            write_json(self.folder / "batch-complete.json", {"utc": utc(), "status": "COMPLETED_WITH_RECORDED_OUTCOMES", "phase": self.RUN_PHASE})
         finally:
             self.server.terminate()
             self.server.wait(timeout=20)
