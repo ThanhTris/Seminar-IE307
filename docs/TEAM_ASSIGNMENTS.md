@@ -16,7 +16,7 @@ Hạn cuối 13/11/2026; bài nói 15 phút gồm demo. Tổng công sức giữ
 | Tuấn | `mtuan2491` | 8 | 19 |
 
 <!-- team-snapshot:start -->
-Status và Input status đối chiếu Project lúc **2026-11-15 02:50:58 UTC**. Mở từng task để xem cụ thể file đầu vào, người bàn giao và CHECKS phải nhận. [Cách làm mới trạng thái](../tasks/README.md#trạng-thái-đối-chiếu-project).
+Status và Input status đối chiếu Project lúc **2026-11-15 12:22:00 UTC**. Mở từng task để xem cụ thể file đầu vào, người bàn giao và CHECKS phải nhận. [Cách làm mới trạng thái](../tasks/README.md#trạng-thái-đối-chiếu-project).
 <!-- team-snapshot:end -->
 
 ## Trí
@@ -62,10 +62,10 @@ Status và Input status đối chiếu Project lúc **2026-11-15 02:50:58 UTC**.
 | [SEM-25](../tasks/backlog/SEM-25.md) | Xây Room, SyncRepository và SyncWorker dùng chung | Done | Đã hoàn thành | Không | 31/10/2026 17:00 (UTC+7) | [SEM-23](../tasks/backlog/SEM-23.md), [SEM-26](../tasks/backlog/SEM-26.md) | Không có. |
 | [SEM-30](../tasks/backlog/SEM-30.md) | Triển khai unique periodic work | Done | Đã hoàn thành | Không | 01/11/2026 18:00 (UTC+7) | [SEM-17](../tasks/backlog/SEM-17.md), [SEM-25](../tasks/backlog/SEM-25.md), [SEM-28](../tasks/backlog/SEM-28.md) | Không có. |
 | [SEM-31](../tasks/backlog/SEM-31.md) | Bàn giao chẩn đoán và tài liệu periodic | Done | Đã hoàn thành | Không | 02/11/2026 12:00 (UTC+7) | [SEM-30](../tasks/backlog/SEM-30.md) | Không có. |
-| [SEM-36](../tasks/backlog/SEM-36.md) | Tích hợp ba mode và pilot hybrid | Todo | Sẵn sàng | Không | 05/11/2026 18:00 (UTC+7) | [SEM-29](../tasks/backlog/SEM-29.md), [SEM-30](../tasks/backlog/SEM-30.md), [SEM-32](../tasks/backlog/SEM-32.md), [SEM-35](../tasks/backlog/SEM-35.md) | [SEM-38](../tasks/backlog/SEM-38.md), [SEM-39](../tasks/backlog/SEM-39.md), [SEM-40](../tasks/backlog/SEM-40.md) |
-| [SEM-37](../tasks/backlog/SEM-37.md) | Chốt bản ứng viên và manifest phục vụ tập chính | Todo | Sẵn sàng | Nên nhận: [SEM-36](../tasks/backlog/SEM-36.md) | 05/11/2026 22:00 (UTC+7) | [SEM-31](../tasks/backlog/SEM-31.md), [SEM-33](../tasks/backlog/SEM-33.md), [SEM-38](../tasks/backlog/SEM-38.md), [SEM-39](../tasks/backlog/SEM-39.md), [SEM-40](../tasks/backlog/SEM-40.md) | [SEM-36](../tasks/backlog/SEM-36.md) |
+| [SEM-36](../tasks/backlog/SEM-36.md) | Tích hợp ba mode và pilot hybrid | In Progress | Đang thực hiện | Không | 05/11/2026 18:00 (UTC+7) | [SEM-29](../tasks/backlog/SEM-29.md), [SEM-30](../tasks/backlog/SEM-30.md), [SEM-32](../tasks/backlog/SEM-32.md), [SEM-35](../tasks/backlog/SEM-35.md) | [SEM-38](../tasks/backlog/SEM-38.md), [SEM-39](../tasks/backlog/SEM-39.md), [SEM-40](../tasks/backlog/SEM-40.md) |
+| [SEM-37](../tasks/backlog/SEM-37.md) | Chốt bản ứng viên và manifest phục vụ tập chính | In Progress | Đang thực hiện | Nên nhận: [SEM-36](../tasks/backlog/SEM-36.md) | 05/11/2026 22:00 (UTC+7) | [SEM-31](../tasks/backlog/SEM-31.md), [SEM-33](../tasks/backlog/SEM-33.md), [SEM-38](../tasks/backlog/SEM-38.md), [SEM-39](../tasks/backlog/SEM-39.md), [SEM-40](../tasks/backlog/SEM-40.md) | [SEM-36](../tasks/backlog/SEM-36.md) |
 | [SEM-39](../tasks/backlog/SEM-39.md) | Củng cố version guard, retry và race trong core | Done | Đã hoàn thành | Không | 05/11/2026 12:00 (UTC+7) | [SEM-25](../tasks/backlog/SEM-25.md), [SEM-30](../tasks/backlog/SEM-30.md) | Không có. |
-| [SEM-52](../tasks/backlog/SEM-52.md) | Build APK bàn giao và viết DEMO_RUNBOOK | Todo | Sẵn sàng | Nên nhận: [SEM-37](../tasks/backlog/SEM-37.md), [SEM-43](../tasks/backlog/SEM-43.md), [SEM-50](../tasks/backlog/SEM-50.md), [SEM-51](../tasks/backlog/SEM-51.md) | 11/11/2026 22:00 (UTC+7) | Không có. | [SEM-37](../tasks/backlog/SEM-37.md), [SEM-43](../tasks/backlog/SEM-43.md), [SEM-50](../tasks/backlog/SEM-50.md), [SEM-51](../tasks/backlog/SEM-51.md) |
+| [SEM-52](../tasks/backlog/SEM-52.md) | Build APK bàn giao và viết DEMO_RUNBOOK | In Progress | Đang thực hiện | Nên nhận: [SEM-37](../tasks/backlog/SEM-37.md), [SEM-43](../tasks/backlog/SEM-43.md), [SEM-50](../tasks/backlog/SEM-50.md), [SEM-51](../tasks/backlog/SEM-51.md) | 11/11/2026 22:00 (UTC+7) | Không có. | [SEM-37](../tasks/backlog/SEM-37.md), [SEM-43](../tasks/backlog/SEM-43.md), [SEM-50](../tasks/backlog/SEM-50.md), [SEM-51](../tasks/backlog/SEM-51.md) |
 
 ## Tâm
 

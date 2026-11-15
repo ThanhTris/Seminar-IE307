@@ -1472,7 +1472,7 @@
       "category": "practice",
       "title": "Tích hợp ba mode và pilot hybrid",
       "due": "2026-11-05",
-      "status": "Todo",
+      "status": "In Progress",
       "start_dependencies": [
         "SEM-29",
         "SEM-30",
@@ -1498,7 +1498,7 @@
         "E05 không rollback/ghi trùng/mất cập nhật ở race; E06 phục hồi từ PERIODIC khi bỏ gửi có chủ ý.",
         "Không coi hybrid là vượt Doze/force-stop; các nhánh code vẫn dùng cùng sync engine."
       ],
-      "input_status": "Sẵn sàng",
+      "input_status": "Đang thực hiện",
       "inputs": [
         {
           "source_task": "SEM-29",
@@ -1591,7 +1591,7 @@
       "category": "practice",
       "title": "Chốt bản ứng viên và manifest phục vụ tập chính",
       "due": "2026-11-05",
-      "status": "Todo",
+      "status": "In Progress",
       "start_dependencies": [
         "SEM-31",
         "SEM-33",
@@ -1615,7 +1615,7 @@
         "Truy được artifact tới đúng source/config và pilot đã ghi; không chỉ gửi APK không metadata.",
         "Chốt cuối 05/11 để tập chính 06–07/11; nếu trễ ghi blocker và điều chỉnh ca mở rộng."
       ],
-      "input_status": "Sẵn sàng",
+      "input_status": "Đang thực hiện",
       "inputs": [
         {
           "source_task": "SEM-31",
@@ -1682,7 +1682,7 @@
             "docs/evidence/SEM-36/HYBRID_PILOT.md"
           ],
           "checks": "docs/evidence/SEM-36/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "In Progress"
         }
       ],
       "due_at": "2026-11-05T22:00:00+07:00",
@@ -1932,7 +1932,7 @@
             "docs/evidence/SEM-37/CANDIDATE_GATE.md"
           ],
           "checks": "docs/evidence/SEM-37/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "In Progress"
         }
       ],
       "due_at": "2026-11-07T13:00:00+07:00",
@@ -2018,7 +2018,7 @@
             "docs/evidence/SEM-37/CANDIDATE_GATE.md"
           ],
           "checks": "docs/evidence/SEM-37/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "In Progress"
         }
       ],
       "due_at": "2026-11-07T15:00:00+07:00",
@@ -2325,7 +2325,7 @@
             "docs/evidence/SEM-37/CANDIDATE_GATE.md"
           ],
           "checks": "docs/evidence/SEM-37/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "In Progress"
         }
       ],
       "due_at": "2026-11-08T16:00:00+07:00",
@@ -2805,7 +2805,7 @@
       "category": "practice",
       "title": "Build APK bàn giao và viết DEMO_RUNBOOK",
       "due": "2026-11-11",
-      "status": "Todo",
+      "status": "In Progress",
       "start_dependencies": [],
       "finish_dependencies": [
         "SEM-37",
@@ -2827,7 +2827,7 @@
         "Commit/config/checksum nối được với candidate/dữ liệu đo; không tự lấy evidence bản cũ cho code mới.",
         "Runbook nêu ngưỡng đổi video 30 giây và cách khôi phục thiết bị."
       ],
-      "input_status": "Sẵn sàng",
+      "input_status": "Đang thực hiện",
       "inputs": [
         {
           "source_task": "SEM-37",
@@ -2838,7 +2838,7 @@
             "docs/evidence/SEM-37/CANDIDATE_GATE.md"
           ],
           "checks": "docs/evidence/SEM-37/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "In Progress"
         },
         {
           "source_task": "SEM-43",
@@ -2928,7 +2928,7 @@
             "release/ (APK hoặc liên kết tải)"
           ],
           "checks": "docs/evidence/SEM-52/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "In Progress"
         }
       ],
       "due_at": "2026-11-12T15:00:00+07:00",
@@ -2991,7 +2991,7 @@
             "release/ (APK hoặc liên kết tải)"
           ],
           "checks": "docs/evidence/SEM-52/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "In Progress"
         },
         {
           "source_task": "SEM-53",
@@ -3100,7 +3100,7 @@
             "release/ (APK hoặc liên kết tải)"
           ],
           "checks": "docs/evidence/SEM-52/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "In Progress"
         },
         {
           "source_task": "SEM-53",
@@ -3139,7 +3139,7 @@
       }
     }
   ],
-  "snapshot_at": "2026-11-15 02:50:58 UTC",
+  "snapshot_at": "2026-11-15 12:22:00 UTC",
   "snapshot_source": "https://github.com/users/ThanhTris/projects/3/views/1",
   "timezone": "Asia/Ho_Chi_Minh",
   "deadline_at": "2026-11-13T22:00:00+07:00",
