@@ -1,13 +1,13 @@
 {
-  "snapshot_utc": "2026-11-15T10:31:16.751Z",
+  "snapshot_utc": "2026-11-15T12:00:48.918Z",
   "run_phase": "pilot",
   "data_kind": "OBSERVED",
   "candidate_gate_passed": false,
   "review_helper_commit": "ffecae09411ce6113e6dc2c4259fb846cc1b54b1",
   "planned_firebase_independent_runs": 8,
   "planned_observation_seconds": 20760,
-  "completed_pilot_runs": 9,
-  "valid_completed_runs": 7,
+  "completed_pilot_runs": 10,
+  "valid_completed_runs": 8,
   "aborted_setup_attempts": 1,
   "aborted_measurement_attempts": 1,
   "main_runs_completed": 0,
@@ -314,13 +314,57 @@
         "run-sem41-pilot-e03-2-20261115-0d277e",
         "run-sem41-pilot-e03-2-20261115-c12a28"
       ]
+    },
+    {
+      "run_id": "run-sem41-pilot-e01-1-20261115-9a8b41",
+      "case_id": "E01",
+      "repetition": 1,
+      "mode": "PERIODIC",
+      "execution_status": "COMPLETED",
+      "outcome": "TIMEOUT",
+      "validity": "VALID",
+      "actual_duration_ms": 5400630,
+      "new_periodic_cycles": 0,
+      "raw_rows": 7,
+      "canonical_android_events": 6,
+      "omitted_rows": 1,
+      "artifact_directory": "experiments/pilots/run-sem41-pilot-e01-1-20261115-9a8b41",
+      "observer_commit": "9da7912a650ba39bc896a14994aecf0972d133b8",
+      "collector_boot_session_id": "boot-sem41-cdcb3ce6c37d2751",
+      "canonical_android_region_counts": {
+        "SETUP": 5,
+        "WINDOW": 0,
+        "POST_WINDOW": 1,
+        "NO_WINDOW_STARTED": 0
+      },
+      "baseline_content_status": "PASS",
+      "baseline_content_reason": "BASELINE_MATCH",
+      "server_store_epoch": "pilots-20261115-r3",
+      "firebase_token_status": "FIREBASE_NOT_CONFIGURED",
+      "replaces_run_id": "run-sem41-pilot-e01-1-20261115-760217"
     }
   ],
-  "remaining_firebase_independent_runs": 1,
-  "unfulfilled_pilot_slots": [
-    "E01:1"
-  ],
-  "batch_status": "RUNNING",
+  "remaining_firebase_independent_runs": 0,
+  "unfulfilled_pilot_slots": [],
+  "batch_status": "COMPLETED_WITH_RECORDED_OUTCOMES",
   "firebase_dependent_main_slots_not_run": 19,
-  "cross_device_latency_calculated": false
+  "cross_device_latency_calculated": false,
+  "e01_cycle_observation": {
+    "run_id": "run-sem41-pilot-e01-1-20261115-9a8b41",
+    "minimum_natural_cycles": 3,
+    "observed_natural_cycles": 0,
+    "goal_met": false
+  },
+  "supplementary_pilot_plan": {
+    "data_kind": "PLANNED",
+    "run_id": null,
+    "run_phase": "pilot",
+    "case_id": "E01",
+    "mode": "PERIODIC",
+    "execution_status": "NOT_RUN",
+    "planned_window_seconds": 5400,
+    "reason": "NATURAL_CYCLE_TARGET_NOT_MET",
+    "next_step": "REVIEW_SCHEDULER_CONDITIONS_AND_FINAL_CANDIDATE_PROFILE_BEFORE_SEPARATE_SESSION",
+    "replace_or_remove_observed_timeout": false
+  }
 }
