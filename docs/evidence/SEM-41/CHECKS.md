@@ -1,5 +1,7 @@
 # SEM-41 — Emulator main readiness và kiểm candidate
 
+> Cập nhật sau lượt chẩn đoán 19:52 ngày 15/11: phát hiện collector gọi `dumpsys jobscheduler` trong window, có thể satisfy/remove timing constraint mà không enqueue job. Tám qualification cũ đang bị thu hồi để đo lại bằng observer không gọi lệnh này trong window; các bảng/snapshot trước đó là lịch sử, không dùng làm số mẫu hợp lệ hiện hành. Giữ nguyên raw/events/outcome.
+
 ## Nhận dạng và đầu vào
 
 - Vinh (`Vinh5905`) thực hiện ngày **15/11/2026, UTC+7**. Nhánh `codex/SEM-41-emulator-main` từ main `6e87411b60e8504d431cd06e577be94b7bb2244f`, sau merge SEM-34 PR #26. Hạn gốc 07/11/2026 13 giờ được giữ trong task.

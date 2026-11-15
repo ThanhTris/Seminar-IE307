@@ -21,9 +21,9 @@ class PilotReviewTests(unittest.TestCase):
         self.events = [{"event_id": "synthetic-registration", "event_type": "periodic_registered", "request_id": None, "source": "PERIODIC", "work_id": "synthetic-work", "elapsed_realtime_ms": 0}]
         self.raw = [{"eventId": "synthetic-registration"}]
         self.report = {"exported_event_count": 1, "omitted_event_count": 0, "omitted_events": []}
-        reviewer.save(self.folder / "cleanup-checkpoint.json", {"package_stopped": False, "app_resumed": False, "network_connected": True, "idle": "ACTIVE"})
+        reviewer.save(self.folder / "cleanup-checkpoint.json", {"package_stopped": False, "app_resumed": False, "network_connected": True, "idle": "ACTIVE", "elapsed_realtime_ms": 5401002})
         for label in ("background", "window-end"):
-            reviewer.save(self.folder / (label + "-checkpoint.json"), {"package_stopped": False, "app_resumed": False, "network_connected": True, "idle": "ACTIVE"})
+            reviewer.save(self.folder / (label + "-checkpoint.json"), {"package_stopped": False, "app_resumed": False, "network_connected": True, "idle": "ACTIVE", "elapsed_realtime_ms": 0 if label == "background" else 5401001})
         reviewer.save(self.folder / "export-v2-state.json", {"periodic_work": []})
         (self.folder / "setup-db").mkdir()
         connection = sqlite3.connect(str(self.folder / "setup-db/seminar_bulletin.db"))

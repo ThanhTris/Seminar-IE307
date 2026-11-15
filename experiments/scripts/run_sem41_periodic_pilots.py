@@ -79,6 +79,10 @@ class PilotBatch:
         return result.stdout.decode("utf-8")
 
     def shell(self, *args, timeout=60):
+        # JobScheduler's dump can evaluate/remove expired TimeController entries.
+        # A diagnostic that changes dispatch state is forbidden while the clock is open.
+        if args[:2] == ("dumpsys", "jobscheduler") and self.record.get("start_elapsed_realtime_ms") is not None and self.record.get("end_elapsed_realtime_ms") is None:
+            raise RuntimeError("SCHEDULER_DUMP_DURING_OPEN_WINDOW")
         return self.adb("shell", *args, timeout=timeout).strip()
 
     def capture(self, name, *args):
@@ -86,17 +90,19 @@ class PilotBatch:
         (self.current / (name + ".txt")).write_text(text + "\n")
         return text
 
-    def checkpoint(self, label):
+    def checkpoint(self, label, *, include_jobs=False):
         idle = self.capture(label + "-idle", "dumpsys", "deviceidle")
         activity = self.capture(label + "-activity", "dumpsys", "activity", "activities")
         package = self.capture(label + "-package", "dumpsys", "package", PACKAGE)
-        self.capture(label + "-jobs", "dumpsys", "jobscheduler", PACKAGE)
+        if include_jobs:
+            self.capture(label + "-jobs", "dumpsys", "jobscheduler", PACKAGE)
         self.capture(label + "-battery", "dumpsys", "battery")
         state = {"utc": utc(), "elapsed_realtime_ms": self.elapsed(),
                  "idle": re.search(r"\bmState=(\w+)", idle).group(1),
                  "network_connected": "mNetworkConnected=true" in idle,
                  "screen_on": "mScreenOn=true" in idle,
                  "package_stopped": "stopped=true" in package,
+                 "scheduler_dump_performed": include_jobs,
                  "app_resumed": any(PACKAGE in line for line in activity.splitlines()
                                     if "topResumedActivity=" in line)}
         write_json(self.current / (label + "-checkpoint.json"), state)
@@ -181,7 +187,7 @@ class PilotBatch:
         write_json(self.current / "baseline-content-proof.json", proof)
         if proof["status"] != "PASS":
             raise RuntimeError(proof["reason"])
-        checkpoint = self.checkpoint("background")
+        checkpoint = self.checkpoint("background", include_jobs=True)
         if checkpoint["app_resumed"] or checkpoint["package_stopped"] or not checkpoint["network_connected"]:
             raise RuntimeError("BACKGROUND_BASELINE_INVALID")
 
@@ -346,7 +352,7 @@ class PilotBatch:
                 self.update("HYBRID", skip=True)
                 self.observe(2700, "CONTROLLED_SKIP_PERIODIC_RECOVERY", "ACTIVE")
             self.record.update(end_utc=utc(), end_elapsed_realtime_ms=self.elapsed(), execution_status="COMPLETED")
-            self.checkpoint("window-end")
+            self.checkpoint("window-end", include_jobs=True)
             metadata, rows = self.database("window-end-db")
             target = self.record.get("target_version")
             within = [row for row in rows if self.record["start_elapsed_realtime_ms"] <= row["elapsedRealtimeMillis"] <= self.record["end_elapsed_realtime_ms"]]
@@ -373,7 +379,7 @@ class PilotBatch:
             self.instrument("export-v2")
             self.shell("am", "start", "-W", "-n", PACKAGE + "/.MainActivity")
             self.shell("input", "keyevent", "KEYCODE_HOME")
-            self.checkpoint("cleanup")
+            self.checkpoint("cleanup", include_jobs=True)
             self.record["cleanup_passed"] = True
             self.persist("FINISHED")
 

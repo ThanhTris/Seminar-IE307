@@ -19,6 +19,7 @@ from types import SimpleNamespace
 
 import export_logs as canonical
 from sem41_baseline import historical_baseline
+from sem41_scheduler_observation import scheduler_collection
 
 ROOT = Path(__file__).resolve().parents[2]
 WINDOWS = {"E01": 5400, "E03": 2100, "E04": 1920, "E06": 2700}
@@ -56,6 +57,8 @@ def review(folder):
     checks = {}
     baseline_content = historical_baseline(folder, record)
     checks["baseline_cache_matches_server"] = baseline_content["status"] == "PASS"
+    scheduler_observation = scheduler_collection(folder, record)
+    checks["scheduler_observation_non_mutating"] = scheduler_observation["status"] == "PASS"
     checks["only_cleanup_omitted"] = all(event["event_type"] == "periodic_cancelled" for event in omitted)
     checkpoints = {path.stem: load(path) for path in folder.glob("*-checkpoint.json")}
     checks["background_and_end_evidence"] = {"background-checkpoint", "window-end-checkpoint"} <= set(checkpoints)
@@ -108,7 +111,7 @@ def review(folder):
         enter, leave = record["idle_start_elapsed_realtime_ms"], record["idle_exit_elapsed_realtime_ms"]
         for name, low, high in [("baseline", start, enter), ("idle", enter, leave), ("post_idle", leave, end)]:
             phases[name] = dict(Counter(event["event_type"] for event in within if low <= event["elapsed_realtime_ms"] < high))
-    return record, {"run_id": record["run_id"], "checks": checks, "baseline_content": baseline_content, "validity": "VALID" if completed and all(checks.values()) else "INVALID", "actual_duration_ms": duration, "new_periodic_cycles": len(request_cycles), "applied_target_count_in_window": len(applied), "raw_rows": len(raw), "canonical_android_events": len(events), "omitted_rows": len(omitted), "phase_event_counts": phases, "clock_controlled": False, "cross_device_latency_calculated": False, "event_boot_session_ids_preserved": True}
+    return record, {"run_id": record["run_id"], "checks": checks, "baseline_content": baseline_content, "scheduler_observation": scheduler_observation, "validity": "VALID" if completed and all(checks.values()) else "INVALID", "actual_duration_ms": duration, "new_periodic_cycles": len(request_cycles), "applied_target_count_in_window": len(applied), "raw_rows": len(raw), "canonical_android_events": len(events), "omitted_rows": len(omitted), "phase_event_counts": phases, "clock_controlled": False, "cross_device_latency_calculated": False, "event_boot_session_ids_preserved": True}
 
 
 def export_one(folder, output, deny_path):
@@ -124,6 +127,8 @@ def export_one(folder, output, deny_path):
     manifest["reason_codes"] += ["AUDIT_" + key.upper().replace("-", "_")[:50] for key, passed in audit["checks"].items() if not passed]
     if audit["baseline_content"]["status"] != "PASS":
         manifest["reason_codes"].append(audit["baseline_content"]["reason"])
+    if audit["scheduler_observation"]["status"] == "FAIL":
+        manifest["reason_codes"].append(audit["scheduler_observation"]["reason"])
     manifest["build"].update(app_commit=record["app_source_commit"], server_commit=record["server_source_commit"], apk_sha256=record["apk_sha256"], candidate_gate_passed=False)
     manifest["config"].update(periodic_interval_minutes=15, periodic_flex_minutes=15, periodic_initial_delay_ms=0, periodic_unique_name="periodic_bulletin_sync", periodic_policy="UPDATE", idle_method="ADB_FORCE_IDLE" if record["case_id"] == "E03" else "NATURAL", deep_idle_during="IDLE" if record.get("idle_start_utc") else "ACTIVE")
     obs = manifest["observation"]
@@ -141,6 +146,7 @@ def export_one(folder, output, deny_path):
             extras[name] = (folder / name).read_text()
     extras["audit.json"] = json.dumps(audit, indent=2) + "\n"
     extras["baseline-content-proof.json"] = json.dumps(audit["baseline_content"], indent=2) + "\n"
+    extras["scheduler-observation-proof.json"] = json.dumps(audit["scheduler_observation"], indent=2) + "\n"
     if (folder / "baseline-content-proof.json").exists():
         extras["baseline-observer-proof.json"] = (folder / "baseline-content-proof.json").read_text()
     for path in sorted(folder.glob("*-checkpoint.json")):
