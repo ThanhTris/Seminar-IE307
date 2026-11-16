@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "samples": [
+    {
+      "utc": "2026-11-15T10:19:46.916Z",
+      "deep_idle": "ACTIVE"
+    }
+  ]
+}

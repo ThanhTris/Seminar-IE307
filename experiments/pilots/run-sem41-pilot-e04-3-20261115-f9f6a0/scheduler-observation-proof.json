@@ -1,0 +1,76 @@
+{
+  "status": "FAIL",
+  "reason": "IN_WINDOW_JOB_DUMP_CAN_REEVALUATE_TIMERS",
+  "checkpoints_without_clock": [],
+  "in_window_dump_count": 6,
+  "timer_transition_count": 1,
+  "in_window_dumps": [
+    {
+      "checkpoint": "POST_RECONNECT-17506010-checkpoint.json",
+      "elapsed_realtime_ms": 17506190,
+      "capture_present": true,
+      "timer_transition_pattern": false,
+      "capture_file": "POST_RECONNECT-17506010-jobs.txt",
+      "capture_sha256": "cd1e6b763c7afa582282073928a49b08a63d8df4d5407fa904daac2242defcc8",
+      "timing_delay_printed_unsatisfied": true,
+      "ready_printed": false,
+      "time_controller_has_tracked_job": true
+    },
+    {
+      "checkpoint": "POST_RECONNECT-17809260-checkpoint.json",
+      "elapsed_realtime_ms": 17809420,
+      "capture_present": true,
+      "timer_transition_pattern": false,
+      "capture_file": "POST_RECONNECT-17809260-jobs.txt",
+      "capture_sha256": "0c1a36cf6c7c1648bb92fbcbe8869bdaec5be5fad73900e813b3edc1adb87569",
+      "timing_delay_printed_unsatisfied": true,
+      "ready_printed": false,
+      "time_controller_has_tracked_job": true
+    },
+    {
+      "checkpoint": "POST_RECONNECT-18111140-checkpoint.json",
+      "elapsed_realtime_ms": 18111350,
+      "capture_present": true,
+      "timer_transition_pattern": false,
+      "capture_file": "POST_RECONNECT-18111140-jobs.txt",
+      "capture_sha256": "83c86ac27dc5b1a4bf9ce2ebbf59504df8ef22ab04ab558d4aad0ba103b19e63",
+      "timing_delay_printed_unsatisfied": true,
+      "ready_printed": false,
+      "time_controller_has_tracked_job": true
+    },
+    {
+      "checkpoint": "POST_RECONNECT-18414080-checkpoint.json",
+      "elapsed_realtime_ms": 18414200,
+      "capture_present": true,
+      "timer_transition_pattern": false,
+      "capture_file": "POST_RECONNECT-18414080-jobs.txt",
+      "capture_sha256": "508555cf25ea12608584e7e9614e328e8a1b67bc79a62f2056c2ccf7350d1213",
+      "timing_delay_printed_unsatisfied": true,
+      "ready_printed": false,
+      "time_controller_has_tracked_job": true
+    },
+    {
+      "checkpoint": "POST_RECONNECT-18715780-checkpoint.json",
+      "elapsed_realtime_ms": 18715900,
+      "capture_present": true,
+      "timer_transition_pattern": false,
+      "capture_file": "POST_RECONNECT-18715780-jobs.txt",
+      "capture_sha256": "21f6b1c475f2ab473ceb954853e399c512de3ee3303f7b7405c5f91923cbf15d",
+      "timing_delay_printed_unsatisfied": true,
+      "ready_printed": false,
+      "time_controller_has_tracked_job": true
+    },
+    {
+      "checkpoint": "POST_RECONNECT-end-checkpoint.json",
+      "elapsed_realtime_ms": 19004340,
+      "capture_present": true,
+      "timer_transition_pattern": true,
+      "capture_file": "POST_RECONNECT-end-jobs.txt",
+      "capture_sha256": "669aab1499fa791ad2493281a3fbace676f485a5c818e5d80e1ab730f1d7cf79",
+      "timing_delay_printed_unsatisfied": true,
+      "ready_printed": true,
+      "time_controller_has_tracked_job": false
+    }
+  ],
+  "events_or_outcomes_modified": false
+}

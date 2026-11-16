@@ -1,0 +1,30 @@
+{
+  "exporter_version": "1.0.0",
+  "data_kind": "OBSERVED",
+  "run_id": "run-sem41-pilot-e06-2-20261115-f56fc9",
+  "device_alias": "emulator-main",
+  "manifest_input_sha256": "2845d457bdd36e93d7e06d8b600eccaae5999602b88f555167a684023a98a73d",
+  "sources": [
+    {
+      "origin": "ANDROID",
+      "sha256": "e6cdc70717ffeb9ed6bceac0fdf049eb4e50c9b7fdb59be55a8dd79cdb2ff3ca",
+      "lines": 5,
+      "selected": 5,
+      "other_run_or_device": 0,
+      "duplicates": 0,
+      "extra_fields_omitted": 0
+    },
+    {
+      "origin": "SERVER",
+      "sha256": "bfd156a8595887d72edb360af10feb5f86b9c607905852493fd875136471877d",
+      "lines": 14,
+      "selected": 2,
+      "other_run_or_device": 12,
+      "duplicates": 0,
+      "extra_fields_omitted": 0
+    }
+  ],
+  "events_exported": 7,
+  "ordering": "INPUT_ORDER_NOT_CAUSAL",
+  "analysis_performed": false
+}

@@ -1,0 +1,99 @@
+{
+  "utc": "2026-11-15T13:23:35.718Z",
+  "data_kind": "OBSERVED",
+  "same_app_and_test_apks": true,
+  "same_runtime_source": true,
+  "main_samples_added": 0,
+  "pilot_samples_added_by_partial_comparison": 0,
+  "before_fix_control": {
+    "run_id": "run-sem41-dispatch-diagnostic-1715327d9b29",
+    "phase": "development",
+    "observer_commit": "0d4307e3c29e05032f491a527a2ce1203d98e2c0",
+    "profile": "WITH_IN_WINDOW_JOB_DUMPS",
+    "undispatched_window_ms": 1200440,
+    "undispatched_new_cycles": 0,
+    "target_applied_without_direct_dispatch": false,
+    "subsequent_direct_dispatch_applied_target": true
+  },
+  "after_fix_partial_e01": {
+    "utc": "2026-11-15T13:23:35.718Z",
+    "data_kind": "OBSERVED",
+    "scope": "PARTIAL_ONGOING_E01_WINDOW",
+    "run_id": "run-sem41-pilot-e01-1-20261115-575a7a",
+    "elapsed_since_window_start_ms": 1206080,
+    "read_only_room_copy": true,
+    "instrumentation_used": false,
+    "scheduler_dump_used": false,
+    "undispatched_new_periodic_cycles": 1,
+    "target_version": 16,
+    "target_applied": true,
+    "cache_version": 16,
+    "all_sources_periodic": true,
+    "collector_proof": {
+      "status": "PASS",
+      "reason": "NO_IN_WINDOW_JOB_DUMP",
+      "checkpoints_without_clock": [],
+      "in_window_dump_count": 0,
+      "timer_transition_count": 0,
+      "in_window_dumps": [],
+      "events_or_outcomes_modified": false
+    },
+    "candidate_gate_passed": false,
+    "main_samples_added": 0,
+    "pilot_window_finished": false
+  },
+  "observer_commit_after_fix": "db98fa8d275c3ca2d10895daa61f00bf53f59cd7",
+  "native_work_start_event_ids": [
+    "4b2f21b0-1bcf-4cae-9dae-e19f058c0fb9"
+  ],
+  "native_target_apply_event_ids": [
+    "528d17c2-d457-4ac4-bffd-0ef2804188f3"
+  ],
+  "native_work_start_utc": [
+    "2026-11-15T13:19:22.149Z"
+  ],
+  "native_target_apply_utc": [
+    "2026-11-15T13:19:23.106Z"
+  ],
+  "room_capture_tar_sha256": "8d05477088ad245a951f9927a925112fbadb2e539abb6261f15ca9c22ea3282e",
+  "full_e01_window_completed": true,
+  "interpretation": "Natural periodic dispatch observed after collector fix; keep full90min and qualify only after closure. No OS binary source equivalence or cross-device latency claimed.",
+  "after_fix_partial_e01_minute60": {
+    "utc": "2026-11-15T14:04:23.326Z",
+    "data_kind": "OBSERVED",
+    "scope": "PARTIAL_ONGOING_E01_WINDOW",
+    "run_id": "run-sem41-pilot-e01-1-20261115-575a7a",
+    "elapsed_since_window_start_ms": 3653680,
+    "read_only_room_copy": true,
+    "instrumentation_used": false,
+    "scheduler_dump_used": false,
+    "new_periodic_cycles": 3,
+    "target_version": 16,
+    "target_applied": true,
+    "cache_version": 16,
+    "all_sources_periodic": true,
+    "collector_proof": {
+      "status": "PASS",
+      "reason": "NO_IN_WINDOW_JOB_DUMP",
+      "checkpoints_without_clock": [],
+      "in_window_dump_count": 0,
+      "timer_transition_count": 0,
+      "in_window_dumps": [],
+      "events_or_outcomes_modified": false
+    },
+    "candidate_gate_passed": false,
+    "main_samples_added": 0,
+    "pilot_window_finished": false
+  },
+  "completed_e01_result": {
+    "run_id": "run-sem41-pilot-e01-1-20261115-575a7a",
+    "manifest_reference": "experiments/pilots/run-sem41-pilot-e01-1-20261115-575a7a/manifest.json",
+    "actual_duration_ms": 5400720,
+    "new_periodic_cycles": 5,
+    "outcome": "SUCCESS",
+    "goal_at_least3_cycles_met": true,
+    "cache_version_after": 16,
+    "direct_dispatch_used": false,
+    "in_window_scheduler_dumps": 0
+  }
+}

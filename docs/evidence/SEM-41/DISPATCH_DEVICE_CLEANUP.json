@@ -1,0 +1,40 @@
+{
+  "utc": "2026-11-15T12:52:30.778Z",
+  "data_kind": "OBSERVED",
+  "device_alias": "emulator-main",
+  "installed_apk_artifacts": {
+    "application_apk": {
+      "sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
+      "matches_measured_artifact": true
+    },
+    "instrumentation_apk": {
+      "sha256": "6d38f794e7df9225926941394ae63db0afce9d365080ab3e69899d402992b4d8",
+      "matches_measured_artifact": true
+    }
+  },
+  "all_sync_workers_checked": true,
+  "active_sync_work": 0,
+  "sync_work_state_counts": {
+    "2": 4,
+    "5": 1
+  },
+  "deep_idle": "ACTIVE",
+  "force_idle": false,
+  "network_connected": true,
+  "baseline_settings": {
+    "wifi_on": "1",
+    "mobile_data": "1",
+    "airplane_mode_on": "0",
+    "low_power": "0"
+  },
+  "screen_on": true,
+  "battery_percent": 100,
+  "package_stopped": false,
+  "app_resumed": false,
+  "same_boot_as_observations": true,
+  "server_stopped": true,
+  "store_lock_released": true,
+  "port_3000_free": true,
+  "raw_evidence_published": false,
+  "outcome": "PASS"
+}

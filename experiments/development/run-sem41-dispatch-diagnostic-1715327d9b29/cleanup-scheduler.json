@@ -1,0 +1,13 @@
+{
+  "probe_version": "1.0.0",
+  "sdk_int": 37,
+  "utc_epoch_ms": 1794747123221,
+  "elapsed_realtime_ms": 35851848,
+  "namespace": "androidx.work.systemjobscheduler",
+  "package": "com.thanhtris.seminarie307",
+  "read_only": true,
+  "jobs": [],
+  "probe_dex_sha256": "526437810fb9fce101fd6dfa866ecdd5af3b7283f9c89cd9f23d941a58854326",
+  "target_process_unchanged_across_query": true,
+  "target_process_present_before_query": true
+}

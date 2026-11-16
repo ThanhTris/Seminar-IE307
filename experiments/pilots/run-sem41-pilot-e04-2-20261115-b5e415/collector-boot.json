@@ -1,0 +1,8 @@
+{
+  "boot_session_id": "boot-sem41-cdcb3ce6c37d2751",
+  "identity_source": "SHA256_OF_KERNEL_BOOT_ID",
+  "verified_by_observer_at_each_checkpoint": true,
+  "raw_boot_id_published": false,
+  "event_boot_session_ids_modified": false,
+  "event_latency_calculated": false
+}

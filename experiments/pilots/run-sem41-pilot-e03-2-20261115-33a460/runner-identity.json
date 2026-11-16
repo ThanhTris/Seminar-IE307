@@ -1,0 +1,12 @@
+{
+  "observer_commit": "8566282d3518639042e3dda2b53a855936fa67c7",
+  "observer_source_sha256": "619a4a54e83182e379047113c4b6c7c6ddb53ae859baf63f9b75053300b77c2f",
+  "support_sources_sha256": {
+    "sem41_baseline.py": "7eb953585bf2cc11532f44e10960d37f9a05ad51e0dc58480a9ac4ba1967bc24"
+  },
+  "phase": "pilot",
+  "candidate_gate_passed": false,
+  "case_sequence": [
+    "E03:2"
+  ]
+}

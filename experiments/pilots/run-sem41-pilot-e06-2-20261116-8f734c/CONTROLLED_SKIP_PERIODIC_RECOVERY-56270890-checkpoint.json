@@ -1,0 +1,10 @@
+{
+  "utc": "2026-11-15T18:32:22.640Z",
+  "elapsed_realtime_ms": 56271030,
+  "idle": "ACTIVE",
+  "network_connected": true,
+  "screen_on": true,
+  "package_stopped": false,
+  "scheduler_dump_performed": false,
+  "app_resumed": false
+}

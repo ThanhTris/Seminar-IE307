@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "reason": "NO_IN_WINDOW_JOB_DUMP",
+  "checkpoints_without_clock": [],
+  "in_window_dump_count": 0,
+  "timer_transition_count": 0,
+  "in_window_dumps": [],
+  "events_or_outcomes_modified": false
+}

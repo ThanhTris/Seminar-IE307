@@ -1,0 +1,98 @@
+{
+  "status": "FAIL",
+  "reason": "IN_WINDOW_JOB_DUMP_CAN_REEVALUATE_TIMERS",
+  "checkpoints_without_clock": [],
+  "in_window_dump_count": 8,
+  "timer_transition_count": 1,
+  "in_window_dumps": [
+    {
+      "checkpoint": "BASELINE-7527570-checkpoint.json",
+      "elapsed_realtime_ms": 7527770,
+      "capture_present": true,
+      "timer_transition_pattern": false,
+      "capture_file": "BASELINE-7527570-jobs.txt",
+      "capture_sha256": "55094d2390b61782a80b61dc3827f382e1fe293fbe033efcf4f7f56d62829785",
+      "timing_delay_printed_unsatisfied": true,
+      "ready_printed": false,
+      "time_controller_has_tracked_job": true
+    },
+    {
+      "checkpoint": "BASELINE-end-checkpoint.json",
+      "elapsed_realtime_ms": 7528030,
+      "capture_present": true,
+      "timer_transition_pattern": false,
+      "capture_file": "BASELINE-end-jobs.txt",
+      "capture_sha256": "1ed61dc886a871a19152ba2563b841e81145ea236b11565457d53d36090dc160",
+      "timing_delay_printed_unsatisfied": true,
+      "ready_printed": false,
+      "time_controller_has_tracked_job": true
+    },
+    {
+      "checkpoint": "CONFIRMED_DOZE-7831130-checkpoint.json",
+      "elapsed_realtime_ms": 7831310,
+      "capture_present": true,
+      "timer_transition_pattern": false,
+      "capture_file": "CONFIRMED_DOZE-7831130-jobs.txt",
+      "capture_sha256": "87a425e28c2353e98e735c06891b83c6de70bf2bd4bb76110bee70102b159eb1",
+      "timing_delay_printed_unsatisfied": true,
+      "ready_printed": false,
+      "time_controller_has_tracked_job": true
+    },
+    {
+      "checkpoint": "CONFIRMED_DOZE-8133240-checkpoint.json",
+      "elapsed_realtime_ms": 8133500,
+      "capture_present": true,
+      "timer_transition_pattern": true,
+      "capture_file": "CONFIRMED_DOZE-8133240-jobs.txt",
+      "capture_sha256": "aa1c1637c19817e72315e8d17b8dde1c0c61d0a2147233c837d1c8562cdb37af",
+      "timing_delay_printed_unsatisfied": true,
+      "ready_printed": false,
+      "time_controller_has_tracked_job": false
+    },
+    {
+      "checkpoint": "CONFIRMED_DOZE-8435600-checkpoint.json",
+      "elapsed_realtime_ms": 8435710,
+      "capture_present": true,
+      "timer_transition_pattern": false,
+      "capture_file": "CONFIRMED_DOZE-8435600-jobs.txt",
+      "capture_sha256": "9f07cb8f3cce0f3439994d797b1b595960ac5359299f8c49c897c355c8e0d127",
+      "timing_delay_printed_unsatisfied": false,
+      "ready_printed": false,
+      "time_controller_has_tracked_job": false
+    },
+    {
+      "checkpoint": "CONFIRMED_DOZE-end-checkpoint.json",
+      "elapsed_realtime_ms": 8729310,
+      "capture_present": true,
+      "timer_transition_pattern": false,
+      "capture_file": "CONFIRMED_DOZE-end-jobs.txt",
+      "capture_sha256": "4fc5da53e2d446aa7434d217e7af3d22549bccd549f8df6de53cacdc323ae371",
+      "timing_delay_printed_unsatisfied": false,
+      "ready_printed": false,
+      "time_controller_has_tracked_job": false
+    },
+    {
+      "checkpoint": "POST_DOZE-9032160-checkpoint.json",
+      "elapsed_realtime_ms": 9032440,
+      "capture_present": true,
+      "timer_transition_pattern": false,
+      "capture_file": "POST_DOZE-9032160-jobs.txt",
+      "capture_sha256": "c552fce71772a22c26a49300bef6ba466bbcd45c80304b0b9a631e7bebfe7b54",
+      "timing_delay_printed_unsatisfied": true,
+      "ready_printed": false,
+      "time_controller_has_tracked_job": true
+    },
+    {
+      "checkpoint": "POST_DOZE-end-checkpoint.json",
+      "elapsed_realtime_ms": 9330640,
+      "capture_present": true,
+      "timer_transition_pattern": false,
+      "capture_file": "POST_DOZE-end-jobs.txt",
+      "capture_sha256": "62b525bfb6c3dbd349582f45fa405e0c7e0a624b6520157685011867e6423e52",
+      "timing_delay_printed_unsatisfied": true,
+      "ready_printed": false,
+      "time_controller_has_tracked_job": true
+    }
+  ],
+  "events_or_outcomes_modified": false
+}

@@ -1,0 +1,39 @@
+{
+  "android_diff_files": [
+    "android/app/src/test/java/com/thanhtris/seminarie307/fcm/PushSyncEnqueueAdapterTest.kt"
+  ],
+  "data_kind": "OBSERVED",
+  "scope": "HOST_ANDROID_UNIT_TESTS_ONLY",
+  "source_commit": "1f79ee93e9a52af2b21c82372f23a6ac684d3ceb",
+  "runtime_source_diff_from_measured_app": false,
+  "measured_app_source_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
+  "command_exit_code": 0,
+  "counts": {
+    "tests": 32,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "reports": [
+    {
+      "file": "TEST-com.thanhtris.seminarie307.fcm.FcmTokenManagerTest.xml",
+      "sha256": "d992fe1ff31fe9c6fcc70d755915e7513a94d7bafba67dac117ac8c6ba3aa20a"
+    },
+    {
+      "file": "TEST-com.thanhtris.seminarie307.fcm.PushInputPolicyTest.xml",
+      "sha256": "39ef02557b8c843d3a3f74c5cf0b5d0db75ffa5f286665f5e803bc63a4baeb27"
+    },
+    {
+      "file": "TEST-com.thanhtris.seminarie307.fcm.PushSyncEnqueueAdapterTest.xml",
+      "sha256": "0695793b2114a551d864030c7216caa1590ec950db697439103d5c7eb3d97c1b"
+    },
+    {
+      "file": "TEST-com.thanhtris.seminarie307.ui.RunIdFilterTest.xml",
+      "sha256": "176585e26cd71fd62d0246bb158b16f7a6fca191ebcb4910335994806ad4e41e"
+    }
+  ],
+  "raw_build_log_sha256": "1b7e3e9f323ee30256ec422c52b41320bc8c6904ec823eafe32e0bd1cce1bbb4",
+  "utc": "2026-11-15T09:42:30.969Z",
+  "apk_install_performed": false,
+  "verification_reused_at_utc": "2026-11-15T09:54:33.730Z"
+}

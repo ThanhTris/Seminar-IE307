@@ -1,0 +1,190 @@
+{
+  "utc": "2026-11-15T13:08:16.258Z",
+  "data_kind": "OBSERVED",
+  "review_scope": "COLLECTOR_SCHEDULER_SIDE_EFFECT",
+  "qualification_of_previous_8_slots": "REVOKED",
+  "original_events_timestamps_outcomes_preserved": true,
+  "supersedes_verification_snapshot": "docs/evidence/SEM-41/FINAL_VERIFICATION.json",
+  "superseded_at_commit": "0e293c1483d961eb4233b8ad381765ea4cdacf1d",
+  "corrected_observer_commit": "db98fa8d275c3ca2d10895daa61f00bf53f59cd7",
+  "runtime_apk_changed": false,
+  "requalification_batch": "pilots-20261115-r6",
+  "primary_source_references": [
+    "https://android.googlesource.com/platform/frameworks/base/+/refs/heads/main/apex/jobscheduler/service/java/com/android/server/job/JobSchedulerService.java",
+    "https://android.googlesource.com/platform/frameworks/base/+/main/apex/jobscheduler/service/java/com/android/server/job/controllers/TimeController.java"
+  ],
+  "time_controller_source_capture_sha256": "e9ffdc3d7ffbbdc87e93663799eb2cdedb1fa4217dbcff24f3f7142115a9a7bc",
+  "detected_transition_examples": [
+    {
+      "run_id": "run-sem41-pilot-e01-1-20261115-760217",
+      "case_id": "E01",
+      "execution_status": "COMPLETED",
+      "outcome": "TIMEOUT",
+      "detected_transitions": [
+        {
+          "checkpoint": "NATURAL_PERIODIC-2713500-checkpoint.json",
+          "elapsed_realtime_ms": 2713650,
+          "job_ready_printed": true,
+          "timing_delay_printed_unsatisfied": true,
+          "time_controller_has_no_tracked_job_after_dump": true
+        }
+      ]
+    },
+    {
+      "run_id": "run-sem41-pilot-e03-1-20261115-5db4eb",
+      "case_id": "E03",
+      "execution_status": "COMPLETED",
+      "outcome": "SUCCESS",
+      "detected_transitions": [
+        {
+          "checkpoint": "CONFIRMED_DOZE-8133240-checkpoint.json",
+          "elapsed_realtime_ms": 8133500,
+          "job_ready_printed": false,
+          "timing_delay_printed_unsatisfied": true,
+          "time_controller_has_no_tracked_job_after_dump": true
+        }
+      ]
+    },
+    {
+      "run_id": "run-sem41-pilot-e03-2-20261115-0d277e",
+      "case_id": "E03",
+      "execution_status": "ABORTED",
+      "outcome": "FAILURE",
+      "detected_transitions": [
+        {
+          "checkpoint": "CONFIRMED_DOZE-10254370-checkpoint.json",
+          "elapsed_realtime_ms": 10254530,
+          "job_ready_printed": false,
+          "timing_delay_printed_unsatisfied": true,
+          "time_controller_has_no_tracked_job_after_dump": true
+        }
+      ]
+    },
+    {
+      "run_id": "run-sem41-pilot-e03-2-20261115-c12a28",
+      "case_id": "E03",
+      "execution_status": "COMPLETED",
+      "outcome": "SUCCESS",
+      "detected_transitions": [
+        {
+          "checkpoint": "CONFIRMED_DOZE-11971830-checkpoint.json",
+          "elapsed_realtime_ms": 11972020,
+          "job_ready_printed": false,
+          "timing_delay_printed_unsatisfied": true,
+          "time_controller_has_no_tracked_job_after_dump": true
+        }
+      ]
+    },
+    {
+      "run_id": "run-sem41-pilot-e04-1-20261115-a52b51",
+      "case_id": "E04",
+      "execution_status": "COMPLETED",
+      "outcome": "SUCCESS",
+      "detected_transitions": [
+        {
+          "checkpoint": "POST_RECONNECT-end-checkpoint.json",
+          "elapsed_realtime_ms": 15113050,
+          "job_ready_printed": true,
+          "timing_delay_printed_unsatisfied": true,
+          "time_controller_has_no_tracked_job_after_dump": true
+        }
+      ]
+    },
+    {
+      "run_id": "run-sem41-pilot-e04-2-20261115-b5e415",
+      "case_id": "E04",
+      "execution_status": "COMPLETED",
+      "outcome": "TIMEOUT",
+      "detected_transitions": [
+        {
+          "checkpoint": "POST_RECONNECT-16165430-checkpoint.json",
+          "elapsed_realtime_ms": 16165650,
+          "job_ready_printed": true,
+          "timing_delay_printed_unsatisfied": true,
+          "time_controller_has_no_tracked_job_after_dump": true
+        }
+      ]
+    },
+    {
+      "run_id": "run-sem41-pilot-e04-3-20261115-f9f6a0",
+      "case_id": "E04",
+      "execution_status": "COMPLETED",
+      "outcome": "SUCCESS",
+      "detected_transitions": [
+        {
+          "checkpoint": "POST_RECONNECT-end-checkpoint.json",
+          "elapsed_realtime_ms": 19004340,
+          "job_ready_printed": true,
+          "timing_delay_printed_unsatisfied": true,
+          "time_controller_has_no_tracked_job_after_dump": true
+        }
+      ]
+    },
+    {
+      "run_id": "run-sem41-pilot-e06-1-20261115-18fec8",
+      "case_id": "E06",
+      "execution_status": "COMPLETED",
+      "outcome": "TIMEOUT",
+      "detected_transitions": [
+        {
+          "checkpoint": "CONTROLLED_SKIP_PERIODIC_RECOVERY-19925040-checkpoint.json",
+          "elapsed_realtime_ms": 19925260,
+          "job_ready_printed": true,
+          "timing_delay_printed_unsatisfied": true,
+          "time_controller_has_no_tracked_job_after_dump": true
+        }
+      ]
+    },
+    {
+      "run_id": "run-sem41-pilot-e06-2-20261115-f56fc9",
+      "case_id": "E06",
+      "execution_status": "COMPLETED",
+      "outcome": "TIMEOUT",
+      "detected_transitions": [
+        {
+          "checkpoint": "CONTROLLED_SKIP_PERIODIC_RECOVERY-22635320-checkpoint.json",
+          "elapsed_realtime_ms": 22635550,
+          "job_ready_printed": true,
+          "timing_delay_printed_unsatisfied": true,
+          "time_controller_has_no_tracked_job_after_dump": true
+        }
+      ]
+    },
+    {
+      "run_id": "run-sem41-pilot-e03-2-20261115-33a460",
+      "case_id": "E03",
+      "execution_status": "COMPLETED",
+      "outcome": "SUCCESS",
+      "detected_transitions": [
+        {
+          "checkpoint": "CONFIRMED_DOZE-26119110-checkpoint.json",
+          "elapsed_realtime_ms": 26119260,
+          "job_ready_printed": false,
+          "timing_delay_printed_unsatisfied": true,
+          "time_controller_has_no_tracked_job_after_dump": true
+        }
+      ]
+    },
+    {
+      "run_id": "run-sem41-pilot-e01-1-20261115-9a8b41",
+      "case_id": "E01",
+      "execution_status": "COMPLETED",
+      "outcome": "TIMEOUT",
+      "detected_transitions": [
+        {
+          "checkpoint": "NATURAL_PERIODIC-28273310-checkpoint.json",
+          "elapsed_realtime_ms": 28273500,
+          "job_ready_printed": true,
+          "timing_delay_printed_unsatisfied": true,
+          "time_controller_has_no_tracked_job_after_dump": true
+        }
+      ]
+    }
+  ],
+  "comparison_reference": "docs/evidence/SEM-41/COLLECTOR_COMPARISON.json",
+  "first_corrected_window_has_native_cycle_before20min": true,
+  "corrected_e01_cycles": 5,
+  "corrected_e01_cycle_goal_met": true,
+  "requalification_completed": true,
+  "new_valid_completed_slots": 8
+}

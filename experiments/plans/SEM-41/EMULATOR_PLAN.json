@@ -1,0 +1,577 @@
+{
+  "plan_version": "1.0.0",
+  "data_kind": "PLANNED",
+  "task_id": "SEM-41",
+  "protocol_version": "1.0.0",
+  "protocol_reference": "../../PROTOCOL.md",
+  "intended_run_phase": "main",
+  "device_alias": "emulator-main",
+  "operator_alias": "Vinh5905",
+  "execution_status": "NOT_RUN",
+  "slot_count": 27,
+  "planned_observation_seconds": 34920,
+  "app_commit": null,
+  "server_commit": null,
+  "apk_sha256": null,
+  "candidate_status_at_check": "NOT_READY",
+  "candidate_reference": "https://github.com/ThanhTris/Seminar-IE307/pull/28",
+  "candidate_app_source_under_review": "9e7e55b76c646ff113a152022cc23317a202e533",
+  "main_requires": [
+    "CANDIDATE_GATE_PASSED",
+    "EXACT_INSTALLED_APK_HASH",
+    "CANONICAL_ANDROID_V2_EXPORT_CHECKED",
+    "CASE_PILOT_CHECKED",
+    "EXCLUSIVE_DEVICE_AND_SERVER_STORE"
+  ],
+  "baseline": {
+    "periodic_interval_minutes": 15,
+    "network_constraint": "CONNECTED",
+    "push_priority": "normal",
+    "push_payload_kind": "DATA_ONLY",
+    "ttl_ms": 86400000,
+    "collapse_key": null
+  },
+  "slots": [
+    {
+      "slot_id": "planned-slot-sem41-e01-periodic-natural_periodic-01",
+      "run_id": null,
+      "case_id": "E01",
+      "mode": "PERIODIC",
+      "subscenario": "NATURAL_PERIODIC",
+      "repetition": 1,
+      "execution_status": "NOT_RUN",
+      "planned_window_seconds": 5400,
+      "requires_firebase": false,
+      "intervention": "NONE",
+      "blocking_reasons": [
+        "CANDIDATE_NOT_READY",
+        "CASE_PILOT_NOT_REQUALIFIED"
+      ],
+      "procedure": {
+        "minimum_natural_cycles": 3
+      }
+    },
+    {
+      "slot_id": "planned-slot-sem41-e02-push-background_push-01",
+      "run_id": null,
+      "case_id": "E02",
+      "mode": "PUSH",
+      "subscenario": "BACKGROUND_PUSH",
+      "repetition": 1,
+      "execution_status": "NOT_RUN",
+      "planned_window_seconds": 120,
+      "requires_firebase": true,
+      "intervention": "NONE",
+      "blocking_reasons": [
+        "CANDIDATE_NOT_READY",
+        "CASE_PILOT_NOT_REQUALIFIED",
+        "FIREBASE_NOT_CONFIGURED"
+      ],
+      "procedure": {}
+    },
+    {
+      "slot_id": "planned-slot-sem41-e02-push-background_push-02",
+      "run_id": null,
+      "case_id": "E02",
+      "mode": "PUSH",
+      "subscenario": "BACKGROUND_PUSH",
+      "repetition": 2,
+      "execution_status": "NOT_RUN",
+      "planned_window_seconds": 120,
+      "requires_firebase": true,
+      "intervention": "NONE",
+      "blocking_reasons": [
+        "CANDIDATE_NOT_READY",
+        "CASE_PILOT_NOT_REQUALIFIED",
+        "FIREBASE_NOT_CONFIGURED"
+      ],
+      "procedure": {}
+    },
+    {
+      "slot_id": "planned-slot-sem41-e02-push-background_push-03",
+      "run_id": null,
+      "case_id": "E02",
+      "mode": "PUSH",
+      "subscenario": "BACKGROUND_PUSH",
+      "repetition": 3,
+      "execution_status": "NOT_RUN",
+      "planned_window_seconds": 120,
+      "requires_firebase": true,
+      "intervention": "NONE",
+      "blocking_reasons": [
+        "CANDIDATE_NOT_READY",
+        "CASE_PILOT_NOT_REQUALIFIED",
+        "FIREBASE_NOT_CONFIGURED"
+      ],
+      "procedure": {}
+    },
+    {
+      "slot_id": "planned-slot-sem41-e02-push-background_push-04",
+      "run_id": null,
+      "case_id": "E02",
+      "mode": "PUSH",
+      "subscenario": "BACKGROUND_PUSH",
+      "repetition": 4,
+      "execution_status": "NOT_RUN",
+      "planned_window_seconds": 120,
+      "requires_firebase": true,
+      "intervention": "NONE",
+      "blocking_reasons": [
+        "CANDIDATE_NOT_READY",
+        "CASE_PILOT_NOT_REQUALIFIED",
+        "FIREBASE_NOT_CONFIGURED"
+      ],
+      "procedure": {}
+    },
+    {
+      "slot_id": "planned-slot-sem41-e02-push-background_push-05",
+      "run_id": null,
+      "case_id": "E02",
+      "mode": "PUSH",
+      "subscenario": "BACKGROUND_PUSH",
+      "repetition": 5,
+      "execution_status": "NOT_RUN",
+      "planned_window_seconds": 120,
+      "requires_firebase": true,
+      "intervention": "NONE",
+      "blocking_reasons": [
+        "CANDIDATE_NOT_READY",
+        "CASE_PILOT_NOT_REQUALIFIED",
+        "FIREBASE_NOT_CONFIGURED"
+      ],
+      "procedure": {}
+    },
+    {
+      "slot_id": "planned-slot-sem41-e03-periodic-doze-01",
+      "run_id": null,
+      "case_id": "E03",
+      "mode": "PERIODIC",
+      "subscenario": "DOZE",
+      "repetition": 1,
+      "execution_status": "NOT_RUN",
+      "planned_window_seconds": 2100,
+      "requires_firebase": false,
+      "intervention": "NONE",
+      "blocking_reasons": [
+        "CANDIDATE_NOT_READY",
+        "CASE_PILOT_NOT_REQUALIFIED"
+      ],
+      "procedure": {
+        "baseline_seconds": 300,
+        "confirmed_idle_seconds": 1200,
+        "post_idle_seconds": 600
+      }
+    },
+    {
+      "slot_id": "planned-slot-sem41-e03-periodic-doze-02",
+      "run_id": null,
+      "case_id": "E03",
+      "mode": "PERIODIC",
+      "subscenario": "DOZE",
+      "repetition": 2,
+      "execution_status": "NOT_RUN",
+      "planned_window_seconds": 2100,
+      "requires_firebase": false,
+      "intervention": "NONE",
+      "blocking_reasons": [
+        "CANDIDATE_NOT_READY",
+        "CASE_PILOT_NOT_REQUALIFIED"
+      ],
+      "procedure": {
+        "baseline_seconds": 300,
+        "confirmed_idle_seconds": 1200,
+        "post_idle_seconds": 600
+      }
+    },
+    {
+      "slot_id": "planned-slot-sem41-e03-push-doze-01",
+      "run_id": null,
+      "case_id": "E03",
+      "mode": "PUSH",
+      "subscenario": "DOZE",
+      "repetition": 1,
+      "execution_status": "NOT_RUN",
+      "planned_window_seconds": 2100,
+      "requires_firebase": true,
+      "intervention": "NONE",
+      "blocking_reasons": [
+        "CANDIDATE_NOT_READY",
+        "CASE_PILOT_NOT_REQUALIFIED",
+        "FIREBASE_NOT_CONFIGURED"
+      ],
+      "procedure": {
+        "baseline_seconds": 300,
+        "confirmed_idle_seconds": 1200,
+        "post_idle_seconds": 600
+      }
+    },
+    {
+      "slot_id": "planned-slot-sem41-e03-push-doze-02",
+      "run_id": null,
+      "case_id": "E03",
+      "mode": "PUSH",
+      "subscenario": "DOZE",
+      "repetition": 2,
+      "execution_status": "NOT_RUN",
+      "planned_window_seconds": 2100,
+      "requires_firebase": true,
+      "intervention": "NONE",
+      "blocking_reasons": [
+        "CANDIDATE_NOT_READY",
+        "CASE_PILOT_NOT_REQUALIFIED",
+        "FIREBASE_NOT_CONFIGURED"
+      ],
+      "procedure": {
+        "baseline_seconds": 300,
+        "confirmed_idle_seconds": 1200,
+        "post_idle_seconds": 600
+      }
+    },
+    {
+      "slot_id": "planned-slot-sem41-e04-periodic-network_loss-01",
+      "run_id": null,
+      "case_id": "E04",
+      "mode": "PERIODIC",
+      "subscenario": "NETWORK_LOSS",
+      "repetition": 1,
+      "execution_status": "NOT_RUN",
+      "planned_window_seconds": 1920,
+      "requires_firebase": false,
+      "intervention": "NONE",
+      "blocking_reasons": [
+        "CANDIDATE_NOT_READY",
+        "CASE_PILOT_NOT_REQUALIFIED"
+      ],
+      "procedure": {
+        "offline_seconds": 120,
+        "post_reconnect_seconds": 1800
+      }
+    },
+    {
+      "slot_id": "planned-slot-sem41-e04-periodic-network_loss-02",
+      "run_id": null,
+      "case_id": "E04",
+      "mode": "PERIODIC",
+      "subscenario": "NETWORK_LOSS",
+      "repetition": 2,
+      "execution_status": "NOT_RUN",
+      "planned_window_seconds": 1920,
+      "requires_firebase": false,
+      "intervention": "NONE",
+      "blocking_reasons": [
+        "CANDIDATE_NOT_READY",
+        "CASE_PILOT_NOT_REQUALIFIED"
+      ],
+      "procedure": {
+        "offline_seconds": 120,
+        "post_reconnect_seconds": 1800
+      }
+    },
+    {
+      "slot_id": "planned-slot-sem41-e04-periodic-network_loss-03",
+      "run_id": null,
+      "case_id": "E04",
+      "mode": "PERIODIC",
+      "subscenario": "NETWORK_LOSS",
+      "repetition": 3,
+      "execution_status": "NOT_RUN",
+      "planned_window_seconds": 1920,
+      "requires_firebase": false,
+      "intervention": "NONE",
+      "blocking_reasons": [
+        "CANDIDATE_NOT_READY",
+        "CASE_PILOT_NOT_REQUALIFIED"
+      ],
+      "procedure": {
+        "offline_seconds": 120,
+        "post_reconnect_seconds": 1800
+      }
+    },
+    {
+      "slot_id": "planned-slot-sem41-e04-push-network_loss-01",
+      "run_id": null,
+      "case_id": "E04",
+      "mode": "PUSH",
+      "subscenario": "NETWORK_LOSS",
+      "repetition": 1,
+      "execution_status": "NOT_RUN",
+      "planned_window_seconds": 420,
+      "requires_firebase": true,
+      "intervention": "NONE",
+      "blocking_reasons": [
+        "CANDIDATE_NOT_READY",
+        "CASE_PILOT_NOT_REQUALIFIED",
+        "FIREBASE_NOT_CONFIGURED"
+      ],
+      "procedure": {
+        "offline_seconds": 120,
+        "post_reconnect_seconds": 300
+      }
+    },
+    {
+      "slot_id": "planned-slot-sem41-e04-push-network_loss-02",
+      "run_id": null,
+      "case_id": "E04",
+      "mode": "PUSH",
+      "subscenario": "NETWORK_LOSS",
+      "repetition": 2,
+      "execution_status": "NOT_RUN",
+      "planned_window_seconds": 420,
+      "requires_firebase": true,
+      "intervention": "NONE",
+      "blocking_reasons": [
+        "CANDIDATE_NOT_READY",
+        "CASE_PILOT_NOT_REQUALIFIED",
+        "FIREBASE_NOT_CONFIGURED"
+      ],
+      "procedure": {
+        "offline_seconds": 120,
+        "post_reconnect_seconds": 300
+      }
+    },
+    {
+      "slot_id": "planned-slot-sem41-e04-push-network_loss-03",
+      "run_id": null,
+      "case_id": "E04",
+      "mode": "PUSH",
+      "subscenario": "NETWORK_LOSS",
+      "repetition": 3,
+      "execution_status": "NOT_RUN",
+      "planned_window_seconds": 420,
+      "requires_firebase": true,
+      "intervention": "NONE",
+      "blocking_reasons": [
+        "CANDIDATE_NOT_READY",
+        "CASE_PILOT_NOT_REQUALIFIED",
+        "FIREBASE_NOT_CONFIGURED"
+      ],
+      "procedure": {
+        "offline_seconds": 120,
+        "post_reconnect_seconds": 300
+      }
+    },
+    {
+      "slot_id": "planned-slot-sem41-e05-push-duplicate-01",
+      "run_id": null,
+      "case_id": "E05",
+      "mode": "PUSH",
+      "subscenario": "DUPLICATE",
+      "repetition": 1,
+      "execution_status": "NOT_RUN",
+      "planned_window_seconds": 900,
+      "requires_firebase": true,
+      "intervention": "NONE",
+      "blocking_reasons": [
+        "CANDIDATE_NOT_READY",
+        "CASE_PILOT_NOT_REQUALIFIED",
+        "FIREBASE_NOT_CONFIGURED"
+      ],
+      "procedure": {
+        "signal_reused": true
+      }
+    },
+    {
+      "slot_id": "planned-slot-sem41-e05-push-duplicate-02",
+      "run_id": null,
+      "case_id": "E05",
+      "mode": "PUSH",
+      "subscenario": "DUPLICATE",
+      "repetition": 2,
+      "execution_status": "NOT_RUN",
+      "planned_window_seconds": 900,
+      "requires_firebase": true,
+      "intervention": "NONE",
+      "blocking_reasons": [
+        "CANDIDATE_NOT_READY",
+        "CASE_PILOT_NOT_REQUALIFIED",
+        "FIREBASE_NOT_CONFIGURED"
+      ],
+      "procedure": {
+        "signal_reused": true
+      }
+    },
+    {
+      "slot_id": "planned-slot-sem41-e05-push-duplicate-03",
+      "run_id": null,
+      "case_id": "E05",
+      "mode": "PUSH",
+      "subscenario": "DUPLICATE",
+      "repetition": 3,
+      "execution_status": "NOT_RUN",
+      "planned_window_seconds": 900,
+      "requires_firebase": true,
+      "intervention": "NONE",
+      "blocking_reasons": [
+        "CANDIDATE_NOT_READY",
+        "CASE_PILOT_NOT_REQUALIFIED",
+        "FIREBASE_NOT_CONFIGURED"
+      ],
+      "procedure": {
+        "signal_reused": true
+      }
+    },
+    {
+      "slot_id": "planned-slot-sem41-e05-push-stale_hint-01",
+      "run_id": null,
+      "case_id": "E05",
+      "mode": "PUSH",
+      "subscenario": "STALE_HINT",
+      "repetition": 1,
+      "execution_status": "NOT_RUN",
+      "planned_window_seconds": 900,
+      "requires_firebase": true,
+      "intervention": "NONE",
+      "blocking_reasons": [
+        "CANDIDATE_NOT_READY",
+        "CASE_PILOT_NOT_REQUALIFIED",
+        "FIREBASE_NOT_CONFIGURED"
+      ],
+      "procedure": {
+        "server_target_greater_than_cached_version": true
+      }
+    },
+    {
+      "slot_id": "planned-slot-sem41-e05-push-stale_hint-02",
+      "run_id": null,
+      "case_id": "E05",
+      "mode": "PUSH",
+      "subscenario": "STALE_HINT",
+      "repetition": 2,
+      "execution_status": "NOT_RUN",
+      "planned_window_seconds": 900,
+      "requires_firebase": true,
+      "intervention": "NONE",
+      "blocking_reasons": [
+        "CANDIDATE_NOT_READY",
+        "CASE_PILOT_NOT_REQUALIFIED",
+        "FIREBASE_NOT_CONFIGURED"
+      ],
+      "procedure": {
+        "server_target_greater_than_cached_version": true
+      }
+    },
+    {
+      "slot_id": "planned-slot-sem41-e05-push-stale_hint-03",
+      "run_id": null,
+      "case_id": "E05",
+      "mode": "PUSH",
+      "subscenario": "STALE_HINT",
+      "repetition": 3,
+      "execution_status": "NOT_RUN",
+      "planned_window_seconds": 900,
+      "requires_firebase": true,
+      "intervention": "NONE",
+      "blocking_reasons": [
+        "CANDIDATE_NOT_READY",
+        "CASE_PILOT_NOT_REQUALIFIED",
+        "FIREBASE_NOT_CONFIGURED"
+      ],
+      "procedure": {
+        "server_target_greater_than_cached_version": true
+      }
+    },
+    {
+      "slot_id": "planned-slot-sem41-e05-push-new_signal_during_work-01",
+      "run_id": null,
+      "case_id": "E05",
+      "mode": "PUSH",
+      "subscenario": "NEW_SIGNAL_DURING_WORK",
+      "repetition": 1,
+      "execution_status": "NOT_RUN",
+      "planned_window_seconds": 900,
+      "requires_firebase": true,
+      "intervention": "INJECTED",
+      "blocking_reasons": [
+        "CANDIDATE_NOT_READY",
+        "CASE_PILOT_NOT_REQUALIFIED",
+        "FIREBASE_NOT_CONFIGURED",
+        "RACE_BARRIER_NOT_HANDED_OFF"
+      ],
+      "procedure": {
+        "barrier_required": true
+      }
+    },
+    {
+      "slot_id": "planned-slot-sem41-e05-push-new_signal_during_work-02",
+      "run_id": null,
+      "case_id": "E05",
+      "mode": "PUSH",
+      "subscenario": "NEW_SIGNAL_DURING_WORK",
+      "repetition": 2,
+      "execution_status": "NOT_RUN",
+      "planned_window_seconds": 900,
+      "requires_firebase": true,
+      "intervention": "INJECTED",
+      "blocking_reasons": [
+        "CANDIDATE_NOT_READY",
+        "CASE_PILOT_NOT_REQUALIFIED",
+        "FIREBASE_NOT_CONFIGURED",
+        "RACE_BARRIER_NOT_HANDED_OFF"
+      ],
+      "procedure": {
+        "barrier_required": true
+      }
+    },
+    {
+      "slot_id": "planned-slot-sem41-e05-push-new_signal_during_work-03",
+      "run_id": null,
+      "case_id": "E05",
+      "mode": "PUSH",
+      "subscenario": "NEW_SIGNAL_DURING_WORK",
+      "repetition": 3,
+      "execution_status": "NOT_RUN",
+      "planned_window_seconds": 900,
+      "requires_firebase": true,
+      "intervention": "INJECTED",
+      "blocking_reasons": [
+        "CANDIDATE_NOT_READY",
+        "CASE_PILOT_NOT_REQUALIFIED",
+        "FIREBASE_NOT_CONFIGURED",
+        "RACE_BARRIER_NOT_HANDED_OFF"
+      ],
+      "procedure": {
+        "barrier_required": true
+      }
+    },
+    {
+      "slot_id": "planned-slot-sem41-e06-hybrid-controlled_push_skip-01",
+      "run_id": null,
+      "case_id": "E06",
+      "mode": "HYBRID",
+      "subscenario": "CONTROLLED_PUSH_SKIP",
+      "repetition": 1,
+      "execution_status": "NOT_RUN",
+      "planned_window_seconds": 2700,
+      "requires_firebase": false,
+      "intervention": "NONE",
+      "blocking_reasons": [
+        "CANDIDATE_NOT_READY",
+        "CASE_PILOT_NOT_REQUALIFIED"
+      ],
+      "procedure": {
+        "expected_apply_source": "PERIODIC",
+        "skip_reason": "FAULT_INJECTION_SKIP"
+      }
+    },
+    {
+      "slot_id": "planned-slot-sem41-e06-hybrid-controlled_push_skip-02",
+      "run_id": null,
+      "case_id": "E06",
+      "mode": "HYBRID",
+      "subscenario": "CONTROLLED_PUSH_SKIP",
+      "repetition": 2,
+      "execution_status": "NOT_RUN",
+      "planned_window_seconds": 2700,
+      "requires_firebase": false,
+      "intervention": "NONE",
+      "blocking_reasons": [
+        "CANDIDATE_NOT_READY",
+        "CASE_PILOT_NOT_REQUALIFIED"
+      ],
+      "procedure": {
+        "expected_apply_source": "PERIODIC",
+        "skip_reason": "FAULT_INJECTION_SKIP"
+      }
+    }
+  ]
+}
