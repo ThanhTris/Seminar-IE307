@@ -91,7 +91,11 @@ def csv_file(path, records):
 
 
 def save(fig, output, name):
-    fig.savefig(output / (name + ".svg"), metadata={"Date": None, "Creator": "SEM-48 / Matplotlib"})
+    svg = output / (name + ".svg")
+    fig.savefig(svg, metadata={"Date": None, "Creator": "SEM-48 / Matplotlib"})
+    # Matplotlib emits trailing spaces inside multiline SVG path attributes.
+    # Newlines preserve SVG token boundaries while keeping the Git diff clean.
+    svg.write_text("\n".join(line.rstrip() for line in svg.read_text(encoding="utf-8").splitlines()) + "\n", encoding="utf-8")
     fig.savefig(output / (name + ".png"), dpi=120, metadata={"Software": "SEM-48 / Matplotlib"})
     plt.close(fig)
 

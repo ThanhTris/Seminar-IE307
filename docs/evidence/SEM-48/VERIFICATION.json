@@ -55,11 +55,11 @@
     },
     {
       "file": "pilot_inventory.svg",
-      "sha256": "2e0c12445e89341a9619c195ca88605b83d2686ed5428854b11818469fd3a3ed"
+      "sha256": "a092a0d8535d4254e7fcf86b22857812dc9bef399f1aa3068e862f26d0419732"
     },
     {
       "file": "main_coverage.svg",
-      "sha256": "2da04660a6121fb506d9c66888135934bf8118c65bffaa83e3cfead442eeb8c0"
+      "sha256": "49ffe09a48c6f0f0a17f826a453fa88f0c08a4b199f54322b99dd3347f391c92"
     },
     {
       "file": "pilot_inventory.png",
@@ -105,7 +105,7 @@
     },
     {
       "path": "slides/inputs/results/main_coverage.svg",
-      "sha256": "2da04660a6121fb506d9c66888135934bf8118c65bffaa83e3cfead442eeb8c0"
+      "sha256": "49ffe09a48c6f0f0a17f826a453fa88f0c08a4b199f54322b99dd3347f391c92"
     },
     {
       "path": "slides/inputs/results/pilot_inventory.csv",
@@ -117,11 +117,11 @@
     },
     {
       "path": "slides/inputs/results/pilot_inventory.svg",
-      "sha256": "2e0c12445e89341a9619c195ca88605b83d2686ed5428854b11818469fd3a3ed"
+      "sha256": "a092a0d8535d4254e7fcf86b22857812dc9bef399f1aa3068e862f26d0419732"
     },
     {
       "path": "slides/inputs/results/render_results.py",
-      "sha256": "31ecc5afb250dc915222923ed622d477fa39e0a65166366fc3886f0266f449fd"
+      "sha256": "54679d89d4ee5d52cb9a53efa9132afefd6955d9b46f69d0365f1e657f01e40f"
     },
     {
       "path": "slides/inputs/results/requirements.txt",
