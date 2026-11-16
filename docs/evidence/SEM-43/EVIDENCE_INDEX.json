@@ -1,0 +1,1178 @@
+{
+  "index_version": "1.0.0",
+  "scope": "SEM43_EVIDENCE_CATALOG_NOT_ANALYZER_OR_INDEPENDENT_AUDIT",
+  "prepared_on_local_date": "2026-11-16",
+  "timezone": "Asia/Ho_Chi_Minh",
+  "source_snapshot_commit": "007a1aa31d02d7af47570f4cf7b60a7ed8135a33",
+  "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/29",
+  "main": {
+    "status": "NOT_RUN",
+    "planned_emulator_slots": 27,
+    "planned_oppo_slots": 6,
+    "observed_runs": 0,
+    "n_complete": 0,
+    "n_total": 0,
+    "completion_rate": null,
+    "median_latency_ms": null,
+    "statistics_reason": "NO_MAIN_ARTIFACTS"
+  },
+  "sem41_pilot": {
+    "attempts": 20,
+    "valid_completed_declared_success": 8,
+    "invalid_attempts": 12,
+    "invalid_declared_outcomes": {
+      "FAILURE": 2,
+      "TIMEOUT": 5,
+      "SUCCESS": 5
+    },
+    "latency_statistics_computed": false,
+    "qualification_source": "SEM41_PRODUCER_REVIEW_NOT_SEM44_INDEPENDENT_MAIN_AUDIT",
+    "attempts_index": [
+      {
+        "run_id": "run-sem41-pilot-e01-1-20261115-89b884",
+        "case_id": "E01",
+        "mode": "PERIODIC",
+        "run_phase": "pilot",
+        "data_kind": "OBSERVED",
+        "validity": "INVALID",
+        "execution_status": "ABORTED",
+        "declared_outcome": "FAILURE",
+        "observer_commit": "9e38c0bf800483c2ed711f33e6977848e94fa391",
+        "server_store_epoch": null,
+        "intervention": "NONE",
+        "build": {
+          "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
+          "server_commit": "c77772e426c00ae464240f00942f8368c638aaa8",
+          "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
+          "api_version": "2.0.0",
+          "package_name": "com.thanhtris.seminarie307",
+          "version_name": "0.1.0",
+          "version_code": 1,
+          "compile_sdk": 37,
+          "target_sdk": 37,
+          "min_sdk": 24,
+          "candidate_gate_passed": false
+        },
+        "config_sha256": "3eb6148cec2809e71a681a3f29dfaec697a16f05fa3e1a63f63878ff891294c7",
+        "declared_natural_periodic_cycles": 0,
+        "actual_observation_duration_ms": null,
+        "sources": [
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e01-1-20261115-89b884/manifest.json",
+            "sha256": "6eb306e1cb8c6304de4a224b59de4dc394811889edaf71247c329eb4b6ca6ccb"
+          },
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e01-1-20261115-89b884/events.jsonl",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e01-1-20261115-89b884/audit.json",
+            "sha256": "549cb7610d1d7d33d4f6b02c07c5a729128eff08d14694b2e24241116e7536ba"
+          },
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e01-1-20261115-89b884/observation.json",
+            "sha256": "423a21566e78a8d515042f23b5870e8cff2085134719729c09a612d7ea916c69"
+          }
+        ]
+      },
+      {
+        "run_id": "run-sem41-pilot-e01-1-20261115-760217",
+        "case_id": "E01",
+        "mode": "PERIODIC",
+        "run_phase": "pilot",
+        "data_kind": "OBSERVED",
+        "validity": "INVALID",
+        "execution_status": "COMPLETED",
+        "declared_outcome": "TIMEOUT",
+        "observer_commit": "0808b6fe98d6eb924785d9a3d78114ddaf58c802",
+        "server_store_epoch": "pilots-20261115-r2",
+        "intervention": "NONE",
+        "build": {
+          "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
+          "server_commit": "c77772e426c00ae464240f00942f8368c638aaa8",
+          "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
+          "api_version": "2.0.0",
+          "package_name": "com.thanhtris.seminarie307",
+          "version_name": "0.1.0",
+          "version_code": 1,
+          "compile_sdk": 37,
+          "target_sdk": 37,
+          "min_sdk": 24,
+          "candidate_gate_passed": false
+        },
+        "config_sha256": "3eb6148cec2809e71a681a3f29dfaec697a16f05fa3e1a63f63878ff891294c7",
+        "declared_natural_periodic_cycles": 0,
+        "actual_observation_duration_ms": 5400420,
+        "sources": [
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e01-1-20261115-760217/manifest.json",
+            "sha256": "4819eeee398046c2137f18e1d8ca2b3580e137fdcdb7ec994f6c939188386c50"
+          },
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e01-1-20261115-760217/events.jsonl",
+            "sha256": "fe6b56b8729c5619d2c353a38bcfe8e4b9355d27bd06adf8f503612482c85f66"
+          },
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e01-1-20261115-760217/audit.json",
+            "sha256": "3073d8c7dd161c9bc056462c35cce71af3cbd0987ad30ae69e66e1d9bcd7e0b5"
+          },
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e01-1-20261115-760217/observation.json",
+            "sha256": "74b641aad6c9711ddab3e031bb6912802d90ef7dfb5c05bca83ea26317c9f8bd"
+          }
+        ]
+      },
+      {
+        "run_id": "run-sem41-pilot-e03-1-20261115-5db4eb",
+        "case_id": "E03",
+        "mode": "PERIODIC",
+        "run_phase": "pilot",
+        "data_kind": "OBSERVED",
+        "validity": "INVALID",
+        "execution_status": "COMPLETED",
+        "declared_outcome": "SUCCESS",
+        "observer_commit": "0808b6fe98d6eb924785d9a3d78114ddaf58c802",
+        "server_store_epoch": "pilots-20261115-r2",
+        "intervention": "INJECTED",
+        "build": {
+          "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
+          "server_commit": "c77772e426c00ae464240f00942f8368c638aaa8",
+          "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
+          "api_version": "2.0.0",
+          "package_name": "com.thanhtris.seminarie307",
+          "version_name": "0.1.0",
+          "version_code": 1,
+          "compile_sdk": 37,
+          "target_sdk": 37,
+          "min_sdk": 24,
+          "candidate_gate_passed": false
+        },
+        "config_sha256": "c8b7c36085eb50cb0a2178413752f7814ec04533346dbd1cf735e8defd74d08b",
+        "declared_natural_periodic_cycles": 1,
+        "actual_observation_duration_ms": 2103340,
+        "sources": [
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e03-1-20261115-5db4eb/manifest.json",
+            "sha256": "54844ec731c1cf0d2d6bf886c00c5e91128c08de4146d8b2f4b9c4d1fb37f74e"
+          },
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e03-1-20261115-5db4eb/events.jsonl",
+            "sha256": "75df33f9ff9ef10fd17dbbe1b243b9a5d052fe12e20917e13aacfd879677d5f8"
+          },
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e03-1-20261115-5db4eb/audit.json",
+            "sha256": "944a848b9ce20f9fd58b092d3779f18e70680a0c02ad2973bc19fd93071f80dd"
+          },
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e03-1-20261115-5db4eb/observation.json",
+            "sha256": "956852d576e1b402dfb454b33d79c754f81d8e0a2c9448c3b84a6f13ddc7e72f"
+          }
+        ]
+      },
+      {
+        "run_id": "run-sem41-pilot-e03-2-20261115-0d277e",
+        "case_id": "E03",
+        "mode": "PERIODIC",
+        "run_phase": "pilot",
+        "data_kind": "OBSERVED",
+        "validity": "INVALID",
+        "execution_status": "ABORTED",
+        "declared_outcome": "FAILURE",
+        "observer_commit": "0808b6fe98d6eb924785d9a3d78114ddaf58c802",
+        "server_store_epoch": "pilots-20261115-r2",
+        "intervention": "INJECTED",
+        "build": {
+          "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
+          "server_commit": "c77772e426c00ae464240f00942f8368c638aaa8",
+          "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
+          "api_version": "2.0.0",
+          "package_name": "com.thanhtris.seminarie307",
+          "version_name": "0.1.0",
+          "version_code": 1,
+          "compile_sdk": 37,
+          "target_sdk": 37,
+          "min_sdk": 24,
+          "candidate_gate_passed": false
+        },
+        "config_sha256": "c8b7c36085eb50cb0a2178413752f7814ec04533346dbd1cf735e8defd74d08b",
+        "declared_natural_periodic_cycles": 0,
+        "actual_observation_duration_ms": 1502720,
+        "sources": [
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e03-2-20261115-0d277e/manifest.json",
+            "sha256": "962e7ce97a703860ec229479cff2bb94a6c9940a7c8ebade32d39c1ddc87f5d2"
+          },
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e03-2-20261115-0d277e/events.jsonl",
+            "sha256": "e41763ad9ff79d2d9bc022bcf42d541844460411ca1e94dd40c7ba6a2a45811d"
+          },
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e03-2-20261115-0d277e/audit.json",
+            "sha256": "26d63a8ee979a53f6ea009e941393181b5ee00be1ea73968b22a0170f9989ebd"
+          },
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e03-2-20261115-0d277e/observation.json",
+            "sha256": "95e98d46f916b08b37bbee9624c6a9a6c2089317feda696a56e30086fa45d77a"
+          }
+        ]
+      },
+      {
+        "run_id": "run-sem41-pilot-e03-2-20261115-c12a28",
+        "case_id": "E03",
+        "mode": "PERIODIC",
+        "run_phase": "pilot",
+        "data_kind": "OBSERVED",
+        "validity": "INVALID",
+        "execution_status": "COMPLETED",
+        "declared_outcome": "SUCCESS",
+        "observer_commit": "056e7896fdd87d71fdd753f96736ae87e06ac378",
+        "server_store_epoch": "pilots-20261115-r3",
+        "intervention": "INJECTED",
+        "build": {
+          "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
+          "server_commit": "c77772e426c00ae464240f00942f8368c638aaa8",
+          "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
+          "api_version": "2.0.0",
+          "package_name": "com.thanhtris.seminarie307",
+          "version_name": "0.1.0",
+          "version_code": 1,
+          "compile_sdk": 37,
+          "target_sdk": 37,
+          "min_sdk": 24,
+          "candidate_gate_passed": false
+        },
+        "config_sha256": "c8b7c36085eb50cb0a2178413752f7814ec04533346dbd1cf735e8defd74d08b",
+        "declared_natural_periodic_cycles": 1,
+        "actual_observation_duration_ms": 2103370,
+        "sources": [
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e03-2-20261115-c12a28/manifest.json",
+            "sha256": "d02bf376c4e7682700e3710befbf91099aca2001fc12ffac53929327214c9add"
+          },
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e03-2-20261115-c12a28/events.jsonl",
+            "sha256": "ac09651ff2d88f8a58545138f4b5b3a21d79fb4cf5203d4c9c9d1649712456ae"
+          },
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e03-2-20261115-c12a28/audit.json",
+            "sha256": "cf9e48416deba4b7249d006f62cb4fbab741b621ce88a6c4036289bb407637a6"
+          },
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e03-2-20261115-c12a28/observation.json",
+            "sha256": "0dc51baa8eec1e54b22ad4030656b5e00d286ff582f55f1c34dc12b345cba3f3"
+          }
+        ]
+      },
+      {
+        "run_id": "run-sem41-pilot-e04-1-20261115-a52b51",
+        "case_id": "E04",
+        "mode": "PERIODIC",
+        "run_phase": "pilot",
+        "data_kind": "OBSERVED",
+        "validity": "INVALID",
+        "execution_status": "COMPLETED",
+        "declared_outcome": "SUCCESS",
+        "observer_commit": "056e7896fdd87d71fdd753f96736ae87e06ac378",
+        "server_store_epoch": "pilots-20261115-r3",
+        "intervention": "NONE",
+        "build": {
+          "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
+          "server_commit": "c77772e426c00ae464240f00942f8368c638aaa8",
+          "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
+          "api_version": "2.0.0",
+          "package_name": "com.thanhtris.seminarie307",
+          "version_name": "0.1.0",
+          "version_code": 1,
+          "compile_sdk": 37,
+          "target_sdk": 37,
+          "min_sdk": 24,
+          "candidate_gate_passed": false
+        },
+        "config_sha256": "3eb6148cec2809e71a681a3f29dfaec697a16f05fa3e1a63f63878ff891294c7",
+        "declared_natural_periodic_cycles": 1,
+        "actual_observation_duration_ms": 1929360,
+        "sources": [
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e04-1-20261115-a52b51/manifest.json",
+            "sha256": "cd5f6d5fa9f72962ce149cbcba677f7c1e05328f990613ce6b8e1ecd431f32be"
+          },
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e04-1-20261115-a52b51/events.jsonl",
+            "sha256": "a6d94d0f582951c8e9012892ab66fecec371e987414f957457766fcf75d17f7c"
+          },
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e04-1-20261115-a52b51/audit.json",
+            "sha256": "28e87060cd5e14a4b3dd52298e017a7bb787d1b776dd23b9cefeef1b9574bb51"
+          },
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e04-1-20261115-a52b51/observation.json",
+            "sha256": "1d7adc2a2a20c2788900c5cd8ff70358751fced5165c60e137640d57fb49055b"
+          }
+        ]
+      },
+      {
+        "run_id": "run-sem41-pilot-e04-2-20261115-b5e415",
+        "case_id": "E04",
+        "mode": "PERIODIC",
+        "run_phase": "pilot",
+        "data_kind": "OBSERVED",
+        "validity": "INVALID",
+        "execution_status": "COMPLETED",
+        "declared_outcome": "TIMEOUT",
+        "observer_commit": "056e7896fdd87d71fdd753f96736ae87e06ac378",
+        "server_store_epoch": "pilots-20261115-r3",
+        "intervention": "NONE",
+        "build": {
+          "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
+          "server_commit": "c77772e426c00ae464240f00942f8368c638aaa8",
+          "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
+          "api_version": "2.0.0",
+          "package_name": "com.thanhtris.seminarie307",
+          "version_name": "0.1.0",
+          "version_code": 1,
+          "compile_sdk": 37,
+          "target_sdk": 37,
+          "min_sdk": 24,
+          "candidate_gate_passed": false
+        },
+        "config_sha256": "3eb6148cec2809e71a681a3f29dfaec697a16f05fa3e1a63f63878ff891294c7",
+        "declared_natural_periodic_cycles": 0,
+        "actual_observation_duration_ms": 1928740,
+        "sources": [
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e04-2-20261115-b5e415/manifest.json",
+            "sha256": "f240d0ecad0c538b966cbe818ec146947449b582599ac3ab296a5d59bd9fcc82"
+          },
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e04-2-20261115-b5e415/events.jsonl",
+            "sha256": "eb229c7d00001f92c4ca6c2aca9f009086fb5b5c411954296eec6cb9ed61fd21"
+          },
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e04-2-20261115-b5e415/audit.json",
+            "sha256": "24983019aa737d7cee5e58950ab95cffbdb795fd57858e600cf389e912496e32"
+          },
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e04-2-20261115-b5e415/observation.json",
+            "sha256": "189071fb06189efa13a2cebe6b6b4ef32906a1a91bf73b59aa8133a2d0ffe4d6"
+          }
+        ]
+      },
+      {
+        "run_id": "run-sem41-pilot-e04-3-20261115-f9f6a0",
+        "case_id": "E04",
+        "mode": "PERIODIC",
+        "run_phase": "pilot",
+        "data_kind": "OBSERVED",
+        "validity": "INVALID",
+        "execution_status": "COMPLETED",
+        "declared_outcome": "SUCCESS",
+        "observer_commit": "056e7896fdd87d71fdd753f96736ae87e06ac378",
+        "server_store_epoch": "pilots-20261115-r3",
+        "intervention": "NONE",
+        "build": {
+          "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
+          "server_commit": "c77772e426c00ae464240f00942f8368c638aaa8",
+          "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
+          "api_version": "2.0.0",
+          "package_name": "com.thanhtris.seminarie307",
+          "version_name": "0.1.0",
+          "version_code": 1,
+          "compile_sdk": 37,
+          "target_sdk": 37,
+          "min_sdk": 24,
+          "candidate_gate_passed": false
+        },
+        "config_sha256": "3eb6148cec2809e71a681a3f29dfaec697a16f05fa3e1a63f63878ff891294c7",
+        "declared_natural_periodic_cycles": 1,
+        "actual_observation_duration_ms": 1928830,
+        "sources": [
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e04-3-20261115-f9f6a0/manifest.json",
+            "sha256": "13c11db978db5e44475b62c65958cffeec7985d095bb48f5201e6af95cba42de"
+          },
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e04-3-20261115-f9f6a0/events.jsonl",
+            "sha256": "9d0cd90c8c112e579ed67d8907ad2d939bf96dc6e832aa5d6b2d5b27185a169f"
+          },
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e04-3-20261115-f9f6a0/audit.json",
+            "sha256": "86e232a1caab706c6740b43a826983b08b5cd4744c6aaa710537bda43a9ba15d"
+          },
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e04-3-20261115-f9f6a0/observation.json",
+            "sha256": "dcf16a95138545b3d9c8579d6bbfff557f03521ff584a9c4bdc872441617ca5e"
+          }
+        ]
+      },
+      {
+        "run_id": "run-sem41-pilot-e06-1-20261115-18fec8",
+        "case_id": "E06",
+        "mode": "HYBRID",
+        "run_phase": "pilot",
+        "data_kind": "OBSERVED",
+        "validity": "INVALID",
+        "execution_status": "COMPLETED",
+        "declared_outcome": "TIMEOUT",
+        "observer_commit": "056e7896fdd87d71fdd753f96736ae87e06ac378",
+        "server_store_epoch": "pilots-20261115-r3",
+        "intervention": "INJECTED",
+        "build": {
+          "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
+          "server_commit": "c77772e426c00ae464240f00942f8368c638aaa8",
+          "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
+          "api_version": "2.0.0",
+          "package_name": "com.thanhtris.seminarie307",
+          "version_name": "0.1.0",
+          "version_code": 1,
+          "compile_sdk": 37,
+          "target_sdk": 37,
+          "min_sdk": 24,
+          "candidate_gate_passed": false
+        },
+        "config_sha256": "3eb6148cec2809e71a681a3f29dfaec697a16f05fa3e1a63f63878ff891294c7",
+        "declared_natural_periodic_cycles": 0,
+        "actual_observation_duration_ms": 2700780,
+        "sources": [
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e06-1-20261115-18fec8/manifest.json",
+            "sha256": "90d2c9c8434b1bee538a970c94e4fb010ba169512538701cba76719b45a8c56e"
+          },
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e06-1-20261115-18fec8/events.jsonl",
+            "sha256": "fa4438d6e087a0024354c1a2334bf74b63d7e7ed049b908bb78c4440d5a284a0"
+          },
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e06-1-20261115-18fec8/audit.json",
+            "sha256": "56991647fc6e12c9789aee8bba8f09d4f456906d5e86b9c94e98bc82d6c69172"
+          },
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e06-1-20261115-18fec8/observation.json",
+            "sha256": "1e9aa90901fd1a5d2deb18f81d3592de3f64d7d1bf207992fb6ba19093e259df"
+          }
+        ]
+      },
+      {
+        "run_id": "run-sem41-pilot-e06-2-20261115-f56fc9",
+        "case_id": "E06",
+        "mode": "HYBRID",
+        "run_phase": "pilot",
+        "data_kind": "OBSERVED",
+        "validity": "INVALID",
+        "execution_status": "COMPLETED",
+        "declared_outcome": "TIMEOUT",
+        "observer_commit": "056e7896fdd87d71fdd753f96736ae87e06ac378",
+        "server_store_epoch": "pilots-20261115-r3",
+        "intervention": "INJECTED",
+        "build": {
+          "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
+          "server_commit": "c77772e426c00ae464240f00942f8368c638aaa8",
+          "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
+          "api_version": "2.0.0",
+          "package_name": "com.thanhtris.seminarie307",
+          "version_name": "0.1.0",
+          "version_code": 1,
+          "compile_sdk": 37,
+          "target_sdk": 37,
+          "min_sdk": 24,
+          "candidate_gate_passed": false
+        },
+        "config_sha256": "3eb6148cec2809e71a681a3f29dfaec697a16f05fa3e1a63f63878ff891294c7",
+        "declared_natural_periodic_cycles": 0,
+        "actual_observation_duration_ms": 2701060,
+        "sources": [
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e06-2-20261115-f56fc9/manifest.json",
+            "sha256": "2845d457bdd36e93d7e06d8b600eccaae5999602b88f555167a684023a98a73d"
+          },
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e06-2-20261115-f56fc9/events.jsonl",
+            "sha256": "e8f8e91fec9f633b0571053d874a792945cd8b94f5768db0d8aac577e5423f91"
+          },
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e06-2-20261115-f56fc9/audit.json",
+            "sha256": "bece668423ea97cc2d6ab7dc2526d7bf905f0540d5716dc79973571b602dede8"
+          },
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e06-2-20261115-f56fc9/observation.json",
+            "sha256": "5f6e6df2a9274676ed90769e468b08f971cc39e024253425afe629d2f9bfa816"
+          }
+        ]
+      },
+      {
+        "run_id": "run-sem41-pilot-e03-2-20261115-33a460",
+        "case_id": "E03",
+        "mode": "PERIODIC",
+        "run_phase": "pilot",
+        "data_kind": "OBSERVED",
+        "validity": "INVALID",
+        "execution_status": "COMPLETED",
+        "declared_outcome": "SUCCESS",
+        "observer_commit": "8566282d3518639042e3dda2b53a855936fa67c7",
+        "server_store_epoch": "pilots-20261115-r3",
+        "intervention": "INJECTED",
+        "build": {
+          "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
+          "server_commit": "c77772e426c00ae464240f00942f8368c638aaa8",
+          "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
+          "api_version": "2.0.0",
+          "package_name": "com.thanhtris.seminarie307",
+          "version_name": "0.1.0",
+          "version_code": 1,
+          "compile_sdk": 37,
+          "target_sdk": 37,
+          "min_sdk": 24,
+          "candidate_gate_passed": false
+        },
+        "config_sha256": "c8b7c36085eb50cb0a2178413752f7814ec04533346dbd1cf735e8defd74d08b",
+        "declared_natural_periodic_cycles": 1,
+        "actual_observation_duration_ms": 2103500,
+        "sources": [
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e03-2-20261115-33a460/manifest.json",
+            "sha256": "000145e039ee712b1dd1236e5b4cffa66a7e236ae409645d6ad2ec9cc3b17a8c"
+          },
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e03-2-20261115-33a460/events.jsonl",
+            "sha256": "851975a5d274ee2e600a96f088b9d394182a18724193c9b82dcf7bd39b9b207e"
+          },
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e03-2-20261115-33a460/audit.json",
+            "sha256": "095e9f0cd47c6d769a71c08a63e9dbcc73eb465b0bc30214901d82e1ab9d308c"
+          },
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e03-2-20261115-33a460/observation.json",
+            "sha256": "cb20fc972896d1bbe3d0089089af393578948730ad5047030a50fd3cf6efcc38"
+          }
+        ]
+      },
+      {
+        "run_id": "run-sem41-pilot-e01-1-20261115-9a8b41",
+        "case_id": "E01",
+        "mode": "PERIODIC",
+        "run_phase": "pilot",
+        "data_kind": "OBSERVED",
+        "validity": "INVALID",
+        "execution_status": "COMPLETED",
+        "declared_outcome": "TIMEOUT",
+        "observer_commit": "9da7912a650ba39bc896a14994aecf0972d133b8",
+        "server_store_epoch": "pilots-20261115-r3",
+        "intervention": "NONE",
+        "build": {
+          "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
+          "server_commit": "c77772e426c00ae464240f00942f8368c638aaa8",
+          "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
+          "api_version": "2.0.0",
+          "package_name": "com.thanhtris.seminarie307",
+          "version_name": "0.1.0",
+          "version_code": 1,
+          "compile_sdk": 37,
+          "target_sdk": 37,
+          "min_sdk": 24,
+          "candidate_gate_passed": false
+        },
+        "config_sha256": "3eb6148cec2809e71a681a3f29dfaec697a16f05fa3e1a63f63878ff891294c7",
+        "declared_natural_periodic_cycles": 0,
+        "actual_observation_duration_ms": 5400630,
+        "sources": [
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e01-1-20261115-9a8b41/manifest.json",
+            "sha256": "08f530deb91beb4f1ed65e53e62322929b17cebb9a5ecdd0ac9cd8f0cad1f4f7"
+          },
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e01-1-20261115-9a8b41/events.jsonl",
+            "sha256": "9fcacd5f56ab42d37675f443ec035b6ffad90f5fa8dc56f798c9f43f7799e6bf"
+          },
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e01-1-20261115-9a8b41/audit.json",
+            "sha256": "eeda7102513d832d17a800e3a47338aceb8015c96fb444fdbd5ceb26903aad5c"
+          },
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e01-1-20261115-9a8b41/observation.json",
+            "sha256": "e0cd4b1250d80da3c80680dc7b03f245fd9db595fc51d0b1ca458aaf6bf7a895"
+          }
+        ]
+      },
+      {
+        "run_id": "run-sem41-pilot-e01-1-20261115-575a7a",
+        "case_id": "E01",
+        "mode": "PERIODIC",
+        "run_phase": "pilot",
+        "data_kind": "OBSERVED",
+        "validity": "VALID",
+        "execution_status": "COMPLETED",
+        "declared_outcome": "SUCCESS",
+        "observer_commit": "db98fa8d275c3ca2d10895daa61f00bf53f59cd7",
+        "server_store_epoch": "pilots-20261115-r3",
+        "intervention": "NONE",
+        "build": {
+          "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
+          "server_commit": "c77772e426c00ae464240f00942f8368c638aaa8",
+          "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
+          "api_version": "2.0.0",
+          "package_name": "com.thanhtris.seminarie307",
+          "version_name": "0.1.0",
+          "version_code": 1,
+          "compile_sdk": 37,
+          "target_sdk": 37,
+          "min_sdk": 24,
+          "candidate_gate_passed": false
+        },
+        "config_sha256": "3eb6148cec2809e71a681a3f29dfaec697a16f05fa3e1a63f63878ff891294c7",
+        "declared_natural_periodic_cycles": 5,
+        "actual_observation_duration_ms": 5400720,
+        "sources": [
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e01-1-20261115-575a7a/manifest.json",
+            "sha256": "56b44dafede1f36eff5f2ec3c386859125e93e339f5029a62300154e7e89f7b7"
+          },
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e01-1-20261115-575a7a/events.jsonl",
+            "sha256": "1ac6374c10f1ab8ce2202a6fee35ef21a7de13f847158d1491c5b17f406a42e3"
+          },
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e01-1-20261115-575a7a/audit.json",
+            "sha256": "cb1ffd80b3e8af0a069229ef3fc3c5b101fb4a38f95a41b37c7a90629ba0ccdb"
+          },
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e01-1-20261115-575a7a/observation.json",
+            "sha256": "e238967b3deaa1bdd10ef3e83d872de8dfd0319db72c035062474a3d676265a5"
+          }
+        ]
+      },
+      {
+        "run_id": "run-sem41-pilot-e03-1-20261115-dc9cc9",
+        "case_id": "E03",
+        "mode": "PERIODIC",
+        "run_phase": "pilot",
+        "data_kind": "OBSERVED",
+        "validity": "VALID",
+        "execution_status": "COMPLETED",
+        "declared_outcome": "SUCCESS",
+        "observer_commit": "db98fa8d275c3ca2d10895daa61f00bf53f59cd7",
+        "server_store_epoch": "pilots-20261115-r3",
+        "intervention": "INJECTED",
+        "build": {
+          "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
+          "server_commit": "c77772e426c00ae464240f00942f8368c638aaa8",
+          "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
+          "api_version": "2.0.0",
+          "package_name": "com.thanhtris.seminarie307",
+          "version_name": "0.1.0",
+          "version_code": 1,
+          "compile_sdk": 37,
+          "target_sdk": 37,
+          "min_sdk": 24,
+          "candidate_gate_passed": false
+        },
+        "config_sha256": "c8b7c36085eb50cb0a2178413752f7814ec04533346dbd1cf735e8defd74d08b",
+        "declared_natural_periodic_cycles": 1,
+        "actual_observation_duration_ms": 2103830,
+        "sources": [
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e03-1-20261115-dc9cc9/manifest.json",
+            "sha256": "26db2be6c56932f608360a1ca7d42e04260df13d0b1881c0b4eb7d8921ef2ba6"
+          },
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e03-1-20261115-dc9cc9/events.jsonl",
+            "sha256": "005d5546bbda922da1796dc1fa8316f90ba48f489d248a703c22942f6832dfc0"
+          },
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e03-1-20261115-dc9cc9/audit.json",
+            "sha256": "98b2f71c64c90bba78d5bb4e3e41258c6c0fd535f2a8df156c54128c3f1aad09"
+          },
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e03-1-20261115-dc9cc9/observation.json",
+            "sha256": "0641bf99cece8c6b232ab21bd18e557470d5a6adf45530928f416ee0c2073c07"
+          }
+        ]
+      },
+      {
+        "run_id": "run-sem41-pilot-e03-2-20261115-7f63e0",
+        "case_id": "E03",
+        "mode": "PERIODIC",
+        "run_phase": "pilot",
+        "data_kind": "OBSERVED",
+        "validity": "VALID",
+        "execution_status": "COMPLETED",
+        "declared_outcome": "SUCCESS",
+        "observer_commit": "db98fa8d275c3ca2d10895daa61f00bf53f59cd7",
+        "server_store_epoch": "pilots-20261115-r3",
+        "intervention": "INJECTED",
+        "build": {
+          "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
+          "server_commit": "c77772e426c00ae464240f00942f8368c638aaa8",
+          "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
+          "api_version": "2.0.0",
+          "package_name": "com.thanhtris.seminarie307",
+          "version_name": "0.1.0",
+          "version_code": 1,
+          "compile_sdk": 37,
+          "target_sdk": 37,
+          "min_sdk": 24,
+          "candidate_gate_passed": false
+        },
+        "config_sha256": "c8b7c36085eb50cb0a2178413752f7814ec04533346dbd1cf735e8defd74d08b",
+        "declared_natural_periodic_cycles": 1,
+        "actual_observation_duration_ms": 2103090,
+        "sources": [
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e03-2-20261115-7f63e0/manifest.json",
+            "sha256": "8ea9c55b833289ebdcc8a0f6a9fc27b393b78c6465ae707b11745f8285baa60b"
+          },
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e03-2-20261115-7f63e0/events.jsonl",
+            "sha256": "633ed8778ce64a72e85be1fd3313aae479ecd98baf133bba17ee7668fb66af2a"
+          },
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e03-2-20261115-7f63e0/audit.json",
+            "sha256": "ef229cf03b75f6e0683dfcc5f0686eb2754838ac6013458b77aeb4a18abe963e"
+          },
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e03-2-20261115-7f63e0/observation.json",
+            "sha256": "9be23b1f0acc600ee1299760f95371e4facf19efa424ac69388ac3df48ecb7fc"
+          }
+        ]
+      },
+      {
+        "run_id": "run-sem41-pilot-e04-1-20261115-cda576",
+        "case_id": "E04",
+        "mode": "PERIODIC",
+        "run_phase": "pilot",
+        "data_kind": "OBSERVED",
+        "validity": "VALID",
+        "execution_status": "COMPLETED",
+        "declared_outcome": "SUCCESS",
+        "observer_commit": "db98fa8d275c3ca2d10895daa61f00bf53f59cd7",
+        "server_store_epoch": "pilots-20261115-r3",
+        "intervention": "NONE",
+        "build": {
+          "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
+          "server_commit": "c77772e426c00ae464240f00942f8368c638aaa8",
+          "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
+          "api_version": "2.0.0",
+          "package_name": "com.thanhtris.seminarie307",
+          "version_name": "0.1.0",
+          "version_code": 1,
+          "compile_sdk": 37,
+          "target_sdk": 37,
+          "min_sdk": 24,
+          "candidate_gate_passed": false
+        },
+        "config_sha256": "3eb6148cec2809e71a681a3f29dfaec697a16f05fa3e1a63f63878ff891294c7",
+        "declared_natural_periodic_cycles": 2,
+        "actual_observation_duration_ms": 1931840,
+        "sources": [
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e04-1-20261115-cda576/manifest.json",
+            "sha256": "409a5f7d214744e5fe1a0c1bf18513ff0fcd009eb6628a7685b528c6bc7ac050"
+          },
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e04-1-20261115-cda576/events.jsonl",
+            "sha256": "a2748149eb7d28eeac00bab8131563216ceeba37663d36e8acabf44888a18605"
+          },
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e04-1-20261115-cda576/audit.json",
+            "sha256": "a371073064e6ce36f68182d7106530e785cf29af26fa4c8655d879af5d553cfe"
+          },
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e04-1-20261115-cda576/observation.json",
+            "sha256": "926a39c3eb7e0bd3f83359ab57e3289b27acfe4c3dca338de524b6020424301f"
+          }
+        ]
+      },
+      {
+        "run_id": "run-sem41-pilot-e04-2-20261115-3bde4f",
+        "case_id": "E04",
+        "mode": "PERIODIC",
+        "run_phase": "pilot",
+        "data_kind": "OBSERVED",
+        "validity": "VALID",
+        "execution_status": "COMPLETED",
+        "declared_outcome": "SUCCESS",
+        "observer_commit": "db98fa8d275c3ca2d10895daa61f00bf53f59cd7",
+        "server_store_epoch": "pilots-20261115-r3",
+        "intervention": "NONE",
+        "build": {
+          "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
+          "server_commit": "c77772e426c00ae464240f00942f8368c638aaa8",
+          "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
+          "api_version": "2.0.0",
+          "package_name": "com.thanhtris.seminarie307",
+          "version_name": "0.1.0",
+          "version_code": 1,
+          "compile_sdk": 37,
+          "target_sdk": 37,
+          "min_sdk": 24,
+          "candidate_gate_passed": false
+        },
+        "config_sha256": "3eb6148cec2809e71a681a3f29dfaec697a16f05fa3e1a63f63878ff891294c7",
+        "declared_natural_periodic_cycles": 1,
+        "actual_observation_duration_ms": 1928540,
+        "sources": [
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e04-2-20261115-3bde4f/manifest.json",
+            "sha256": "6f7d6f5acbd682ea6c358dfe0c9a290be28329bfd76668d3aebb145ea8a85567"
+          },
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e04-2-20261115-3bde4f/events.jsonl",
+            "sha256": "ce655a4579cd37d0e41a23e2438b3b24d824f0e874f8cf9a73edf6310a457ffd"
+          },
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e04-2-20261115-3bde4f/audit.json",
+            "sha256": "cecd65ced96be6b7fdd3c3d62400149c4967b925ebe3f5f19bfffa355a8e3423"
+          },
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e04-2-20261115-3bde4f/observation.json",
+            "sha256": "15df94ac71a92bd39a8139e4ebb75b8ac055a0d11ba02313fdf24a54c0c3191a"
+          }
+        ]
+      },
+      {
+        "run_id": "run-sem41-pilot-e04-3-20261115-54c1a9",
+        "case_id": "E04",
+        "mode": "PERIODIC",
+        "run_phase": "pilot",
+        "data_kind": "OBSERVED",
+        "validity": "VALID",
+        "execution_status": "COMPLETED",
+        "declared_outcome": "SUCCESS",
+        "observer_commit": "db98fa8d275c3ca2d10895daa61f00bf53f59cd7",
+        "server_store_epoch": "pilots-20261115-r3",
+        "intervention": "NONE",
+        "build": {
+          "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
+          "server_commit": "c77772e426c00ae464240f00942f8368c638aaa8",
+          "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
+          "api_version": "2.0.0",
+          "package_name": "com.thanhtris.seminarie307",
+          "version_name": "0.1.0",
+          "version_code": 1,
+          "compile_sdk": 37,
+          "target_sdk": 37,
+          "min_sdk": 24,
+          "candidate_gate_passed": false
+        },
+        "config_sha256": "3eb6148cec2809e71a681a3f29dfaec697a16f05fa3e1a63f63878ff891294c7",
+        "declared_natural_periodic_cycles": 1,
+        "actual_observation_duration_ms": 1928690,
+        "sources": [
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e04-3-20261115-54c1a9/manifest.json",
+            "sha256": "dff7fd0448c39c838ed23db01b2e542a0c22404bbf6b29dfbf0c70784a372bd0"
+          },
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e04-3-20261115-54c1a9/events.jsonl",
+            "sha256": "1aae38bf8aff01244d2c29fbad6abe8bdb60d21da2948b603b7766ffd3cb1f54"
+          },
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e04-3-20261115-54c1a9/audit.json",
+            "sha256": "d3f5bb0da3cd6f84b6e6a99faea14060a40589ce2b1a26b4fb574bba94ba5c92"
+          },
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e04-3-20261115-54c1a9/observation.json",
+            "sha256": "501ad2fe0cbc3cddf77d6e4db9203a2a83b4b108e1dd3b3305bd598159fbbf2e"
+          }
+        ]
+      },
+      {
+        "run_id": "run-sem41-pilot-e06-1-20261116-aa16ca",
+        "case_id": "E06",
+        "mode": "HYBRID",
+        "run_phase": "pilot",
+        "data_kind": "OBSERVED",
+        "validity": "VALID",
+        "execution_status": "COMPLETED",
+        "declared_outcome": "SUCCESS",
+        "observer_commit": "db98fa8d275c3ca2d10895daa61f00bf53f59cd7",
+        "server_store_epoch": "pilots-20261115-r3",
+        "intervention": "INJECTED",
+        "build": {
+          "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
+          "server_commit": "c77772e426c00ae464240f00942f8368c638aaa8",
+          "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
+          "api_version": "2.0.0",
+          "package_name": "com.thanhtris.seminarie307",
+          "version_name": "0.1.0",
+          "version_code": 1,
+          "compile_sdk": 37,
+          "target_sdk": 37,
+          "min_sdk": 24,
+          "candidate_gate_passed": false
+        },
+        "config_sha256": "3eb6148cec2809e71a681a3f29dfaec697a16f05fa3e1a63f63878ff891294c7",
+        "declared_natural_periodic_cycles": 2,
+        "actual_observation_duration_ms": 2700870,
+        "sources": [
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e06-1-20261116-aa16ca/manifest.json",
+            "sha256": "60fc6e6b6a9fec258652d0f3032d95f8f0c80896b5c51962d64f765176a00cc9"
+          },
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e06-1-20261116-aa16ca/events.jsonl",
+            "sha256": "00eb51ef2260e7564d452bae7fc38e4f65c13fba255c081b8e8adb4d20b21af4"
+          },
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e06-1-20261116-aa16ca/audit.json",
+            "sha256": "4b716539264813cca944c8e15d13f7b4b01977bceb03ebe64140f7b9bb2666cc"
+          },
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e06-1-20261116-aa16ca/observation.json",
+            "sha256": "71e3e068cbcc7532b02fd50c8e5cad53b02afde2de81ab8e6b3ee12080016cd9"
+          }
+        ]
+      },
+      {
+        "run_id": "run-sem41-pilot-e06-2-20261116-8f734c",
+        "case_id": "E06",
+        "mode": "HYBRID",
+        "run_phase": "pilot",
+        "data_kind": "OBSERVED",
+        "validity": "VALID",
+        "execution_status": "COMPLETED",
+        "declared_outcome": "SUCCESS",
+        "observer_commit": "db98fa8d275c3ca2d10895daa61f00bf53f59cd7",
+        "server_store_epoch": "pilots-20261115-r3",
+        "intervention": "INJECTED",
+        "build": {
+          "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
+          "server_commit": "c77772e426c00ae464240f00942f8368c638aaa8",
+          "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
+          "api_version": "2.0.0",
+          "package_name": "com.thanhtris.seminarie307",
+          "version_name": "0.1.0",
+          "version_code": 1,
+          "compile_sdk": 37,
+          "target_sdk": 37,
+          "min_sdk": 24,
+          "candidate_gate_passed": false
+        },
+        "config_sha256": "3eb6148cec2809e71a681a3f29dfaec697a16f05fa3e1a63f63878ff891294c7",
+        "declared_natural_periodic_cycles": 2,
+        "actual_observation_duration_ms": 2700670,
+        "sources": [
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e06-2-20261116-8f734c/manifest.json",
+            "sha256": "8d9ca31e4042250e8924c0c4222fb9d5a2bbd3477e0185a47f2d1b76585b1c6e"
+          },
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e06-2-20261116-8f734c/events.jsonl",
+            "sha256": "e893e119932f9920f2e731f0914f4d6c4ed7e4d946a3af70707c24f01d599559"
+          },
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e06-2-20261116-8f734c/audit.json",
+            "sha256": "33577ac925a2f4e06079b93e762aa5cfbac20df42b7c73955a0db2e640384e4a"
+          },
+          {
+            "path": "experiments/pilots/run-sem41-pilot-e06-2-20261116-8f734c/observation.json",
+            "sha256": "b770d3165be22f811618143acd23e981fb4fe59f636a4f429c917d9f5208b2d8"
+          }
+        ]
+      }
+    ]
+  },
+  "legacy_pilots_excluded_from_current_build": [
+    {
+      "run_id": "run-sem29-periodic-emulator-20261107",
+      "run_phase": "pilot",
+      "event_schema_version": "legacy-room-v1",
+      "app_commit": "a26646d72e8ee93f9e46a03b16d66f81be0552e0",
+      "validity": "INVALID",
+      "sources": [
+        {
+          "path": "experiments/runs/run-sem29-periodic-emulator-20261107/manifest.json",
+          "sha256": "ae4f9bdd74a657ba43dbd9e9bb3a430470a4601a296079a815795b7c529b9912"
+        },
+        {
+          "path": "experiments/runs/run-sem29-periodic-emulator-20261107/events.jsonl",
+          "sha256": "4f63e5e806d35d0f69914194a882fcfd70e25566512661a068d85bea93b71576"
+        }
+      ]
+    },
+    {
+      "run_id": "run-sem29-periodic-emulator-20261107-r2",
+      "run_phase": "pilot",
+      "event_schema_version": "legacy-room-v1",
+      "app_commit": "95eeecb6bfa1a0963a95e581b5322c15443711e4",
+      "validity": "NOT_ASSESSED",
+      "sources": [
+        {
+          "path": "experiments/runs/run-sem29-periodic-emulator-20261107-r2/manifest.json",
+          "sha256": "b8bec1c5ee533c8ebe1176821d437f48acc21be8afccde8e07f927f05ccaa88b"
+        },
+        {
+          "path": "experiments/runs/run-sem29-periodic-emulator-20261107-r2/events.jsonl",
+          "sha256": "3e65b723e67587f74fb4e0faff957e81829b7e0dd563f81264a0f4b4356c7438"
+        }
+      ]
+    }
+  ],
+  "development_controls_excluded_from_background_statistics": [
+    {
+      "run_id": "run-sem34-fcm-config-20261112",
+      "case_id": "CONTROL",
+      "run_phase": "development",
+      "intervention": "NONE",
+      "validity": "INVALID",
+      "declared_outcome": "FAILURE",
+      "app_commit": "decdef675e9eb11104bfb77cef57565d72df05d8",
+      "sources": [
+        {
+          "path": "experiments/development/run-sem34-fcm-config-20261112/manifest.json",
+          "sha256": "c441be02cd69a22f4f4806b601d3847a4754dd47076b25db3233015c24c93fa9"
+        },
+        {
+          "path": "experiments/development/run-sem34-fcm-config-20261112/events.jsonl",
+          "sha256": "d0fd0fcf9215d41220883bc35fde9d1f608e98fa4b74397585a750cad15654b2"
+        }
+      ]
+    },
+    {
+      "run_id": "run-sem41-dispatch-diagnostic-1715327d9b29",
+      "case_id": "CONTROL",
+      "run_phase": "development",
+      "intervention": "INJECTED",
+      "validity": "VALID",
+      "declared_outcome": "SUCCESS",
+      "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
+      "sources": [
+        {
+          "path": "experiments/development/run-sem41-dispatch-diagnostic-1715327d9b29/manifest.json",
+          "sha256": "fc4087e8cdd76845656ab4ca6bd43e740b0eca35584582b49ee5cfb6eb099f57"
+        },
+        {
+          "path": "experiments/development/run-sem41-dispatch-diagnostic-1715327d9b29/events.jsonl",
+          "sha256": "2d5ae7972f3489125dc2c6a2f9ccb0076debd829d4d173737786166927740ea5"
+        }
+      ]
+    },
+    {
+      "run_id": "run-sem41-v2-smoke-20261115",
+      "case_id": "CONTROL",
+      "run_phase": "development",
+      "intervention": "NONE",
+      "validity": "NOT_ASSESSED",
+      "declared_outcome": "SUCCESS",
+      "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
+      "sources": [
+        {
+          "path": "experiments/development/run-sem41-v2-smoke-20261115/manifest.json",
+          "sha256": "75e2c18b41aa92c1b3490fad5db822c81335c8135a88e4f2eefd96e817d22b96"
+        },
+        {
+          "path": "experiments/development/run-sem41-v2-smoke-20261115/events.jsonl",
+          "sha256": "00ad52c066d7b4789687a4d2ccd76a2be7f34c4676af8ba40752a3f16b10a10b"
+        }
+      ]
+    }
+  ],
+  "source_evidence": [
+    {
+      "path": "docs/EXPERIMENT_PROTOCOL.md",
+      "sha256": "17cb233e5005c6b1540f6be5e7b967329695eeb305c485d2f8d6943422372033"
+    },
+    {
+      "path": "experiments/PROTOCOL.md",
+      "sha256": "d95c82211b20baf219aa7708d9dc2813d912cd89b34efd8ecb3f81fc3c3d9b2a"
+    },
+    {
+      "path": "experiments/RUN_SCHEDULE.md",
+      "sha256": "a2ca86f821f127c16ac1b8f3398a404624c242c3f6a06ceb3e2e945c2ef561fc"
+    },
+    {
+      "path": "experiments/plans/SEM-41/EMULATOR_PLAN.json",
+      "sha256": "3ad77818754c95cbdc16bf267bc4ef52c466f32f7f9b8dfcaa0faae29d39cff6"
+    },
+    {
+      "path": "docs/evidence/SEM-41/PILOT_RESULTS.json",
+      "sha256": "d3a0a7e723835e668921b6496b9df07d1d67d6b35cd83d938a4c0d8eb2bac986"
+    },
+    {
+      "path": "docs/evidence/SEM-41/CHECKS.md",
+      "sha256": "a9ba5b153943b578a71aafdbe84d645dcec562dab48daeb142d493602d6ba93f"
+    },
+    {
+      "path": "docs/evidence/SEM-41/SCHEDULER_OBSERVER_AUDIT.json",
+      "sha256": "c7041b17540d4f4f81378e4198630a5263ccd2cbc8b292f2fd8df2d4a762d395"
+    },
+    {
+      "path": "docs/evidence/SEM-41/COLLECTOR_COMPARISON.json",
+      "sha256": "cfd8a5c243915220251ec09e1480f1ae6533b21ea1694950b29ed091c4296e1b"
+    },
+    {
+      "path": "docs/evidence/SEM-41/PR_REVIEW_FIXES.json",
+      "sha256": "7489435adb2a98c77926e904caa5e1985b88c08cd435efe0ed67d9de39adf156"
+    },
+    {
+      "path": "docs/evidence/SEM-41/UNIT_FOLLOWUP.json",
+      "sha256": "96ad7f48779dbd0f2ed7df9b095dd456d273b442ca5fc173e8cce4c6df919ac8"
+    },
+    {
+      "path": "docs/evidence/SEM-41/REQUALIFICATION_VERIFICATION.json",
+      "sha256": "745e939fbe7b4e51b6aa96ef4c39223919b4d878c132cbb7c66bd16fc50c6e63"
+    },
+    {
+      "path": "docs/evidence/SEM-41/REQUALIFICATION_DEVICE_CLEANUP.json",
+      "sha256": "f60befe63bf00b46ca12c0b73263eae1e7aa458836aef61d5ba4c44a5940c048"
+    },
+    {
+      "path": "docs/evidence/SEM-41/REQUALIFICATION_HOST_CONTINUITY.json",
+      "sha256": "aac6661a607471d11d15385a2039d7d804e25ac048a8bfcb0d75fa0436fff1f6"
+    },
+    {
+      "path": "release/CANDIDATE_MANIFEST.json",
+      "sha256": "f8d632086d520084f3330731f9d45ecff331a738c5609f454b95f941145a8b9b"
+    },
+    {
+      "path": "experiments/AUDIT.md",
+      "sha256": "9613b73f8a5102f0583660c8e80416b71622288792ad7096a62deaf3d74d7894"
+    },
+    {
+      "path": "experiments/AUDIT_RESULTS.md",
+      "sha256": "b9fc06cb63d0741bc5fd583d0745b2186899c955d1fbfb3cb61f794e13e8b0c3"
+    },
+    {
+      "path": "docs/evidence/SEM-44/CHECKS.md",
+      "sha256": "bc1d1adeea61afa3dad100425d1fca0b342fa0a8a4378f23acdae06b377e2e7c"
+    }
+  ],
+  "inputs_not_present_on_source_main": [
+    "experiments/results.csv",
+    "experiments/scripts/analyze.py",
+    "docs/evidence/SEM-45/CHECKS.md",
+    "docs/evidence/SEM-42/CHECKS.md"
+  ],
+  "pending_sem45": {
+    "pr": "https://github.com/ThanhTris/Seminar-IE307/pull/30",
+    "head_commit": "1a0c667c93391553cd08f054407d7eb04be2d4ef",
+    "status_when_inspected": "OPEN_DRAFT_NOT_MERGED",
+    "source_revision_pinned_by_sem45": "42ca000da1de2b7465851e1485fec2631f4b1a3c",
+    "csv_rows": 12,
+    "declared_valid_rows": 0,
+    "declared_invalid_rows": 12,
+    "used_for_main_statistics": false,
+    "current_qualified_pilots_in_this_csv": 0,
+    "sources": [
+      {
+        "path": "docs/evidence/SEM-45/INPUTS.json",
+        "sha256": "849fe6df1ea7f6cc169d4cb1e80ff63ec797a60fd3450a86017d90faefee7bab",
+        "url": "https://github.com/ThanhTris/Seminar-IE307/blob/1a0c667c93391553cd08f054407d7eb04be2d4ef/docs/evidence/SEM-45/INPUTS.json"
+      },
+      {
+        "path": "experiments/results.csv",
+        "sha256": "49d4f9e7c533f50f17fd429783fabb4afde15f27ad7a0c1e0e0c3fc3958fe8b0",
+        "url": "https://github.com/ThanhTris/Seminar-IE307/blob/1a0c667c93391553cd08f054407d7eb04be2d4ef/experiments/results.csv"
+      },
+      {
+        "path": "docs/evidence/SEM-45/summary.json",
+        "sha256": "4b340643871dc7ce054f2c7e53cc5969cef2e5f989eaadec67149e4072725a02",
+        "url": "https://github.com/ThanhTris/Seminar-IE307/blob/1a0c667c93391553cd08f054407d7eb04be2d4ef/docs/evidence/SEM-45/summary.json"
+      },
+      {
+        "path": "docs/evidence/SEM-45/CHECKS.md",
+        "sha256": "a26d0734bf563a11b4facfc0adda67b61481bfa57e3861c043983f237277790f",
+        "url": "https://github.com/ThanhTris/Seminar-IE307/blob/1a0c667c93391553cd08f054407d7eb04be2d4ef/docs/evidence/SEM-45/CHECKS.md"
+      }
+    ]
+  },
+  "source_hash_basis": "GIT_BLOB_BYTES_AT_PINNED_SOURCE_REVISION"
+}
