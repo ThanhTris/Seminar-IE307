@@ -1,0 +1,57 @@
+{
+  "scope": "SEM43_DOCUMENT_AND_EVIDENCE_TRACEABILITY_NOT_RUNTIME_OR_INDEPENDENT_AUDIT",
+  "source_snapshot_commit": "007a1aa31d02d7af47570f4cf7b60a7ed8135a33",
+  "source_files_byte_identical_to_snapshot": 107,
+  "sem41_manifests_validated": 20,
+  "canonical_events_validated": 203,
+  "registry_rows_reconciled": 8,
+  "valid_pilot_case_counts": {
+    "E01": 1,
+    "E03": 2,
+    "E04": 3,
+    "E06": 2
+  },
+  "invalid_attempts_retained": 12,
+  "invalid_outcomes_preserved": {
+    "SUCCESS": 5,
+    "TIMEOUT": 5,
+    "FAILURE": 2
+  },
+  "main_runs": 0,
+  "main_n_complete": 0,
+  "main_n_total": 0,
+  "latency_statistics_computed": false,
+  "legacy_pilots_excluded": 2,
+  "development_controls_excluded": 3,
+  "pending_csv_rows": 12,
+  "qualified_new_pilots_in_pending_csv": 0,
+  "local_links_checked": 104,
+  "anchors_checked": 3,
+  "markdown_tables_checked": 9,
+  "source_mutations": 0,
+  "privacy_check": "SIGNATURES_EXCLUDING_VERIFIED_PUBLIC_RUN_IDS_AND_PRIVATE_DENY_VALUES",
+  "new_runtime_tests_or_measurements": false,
+  "validation_outcome": "PASS",
+  "output_files": [
+    {
+      "path": "experiments/SUMMARY.md",
+      "sha256": "ab92f7ec845096ae3ba8f39bcc891331002bc71ddf4c8a5d1802477f38e0c21d"
+    },
+    {
+      "path": "docs/evidence/SEM-43/CHECKS.md",
+      "sha256": "258489e4df21e46a11c032c4e65198a6efcfdb674dd06bd3545dae620ad9ba86"
+    },
+    {
+      "path": "docs/evidence/SEM-43/EVIDENCE_INDEX.json",
+      "sha256": "f709f9bdbfc5b49e5ebac986b3529a81b20fc423b947b737b2e93c14d8d4dfc3"
+    },
+    {
+      "path": "experiments/README.md",
+      "sha256": "1964e3dfac7878089e0b775f80f516e91a6d9438b12e1ca06bab4a0161168d62"
+    },
+    {
+      "path": "tasks/backlog/SEM-43.md",
+      "sha256": "4094794bb93f72c59752811c560cdf37a8aa226e8ca3c7fa1d4202a5350fc7cc"
+    }
+  ]
+}

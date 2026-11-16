@@ -51,6 +51,14 @@ Status nguồn được đối chiếu Project lúc **2026-11-15 12:27:57 UTC**;
 - [ ] Median kèm n_complete/n_total, không suy pin từ số request và không so latency thiếu kiểm soát.
 - [ ] Đầu ra và CHECKS có thật, link đọc được; chưa chạy phải ghi Not run, không tự chuyển Done từ kế hoạch.
 
+## Tiến độ ngày 16/11/2026
+
+- Đã bắt đầu từ main `007a1aa` sau merge PR SEM-41 #29. Đầu ra [SUMMARY](../../experiments/SUMMARY.md), [CHECKS](../../docs/evidence/SEM-43/CHECKS.md) và [catalog nguồn/hash](../../docs/evidence/SEM-43/EVIDENCE_INDEX.json) đã có.
+- Tổng hợp đúng build/config: 8 pilot SEM-41 VALID/SUCCESS mới; giữ riêng 12 INVALID (5 SUCCESS, 5 TIMEOUT, 2 ABORTED/FAILURE), hai pilot legacy và các control development. Không gộp cycle thành run hoặc pilot thành main.
+- Main hiện 0 run trên 33 slot kế hoạch (27 emulator, 6 OPPO); rate/median N/A. OPPO/FCM/E05/kiểm độc lập chưa nhận được ghi NOT_RUN/giới hạn.
+- Đã đọc Draft PR SEM-45 #30 ở head `1a0c667`: CSV chỉ có 12 pilot cũ INVALID, chưa gồm 8 pilot mới và chưa merge. SUMMARY tham chiếu revision ghim, không tự sửa parser/CSV hoặc audit của owner khác.
+- Bản tổng hợp hiện hành dùng được cho report/slide với nhãn pilot và giới hạn; cập nhật khi nhận main/CSV/audit đúng revision. Trạng thái Project ở đầu file giữ snapshot nguồn, không tự chuyển Done.
+
 ## Task được mở khóa
 
 - [SEM-48](SEM-48.md) cần đầu ra này để **hoàn tất**.
