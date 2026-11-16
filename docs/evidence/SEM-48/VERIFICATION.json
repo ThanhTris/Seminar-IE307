@@ -1,0 +1,135 @@
+{
+  "scope": "SEM48_PRESENTATION_ASSET_VALIDATION_NOT_MAIN_AUDIT_OR_REHEARSAL",
+  "source_revision": "fce39b0df8086ede8d91d26171bf00436b83da31",
+  "source_pr_status_when_received": "OPEN_READY_FOR_REVIEW_NOT_MERGED",
+  "sources_verified_unchanged": 71,
+  "pilot_rows_checked": 20,
+  "pilot_case_bucket_counts": {
+    "E01": {
+      "VALID_SUCCESS": 1,
+      "INVALID_SUCCESS": 0,
+      "INVALID_TIMEOUT": 2,
+      "INVALID_FAILURE": 1
+    },
+    "E03": {
+      "VALID_SUCCESS": 2,
+      "INVALID_SUCCESS": 3,
+      "INVALID_TIMEOUT": 0,
+      "INVALID_FAILURE": 1
+    },
+    "E04": {
+      "VALID_SUCCESS": 3,
+      "INVALID_SUCCESS": 2,
+      "INVALID_TIMEOUT": 1,
+      "INVALID_FAILURE": 0
+    },
+    "E06": {
+      "VALID_SUCCESS": 2,
+      "INVALID_SUCCESS": 0,
+      "INVALID_TIMEOUT": 2,
+      "INVALID_FAILURE": 0
+    }
+  },
+  "main_runs": 0,
+  "main_n_complete": 0,
+  "main_n_total": 0,
+  "latency_statistics_computed": false,
+  "script_primary_planned_seconds": 105,
+  "script_short_planned_seconds": 75,
+  "primary_whitespace_units": 286,
+  "actual_rehearsal_timing": "NOT_RUN",
+  "png_dimensions": [
+    1920,
+    1080
+  ],
+  "pngs_visually_reviewed": 2,
+  "svg_text_editable": true,
+  "same_environment_reproduction_files": [
+    {
+      "file": "pilot_inventory.csv",
+      "sha256": "0574e9736e74e72776511ad7b99e059e959020f9e4ff4e2402bb264e17bdd2f7"
+    },
+    {
+      "file": "main_coverage.csv",
+      "sha256": "e8be26ac1180463bc806a59622ef942854cefe04f48db873a30581adc367d1bb"
+    },
+    {
+      "file": "pilot_inventory.svg",
+      "sha256": "2e0c12445e89341a9619c195ca88605b83d2686ed5428854b11818469fd3a3ed"
+    },
+    {
+      "file": "main_coverage.svg",
+      "sha256": "2da04660a6121fb506d9c66888135934bf8118c65bffaa83e3cfead442eeb8c0"
+    },
+    {
+      "file": "pilot_inventory.png",
+      "sha256": "61ff605fcb0a8b691875d12cf693608a12019eb8b27ffd8f8a7a9aef0506be85"
+    },
+    {
+      "file": "main_coverage.png",
+      "sha256": "1c78c4bed2853a761b5e5bef43edc4fe2dca0d8b53f2051c9909bbcb4ffb2301"
+    }
+  ],
+  "local_links_checked": 55,
+  "anchors_checked": 1,
+  "markdown_tables_checked": 8,
+  "source_mutations": 0,
+  "python_version": "3.12.14",
+  "matplotlib_version": "3.10.7",
+  "main_chart_from_audited_csv": "NOT_RUN",
+  "validation_outcome": "PASS",
+  "output_files": [
+    {
+      "path": "docs/evidence/SEM-48/CHECKS.md",
+      "sha256": "30321d33055e8c2d2eab5d09207863cc560c1ceab59421b2d4d93eb7210b5009"
+    },
+    {
+      "path": "slides/inputs/VINH.md",
+      "sha256": "8a27884fcfa823d926a02bf276aa08b2b28bca6e7d0d39968e0083e624fdebcf"
+    },
+    {
+      "path": "slides/inputs/results/INPUTS.json",
+      "sha256": "c9109ac9f7ff09839e562555f9bec09eeff7932d67b98fef7480f6fd549df467"
+    },
+    {
+      "path": "slides/inputs/results/README.md",
+      "sha256": "c30719ac8943aecba01a9c7757935aa4976d2f3cbdcbc48b12dfb43ec5f63427"
+    },
+    {
+      "path": "slides/inputs/results/main_coverage.csv",
+      "sha256": "e8be26ac1180463bc806a59622ef942854cefe04f48db873a30581adc367d1bb"
+    },
+    {
+      "path": "slides/inputs/results/main_coverage.png",
+      "sha256": "1c78c4bed2853a761b5e5bef43edc4fe2dca0d8b53f2051c9909bbcb4ffb2301"
+    },
+    {
+      "path": "slides/inputs/results/main_coverage.svg",
+      "sha256": "2da04660a6121fb506d9c66888135934bf8118c65bffaa83e3cfead442eeb8c0"
+    },
+    {
+      "path": "slides/inputs/results/pilot_inventory.csv",
+      "sha256": "0574e9736e74e72776511ad7b99e059e959020f9e4ff4e2402bb264e17bdd2f7"
+    },
+    {
+      "path": "slides/inputs/results/pilot_inventory.png",
+      "sha256": "61ff605fcb0a8b691875d12cf693608a12019eb8b27ffd8f8a7a9aef0506be85"
+    },
+    {
+      "path": "slides/inputs/results/pilot_inventory.svg",
+      "sha256": "2e0c12445e89341a9619c195ca88605b83d2686ed5428854b11818469fd3a3ed"
+    },
+    {
+      "path": "slides/inputs/results/render_results.py",
+      "sha256": "31ecc5afb250dc915222923ed622d477fa39e0a65166366fc3886f0266f449fd"
+    },
+    {
+      "path": "slides/inputs/results/requirements.txt",
+      "sha256": "843a9a46b848c2c3625e329c99da64aa1da3a08dc8bb91499ab85dbe2dc27ead"
+    },
+    {
+      "path": "tasks/backlog/SEM-48.md",
+      "sha256": "a3123a5b40bf229e565088a3106a8927e5d19f41de3ecfb68c4c23235ff395a4"
+    }
+  ]
+}
