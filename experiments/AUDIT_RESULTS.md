@@ -3,10 +3,11 @@
 - Audit status: **NOT_RUN**
 - Runs inspected: 0
 - CSV rows: 0
+- Non-main directories excluded: 2
 - Valid events parsed: 0
 - Background worker starts (PERIODIC/PUSH): 0
 - Manual worker starts (excluded from background count): 0
-- Generated at UTC: 2026-11-03T05:53:31Z
+- Generated at UTC: 2026-11-17T09:27:16Z
 
 The report reads input artifacts and does not rewrite logs or CSV. `AUDIT_READY` means structural cross-checks found no listed issue; it does not certify the physical procedure or replace owner review.
 
@@ -15,10 +16,15 @@ The report reads input artifacts and does not rewrite logs or CSV. `AUDIT_READY`
 | Run | Device | Mode | Phase | Outcome | Event count | Issues |
 |---|---|---|---|---|---:|---|
 
+## Excluded inputs (not main results)
+
+- `run-sem29-periodic-emulator-20261107`: `pilot`
+- `run-sem29-periodic-emulator-20261107-r2`: `pilot`
+
 ## Audit issues
 
+- `MAIN_RUNS_MISSING`
 - `RESULTS_CSV_MISSING`
-- `RUNS_DIRECTORY_MISSING`
 
 ## Interpretation
 

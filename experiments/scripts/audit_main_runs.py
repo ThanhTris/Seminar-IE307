@@ -2,12 +2,13 @@
 """SEM-44: audit exported main-run manifests/events against results.csv.
 
 Read-only for all inputs. Writes a Markdown audit report; it never edits logs or CSV.
-Python 3.9+. This script does not create observations or infer missing events.
+Python 3.10+. This script does not create observations or infer missing events.
 """
 
 import argparse
 import csv
-from datetime import datetime
+import hashlib
+from datetime import datetime, timezone
 import importlib.util
 import json
 from pathlib import Path
@@ -20,12 +21,16 @@ exporter = importlib.util.module_from_spec(spec)
 sys.modules[spec.name] = exporter
 spec.loader.exec_module(exporter)
 
-CSV_REQUIRED = {"run_id", "device_alias", "mode"}
+CSV_REQUIRED = {"run_id", "device_alias", "mode", "case_id", "run_phase",
+                "app_commit", "server_commit", "apk_sha256", "outcome", "validity", "data_kind", "execution_status",
+                "manifest_sha256", "events_sha256",
+                "eligible", "work_started_event_count_all", "snapshot_applied_event_count_all"}
 CSV_COMPARE = (
     "run_id", "device_alias", "mode", "case_id", "run_phase", "app_commit",
-    "server_commit", "apk_sha256", "outcome", "cached_version_after",
+    "server_commit", "apk_sha256", "outcome", "validity", "data_kind", "execution_status",
+    "cached_version_after", "declared_cached_version_after",
 )
-LATENCY_COLUMNS = {"latency_ms", "latency_first_applied_ms", "time_to_apply_ms"}
+LATENCY_COLUMNS = {"latency_ms", "latency_first_applied_ms", "time_to_apply_ms", "update_to_applied_ms"}
 COUNT_COLUMNS = {
     "push_send_accepted_count": "push_send_accepted",
     "work_started_count": "work_started",
@@ -38,6 +43,7 @@ COUNT_COLUMNS = {
     "sync_failed_count": "sync_failed",
 }
 
+COUNT_COLUMNS.update({name + "_event_count_all": name for name in set(COUNT_COLUMNS.values()) | {"server_updated", "push_send_skipped", "snapshot_fetch_started"}})
 
 def load_json(path):
     return json.loads(path.read_text(encoding="utf-8"))
@@ -63,6 +69,8 @@ def audit_run(run_dir):
         return None, [], ["MANIFEST_CONTRACT_INVALID"]
     if manifest["run_phase"] != "main":
         issues.append("NON_MAIN_RUN_IN_RUNS_DIRECTORY")
+    if manifest["execution_status"] == "NOT_RUN":
+        issues.append("RUN_NOT_EXECUTED")
     if manifest["execution_status"] == "NOT_RUN" and manifest["outcome"] != "NOT_RUN":
         issues.append("NOT_RUN_OUTCOME_CONFLICT")
 
@@ -88,6 +96,7 @@ def audit_run(run_dir):
         if previous is not None:
             if previous != event:
                 issues.append(f"EVENT_ID_CONFLICT_LINE_{number}")
+                continue
             else:
                 issues.append(f"DUPLICATE_EVENT_LINE_{number}")
                 continue
@@ -100,16 +109,15 @@ def audit_run(run_dir):
         issues.append("COMPLETED_RUN_WITHOUT_EVENTS")
     before = manifest["observation"].get("cached_version_before")
     after = manifest["observation"].get("cached_version_after")
-    target = manifest["observation"].get("target_version")
     if before is not None and after is not None and after < before:
         issues.append("CACHE_VERSION_DECREASED")
-    applied = [e for e in events if e["event_type"] == "snapshot_applied"]
-    if target is not None and any(e["data_version"] != target for e in applied):
-        issues.append("APPLIED_VERSION_DIFFERS_FROM_TARGET")
+    # A newer snapshot may legitimately be applied; target is not an equality guard.
     work_starts = {}
     for event in events:
         if event["event_type"] == "work_started":
             key = (event["request_id"], event["work_id"], event["work_attempt"])
+            if key in work_starts:
+                issues.append("DUPLICATE_WORK_START_KEY")
             work_starts[key] = event
     terminal_types = {"snapshot_applied", "snapshot_unchanged", "snapshot_stale", "sync_retrying", "sync_failed"}
     for event in events:
@@ -119,8 +127,12 @@ def audit_run(run_dir):
         start = work_starts.get(key)
         if start is None:
             issues.append("SYNC_RESULT_WITHOUT_MATCHING_WORK_START")
+        elif not event["boot_session_id"] or event["boot_session_id"] != start["boot_session_id"]:
+            issues.append("SYNC_MONOTONIC_BOOT_UNVERIFIED")
         elif event["elapsed_realtime_ms"] < start["elapsed_realtime_ms"]:
             issues.append("SYNC_RESULT_MONOTONICALLY_PRECEDES_START")
+    manifest["_audit_manifest_sha256"] = hashlib.sha256(manifest_path.read_bytes()).hexdigest()
+    manifest["_audit_events_sha256"] = hashlib.sha256(events_path.read_bytes()).hexdigest()
     return manifest, events, issues
 
 
@@ -132,6 +144,8 @@ def audit_csv(csv_path, runs):
     try:
         with csv_path.open("r", encoding="utf-8-sig", newline="") as handle:
             reader = csv.DictReader(handle)
+            if len(reader.fieldnames or []) != len(set(reader.fieldnames or [])):
+                return rows, ["CSV_DUPLICATE_COLUMNS"]
             headers = set(reader.fieldnames or [])
             missing = CSV_REQUIRED - headers
             if missing:
@@ -140,21 +154,31 @@ def audit_csv(csv_path, runs):
     except (OSError, UnicodeError, csv.Error):
         return rows, ["RESULTS_CSV_UNREADABLE"]
 
+    if not rows:
+        issues.append("RESULTS_CSV_EMPTY")
     known_run_ids = {manifest["run_id"] for manifest, _, _ in runs if manifest}
     row_by_run = {}
     for row_number, row in enumerate(rows, 2):
+        if None in row:
+            issues.append(f"CSV_EXTRA_CELLS_ROW_{row_number}")
         run_id = str(row.get("run_id") or "")
         if not run_id:
             issues.append(f"CSV_RUN_ID_EMPTY_ROW_{row_number}")
             continue
+        if run_id in row_by_run:
+            issues.append(f"DUPLICATE_CSV_RUN_ROW_{row_number}")
         row_by_run.setdefault(run_id, []).append((row_number, row))
+        if str(row.get("eligible") or "").lower() not in {"true", "false"}:
+            issues.append(f"CSV_ELIGIBLE_INVALID_ROW_{row_number}")
+        if str(row.get("run_phase") or "") != "main":
+            issues.append(f"CSV_NON_MAIN_ROW_{row_number}")
         if run_id not in known_run_ids:
             issues.append(f"CSV_RUN_WITHOUT_MANIFEST_ROW_{row_number}")
         if str(row.get("outcome") or "").upper() in {"TIMEOUT", "NOT_OBSERVED", "UNKNOWN"}:
             for key in LATENCY_COLUMNS & row.keys():
                 raw = str(row.get(key) or "").strip()
-                if raw in {"0", "0.0", "0.00"}:
-                    issues.append(f"TIMEOUT_ZERO_LATENCY_ROW_{row_number}")
+                if raw and raw.lower() != "null":
+                    issues.append(f"TIMEOUT_HAS_COMPLETION_LATENCY_ROW_{row_number}")
 
     for manifest, _, _ in runs:
         if manifest and manifest["run_id"] not in row_by_run:
@@ -165,18 +189,28 @@ def audit_csv(csv_path, runs):
         entries = row_by_run.get(manifest["run_id"], [])
         run_events = next((events for run_manifest, events, _ in runs if run_manifest and run_manifest["run_id"] == manifest["run_id"]), [])
         for row_number, row in entries:
+            for field in ("manifest_sha256", "events_sha256"):
+                expected = manifest.get("_audit_" + field)
+                if expected and row.get(field) != expected:
+                    issues.append(f"CSV_HASH_MISMATCH_{field.upper()}_ROW_{row_number}")
+            if row.get("eligible", "").lower() == "true" and (manifest.get("validity") != "VALID" or manifest.get("execution_status") != "COMPLETED"):
+                issues.append(f"CSV_INELIGIBLE_INCLUDED_ROW_{row_number}")
             for field in CSV_COMPARE:
                 expected = manifest.get(field)
-                if field in {"app_commit", "server_commit", "apk_sha256", "cached_version_after"}:
+                if field in {"app_commit", "server_commit", "apk_sha256", "cached_version_after", "declared_cached_version_after"}:
                     if field in {"app_commit", "server_commit", "apk_sha256"}:
                         expected = manifest["build"].get(field)
-                    elif field == "cached_version_after":
-                        expected = manifest["observation"].get(field)
-                if expected is not None and str(row.get(field) or "").strip() not in {"", str(expected)}:
+                    elif field in {"cached_version_after", "declared_cached_version_after"}:
+                        expected = manifest["observation"].get("cached_version_after")
+                if field in {"cached_version_after", "declared_cached_version_after"} and field not in row:
+                    continue
+                if expected is not None and str(row.get(field) or "").strip() != str(expected):
                     issues.append(f"CSV_MANIFEST_MISMATCH_{field.upper()}_ROW_{row_number}")
             for column, event_type in COUNT_COLUMNS.items():
                 raw_count = str(row.get(column) or "").strip()
                 if not raw_count:
+                    if column in CSV_REQUIRED:
+                        issues.append(f"CSV_COUNT_MISSING_{column.upper()}_ROW_{row_number}")
                     continue
                 try:
                     csv_count = int(raw_count)
@@ -189,7 +223,7 @@ def audit_csv(csv_path, runs):
     return rows, issues
 
 
-def render_report(runs, csv_path, csv_rows, issues):
+def render_report(runs, csv_path, csv_rows, issues, excluded=()):
     report_issues = list(issues)
     run_count = len(runs)
     event_count = sum(len(events) for _, events, _ in runs)
@@ -205,10 +239,10 @@ def render_report(runs, csv_path, csv_rows, issues):
     lines = [
         "# SEM-44 — Automated main-run audit", "",
         f"- Audit status: **{status}**", f"- Runs inspected: {run_count}",
-        f"- CSV rows: {len(csv_rows)}", f"- Valid events parsed: {event_count}",
+        f"- CSV rows: {len(csv_rows)}", f"- Non-main directories excluded: {len(excluded)}", f"- Valid events parsed: {event_count}",
         f"- Background worker starts (PERIODIC/PUSH): {background}",
         f"- Manual worker starts (excluded from background count): {manual}",
-        f"- Generated at UTC: {datetime.utcnow().isoformat(timespec='seconds')}Z", "",
+        f"- Generated at UTC: {datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%S')}Z", "",
         "The report reads input artifacts and does not rewrite logs or CSV. `AUDIT_READY` means structural cross-checks found no listed issue; it does not certify the physical procedure or replace owner review.", "",
         "## Runs", "", "| Run | Device | Mode | Phase | Outcome | Event count | Issues |", "|---|---|---|---|---|---:|---|",
     ]
@@ -219,6 +253,8 @@ def render_report(runs, csv_path, csv_rows, issues):
         lines.append(
             f"| `{manifest['run_id']}` | `{manifest['device_alias']}` | {manifest['mode']} | {manifest['run_phase']} | {manifest['outcome']} | {len(events)} | `{', '.join(run_issues) or 'none'}` |"
         )
+    lines.extend(["", "## Excluded inputs (not main results)", ""])
+    lines.extend(f"- `{name}`: `{phase}`" for name, phase in excluded)
     lines.extend(["", "## Audit issues", ""])
     if report_issues:
         lines.extend(f"- `{issue}`" for issue in sorted(set(report_issues)))
@@ -243,18 +279,31 @@ def main(argv=None):
     parser.add_argument("--csv", type=Path, default=ROOT / "experiments/results.csv")
     parser.add_argument("--output", type=Path, default=ROOT / "experiments/AUDIT_RESULTS.md")
     args = parser.parse_args(argv)
+    if args.output.resolve() == args.csv.resolve() or args.output.resolve().is_relative_to(args.runs.resolve()):
+        print(json.dumps({"error": "OUTPUT_OVERLAPS_INPUT"}))
+        return 2
     runs = []
+    excluded = []
     top_issues = []
     if args.runs.is_dir():
         for run_dir in sorted(p for p in args.runs.iterdir() if p.is_dir()):
+            try:
+                raw = load_json(run_dir / "manifest.json")
+            except (OSError, UnicodeError, ValueError):
+                raw = None
+            if isinstance(raw, dict) and raw.get("run_phase") in {"pilot", "development"}:
+                excluded.append((run_dir.name, raw["run_phase"]))
+                continue
             manifest, events, issues = audit_run(run_dir)
             runs.append((manifest, events, issues))
             top_issues.extend(issues)
     else:
         top_issues.append("RUNS_DIRECTORY_MISSING")
+    if not runs:
+        top_issues.append("MAIN_RUNS_MISSING")
     csv_rows, csv_issues = audit_csv(args.csv, runs)
     top_issues.extend(csv_issues)
-    report = render_report(runs, args.csv, csv_rows, top_issues)
+    report = render_report(runs, args.csv, csv_rows, top_issues, excluded)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     with args.output.open("w", encoding="utf-8", newline="\n") as handle:
         handle.write(report)
