@@ -59,7 +59,7 @@ py -3.12 -m venv .local/sem48/venv
 
 Chọn thư mục output trống cho mỗi lần kiểm. [verify_reproduction.py](verify_reproduction.py) ghi `reproduction-report.json`: OS/Python, config Git, số source đã được chuẩn hóa, SHA-256 của đủ 6 artifact và hash code đã chạy. Golden lấy từ blob Git `HEAD` và VERIFICATION, không so với SVG/CSV checkout có thể đã đổi CRLF. Output không được chuẩn hóa trước khi hash; bất kỳ khác byte thật nào cũng làm kiểm thất bại.
 
-[Workflow Windows](../../../.github/workflows/sem48-reproduction.yml) chạy cùng lệnh trên runner Windows thật, bật autocrlf trước checkout, chạy 7 regression tests và lưu báo cáo. [Tests](tests/test_source_validation.py) giữ kiểm phân biệt line ending với thay đổi nội dung; đây là kiểm công cụ, không phải sample thực nghiệm.
+[Workflow Windows](../../../.github/workflows/sem48-reproduction.yml) chạy cùng lệnh trên runner Windows thật, bật autocrlf trước checkout, chạy 7 regression tests và lưu báo cáo. [Tests](tests/test_source_validation.py) giữ kiểm phân biệt line ending với thay đổi nội dung; đây là kiểm công cụ, không phải sample thực nghiệm. [Báo cáo Windows native](../../../docs/evidence/SEM-48/WINDOWS_REPRODUCTION.json) ghi 51/71 file checkout đổi CRLF, 7 tests đạt và đủ 6 SHA-256 khớp; [CI](https://github.com/ThanhTris/Seminar-IE307/actions/runs/44093928981) đã chạy thành công.
 
 ## Giới hạn bàn giao
 

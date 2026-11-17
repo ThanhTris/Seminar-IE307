@@ -61,7 +61,7 @@ Status nguồn được đối chiếu Project lúc **2026-11-15 12:27:57 UTC**;
 ## Sửa theo review ngày 17/11/2026
 
 - Đã merge main `1475e67` sau khi SEM-43 #31 merge. Giữ source `fce39b0` vì commit nguồn vẫn nằm trong main và 71 file nguồn không đổi.
-- Sửa kiểm input để chấp nhận CRLF/LF nhưng giữ hash Git blob chính xác; SVG ép ghi LF. Thêm 7 regression tests và workflow Windows/autocrlf kiểm SHA-256 đủ 6 artifact. Dữ liệu/ảnh/scope main NOT_RUN không đổi; xem CHECKS và VERIFICATION cho bằng chứng review.
+- Sửa kiểm input để chấp nhận CRLF/LF nhưng giữ hash Git blob chính xác; SVG ép ghi LF. Thêm 7 regression tests và workflow Windows/autocrlf kiểm SHA-256 đủ 6 artifact. Windows native/Python 3.12 với autocrlf=true đạt 7/7 tests, 51/71 source CRLF và 6/6 SHA-256 khớp; báo cáo CI lưu trong evidence. Dữ liệu/ảnh/scope main NOT_RUN không đổi; xem CHECKS và VERIFICATION cho bằng chứng review.
 
 ## Task được mở khóa
 

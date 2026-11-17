@@ -70,7 +70,7 @@
       "sha256": "1c78c4bed2853a761b5e5bef43edc4fe2dca0d8b53f2051c9909bbcb4ffb2301"
     }
   ],
-  "local_links_checked": 60,
+  "local_links_checked": 62,
   "anchors_checked": 1,
   "markdown_tables_checked": 8,
   "source_mutations": 0,
@@ -85,7 +85,7 @@
     },
     {
       "path": "docs/evidence/SEM-48/CHECKS.md",
-      "sha256": "e102515c1b89e8994dbe25b2a35a0368df88f9c9e5cba01eba74e5c3b2f14cb3"
+      "sha256": "8fdf3250bc44a3de4941de1f115c659212b88c37b03670210312cdcac111a63f"
     },
     {
       "path": "slides/inputs/VINH.md",
@@ -97,7 +97,7 @@
     },
     {
       "path": "slides/inputs/results/README.md",
-      "sha256": "b7aae773bf170703b82bde598b5b647709440b14c698ebf7deb6150e771df6b9"
+      "sha256": "7c9d5f36a10072e02a9c11af584112acfc692aa084fa3728e814245c9dcf5642"
     },
     {
       "path": "slides/inputs/results/main_coverage.csv",
@@ -141,7 +141,11 @@
     },
     {
       "path": "tasks/backlog/SEM-48.md",
-      "sha256": "2c21c7412f0e6d52e9cc0a200f9005fff5f5e57f59b8e8dd0026ed8517d17cc2"
+      "sha256": "d24a2b5010bd3b412c068772ef4cbfa35e84175e590b71b4cdea0ff909c524fa"
+    },
+    {
+      "path": "docs/evidence/SEM-48/WINDOWS_REPRODUCTION.json",
+      "sha256": "872da5d4198e53805223aa89adf962f6a28a0536cf467b3a71f7ab2989817428"
     }
   ],
   "review_fixes": {
@@ -155,6 +159,14 @@
     "source_commit_retained_in_main": true,
     "source_files_unchanged_after_main_merge": 71,
     "all_six_artifacts_unchanged": true,
-    "windows_native_outcome": "PENDING_CI"
+    "windows_native_outcome": "PASS",
+    "windows_ci_run": "https://github.com/ThanhTris/Seminar-IE307/actions/runs/44093928981",
+    "windows_python_version": "3.12.10",
+    "windows_core_autocrlf": true,
+    "windows_crlf_normalized_source_files": 51,
+    "windows_artifacts_matching_sha256": 6,
+    "windows_report_sha256": "872da5d4198e53805223aa89adf962f6a28a0536cf467b3a71f7ab2989817428",
+    "windows_tested_code_unchanged": true,
+    "windows_test_log_sha256": "4db8dc699aaf22babea5895d710d7a03fdc76884fd4be39eaed7a8ef1e90ef22"
   }
 }

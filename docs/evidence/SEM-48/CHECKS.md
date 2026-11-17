@@ -37,7 +37,7 @@ Phần output không sửa SUMMARY, results.csv/parser SEM-45, audit SEM-44, app
 | Nguồn và link | Trace source/run, không sửa đầu vào | Hash source và nội dung CSV đối chiếu manifest/audit; link/anchor/bảng, checksum ở VERIFICATION | Pass |
 | Biểu đồ main từ CSV audited | Có n_complete/n_total, timeout và clock cho metric thật | Chưa có CSV/audit/main tương ứng | NOT_RUN |
 
-Validation đã đối chiếu **71 file nguồn, 20 dòng pilot, 6 artifact tái sinh khớp byte, 55 link local/1 anchor và 8 bảng Markdown**. Đã xem hai PNG; không có phép đo runtime hoặc thống kê latency mới.
+Validation đã đối chiếu **71 file nguồn, 20 dòng pilot, 6 artifact tái sinh khớp byte, 62 link local/1 anchor và 8 bảng Markdown**. Đã xem hai PNG; không có phép đo runtime hoặc thống kê latency mới.
 
 ## Tái lập và kiểm
 
@@ -65,3 +65,7 @@ Khi CSV/audit/main đúng revision được bàn giao, SEM-48 cập nhật plots
 Đã xác nhận toàn bộ 71 source có byte không đổi giữa `fce39b0` và main merge `1475e67`; `fce39b0` là ancestor của main nên không cần đổi source revision hoặc hash gốc. Không phải trường hợp squash làm mất commit nguồn. Sáu artifact không đổi so với bản đã review.
 
 [Workflow](../../../.github/workflows/sem48-reproduction.yml) bật autocrlf trước checkout và kiểm trên Windows thật; [checker](../../../slides/inputs/results/verify_reproduction.py) so SHA-256 cả 6 output với blob Git/golden, bắt CRLF ở output và lưu report. Kiểm macOS đã đạt 7/7 tests và 6/6 SHA. Kết quả Windows native được ghi theo CI, không gọi phép mô phỏng CRLF trên macOS là test Windows.
+
+### Kết quả Windows native
+
+[CI Windows thành công](https://github.com/ThanhTris/Seminar-IE307/actions/runs/44093928981) trên head code `bccca07`, Windows/Python 3.12.10, `core.autocrlf=true`. 7/7 regression tests đạt. 51/71 source có CRLF của checkout, nội dung/hash blob vẫn đúng; **cả 6 output khớp SHA-256 canonical**, SVG/CSV giữ LF. [WINDOWS_REPRODUCTION.json](WINDOWS_REPRODUCTION.json) là báo cáo tải nguyên byte từ artifact CI, gồm hash code đã chạy và từng file; đối chiếu hash code với nhánh hiện tại đạt. Đây là kiểm tái sinh, không phải phép đo main hoặc rehearsal.
