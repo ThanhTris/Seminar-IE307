@@ -1,9 +1,9 @@
 # SEM-44 — Kiểm độc lập trigger và phép tính dữ liệu main
 
-- Trạng thái: **Todo** (Project).
-- Trạng thái đầu vào: **Sẵn sàng**.
+- Trạng thái: **Review** (Project).
+- Trạng thái đầu vào: **Chờ kiểm tra**.
 - Còn chờ: Nên nhận: [SEM-41](SEM-41.md), [SEM-42](SEM-42.md), [SEM-45](SEM-45.md).
-- Đối chiếu Project: 2026-11-15 12:27:57 UTC.
+- Đối chiếu Project: 2026-11-17 09:31:58 UTC.
 - Người thực hiện duy nhất: **Tâm** (`HoaiTam`).
 - Hạn: **07/11/2026 19:00 (UTC+7)**.
 - Công sức: 1/100 — Cơ chế/thực hành.
@@ -29,7 +29,7 @@ Tài liệu nền đã có: [Kế hoạch/phạm vi](../../docs/PLAN.md) · [Pro
 
 Đây là danh sách đầu ra cần bàn giao, chưa phải xác nhận các file đã tồn tại. Trước khi dùng, nhận đúng artifact/commit/config và CHECKS từ task nguồn.
 
-Status nguồn được đối chiếu Project lúc **2026-11-15 12:27:57 UTC**; mở link task nguồn để xem cập nhật mới hơn.
+Status nguồn được đối chiếu Project lúc **2026-11-17 09:31:58 UTC**; mở link task nguồn để xem cập nhật mới hơn.
 <!-- task-inputs:end -->
 
 

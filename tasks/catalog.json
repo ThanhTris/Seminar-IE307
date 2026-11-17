@@ -2084,7 +2084,7 @@
             "experiments/AUDIT.md"
           ],
           "checks": "docs/evidence/SEM-44/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Review"
         },
         {
           "source_task": "SEM-45",
@@ -2118,7 +2118,7 @@
       "category": "practice",
       "title": "Kiểm độc lập trigger và phép tính dữ liệu main",
       "due": "2026-11-07",
-      "status": "Todo",
+      "status": "Review",
       "start_dependencies": [],
       "finish_dependencies": [
         "SEM-41",
@@ -2137,7 +2137,7 @@
         "Có case/input/expected/actual/assertion và run_id/commit thật.",
         "Không tự ký Pass cho run chưa thực hiện hoặc chưa đủ log."
       ],
-      "input_status": "Sẵn sàng",
+      "input_status": "Chờ kiểm tra",
       "inputs": [
         {
           "source_task": "SEM-41",
@@ -2460,7 +2460,7 @@
             "experiments/AUDIT.md"
           ],
           "checks": "docs/evidence/SEM-44/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Review"
         },
         {
           "source_task": "SEM-45",
@@ -3124,7 +3124,7 @@
       }
     }
   ],
-  "snapshot_at": "2026-11-15 12:27:57 UTC",
+  "snapshot_at": "2026-11-17 09:31:58 UTC",
   "snapshot_source": "https://github.com/users/ThanhTris/projects/3/views/1",
   "timezone": "Asia/Ho_Chi_Minh",
   "deadline_at": "2026-11-13T22:00:00+07:00",

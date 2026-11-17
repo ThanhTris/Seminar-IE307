@@ -36,3 +36,8 @@ Hồ sơ đủ đề nghị Review **phần SEM-44 đã thực hiện** theo pol
 Các nguồn cần tiếp nhận và phiếu A44-01…04 nằm trong AUDIT; nhận phạm vi mới thì chạy lại cả inventory, independent compare và main audit. Các cập nhật report/CLAIMS/SUMMARY thuộc owner của task tương ứng. Bàn giao cho SEM-43/48 qua PR tag trưởng nhóm.
 
 Trạng thái kết thúc làm việc là Review; trưởng nhóm kiểm nhận và merge, không tự chuyển Done. Sau bàn giao chỉ sửa theo comment yêu cầu.
+
+## Đồng bộ bàn giao
+
+- Commit nội dung/công cụ được kiểm: `40f38a1`; [PR #33](https://github.com/ThanhTris/Seminar-IE307/pull/33) đã tag `@ThanhTris`, nêu rõ main NOT_RUN và scope draft/pilot.
+- Đã chuyển SEM-44 sang Review. Script snapshot `--apply` và `--check` exit 0: 45 task, 34 Done, 8 Todo, 2 In Progress, 1 Review; assignee khớp owner, không có chu trình dependency. Snapshot **09:31:58 UTC ngày 17/11/2026**. Đây là đồng bộ workflow, không ký Pass cho phép đo main.

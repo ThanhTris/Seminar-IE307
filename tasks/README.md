@@ -20,10 +20,10 @@ SEM-01…SEM-10 chỉ còn là nhóm lịch sử với link tới task thay th�
 <!-- input-snapshot:start -->
 ## Trạng thái đối chiếu Project
 
-Snapshot **2026-11-15 12:27:57 UTC**. Status là tiến độ thực hiện; Input status là trạng thái tương ứng theo từng cột:
-- **Cột Todo:** Sẵn sàng **9**, Chờ đầu vào **0**.
+Snapshot **2026-11-17 09:31:58 UTC**. Status là tiến độ thực hiện; Input status là trạng thái tương ứng theo từng cột:
+- **Cột Todo:** Sẵn sàng **8**, Chờ đầu vào **0**.
 - **Cột In Progress:** Đang thực hiện **2**.
-- **Cột Review:** Chờ kiểm tra **0**.
+- **Cột Review:** Chờ kiểm tra **1**.
 - **Cột Needs Update:** Cần cập nhật **0**.
 - **Cột Done:** Đã hoàn thành **34**.
 
@@ -74,7 +74,7 @@ Project là nguồn Status hiện hành. Sau khi đổi Status nguồn, chạy `
 | [SEM-41](backlog/SEM-41.md) — Chạy tập chính E01–E06 trên emulator | Vinh | Todo | Sẵn sàng | Không | 07/11/2026 13:00 (UTC+7) | 3 | [SEM-16](backlog/SEM-16.md), [SEM-24](backlog/SEM-24.md) | [SEM-37](backlog/SEM-37.md) |
 | [SEM-42](backlog/SEM-42.md) — Chạy đối chiếu OPPO E01/E02 và ghi giới hạn OEM | Trí | Todo | Sẵn sàng | Không | 07/11/2026 15:00 (UTC+7) | 3 | [SEM-12](backlog/SEM-12.md), [SEM-16](backlog/SEM-16.md), [SEM-24](backlog/SEM-24.md) | [SEM-37](backlog/SEM-37.md) |
 | [SEM-43](backlog/SEM-43.md) — Chốt SUMMARY và bộ evidence thực nghiệm | Vinh | Todo | Sẵn sàng | Nên nhận: [SEM-41](backlog/SEM-41.md), [SEM-42](backlog/SEM-42.md), [SEM-44](backlog/SEM-44.md), [SEM-45](backlog/SEM-45.md) | 07/11/2026 22:00 (UTC+7) | 1 | Không có. | [SEM-41](backlog/SEM-41.md), [SEM-42](backlog/SEM-42.md), [SEM-44](backlog/SEM-44.md), [SEM-45](backlog/SEM-45.md) |
-| [SEM-44](backlog/SEM-44.md) — Kiểm độc lập trigger và phép tính dữ liệu main | Tâm | Todo | Sẵn sàng | Nên nhận: [SEM-41](backlog/SEM-41.md), [SEM-42](backlog/SEM-42.md), [SEM-45](backlog/SEM-45.md) | 07/11/2026 19:00 (UTC+7) | 1 | Không có. | [SEM-41](backlog/SEM-41.md), [SEM-42](backlog/SEM-42.md), [SEM-45](backlog/SEM-45.md) |
+| [SEM-44](backlog/SEM-44.md) — Kiểm độc lập trigger và phép tính dữ liệu main | Tâm | Review | Chờ kiểm tra | Nên nhận: [SEM-41](backlog/SEM-41.md), [SEM-42](backlog/SEM-42.md), [SEM-45](backlog/SEM-45.md) | 07/11/2026 19:00 (UTC+7) | 1 | Không có. | [SEM-41](backlog/SEM-41.md), [SEM-42](backlog/SEM-42.md), [SEM-45](backlog/SEM-45.md) |
 | [SEM-45](backlog/SEM-45.md) — Viết parser log và sinh results.csv | Tuấn | In Progress | Đang thực hiện | Nên nhận: [SEM-41](backlog/SEM-41.md), [SEM-42](backlog/SEM-42.md) | 07/11/2026 17:00 (UTC+7) | 2 | [SEM-24](backlog/SEM-24.md), [SEM-26](backlog/SEM-26.md) | [SEM-41](backlog/SEM-41.md), [SEM-42](backlog/SEM-42.md) |
 | [SEM-46](backlog/SEM-46.md) — Viết phần mở bài và bàn giao lời dẫn thao tác demo | Tuấn | Done | Đã hoàn thành | Không | 08/11/2026 16:00 (UTC+7) | 1 | Không có. | [SEM-14](backlog/SEM-14.md), [SEM-37](backlog/SEM-37.md) |
 | [SEM-47](backlog/SEM-47.md) — Viết phần silent push và lời dẫn demo 4 phút | Trang | Done | Đã hoàn thành | Không | 08/11/2026 16:00 (UTC+7) | 2 | [SEM-15](backlog/SEM-15.md) | [SEM-33](backlog/SEM-33.md), [SEM-34](backlog/SEM-34.md), [SEM-38](backlog/SEM-38.md) |
