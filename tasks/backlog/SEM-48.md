@@ -58,6 +58,11 @@ Status nguồn được đối chiếu Project lúc **2026-11-15 12:27:57 UTC**;
 - Biểu đồ hiệu năng main từ CSV đã audit **NOT_RUN**: Draft SEM-45 #30 chỉ chứa 12 pilot cũ INVALID, chưa có tám pilot mới; SEM-44 chưa ký bộ mới. Không dùng ảnh pilot thay biểu đồ main hoặc sửa output của owner khác.
 - [CHECKS](../../docs/evidence/SEM-48/CHECKS.md) và [VERIFICATION](../../docs/evidence/SEM-48/VERIFICATION.json) ghi tái sinh/đối chiếu ảnh-data và giới hạn. Đã chuẩn bị đầy đủ input có thể dùng cho SEM-51; cập nhật khi nhận main/CSV/audit, không tự chuyển trạng thái Project.
 
+## Sửa theo review ngày 17/11/2026
+
+- Đã merge main `1475e67` sau khi SEM-43 #31 merge. Giữ source `fce39b0` vì commit nguồn vẫn nằm trong main và 71 file nguồn không đổi.
+- Sửa kiểm input để chấp nhận CRLF/LF nhưng giữ hash Git blob chính xác; SVG ép ghi LF. Thêm 7 regression tests và workflow Windows/autocrlf kiểm SHA-256 đủ 6 artifact. Dữ liệu/ảnh/scope main NOT_RUN không đổi; xem CHECKS và VERIFICATION cho bằng chứng review.
+
 ## Task được mở khóa
 
 - [SEM-51](SEM-51.md) cần đầu ra này để **hoàn tất**.

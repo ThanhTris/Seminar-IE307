@@ -70,7 +70,7 @@
       "sha256": "1c78c4bed2853a761b5e5bef43edc4fe2dca0d8b53f2051c9909bbcb4ffb2301"
     }
   ],
-  "local_links_checked": 55,
+  "local_links_checked": 60,
   "anchors_checked": 1,
   "markdown_tables_checked": 8,
   "source_mutations": 0,
@@ -80,20 +80,24 @@
   "validation_outcome": "PASS",
   "output_files": [
     {
+      "path": ".github/workflows/sem48-reproduction.yml",
+      "sha256": "2b434ae36f8202ebef43d7e1e789e465fcfa4f9513980f339e3566f9862db8c0"
+    },
+    {
       "path": "docs/evidence/SEM-48/CHECKS.md",
-      "sha256": "30321d33055e8c2d2eab5d09207863cc560c1ceab59421b2d4d93eb7210b5009"
+      "sha256": "e102515c1b89e8994dbe25b2a35a0368df88f9c9e5cba01eba74e5c3b2f14cb3"
     },
     {
       "path": "slides/inputs/VINH.md",
-      "sha256": "8a27884fcfa823d926a02bf276aa08b2b28bca6e7d0d39968e0083e624fdebcf"
+      "sha256": "de6f7e0308832e961ce0e03b065fa5a86f277835e3aa9dbb26e1d39a25c190ab"
     },
     {
       "path": "slides/inputs/results/INPUTS.json",
-      "sha256": "c9109ac9f7ff09839e562555f9bec09eeff7932d67b98fef7480f6fd549df467"
+      "sha256": "c5466ab9413c1dfab8aaba81e94165661b51d0fc92ed09b640f0dbe77ebd3b27"
     },
     {
       "path": "slides/inputs/results/README.md",
-      "sha256": "c30719ac8943aecba01a9c7757935aa4976d2f3cbdcbc48b12dfb43ec5f63427"
+      "sha256": "b7aae773bf170703b82bde598b5b647709440b14c698ebf7deb6150e771df6b9"
     },
     {
       "path": "slides/inputs/results/main_coverage.csv",
@@ -121,15 +125,36 @@
     },
     {
       "path": "slides/inputs/results/render_results.py",
-      "sha256": "54679d89d4ee5d52cb9a53efa9132afefd6955d9b46f69d0365f1e657f01e40f"
+      "sha256": "3ea6a9bba2b179ef4169c97ad93ac8db4fb2206186463fd0814704271667fddc"
     },
     {
       "path": "slides/inputs/results/requirements.txt",
       "sha256": "843a9a46b848c2c3625e329c99da64aa1da3a08dc8bb91499ab85dbe2dc27ead"
     },
     {
+      "path": "slides/inputs/results/tests/test_source_validation.py",
+      "sha256": "f48a36f9a93de3c90a46678543e6d3866a7d04f363861d87091d2b52dee746f2"
+    },
+    {
+      "path": "slides/inputs/results/verify_reproduction.py",
+      "sha256": "8169c59fa1cd40c9ecf9d4f55d9a5158c02214506e777f0ced05924ec6d33800"
+    },
+    {
       "path": "tasks/backlog/SEM-48.md",
-      "sha256": "a3123a5b40bf229e565088a3106a8927e5d19f41de3ecfb68c4c23235ff395a4"
+      "sha256": "2c21c7412f0e6d52e9cc0a200f9005fff5f5e57f59b8e8dd0026ed8517d17cc2"
     }
-  ]
+  ],
+  "review_fixes": {
+    "comment": "https://github.com/ThanhTris/Seminar-IE307/pull/32#issuecomment-6918001419",
+    "regression_tests": 7,
+    "regression_tests_outcome": "PASS",
+    "pinned_git_blob_hash_checked_exactly": true,
+    "worktree_normalization": "CRLF_TO_LF_ONLY",
+    "svg_newline": "LF_EXPLICIT",
+    "main_merged": "1475e67c7b65b4ffcaa540d10da76e6d1bfaab00",
+    "source_commit_retained_in_main": true,
+    "source_files_unchanged_after_main_merge": 71,
+    "all_six_artifacts_unchanged": true,
+    "windows_native_outcome": "PENDING_CI"
+  }
 }

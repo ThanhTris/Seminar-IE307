@@ -1,6 +1,6 @@
 # SEM-48 — Nội dung phần kết quả của Vinh
 
-**Bàn giao cho SEM-51, ngày 16/11/2026 (UTC+7).** Phần nói **11:00–12:45, tổng 105 giây**, theo [PRESENTATION_PLAN](../../docs/PRESENTATION_PLAN.md). Nội dung hiện dựa trên [SUMMARY SEM-43](../../experiments/SUMMARY.md) ở commit **`fce39b0df8086ede8d91d26171bf00436b83da31`**, PR [#31](https://github.com/ThanhTris/Seminar-IE307/pull/31) đang chờ merge khi nhận đầu vào. Main gốc `007a1aa`. Đây là input nội dung/ảnh/data, không phải deck cuối SEM-51.
+**Bàn giao cho SEM-51, ngày 16/11/2026 (UTC+7).** Phần nói **11:00–12:45, tổng 105 giây**, theo [PRESENTATION_PLAN](../../docs/PRESENTATION_PLAN.md). Nội dung hiện dựa trên [SUMMARY SEM-43](../../experiments/SUMMARY.md) ở commit **`fce39b0df8086ede8d91d26171bf00436b83da31`**, PR [#31](https://github.com/ThanhTris/Seminar-IE307/pull/31) đã merge vào main `1475e67`. Revision nguồn `fce39b0` còn nguyên trong lịch sử main; ảnh/số liệu không đổi. Đây là input nội dung/ảnh/data, không phải deck cuối SEM-51.
 
 ## 1. Thông điệp và hình dùng trên slide 7
 

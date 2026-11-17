@@ -4,8 +4,8 @@
   "source_revision": "fce39b0df8086ede8d91d26171bf00436b83da31",
   "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/31",
   "source_status_when_received": "OPEN_READY_FOR_REVIEW_NOT_MERGED",
-  "main_base_revision": "007a1aa31d02d7af47570f4cf7b60a7ed8135a33",
-  "source_hash_basis": "GIT_BLOB_BYTES_AND_MATCHING_WORKTREE_BYTES",
+  "main_base_revision": "1475e67c7b65b4ffcaa540d10da76e6d1bfaab00",
+  "source_hash_basis": "EXACT_PINNED_GIT_BLOB_SHA256_AND_WORKTREE_EQUIVALENCE_AFTER_CRLF_TO_LF_ONLY",
   "sources": [
     {
       "path": "experiments/pilots/run-sem41-pilot-e01-1-20261115-89b884/manifest.json",
@@ -332,5 +332,8 @@
     "main_completion_rate": null,
     "independent_main_audit": "NOT_RUN",
     "new_runtime_measurements": false
-  }
+  },
+  "source_pr_status_when_reviewed": "MERGED",
+  "source_pr_merge_commit": "1475e67c7b65b4ffcaa540d10da76e6d1bfaab00",
+  "source_revision_is_ancestor_of_main": true
 }

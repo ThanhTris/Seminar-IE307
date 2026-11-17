@@ -1,6 +1,6 @@
 # Ảnh và dữ liệu trình bày SEM-48
 
-Bộ input cho [lời dẫn Vinh](../VINH.md), source SUMMARY ở `fce39b0df8086ede8d91d26171bf00436b83da31` ([PR SEM-43 #31](https://github.com/ThanhTris/Seminar-IE307/pull/31), chưa merge khi nhận). Main base `007a1aa`. [INPUTS.json](INPUTS.json) ghim 71 file nguồn bằng SHA-256; ảnh chỉ mô tả evidence tại revision này.
+Bộ input cho [lời dẫn Vinh](../VINH.md), source SUMMARY ở `fce39b0df8086ede8d91d26171bf00436b83da31` ([PR SEM-43 #31](https://github.com/ThanhTris/Seminar-IE307/pull/31), đã merge vào main `1475e67`). Commit nguồn `fce39b0` vẫn nằm trong lịch sử main, nên giữ nguyên revision/hash và sáu artifact gốc. [INPUTS.json](INPUTS.json) ghim 71 file nguồn bằng SHA-256; ảnh chỉ mô tả evidence tại revision này.
 
 ## File dùng trong deck
 
@@ -33,7 +33,7 @@ python3.12 -m venv .local/sem48/venv
 .local/sem48/venv/bin/python -B slides/inputs/results/render_results.py
 ```
 
-Windows dùng đường dẫn Python trong `Scripts` của venv. Nếu checkout tự đổi CRLF ở file nguồn JSON/Markdown, cấu hình checkout giữ LF trước khi kiểm hash; renderer kiểm byte worktree khớp blob Git đã ghim. Không tắt guard hoặc sửa hash để bỏ qua source thay đổi.
+Windows dùng đường dẫn Python trong `Scripts` của venv. `core.autocrlf=true` được hỗ trợ: renderer kiểm SHA-256 chính xác của blob Git đã ghim, rồi chỉ chuẩn hóa CRLF→LF khi so nội dung checkout. Sửa outcome/version, thêm khoảng trắng, BOM, đổi newline cuối file hoặc sửa blob đều vẫn bị chặn. SVG/CSV xuất ra luôn LF; không tắt guard hoặc sửa hash để bỏ qua nội dung thay đổi.
 
 Xuất vào thư mục riêng để đối chiếu mà không ghi lại ảnh bàn giao:
 
@@ -41,7 +41,25 @@ Xuất vào thư mục riêng để đối chiếu mà không ghi lại ảnh b�
 .local/sem48/venv/bin/python -B slides/inputs/results/render_results.py --output .local/sem48/repro
 ```
 
-Renderer chỉ đọc source đã ghim; kiểm manifest/audit/phase/outcome, ghi hai CSV và bốn file ảnh. Nó từ chối nguồn/hash thay đổi, outcome mới hoặc khi xuất hiện main data: cần nhận CSV/audit và cập nhật nội dung thay vì tự vẽ biểu đồ hiệu năng. SVG bỏ timestamp và dùng hash salt cố định. Hai lần render trong môi trường đã ghim khớp byte; font/Freetype khác giữa OS có thể thay byte ảnh, khi đó đối chiếu CSV, dependency/font và xem lại hình.
+Renderer chỉ đọc source đã ghim (cho phép khác CRLF/LF của checkout); kiểm manifest/audit/phase/outcome, ghi hai CSV và bốn file ảnh. Nó từ chối nguồn/hash thay đổi, outcome mới hoặc khi xuất hiện main data: cần nhận CSV/audit và cập nhật nội dung thay vì tự vẽ biểu đồ hiệu năng. SVG bỏ timestamp và dùng hash salt cố định. Hai lần render trong môi trường đã ghim khớp byte; font/Freetype khác giữa OS có thể thay byte ảnh, khi đó đối chiếu CSV, dependency/font và xem lại hình.
+
+## Kiểm Windows với core.autocrlf=true
+
+Dùng checkout mới để Git thực sự chuyển line ending, không chỉ đổi config trên checkout đã có. Trong PowerShell:
+
+```powershell
+git clone --config core.autocrlf=true https://github.com/ThanhTris/Seminar-IE307.git Seminar-IE307-sem48-crlf
+cd Seminar-IE307-sem48-crlf
+git switch codex/SEM-48-results-presentation
+py -3.12 -m venv .local/sem48/venv
+./.local/sem48/venv/Scripts/python.exe -m pip install -r slides/inputs/results/requirements.txt
+./.local/sem48/venv/Scripts/python.exe -B -m unittest discover -s slides/inputs/results/tests -v
+./.local/sem48/venv/Scripts/python.exe -B slides/inputs/results/verify_reproduction.py --require-crlf --output .local/sem48/windows-repro
+```
+
+Chọn thư mục output trống cho mỗi lần kiểm. [verify_reproduction.py](verify_reproduction.py) ghi `reproduction-report.json`: OS/Python, config Git, số source đã được chuẩn hóa, SHA-256 của đủ 6 artifact và hash code đã chạy. Golden lấy từ blob Git `HEAD` và VERIFICATION, không so với SVG/CSV checkout có thể đã đổi CRLF. Output không được chuẩn hóa trước khi hash; bất kỳ khác byte thật nào cũng làm kiểm thất bại.
+
+[Workflow Windows](../../../.github/workflows/sem48-reproduction.yml) chạy cùng lệnh trên runner Windows thật, bật autocrlf trước checkout, chạy 7 regression tests và lưu báo cáo. [Tests](tests/test_source_validation.py) giữ kiểm phân biệt line ending với thay đổi nội dung; đây là kiểm công cụ, không phải sample thực nghiệm.
 
 ## Giới hạn bàn giao
 

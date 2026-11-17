@@ -36,13 +36,21 @@ def load(path):
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def check_source_bytes(raw, blob, expected_sha256, path):
+    # Hash the pinned Git blob exactly; only checkout line endings may differ.
+    # Do not parse/re-serialize JSON or strip whitespace: those mask real edits.
+    if hashlib.sha256(blob).hexdigest() != expected_sha256:
+        raise ValueError("PINNED_SOURCE_HASH_MISMATCH: " + path)
+    if raw.replace(b"\r\n", b"\n") != blob.replace(b"\r\n", b"\n"):
+        raise ValueError("INPUT_CHANGED: " + path)
+
+
 def inputs():
     index = load(HERE / "INPUTS.json")
     for ref in index["sources"]:
         raw = (ROOT / ref["path"]).read_bytes()
         blob = subprocess.check_output(["git", "show", index["source_revision"] + ":" + ref["path"]], cwd=ROOT)
-        if raw != blob or hashlib.sha256(raw).hexdigest() != ref["sha256"]:
-            raise ValueError("INPUT_CHANGED: " + ref["path"])
+        check_source_bytes(raw, blob, ref["sha256"], ref["path"])
     for path in (ROOT / "experiments").rglob("manifest.json"):
         if load(path).get("run_phase") == "main":
             raise ValueError("MAIN_INPUT_REQUIRES_AUDITED_CSV_AND_PRESENTATION_UPDATE")
@@ -95,7 +103,7 @@ def save(fig, output, name):
     fig.savefig(svg, metadata={"Date": None, "Creator": "SEM-48 / Matplotlib"})
     # Matplotlib emits trailing spaces inside multiline SVG path attributes.
     # Newlines preserve SVG token boundaries while keeping the Git diff clean.
-    svg.write_text("\n".join(line.rstrip() for line in svg.read_text(encoding="utf-8").splitlines()) + "\n", encoding="utf-8")
+    svg.write_text("\n".join(line.rstrip() for line in svg.read_text(encoding="utf-8").splitlines()) + "\n", encoding="utf-8", newline="\n")
     fig.savefig(output / (name + ".png"), dpi=120, metadata={"Software": "SEM-48 / Matplotlib"})
     plt.close(fig)
 
