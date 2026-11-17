@@ -1,0 +1,172 @@
+{
+  "scope": "SEM48_PRESENTATION_ASSET_VALIDATION_NOT_MAIN_AUDIT_OR_REHEARSAL",
+  "source_revision": "fce39b0df8086ede8d91d26171bf00436b83da31",
+  "source_pr_status_when_received": "OPEN_READY_FOR_REVIEW_NOT_MERGED",
+  "sources_verified_unchanged": 71,
+  "pilot_rows_checked": 20,
+  "pilot_case_bucket_counts": {
+    "E01": {
+      "VALID_SUCCESS": 1,
+      "INVALID_SUCCESS": 0,
+      "INVALID_TIMEOUT": 2,
+      "INVALID_FAILURE": 1
+    },
+    "E03": {
+      "VALID_SUCCESS": 2,
+      "INVALID_SUCCESS": 3,
+      "INVALID_TIMEOUT": 0,
+      "INVALID_FAILURE": 1
+    },
+    "E04": {
+      "VALID_SUCCESS": 3,
+      "INVALID_SUCCESS": 2,
+      "INVALID_TIMEOUT": 1,
+      "INVALID_FAILURE": 0
+    },
+    "E06": {
+      "VALID_SUCCESS": 2,
+      "INVALID_SUCCESS": 0,
+      "INVALID_TIMEOUT": 2,
+      "INVALID_FAILURE": 0
+    }
+  },
+  "main_runs": 0,
+  "main_n_complete": 0,
+  "main_n_total": 0,
+  "latency_statistics_computed": false,
+  "script_primary_planned_seconds": 105,
+  "script_short_planned_seconds": 75,
+  "primary_whitespace_units": 286,
+  "actual_rehearsal_timing": "NOT_RUN",
+  "png_dimensions": [
+    1920,
+    1080
+  ],
+  "pngs_visually_reviewed": 2,
+  "svg_text_editable": true,
+  "same_environment_reproduction_files": [
+    {
+      "file": "pilot_inventory.csv",
+      "sha256": "0574e9736e74e72776511ad7b99e059e959020f9e4ff4e2402bb264e17bdd2f7"
+    },
+    {
+      "file": "main_coverage.csv",
+      "sha256": "e8be26ac1180463bc806a59622ef942854cefe04f48db873a30581adc367d1bb"
+    },
+    {
+      "file": "pilot_inventory.svg",
+      "sha256": "a092a0d8535d4254e7fcf86b22857812dc9bef399f1aa3068e862f26d0419732"
+    },
+    {
+      "file": "main_coverage.svg",
+      "sha256": "49ffe09a48c6f0f0a17f826a453fa88f0c08a4b199f54322b99dd3347f391c92"
+    },
+    {
+      "file": "pilot_inventory.png",
+      "sha256": "61ff605fcb0a8b691875d12cf693608a12019eb8b27ffd8f8a7a9aef0506be85"
+    },
+    {
+      "file": "main_coverage.png",
+      "sha256": "1c78c4bed2853a761b5e5bef43edc4fe2dca0d8b53f2051c9909bbcb4ffb2301"
+    }
+  ],
+  "local_links_checked": 62,
+  "anchors_checked": 1,
+  "markdown_tables_checked": 8,
+  "source_mutations": 0,
+  "python_version": "3.12.14",
+  "matplotlib_version": "3.10.7",
+  "main_chart_from_audited_csv": "NOT_RUN",
+  "validation_outcome": "PASS",
+  "output_files": [
+    {
+      "path": ".github/workflows/sem48-reproduction.yml",
+      "sha256": "2b434ae36f8202ebef43d7e1e789e465fcfa4f9513980f339e3566f9862db8c0"
+    },
+    {
+      "path": "docs/evidence/SEM-48/CHECKS.md",
+      "sha256": "8fdf3250bc44a3de4941de1f115c659212b88c37b03670210312cdcac111a63f"
+    },
+    {
+      "path": "slides/inputs/VINH.md",
+      "sha256": "de6f7e0308832e961ce0e03b065fa5a86f277835e3aa9dbb26e1d39a25c190ab"
+    },
+    {
+      "path": "slides/inputs/results/INPUTS.json",
+      "sha256": "c5466ab9413c1dfab8aaba81e94165661b51d0fc92ed09b640f0dbe77ebd3b27"
+    },
+    {
+      "path": "slides/inputs/results/README.md",
+      "sha256": "7c9d5f36a10072e02a9c11af584112acfc692aa084fa3728e814245c9dcf5642"
+    },
+    {
+      "path": "slides/inputs/results/main_coverage.csv",
+      "sha256": "e8be26ac1180463bc806a59622ef942854cefe04f48db873a30581adc367d1bb"
+    },
+    {
+      "path": "slides/inputs/results/main_coverage.png",
+      "sha256": "1c78c4bed2853a761b5e5bef43edc4fe2dca0d8b53f2051c9909bbcb4ffb2301"
+    },
+    {
+      "path": "slides/inputs/results/main_coverage.svg",
+      "sha256": "49ffe09a48c6f0f0a17f826a453fa88f0c08a4b199f54322b99dd3347f391c92"
+    },
+    {
+      "path": "slides/inputs/results/pilot_inventory.csv",
+      "sha256": "0574e9736e74e72776511ad7b99e059e959020f9e4ff4e2402bb264e17bdd2f7"
+    },
+    {
+      "path": "slides/inputs/results/pilot_inventory.png",
+      "sha256": "61ff605fcb0a8b691875d12cf693608a12019eb8b27ffd8f8a7a9aef0506be85"
+    },
+    {
+      "path": "slides/inputs/results/pilot_inventory.svg",
+      "sha256": "a092a0d8535d4254e7fcf86b22857812dc9bef399f1aa3068e862f26d0419732"
+    },
+    {
+      "path": "slides/inputs/results/render_results.py",
+      "sha256": "3ea6a9bba2b179ef4169c97ad93ac8db4fb2206186463fd0814704271667fddc"
+    },
+    {
+      "path": "slides/inputs/results/requirements.txt",
+      "sha256": "843a9a46b848c2c3625e329c99da64aa1da3a08dc8bb91499ab85dbe2dc27ead"
+    },
+    {
+      "path": "slides/inputs/results/tests/test_source_validation.py",
+      "sha256": "f48a36f9a93de3c90a46678543e6d3866a7d04f363861d87091d2b52dee746f2"
+    },
+    {
+      "path": "slides/inputs/results/verify_reproduction.py",
+      "sha256": "8169c59fa1cd40c9ecf9d4f55d9a5158c02214506e777f0ced05924ec6d33800"
+    },
+    {
+      "path": "tasks/backlog/SEM-48.md",
+      "sha256": "d24a2b5010bd3b412c068772ef4cbfa35e84175e590b71b4cdea0ff909c524fa"
+    },
+    {
+      "path": "docs/evidence/SEM-48/WINDOWS_REPRODUCTION.json",
+      "sha256": "872da5d4198e53805223aa89adf962f6a28a0536cf467b3a71f7ab2989817428"
+    }
+  ],
+  "review_fixes": {
+    "comment": "https://github.com/ThanhTris/Seminar-IE307/pull/32#issuecomment-6918001419",
+    "regression_tests": 7,
+    "regression_tests_outcome": "PASS",
+    "pinned_git_blob_hash_checked_exactly": true,
+    "worktree_normalization": "CRLF_TO_LF_ONLY",
+    "svg_newline": "LF_EXPLICIT",
+    "main_merged": "1475e67c7b65b4ffcaa540d10da76e6d1bfaab00",
+    "source_commit_retained_in_main": true,
+    "source_files_unchanged_after_main_merge": 71,
+    "all_six_artifacts_unchanged": true,
+    "windows_native_outcome": "PASS",
+    "windows_ci_run": "https://github.com/ThanhTris/Seminar-IE307/actions/runs/44093928981",
+    "windows_python_version": "3.12.10",
+    "windows_core_autocrlf": true,
+    "windows_crlf_normalized_source_files": 51,
+    "windows_artifacts_matching_sha256": 6,
+    "windows_report_sha256": "872da5d4198e53805223aa89adf962f6a28a0536cf467b3a71f7ab2989817428",
+    "windows_tested_code_unchanged": true,
+    "windows_test_log_sha256": "4db8dc699aaf22babea5895d710d7a03fdc76884fd4be39eaed7a8ef1e90ef22"
+  }
+}

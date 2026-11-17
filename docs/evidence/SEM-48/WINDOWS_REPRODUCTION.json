@@ -1,0 +1,49 @@
+{
+  "scope": "SEM48_CROSS_PLATFORM_REPRODUCTION_NOT_EXPERIMENTAL_DATA",
+  "platform": "Windows",
+  "python_version": "3.12.10",
+  "tested_head": "e6bd0e268ed9f72fb8b3313a81eb9d67d3ccc526",
+  "pull_request_head": "bccca0757c7f68966b44d229eb3bf4de114eb858",
+  "code_sha256": {
+    "slides/inputs/results/render_results.py": "3ea6a9bba2b179ef4169c97ad93ac8db4fb2206186463fd0814704271667fddc",
+    "slides/inputs/results/verify_reproduction.py": "8169c59fa1cd40c9ecf9d4f55d9a5158c02214506e777f0ced05924ec6d33800",
+    "slides/inputs/results/tests/test_source_validation.py": "f48a36f9a93de3c90a46678543e6d3866a7d04f363861d87091d2b52dee746f2"
+  },
+  "source_revision": "fce39b0df8086ede8d91d26171bf00436b83da31",
+  "core_autocrlf": "true",
+  "source_files_checked": 71,
+  "crlf_normalized_source_files": 51,
+  "artifacts": [
+    {
+      "file": "pilot_inventory.csv",
+      "sha256": "0574e9736e74e72776511ad7b99e059e959020f9e4ff4e2402bb264e17bdd2f7",
+      "matches_committed_sha256": true
+    },
+    {
+      "file": "main_coverage.csv",
+      "sha256": "e8be26ac1180463bc806a59622ef942854cefe04f48db873a30581adc367d1bb",
+      "matches_committed_sha256": true
+    },
+    {
+      "file": "pilot_inventory.svg",
+      "sha256": "a092a0d8535d4254e7fcf86b22857812dc9bef399f1aa3068e862f26d0419732",
+      "matches_committed_sha256": true
+    },
+    {
+      "file": "main_coverage.svg",
+      "sha256": "49ffe09a48c6f0f0a17f826a453fa88f0c08a4b199f54322b99dd3347f391c92",
+      "matches_committed_sha256": true
+    },
+    {
+      "file": "pilot_inventory.png",
+      "sha256": "61ff605fcb0a8b691875d12cf693608a12019eb8b27ffd8f8a7a9aef0506be85",
+      "matches_committed_sha256": true
+    },
+    {
+      "file": "main_coverage.png",
+      "sha256": "1c78c4bed2853a761b5e5bef43edc4fe2dca0d8b53f2051c9909bbcb4ffb2301",
+      "matches_committed_sha256": true
+    }
+  ],
+  "outcome": "PASS"
+}
