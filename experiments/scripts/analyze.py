@@ -15,7 +15,7 @@ import sys
 
 import export_logs as contract
 
-VERSION = "0.2.0"
+VERSION = "0.3.0"
 ROOT = Path(__file__).resolve().parents[2]
 
 
@@ -202,6 +202,35 @@ def group_identity(manifest, source_context=None):
                                     separators=(",", ":")).encode()).hexdigest()
 
 
+def e04_reconnect_elapsed(manifest, android, estimate):
+    """Map declared Android UTC milestones only after checking same-boot anchors."""
+    obs = manifest["observation"]
+    offline, reconnect = (obs["milestones"][k] for k in ("offline_utc", "reconnect_utc"))
+    if estimate is None or not all((obs["start_utc"], obs["end_utc"], offline, reconnect,
+                                    obs["boot_session_id"])):
+        return None, "E04_RECOVERY_CLOCK_UNVERIFIED"
+    start, end = obs["start_elapsed_realtime_ms"], obs["end_elapsed_realtime_ms"]
+    anchors = [utc_ms(e["timestamp_utc"]) - e["elapsed_realtime_ms"] for e in android
+               if e["boot_session_id"] == obs["boot_session_id"]]
+    if not anchors or not contract.uint(start) or not contract.uint(end):
+        return None, "E04_RECOVERY_CLOCK_UNVERIFIED"
+    utc_start, utc_end = utc_ms(obs["start_utc"]), utc_ms(obs["end_utc"])
+    before = max(utc_ms(s["client_receive_utc"]) for s in manifest["clock"]["before_samples"])
+    after = min(utc_ms(s["client_send_utc"]) for s in manifest["clock"]["after_samples"])
+    tolerance = 2 * estimate[1]
+    if (before > utc_start or after < utc_end or
+            any(abs(anchor - boundary) > tolerance for anchor in anchors
+                for boundary in (utc_start - start, utc_end - end))):
+        return None, "E04_RECOVERY_CLOCK_UNVERIFIED"
+    offline_ms, reconnect_ms = utc_ms(offline), utc_ms(reconnect)
+    if not utc_start <= offline_ms <= reconnect_ms <= utc_end or reconnect_ms - offline_ms < 120000:
+        return None, "E04_OFFLINE_INTERVAL_INVALID"
+    recovery_ms = 1800000 if manifest["mode"] == "PERIODIC" else 300000
+    if utc_end - reconnect_ms < recovery_ms:
+        return None, "E04_RECOVERY_WINDOW_SHORT"
+    return start + reconnect_ms - utc_start, None
+
+
 def analyze_run(run):
     """One run remains one sample. Counts are evidence, never invented DB writes."""
     m, events = run["manifest"], run["events"]
@@ -274,15 +303,57 @@ def analyze_run(run):
                               "location": location(group[0]), "duration_ms": duration,
                               "outcome": finished[0]["outcome"] if finished else None})
 
+    clock, clock_reason = m["clock"], None
+    estimate = clock_estimate(clock)
+    android = [e for e in events if e["origin"] == "ANDROID"]
+    if estimate and android:
+        before_end = max(utc_ms(s["client_receive_utc"]) for s in clock["before_samples"])
+        after_start = min(utc_ms(s["client_send_utc"]) for s in clock["after_samples"])
+        if before_end > min(utc_ms(e["timestamp_utc"]) for e in android) or after_start < max(
+                utc_ms(e["timestamp_utc"]) for e in android):
+            clock_reason = "CLOCK_SAMPLES_DO_NOT_BRACKET_EVENTS"
+        anchors = {}
+        for e in android:
+            if e["boot_session_id"]:
+                value = utc_ms(e["timestamp_utc"]) - e["elapsed_realtime_ms"]
+                anchor = anchors.setdefault(e["boot_session_id"], value)
+                if abs(value - anchor) > 2 * estimate[1]:
+                    clock_reason = "ANDROID_UTC_DISCONTINUITY"
+        if clock_reason:
+            estimate = None
+    if estimate is None:
+        clock_reason = clock_reason or "CLOCK_NOT_USABLE"
+        clock = {"controlled": False}
+
     target = obs["target_version"]
     def target_apply(e):
         return (e["event_type"] == "snapshot_applied" and e["data_version"] == target and
                 target is not None and e["source"] != "MANUAL" and
                 (expected_source is None or e["source"] == expected_source))
 
+    recovery_verified = True
+    reconnect_elapsed = None
+    if m["case_id"] == "E04":
+        reconnect_elapsed, recovery_flag = e04_reconnect_elapsed(m, android, estimate)
+        recovery_verified = recovery_flag is None
+        if recovery_flag:
+            flags.add(recovery_flag)
+
     applied = sorted([e for e in inside if target_apply(e)],
                      key=lambda e: (e["elapsed_realtime_ms"], e["event_id"]))
     late = [e for e in buckets["late"] if target_apply(e)]
+    if m["case_id"] == "E04":
+        tolerance = 2 * estimate[1] if estimate else 0
+        if reconnect_elapsed is not None:
+            if any(e["elapsed_realtime_ms"] < reconnect_elapsed - tolerance for e in applied):
+                flags.add("E04_APPLIED_BEFORE_RECONNECT")
+            if any(abs(e["elapsed_realtime_ms"] - reconnect_elapsed) <= tolerance for e in applied):
+                flags.add("E04_APPLY_TIME_UNVERIFIED")
+                recovery_verified = False
+        applied = [e for e in applied if reconnect_elapsed is not None and
+                   e["elapsed_realtime_ms"] > reconnect_elapsed + tolerance]
+        late = [e for e in late if reconnect_elapsed is not None and
+                e["elapsed_realtime_ms"] > reconnect_elapsed + tolerance]
     completion = applied[0] if applied else None
     if target is None:
         flags.add("TARGET_UNDECLARED")
@@ -305,7 +376,8 @@ def analyze_run(run):
                         monotonic_delta(e, enqueued) is not None]
             receipt_enqueue_ms = monotonic_delta(only(receipts), enqueued)
     if m["execution_status"] == "COMPLETED" and ((m["outcome"] == "SUCCESS") != bool(applied)):
-        flags.add("OUTCOME_EVIDENCE_UNVERIFIED" if not applied and not window_verified else
+        flags.add("OUTCOME_EVIDENCE_UNVERIFIED" if not applied and
+                  (not window_verified or not recovery_verified) else
                   "OUTCOME_EVIDENCE_CONFLICT")
 
     updated = only([e for e in events if e["event_type"] == "server_updated" and e["data_version"] == target])
@@ -313,27 +385,6 @@ def analyze_run(run):
             e["event_type"] == "push_send_skipped" and e["data_version"] == target and
             e["update_id"] == updated["update_id"] for e in events)):
         flags.add("FAULT_SKIP_EVIDENCE_MISSING")
-    clock, clock_reason = m["clock"], None
-    estimate = clock_estimate(clock)
-    android = [e for e in events if e["origin"] == "ANDROID"]
-    if estimate and android:
-        before_end = max(utc_ms(s["client_receive_utc"]) for s in clock["before_samples"])
-        after_start = min(utc_ms(s["client_send_utc"]) for s in clock["after_samples"])
-        if before_end > min(utc_ms(e["timestamp_utc"]) for e in android) or after_start < max(
-                utc_ms(e["timestamp_utc"]) for e in android):
-            clock_reason = "CLOCK_SAMPLES_DO_NOT_BRACKET_EVENTS"
-        anchors = {}
-        for e in android:
-            if e["boot_session_id"]:
-                value = utc_ms(e["timestamp_utc"]) - e["elapsed_realtime_ms"]
-                anchor = anchors.setdefault(e["boot_session_id"], value)
-                if abs(value - anchor) > 2 * estimate[1]:
-                    clock_reason = "ANDROID_UTC_DISCONTINUITY"
-        if clock_reason:
-            estimate = None
-    if estimate is None:
-        clock_reason = clock_reason or "CLOCK_NOT_USABLE"
-        clock = {"controlled": False}
     end_to_end = cross_clock_delta(updated, completion, clock)
     receipts = []
     if updated:
@@ -363,11 +414,13 @@ def analyze_run(run):
                 "window_events_verified": bool(window_verified),
                 "observed_completion": ("NOT_RUN" if m["execution_status"] == "NOT_RUN" else
                                         "APPLIED_TARGET" if applied else "LATE_TARGET" if late else
-                                        "NO_TARGET_EVIDENCE" if window_verified else "UNCERTAIN_WINDOW"),
+                                        "NO_TARGET_EVIDENCE" if window_verified and recovery_verified else
+                                        "UNCERTAIN_WINDOW"),
                 "eligible": (m["data_kind"] == "OBSERVED" and m["run_phase"] == "main" and
                              m["validity"] == "VALID" and m["execution_status"] == "COMPLETED" and not flags),
-                "target_applied_in_window": bool(applied) if window_verified or applied else None,
-                "late_target_applied_count": len(late) if window_verified else None,
+                "target_applied_in_window": bool(applied) if
+                                            (window_verified and recovery_verified) or applied else None,
+                "late_target_applied_count": len(late) if window_verified and recovery_verified else None,
                 "natural_periodic_cycles": len(natural_cycles) if window_verified else None,
                 "work_attempt_count": len(attempts) if window_verified else None,
                 "get_started_count": len({e["network_call_id"] for e in inside if

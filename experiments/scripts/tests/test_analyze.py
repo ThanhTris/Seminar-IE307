@@ -336,6 +336,122 @@ class MetricTests(unittest.TestCase):
         self.assertNotIn("FAULT_SKIP_EVIDENCE_MISSING", self.analyze()["row"]["flags"])
 
 
+class CaseEvidenceTests(unittest.TestCase):
+    setUp = MetricTests.setUp
+    load = InputTests.load
+    controlled_clock = MetricTests.controlled_clock
+
+    def observed_case(self, case, mode, seconds):
+        self.manifest.update(case_id=case, mode=mode, data_kind="OBSERVED", run_phase="main")
+        self.manifest["build"]["candidate_gate_passed"] = True
+        obs = self.manifest["observation"]
+        obs.update(planned_window_seconds=seconds, actual_duration_ms=seconds * 1000,
+                   end_elapsed_realtime_ms=30000 + seconds * 1000,
+                   end_utc=(datetime(2026, 11, 3, tzinfo=timezone.utc) +
+                            timedelta(seconds=seconds)).isoformat().replace("+00:00", "Z"))
+        self.events = [e for e in self.events if e["event_type"] not in
+                       {"push_send_accepted", "push_received", "work_enqueued"}]
+        for event in self.events:
+            event["mode"] = mode
+            if event["origin"] == "ANDROID":
+                event.update(source="PERIODIC" if mode != "PUSH" else "PUSH", signal_ids=[])
+
+    def e04(self, mode="PUSH"):
+        self.observed_case("E04", mode, 1920 if mode == "PERIODIC" else 420)
+        self.manifest["observation"]["milestones"].update(
+            offline_utc="2026-11-03T00:00:00Z", reconnect_utc="2026-11-03T00:02:00Z")
+        self.controlled_clock()
+        end = datetime.fromisoformat(self.manifest["observation"]["end_utc"].replace("Z", "+00:00"))
+        for sample in self.manifest["clock"]["after_samples"]:
+            sample.update(client_send_utc=(end + timedelta(seconds=1)).isoformat().replace("+00:00", "Z"),
+                          client_receive_utc=(end + timedelta(seconds=1, milliseconds=10)).isoformat().replace("+00:00", "Z"),
+                          server_utc=(end + timedelta(seconds=2, milliseconds=5)).isoformat().replace("+00:00", "Z"))
+
+    def move_apply_chain(self, applied_second):
+        times = {"work_started": applied_second - 3, "snapshot_fetch_started": applied_second - 2,
+                 "snapshot_fetch_completed": applied_second - 1, "snapshot_applied": applied_second}
+        for event in self.events:
+            if event["event_type"] in times:
+                seconds = times[event["event_type"]]
+                event.update(elapsed_realtime_ms=30000 + seconds * 1000,
+                             timestamp_utc=(datetime(2026, 11, 3, tzinfo=timezone.utc) +
+                                            timedelta(seconds=seconds)).isoformat().replace("+00:00", "Z"))
+
+    def analyze(self):
+        return analyzer.analyze_run(self.load("main"))
+
+    def test_e04_apply_before_reconnect_is_excluded_and_outcome_preserved(self):
+        self.e04()
+        row = self.analyze()["row"]
+        self.assertEqual(row["outcome"], "SUCCESS")
+        self.assertFalse(row["eligible"])
+        self.assertFalse(row["target_applied_in_window"])
+        self.assertIn("E04_APPLIED_BEFORE_RECONNECT", row["flags"])
+        self.assertIsNone(row["sync_ms"])
+
+    def test_e04_apply_after_reconnect_is_eligible_for_both_modes(self):
+        for mode in ("PUSH", "PERIODIC"):
+            self.setUp()
+            self.e04(mode)
+            self.move_apply_chain(200)
+            row = self.analyze()["row"]
+            self.assertEqual(row["flags"], "")
+            self.assertTrue(row["eligible"])
+            self.assertEqual(row["observed_completion"], "APPLIED_TARGET")
+
+    def test_e04_missing_milestone_or_unverified_clock_is_excluded(self):
+        for problem in ("reconnect", "offline", "clock", "host", "anchor", "jump"):
+            self.setUp()
+            self.e04()
+            self.move_apply_chain(200)
+            if problem in {"reconnect", "offline"}:
+                self.manifest["observation"]["milestones"][problem + "_utc"] = None
+            elif problem == "clock":
+                self.manifest["clock"]["controlled"] = False
+            elif problem == "host":
+                self.manifest["clock"]["client_clock"] = "HOST"
+            elif problem == "anchor":
+                self.manifest["observation"]["start_elapsed_realtime_ms"] += 1000
+            else:
+                next(e for e in self.events if e["event_type"] == "snapshot_applied")[
+                    "timestamp_utc"] = "2026-11-03T00:03:30Z"
+            row = self.analyze()["row"]
+            self.assertFalse(row["eligible"], problem)
+            self.assertIsNone(row["target_applied_in_window"], problem)
+            self.assertEqual(row["observed_completion"], "UNCERTAIN_WINDOW", problem)
+            self.assertIn("E04_RECOVERY_CLOCK_UNVERIFIED", row["flags"], problem)
+
+    def test_e04_full_window_timeout_remains_in_denominator(self):
+        self.e04()
+        self.move_apply_chain(200)
+        self.events = [e for e in self.events if e["event_type"] != "snapshot_applied"]
+        self.manifest.update(outcome="TIMEOUT", reason_codes=["TIMEOUT"])
+        result = self.analyze()
+        self.assertTrue(result["row"]["eligible"])
+        self.assertEqual(result["row"]["outcome"], "TIMEOUT")
+        self.assertIsNone(result["row"]["sync_ms"])
+        self.assertEqual(analyzer.summarize([result])[0]["n_eligible"], 1)
+
+    def test_e04_apply_at_reconnect_precision_boundary_remains_unverified(self):
+        self.e04()
+        self.move_apply_chain(120)
+        row = self.analyze()["row"]
+        self.assertFalse(row["eligible"])
+        self.assertIsNone(row["target_applied_in_window"])
+        self.assertIn("E04_APPLY_TIME_UNVERIFIED", row["flags"])
+
+    def test_e04_short_offline_or_recovery_interval_is_excluded(self):
+        for reconnect, flag in (("00:01:00", "E04_OFFLINE_INTERVAL_INVALID"),
+                                ("00:03:00", "E04_RECOVERY_WINDOW_SHORT")):
+            self.setUp()
+            self.e04()
+            self.move_apply_chain(200)
+            self.manifest["observation"]["milestones"]["reconnect_utc"] = "2026-11-03T" + reconnect + "Z"
+            row = self.analyze()["row"]
+            self.assertFalse(row["eligible"])
+            self.assertIn(flag, row["flags"])
+
+
 class OutputTests(unittest.TestCase):
     load = InputTests.load
     setUp = MetricTests.setUp
