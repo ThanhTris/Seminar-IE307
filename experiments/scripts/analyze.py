@@ -231,6 +231,27 @@ def e04_reconnect_elapsed(manifest, android, estimate):
     return start + reconnect_ms - utc_start, None
 
 
+def e06_fetch_verified(applied, requests, fetches):
+    """Require a successful target fetch in the applying periodic work attempt."""
+    key = tuple(applied[k] for k in ("request_id", "work_id", "work_attempt"))
+    started = only([e for e in requests[applied["request_id"]] if e["event_type"] == "work_started"
+                    and e["work_attempt"] == applied["work_attempt"]])
+    for group in fetches.values():
+        began = only([e for e in group if e["event_type"] == "snapshot_fetch_started"])
+        finished = only([e for e in group if e["event_type"] == "snapshot_fetch_completed"])
+        if began is None or finished is None:
+            continue
+        if (tuple(finished[k] for k in ("request_id", "work_id", "work_attempt")) == key and
+                all(e["source"] == "PERIODIC" for e in (began, finished, applied)) and
+                finished["outcome"] == "success" and finished["http_status"] == 200 and
+                finished["data_version"] == applied["data_version"] and
+                monotonic_delta(started, began) is not None and
+                monotonic_delta(began, finished) is not None and
+                monotonic_delta(finished, applied) is not None):
+            return True
+    return False
+
+
 def analyze_run(run):
     """One run remains one sample. Counts are evidence, never invented DB writes."""
     m, events = run["manifest"], run["events"]
@@ -354,6 +375,13 @@ def analyze_run(run):
                    e["elapsed_realtime_ms"] > reconnect_elapsed + tolerance]
         late = [e for e in late if reconnect_elapsed is not None and
                 e["elapsed_realtime_ms"] > reconnect_elapsed + tolerance]
+    if m["case_id"] == "E06":
+        verified_ids = {e["event_id"] for e in applied + late if e06_fetch_verified(e, requests, fetches)}
+        if len(verified_ids) != len(applied) + len(late):
+            flags.add("E06_FETCH_CHAIN_UNVERIFIED")
+            recovery_verified = False
+        applied = [e for e in applied if e["event_id"] in verified_ids]
+        late = [e for e in late if e["event_id"] in verified_ids]
     completion = applied[0] if applied else None
     if target is None:
         flags.add("TARGET_UNDECLARED")

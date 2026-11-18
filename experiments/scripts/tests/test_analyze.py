@@ -451,6 +451,84 @@ class CaseEvidenceTests(unittest.TestCase):
             self.assertFalse(row["eligible"])
             self.assertIn(flag, row["flags"])
 
+    def e06(self):
+        self.observed_case("E06", "HYBRID", 2700)
+        updated = next(e for e in self.events if e["event_type"] == "server_updated")
+        skipped = copy.deepcopy(updated)
+        skipped.update(event_id="00000000-0000-4000-8000-000000000099", event_type="push_send_skipped",
+                       source="PUSH", outcome="skipped", reason="FAULT_INJECTION_SKIP")
+        self.events.append(skipped)
+
+    def test_e06_complete_fetch_chain_is_eligible_independent_of_input_order(self):
+        self.e06()
+        self.events.reverse()
+        row = self.analyze()["row"]
+        self.assertTrue(row["eligible"])
+        self.assertEqual(row["flags"], "")
+        self.assertEqual(row["get_started_count"], 1)
+        self.assertEqual(row["observed_completion"], "APPLIED_TARGET")
+
+    def test_e06_missing_fetch_stages_are_unverified(self):
+        for missing in ({"snapshot_fetch_started"}, {"snapshot_fetch_completed"},
+                        {"snapshot_fetch_started", "snapshot_fetch_completed"}):
+            self.setUp()
+            self.e06()
+            self.events = [e for e in self.events if e["event_type"] not in missing]
+            row = self.analyze()["row"]
+            self.assertEqual(row["outcome"], "SUCCESS")
+            self.assertFalse(row["eligible"])
+            self.assertIsNone(row["target_applied_in_window"])
+            self.assertIsNone(row["sync_ms"])
+            self.assertIn("E06_FETCH_CHAIN_UNVERIFIED", row["flags"])
+
+    def test_e06_different_request_work_or_attempt_cannot_prove_apply(self):
+        for field, value in (("request_id", "other-request"),
+                             ("work_id", "00000000-0000-4000-8000-000000000098"),
+                             ("work_attempt", 1)):
+            self.setUp()
+            self.e06()
+            for event in self.events:
+                if event["event_type"] in {"snapshot_fetch_started", "snapshot_fetch_completed"}:
+                    event[field] = value
+            if field == "work_id":
+                with self.assertRaisesRegex(analyzer.AnalysisError, "REQUEST_CORRELATION_CONFLICT"):
+                    self.analyze()
+            else:
+                row = self.analyze()["row"]
+                self.assertFalse(row["eligible"])
+                self.assertIn("E06_FETCH_CHAIN_UNVERIFIED", row["flags"])
+
+    def test_e06_fetch_must_succeed_for_target_version(self):
+        for change in ({"data_version": 2}, {"http_status": 500, "outcome": "failure", "reason": "HTTP_ERROR"}):
+            self.setUp()
+            self.e06()
+            next(e for e in self.events if e["event_type"] == "snapshot_fetch_completed").update(change)
+            row = self.analyze()["row"]
+            self.assertFalse(row["eligible"])
+            self.assertIn("E06_FETCH_CHAIN_UNVERIFIED", row["flags"])
+
+    def test_e06_fetch_must_follow_work_start_and_precede_apply(self):
+        for kind, seconds in (("snapshot_fetch_started", 3), ("snapshot_fetch_completed", 4),
+                              ("snapshot_fetch_completed", 8)):
+            self.setUp()
+            self.e06()
+            event = next(e for e in self.events if e["event_type"] == kind)
+            event.update(elapsed_realtime_ms=30000 + seconds * 1000,
+                         timestamp_utc="2026-11-03T00:00:0" + str(seconds) + "Z")
+            row = self.analyze()["row"]
+            self.assertFalse(row["eligible"])
+            self.assertIn("E06_FETCH_CHAIN_UNVERIFIED", row["flags"])
+
+    def test_e06_full_window_timeout_does_not_require_an_unobserved_fetch(self):
+        self.e06()
+        self.manifest.update(outcome="TIMEOUT", reason_codes=["TIMEOUT"])
+        self.events = [e for e in self.events if e["event_type"] not in
+                       {"snapshot_applied", "snapshot_fetch_started", "snapshot_fetch_completed"}]
+        result = self.analyze()
+        self.assertTrue(result["row"]["eligible"])
+        self.assertEqual(result["row"]["outcome"], "TIMEOUT")
+        self.assertEqual(analyzer.summarize([result])[0]["n_eligible"], 1)
+
 
 class OutputTests(unittest.TestCase):
     load = InputTests.load
