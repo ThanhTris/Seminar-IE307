@@ -1,0 +1,31 @@
+{
+  "run_id": "run-sem41-pilot-e03-2-20261115-0d277e",
+  "case_id": "E03",
+  "repetition": 2,
+  "run_phase": "pilot",
+  "execution_status": "ABORTED",
+  "outcome": "FAILURE",
+  "candidate_gate_passed": false,
+  "app_source_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
+  "server_source_commit": "c77772e426c00ae464240f00942f8368c638aaa8",
+  "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
+  "reason_codes": [
+    "IDLE_RESTORE_NOT_CONFIRMED"
+  ],
+  "mode": "PERIODIC",
+  "stage": "FINISHED",
+  "last_updated_utc": "2026-11-15T05:55:26.133Z",
+  "work_id": "e4b3352d-4666-42d0-9f9a-57effd491d1b",
+  "cached_version_before": 6,
+  "start_utc": "2026-11-15T05:30:19.248Z",
+  "start_elapsed_realtime_ms": 9347960,
+  "idle_start_utc": "2026-11-15T05:35:20.367Z",
+  "idle_start_elapsed_realtime_ms": 9649110,
+  "target_version": 7,
+  "update_id": "update-run-sem41-pilot-e03-2-20261115-0d277e",
+  "update_received_utc": "2026-11-15T05:35:20.901Z",
+  "update_utc": "2026-11-15T05:35:20.653Z",
+  "end_utc": "2026-11-15T05:55:21.990Z",
+  "end_elapsed_realtime_ms": 10850680,
+  "cleanup_passed": true
+}

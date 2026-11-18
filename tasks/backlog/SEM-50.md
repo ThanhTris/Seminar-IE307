@@ -2,8 +2,8 @@
 
 - Trạng thái: **In Progress** (Project).
 - Trạng thái đầu vào: **Đang thực hiện**.
-- Còn chờ: Nên nhận: [SEM-43](SEM-43.md), [SEM-45](SEM-45.md).
-- Đối chiếu Project: 2026-11-15 12:27:57 UTC.
+- Còn chờ: Nên nhận: [SEM-45](SEM-45.md).
+- Đối chiếu Project: 2026-11-18 02:33:31 UTC.
 - Người thực hiện duy nhất: **Tuấn** (`mtuan2491`).
 - Hạn: **09/11/2026 22:00 (UTC+7)**.
 - Công sức: 2/100 — Nghiên cứu/lập luận.
@@ -27,12 +27,12 @@ Tài liệu nền đã có: [Kế hoạch/phạm vi](../../docs/PLAN.md) · [K�
 | Hoàn tất | [SEM-20 — Đọc bài nghiên cứu thứ nhất và ghi chú nguồn](SEM-20.md) | Tuấn | `research/notes/PAPER_1.md`<br>`research/metadata/paper-1.bib` | `docs/evidence/SEM-20/CHECKS.md` | Done |
 | Hoàn tất | [SEM-21 — Đọc bài nghiên cứu thứ hai và ghi chú nguồn](SEM-21.md) | Tâm | `research/notes/PAPER_2.md`<br>`research/metadata/paper-2.bib` | `docs/evidence/SEM-21/CHECKS.md` | Done |
 | Hoàn tất | [SEM-22 — Đối chiếu hai bài nghiên cứu với API push hiện hành](SEM-22.md) | Trang | `research/notes/API_CROSSCHECK.md` | `docs/evidence/SEM-22/CHECKS.md` | Done |
-| Hoàn tất | [SEM-43 — Chốt SUMMARY và bộ evidence thực nghiệm](SEM-43.md) | Vinh | `experiments/SUMMARY.md` | `docs/evidence/SEM-43/CHECKS.md` | Todo |
+| Hoàn tất | [SEM-43 — Chốt SUMMARY và bộ evidence thực nghiệm](SEM-43.md) | Vinh | `experiments/SUMMARY.md` | `docs/evidence/SEM-43/CHECKS.md` | Done |
 | Hoàn tất | [SEM-45 — Viết parser log và sinh results.csv](SEM-45.md) | Tuấn | `experiments/scripts/analyze.*`<br>`experiments/results.csv` | `docs/evidence/SEM-45/CHECKS.md` | In Progress |
 
 Đây là danh sách đầu ra cần bàn giao, chưa phải xác nhận các file đã tồn tại. Trước khi dùng, nhận đúng artifact/commit/config và CHECKS từ task nguồn.
 
-Status nguồn được đối chiếu Project lúc **2026-11-15 12:27:57 UTC**; mở link task nguồn để xem cập nhật mới hơn.
+Status nguồn được đối chiếu Project lúc **2026-11-18 02:33:31 UTC**; mở link task nguồn để xem cập nhật mới hơn.
 <!-- task-inputs:end -->
 
 

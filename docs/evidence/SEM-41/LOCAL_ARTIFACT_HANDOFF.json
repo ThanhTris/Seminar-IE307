@@ -1,0 +1,43 @@
+{
+  "utc": "2026-11-15T18:52:30.361Z",
+  "data_kind": "OBSERVED",
+  "scope": "LOCAL_ARTIFACT_HANDOFF_NOT_RELEASE_FREEZE",
+  "candidate_status": "NOT_READY",
+  "candidate_gate_passed": false,
+  "profile": "FIREBASE_NOT_CONFIGURED",
+  "app_source_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
+  "server_source_commit": "c77772e426c00ae464240f00942f8368c638aaa8",
+  "artifacts": {
+    "com.thanhtris.seminarie307": {
+      "file": ".local/sem41/candidate-handoff-nofirebase/application.apk",
+      "sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
+      "bytes": 15043499,
+      "matches_installed_measured_apk": true
+    },
+    "com.thanhtris.seminarie307.test": {
+      "file": ".local/sem41/candidate-handoff-nofirebase/instrumentation.apk",
+      "sha256": "6d38f794e7df9225926941394ae63db0afce9d365080ab3e69899d402992b4d8",
+      "bytes": 1111124,
+      "matches_installed_measured_apk": true
+    }
+  },
+  "unit_followup_source_commit": "1f79ee93e9a52af2b21c82372f23a6ac684d3ceb",
+  "unit_tests": {
+    "tests": 32,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "runtime_source_unchanged_by_unit_followup": true,
+  "new_apk_install_performed": false,
+  "firebase_credentials_included": false,
+  "app_database_or_user_data_included": false,
+  "release_manifest_modified": false,
+  "release_owner": "SEM-37",
+  "notes": [
+    "These APKs are the exact installed no-Firebase debug artifacts used in SEM-41 captures.",
+    "Checksums and local binaries are provided as handoff inputs; Project Done is not candidate gate approval.",
+    "No APK/config replacement or retroactive promotion of pilot runs to main.",
+    "Firebase/E05 integration evidence and final candidate/profile approval remain outside this no-Firebase build handoff."
+  ]
+}

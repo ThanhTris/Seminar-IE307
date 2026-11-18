@@ -1,0 +1,17 @@
+{
+  "group_totals": {
+    "n_input": 12,
+    "n_eligible": 0,
+    "n_excluded": 12,
+    "n_complete": 0
+  },
+  "group_completion_rates_all_null": true,
+  "ref": "1a0c667c93391553cd08f054407d7eb04be2d4ef",
+  "rows": 12,
+  "exact_bytes_equal": true,
+  "csv_sha256": "49d4f9e7c533f50f17fd429783fabb4afde15f27ad7a0c1e0e0c3fc3958fe8b0",
+  "parser_sha256": "cc17e669d6a4ac8ab549f3366bb47018c2c1b0f871f396a39f86db83b8c3c53e",
+  "scope": "UNMERGED_PINNED_PILOT_ONLY_NOT_MAIN",
+  "external_calls": false,
+  "template_matches_pinned_ref": true
+}

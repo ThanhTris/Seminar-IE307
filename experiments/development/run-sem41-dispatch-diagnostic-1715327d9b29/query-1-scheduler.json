@@ -1,0 +1,145 @@
+{
+  "probe_version": "1.0.0",
+  "sdk_int": 37,
+  "utc_epoch_ms": 1794745970873,
+  "elapsed_realtime_ms": 34699500,
+  "namespace": "androidx.work.systemjobscheduler",
+  "package": "com.thanhtris.seminarie307",
+  "read_only": true,
+  "jobs": [
+    {
+      "job_id": 34,
+      "service": "androidx.work.impl.background.systemjob.SystemJobService",
+      "work_id": "e281a253-bd1e-4dfd-9ce1-8e9892e6856a",
+      "generation": 0,
+      "system_job_is_periodic": false,
+      "minimum_latency_ms": 899984,
+      "pending_reasons": [
+        {
+          "code": 9,
+          "name": "PENDING_JOB_REASON_CONSTRAINT_MINIMUM_LATENCY"
+        }
+      ],
+      "job_disappeared_during_query": false,
+      "history": [
+        {
+          "timestamp_ms": 1794745907712,
+          "reasons": [
+            {
+              "code": 12,
+              "name": "PENDING_JOB_REASON_DEVICE_STATE"
+            },
+            {
+              "code": 6,
+              "name": "PENDING_JOB_REASON_CONSTRAINT_CONNECTIVITY"
+            },
+            {
+              "code": 9,
+              "name": "PENDING_JOB_REASON_CONSTRAINT_MINIMUM_LATENCY"
+            },
+            {
+              "code": 14,
+              "name": "PENDING_JOB_REASON_QUOTA"
+            }
+          ]
+        },
+        {
+          "timestamp_ms": 1794745907712,
+          "reasons": [
+            {
+              "code": 12,
+              "name": "PENDING_JOB_REASON_DEVICE_STATE"
+            },
+            {
+              "code": 9,
+              "name": "PENDING_JOB_REASON_CONSTRAINT_MINIMUM_LATENCY"
+            },
+            {
+              "code": 14,
+              "name": "PENDING_JOB_REASON_QUOTA"
+            }
+          ]
+        },
+        {
+          "timestamp_ms": 1794745907712,
+          "reasons": [
+            {
+              "code": 12,
+              "name": "PENDING_JOB_REASON_DEVICE_STATE"
+            },
+            {
+              "code": 9,
+              "name": "PENDING_JOB_REASON_CONSTRAINT_MINIMUM_LATENCY"
+            },
+            {
+              "code": 14,
+              "name": "PENDING_JOB_REASON_QUOTA"
+            }
+          ]
+        },
+        {
+          "timestamp_ms": 1794745907712,
+          "reasons": [
+            {
+              "code": 9,
+              "name": "PENDING_JOB_REASON_CONSTRAINT_MINIMUM_LATENCY"
+            },
+            {
+              "code": 14,
+              "name": "PENDING_JOB_REASON_QUOTA"
+            }
+          ]
+        },
+        {
+          "timestamp_ms": 1794745907712,
+          "reasons": [
+            {
+              "code": 9,
+              "name": "PENDING_JOB_REASON_CONSTRAINT_MINIMUM_LATENCY"
+            }
+          ]
+        }
+      ],
+      "stats": [
+        {
+          "reason": {
+            "code": 6,
+            "name": "PENDING_JOB_REASON_CONSTRAINT_CONNECTIVITY"
+          },
+          "duration_ms": 0
+        },
+        {
+          "reason": {
+            "code": 9,
+            "name": "PENDING_JOB_REASON_CONSTRAINT_MINIMUM_LATENCY"
+          },
+          "duration_ms": 63162
+        },
+        {
+          "reason": {
+            "code": 12,
+            "name": "PENDING_JOB_REASON_DEVICE_STATE"
+          },
+          "duration_ms": 0
+        },
+        {
+          "reason": {
+            "code": 13,
+            "name": "PENDING_JOB_REASON_JOB_SCHEDULER_OPTIMIZATION"
+          },
+          "duration_ms": 0
+        },
+        {
+          "reason": {
+            "code": 14,
+            "name": "PENDING_JOB_REASON_QUOTA"
+          },
+          "duration_ms": 0
+        }
+      ]
+    }
+  ],
+  "probe_dex_sha256": "526437810fb9fce101fd6dfa866ecdd5af3b7283f9c89cd9f23d941a58854326",
+  "target_process_unchanged_across_query": true,
+  "target_process_present_before_query": true
+}

@@ -1,0 +1,52 @@
+{
+  "data_kind": "OBSERVED",
+  "scope": "AUDIT_TOOL_REVIEW_FIX_VALIDATION_NOT_NEW_MEASUREMENTS",
+  "review_helper_commit": "7ce599d52ba5035bbd62f9d1045ee72bf71f0ba2",
+  "comments_addressed": [
+    "https://github.com/ThanhTris/Seminar-IE307/pull/29#issuecomment-6897622590",
+    "https://github.com/ThanhTris/Seminar-IE307/pull/29#issuecomment-6898399821"
+  ],
+  "fixes": [
+    "E04 rejects target apply before reconnect without changing observed events/outcome",
+    "Missing cleanup checkpoint yields INVALID and AUDIT_CLEANUP_EVIDENCE rather than KeyError"
+  ],
+  "tool_tests": {
+    "tests": 74,
+    "failures": 0,
+    "errors": 0,
+    "outcome": "PASS",
+    "raw_log_sha256": "58f5280c1af3ba3f57f0144a3a820b8e6e73b97905cb7d0af211ee4a68499f7e"
+  },
+  "synthetic_regression_tests_are_not_experimental_runs": true,
+  "finished_attempts_rereviewed": 20,
+  "valid_completed_pilot_slots": 8,
+  "invalid_attempts_retained": 12,
+  "e04_reconnect_checks": [
+    {
+      "run_id": "run-sem41-pilot-e04-1-20261115-cda576",
+      "reconnect_elapsed_realtime_ms": 46322380,
+      "target_applied_elapsed_realtime_ms": [
+        47124819
+      ],
+      "post_reconnect_apply_check": "PASS"
+    },
+    {
+      "run_id": "run-sem41-pilot-e04-2-20261115-3bde4f",
+      "reconnect_elapsed_realtime_ms": 48270110,
+      "target_applied_elapsed_realtime_ms": [
+        49201107
+      ],
+      "post_reconnect_apply_check": "PASS"
+    },
+    {
+      "run_id": "run-sem41-pilot-e04-3-20261115-54c1a9",
+      "reconnect_elapsed_realtime_ms": 50209570,
+      "target_applied_elapsed_realtime_ms": [
+        51006333
+      ],
+      "post_reconnect_apply_check": "PASS"
+    }
+  ],
+  "events_or_observation_timestamps_modified": false,
+  "main_runs_completed": 0
+}

@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1152pt" height="648pt" viewBox="0 0 1152 648" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>SEM-48 / Matplotlib</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 648
+L 1152 648
+L 1152 0
+L 0 0
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 207.36 401.76
+L 1071.36 401.76
+L 1071.36 194.4
+L 207.36 194.4
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 207.36 264.097069
+L 873.874286 264.097069
+L 873.874286 203.825455
+L 207.36 203.825455
+z
+" clip-path="url(#pab49a097c3)" style="fill: url(#hed7e62b0df); stroke: #8a98a8; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 207.36 392.334545
+L 355.474286 392.334545
+L 355.474286 332.062931
+L 207.36 332.062931
+z
+" clip-path="url(#pab49a097c3)" style="fill: url(#hed7e62b0df); stroke: #8a98a8; stroke-linejoin: miter"/>
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1">
+      <defs>
+       <path id="mda10aaeebd" d="M 0 0
+L 0 3.5
+" style="stroke: #000000; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#mda10aaeebd" x="207.36" y="401.76" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_1">
+      <text style="font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle" x="207.36" y="420.9175" transform="rotate(-0 207.36 420.9175)">0</text>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_2">
+      <g>
+       <use xlink:href="#mda10aaeebd" x="330.788571" y="401.76" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_2">
+      <text style="font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle" x="330.788571" y="420.9175" transform="rotate(-0 330.788571 420.9175)">5</text>
+     </g>
+    </g>
+    <g id="xtick_3">
+     <g id="line2d_3">
+      <g>
+       <use xlink:href="#mda10aaeebd" x="454.217143" y="401.76" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_3">
+      <text style="font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle" x="454.217143" y="420.9175" transform="rotate(-0 454.217143 420.9175)">10</text>
+     </g>
+    </g>
+    <g id="xtick_4">
+     <g id="line2d_4">
+      <g>
+       <use xlink:href="#mda10aaeebd" x="577.645714" y="401.76" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_4">
+      <text style="font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle" x="577.645714" y="420.9175" transform="rotate(-0 577.645714 420.9175)">15</text>
+     </g>
+    </g>
+    <g id="xtick_5">
+     <g id="line2d_5">
+      <g>
+       <use xlink:href="#mda10aaeebd" x="701.074286" y="401.76" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_5">
+      <text style="font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle" x="701.074286" y="420.9175" transform="rotate(-0 701.074286 420.9175)">20</text>
+     </g>
+    </g>
+    <g id="xtick_6">
+     <g id="line2d_6">
+      <g>
+       <use xlink:href="#mda10aaeebd" x="824.502857" y="401.76" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_6">
+      <text style="font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle" x="824.502857" y="420.9175" transform="rotate(-0 824.502857 420.9175)">25</text>
+     </g>
+    </g>
+    <g id="xtick_7">
+     <g id="line2d_7">
+      <g>
+       <use xlink:href="#mda10aaeebd" x="947.931429" y="401.76" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_7">
+      <text style="font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle" x="947.931429" y="420.9175" transform="rotate(-0 947.931429 420.9175)">30</text>
+     </g>
+    </g>
+    <g id="xtick_8">
+     <g id="line2d_8">
+      <g>
+       <use xlink:href="#mda10aaeebd" x="1071.36" y="401.76" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_8">
+      <text style="font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: middle" x="1071.36" y="420.9175" transform="rotate(-0 1071.36 420.9175)">35</text>
+     </g>
+    </g>
+    <g id="text_9">
+     <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: middle" x="639.36" y="451.457813" transform="rotate(-0 639.36 451.457813)">Số slot cần chạy theo protocol</text>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2">
+    <g id="ytick_1">
+     <g id="line2d_9"/>
+     <g id="text_10">
+      <text style="font-size: 20px; font-family: 'DejaVu Sans'; text-anchor: end" x="193.36" y="241.559699" transform="rotate(-0 193.36 241.559699)">Emulator</text>
+     </g>
+    </g>
+    <g id="ytick_2">
+     <g id="line2d_10"/>
+     <g id="text_11">
+      <text style="font-size: 20px; font-family: 'DejaVu Sans'; text-anchor: end" x="193.36" y="369.797176" transform="rotate(-0 193.36 369.797176)">OPPO</text>
+     </g>
+    </g>
+   </g>
+   <g id="patch_5">
+    <path d="M 207.36 401.76
+L 1071.36 401.76
+" style="fill: none; stroke: #cbd5e1; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_12">
+    <text style="font-size: 19px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #334155" x="886.217143" y="239.778527" transform="rotate(-0 886.217143 239.778527)">27 slot kế hoạch</text>
+   </g>
+   <g id="text_13">
+    <text style="font-size: 19px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #334155" x="367.817143" y="368.016004" transform="rotate(-0 367.817143 368.016004)">6 slot kế hoạch</text>
+   </g>
+  </g>
+  <g id="text_14">
+   <text style="font-weight: 700; font-size: 28px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172638" x="74.88" y="58.32" transform="rotate(-0 74.88 58.32)">Tập main chưa chạy trên cả hai thiết bị</text>
+  </g>
+  <g id="text_15">
+   <text style="font-size: 21px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #475569" x="74.88" y="103.68" transform="rotate(-0 74.88 103.68)">33 slot kế hoạch · run main đã nhận: 0 · NOT_RUN</text>
+  </g>
+  <g id="text_16">
+   <text style="font-size: 21px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172638" x="74.88" y="489.24" transform="rotate(-0 74.88 489.24)">Main n_complete/n_total = 0/0 · median và completion rate: N/A</text>
+  </g>
+  <g id="text_17">
+   <text style="font-size: 18px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #475569" x="74.88" y="544.32" transform="rotate(-0 74.88 544.32)">Chưa quan sát không có nghĩa thất bại; pilot không thay thế main hoặc OPPO.</text>
+  </g>
+  <g id="text_18">
+   <text style="font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #64748b" x="74.88" y="589.68" transform="rotate(-0 74.88 589.68)">Nguồn: EMULATOR_PLAN (27) + RUN_SCHEDULE/SUMMARY (6 OPPO) · snapshot fce39b0</text>
+  </g>
+  <g id="text_19">
+   <text style="font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #475569" x="74.88" y="618.84" transform="rotate(-0 74.88 618.84)">Đây là độ phủ evidence, không phải biểu đồ tỷ lệ thành công hoặc thời gian chạy.</text>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pab49a097c3">
+   <rect x="207.36" y="194.4" width="864" height="207.36"/>
+  </clipPath>
+ </defs>
+ <defs>
+  <pattern id="hed7e62b0df" patternUnits="userSpaceOnUse" x="0" y="0" width="72" height="72">
+   <rect x="0" y="0" width="73" height="73" fill="#dce3eb"/>
+   <path d="M -36 36
+L 36 -36
+M -30 42
+L 42 -30
+M -24 48
+L 48 -24
+M -18 54
+L 54 -18
+M -12 60
+L 60 -12
+M -6 66
+L 66 -6
+M 0 72
+L 72 0
+M 6 78
+L 78 6
+M 12 84
+L 84 12
+M 18 90
+L 90 18
+M 24 96
+L 96 24
+M 30 102
+L 102 30
+M 36 108
+L 108 36
+" style="fill: #8a98a8; stroke: #8a98a8; stroke-width: 1.0; stroke-linecap: butt; stroke-linejoin: miter"/>
+  </pattern>
+ </defs>
+</svg>

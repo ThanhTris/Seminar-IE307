@@ -1,0 +1,30 @@
+{
+  "exporter_version": "1.0.0",
+  "data_kind": "OBSERVED",
+  "run_id": "run-sem41-dispatch-diagnostic-1715327d9b29",
+  "device_alias": "emulator-main",
+  "manifest_input_sha256": "fc4087e8cdd76845656ab4ca6bd43e740b0eca35584582b49ee5cfb6eb099f57",
+  "sources": [
+    {
+      "origin": "ANDROID",
+      "sha256": "0f66960b37153a853050f2dc8c696d1298949d6528d94297a7f68bdfed8b4e9d",
+      "lines": 9,
+      "selected": 9,
+      "other_run_or_device": 0,
+      "duplicates": 0,
+      "extra_fields_omitted": 0
+    },
+    {
+      "origin": "SERVER",
+      "sha256": "811f3800b9648773d5c2aee22c48c622f986db748af9afa0584870191f86cc95",
+      "lines": 15,
+      "selected": 1,
+      "other_run_or_device": 14,
+      "duplicates": 0,
+      "extra_fields_omitted": 0
+    }
+  ],
+  "events_exported": 10,
+  "ordering": "INPUT_ORDER_NOT_CAUSAL",
+  "analysis_performed": false
+}

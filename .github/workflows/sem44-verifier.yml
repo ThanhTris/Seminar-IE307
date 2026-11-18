@@ -1,0 +1,36 @@
+name: SEM-44 Windows verifier
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/sem44-verifier.yml'
+      - 'experiments/scripts/verify_sem44.py'
+      - 'experiments/scripts/audit_main_runs.py'
+      - 'experiments/scripts/tests/test_verify_sem44.py'
+      - 'experiments/scripts/tests/test_audit_main_runs.py'
+
+permissions:
+  contents: read
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    timeout-minutes: 10
+    steps:
+      - name: Keep the input snapshot's LF line endings
+        run: git config --global core.autocrlf false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: '3.12'
+      - name: Run the SEM-44 regression tests
+        run: |
+          python -B -m unittest discover -s experiments/scripts/tests -p test_verify_sem44.py -v
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python -B -m unittest discover -s experiments/scripts/tests -p test_audit_main_runs.py -v
+      - name: Verify the pinned inputs from AUDIT.md
+        run: python -B experiments/scripts/verify_sem44.py --source-ref 1475e67c7b65b4ffcaa540d10da76e6d1bfaab00 --draft-ref 1a0c667c93391553cd08f054407d7eb04be2d4ef
