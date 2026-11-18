@@ -361,6 +361,8 @@ class CaseEvidenceTests(unittest.TestCase):
         self.manifest["observation"]["milestones"].update(
             offline_utc="2026-11-03T00:00:00Z", reconnect_utc="2026-11-03T00:02:00Z")
         self.controlled_clock()
+        next(e for e in self.events if e["event_type"] == "server_updated")[
+            "timestamp_utc"] = "2026-11-03T00:00:02Z"
         end = datetime.fromisoformat(self.manifest["observation"]["end_utc"].replace("Z", "+00:00"))
         for sample in self.manifest["clock"]["after_samples"]:
             sample.update(client_send_utc=(end + timedelta(seconds=1)).isoformat().replace("+00:00", "Z"),
@@ -398,6 +400,66 @@ class CaseEvidenceTests(unittest.TestCase):
             self.assertEqual(row["flags"], "")
             self.assertTrue(row["eligible"])
             self.assertEqual(row["observed_completion"], "APPLIED_TARGET")
+
+    def test_e04_target_update_outside_offline_is_excluded(self):
+        for server_utc in ("2026-11-03T00:00:00Z", "2026-11-03T00:03:01Z"):
+            with self.subTest(server_utc=server_utc):
+                self.setUp()
+                self.e04()
+                self.move_apply_chain(200)
+                next(e for e in self.events if e["event_type"] == "server_updated")[
+                    "timestamp_utc"] = server_utc
+                result = self.analyze()
+                row = result["row"]
+                self.assertEqual(row["outcome"], "SUCCESS")
+                self.assertFalse(row["eligible"])
+                self.assertNotEqual(row["observed_completion"], "APPLIED_TARGET")
+                self.assertIn("E04_TARGET_UPDATE_OUTSIDE_OFFLINE", row["flags"])
+                self.assertIsNone(row["update_to_applied_ms"])
+                self.assertEqual(row["snapshot_applied_event_count_all"], 1)
+                self.assertEqual(analyzer.summarize([result])[0]["n_eligible"], 0)
+
+    def test_e04_offset_maps_target_update_into_offline_interval(self):
+        self.e04()
+        self.move_apply_chain(200)
+        next(e for e in self.events if e["event_type"] == "server_updated")[
+            "timestamp_utc"] = "2026-11-03T00:02:00.500Z"
+        row = self.analyze()["row"]
+        self.assertTrue(row["eligible"])
+        self.assertEqual(row["observed_completion"], "APPLIED_TARGET")
+        self.assertEqual(row["update_to_applied_ms"], 80500)
+
+    def test_e04_uncertainty_overlapping_offline_boundary_is_unverified(self):
+        for server_utc in ("2026-11-03T00:00:01.003Z", "2026-11-03T00:02:00.997Z"):
+            with self.subTest(server_utc=server_utc):
+                self.setUp()
+                self.e04()
+                self.move_apply_chain(200)
+                next(e for e in self.events if e["event_type"] == "server_updated")[
+                    "timestamp_utc"] = server_utc
+                row = self.analyze()["row"]
+                self.assertFalse(row["eligible"])
+                self.assertEqual(row["observed_completion"], "UNCERTAIN_WINDOW")
+                self.assertIn("E04_TARGET_UPDATE_TIME_UNVERIFIED", row["flags"])
+                self.assertIsNone(row["update_to_applied_ms"])
+
+    def test_e04_missing_or_ambiguous_target_update_is_unverified(self):
+        for ambiguous in (False, True):
+            with self.subTest(ambiguous=ambiguous):
+                self.setUp()
+                self.e04()
+                self.move_apply_chain(200)
+                updated = next(e for e in self.events if e["event_type"] == "server_updated")
+                if ambiguous:
+                    self.events.append(dict(updated, event_id="00000000-0000-4000-8000-000000000098",
+                                            update_id="second-update"))
+                else:
+                    updated["data_version"] = 2
+                row = self.analyze()["row"]
+                self.assertFalse(row["eligible"])
+                self.assertEqual(row["outcome"], "SUCCESS")
+                self.assertIsNone(row["target_applied_in_window"])
+                self.assertIn("E04_TARGET_UPDATE_TIME_UNVERIFIED", row["flags"])
 
     def test_e04_missing_milestone_or_unverified_clock_is_excluded(self):
         for problem in ("reconnect", "offline", "clock", "host", "anchor", "jump"):

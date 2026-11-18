@@ -15,7 +15,7 @@ import sys
 
 import export_logs as contract
 
-VERSION = "0.3.0"
+VERSION = "0.4.0"
 ROOT = Path(__file__).resolve().parents[2]
 
 
@@ -231,6 +231,21 @@ def e04_reconnect_elapsed(manifest, android, estimate):
     return start + reconnect_ms - utc_start, None
 
 
+def e04_target_update_flag(milestones, updated, estimate):
+    """Check the target commit against the verified Android UTC offline interval."""
+    if updated is None:
+        return "E04_TARGET_UPDATE_TIME_UNVERIFIED"
+    offset, uncertainty = estimate
+    update_android_utc = utc_ms(updated["timestamp_utc"]) - offset
+    earliest, latest = update_android_utc - uncertainty, update_android_utc + uncertainty
+    offline, reconnect = (utc_ms(milestones[k]) for k in ("offline_utc", "reconnect_utc"))
+    if latest < offline or earliest >= reconnect:
+        return "E04_TARGET_UPDATE_OUTSIDE_OFFLINE"
+    if earliest < offline or latest >= reconnect:
+        return "E04_TARGET_UPDATE_TIME_UNVERIFIED"
+    return None
+
+
 def e06_fetch_verified(applied, requests, fetches):
     """Require a successful target fetch in the applying periodic work attempt."""
     key = tuple(applied[k] for k in ("request_id", "work_id", "work_attempt"))
@@ -347,6 +362,7 @@ def analyze_run(run):
         clock = {"controlled": False}
 
     target = obs["target_version"]
+    updated = only([e for e in events if e["event_type"] == "server_updated" and e["data_version"] == target])
     def target_apply(e):
         return (e["event_type"] == "snapshot_applied" and e["data_version"] == target and
                 target is not None and e["source"] != "MANUAL" and
@@ -354,11 +370,18 @@ def analyze_run(run):
 
     recovery_verified = True
     reconnect_elapsed = None
+    e04_update_verified = True
     if m["case_id"] == "E04":
         reconnect_elapsed, recovery_flag = e04_reconnect_elapsed(m, android, estimate)
         recovery_verified = recovery_flag is None
         if recovery_flag:
             flags.add(recovery_flag)
+        else:
+            update_flag = e04_target_update_flag(obs["milestones"], updated, estimate)
+            if update_flag:
+                flags.add(update_flag)
+                recovery_verified = False
+                e04_update_verified = False
 
     applied = sorted([e for e in inside if target_apply(e)],
                      key=lambda e: (e["elapsed_realtime_ms"], e["event_id"]))
@@ -371,9 +394,9 @@ def analyze_run(run):
             if any(abs(e["elapsed_realtime_ms"] - reconnect_elapsed) <= tolerance for e in applied):
                 flags.add("E04_APPLY_TIME_UNVERIFIED")
                 recovery_verified = False
-        applied = [e for e in applied if reconnect_elapsed is not None and
+        applied = [e for e in applied if reconnect_elapsed is not None and e04_update_verified and
                    e["elapsed_realtime_ms"] > reconnect_elapsed + tolerance]
-        late = [e for e in late if reconnect_elapsed is not None and
+        late = [e for e in late if reconnect_elapsed is not None and e04_update_verified and
                 e["elapsed_realtime_ms"] > reconnect_elapsed + tolerance]
     if m["case_id"] == "E06":
         verified_ids = {e["event_id"] for e in applied + late if e06_fetch_verified(e, requests, fetches)}
@@ -408,7 +431,6 @@ def analyze_run(run):
                   (not window_verified or not recovery_verified) else
                   "OUTCOME_EVIDENCE_CONFLICT")
 
-    updated = only([e for e in events if e["event_type"] == "server_updated" and e["data_version"] == target])
     if m["case_id"] == "E06" and (updated is None or not any(
             e["event_type"] == "push_send_skipped" and e["data_version"] == target and
             e["update_id"] == updated["update_id"] for e in events)):
@@ -420,7 +442,7 @@ def analyze_run(run):
                    e["data_version"] == target and e["update_id"] == updated["update_id"] for s in e["signal_ids"]}
         receipts = [e for e in inside if e["event_type"] == "push_received" and
                     set(e["signal_ids"]) & signals]
-    receive_delta = cross_clock_delta(updated, only(receipts), clock)
+    receive_delta = cross_clock_delta(updated, only(receipts), clock) if e04_update_verified else None
 
     counts = Counter(e["event_type"] for e in inside if e["source"] != "MANUAL")
     natural_cycles = {e["request_id"] for e in inside if e["event_type"] == "work_started" and
