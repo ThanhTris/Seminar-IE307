@@ -1875,7 +1875,7 @@
       "category": "practice",
       "title": "Chạy tập chính E01–E06 trên emulator",
       "due": "2026-11-07",
-      "status": "Todo",
+      "status": "Done",
       "start_dependencies": [
         "SEM-16",
         "SEM-24"
@@ -1896,7 +1896,7 @@
         "Giữ E01 90 phút, E02 5 lượt/120 giây, E03 2/trigger, E04 3/trigger, E05 3/kịch bản, E06 2×45 phút.",
         "Không force-run cho kết quả tự nhiên, không trộn pilot/build hoặc loại timeout khỏi mẫu số."
       ],
-      "input_status": "Sẵn sàng",
+      "input_status": "Đã hoàn thành",
       "inputs": [
         {
           "source_task": "SEM-16",
@@ -2032,7 +2032,7 @@
       "category": "practice",
       "title": "Chốt SUMMARY và bộ evidence thực nghiệm",
       "due": "2026-11-07",
-      "status": "Todo",
+      "status": "Done",
       "start_dependencies": [],
       "finish_dependencies": [
         "SEM-41",
@@ -2052,7 +2052,7 @@
         "Mọi bảng truy được run/manifest/build; không trộn tập khác version.",
         "Median kèm n_complete/n_total, không suy pin từ số request và không so latency thiếu kiểm soát."
       ],
-      "input_status": "Sẵn sàng",
+      "input_status": "Đã hoàn thành",
       "inputs": [
         {
           "source_task": "SEM-41",
@@ -2063,7 +2063,7 @@
             "experiments/runs/<emulator-main-run>/events.jsonl"
           ],
           "checks": "docs/evidence/SEM-41/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Done"
         },
         {
           "source_task": "SEM-42",
@@ -2101,12 +2101,7 @@
       "due_at": "2026-11-07T22:00:00+07:00",
       "waiting_on": {
         "start": [],
-        "finish": [
-          "SEM-41",
-          "SEM-42",
-          "SEM-44",
-          "SEM-45"
-        ]
+        "finish": []
       }
     },
     {
@@ -2148,7 +2143,7 @@
             "experiments/runs/<emulator-main-run>/events.jsonl"
           ],
           "checks": "docs/evidence/SEM-41/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Done"
         },
         {
           "source_task": "SEM-42",
@@ -2177,7 +2172,6 @@
       "waiting_on": {
         "start": [],
         "finish": [
-          "SEM-41",
           "SEM-42",
           "SEM-45"
         ]
@@ -2248,7 +2242,7 @@
             "experiments/runs/<emulator-main-run>/events.jsonl"
           ],
           "checks": "docs/evidence/SEM-41/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Done"
         },
         {
           "source_task": "SEM-42",
@@ -2266,7 +2260,6 @@
       "waiting_on": {
         "start": [],
         "finish": [
-          "SEM-41",
           "SEM-42"
         ]
       }
@@ -2420,7 +2413,7 @@
       "category": "research",
       "title": "Viết nội dung và biểu đồ kết quả cho bài nói",
       "due": "2026-11-08",
-      "status": "Todo",
+      "status": "Done",
       "start_dependencies": [],
       "finish_dependencies": [
         "SEM-43",
@@ -2440,7 +2433,7 @@
         "Biểu đồ đúng số liệu main, có n_complete/n_total và không giấu kết quả trái giả thuyết.",
         "Không kết luận pin hoặc mọi Android từ request count/OPPO."
       ],
-      "input_status": "Sẵn sàng",
+      "input_status": "Đã hoàn thành",
       "inputs": [
         {
           "source_task": "SEM-43",
@@ -2450,7 +2443,7 @@
             "experiments/SUMMARY.md"
           ],
           "checks": "docs/evidence/SEM-43/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Done"
         },
         {
           "source_task": "SEM-44",
@@ -2477,11 +2470,7 @@
       "due_at": "2026-11-08T18:00:00+07:00",
       "waiting_on": {
         "start": [],
-        "finish": [
-          "SEM-43",
-          "SEM-44",
-          "SEM-45"
-        ]
+        "finish": []
       }
     },
     {
@@ -2667,7 +2656,7 @@
             "experiments/SUMMARY.md"
           ],
           "checks": "docs/evidence/SEM-43/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Done"
         },
         {
           "source_task": "SEM-45",
@@ -2685,7 +2674,6 @@
       "waiting_on": {
         "start": [],
         "finish": [
-          "SEM-43",
           "SEM-45"
         ]
       }
@@ -2755,7 +2743,7 @@
             "slides/inputs/results/"
           ],
           "checks": "docs/evidence/SEM-48/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Done"
         },
         {
           "source_task": "SEM-49",
@@ -2785,7 +2773,6 @@
       "waiting_on": {
         "start": [],
         "finish": [
-          "SEM-48",
           "SEM-50"
         ]
       }
@@ -2842,7 +2829,7 @@
             "experiments/SUMMARY.md"
           ],
           "checks": "docs/evidence/SEM-43/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Done"
         },
         {
           "source_task": "SEM-50",
@@ -3049,7 +3036,7 @@
             "experiments/SUMMARY.md"
           ],
           "checks": "docs/evidence/SEM-43/CHECKS.md",
-          "source_status": "Todo"
+          "source_status": "Done"
         },
         {
           "source_task": "SEM-50",
@@ -3115,7 +3102,6 @@
       "waiting_on": {
         "start": [],
         "finish": [
-          "SEM-43",
           "SEM-50",
           "SEM-51",
           "SEM-53",
@@ -3124,7 +3110,7 @@
       }
     }
   ],
-  "snapshot_at": "2026-11-17 09:31:58 UTC",
+  "snapshot_at": "2026-11-18 02:33:31 UTC",
   "snapshot_source": "https://github.com/users/ThanhTris/projects/3/views/1",
   "timezone": "Asia/Ho_Chi_Minh",
   "deadline_at": "2026-11-13T22:00:00+07:00",

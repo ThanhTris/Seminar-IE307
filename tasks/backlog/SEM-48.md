@@ -1,9 +1,9 @@
 # SEM-48 — Viết nội dung và biểu đồ kết quả cho bài nói
 
-- Trạng thái: **Todo** (Project).
-- Trạng thái đầu vào: **Sẵn sàng**.
-- Còn chờ: Nên nhận: [SEM-43](SEM-43.md), [SEM-44](SEM-44.md), [SEM-45](SEM-45.md).
-- Đối chiếu Project: 2026-11-17 09:31:58 UTC.
+- Trạng thái: **Done** (Project).
+- Trạng thái đầu vào: **Đã hoàn thành**.
+- Còn chờ: Không.
+- Đối chiếu Project: 2026-11-18 02:33:31 UTC.
 - Người thực hiện duy nhất: **Vinh** (`Vinh5905`).
 - Hạn: **08/11/2026 18:00 (UTC+7)**.
 - Công sức: 1/100 — Nghiên cứu/lập luận.
@@ -23,13 +23,13 @@ Tài liệu nền đã có: [Kế hoạch/phạm vi](../../docs/PLAN.md) · [K�
 
 | Cần cho | Task cung cấp | Người bàn giao | Đầu ra phải nhận | Kiểm chứng bàn giao | Status nguồn |
 |---|---|---|---|---|---|
-| Hoàn tất | [SEM-43 — Chốt SUMMARY và bộ evidence thực nghiệm](SEM-43.md) | Vinh | `experiments/SUMMARY.md` | `docs/evidence/SEM-43/CHECKS.md` | Todo |
+| Hoàn tất | [SEM-43 — Chốt SUMMARY và bộ evidence thực nghiệm](SEM-43.md) | Vinh | `experiments/SUMMARY.md` | `docs/evidence/SEM-43/CHECKS.md` | Done |
 | Hoàn tất | [SEM-44 — Kiểm độc lập trigger và phép tính dữ liệu main](SEM-44.md) | Tâm | `experiments/AUDIT.md` | `docs/evidence/SEM-44/CHECKS.md` | Review |
 | Hoàn tất | [SEM-45 — Viết parser log và sinh results.csv](SEM-45.md) | Tuấn | `experiments/scripts/analyze.*`<br>`experiments/results.csv` | `docs/evidence/SEM-45/CHECKS.md` | In Progress |
 
 Đây là danh sách đầu ra cần bàn giao, chưa phải xác nhận các file đã tồn tại. Trước khi dùng, nhận đúng artifact/commit/config và CHECKS từ task nguồn.
 
-Status nguồn được đối chiếu Project lúc **2026-11-17 09:31:58 UTC**; mở link task nguồn để xem cập nhật mới hơn.
+Status nguồn được đối chiếu Project lúc **2026-11-18 02:33:31 UTC**; mở link task nguồn để xem cập nhật mới hơn.
 <!-- task-inputs:end -->
 
 
