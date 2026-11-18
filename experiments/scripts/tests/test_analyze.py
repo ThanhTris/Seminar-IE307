@@ -529,6 +529,47 @@ class CaseEvidenceTests(unittest.TestCase):
         self.assertEqual(row["flags"], "")
         self.assertEqual(row["get_started_count"], 1)
         self.assertEqual(row["observed_completion"], "APPLIED_TARGET")
+        self.assertEqual(row["push_send_skipped_event_count_all"], 1)
+        self.assertEqual(row["push_send_accepted_event_count_all"], 0)
+
+    def test_e06_skipped_and_provider_send_for_same_update_conflict(self):
+        for kind, outcome, provider in (
+                ("push_send_accepted", "accepted", {"message_id": "test-provider-response", "http_status": 200}),
+                ("push_send_rejected", "rejected", {"reason": "FCM_REJECTED", "http_status": 400}),
+                ("push_send_unknown", "unknown", {"reason": "FCM_RESPONSE_UNKNOWN"})):
+            with self.subTest(kind=kind):
+                self.setUp()
+                self.e06()
+                updated = next(e for e in self.events if e["event_type"] == "server_updated")
+                self.events.append(dict(updated, event_id="00000000-0000-4000-8000-000000000098",
+                                        event_type=kind, source="PUSH", outcome=outcome,
+                                        signal_ids=["test-signal"], send_attempt_id="test-attempt",
+                                        ttl_ms=86400000, **provider))
+                result = self.analyze()
+                row = result["row"]
+                self.assertEqual(row["outcome"], "SUCCESS")
+                self.assertFalse(row["eligible"])
+                self.assertIn("E06_FAULT_SKIP_CONFLICTING_SEND", row["flags"])
+                self.assertNotIn("FAULT_SKIP_EVIDENCE_MISSING", row["flags"])
+                self.assertEqual(result["event_counts"][kind], 1)
+                self.assertEqual(result["event_counts"]["push_send_skipped"], 1)
+                self.assertEqual(analyzer.summarize([result])[0]["n_eligible"], 0)
+
+    def test_e06_unrelated_send_or_local_failure_does_not_conflict(self):
+        self.e06()
+        updated = next(e for e in self.events if e["event_type"] == "server_updated")
+        self.events.extend([
+            dict(updated, event_id="00000000-0000-4000-8000-000000000098",
+                 update_id="unrelated-update", event_type="push_send_accepted", source="PUSH",
+                 outcome="accepted", message_id="test-provider-response", http_status=200,
+                 signal_ids=["test-signal"], send_attempt_id="test-attempt", ttl_ms=86400000),
+            dict(updated, event_id="00000000-0000-4000-8000-000000000097",
+                 event_type="push_send_failed_local", source="PUSH", outcome="failure",
+                 reason="INVALID_FCM_CONFIG"),
+        ])
+        row = self.analyze()["row"]
+        self.assertTrue(row["eligible"])
+        self.assertEqual(row["flags"], "")
 
     def test_e06_missing_fetch_stages_are_unverified(self):
         for missing in ({"snapshot_fetch_started"}, {"snapshot_fetch_completed"},

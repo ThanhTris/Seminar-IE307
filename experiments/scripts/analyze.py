@@ -431,10 +431,13 @@ def analyze_run(run):
                   (not window_verified or not recovery_verified) else
                   "OUTCOME_EVIDENCE_CONFLICT")
 
-    if m["case_id"] == "E06" and (updated is None or not any(
-            e["event_type"] == "push_send_skipped" and e["data_version"] == target and
-            e["update_id"] == updated["update_id"] for e in events)):
-        flags.add("FAULT_SKIP_EVIDENCE_MISSING")
+    if m["case_id"] == "E06":
+        target_events = {e["event_type"] for e in buckets["server"] if updated is not None and
+                         e["update_id"] == updated["update_id"] and e["data_version"] == target}
+        if "push_send_skipped" not in target_events:
+            flags.add("FAULT_SKIP_EVIDENCE_MISSING")
+        if target_events & {"push_send_accepted", "push_send_rejected", "push_send_unknown"}:
+            flags.add("E06_FAULT_SKIP_CONFLICTING_SEND")
     end_to_end = cross_clock_delta(updated, completion, clock)
     receipts = []
     if updated:
