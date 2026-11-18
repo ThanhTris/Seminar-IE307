@@ -74,4 +74,23 @@ class AuditTests(unittest.TestCase):
         self.m.update(validity='INVALID',reason_codes=['INVALID_RESPONSE']);self.write();run=a.audit_run(self.run)
         _,issues=a.audit_csv(self.csv({'eligible':'true'}),[run]);self.assertTrue(any('INELIGIBLE_INCLUDED' in x for x in issues))
 
+    def test_truncated_csv_reports_missing_eligible(self):
+        csv_path = self.csv()
+        with csv_path.open(newline='') as stream:
+            header, row = list(csv.reader(stream))
+        eligible_index = header.index('eligible')
+        header.pop(eligible_index)
+        row.pop(eligible_index)
+        with csv_path.open('w', newline='') as stream:
+            writer = csv.writer(stream)
+            writer.writerow([*header, 'eligible'])
+            writer.writerow(row)
+
+        report = self.root / 'report.md'
+        with redirect_stdout(io.StringIO()):
+            code = a.main(['--runs', str(self.root / 'runs'), '--csv', str(csv_path),
+                           '--output', str(report)])
+        self.assertEqual(code, 2)
+        self.assertIn('CSV_ELIGIBLE_INVALID_ROW_2', report.read_text(encoding='utf-8'))
+
 if __name__=='__main__':unittest.main()

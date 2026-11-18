@@ -1,5 +1,7 @@
 {
   "snapshot_mismatches": [],
+  "missing_manifests": [],
+  "unexpected_manifests": [],
   "scope": "SEM44_READ_ONLY_LIMITED_AUDIT",
   "source_commit": "1475e67c7b65b4ffcaa540d10da76e6d1bfaab00",
   "main_status": "NOT_RUN",

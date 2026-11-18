@@ -167,8 +167,9 @@ def audit_csv(csv_path, runs):
             continue
         if run_id in row_by_run:
             issues.append(f"DUPLICATE_CSV_RUN_ROW_{row_number}")
-        row_by_run.setdefault(run_id, []).append((row_number, row))
-        if str(row.get("eligible") or "").lower() not in {"true", "false"}:
+        eligible = (row.get("eligible") or "").strip().lower()
+        row_by_run.setdefault(run_id, []).append((row_number, row, eligible))
+        if eligible not in {"true", "false"}:
             issues.append(f"CSV_ELIGIBLE_INVALID_ROW_{row_number}")
         if str(row.get("run_phase") or "") != "main":
             issues.append(f"CSV_NON_MAIN_ROW_{row_number}")
@@ -188,12 +189,12 @@ def audit_csv(csv_path, runs):
             continue
         entries = row_by_run.get(manifest["run_id"], [])
         run_events = next((events for run_manifest, events, _ in runs if run_manifest and run_manifest["run_id"] == manifest["run_id"]), [])
-        for row_number, row in entries:
+        for row_number, row, eligible in entries:
             for field in ("manifest_sha256", "events_sha256"):
                 expected = manifest.get("_audit_" + field)
                 if expected and row.get(field) != expected:
                     issues.append(f"CSV_HASH_MISMATCH_{field.upper()}_ROW_{row_number}")
-            if row.get("eligible", "").lower() == "true" and (manifest.get("validity") != "VALID" or manifest.get("execution_status") != "COMPLETED"):
+            if eligible == "true" and (manifest.get("validity") != "VALID" or manifest.get("execution_status") != "COMPLETED"):
                 issues.append(f"CSV_INELIGIBLE_INCLUDED_ROW_{row_number}")
             for field in CSV_COMPARE:
                 expected = manifest.get(field)

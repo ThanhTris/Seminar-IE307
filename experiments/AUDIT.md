@@ -67,6 +67,6 @@ python3 -B experiments/scripts/audit_main_runs.py
 - Main auditor kiểm schema/correlation, exact metadata/hash, dòng trùng, event count, timeout latency và boot trước so monotonic. Cột count hỗ trợ tên cũ và `*_event_count_all`; hai count cốt lõi là bắt buộc. Nó không tự tính lại mọi metric, clock uncertainty hoặc chứng nhận quy trình vật lý. `AUDIT_READY` chỉ là cấu trúc đã qua các check đang hỗ trợ, vẫn cần review đầy đủ.
 - `--output` của main auditor không được trùng CSV hoặc nằm trong thư mục inputs. Verifier chỉ ghi trong `docs/evidence/SEM-44`. Reproducer tách code ghim vào `.local/sem44/producer`, đặt root/template đúng checkout sau khi kiểm template khớp revision; không checkout/chỉnh nhánh SEM-45 hoặc thực hiện thí nghiệm mới.
 
-Ở Windows, dùng executable Python 3.10+ phù hợp (`python`/`py`). Lần kiểm này chạy macOS; không tuyên bố đã chạy native Windows. Không sửa các byte JSON/JSONL/CSV nguồn; nếu checkout có thay đổi EOL/hash, xem lại artifact trước khi diễn giải mismatch.
+Trên Windows, dùng `python` hoặc `py` với Python 3.10+ và checkout giữ đúng byte LF của dữ liệu nguồn. Verifier so danh sách manifest trên checkout với cây Git tại `--source-ref`. Thiếu manifest hoặc có manifest ngoài snapshot sẽ được liệt kê và trả exit 2. Các đường dẫn trong báo cáo và tham chiếu Git dùng dấu `/` trên mọi nền tảng. [Workflow kiểm tra Windows](../.github/workflows/sem44-verifier.yml)
 
 [CHECKS SEM-44](../docs/evidence/SEM-44/CHECKS.md) ghi nhận đầu vào/expected/actual và phạm vi đề nghị Review theo quy định mới của task.

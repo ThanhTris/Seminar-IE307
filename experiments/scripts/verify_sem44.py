@@ -7,10 +7,11 @@ import hashlib
 import importlib.util
 import io
 import json
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 import subprocess
 
 ROOT = Path(__file__).resolve().parents[2]
+RUN_ROOTS = tuple(PurePosixPath("experiments", folder) for folder in ("runs", "pilots", "development"))
 spec = importlib.util.spec_from_file_location('exporter', ROOT/'experiments/scripts/export_logs.py')
 exporter = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(exporter)
@@ -19,25 +20,46 @@ def digest(data):
     return hashlib.sha256(data).hexdigest()
 
 def verify(draft_ref=None, source_ref="HEAD"):
+    source = subprocess.check_output(
+        ['git', 'rev-parse', source_ref], cwd=ROOT, text=True
+    ).strip()
+    tracked = subprocess.check_output(
+        ['git', 'ls-tree', '-r', '--name-only', '-z', source, '--',
+         *(root.as_posix() for root in RUN_ROOTS)],
+        cwd=ROOT,
+    ).decode('utf-8').split('\0')
+    tracked_paths = (PurePosixPath(name) for name in tracked if name)
+    expected = {
+        path for path in tracked_paths
+        if path.name == 'manifest.json' and path.parent.parent in RUN_ROOTS
+    }
+    present = {
+        PurePosixPath(path.relative_to(ROOT).as_posix())
+        for root in RUN_ROOTS for path in (ROOT / root).glob('*/manifest.json')
+        if path.is_file()
+    }
+    missing_manifests = sorted(path.as_posix() for path in expected - present)
+    unexpected_manifests = sorted(path.as_posix() for path in present - expected)
+
     files = {}
     def read(p):
-        p = Path(p)
-        data = (ROOT/p).read_bytes()
-        files[str(p)] = digest(data)
+        p = PurePosixPath(p)
+        data = (ROOT / p).read_bytes()
+        files[p.as_posix()] = digest(data)
         return data
     index = json.loads(read('docs/evidence/SEM-43/EVIDENCE_INDEX.json'))
     reference_issues = []
     for attempt in index['sem41_pilot']['attempts_index']:
-        for source in attempt['sources']:
-            if digest(read(source['path'])) != source['sha256']:
-                reference_issues.append(source['path'])
+        for item in attempt['sources']:
+            if (not (ROOT / item['path']).is_file() or
+                    digest(read(item['path'])) != item['sha256']):
+                reference_issues.append(item['path'])
     records = []
-    for folder in ('runs', 'pilots', 'development'):
-        for path in sorted((ROOT/'experiments'/folder).glob('*/manifest.json')):
-            rel = path.relative_to(ROOT)
+    for root in RUN_ROOTS:
+        for rel in sorted(path for path in expected & present if path.parent.parent == root):
             manifest = json.loads(read(rel))
             eventpath = rel.parent/'events.jsonl'
-            record = {'directory': str(rel.parent), 'run_id': manifest['run_id'],
+            record = {'directory': rel.parent.as_posix(), 'run_id': manifest['run_id'],
                       'phase': manifest['run_phase'], 'data_kind': manifest['data_kind'],
                       'case_id': manifest['case_id'], 'mode': manifest['mode'],
                       'validity': manifest['validity'], 'outcome': manifest['outcome'],
@@ -92,8 +114,8 @@ def verify(draft_ref=None, source_ref="HEAD"):
             if not r:
                 issues.append({'run': row['run_id'], 'code': 'NO_LOCAL_MANIFEST'})
                 continue
-            mbytes = read(Path(r['directory'])/'manifest.json')
-            ebytes = read(Path(r['directory'])/'events.jsonl')
+            mbytes = read(PurePosixPath(r['directory'])/'manifest.json')
+            ebytes = read(PurePosixPath(r['directory'])/'events.jsonl')
             m = json.loads(mbytes)
             for field in ('run_phase','case_id','mode','device_alias','outcome','validity','data_kind'):
                 if row.get(field) != str(m[field]): issues.append({'run':row['run_id'],'code':'CSV_METADATA_'+field})
@@ -114,22 +136,22 @@ def verify(draft_ref=None, source_ref="HEAD"):
                  'validity_counts':dict(Counter(r['validity'] for r in rows)), 'outcome_counts':dict(Counter(r['outcome'] for r in rows)),
                  'missing_current_pilot_ids':missing,'issues':issues,'status':'UNMERGED_PINNED_SCOPE_NOT_MAIN',
                  'row_run_ids':keys}
-    source = subprocess.check_output(['git','rev-parse',source_ref],cwd=ROOT,text=True).strip()
-    snapshot_mismatches = []
+    snapshot_mismatches = sorted(missing_manifests + unexpected_manifests)
     for name, sha in files.items():
         original = subprocess.check_output(['git','show',f'{source}:{name}'],cwd=ROOT)
         if digest(original)!=sha: snapshot_mismatches.append(name)
     main_count=sum(r['phase']=='main' for r in records)
-    return {'snapshot_mismatches':snapshot_mismatches,'scope':'SEM44_READ_ONLY_LIMITED_AUDIT','source_commit':source,
+    return {'snapshot_mismatches':snapshot_mismatches,'missing_manifests':missing_manifests,
+            'unexpected_manifests':unexpected_manifests,'scope':'SEM44_READ_ONLY_LIMITED_AUDIT','source_commit':source,
             'main_status':'NOT_RUN' if main_count==0 else 'REQUIRES_MAIN_AUDIT','main_runs':main_count,'results_csv_on_main_checkout':(ROOT/'experiments/results.csv').exists(),
             'reference_hash_mismatches':reference_issues,'records':records,'draft_csv':draft,'input_sha256':files}
 
-if __name__=='__main__':
+def main(argv=None):
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--draft-ref',help='Optional already-fetched SEM-45 commit; never fetches or executes producer parser')
     parser.add_argument('--source-ref',default='HEAD',help='Input snapshot commit to verify against Git bytes')
     parser.add_argument('--output',type=Path,default=ROOT/'docs/evidence/SEM-44/VERIFICATION.json')
-    args=parser.parse_args()
+    args=parser.parse_args(argv)
     result=verify(args.draft_ref,args.source_ref)
     # Only the audit-owned output is written; inputs remain byte-for-byte unchanged.
     out=args.output.resolve()
@@ -137,9 +159,20 @@ if __name__=='__main__':
         parser.error('output must stay in docs/evidence/SEM-44')
     args.output.parent.mkdir(parents=True,exist_ok=True)
     args.output.write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
-    print(json.dumps({'snapshot_mismatches':len(result['snapshot_mismatches']),'main_status':result['main_status'],'records':len(result['records']),
+    print(json.dumps({'snapshot_mismatches':len(result['snapshot_mismatches']),
+                      'missing_manifests':result['missing_manifests'],'unexpected_manifests':result['unexpected_manifests'],
+                      'main_status':result['main_status'],'records':len(result['records']),
                       'reference_hash_mismatches':len(result['reference_hash_mismatches']),
                       'structural_issues':sum(len(r['issues']) for r in result['records']),
                       'draft_csv_issues':len(result['draft_csv']['issues']) if result['draft_csv'] else None}))
 
-    raise SystemExit(2 if result['snapshot_mismatches'] or result['reference_hash_mismatches'] or any(r['issues'] for r in result['records']) or (result['draft_csv'] and result['draft_csv']['issues']) else 0)
+    problems = (
+        result['snapshot_mismatches'] or result['reference_hash_mismatches']
+        or any(r['issues'] for r in result['records'])
+        or (result['draft_csv'] and result['draft_csv']['issues'])
+    )
+    return 2 if problems else 0
+
+
+if __name__ == '__main__':
+    raise SystemExit(main())

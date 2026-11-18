@@ -41,3 +41,13 @@ Trạng thái kết thúc làm việc là Review; trưởng nhóm kiểm nhận 
 
 - Commit nội dung/công cụ được kiểm: `40f38a1`; [PR #33](https://github.com/ThanhTris/Seminar-IE307/pull/33) đã tag `@ThanhTris`, nêu rõ main NOT_RUN và scope draft/pilot.
 - Đã chuyển SEM-44 sang Review. Script snapshot `--apply` và `--check` exit 0: 45 task, 34 Done, 8 Todo, 2 In Progress, 1 Review; assignee khớp owner, không có chu trình dependency. Snapshot **09:31:58 UTC ngày 17/11/2026**. Đây là đồng bộ workflow, không ký Pass cho phép đo main.
+
+## Cập nhật theo review ngày 18/11/2026
+
+| Yêu cầu | Thao tác kiểm | Kết quả trên macOS |
+|---|---|---|
+| Phát hiện manifest thiếu so với commit nguồn | Commit một manifest development trong repo thử, chạy verifier, xóa manifest rồi chạy lại với cùng ref | Lần đầu exit 0. Sau khi xóa, report liệt kê đúng đường dẫn trong `missing_manifests` và trả exit 2 |
+| Dùng đường dẫn Git trên Windows | Đối chiếu manifest và file index trong repo thử. Chạy verifier với source `1475e67` và draft `1a0c667` | Report dùng đường dẫn có dấu `/`. Verifier đọc 25 bản ghi, exit 0, 0 manifest thiếu hoặc dư và 0 mismatch |
+| CSV thiếu ô `eligible` | Giữ đủ header, cắt ô cuối trong dòng có run ID hợp lệ và chạy auditor | Báo cáo có `CSV_ELIGIBLE_INVALID_ROW_2` và CLI trả exit 2 |
+
+Chạy `python3 -B -m unittest discover -s experiments/scripts/tests -v` đạt **88/88 test**. Workflow của PR chạy hai nhóm hồi quy SEM-44 và lệnh verifier trong AUDIT.md bằng Python 3.12 trên Windows. [Comment review](https://github.com/ThanhTris/Seminar-IE307/pull/33#issuecomment-6948093859)
