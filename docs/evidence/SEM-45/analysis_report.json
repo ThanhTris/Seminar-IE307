@@ -1,11 +1,11 @@
 {
-  "analysis_version": "0.2.0",
-  "analyzer_sha256": "cc17e669d6a4ac8ab549f3366bb47018c2c1b0f871f396a39f86db83b8c3c53e",
-  "batch_id": "handoff",
+  "analysis_version": "0.3.0",
+  "analyzer_sha256": "7b61da5ee57894b524dd8436095470ceec1896abccb77eceba69dedf4aa28dfd",
+  "batch_id": "windows",
   "dataset": "pilot",
   "outputs_sha256": {
-    "results.csv": "49d4f9e7c533f50f17fd429783fabb4afde15f27ad7a0c1e0e0c3fc3958fe8b0",
-    "summary.json": "4b340643871dc7ce054f2c7e53cc5969cef2e5f989eaadec67149e4072725a02"
+    "results.csv": "39f846e0b542000085f81a30181f2046ea4c42d8dd1329d6a1085f842b6139a3",
+    "summary.json": "0598955823514fa169f5c469a188e903bc56b13d6fa2b66542aa8a70243552e5"
   },
   "runs": [
     {
@@ -113,7 +113,7 @@
         }
       },
       "row": {
-        "analysis_version": "0.2.0",
+        "analysis_version": "0.3.0",
         "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
         "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
         "applied_event_count": null,
@@ -258,7 +258,7 @@
         }
       },
       "row": {
-        "analysis_version": "0.2.0",
+        "analysis_version": "0.3.0",
         "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
         "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
         "applied_event_count": null,
@@ -415,7 +415,7 @@
         }
       },
       "row": {
-        "analysis_version": "0.2.0",
+        "analysis_version": "0.3.0",
         "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
         "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
         "applied_event_count": null,
@@ -577,7 +577,7 @@
         }
       },
       "row": {
-        "analysis_version": "0.2.0",
+        "analysis_version": "0.3.0",
         "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
         "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
         "applied_event_count": null,
@@ -736,7 +736,7 @@
         }
       },
       "row": {
-        "analysis_version": "0.2.0",
+        "analysis_version": "0.3.0",
         "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
         "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
         "applied_event_count": null,
@@ -899,7 +899,7 @@
         }
       },
       "row": {
-        "analysis_version": "0.2.0",
+        "analysis_version": "0.3.0",
         "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
         "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
         "applied_event_count": null,
@@ -1064,7 +1064,7 @@
         }
       },
       "row": {
-        "analysis_version": "0.2.0",
+        "analysis_version": "0.3.0",
         "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
         "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
         "applied_event_count": null,
@@ -1227,7 +1227,7 @@
         }
       },
       "row": {
-        "analysis_version": "0.2.0",
+        "analysis_version": "0.3.0",
         "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
         "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
         "applied_event_count": null,
@@ -1240,7 +1240,7 @@
         "eligible": false,
         "events_sha256": "a6d94d0f582951c8e9012892ab66fecec371e987414f957457766fcf75d17f7c",
         "execution_status": "COMPLETED",
-        "flags": "ANDROID_WINDOW_OR_BOOT_UNKNOWN|OUTCOME_EVIDENCE_UNVERIFIED",
+        "flags": "ANDROID_WINDOW_OR_BOOT_UNKNOWN|E04_RECOVERY_CLOCK_UNVERIFIED|OUTCOME_EVIDENCE_UNVERIFIED",
         "get_started_count": null,
         "group_id": "bc29d30ac2ea8034f5748b3ce00a646f6dd92074c4d50b3facd1aea28347db18",
         "intervention": "NONE",
@@ -1383,7 +1383,7 @@
         }
       },
       "row": {
-        "analysis_version": "0.2.0",
+        "analysis_version": "0.3.0",
         "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
         "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
         "applied_event_count": null,
@@ -1396,7 +1396,7 @@
         "eligible": false,
         "events_sha256": "eb229c7d00001f92c4ca6c2aca9f009086fb5b5c411954296eec6cb9ed61fd21",
         "execution_status": "COMPLETED",
-        "flags": "ANDROID_WINDOW_OR_BOOT_UNKNOWN",
+        "flags": "ANDROID_WINDOW_OR_BOOT_UNKNOWN|E04_RECOVERY_CLOCK_UNVERIFIED",
         "get_started_count": null,
         "group_id": "bc29d30ac2ea8034f5748b3ce00a646f6dd92074c4d50b3facd1aea28347db18",
         "intervention": "NONE",
@@ -1545,7 +1545,7 @@
         }
       },
       "row": {
-        "analysis_version": "0.2.0",
+        "analysis_version": "0.3.0",
         "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
         "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
         "applied_event_count": null,
@@ -1558,7 +1558,7 @@
         "eligible": false,
         "events_sha256": "9d0cd90c8c112e579ed67d8907ad2d939bf96dc6e832aa5d6b2d5b27185a169f",
         "execution_status": "COMPLETED",
-        "flags": "ANDROID_WINDOW_OR_BOOT_UNKNOWN|OUTCOME_EVIDENCE_UNVERIFIED",
+        "flags": "ANDROID_WINDOW_OR_BOOT_UNKNOWN|E04_RECOVERY_CLOCK_UNVERIFIED|OUTCOME_EVIDENCE_UNVERIFIED",
         "get_started_count": null,
         "group_id": "bc29d30ac2ea8034f5748b3ce00a646f6dd92074c4d50b3facd1aea28347db18",
         "intervention": "NONE",
@@ -1702,7 +1702,7 @@
         }
       },
       "row": {
-        "analysis_version": "0.2.0",
+        "analysis_version": "0.3.0",
         "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
         "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
         "applied_event_count": null,
@@ -1859,7 +1859,7 @@
         }
       },
       "row": {
-        "analysis_version": "0.2.0",
+        "analysis_version": "0.3.0",
         "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
         "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
         "applied_event_count": null,

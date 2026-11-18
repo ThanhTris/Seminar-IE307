@@ -11,6 +11,8 @@
 
 > **Cập nhật 16/11/2026 theo review của Trí.** Bộ `experiments/results.csv` giữ 12 lượt OBSERVED/pilot đã bàn giao, cập nhật theo nguồn SEM-41 `42ca000` thành **0 VALID / 12 INVALID** sau audit collector thu hồi 8 qualification. Sáu lượt chạy lại mới của nguồn nằm ngoài bộ chọn hiện tại và được liệt kê trong INPUTS. Mẫu số main bằng 0; main emulator 27 slot Not run, OPPO chưa có log, kiểm độc lập SEM-44 và các phép đo thiếu clock/boot ghi Not run/giới hạn trong CHECKS. Trạng thái Project hiện vẫn In Progress, chờ review bản sửa.
 
+> **Cập nhật 18/11/2026.** Đã nhận main `9caaf38`, sửa guard E04 cho apply trước reconnect/thiếu clock và guard E06 cho fetch đúng target/correlation/thứ tự. Công cụ v0.3.0 có 12 test hồi quy mới, suite Ubuntu đạt 145/145. Bộ artifact vẫn giữ 12 pilot lịch sử INVALID, main/OPPO chưa có phép đo nhận vào bộ này, mẫu số main bằng 0. Audit SEM-44 trên main đã kiểm bản producer trước; bản sửa hiện tại chờ reviewer đối chiếu. CHECKS và ANALYSIS ghi giới hạn Windows symlink và cách phục hồi LF để tái lập report. PR tiếp tục Draft.
+
 ## Dependency — bấm mã task để mở yêu cầu
 
 - **Bắt đầu sau:** [SEM-24](SEM-24.md), [SEM-26](SEM-26.md)
@@ -69,7 +71,14 @@ Nhánh `codex/SEM-45-log-parser`, từ main `d29532a` ngày 08/11/2026. Lịch s
 
 1. **Đã xong** cập nhật pin/hash theo nguồn mới, audit thu hồi và phạm vi 12 lượt cũ — `d202701`.
 2. **Đã xong** tái sinh CSV/summary/report/VERIFICATION với 0 VALID/12 INVALID, kiểm 81 test và tái lập — `0629f24`.
-3. **Đã xong** sửa CHECKS/ANALYSIS/task theo qualification mới, ghi rõ 6 lượt đo lại nằm ngoài bộ chọn và phần Not run. Commit cuối tra trong lịch sử file CHECKS.
+3. **Đã xong** sửa CHECKS/ANALYSIS/task theo qualification mới, ghi rõ 6 lượt đo lại nằm ngoài bộ chọn và phần Not run — `1a0c667`.
+
+### Bốn bước sửa theo review ngày 18/11
+
+1. **Đã xong** cập nhật main `9caaf38` — `42a466a`.
+2. **Đã xong** sửa và kiểm hồi quy E04 reconnect/clock/cửa sổ — `fd53736`.
+3. **Đã xong** sửa và kiểm hồi quy E06 work/fetch/apply — `5654664`.
+4. **Đã xong** tái sinh artifact, đối chiếu Windows/Ubuntu, ghi hướng dẫn CRLF/LF và kiểm bàn giao. Commit cuối tra trong lịch sử CHECKS.
 
 ## Task được mở khóa
 

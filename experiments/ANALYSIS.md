@@ -1,6 +1,6 @@
 # Phân tích manifest/JSONL — SEM-45
 
-Phiên bản công cụ **0.2.0**, Tuấn (`mtuan2491`), cập nhật 16/11/2026 theo review của Trí. Python **3.9+**, standard library và Git khi dùng index nguồn. Đã kiểm trên Windows với Python 3.12.14. Analyzer đọc dữ liệu offline và xuất CSV, summary, report có checksum. [Yêu cầu SEM-45](../tasks/backlog/SEM-45.md) · [CHECKS](../docs/evidence/SEM-45/CHECKS.md).
+Phiên bản công cụ **0.3.0**, Tuấn (`mtuan2491`), cập nhật 18/11/2026 theo review E04/E06 của Trí. Python **3.9+**, standard library và Git khi dùng index nguồn. Đã kiểm trên Windows với Python 3.12.14 và Ubuntu 24.04. Analyzer đọc dữ liệu offline và xuất CSV, summary, report có checksum. [Yêu cầu SEM-45](../tasks/backlog/SEM-45.md) · [CHECKS](../docs/evidence/SEM-45/CHECKS.md).
 
 ## Bộ kết quả bàn giao
 
@@ -40,6 +40,25 @@ So sánh các file sau với bộ được commit. CSV và summary của hai bat
 | `analysis_report.json` | [analysis_report.json](../docs/evidence/SEM-45/analysis_report.json) |
 
 `.gitattributes` giữ LF cho CSV, JSON của SEM-45 và hai file Python được hash trong report. SHA-256 được tính trên byte thực tế. Khi công cụ/validator/index thay đổi có chủ ý, phải sinh lại report và kiểm lại kết quả. Batch có sẵn bị từ chối với `OUTPUT_EXISTS`, chọn ID mới để chạy lại.
+
+### Checkout Windows đã có sẵn
+
+Sau merge, file `export_logs.py` có thể còn CRLF dù `.gitattributes` quy định LF. CSV/summary vẫn tái lập được, còn `validator_sha256` phản ánh byte CRLF đang được dùng. Để đối chiếu report với byte LF đã commit, chạy đoạn PowerShell dưới từ root repo, rồi dùng batch ID mới để chạy analyzer. Đoạn kiểm so sánh nội dung với HEAD trước khi ghi lại cả hai file từ Git. Nếu có sửa nội dung local, Git trả lỗi và quá trình dừng để giữ phần chỉnh sửa đó.
+
+```powershell
+@'
+from pathlib import Path
+import subprocess
+paths = ["experiments/scripts/analyze.py", "experiments/scripts/export_logs.py"]
+for path in paths:
+    subprocess.run(["git", "diff", "--quiet", "HEAD", "--", path], check=True)
+for path in paths:
+    content = subprocess.check_output(["git", "show", "HEAD:" + path])
+    Path(path).write_bytes(content)
+'@ | python -
+```
+
+Đã thử trên bản checkout local riêng với validator CRLF. Report lệch đúng trường `validator_sha256`, sau khi lấy byte LF từ Git thì report khớp sau chuẩn hóa `batch_id`. Report vẫn hash byte thực tế của mã được chạy.
 
 Trên máy sandbox, có thể đặt TEMP/TMP/TMPDIR của tiến trình kiểm vào thư mục `.local/` đã tạo. Các file tạm không thuộc artifact bàn giao.
 
@@ -87,6 +106,16 @@ Duration Android dùng elapsed realtime cùng device và boot khác null. Fetch 
 Clock liên máy dùng offset server − Android. Mẫu trước/sau phải bao quanh event, uncertainty bao được RTT/2 + resolution và sai lệch offset khai báo. Bound gồm uncertainty lớn nhất và nửa chênh offset trước/sau. UTC/monotonic mâu thuẫn hoặc estimate − bound âm khiến latency null. Accepted, received, enqueue và applied có mốc riêng theo schema. [Protocol](PROTOCOL.md).
 
 Giá trị chưa đủ căn cứ là ô CSV rỗng hoặc JSON null. Số 0 biểu thị count/duration đã kiểm được bằng 0. Với event thiếu boot, `OUTCOME_EVIDENCE_UNVERIFIED` thể hiện chưa đối chiếu được một SUCCESS khai báo. Khi cửa sổ đầy đủ và outcome trái evidence, công cụ ghi `OUTCOME_EVIDENCE_CONFLICT`. TIMEOUT cùng late apply giữ nguyên TIMEOUT và báo late riêng.
+
+### Điều kiện phục hồi E04 và E06
+
+- **E04** cần `offline_utc`, `reconnect_utc`, mốc start/end và clock `ANDROID` đã controlled. Các mẫu clock phải bao quanh cửa sổ, anchor UTC − elapsed của event cùng boot phải khớp mốc manifest trong bound `2 × uncertainty`. Milestone được tiếp nhận trên cơ sở Android UTC đã khai báo và đối chiếu này. Milestone từ host hoặc chưa xác minh cơ sở clock nhận cờ `E04_RECOVERY_CLOCK_UNVERIFIED`.
+- Khoảng offline phải đủ 2 phút, sau reconnect còn ít nhất 30 phút với PERIODIC hoặc 5 phút với PUSH. Khoảng không hợp lệ/cửa sổ ngắn nhận `E04_OFFLINE_INTERVAL_INVALID` hoặc `E04_RECOVERY_WINDOW_SHORT`. TIMEOUT đủ cửa sổ và evidence vẫn được giữ trong mẫu số hợp lệ.
+- Apply trước reconnect ngoài bound nhận `E04_APPLIED_BEFORE_RECONNECT` và bị loại khỏi mẫu số. Apply nằm trong bound quanh reconnect nhận `E04_APPLY_TIME_UNVERIFIED`. Các trường hợp chưa xác minh để completion null và `UNCERTAIN_WINDOW`; outcome nguồn được giữ để truy vết.
+- **E06** cần chuỗi PERIODIC `work_started → snapshot_fetch_started → snapshot_fetch_completed → snapshot_applied` cùng request/work/attempt, cặp fetch cùng network_call_id. Fetch phải HTTP 200/success, đúng target version, cùng device/boot khác null và thứ tự elapsed không giảm. Log có thể được cung cấp khác thứ tự dòng.
+- Thiếu fetch, sai correlation/target/status/thứ tự/boot nhận `E06_FETCH_CHAIN_UNVERIFIED` và loại khỏi mẫu số. Mâu thuẫn correlation nội bộ vẫn trả lỗi contract hiện có. Chuỗi đủ evidence mới được xét `APPLIED_TARGET`; TIMEOUT chưa có apply vẫn được đánh giá theo cửa sổ và evidence skip thật.
+
+Bộ 12 pilot lịch sử vẫn giữ source index đã pin và validity INVALID. Phiên bản 0.3.0 cập nhật version/cờ phân tích, vì vậy CSV/summary/report có checksum mới. Các phép đo và event nguồn được giữ để truy vết.
 
 ## Nhóm thống kê và bàn giao tiếp
 
