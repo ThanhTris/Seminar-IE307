@@ -1,11 +1,11 @@
 {
-  "analysis_version": "0.3.0",
-  "analyzer_sha256": "7b61da5ee57894b524dd8436095470ceec1896abccb77eceba69dedf4aa28dfd",
+  "analysis_version": "0.4.0",
+  "analyzer_sha256": "12089b97019c566cc0fad8b5056b8fc54d17905e15eba088296691f55e1428c4",
   "batch_id": "windows",
   "dataset": "pilot",
   "outputs_sha256": {
-    "results.csv": "39f846e0b542000085f81a30181f2046ea4c42d8dd1329d6a1085f842b6139a3",
-    "summary.json": "0598955823514fa169f5c469a188e903bc56b13d6fa2b66542aa8a70243552e5"
+    "results.csv": "4f904680124b6dde9a1fe7e3a446b630ef27240b108f0f0a185f00cce9aac23f",
+    "summary.json": "4afcdcfcedbd0a4aee5273209fffdba4d25a7edfff989732aefb369f8c02acff"
   },
   "runs": [
     {
@@ -113,7 +113,7 @@
         }
       },
       "row": {
-        "analysis_version": "0.3.0",
+        "analysis_version": "0.4.0",
         "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
         "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
         "applied_event_count": null,
@@ -258,7 +258,7 @@
         }
       },
       "row": {
-        "analysis_version": "0.3.0",
+        "analysis_version": "0.4.0",
         "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
         "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
         "applied_event_count": null,
@@ -415,7 +415,7 @@
         }
       },
       "row": {
-        "analysis_version": "0.3.0",
+        "analysis_version": "0.4.0",
         "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
         "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
         "applied_event_count": null,
@@ -577,7 +577,7 @@
         }
       },
       "row": {
-        "analysis_version": "0.3.0",
+        "analysis_version": "0.4.0",
         "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
         "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
         "applied_event_count": null,
@@ -736,7 +736,7 @@
         }
       },
       "row": {
-        "analysis_version": "0.3.0",
+        "analysis_version": "0.4.0",
         "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
         "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
         "applied_event_count": null,
@@ -899,7 +899,7 @@
         }
       },
       "row": {
-        "analysis_version": "0.3.0",
+        "analysis_version": "0.4.0",
         "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
         "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
         "applied_event_count": null,
@@ -1064,7 +1064,7 @@
         }
       },
       "row": {
-        "analysis_version": "0.3.0",
+        "analysis_version": "0.4.0",
         "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
         "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
         "applied_event_count": null,
@@ -1227,7 +1227,7 @@
         }
       },
       "row": {
-        "analysis_version": "0.3.0",
+        "analysis_version": "0.4.0",
         "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
         "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
         "applied_event_count": null,
@@ -1383,7 +1383,7 @@
         }
       },
       "row": {
-        "analysis_version": "0.3.0",
+        "analysis_version": "0.4.0",
         "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
         "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
         "applied_event_count": null,
@@ -1545,7 +1545,7 @@
         }
       },
       "row": {
-        "analysis_version": "0.3.0",
+        "analysis_version": "0.4.0",
         "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
         "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
         "applied_event_count": null,
@@ -1702,7 +1702,7 @@
         }
       },
       "row": {
-        "analysis_version": "0.3.0",
+        "analysis_version": "0.4.0",
         "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
         "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
         "applied_event_count": null,
@@ -1859,7 +1859,7 @@
         }
       },
       "row": {
-        "analysis_version": "0.3.0",
+        "analysis_version": "0.4.0",
         "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
         "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
         "applied_event_count": null,

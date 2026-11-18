@@ -11,7 +11,7 @@
 
 > **Cập nhật 16/11/2026 theo review của Trí.** Bộ `experiments/results.csv` giữ 12 lượt OBSERVED/pilot đã bàn giao, cập nhật theo nguồn SEM-41 `42ca000` thành **0 VALID / 12 INVALID** sau audit collector thu hồi 8 qualification. Sáu lượt chạy lại mới của nguồn nằm ngoài bộ chọn hiện tại và được liệt kê trong INPUTS. Mẫu số main bằng 0; main emulator 27 slot Not run, OPPO chưa có log, kiểm độc lập SEM-44 và các phép đo thiếu clock/boot ghi Not run/giới hạn trong CHECKS. Trạng thái Project hiện vẫn In Progress, chờ review bản sửa.
 
-> **Cập nhật 18/11/2026.** Đã nhận main `9caaf38`, sửa guard E04 cho apply trước reconnect/thiếu clock và guard E06 cho fetch đúng target/correlation/thứ tự. Công cụ v0.3.0 có 12 test hồi quy mới, suite Ubuntu đạt 145/145. Bộ artifact vẫn giữ 12 pilot lịch sử INVALID, main/OPPO chưa có phép đo nhận vào bộ này, mẫu số main bằng 0. Audit SEM-44 trên main đã kiểm bản producer trước; bản sửa hiện tại chờ reviewer đối chiếu. CHECKS và ANALYSIS ghi giới hạn Windows symlink và cách phục hồi LF để tái lập report. PR tiếp tục Draft.
+> **Cập nhật 19/11/2026.** Đã pull main `9caaf38` trước khi sửa. Analyzer v0.4.0 kiểm update E04 đúng target nằm trong khoảng offline sau khi tính offset/sai số, đồng thời loại E06 có skip mâu thuẫn với bằng chứng gửi push cho cùng update. Sáu test hồi quy mới bao gồm hai ca reviewer nêu và các đối chứng. Bộ artifact giữ 12 pilot lịch sử INVALID, mẫu số main bằng 0. CHECKS ghi kết quả Ubuntu/Windows và các giới hạn. PR tiếp tục Draft để kiểm lại.
 
 ## Dependency — bấm mã task để mở yêu cầu
 
@@ -78,7 +78,13 @@ Nhánh `codex/SEM-45-log-parser`, từ main `d29532a` ngày 08/11/2026. Lịch s
 1. **Đã xong** cập nhật main `9caaf38` — `42a466a`.
 2. **Đã xong** sửa và kiểm hồi quy E04 reconnect/clock/cửa sổ — `fd53736`.
 3. **Đã xong** sửa và kiểm hồi quy E06 work/fetch/apply — `5654664`.
-4. **Đã xong** tái sinh artifact, đối chiếu Windows/Ubuntu, ghi hướng dẫn CRLF/LF và kiểm bàn giao. Commit cuối tra trong lịch sử CHECKS.
+4. **Đã xong** tái sinh artifact, đối chiếu Windows/Ubuntu, ghi hướng dẫn CRLF/LF và kiểm bàn giao — `2887ce9`.
+
+### Ba bước sửa theo review ngày 19/11
+
+1. **Đã xong** kiểm mốc update E04 theo clock và khoảng offline — `bfbcdea`.
+2. **Đã xong** kiểm mâu thuẫn skip/send E06 theo update ID và target version — `399044d`.
+3. **Đã xong** tái sinh artifact v0.4.0, đối chiếu test và cập nhật bàn giao. Commit tra trong lịch sử CHECKS.
 
 ## Task được mở khóa
 

@@ -1,6 +1,6 @@
 # Phân tích manifest/JSONL — SEM-45
 
-Phiên bản công cụ **0.3.0**, Tuấn (`mtuan2491`), cập nhật 18/11/2026 theo review E04/E06 của Trí. Python **3.9+**, standard library và Git khi dùng index nguồn. Đã kiểm trên Windows với Python 3.12.14 và Ubuntu 24.04. Analyzer đọc dữ liệu offline và xuất CSV, summary, report có checksum. [Yêu cầu SEM-45](../tasks/backlog/SEM-45.md) · [CHECKS](../docs/evidence/SEM-45/CHECKS.md).
+Phiên bản công cụ **0.4.0**, Tuấn (`mtuan2491`), cập nhật 19/11/2026 theo review E04/E06 của Trí. Python **3.9+**, standard library và Git khi dùng index nguồn. Đã kiểm trên Windows với Python 3.12.14 và Ubuntu 24.04. Analyzer đọc dữ liệu offline và xuất CSV, summary, report có checksum. [Yêu cầu SEM-45](../tasks/backlog/SEM-45.md) · [CHECKS](../docs/evidence/SEM-45/CHECKS.md).
 
 ## Bộ kết quả bàn giao
 
@@ -111,11 +111,13 @@ Giá trị chưa đủ căn cứ là ô CSV rỗng hoặc JSON null. Số 0 bi�
 
 - **E04** cần `offline_utc`, `reconnect_utc`, mốc start/end và clock `ANDROID` đã controlled. Các mẫu clock phải bao quanh cửa sổ, anchor UTC − elapsed của event cùng boot phải khớp mốc manifest trong bound `2 × uncertainty`. Milestone được tiếp nhận trên cơ sở Android UTC đã khai báo và đối chiếu này. Milestone từ host hoặc chưa xác minh cơ sở clock nhận cờ `E04_RECOVERY_CLOCK_UNVERIFIED`.
 - Khoảng offline phải đủ 2 phút, sau reconnect còn ít nhất 30 phút với PERIODIC hoặc 5 phút với PUSH. Khoảng không hợp lệ/cửa sổ ngắn nhận `E04_OFFLINE_INTERVAL_INVALID` hoặc `E04_RECOVERY_WINDOW_SHORT`. TIMEOUT đủ cửa sổ và evidence vẫn được giữ trong mẫu số hợp lệ.
+- E04 cần một `server_updated` duy nhất cho target version. Quy đổi sang Android UTC bằng thời điểm server trừ offset server − Android, rồi xét toàn bộ khoảng ± uncertainty. Chỉ công nhận khi khoảng này nằm trọn trong `[offline_utc, reconnect_utc)`. Khoảng nằm ngoài nhận `E04_TARGET_UPDATE_OUTSIDE_OFFLINE`. Thiếu update đúng target, có nhiều update cùng target hoặc khoảng sai số chạm qua ranh giới nhận `E04_TARGET_UPDATE_TIME_UNVERIFIED`. Các lượt này giữ outcome và event để truy vết, để trống latency và bị loại khỏi mẫu số.
 - Apply trước reconnect ngoài bound nhận `E04_APPLIED_BEFORE_RECONNECT` và bị loại khỏi mẫu số. Apply nằm trong bound quanh reconnect nhận `E04_APPLY_TIME_UNVERIFIED`. Các trường hợp chưa xác minh để completion null và `UNCERTAIN_WINDOW`; outcome nguồn được giữ để truy vết.
 - **E06** cần chuỗi PERIODIC `work_started → snapshot_fetch_started → snapshot_fetch_completed → snapshot_applied` cùng request/work/attempt, cặp fetch cùng network_call_id. Fetch phải HTTP 200/success, đúng target version, cùng device/boot khác null và thứ tự elapsed không giảm. Log có thể được cung cấp khác thứ tự dòng.
 - Thiếu fetch, sai correlation/target/status/thứ tự/boot nhận `E06_FETCH_CHAIN_UNVERIFIED` và loại khỏi mẫu số. Mâu thuẫn correlation nội bộ vẫn trả lỗi contract hiện có. Chuỗi đủ evidence mới được xét `APPLIED_TARGET`; TIMEOUT chưa có apply vẫn được đánh giá theo cửa sổ và evidence skip thật.
+- E06 cần `push_send_skipped` cho cùng `update_id` và target version của `server_updated`. Nếu có `push_send_accepted`, `push_send_rejected` hoặc `push_send_unknown` cho cặp này, `E06_FAULT_SKIP_CONFLICTING_SEND` đánh dấu đã thử gửi qua provider và loại lượt khỏi mẫu số. Report vẫn giữ event skip/send, outcome khai báo và bằng chứng periodic apply để truy vết.
 
-Bộ 12 pilot lịch sử vẫn giữ source index đã pin và validity INVALID. Phiên bản 0.3.0 cập nhật version/cờ phân tích, vì vậy CSV/summary/report có checksum mới. Các phép đo và event nguồn được giữ để truy vết.
+Bộ v0.4.0 giữ source index của 12 pilot lịch sử và validity INVALID. CSV/summary/report được sinh từ analyzer mới và có checksum tương ứng. Các phép đo và event nguồn được giữ để truy vết.
 
 ## Nhóm thống kê và bàn giao tiếp
 
