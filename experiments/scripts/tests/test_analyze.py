@@ -357,6 +357,76 @@ class CaseEvidenceTests(unittest.TestCase):
             if event["origin"] == "ANDROID":
                 event.update(source="PERIODIC" if mode != "PUSH" else "PUSH", signal_ids=[])
 
+    def e03(self, mode="PERIODIC"):
+        self.observed_case("E03", mode, 2100)
+        self.manifest["config"].update(deep_idle_before="ACTIVE", deep_idle_during="IDLE",
+                                       deep_idle_after="ACTIVE")
+        self.manifest["observation"]["milestones"].update(
+            idle_start_utc="2026-11-03T00:05:00Z", idle_exit_utc="2026-11-03T00:25:00Z")
+        next(e for e in self.events if e["event_type"] == "server_updated")[
+            "timestamp_utc"] = "2026-11-03T00:05:01Z"
+        self.move_apply_chain(1800)
+
+    def test_e03_active_and_short_idle_is_excluded_even_with_full_total_window(self):
+        self.e03()
+        self.manifest["config"]["deep_idle_during"] = "ACTIVE"
+        self.manifest["observation"]["milestones"]["idle_exit_utc"] = "2026-11-03T00:06:00Z"
+        result = self.analyze()
+        row = result["row"]
+        self.assertFalse(row["eligible"])
+        self.assertEqual(row["outcome"], "SUCCESS")
+        self.assertEqual(row["snapshot_applied_event_count_all"], 1)
+        self.assertIn("E03_DEEP_DOZE_NOT_CONFIRMED", row["flags"])
+        self.assertIn("E03_DOZE_PHASE_TOO_SHORT", row["flags"])
+        group = analyzer.summarize([result])[0]
+        self.assertEqual((group["n_eligible"], group["n_complete"]), (0, 0))
+
+    def test_e03_verified_doze_and_required_phases_are_eligible_for_both_modes(self):
+        for mode in ("PERIODIC", "PUSH"):
+            with self.subTest(mode=mode):
+                self.setUp()
+                self.e03(mode)
+                result = self.analyze()
+                self.assertEqual(result["row"]["flags"], "")
+                self.assertTrue(result["row"]["eligible"])
+                self.assertEqual(analyzer.summarize([result])[0]["n_complete"], 1)
+
+    def test_e03_each_phase_minimum_is_checked_independently(self):
+        for enter, leave in (("04:59", "25:00"), ("05:00", "24:59"), ("05:00", "25:01")):
+            with self.subTest(enter=enter, leave=leave):
+                self.setUp()
+                self.e03()
+                self.manifest["observation"]["milestones"].update(
+                    idle_start_utc=f"2026-11-03T00:{enter}Z", idle_exit_utc=f"2026-11-03T00:{leave}Z")
+                row = self.analyze()["row"]
+                self.assertFalse(row["eligible"])
+                self.assertIn("E03_DOZE_PHASE_TOO_SHORT", row["flags"])
+
+    def test_e03_missing_conflicting_or_reversed_doze_evidence_is_excluded(self):
+        for field, value, flag in (
+                ("deep_idle_during", None, "E03_DEEP_DOZE_NOT_CONFIRMED"),
+                ("deep_idle_after", "IDLE", "E03_DOZE_STATE_CONFLICT"),
+                ("idle_start_utc", None, "E03_DOZE_PHASES_UNVERIFIED"),
+                ("idle_exit_utc", "2026-11-03T00:04:00Z", "E03_DOZE_PHASE_ORDER_INVALID")):
+            with self.subTest(field=field, value=value):
+                self.setUp()
+                self.e03()
+                section = (self.manifest["config"] if field.startswith("deep_idle") else
+                           self.manifest["observation"]["milestones"])
+                section[field] = value
+                row = self.analyze()["row"]
+                self.assertFalse(row["eligible"])
+                self.assertIn(flag, row["flags"])
+
+    def test_e03_full_window_timeout_with_valid_doze_remains_eligible(self):
+        self.e03()
+        self.manifest.update(outcome="TIMEOUT", reason_codes=["TIMEOUT"])
+        self.events = [e for e in self.events if e["event_type"] != "snapshot_applied"]
+        result = self.analyze()
+        self.assertTrue(result["row"]["eligible"])
+        self.assertEqual(result["row"]["outcome"], "TIMEOUT")
+        self.assertEqual(analyzer.summarize([result])[0]["eligible_outcomes"], {"TIMEOUT": 1})
+
     def e04(self, mode="PUSH"):
         self.observed_case("E04", mode, 1920 if mode == "PERIODIC" else 420)
         self.manifest["observation"]["milestones"].update(

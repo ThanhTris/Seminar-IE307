@@ -218,6 +218,24 @@ def e02_receipt_for_apply(applied, request, target_signals, receipts, location):
                  monotonic_delta(e, started) is not None])
 
 
+def e03_doze_phase_flag(observation):
+    """Check elapsed durations on the observation clock, independent of server UTC."""
+    idle_start, idle_exit = (observation["milestones"][key] for key in ("idle_start_utc", "idle_exit_utc"))
+    bounds = (observation["start_utc"], idle_start, idle_exit, observation["end_utc"])
+    start_elapsed, end_elapsed = (observation[key] for key in
+                                  ("start_elapsed_realtime_ms", "end_elapsed_realtime_ms"))
+    if not all(bounds) or not contract.uint(start_elapsed) or not contract.uint(end_elapsed):
+        return "E03_DOZE_PHASES_UNVERIFIED"
+    start, enter, leave, end = map(utc_ms, bounds)
+    if not start <= enter <= leave <= end:
+        return "E03_DOZE_PHASE_ORDER_INVALID"
+    if abs((end - start) - (end_elapsed - start_elapsed)) > 1000:
+        return "E03_DOZE_PHASES_UNVERIFIED"
+    if enter - start < 300000 or leave - enter < 1200000 or end - leave < 600000:
+        return "E03_DOZE_PHASE_TOO_SHORT"
+    return None
+
+
 def e04_reconnect_elapsed(manifest, android, estimate):
     """Map declared Android UTC milestones only after checking same-boot anchors."""
     obs = manifest["observation"]
@@ -326,6 +344,15 @@ def analyze_run(run):
         flags.add("CASE_MODE_MISMATCH")
     if m["case_id"] in {"E03", "E04"} and m["mode"] not in {"PERIODIC", "PUSH"}:
         flags.add("CASE_MODE_MISMATCH")
+    if m["case_id"] == "E03" and m["execution_status"] != "NOT_RUN":
+        config = m["config"]
+        if config["deep_idle_during"] != "IDLE":
+            flags.add("E03_DEEP_DOZE_NOT_CONFIRMED")
+        if any(config[key] in {"IDLE", "IDLE_MAINTENANCE"} for key in ("deep_idle_before", "deep_idle_after")):
+            flags.add("E03_DOZE_STATE_CONFLICT")
+        phase_flag = e03_doze_phase_flag(obs)
+        if phase_flag:
+            flags.add(phase_flag)
     if expected_source and any(e["source"] not in {expected_source, None} and
                                e["event_type"] != "trigger_rejected" for e in inside):
         flags.add("UNEXPECTED_BACKGROUND_SOURCE")
