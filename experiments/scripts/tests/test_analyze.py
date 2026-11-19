@@ -359,12 +359,13 @@ class CaseEvidenceTests(unittest.TestCase):
 
     def e03(self, mode="PERIODIC"):
         self.observed_case("E03", mode, 2100)
+        self.controlled_clock_for_window()
         self.manifest["config"].update(deep_idle_before="ACTIVE", deep_idle_during="IDLE",
                                        deep_idle_after="ACTIVE")
         self.manifest["observation"]["milestones"].update(
             idle_start_utc="2026-11-03T00:05:00Z", idle_exit_utc="2026-11-03T00:25:00Z")
         next(e for e in self.events if e["event_type"] == "server_updated")[
-            "timestamp_utc"] = "2026-11-03T00:05:01Z"
+            "timestamp_utc"] = "2026-11-03T00:05:02Z"
         self.move_apply_chain(1800)
 
     def test_e03_active_and_short_idle_is_excluded_even_with_full_total_window(self):
@@ -389,7 +390,61 @@ class CaseEvidenceTests(unittest.TestCase):
                 result = self.analyze()
                 self.assertEqual(result["row"]["flags"], "")
                 self.assertTrue(result["row"]["eligible"])
+                self.assertEqual(result["row"]["update_to_applied_ms"], 1499000)
                 self.assertEqual(analyzer.summarize([result])[0]["n_complete"], 1)
+
+    def test_e03_update_and_apply_in_baseline_are_excluded(self):
+        self.e03()
+        next(e for e in self.events if e["event_type"] == "server_updated")[
+            "timestamp_utc"] = "2026-11-03T00:01:01Z"
+        self.move_apply_chain(120)
+        result = self.analyze()
+        row = result["row"]
+        self.assertFalse(row["eligible"])
+        self.assertIn("E03_TARGET_UPDATE_OUTSIDE_DOZE", row["flags"])
+        self.assertEqual(row["outcome"], "SUCCESS")
+        self.assertEqual(row["snapshot_applied_event_count_all"], 1)
+        self.assertEqual(row["observed_completion"], "UNCERTAIN_WINDOW")
+        self.assertIsNone(row["update_to_applied_ms"])
+        group = analyzer.summarize([result])[0]
+        self.assertEqual((group["n_eligible"], group["n_complete"]), (0, 0))
+
+    def test_e03_target_update_after_idle_exit_is_excluded(self):
+        self.e03()
+        next(e for e in self.events if e["event_type"] == "server_updated")[
+            "timestamp_utc"] = "2026-11-03T00:26:01Z"
+        row = self.analyze()["row"]
+        self.assertFalse(row["eligible"])
+        self.assertIn("E03_TARGET_UPDATE_OUTSIDE_DOZE", row["flags"])
+
+    def test_e03_update_without_certain_phase_is_unverified(self):
+        for problem in ("enter", "exit", "missing_target", "uncontrolled_clock", "window_anchor"):
+            with self.subTest(problem=problem):
+                self.setUp()
+                self.e03()
+                updated = next(e for e in self.events if e["event_type"] == "server_updated")
+                if problem == "enter":
+                    updated["timestamp_utc"] = "2026-11-03T00:05:01.003Z"
+                elif problem == "exit":
+                    updated["timestamp_utc"] = "2026-11-03T00:25:00.997Z"
+                elif problem == "missing_target":
+                    updated["data_version"] = 2
+                elif problem == "uncontrolled_clock":
+                    self.manifest["clock"]["controlled"] = False
+                else:
+                    self.manifest["observation"]["start_elapsed_realtime_ms"] += 100
+                row = self.analyze()["row"]
+                self.assertFalse(row["eligible"])
+                self.assertIn("E03_TARGET_UPDATE_TIME_UNVERIFIED", row["flags"])
+                self.assertIsNone(row["update_to_applied_ms"])
+
+    def test_e03_apply_before_target_update_in_doze_is_excluded(self):
+        self.e03()
+        self.move_apply_chain(120)
+        row = self.analyze()["row"]
+        self.assertFalse(row["eligible"])
+        self.assertIn("E03_APPLIED_BEFORE_TARGET_UPDATE", row["flags"])
+        self.assertFalse(row["target_applied_in_window"])
 
     def test_e03_each_phase_minimum_is_checked_independently(self):
         for enter, leave in (("04:59", "25:00"), ("05:00", "24:59"), ("05:00", "25:01")):
@@ -431,9 +486,12 @@ class CaseEvidenceTests(unittest.TestCase):
         self.observed_case("E04", mode, 1920 if mode == "PERIODIC" else 420)
         self.manifest["observation"]["milestones"].update(
             offline_utc="2026-11-03T00:00:00Z", reconnect_utc="2026-11-03T00:02:00Z")
-        self.controlled_clock()
+        self.controlled_clock_for_window()
         next(e for e in self.events if e["event_type"] == "server_updated")[
             "timestamp_utc"] = "2026-11-03T00:00:02Z"
+
+    def controlled_clock_for_window(self):
+        self.controlled_clock()
         end = datetime.fromisoformat(self.manifest["observation"]["end_utc"].replace("Z", "+00:00"))
         for sample in self.manifest["clock"]["after_samples"]:
             sample.update(client_send_utc=(end + timedelta(seconds=1)).isoformat().replace("+00:00", "Z"),

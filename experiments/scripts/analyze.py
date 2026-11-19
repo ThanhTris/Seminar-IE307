@@ -243,45 +243,51 @@ def e03_doze_phase_flag(observation):
     return None
 
 
-def e04_reconnect_elapsed(manifest, android, estimate):
-    """Map declared Android UTC milestones only after checking same-boot anchors."""
+def observation_on_android_clock(manifest, android, estimate):
+    """Check that the manifest window UTC is consistent with same-boot events."""
     obs = manifest["observation"]
-    offline, reconnect = (obs["milestones"][k] for k in ("offline_utc", "reconnect_utc"))
-    if estimate is None or not all((obs["start_utc"], obs["end_utc"], offline, reconnect,
-                                    obs["boot_session_id"])):
-        return None, "E04_RECOVERY_CLOCK_UNVERIFIED"
+    if estimate is None or not all((obs["start_utc"], obs["end_utc"], obs["boot_session_id"])):
+        return False
     start, end = obs["start_elapsed_realtime_ms"], obs["end_elapsed_realtime_ms"]
     anchors = [utc_ms(e["timestamp_utc"]) - e["elapsed_realtime_ms"] for e in android
                if e["boot_session_id"] == obs["boot_session_id"]]
     if not anchors or not contract.uint(start) or not contract.uint(end):
-        return None, "E04_RECOVERY_CLOCK_UNVERIFIED"
+        return False
     utc_start, utc_end = utc_ms(obs["start_utc"]), utc_ms(obs["end_utc"])
     before = max(utc_ms(s["client_receive_utc"]) for s in manifest["clock"]["before_samples"])
     after = min(utc_ms(s["client_send_utc"]) for s in manifest["clock"]["after_samples"])
     tolerance = 2 * estimate[1]
-    if (before > utc_start or after < utc_end or
-            any(abs(anchor - boundary) > tolerance for anchor in anchors
-                for boundary in (utc_start - start, utc_end - end))):
+    return (before <= utc_start <= utc_end <= after and
+            all(abs(anchor - boundary) <= tolerance for anchor in anchors
+                for boundary in (utc_start - start, utc_end - end)))
+
+
+def e04_reconnect_elapsed(manifest, android, estimate):
+    """Map declared Android UTC milestones only after checking same-boot anchors."""
+    obs = manifest["observation"]
+    offline, reconnect = (obs["milestones"][k] for k in ("offline_utc", "reconnect_utc"))
+    if not offline or not reconnect or not observation_on_android_clock(manifest, android, estimate):
         return None, "E04_RECOVERY_CLOCK_UNVERIFIED"
+    utc_start, utc_end = utc_ms(obs["start_utc"]), utc_ms(obs["end_utc"])
     offline_ms, reconnect_ms = utc_ms(offline), utc_ms(reconnect)
     if not utc_start <= offline_ms <= reconnect_ms <= utc_end or reconnect_ms - offline_ms < 120000:
         return None, "E04_OFFLINE_INTERVAL_INVALID"
     recovery_ms = 1800000 if manifest["mode"] == "PERIODIC" else 300000
     if utc_end - reconnect_ms < recovery_ms:
         return None, "E04_RECOVERY_WINDOW_SHORT"
-    return start + reconnect_ms - utc_start, None
+    return obs["start_elapsed_realtime_ms"] + reconnect_ms - utc_start, None
 
 
-def e04_target_update_flag(milestones, updated, estimate):
-    """Check the target commit against the verified Android UTC offline interval."""
-    if updated is None:
-        return "E04_TARGET_UPDATE_TIME_UNVERIFIED"
+def target_update_interval_flag(updated, estimate, start_utc, end_utc, case, interval):
+    """Require the full uncertainty interval inside the specified Android UTC phase."""
+    if updated is None or estimate is None:
+        return f"{case}_TARGET_UPDATE_TIME_UNVERIFIED"
     earliest, latest = server_time_on_android(updated, estimate)
-    offline, reconnect = (utc_ms(milestones[k]) for k in ("offline_utc", "reconnect_utc"))
-    if latest < offline or earliest >= reconnect:
-        return "E04_TARGET_UPDATE_OUTSIDE_OFFLINE"
-    if earliest < offline or latest >= reconnect:
-        return "E04_TARGET_UPDATE_TIME_UNVERIFIED"
+    start, end = utc_ms(start_utc), utc_ms(end_utc)
+    if latest < start or earliest >= end:
+        return f"{case}_TARGET_UPDATE_OUTSIDE_{interval}"
+    if earliest < start or latest >= end:
+        return f"{case}_TARGET_UPDATE_TIME_UNVERIFIED"
     return None
 
 
@@ -349,15 +355,17 @@ def analyze_run(run):
         flags.add("CASE_MODE_MISMATCH")
     if m["case_id"] in {"E03", "E04"} and m["mode"] not in {"PERIODIC", "PUSH"}:
         flags.add("CASE_MODE_MISMATCH")
-    if m["case_id"] == "E03" and m["execution_status"] != "NOT_RUN":
+    e03_measurement = m["case_id"] == "E03" and m["execution_status"] != "NOT_RUN"
+    e03_phase_flag = None
+    if e03_measurement:
         config = m["config"]
         if config["deep_idle_during"] != "IDLE":
             flags.add("E03_DEEP_DOZE_NOT_CONFIRMED")
         if any(config[key] in {"IDLE", "IDLE_MAINTENANCE"} for key in ("deep_idle_before", "deep_idle_after")):
             flags.add("E03_DOZE_STATE_CONFLICT")
-        phase_flag = e03_doze_phase_flag(obs)
-        if phase_flag:
-            flags.add(phase_flag)
+        e03_phase_flag = e03_doze_phase_flag(obs)
+        if e03_phase_flag:
+            flags.add(e03_phase_flag)
     if expected_source and any(e["source"] not in {expected_source, None} and
                                e["event_type"] != "trigger_rejected" for e in inside):
         flags.add("UNEXPECTED_BACKGROUND_SOURCE")
@@ -418,22 +426,39 @@ def analyze_run(run):
 
     recovery_verified = True
     reconnect_elapsed = None
-    e04_update_verified = True
+    target_update_verified = True
     if m["case_id"] == "E04":
         reconnect_elapsed, recovery_flag = e04_reconnect_elapsed(m, android, estimate)
         recovery_verified = recovery_flag is None
         if recovery_flag:
             flags.add(recovery_flag)
         else:
-            update_flag = e04_target_update_flag(obs["milestones"], updated, estimate)
+            milestones = obs["milestones"]
+            update_flag = target_update_interval_flag(updated, estimate, milestones["offline_utc"],
+                                                      milestones["reconnect_utc"], "E04", "OFFLINE")
             if update_flag:
                 flags.add(update_flag)
                 recovery_verified = False
-                e04_update_verified = False
+                target_update_verified = False
 
     applied = sorted([e for e in inside if target_apply(e)],
                      key=lambda e: (e["elapsed_realtime_ms"], e["event_id"]))
     late = [e for e in buckets["late"] if target_apply(e)]
+    if e03_measurement and e03_phase_flag is None:
+        milestones = obs["milestones"]
+        phase_estimate = estimate if observation_on_android_clock(m, android, estimate) else None
+        update_flag = target_update_interval_flag(updated, phase_estimate, milestones["idle_start_utc"],
+                                                  milestones["idle_exit_utc"], "E03", "DOZE")
+        if update_flag:
+            flags.add(update_flag)
+            target_update_verified = recovery_verified = False
+            applied, late = [], []
+        else:
+            earliest_update, _ = server_time_on_android(updated, phase_estimate)
+            if any(utc_ms(e["timestamp_utc"]) < earliest_update for e in applied):
+                flags.add("E03_APPLIED_BEFORE_TARGET_UPDATE")
+            applied = [e for e in applied if utc_ms(e["timestamp_utc"]) >= earliest_update]
+            late = [e for e in late if utc_ms(e["timestamp_utc"]) >= earliest_update]
     if m["case_id"] == "E04":
         tolerance = 2 * estimate[1] if estimate else 0
         if reconnect_elapsed is not None:
@@ -442,9 +467,9 @@ def analyze_run(run):
             if any(abs(e["elapsed_realtime_ms"] - reconnect_elapsed) <= tolerance for e in applied):
                 flags.add("E04_APPLY_TIME_UNVERIFIED")
                 recovery_verified = False
-        applied = [e for e in applied if reconnect_elapsed is not None and e04_update_verified and
+        applied = [e for e in applied if reconnect_elapsed is not None and target_update_verified and
                    e["elapsed_realtime_ms"] > reconnect_elapsed + tolerance]
-        late = [e for e in late if reconnect_elapsed is not None and e04_update_verified and
+        late = [e for e in late if reconnect_elapsed is not None and target_update_verified and
                 e["elapsed_realtime_ms"] > reconnect_elapsed + tolerance]
     e02_receipts = {}
     e02_chain_unverified = False
@@ -526,7 +551,7 @@ def analyze_run(run):
         receipts = [e for e in inside if e["event_type"] == "push_received" and
                     set(e["signal_ids"]) & signals]
     receipt = e02_receipts[completion["event_id"]] if m["case_id"] == "E02" and completion else only(receipts)
-    receive_delta = (cross_clock_delta(updated, receipt, clock) if e04_update_verified and
+    receive_delta = (cross_clock_delta(updated, receipt, clock) if target_update_verified and
                      not e02_chain_unverified else None)
 
     counts = Counter(e["event_type"] for e in inside if e["source"] != "MANUAL")
