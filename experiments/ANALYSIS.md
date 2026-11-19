@@ -1,6 +1,6 @@
 # Phân tích manifest/JSONL — SEM-45
 
-Phiên bản công cụ **0.4.0**, Tuấn (`mtuan2491`), cập nhật 19/11/2026 theo review E04/E06 của Trí. Python **3.9+**, standard library và Git khi dùng index nguồn. Đã kiểm trên Windows với Python 3.12.14 và Ubuntu 24.04. Analyzer đọc dữ liệu offline và xuất CSV, summary, report có checksum. [Yêu cầu SEM-45](../tasks/backlog/SEM-45.md) · [CHECKS](../docs/evidence/SEM-45/CHECKS.md).
+Phiên bản công cụ **0.5.0**, Tuấn (`mtuan2491`), cập nhật 19/11/2026 theo review E02/E03 của Trí. Python **3.9+**, standard library và Git khi dùng index nguồn. Đã kiểm trên Windows với Python 3.12.14 và Ubuntu 24.04. Analyzer đọc dữ liệu offline và xuất CSV, summary, report có checksum. [Yêu cầu SEM-45](../tasks/backlog/SEM-45.md) · [CHECKS](../docs/evidence/SEM-45/CHECKS.md).
 
 ## Bộ kết quả bàn giao
 
@@ -107,7 +107,11 @@ Clock liên máy dùng offset server − Android. Mẫu trước/sau phải bao 
 
 Giá trị chưa đủ căn cứ là ô CSV rỗng hoặc JSON null. Số 0 biểu thị count/duration đã kiểm được bằng 0. Với event thiếu boot, `OUTCOME_EVIDENCE_UNVERIFIED` thể hiện chưa đối chiếu được một SUCCESS khai báo. Khi cửa sổ đầy đủ và outcome trái evidence, công cụ ghi `OUTCOME_EVIDENCE_CONFLICT`. TIMEOUT cùng late apply giữ nguyên TIMEOUT và báo late riêng.
 
-### Điều kiện phục hồi E04 và E06
+### Điều kiện hợp lệ theo ca
+
+- **E02** cần `server_updated` duy nhất của target version và event sender có cùng `update_id`, version và tín hiệu. Sender `accepted` hoặc `unknown` phải đi cùng callback `push_received` có cùng `run_id`, `device_alias`, `signal_id`. Cùng tín hiệu phải nối được qua `work_enqueued`, `work_started` và `snapshot_applied` theo request/work và attempt thực hiện apply. Callback phải đi trước hoặc cùng mốc elapsed với enqueue và worker start cùng boot. Log xác nhận enqueue có thể xuất hiện sau worker start do cách WorkManager xác nhận, khi đó `queue_ms` để trống. Mốc phản hồi server có thể được ghi sau callback.
+- E02 khai báo `SUCCESS` mà chuỗi không xác minh được nhận `E02_PUSH_CHAIN_UNVERIFIED`, giữ outcome và event gốc, loại khỏi mẫu số và để trống timing dựa vào chuỗi chưa đủ căn cứ. Lượt timeout/lỗi đủ cửa sổ vẫn được tính khi không có apply trong cửa sổ. Event gửi thất bại vẫn có trong report để truy vết.
+- **E03** cần `deep_idle_during=IDLE`, mốc start/enter/exit/end có thứ tự và tách đủ 5 phút baseline, 20 phút deep Doze, 10 phút sau thoát. Tổng thời lượng UTC phải khớp khoảng elapsed realtime trong dung sai 1 giây. Mốc pha dùng cùng clock quan sát khai báo trong manifest. Trạng thái thiếu/mâu thuẫn hay pha thiếu, đảo thứ tự hoặc quá ngắn bị gắn cờ và loại khỏi mẫu số. Outcome và event nguồn vẫn đọc được. Xác nhận checkpoint thực tế trong lúc Doze và phase event counts dựa vào audit của lượt chạy. [Protocol](PROTOCOL.md).
 
 - **E04** cần `offline_utc`, `reconnect_utc`, mốc start/end và clock `ANDROID` đã controlled. Các mẫu clock phải bao quanh cửa sổ, anchor UTC − elapsed của event cùng boot phải khớp mốc manifest trong bound `2 × uncertainty`. Milestone được tiếp nhận trên cơ sở Android UTC đã khai báo và đối chiếu này. Milestone từ host hoặc chưa xác minh cơ sở clock nhận cờ `E04_RECOVERY_CLOCK_UNVERIFIED`.
 - Khoảng offline phải đủ 2 phút, sau reconnect còn ít nhất 30 phút với PERIODIC hoặc 5 phút với PUSH. Khoảng không hợp lệ/cửa sổ ngắn nhận `E04_OFFLINE_INTERVAL_INVALID` hoặc `E04_RECOVERY_WINDOW_SHORT`. TIMEOUT đủ cửa sổ và evidence vẫn được giữ trong mẫu số hợp lệ.
@@ -117,7 +121,7 @@ Giá trị chưa đủ căn cứ là ô CSV rỗng hoặc JSON null. Số 0 bi�
 - Thiếu fetch, sai correlation/target/status/thứ tự/boot nhận `E06_FETCH_CHAIN_UNVERIFIED` và loại khỏi mẫu số. Mâu thuẫn correlation nội bộ vẫn trả lỗi contract hiện có. Chuỗi đủ evidence mới được xét `APPLIED_TARGET`; TIMEOUT chưa có apply vẫn được đánh giá theo cửa sổ và evidence skip thật.
 - E06 cần `push_send_skipped` cho cùng `update_id` và target version của `server_updated`. Nếu có `push_send_accepted`, `push_send_rejected` hoặc `push_send_unknown` cho cặp này, `E06_FAULT_SKIP_CONFLICTING_SEND` đánh dấu đã thử gửi qua provider và loại lượt khỏi mẫu số. Report vẫn giữ event skip/send, outcome khai báo và bằng chứng periodic apply để truy vết.
 
-Bộ v0.4.0 giữ source index của 12 pilot lịch sử và validity INVALID. CSV/summary/report được sinh từ analyzer mới và có checksum tương ứng. Các phép đo và event nguồn được giữ để truy vết.
+Bộ v0.5.0 giữ source index của 12 pilot lịch sử và validity INVALID. CSV/summary/report được sinh từ analyzer mới và có checksum tương ứng. Các phép đo và event nguồn được giữ để truy vết.
 
 ## Nhóm thống kê và bàn giao tiếp
 

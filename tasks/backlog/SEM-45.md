@@ -11,7 +11,7 @@
 
 > **Cập nhật 16/11/2026 theo review của Trí.** Bộ `experiments/results.csv` giữ 12 lượt OBSERVED/pilot đã bàn giao, cập nhật theo nguồn SEM-41 `42ca000` thành **0 VALID / 12 INVALID** sau audit collector thu hồi 8 qualification. Sáu lượt chạy lại mới của nguồn nằm ngoài bộ chọn hiện tại và được liệt kê trong INPUTS. Mẫu số main bằng 0; main emulator 27 slot Not run, OPPO chưa có log, kiểm độc lập SEM-44 và các phép đo thiếu clock/boot ghi Not run/giới hạn trong CHECKS. Trạng thái Project hiện vẫn In Progress, chờ review bản sửa.
 
-> **Cập nhật 19/11/2026.** Đã pull main `9caaf38` trước khi sửa. Analyzer v0.4.0 kiểm update E04 đúng target nằm trong khoảng offline sau khi tính offset/sai số, đồng thời loại E06 có skip mâu thuẫn với bằng chứng gửi push cho cùng update. Sáu test hồi quy mới bao gồm hai ca reviewer nêu và các đối chứng. Bộ artifact giữ 12 pilot lịch sử INVALID, mẫu số main bằng 0. CHECKS ghi kết quả Ubuntu/Windows và các giới hạn. PR tiếp tục Draft để kiểm lại.
+> **Cập nhật 19/11/2026 theo review trên `0faf74d`.** Analyzer v0.5.0 kiểm chuỗi sender–callback–enqueue–worker cho E02 và trạng thái deep IDLE cùng ba pha 5/20/10 phút cho E03. Bộ artifact giữ 12 pilot lịch sử INVALID, mẫu số main bằng 0. CHECKS ghi kết quả Ubuntu/Windows và giới hạn chứng cứ. PR tiếp tục Draft để kiểm lại.
 
 ## Dependency — bấm mã task để mở yêu cầu
 
@@ -84,7 +84,13 @@ Nhánh `codex/SEM-45-log-parser`, từ main `d29532a` ngày 08/11/2026. Lịch s
 
 1. **Đã xong** kiểm mốc update E04 theo clock và khoảng offline — `bfbcdea`.
 2. **Đã xong** kiểm mâu thuẫn skip/send E06 theo update ID và target version — `399044d`.
-3. **Đã xong** tái sinh artifact v0.4.0, đối chiếu test và cập nhật bàn giao. Commit tra trong lịch sử CHECKS.
+3. **Đã xong** tái sinh artifact v0.4.0, đối chiếu test và cập nhật bàn giao — `0faf74d`.
+
+### Sửa theo review E02/E03 trên `0faf74d`
+
+1. **Đã xong** nối provenance E02 theo update, tín hiệu và work attempt, giữ timeout/lỗi đủ cửa sổ — `5829ebf`.
+2. **Đã xong** kiểm deep IDLE, thứ tự và từng pha E03 — `98dee5c`.
+3. **Đã xong** rà protocol E01–E06, tái sinh artifact v0.5.0 và kiểm bàn giao. Commit tra trong lịch sử CHECKS.
 
 ## Task được mở khóa
 

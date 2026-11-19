@@ -1,5 +1,5 @@
 {
-  "analysis_version": "0.4.0",
+  "analysis_version": "0.5.0",
   "base_main_commit": "9caaf38f3932269bdcdd74aa0bfef0e9fc148271",
   "cli_checks": {
     "fixture": {
@@ -26,7 +26,7 @@
   "crlf_report_differences": [
     "validator_sha256"
   ],
-  "csv_sha256": "4f904680124b6dde9a1fe7e3a446b630ef27240b108f0f0a185f00cce9aac23f",
+  "csv_sha256": "25151e8f443c74c4ac22100d98a481329a39fed9f1fc971d3ee2f1967090c3af",
   "declared_outcomes_all_runs": {
     "FAILURE": 2,
     "SUCCESS": 5,
@@ -35,38 +35,38 @@
   "excluded_requalification_run_count": 6,
   "git_diff_check_passed": true,
   "group_count": 7,
-  "independent_review_status": "V04_AWAITING_REVIEW",
+  "historical_e03_rows_with_added_flags": 1,
+  "independent_review_status": "V05_AWAITING_REVIEW",
   "index_sha256": "849fe6df1ea7f6cc169d4cb1e80ff63ec797a60fd3450a86017d90faefee7bab",
-  "internal_links_checked": 52,
+  "internal_links_checked": 56,
   "invalid_attempts_retained": 12,
   "lf_repaired_report_matches": true,
   "main_eligible": 0,
   "markdown_fences_passed": true,
-  "markdown_tables_checked": 11,
+  "markdown_tables_checked": 12,
   "matches_local_source_exports": true,
   "not_run": [
     "main_emulator",
     "oppo",
     "firebase_runtime",
     "phase_specific_metrics",
-    "independent_review_of_v04"
+    "independent_review_of_v05"
   ],
-  "original_csv_values_preserved_except_analysis_version": true,
+  "original_csv_values_preserved_except_analysis_version_and_flags": true,
   "original_event_bytes_preserved": true,
   "python_39_syntax_passed": true,
   "python_version": "3.12.14",
   "qualification_status": "REVOKED_AFTER_SCHEDULER_COLLECTOR_AUDIT",
   "regression_tests": {
+    "E02": 4,
+    "E03": 5,
     "E04": 10,
     "E06": 8,
     "all_passed": true,
     "data_kind": "SYNTHETIC_TEST_ONLY"
   },
-  "regression_tests_added_for_2887ce9_review": {
-    "E04": 4,
-    "E06": 2
-  },
   "reproduced_byte_for_byte": true,
+  "review_commit": "0faf74d92563904403d3e9bb1caf82c16d215526",
   "run_count": 12,
   "runtime_experiment_performed": false,
   "scope": "SEM45_OFFLINE_ANALYSIS_ORIGINAL_12_RUN_COHORT",
@@ -78,18 +78,18 @@
   "source_commit": "42ca000da1de2b7465851e1485fec2631f4b1a3c",
   "source_epochs_match_pinned_pilot_results": true,
   "source_review_status": "DRAFT_AT_IMPORT",
-  "summary_sha256": "4afcdcfcedbd0a4aee5273209fffdba4d25a7edfff989732aefb369f8c02acff",
+  "summary_sha256": "cf4826fd1fd9b290e314e96feef5fcbce91f20c639814aaf840860cff5ba3eb3",
   "task_snapshot_check": {
     "passed": true,
     "verified_tasks": 45
   },
   "uncertain_window_rows": 12,
   "unit_tests": {
-    "analyzer_tests": 63,
+    "analyzer_tests": 72,
     "exporter_tests": 36,
     "failures": 0,
     "other_main_tests": 52,
-    "passed": 151,
+    "passed": 160,
     "platform": "Ubuntu 24.04 WSL",
     "python_version": "3.12.3"
   },
@@ -101,12 +101,9 @@
   "windows_index_checkout_reproduced": true,
   "windows_ubuntu_csv_summary_report_equal": true,
   "windows_unit_tests": {
-    "analyzer_tests_passed": 63,
-    "error": "SEM41_SYMLINK_PRIVILEGE_WINERROR_1314",
-    "error_test": "test_resuming_store_preserves_original_ledger_bytes",
-    "errors": 1,
-    "passed": 150,
-    "python_version": "3.12.14",
-    "total": 151
+    "analyzer_tests_passed": 72,
+    "full_suite": "NOT_RUN_FOR_V05",
+    "previous_full_suite_limit": "SEM41_SYMLINK_PRIVILEGE_WINERROR_1314",
+    "python_version": "3.12.14"
   }
 }

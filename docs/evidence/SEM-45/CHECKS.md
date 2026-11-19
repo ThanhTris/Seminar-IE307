@@ -1,6 +1,6 @@
 # SEM-45 — Kiểm parser và bàn giao kết quả offline
 
-- Người thực hiện Tuấn (`mtuan2491`), cập nhật **19/11/2026 (UTC+7)** theo review E04/E06 của Trí trên `2887ce9`.
+- Người thực hiện Tuấn (`mtuan2491`), cập nhật **19/11/2026 (UTC+7)** theo review E02/E03 của Trí trên `0faf74d`.
 - Nhánh `codex/SEM-45-log-parser`, tạo từ main `d29532ac19a2fba402d2d1c6d25dfb63a306a87a` ngày 08/11. Đã nhận main `9caaf38` bằng merge commit `42a466a`, gồm code sau PR #29 và các consumer SEM-43/44/48.
 - **Đầu ra SEM-45 được sửa theo review**, gồm parser, CSV của 12 lượt pilot lịch sử, index nguồn, summary/report và hướng dẫn tái lập. Bộ được chọn hiện có **0 VALID / 12 INVALID** do thu hồi qualification. Trạng thái Project vẫn In Progress trong lần bàn giao này.
 - Chính sách task hiện hành cho phép bàn giao đầu ra có thật cùng Not run/giới hạn cho đầu vào chưa nhận. Ghi chú chờ toàn bộ SEM-41/42 ngày 08/11 đã được thay bằng phạm vi kiểm chứng dưới đây. [Quy định SEM-45](../../../tasks/backlog/SEM-45.md).
@@ -41,7 +41,17 @@ Lịch sử công cụ ngày 08/11 gồm loader `85aab1c`, metrics `f7c1958`, CL
 |---|---|---|
 | 1. E04 | Quy đổi `server_updated` đúng target sang Android UTC, xét khoảng sai số so với offline/reconnect và thêm 4 test hồi quy | `bfbcdea` |
 | 2. E06 | Phát hiện thử gửi push cho đúng update và target, giữ ca chỉ skip cùng chuỗi periodic, thêm 2 test hồi quy | `399044d` |
-| 3. Bàn giao | Tái sinh artifact v0.4.0, đối chiếu kết quả test và ghi giới hạn | Commit chứa CHECKS này, tra `git log -1 -- docs/evidence/SEM-45/CHECKS.md` |
+| 3. Bàn giao | Tái sinh artifact v0.4.0, đối chiếu kết quả test và ghi giới hạn | `0faf74d` |
+
+## Sửa theo review E02/E03 trên `0faf74d`
+
+| Bước | Kết quả | Commit |
+|---|---|---|
+| 1. E02 | Nối update, sender, callback, enqueue và work attempt apply qua ID; bảo toàn timeout/lỗi đủ cửa sổ. Thêm 4 test | `5829ebf` |
+| 2. E03 | Kiểm deep IDLE, thứ tự mốc và ba pha 5/20/10 phút trước khi tính mẫu. Thêm 5 test | `98dee5c` |
+| 3. Bàn giao | Rà protocol E01–E06, tái sinh artifact v0.5.0 và kiểm Windows/Ubuntu | Commit chứa CHECKS này, tra `git log -1 -- docs/evidence/SEM-45/CHECKS.md` |
+
+Đã đối chiếu điều kiện E01–E06 trong hai tài liệu protocol với analyzer, exporter, template, schema v2, cách app phát event và công cụ audit. Analyzer kiểm các bất biến có evidence trong manifest/event. Trạng thái background, checkpoint Doze đầu/giữa/cuối, điều kiện race E05, candidate và môi trường thiết bị cần evidence của owner và kiểm độc lập theo protocol. [Protocol cốt lõi](../../EXPERIMENT_PROTOCOL.md) · [Protocol chạy](../../../experiments/PROTOCOL.md) · [Schema](../../EVENT_SCHEMA.md).
 
 ## Đầu vào và provenance
 
@@ -79,11 +89,11 @@ Môi trường Windows, Python **3.12.14**, standard library và Ubuntu 24.04 qu
 
 | Check | Expected | Actual | Kết quả |
 |---|---|---|---|
-| Unit/regression và tích hợp main | Giữ contract, correlation, timeout, clock, dataset, provenance và nhóm epoch | **151/151 test đạt trên Ubuntu**, gồm 63 SEM-45, 36 exporter và 52 test khác từ main. Windows đạt 63/63 SEM-45; suite đầy đủ có một lỗi quyền symlink của test SEM-41 | Pass Ubuntu / giới hạn Windows ghi dưới |
+| Unit/regression và tích hợp main | Giữ contract, correlation, timeout, clock, dataset, provenance và nhóm epoch | **160/160 test đạt trên Ubuntu**, gồm 72 SEM-45, 36 exporter và 52 test khác từ main. Windows đạt 72/72 SEM-45 | Pass |
 | Nguồn pinned | Hash đúng cho 12 manifest, 12 JSONL và 4 evidence nguồn | Đọc Git object trực tiếp tại full commit, tất cả hash khớp index | Pass — dữ liệu pilot thật |
 | Giá trị nguồn | Giữ manifest/events và kết quả giống đọc thư mục canonical | Toàn bộ 12 analysis khớp khi đọc export được trích nguyên byte, có cùng metadata epoch | Pass — offline |
-| Tái lập | CSV/summary ổn định, report chỉ khác batch ID | Batch `windows`, `repeat`, `ubuntu` trong `.local/sem45-review-20261119` cho CSV/summary giống từng byte, report khớp sau chuẩn hóa batch ID | Pass |
-| Checkout Windows có CRLF | Có thể phục hồi byte LF đúng từ Git để so report | Bản checkout riêng với validator CRLF chỉ lệch `validator_sha256`; lấy lại LF từ Git thì report khớp. Hướng dẫn PowerShell trong ANALYSIS kiểm nội dung local trước khi ghi | Pass |
+| Tái lập | CSV/summary ổn định, report chỉ khác batch ID | Batch `windows` và `ubuntu` trong `.local/sem45-chain-review` cho CSV/summary giống từng byte, report khớp sau chuẩn hóa batch ID | Pass |
+| Checkout Windows có CRLF | Có thể phục hồi byte LF đúng từ Git để so report | Bản checkout riêng với validator CRLF chỉ lệch `validator_sha256`; lấy lại LF từ Git thì report v0.5.0 khớp. Hướng dẫn PowerShell nằm trong ANALYSIS | Pass |
 | Checksum artifact | CSV/summary/index/analyzer/validator khớp report | Hash kiểm trên byte file bàn giao | Pass |
 | Dataset và mẫu số | Giữ 12 pilot, loại INVALID và toàn bộ pilot khỏi main | 0 VALID/COMPLETED, 12 INVALID, 7 nhóm, n_eligible main = 0; valid_completed_declared_outcomes rỗng ở cả 7 nhóm | Pass |
 | Thu hồi qualification | Theo validity mới và giữ lịch sử đo | Tám qualification bị thu hồi; cả 12 dòng hiện INVALID. Event bytes/outcome/timing/count gốc được giữ | Pass |
@@ -92,6 +102,8 @@ Môi trường Windows, Python **3.12.14**, standard library và Ubuntu 24.04 qu
 | E04 update ngoài khoảng offline | Kiểm đúng target với offset và uncertainty | Mốc server `00:03:01`, offset `+1 s`, reconnect Android `00:02:00`, apply `00:03:20` cho `E04_TARGET_UPDATE_OUTSIDE_OFFLINE`, `eligible=false`, latency rỗng và giữ `SUCCESS`. Update trước offline cũng bị loại. Update đã quy đổi nằm trọn trong offline được tính hợp lệ | Pass — synthetic |
 | E04 update chưa xác minh | Loại khi thời điểm hoặc định danh update chưa đủ căn cứ | Khoảng sai số trùm mốc offline/reconnect, thiếu update đúng target hoặc nhiều update cùng target cho `E04_TARGET_UPDATE_TIME_UNVERIFIED` | Pass — synthetic |
 | E06 skip mâu thuẫn send | Kiểm cùng update ID và target version | Skip cùng accepted, rejected hoặc unknown cho `E06_FAULT_SKIP_CONFLICTING_SEND` và mẫu số bằng 0. Ca chỉ skip và chuỗi periodic/fetch hợp lệ vẫn đủ điều kiện, send của update khác và lỗi trước khi gọi provider không tạo cờ mâu thuẫn | Pass — synthetic |
+| E02 nối sender và worker | Chỉ tính apply có chuỗi tín hiệu đúng | Đổi `signal-demo-001` phía sender thành `unrelated-signal` cho `E02_PUSH_CHAIN_UNVERIFIED`, `n_eligible=0`, `n_complete=0`, outcome giữ `SUCCESS`. Sai update/version hoặc thiếu callback/enqueue/work cũng bị loại. Ca cùng tín hiệu hoàn chỉnh cho `n_complete=1`. TIMEOUT và provider FAILURE đủ cửa sổ giữ trong mẫu số | Pass — synthetic |
+| E03 kiểm deep Doze và các pha | Xác minh deep IDLE, thứ tự và thời lượng từng đoạn | Ca ACTIVE và idle một phút trong cửa sổ 35 phút nhận `E03_DEEP_DOZE_NOT_CONFIRMED` và `E03_DOZE_PHASE_TOO_SHORT`, `n_eligible=0`, `n_complete=0`. Ca đủ 5/20/10 phút đạt ở PERIODIC và PUSH, TIMEOUT đủ điều kiện vẫn được giữ | Pass — synthetic |
 | Boot/clock thiếu | Completion/duration/count window chưa biết là null, outcome khai báo giữ nguyên | 12 UNCERTAIN_WINDOW, latency và count cửa sổ rỗng | Pass |
 | Fixture | Fixture giữ NOT_RUN và mẫu số 0 | CLI fixture đạt, nguồn fixture có nhãn riêng | Pass |
 | Kiểm từ chối | Pilot bị chặn khi chọn main, legacy bị chặn, batch cũ không bị ghi đè | Các lệnh trả exit 2 với mã lỗi tương ứng | Pass |
@@ -99,9 +111,9 @@ Môi trường Windows, Python **3.12.14**, standard library và Ubuntu 24.04 qu
 | Snapshot và tài liệu nền | Metadata task và tài liệu SEM-19 hợp lệ | `update_task_snapshot.py --check` đạt 45 task; validator SEM-19 đạt 174 link nội bộ | Pass |
 | Runtime main, OPPO và các phase | Có log/clock/evidence thật trước công bố kết quả | Chưa chạy các phép đo này trong SEM-45 | **Not run** |
 
-Chi tiết máy kiểm và kết quả assertions được ghi trong [VERIFICATION.json](VERIFICATION.json). Lệnh tái lập nằm trong [ANALYSIS.md](../../../experiments/ANALYSIS.md). Các kiểm tra lần này thực hiện offline. Một test nguồn `test_resuming_store_preserves_original_ledger_bytes` gặp WinError 1314 khi tạo symlink trên Windows, suite cùng source chạy đầy đủ trên Ubuntu đạt 151/151. Các ca E04/E06 mới đều là dữ liệu tổng hợp có nhãn.
+Chi tiết máy kiểm và kết quả assertions được ghi trong [VERIFICATION.json](VERIFICATION.json). Lệnh tái lập nằm trong [ANALYSIS.md](../../../experiments/ANALYSIS.md). Suite đầy đủ chạy trên Ubuntu do test SEM-41 cần quyền tạo symlink. Các ca hồi quy E02/E03 là dữ liệu tổng hợp có nhãn.
 
-v0.4.0 giữ các giá trị đo và source index của 12 pilot. CSV/summary/report đã được sinh lại với checksum mới. Lệnh phục hồi LF giữ cơ chế hash byte thực tế của report.
+v0.5.0 giữ các giá trị đo và source index của 12 pilot. CSV/summary/report đã được sinh lại với checksum mới. Một dòng E03 lịch sử có thêm cờ kiểm pha, cả 12 dòng vẫn INVALID.
 
 ## Phần thiếu, chưa rõ và chưa chắc chắn
 
@@ -117,7 +129,7 @@ v0.4.0 giữ các giá trị đo và source index của 12 pilot. CSV/summary/re
 | Firebase/E02/E05/E06 | Profile đo FIREBASE_NOT_CONFIGURED. E06 có event deliberate skip, callback/token/push thật và hybrid trên profile Firebase **Not run**. E02/E05 chưa có pilot trong bộ này | Owner runtime và SEM-41/42 |
 | Candidate | Manifest nguồn gate=false, release main vẫn NOT_READY/NOT_BUILT tại nền cập nhật. Hash APK đo pilot đã có trong manifest nguồn, freeze/bàn giao main còn thiếu | Trung / SEM-37, SEM-52 |
 | DB writes và năng lượng | Chưa instrument số write SQL/items, `db_write_count=null`. Chưa có phép đo mAh | Owner instrumentation/run khi có phép đo tương ứng |
-| Review độc lập | Main đã có audit SEM-44 theo bản producer `1a0c667`. Trí đã kiểm v0.3.0 trên `2887ce9`. Bản v0.4.0 đang ở Draft để kiểm lại hai ca mới và checksum | Tâm / SEM-44 và Trí / reviewer |
+| Review độc lập | Main đã có audit SEM-44 theo bản producer `1a0c667`. Trí đã kiểm v0.4.0 trên `0faf74d`. Bản v0.5.0 đang ở Draft để kiểm lại E02/E03 và checksum | Tâm / SEM-44 và Trí / reviewer |
 
 Các lý do INVALID cũ vẫn được giữ, gồm `89b884` chưa bắt đầu measurement, `760217` và `c12a28` có baseline payload mismatch, `0d277e` bị cắt cửa sổ post-idle. Audit scheduler bổ sung lý do thu hồi 8 qualification và giữ đủ 12 lượt INVALID. Outcome gốc được giữ, kể cả SUCCESS ở lượt INVALID. Epoch được lấy từ PILOT_RESULTS đã pin và đối chiếu theo artifact_directory. [Đối chiếu nguồn](https://github.com/ThanhTris/Seminar-IE307/blob/42ca000da1de2b7465851e1485fec2631f4b1a3c/docs/evidence/SEM-41/CHECKS.md).
 
