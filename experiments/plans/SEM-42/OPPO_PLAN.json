@@ -15,8 +15,7 @@
       "execution_status": "NOT_RUN",
       "reason_codes": [
         "CANDIDATE_NOT_READY",
-        "USB_ENDPOINT_UNVERIFIED",
-        "DEVICE_NOT_CONNECTED"
+        "USB_ENDPOINT_UNVERIFIED"
       ]
     },
     {
@@ -29,7 +28,6 @@
       "reason_codes": [
         "CANDIDATE_NOT_READY",
         "USB_ENDPOINT_UNVERIFIED",
-        "DEVICE_NOT_CONNECTED",
         "FIREBASE_NOT_CONFIGURED"
       ]
     },
@@ -43,7 +41,6 @@
       "reason_codes": [
         "CANDIDATE_NOT_READY",
         "USB_ENDPOINT_UNVERIFIED",
-        "DEVICE_NOT_CONNECTED",
         "FIREBASE_NOT_CONFIGURED"
       ]
     },
@@ -57,7 +54,6 @@
       "reason_codes": [
         "CANDIDATE_NOT_READY",
         "USB_ENDPOINT_UNVERIFIED",
-        "DEVICE_NOT_CONNECTED",
         "FIREBASE_NOT_CONFIGURED"
       ]
     },
@@ -71,7 +67,6 @@
       "reason_codes": [
         "CANDIDATE_NOT_READY",
         "USB_ENDPOINT_UNVERIFIED",
-        "DEVICE_NOT_CONNECTED",
         "FIREBASE_NOT_CONFIGURED"
       ]
     },
@@ -85,7 +80,6 @@
       "reason_codes": [
         "CANDIDATE_NOT_READY",
         "USB_ENDPOINT_UNVERIFIED",
-        "DEVICE_NOT_CONNECTED",
         "FIREBASE_NOT_CONFIGURED"
       ]
     }

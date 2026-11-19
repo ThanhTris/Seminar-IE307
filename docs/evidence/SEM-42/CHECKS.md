@@ -8,10 +8,10 @@
 | --- | --- | --- | --- |
 | Candidate từ SEM-37 | APK, SHA-256, commit app/server và gate đã qua | Project Done. Manifest `NOT_READY`, gate false, APK và hash null. GitHub Releases và Actions không có APK bàn giao. | Blocked |
 | Đường USB từ client | App GET qua `127.0.0.1:3000` và reverse trên đúng thiết bị | Đọc source thấy mặc định `10.0.2.2:3000`. Hàm đổi URL chưa có caller. Không thể xác nhận tuyến USB bằng reverse đơn lẻ. | Blocked |
-| Thiết bị và baseline | Có OPPO qua cáp, đọc OS/API/ColorOS, mạng, pin, sạc và tối ưu pin | Inventory ADB lúc preflight không có máy thật. | Not run |
+| Thiết bị và baseline | Nhận đúng OPPO qua USB và đọc trạng thái trước khi đo | ADB đã nhận Find X9; xem thông số preflight bên dưới. Tối ưu pin theo app sẽ đo sau cài. | Pass kết nối, baseline đo Not run |
 | Firebase E02 | Cấu hình test đúng package, quyền gửi và token hiện hành | Không có config chuẩn trong workspace hoặc biến tiến trình do run cung cấp. | Blocked |
 | Server development | Server build, test và lắng nghe loopback | `npm ci`, `npm run build`, `npm test`: 22/22. `GET /health` trả API 2.0.0, status ok, trên `127.0.0.1:3000`. | Pass |
-| E01 | 1 cửa sổ 90 phút, ≥3 cycle tự nhiên là mục tiêu | Chờ candidate, đường USB và thiết bị. | Not run |
+| E01 | 1 cửa sổ 90 phút, ≥3 cycle tự nhiên là mục tiêu | Chờ candidate và xác minh đường USB từ client. | Not run |
 | E02 | 5 cửa sổ 120 giây, có provenance sender/callback/worker/cache | Chờ các điều kiện trên cùng Firebase. | Not run |
 | Cleanup OPPO | Work thử đã dừng, reverse tạo trong phiên đã gỡ, quyền USB hoàn tác | Chưa có phiên trên OPPO. | Not run |
 
@@ -39,6 +39,20 @@ Hoàn tất lúc **10:59 UTC+7** trên `Medium_Phone_API_37.0`, Android API 37, 
 | Cleanup | Phiên emulator thử và listener trên cổng 3000 đã dừng. File build, log gốc và báo cáo omission giữ local. | Pass |
 
 Các lượt trên là smoke test development. Chưa đo cycle tự nhiên 90 phút, E02 hay OPPO bằng APK development.
+
+## Kiểm kết nối OPPO qua USB
+
+Lúc **12:35 UTC+7 ngày 19/11/2026**, ADB xác nhận một thiết bị USB đã cấp quyền bằng `adb -d`. Các truy vấn sau đó chỉ đọc và nhắm đúng thiết bị theo serial local.
+
+| Hạng mục | Kết quả |
+| --- | --- |
+| Thiết bị | OPPO Find X9, model CPH2797, alias `oppo-find-x9` |
+| OS | Android 17 (API 37), ColorOS `V17.0.0` từ thuộc tính OPlus, bản vá 2026-10-01 |
+| Google Play services | 26.45.31 |
+| Nguồn, pin và mạng | Cấp nguồn USB, pin 38%, nhiệt độ pin đọc được 39,5 °C, Battery Saver tắt, mạng mặc định Wi-Fi |
+| App và reverse | Chưa cài app Seminar, chưa có map reverse cho tcp:3000 |
+
+Đây là thông số tại thời điểm kiểm kết nối. Đọc lại pin, mạng, idle và tối ưu pin theo app lúc bắt đầu run. Candidate trên `main` vẫn `NOT_READY`, APK và SHA-256 chưa được điền. Chưa cài, chưa tạo reverse và chưa chạy E01/E02 trên OPPO.
 
 ## Cách tiếp tục trên máy thật
 
