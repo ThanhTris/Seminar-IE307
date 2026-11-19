@@ -15,4 +15,6 @@
 
 Trong đợt chuẩn bị chung, bản development từ `9caaf38` đã assemble app/test APK và qua 32/32 unit tests. Server build và đạt 22/22 tests trên Windows. Các kiểm tra này chuẩn bị môi trường để tái lập khi nhận đúng artifact SEM-52.
 
+Emulator đã cài app/test APK development và đối chiếu SHA-256 của bản cài. Probe GET đạt sau khi mạng emulator ổn định. MANUAL áp dụng v1, lịch PERIODIC đăng ký và hủy được. Export kiểm tra trả `PARTIAL` do một event `periodic_cancelled` chưa được schema v2 hỗ trợ. Phiên thử và server loopback đã dừng.
+
 Tài liệu chạy lại: [REPRODUCTION](REPRODUCTION.md). Khi video đủ ba phần và link đã kiểm, bàn giao manifest cho SEM-54/55.
