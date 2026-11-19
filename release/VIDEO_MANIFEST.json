@@ -1,0 +1,38 @@
+{
+  "manifest_version": "1.0.0",
+  "status": "NOT_RUN",
+  "build_manifest": "BUILD_MANIFEST.json",
+  "app_commit": null,
+  "server_commit": null,
+  "apk_sha256": null,
+  "video_sha256": null,
+  "duration_seconds": null,
+  "recorded_at_utc": null,
+  "drive_url": null,
+  "drive_access_verified": false,
+  "offline_playback_verified": false,
+  "segments": [
+    {
+      "mode": "PUSH",
+      "status": "NOT_RUN",
+      "run_id": null,
+      "evidence": null
+    },
+    {
+      "mode": "PERIODIC",
+      "status": "NOT_RUN",
+      "run_id": null,
+      "evidence": null
+    },
+    {
+      "mode": "HYBRID",
+      "status": "NOT_RUN",
+      "run_id": null,
+      "evidence": null
+    }
+  ],
+  "blockers": [
+    "DEMO_APK_NOT_HANDED_OFF",
+    "FIREBASE_NOT_CONFIGURED"
+  ]
+}
