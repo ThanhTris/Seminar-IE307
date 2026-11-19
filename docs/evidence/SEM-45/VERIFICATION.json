@@ -1,5 +1,5 @@
 {
-  "analysis_version": "0.5.0",
+  "analysis_version": "0.6.0",
   "base_main_commit": "9caaf38f3932269bdcdd74aa0bfef0e9fc148271",
   "cli_checks": {
     "fixture": {
@@ -26,7 +26,8 @@
   "crlf_report_differences": [
     "validator_sha256"
   ],
-  "csv_sha256": "25151e8f443c74c4ac22100d98a481329a39fed9f1fc971d3ee2f1967090c3af",
+  "crlf_reproduction_checked_version": "0.5.0",
+  "csv_sha256": "4851afcde92542c1b5f245d69a1193a69acf7e1e3b3a4c3967da4dd090ac8eca",
   "declared_outcomes_all_runs": {
     "FAILURE": 2,
     "SUCCESS": 5,
@@ -35,22 +36,22 @@
   "excluded_requalification_run_count": 6,
   "git_diff_check_passed": true,
   "group_count": 7,
-  "historical_e03_rows_with_added_flags": 1,
-  "independent_review_status": "V05_AWAITING_REVIEW",
+  "historical_e03_rows_with_added_flags": 3,
+  "independent_review_status": "V06_AWAITING_REVIEW",
   "index_sha256": "849fe6df1ea7f6cc169d4cb1e80ff63ec797a60fd3450a86017d90faefee7bab",
   "internal_links_checked": 56,
   "invalid_attempts_retained": 12,
   "lf_repaired_report_matches": true,
   "main_eligible": 0,
   "markdown_fences_passed": true,
-  "markdown_tables_checked": 12,
+  "markdown_tables_checked": 13,
   "matches_local_source_exports": true,
   "not_run": [
     "main_emulator",
     "oppo",
     "firebase_runtime",
     "phase_specific_metrics",
-    "independent_review_of_v05"
+    "independent_review_of_v06"
   ],
   "original_csv_values_preserved_except_analysis_version_and_flags": true,
   "original_event_bytes_preserved": true,
@@ -58,15 +59,15 @@
   "python_version": "3.12.14",
   "qualification_status": "REVOKED_AFTER_SCHEDULER_COLLECTOR_AUDIT",
   "regression_tests": {
-    "E02": 4,
-    "E03": 5,
+    "E02": 7,
+    "E03": 9,
     "E04": 10,
     "E06": 8,
     "all_passed": true,
     "data_kind": "SYNTHETIC_TEST_ONLY"
   },
   "reproduced_byte_for_byte": true,
-  "review_commit": "0faf74d92563904403d3e9bb1caf82c16d215526",
+  "review_commit": "a270a9b37b48366be209055c5fe8b43aa0eafebf",
   "run_count": 12,
   "runtime_experiment_performed": false,
   "scope": "SEM45_OFFLINE_ANALYSIS_ORIGINAL_12_RUN_COHORT",
@@ -78,18 +79,18 @@
   "source_commit": "42ca000da1de2b7465851e1485fec2631f4b1a3c",
   "source_epochs_match_pinned_pilot_results": true,
   "source_review_status": "DRAFT_AT_IMPORT",
-  "summary_sha256": "cf4826fd1fd9b290e314e96feef5fcbce91f20c639814aaf840860cff5ba3eb3",
+  "summary_sha256": "8b34ec5d7179ebbb0ac19a8dc9f74cfab998748f07562043bb90f40cdfdbfdb4",
   "task_snapshot_check": {
     "passed": true,
     "verified_tasks": 45
   },
   "uncertain_window_rows": 12,
   "unit_tests": {
-    "analyzer_tests": 72,
+    "analyzer_tests": 79,
     "exporter_tests": 36,
     "failures": 0,
     "other_main_tests": 52,
-    "passed": 160,
+    "passed": 167,
     "platform": "Ubuntu 24.04 WSL",
     "python_version": "3.12.3"
   },
@@ -101,8 +102,8 @@
   "windows_index_checkout_reproduced": true,
   "windows_ubuntu_csv_summary_report_equal": true,
   "windows_unit_tests": {
-    "analyzer_tests_passed": 72,
-    "full_suite": "NOT_RUN_FOR_V05",
+    "analyzer_tests_passed": 79,
+    "full_suite": "NOT_RUN_FOR_V06",
     "previous_full_suite_limit": "SEM41_SYMLINK_PRIVILEGE_WINERROR_1314",
     "python_version": "3.12.14"
   }
