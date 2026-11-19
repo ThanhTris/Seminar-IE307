@@ -283,6 +283,7 @@ class MetricTests(unittest.TestCase):
         self.assertEqual(row["work_attempt_count"], 3)
 
     def test_setup_recovery_manual_and_short_window_are_flagged(self):
+        self.manifest["case_id"] = "E05"
         next(e for e in self.events if e["event_type"] == "work_started")["elapsed_realtime_ms"] = 29000
         self.assertIn("TARGET_START_NOT_IN_WINDOW", self.analyze()["row"]["flags"])
         self.event("work_started", 45000, source="MANUAL", request_id="manual-request",
@@ -633,15 +634,83 @@ class CaseEvidenceTests(unittest.TestCase):
         self.assertEqual(analyzer.summarize([result])[0]["n_eligible"], 1)
 
 
-class OutputTests(unittest.TestCase):
+class E02ChainTests(unittest.TestCase):
     load = InputTests.load
     setUp = MetricTests.setUp
 
     def main_input(self):
         self.manifest.update(data_kind="OBSERVED", run_phase="main")
         self.manifest["build"]["candidate_gate_passed"] = True
-        self.events = [e for e in self.events if e["event_type"] != "push_send_accepted"]
+        for event in self.events:
+            if event["event_type"] == "push_send_accepted":
+                event["message_id"] = "test-provider-response"
         return self.load("main")
+
+    def test_e02_same_target_and_signal_chain_is_eligible(self):
+        # WorkManager can start work before the enqueue acknowledgement is logged.
+        enqueued = next(e for e in self.events if e["event_type"] == "work_enqueued")
+        enqueued["elapsed_realtime_ms"] = 34500
+        self.events.reverse()
+        result = analyzer.analyze_run(self.main_input())
+        row = result["row"]
+        self.assertTrue(row["eligible"])
+        self.assertEqual(row["observed_completion"], "APPLIED_TARGET")
+        self.assertIsNone(row["queue_ms"])
+        self.assertEqual(analyzer.summarize([result])[0]["n_complete"], 1)
+
+    def test_e02_unrelated_signal_or_wrong_sender_update_excludes_declared_success(self):
+        for mismatch in ({"signal_ids": ["unrelated-signal"]}, {"update_id": "other-update"}, {"data_version": 2}):
+            with self.subTest(mismatch=mismatch):
+                self.setUp()
+                next(e for e in self.events if e["event_type"] == "push_send_accepted").update(mismatch)
+                result = analyzer.analyze_run(self.main_input())
+                row = result["row"]
+                self.assertEqual(row["outcome"], "SUCCESS")
+                self.assertFalse(row["eligible"])
+                self.assertEqual(row["observed_completion"], "UNCERTAIN_WINDOW")
+                self.assertIn("E02_PUSH_CHAIN_UNVERIFIED", row["flags"])
+                self.assertEqual(row["push_send_accepted_event_count_all"], 1)
+                self.assertEqual(row["snapshot_applied_event_count_all"], 1)
+                self.assertIsNone(row["update_to_applied_ms"])
+                group = analyzer.summarize([result])[0]
+                self.assertEqual((group["n_eligible"], group["n_complete"]), (0, 0))
+
+    def test_e02_missing_or_mismatched_callback_enqueue_or_worker_excludes_success(self):
+        for event_type in ("push_received", "work_enqueued", "work_started", "snapshot_applied"):
+            with self.subTest(event_type=event_type):
+                self.setUp()
+                event = next(e for e in self.events if e["event_type"] == event_type)
+                if event_type in {"push_received", "work_started"}:
+                    self.events.remove(event)
+                elif event_type == "work_enqueued":
+                    event["request_id"] = "other-request"
+                else:
+                    event["signal_ids"] = ["unrelated-signal"]
+                row = analyzer.analyze_run(self.main_input())["row"]
+                self.assertFalse(row["eligible"])
+                self.assertIn("E02_PUSH_CHAIN_UNVERIFIED", row["flags"])
+
+    def test_e02_observed_timeout_or_provider_failure_remains_eligible(self):
+        for outcome in ("TIMEOUT", "FAILURE"):
+            with self.subTest(outcome=outcome):
+                self.setUp()
+                self.manifest.update(outcome=outcome, reason_codes=["TIMEOUT" if outcome == "TIMEOUT" else "FCM_REJECTED"])
+                self.events = [e for e in self.events if e["origin"] == "SERVER"]
+                if outcome == "FAILURE":
+                    sender = next(e for e in self.events if e["event_type"] == "push_send_accepted")
+                    sender.update(event_type="push_send_rejected", message_id=None, outcome="rejected",
+                                  http_status=400, reason="FCM_REJECTED")
+                result = analyzer.analyze_run(self.main_input())
+                self.assertTrue(result["row"]["eligible"])
+                self.assertEqual(result["row"]["outcome"], outcome)
+                group = analyzer.summarize([result])[0]
+                self.assertEqual((group["n_eligible"], group["n_complete"]), (1, 0))
+
+
+class OutputTests(unittest.TestCase):
+    load = InputTests.load
+    setUp = MetricTests.setUp
+    main_input = E02ChainTests.main_input
 
     def test_csv_nulls_are_empty_not_zero_and_fixture_never_enters_denominator(self):
         result = analyzer.analyze_run(self.load())
@@ -766,11 +835,11 @@ class OutputTests(unittest.TestCase):
         self.events = [e for e in self.events if e["event_type"] != "snapshot_applied"]
         row = analyzer.analyze_run(self.load("main"))["row"]
         self.assertFalse(row["eligible"])
-        self.assertIn("OUTCOME_EVIDENCE_CONFLICT", row["flags"])
+        self.assertIn("E02_PUSH_CHAIN_UNVERIFIED", row["flags"])
 
     def test_pilot_declared_outcomes_are_visible_with_zero_main_denominator(self):
         self.manifest.update(data_kind="OBSERVED", run_phase="pilot")
-        self.events = [e for e in self.events if e["event_type"] != "push_send_accepted"]
+        next(e for e in self.events if e["event_type"] == "push_send_accepted")["message_id"] = "test-provider-response"
         success = analyzer.analyze_run(self.load("pilot"))
         self.manifest.update(outcome="TIMEOUT", reason_codes=["TIMEOUT"])
         timeout = analyzer.analyze_run(self.load("pilot"))

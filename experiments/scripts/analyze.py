@@ -15,7 +15,7 @@ import sys
 
 import export_logs as contract
 
-VERSION = "0.4.0"
+VERSION = "0.5.0"
 ROOT = Path(__file__).resolve().parents[2]
 
 
@@ -200,6 +200,22 @@ def group_identity(manifest, source_context=None):
         identity["source_context"] = source_context
     return hashlib.sha256(json.dumps(identity, sort_keys=True, ensure_ascii=True,
                                     separators=(",", ":")).encode()).hexdigest()
+
+
+def e02_receipt_for_apply(applied, request, target_signals, receipts, location):
+    """Find the target send's callback and the work attempt that applied it."""
+    enqueued = only([e for e in request if e["event_type"] == "work_enqueued"])
+    started = only([e for e in request if e["event_type"] == "work_started" and
+                    e["work_attempt"] == applied["work_attempt"]])
+    if (enqueued is None or started is None or
+            location(enqueued) not in {"window", "late"} or
+            location(started) not in {"window", "late"} or monotonic_delta(started, applied) is None):
+        return None
+    signals = target_signals.intersection(enqueued["signal_ids"], started["signal_ids"], applied["signal_ids"])
+    # The app logs enqueue acknowledgement after submitting work. A worker can start first.
+    return only([e for e in receipts if e["signal_ids"][0] in signals and
+                 location(e) in {"window", "late"} and monotonic_delta(e, enqueued) is not None and
+                 monotonic_delta(e, started) is not None])
 
 
 def e04_reconnect_elapsed(manifest, android, estimate):
@@ -398,6 +414,25 @@ def analyze_run(run):
                    e["elapsed_realtime_ms"] > reconnect_elapsed + tolerance]
         late = [e for e in late if reconnect_elapsed is not None and e04_update_verified and
                 e["elapsed_realtime_ms"] > reconnect_elapsed + tolerance]
+    e02_receipts = {}
+    e02_chain_unverified = False
+    if m["case_id"] == "E02":
+        # The loader already enforces the common run_id and device_alias for all events.
+        target_signals = {e["signal_ids"][0] for e in buckets["server"] if updated is not None and
+                          e["event_type"] in {"push_send_accepted", "push_send_unknown"} and
+                          e["update_id"] == updated["update_id"] and e["data_version"] == target and
+                          utc_ms(e["timestamp_utc"]) >= utc_ms(updated["timestamp_utc"])}
+        callbacks = [e for e in android if e["event_type"] == "push_received"]
+        e02_receipts = {e["event_id"]: e02_receipt_for_apply(e, requests[e["request_id"]], target_signals,
+                                                          callbacks, location) for e in applied + late}
+        e02_chain_unverified = any(e02_receipts[e["event_id"]] is None for e in applied)
+        applied = [e for e in applied if e02_receipts[e["event_id"]] is not None]
+        late = [e for e in late if e02_receipts[e["event_id"]] is not None]
+        if e02_chain_unverified or (m["execution_status"] == "COMPLETED" and m["outcome"] == "SUCCESS"
+                                    and not applied):
+            flags.add("E02_PUSH_CHAIN_UNVERIFIED")
+            recovery_verified = False
+            e02_chain_unverified = True
     if m["case_id"] == "E06":
         verified_ids = {e["event_id"] for e in applied + late if e06_fetch_verified(e, requests, fetches)}
         if len(verified_ids) != len(applied) + len(late):
@@ -421,7 +456,9 @@ def analyze_run(run):
         enqueued = only([e for e in request if e["event_type"] == "work_enqueued"])
         first = only([e for e in request if e["event_type"] == "work_started" and e["work_attempt"] == 0])
         queue_ms = monotonic_delta(enqueued, first)
-        if enqueued:
+        if m["case_id"] == "E02":
+            receipt_enqueue_ms = monotonic_delta(e02_receipts[completion["event_id"]], enqueued)
+        elif enqueued:
             receipts = [e for e in events if e["event_type"] == "push_received" and
                         set(e["signal_ids"]) & set(enqueued["signal_ids"]) and
                         monotonic_delta(e, enqueued) is not None]
@@ -445,7 +482,9 @@ def analyze_run(run):
                    e["data_version"] == target and e["update_id"] == updated["update_id"] for s in e["signal_ids"]}
         receipts = [e for e in inside if e["event_type"] == "push_received" and
                     set(e["signal_ids"]) & signals]
-    receive_delta = cross_clock_delta(updated, only(receipts), clock) if e04_update_verified else None
+    receipt = e02_receipts[completion["event_id"]] if m["case_id"] == "E02" and completion else only(receipts)
+    receive_delta = (cross_clock_delta(updated, receipt, clock) if e04_update_verified and
+                     not e02_chain_unverified else None)
 
     counts = Counter(e["event_type"] for e in inside if e["source"] != "MANUAL")
     natural_cycles = {e["request_id"] for e in inside if e["event_type"] == "work_started" and
