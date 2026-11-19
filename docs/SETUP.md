@@ -131,5 +131,5 @@ python experiments/scripts/export_logs.py --run-id "$RUN_ID" --manifest experime
 
 - **Cổng 3000 bị chiếm dụng (EADDRINUSE):** Chạy `Get-Process -Id (Get-NetTCPConnection -LocalPort 3000).OwningProcess | Stop-Process` trên PowerShell hoặc đổi cổng qua biến môi trường `$env:PORT = '3001'`.
 - **Khóa `state.json.lock` cũ sau khi server bị tắt đột ngột (SIGKILL):** Kiểm tra tiến trình cũ đã dừng hoàn toàn, sau đó xóa tệp `server/data/state.json.lock`.
-- **Android không kết nối được Server host (`Connection refused`):** Đảm bảo dùng URL `http://10.0.2.2:3000/api/bulletin` đối với Emulator, hoặc chạy `adb reverse tcp:3000 tcp:3000` đối với thiết bị thật.
+- **Android không kết nối được Server host (`Connection refused`):** App tự chọn `http://10.0.2.2:3000` trên emulator và `http://127.0.0.1:3000` trên thiết bị thật. Với thiết bị USB, giữ server bind `127.0.0.1:3000` trên cùng máy và chạy `adb -s <serial-local> reverse tcp:3000 tcp:3000`; sau đó đồng bộ thủ công để xác nhận GET `/api/bulletin` từ app. Không ghi serial thiết bị vào evidence.
 - **Lỗi Windows fsync thư mục:** Snapshot server đã được cấu hình tối ưu để bỏ qua `fsync` directory trên Windows (commit `af60deb`), bảo đảm an toàn trên mọi hệ điều hành.

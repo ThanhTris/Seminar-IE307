@@ -16,8 +16,9 @@
 | SEM-36 integration/pilot | Todo; mode code/docs and strict schema-v2 serializer prepared; E05/E06 pilots and runtime export Not run |
 | SEM-33 token lifecycle | Done on live board |
 | SEM-38 push policy | Done on live board |
-| Android candidate build | Repo owner reports `assembleDebug` and `assembleDebugAndroidTest` passed on review head `051f6b0`; unit tests were 31/32 with one stale assertion, now corrected in a follow-up. Current workstation cannot rerun because platform 37 / Build Tools 36 licenses are not accepted |
-| APK and SHA-256 | Not available; no candidate artifact |
+| Android build | `:app:testDebugUnitTest`, `:app:assembleDebug`, and `:app:assembleDebugAndroidTest` pass on `321aa7d7a44381cbceeb441d97913f498023730f`; 34/34 unit tests pass |
+| Debug APK and SHA-256 | `release/app-debug.apk`; `DBAAD0492E14FC872C66BF7F118704A404EEF6C553F043AE5CA1FE59E6D69414` |
+| Device verification | Not run; `adb devices` returned no devices, so OPPO USB route is documented but not confirmed from the app |
 | Main-run manifest | Not created; no measurements are being represented as real |
 
-The manifest pins app source `9e7e55b76c646ff113a152022cc23317a202e533` and server source `c77772e426c00ae464240f00942f8368c638aaa8`, but is explicitly `NOT_READY`: no APK/checksum was handed off, the latest unit-test assertion fix has not been rerun, and required run evidence is absent. Do not distribute it as a candidate.
+The manifest records app source `321aa7d7a44381cbceeb441d97913f498023730f` and server source `c77772e426c00ae464240f00942f8368c638aaa8`. A debug APK and checksum now exist, but candidate status remains `NOT_READY` until device verification, Firebase/PUSH availability, E05/E06 pilots, and required run evidence are addressed. Do not present this debug build as a completed candidate.

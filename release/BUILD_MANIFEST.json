@@ -1,10 +1,12 @@
 {
   "manifest_version": "1.0.0",
-  "status": "NOT_BUILT",
+  "status": "BUILT_DEBUG_NOT_CANDIDATE",
   "source_base_commit": "c77772e426c00ae464240f00942f8368c638aaa8",
-  "source_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
+  "source_commit": "321aa7d7a44381cbceeb441d97913f498023730f",
   "build": {
     "command": ":app:testDebugUnitTest :app:assembleDebug :app:assembleDebugAndroidTest",
+    "build_type": "debug",
+    "built_at": "2026-11-19T21:32:50+07:00",
     "gradle_wrapper": "9.6.0",
     "jdk": "17.0.20.1",
     "compile_sdk": 37,
@@ -13,19 +15,22 @@
     "package_name": "com.thanhtris.seminarie307"
   },
   "artifacts": {
-    "app_apk": null,
-    "app_apk_sha256": null,
-    "android_test_apk": null,
-    "android_test_apk_sha256": null
+    "app_apk": "release/app-debug.apk",
+    "app_apk_sha256": "DBAAD0492E14FC872C66BF7F118704A404EEF6C553F043AE5CA1FE59E6D69414",
+    "android_test_apk": "release/app-debug-androidTest.apk",
+    "android_test_apk_sha256": "E0618FB2F41DE1E70F3C0C5A27A10157BA5411314394BC2DB4D03EE80EF7DF75"
   },
   "verification": {
-    "android_unit_tests": "NOT_VERIFIED_FINAL_REVISION: repo owner reported 31/32 passing at review head 051f6b0; failing assertion fixed in follow-up but not rerun",
-    "assemble_debug": "PASS_REPORTED_BY_OWNER at review head 051f6b0; no APK/checksum handed off",
-    "device_install": "NOT_RUN"
+    "android_unit_tests": "PASS: 34 tests, 0 failures, 0 errors, 0 skipped (:app:testDebugUnitTest)",
+    "assemble_debug": "PASS on source commit 321aa7d7a44381cbceeb441d97913f498023730f (:app:assembleDebug)",
+    "assemble_android_test": "PASS on source commit 321aa7d7a44381cbceeb441d97913f498023730f (:app:assembleDebugAndroidTest)",
+    "apk_metadata": "PASS: package com.thanhtris.seminarie307, version 0.1.0 (1), minSdk 24, targetSdk 37",
+    "apk_signature": "PASS: debug APK verified with APK Signature Scheme v2",
+    "device_install": "NOT_RUN: adb devices returned no connected devices"
   },
   "blockers": [
-    "Gradle found D:\\Android\\Sdk but could not install platforms;android-37.0 and build-tools;36.0.0 because their SDK license agreements are not accepted.",
-    "The current source revision has not been compiled or unit-tested on this workstation.",
-    "This manifest does not identify or claim a release APK."
+    "No emulator or OPPO device is connected, so adb reverse and app-originated GET/snapshot application remain unverified.",
+    "android/app/google-services.json is absent; Firebase PUSH remains NOT_RUN.",
+    "Hybrid E05/E06 pilots and on-device schema-v2 export remain NOT_RUN; this debug APK is not a release candidate."
   ]
 }

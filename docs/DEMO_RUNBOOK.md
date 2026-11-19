@@ -39,7 +39,7 @@ npm test
 npm start
 ```
 
-Check `http://127.0.0.1:3000/health`. For an emulator, the app uses `http://10.0.2.2:3000`; for a USB device, follow the approved `adb reverse tcp:3000 tcp:3000` setup in [`docs/SETUP.md`](SETUP.md). Use a run-scoped server store and record its commit and starting version.
+Check `http://127.0.0.1:3000/health`. The shared APK selects `http://10.0.2.2:3000` on an emulator and `http://127.0.0.1:3000` on a physical device. For a USB device, run `adb -s <serial-local> reverse tcp:3000 tcp:3000` on the same host as the server, then trigger a manual sync and verify the resulting `snapshot_fetch_completed` status and cache version in the app timeline. This confirms the app's GET path; a host-side curl alone does not. Use a run-scoped server store and record its commit and starting version. Device-side confirmation is pending until this procedure is run on OPPO.
 
 ## 4. Select a mode and run
 
