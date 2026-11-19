@@ -707,6 +707,7 @@ class CaseEvidenceTests(unittest.TestCase):
 class E02ChainTests(unittest.TestCase):
     load = InputTests.load
     setUp = MetricTests.setUp
+    controlled_clock = MetricTests.controlled_clock
 
     def main_input(self):
         self.manifest.update(data_kind="OBSERVED", run_phase="main")
@@ -727,6 +728,45 @@ class E02ChainTests(unittest.TestCase):
         self.assertEqual(row["observed_completion"], "APPLIED_TARGET")
         self.assertIsNone(row["queue_ms"])
         self.assertEqual(analyzer.summarize([result])[0]["n_complete"], 1)
+
+    def test_e02_clock_rejects_callback_and_apply_before_target_commit(self):
+        self.controlled_clock()
+        next(e for e in self.events if e["event_type"] == "server_updated")[
+            "timestamp_utc"] = "2026-11-03T00:01:01Z"
+        next(e for e in self.events if e["event_type"] == "push_send_accepted")[
+            "timestamp_utc"] = "2026-11-03T00:01:02Z"
+        result = analyzer.analyze_run(self.main_input())
+        row = result["row"]
+        self.assertEqual(row["outcome"], "SUCCESS")
+        self.assertFalse(row["eligible"])
+        self.assertEqual(row["observed_completion"], "UNCERTAIN_WINDOW")
+        self.assertIn("E02_PUSH_CLOCK_ORDER_CONFLICT", row["flags"])
+        self.assertEqual(row["snapshot_applied_event_count_all"], 1)
+        self.assertIsNone(row["update_to_applied_ms"])
+        group = analyzer.summarize([result])[0]
+        self.assertEqual((group["n_eligible"], group["n_complete"]), (0, 0))
+
+    def test_e02_clock_accepts_ordered_update_and_late_provider_response(self):
+        self.controlled_clock()
+        next(e for e in self.events if e["event_type"] == "server_updated")[
+            "timestamp_utc"] = "2026-11-03T00:00:01Z"
+        next(e for e in self.events if e["event_type"] == "push_send_accepted")[
+            "timestamp_utc"] = "2026-11-03T00:00:10Z"
+        result = analyzer.analyze_run(self.main_input())
+        self.assertTrue(result["row"]["eligible"])
+        self.assertEqual(result["row"]["update_to_applied_ms"], 7000)
+        self.assertEqual(analyzer.summarize([result])[0]["n_complete"], 1)
+
+    def test_e02_clock_overlap_with_callback_is_not_a_certain_conflict(self):
+        self.controlled_clock()
+        next(e for e in self.events if e["event_type"] == "server_updated")[
+            "timestamp_utc"] = "2026-11-03T00:00:03.003Z"
+        next(e for e in self.events if e["event_type"] == "push_send_accepted")[
+            "timestamp_utc"] = "2026-11-03T00:00:04Z"
+        row = analyzer.analyze_run(self.main_input())["row"]
+        self.assertTrue(row["eligible"])
+        self.assertNotIn("E02_PUSH_CLOCK_ORDER_CONFLICT", row["flags"])
+        self.assertIsNone(row["update_to_received_ms"])
 
     def test_e02_unrelated_signal_or_wrong_sender_update_excludes_declared_success(self):
         for mismatch in ({"signal_ids": ["unrelated-signal"]}, {"update_id": "other-update"}, {"data_version": 2}):

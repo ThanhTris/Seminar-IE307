@@ -15,7 +15,7 @@ import sys
 
 import export_logs as contract
 
-VERSION = "0.5.0"
+VERSION = "0.6.0"
 ROOT = Path(__file__).resolve().parents[2]
 
 
@@ -187,6 +187,13 @@ def cross_clock_delta(server, android, clock):
     return {"estimate_ms": round(value, 3), "uncertainty_ms": round(uncertainty, 3)}
 
 
+def server_time_on_android(event, estimate):
+    """Return earliest/latest possible Android UTC for a server timestamp."""
+    offset, uncertainty = estimate
+    android_utc = utc_ms(event["timestamp_utc"]) - offset
+    return android_utc - uncertainty, android_utc + uncertainty
+
+
 def only(events):
     """An ambiguous join remains unknown instead of picking an arbitrary row."""
     return events[0] if len(events) == 1 else None
@@ -269,9 +276,7 @@ def e04_target_update_flag(milestones, updated, estimate):
     """Check the target commit against the verified Android UTC offline interval."""
     if updated is None:
         return "E04_TARGET_UPDATE_TIME_UNVERIFIED"
-    offset, uncertainty = estimate
-    update_android_utc = utc_ms(updated["timestamp_utc"]) - offset
-    earliest, latest = update_android_utc - uncertainty, update_android_utc + uncertainty
+    earliest, latest = server_time_on_android(updated, estimate)
     offline, reconnect = (utc_ms(milestones[k]) for k in ("offline_utc", "reconnect_utc"))
     if latest < offline or earliest >= reconnect:
         return "E04_TARGET_UPDATE_OUTSIDE_OFFLINE"
@@ -452,6 +457,17 @@ def analyze_run(run):
         callbacks = [e for e in android if e["event_type"] == "push_received"]
         e02_receipts = {e["event_id"]: e02_receipt_for_apply(e, requests[e["request_id"]], target_signals,
                                                           callbacks, location) for e in applied + late}
+        if updated is not None and estimate is not None:
+            earliest_update, _ = server_time_on_android(updated, estimate)
+            for apply_event in applied + late:
+                event_id = apply_event["event_id"]
+                callback = e02_receipts[event_id]
+                # Provider response logging can follow the callback. The target commit cannot.
+                if callback is not None and earliest_update > min(utc_ms(callback["timestamp_utc"]),
+                                                                 utc_ms(apply_event["timestamp_utc"])):
+                    e02_receipts[event_id] = None
+                    if location(apply_event) == "window":
+                        flags.add("E02_PUSH_CLOCK_ORDER_CONFLICT")
         e02_chain_unverified = any(e02_receipts[e["event_id"]] is None for e in applied)
         applied = [e for e in applied if e02_receipts[e["event_id"]] is not None]
         late = [e for e in late if e02_receipts[e["event_id"]] is not None]
