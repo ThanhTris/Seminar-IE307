@@ -1,0 +1,30 @@
+{
+  "exporter_version": "1.0.0",
+  "data_kind": "OBSERVED",
+  "run_id": "run-sem42-oppo-e01-02",
+  "device_alias": "oppo-find-x9",
+  "manifest_input_sha256": "c911d57df02b40a22202daed4ebfa5f66621ab714c8c2d43512a07c1eb2c109f",
+  "sources": [
+    {
+      "origin": "ANDROID",
+      "sha256": "ea74c6540becf98f19d2046a29b1746f5b6aebe5871c3c16b639e0aea532fc3b",
+      "lines": 17,
+      "selected": 17,
+      "other_run_or_device": 0,
+      "duplicates": 0,
+      "extra_fields_omitted": 0
+    },
+    {
+      "origin": "SERVER",
+      "sha256": "f5ddc4e2cbac42fd531b5d5cb2b12add7526bd6ebd8d765cb779ee9441d979c4",
+      "lines": 3,
+      "selected": 1,
+      "other_run_or_device": 2,
+      "duplicates": 0,
+      "extra_fields_omitted": 0
+    }
+  ],
+  "events_exported": 18,
+  "ordering": "INPUT_ORDER_NOT_CAUSAL",
+  "analysis_performed": false
+}
