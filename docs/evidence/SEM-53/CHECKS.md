@@ -1,5 +1,21 @@
 # SEM-53 — Kiểm tra chuẩn bị tái lập và quay demo
 
+## Kết quả runtime ngày 20/11/2026
+
+Dùng cặp APK debug đã xác minh từ commit app/server `76fece00110e0dba83c59b3e56bdabd2b4b7934e`. E01 được ghi ở pha `pilot`. [Hash hai APK và các bộ dữ liệu](https://github.com/ThanhTris/Seminar-IE307/blob/a7f7d2b4148d97280affd468fbcabdc288868173/docs/evidence/SEM-42/CHECKS.md)
+
+| Hạng mục | Kết quả |
+| --- | --- |
+| Emulator MANUAL | HTTP 200 và áp dụng v2 trong `demo-manual-76fece0-r2`. |
+| Emulator E01 PERIODIC | Cache v2 → v3 trong cửa sổ 90 phút. Quan sát 2 chu kỳ tự nhiên, dưới mục tiêu 3. Android export báo `PARTIAL` với 1 omission `periodic_cancelled`. |
+| Đối chiếu trên OPPO Find X9 | Lượt hoàn tất `run-sem42-oppo-e01-03` có 5 chu kỳ tự nhiên trong 90 phút. Cache v4 → v5 khi app ở nền, OPPO cắm USB qua ADB reverse. Lượt `run-sem42-oppo-e01-02` dừng khi app trở lại tiền cảnh và có dữ liệu riêng. |
+| E02 silent push | `NOT_RUN`, preflight ghi `FIREBASE_NOT_CONFIGURED`. |
+| Video | `NOT_RUN`. Dữ liệu E01 đã có để chuẩn bị đoạn PERIODIC playback. |
+
+[Timeline emulator](https://github.com/ThanhTris/Seminar-IE307/blob/e6a1857da2a25feebd1bed3681d7e43d32d7843c/docs/evidence/SEM-53/EMULATOR_2026-11-20.md)
+
+## Kiểm tra chuẩn bị ngày 19/11/2026
+
 - Base: `9caaf38f3932269bdcdd74aa0bfef0e9fc148271`.
 - Kiểm ngày 19/11/2026 (UTC+7) trên Windows. Dùng emulator cho demo.
 - Trạng thái video: **NOT_RUN**. [VIDEO_MANIFEST](../../../release/VIDEO_MANIFEST.json) chưa có APK, video, hash hay link Drive.
