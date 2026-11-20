@@ -1,4 +1,19 @@
-# SEM-42 — Kiểm tra chuẩn bị đối chiếu OPPO
+# SEM-42 — Kiểm tra đối chiếu OPPO
+
+## Pilot E01 ngày 20/11/2026
+
+Bản debug chạy trên emulator và OPPO dùng commit app/server `76fece00110e0dba83c59b3e56bdabd2b4b7934e`. Manifest bàn giao ghi `NOT_READY`, nên các lượt đo dưới đây thuộc pha `pilot`.
+
+| APK đã cài | SHA-256 |
+| --- | --- |
+| `app-debug.apk` | `814347f09ef9a61331910d7c4267fef827a4749377f3af53ae21fbb882ebaf5b` |
+| `app-debug-androidTest.apk` | `b973f170fd61974029cc882c85641d65a79f416be515504e0cef56a3baa3e029` |
+
+- **Emulator.** Dùng kết quả E01 đã ghi với cùng cặp APK. Cache chuyển v2 → v3 qua PERIODIC trong 90 phút, quan sát 2 chu kỳ tự nhiên. Thử mở một phiên kiểm tra nhanh mới dừng ở khâu khởi động và kết nối. [Kết quả emulator](https://github.com/ThanhTris/Seminar-IE307/blob/e6a1857da2a25feebd1bed3681d7e43d32d7843c/docs/evidence/SEM-53/EMULATOR_2026-11-20.md)
+- **OPPO `run-sem42-oppo-e01-02` — `ABORTED`.** Find X9 dùng Android 17 (API 37), ColorOS V17.0.0 và kết nối server qua ADB reverse trong khi được cấp nguồn USB. App probe đạt, MANUAL nhận HTTP 200 và dựng cache v2. Từ 09:43:35 (UTC+7), ghi nhận 3 chu kỳ PERIODIC tự nhiên trước khi Android đưa app lên tiền cảnh lúc 10:34:34. Lần đầu áp dụng v3 lúc 09:58:36, hai lần sau trả HTTP 304. Phát hiện gián đoạn ở checkpoint 10:38:50 và đóng lượt. Export Android `PARTIAL` giữ 17 event v2, omission `periodic_cancelled` do schema. Kiểm tra riêng xác nhận lịch `CANCELLED`, reverse đã gỡ và server đã đóng store. Lượt này dùng để minh họa đồng bộ nền trước gián đoạn.
+- **E02 — `NOT_RUN`.** Bản debug ghi `FIREBASE_NOT_CONFIGURED`; chưa có lượt silent push đầu cuối.
+
+## Kiểm tra chuẩn bị ngày 19/11/2026
 
 - Base: `9caaf38f3932269bdcdd74aa0bfef0e9fc148271`.
 - Kiểm ngày 19/11/2026 (UTC+7), trên máy Windows. Thiết bị dự kiến: OPPO Find X9, alias `oppo-find-x9`.
@@ -54,7 +69,7 @@ Lúc **12:35 UTC+7 ngày 19/11/2026**, ADB xác nhận một thiết bị USB đ
 
 Đây là thông số tại thời điểm kiểm kết nối. Đọc lại pin, mạng, idle và tối ưu pin theo app lúc bắt đầu run. Candidate trên `main` vẫn `NOT_READY`, APK và SHA-256 chưa được điền. Chưa cài, chưa tạo reverse và chưa chạy E01/E02 trên OPPO.
 
-## Cách tiếp tục trên máy thật
+## Quy trình chuẩn bị cho các lượt tiếp theo
 
 1. Nhận từ SEM-37 candidate đã chốt và cấu hình endpoint loopback cho worker. Kiểm hash, chữ ký, package và quyền trên emulator trước. Nếu OPPO đã có app Seminar, xác minh hash và chỉ tiếp tục khi dữ liệu thuộc phiên thử. Dừng nếu khác bản hoặc chưa rõ dữ liệu.
 2. Người giữ máy cấp USB debugging. Chỉ chấp nhận host tin cậy. Xác nhận serial local bằng ADB và model qua Settings. Tất cả lệnh dùng `adb -s <serial-local>`. Kiểm `reverse --list`, rồi dùng `reverse --no-rebind tcp:3000 tcp:3000` nếu cổng trống. Probe từ client thật trước khi đo.
