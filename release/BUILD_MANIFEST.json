@@ -32,5 +32,35 @@
     "No emulator or OPPO device is connected, so adb reverse and app-originated GET/snapshot application remain unverified.",
     "android/app/google-services.json is absent; Firebase PUSH remains NOT_RUN.",
     "Hybrid E05/E06 pilots and on-device schema-v2 export remain NOT_RUN; this debug APK is not a release candidate."
-  ]
+  ],
+  "pilot_artifacts": {
+    "note": "APK pair installed on the emulator and the OPPO for the 20/11/2026 E01 pilots (SEM-41/SEM-42/SEM-53). It is a different build from artifacts above and is not a release candidate.",
+    "source_commit": "76fece00110e0dba83c59b3e56bdabd2b4b7934e",
+    "built_on": "workstation of the repository owner, 2026-11-20, from a detached worktree of origin/main (merge of PR #36)",
+    "build": {
+      "command": ":app:testDebugUnitTest :app:assembleDebug :app:assembleDebugAndroidTest",
+      "gradle_wrapper": "9.6.0",
+      "jdk": "Android Studio JBR 25.0.3",
+      "compile_sdk": 37,
+      "target_sdk": 37
+    },
+    "app_apk": "app-debug.apk",
+    "app_apk_sha256": "814347F09EF9A61331910D7C4267FEF827A4749377F3AF53AE21FBB882EBAF5B",
+    "android_test_apk": "app-debug-androidTest.apk",
+    "android_test_apk_sha256": "B973F170FD61974029CC882C85641D65A79F416BE515504E0CEF56A3BAA3E029",
+    "signing_certificate_sha256": "6B88FF7E2835A23374715E1838327A6709CBC9D9573638E1C4DC3188BE87E1C3",
+    "verification": {
+      "android_unit_tests": "PASS: 34 tests, 0 failures",
+      "app_apk_vs_release": "Every entry outside the signature block is byte-identical to release/app-debug.apk; only the debug signing key differs",
+      "android_test_apk_vs_release": "Differs from release/app-debug-androidTest.apk: includes PushPilotControl (added in PR #26 after the release test APK was built)",
+      "installed_hash_check": "The pilot manifests under experiments/pilots/ record apk_sha256 = app_apk_sha256 above; docs/evidence/SEM-42/CHECKS.md lists both installed hashes. A per-install hash comparison on the OPPO is not separately recorded."
+    },
+    "storage": "Not committed to the repository. Kept on the owner's workstation; no GitHub Release or Drive upload exists yet. Add the link here once uploaded.",
+    "referenced_by": [
+      "docs/evidence/SEM-42/CHECKS.md",
+      "experiments/pilots/run-sem42-oppo-e01-02",
+      "experiments/pilots/run-sem42-oppo-e01-03",
+      "experiments/pilots/run-sem41-pilot-e01-1-20261120-8d5816"
+    ]
+  }
 }
