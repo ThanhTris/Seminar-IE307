@@ -32,7 +32,7 @@
     }
   ],
   "blockers": [
-    "DEMO_APK_NOT_HANDED_OFF",
+    "VIDEO_NOT_RECORDED",
     "FIREBASE_NOT_CONFIGURED"
   ]
 }

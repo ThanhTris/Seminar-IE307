@@ -1,6 +1,6 @@
 # SEM-53 — Quy trình tái lập demo
 
-**Tình trạng:** Chờ bản build SEM-52 và cấu hình Firebase. Quy trình dưới đây chuẩn bị cho lần chạy thật trên emulator. Kết quả từng bước ghi tại [CHECKS](CHECKS.md).
+**Tình trạng:** APK debug đã bàn giao ở `release/` (PR #36); còn chờ cấu hình Firebase cho đoạn PUSH và bản quay video. Quy trình dưới đây chuẩn bị cho lần chạy thật trên emulator. Kết quả từng bước ghi tại [CHECKS](CHECKS.md).
 
 ## Cài và kiểm tra đầu vào
 

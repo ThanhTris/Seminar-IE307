@@ -12,7 +12,7 @@ Dùng cặp APK debug đã xác minh từ commit app/server `76fece00110e0dba83c
 | E02 silent push | `NOT_RUN`, preflight ghi `FIREBASE_NOT_CONFIGURED`. |
 | Video | `NOT_RUN`. Dữ liệu E01 đã có để chuẩn bị đoạn PERIODIC playback. |
 
-[Timeline emulator](https://github.com/ThanhTris/Seminar-IE307/blob/e6a1857da2a25feebd1bed3681d7e43d32d7843c/docs/evidence/SEM-53/EMULATOR_2026-11-20.md)
+[Timeline emulator](EMULATOR_2026-11-20.md)
 
 ## Kiểm tra chuẩn bị ngày 19/11/2026
 
