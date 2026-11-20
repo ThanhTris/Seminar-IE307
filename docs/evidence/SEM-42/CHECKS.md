@@ -16,6 +16,16 @@ Bản debug chạy trên emulator và OPPO dùng commit app/server `76fece00110e
 - **Evidence và cleanup.** Export trước khi hủy lịch đạt `COMPLETE`, gồm 25 event Android và 1 `server_updated` của lượt. Tệp trạng thái xác nhận lịch `CANCELLED`. Reverse cổng 3000 đã gỡ, server loopback đã dừng và nhả khóa store. Quyền mạng cục bộ cấp cho lượt thử đã được thu hồi qua Cài đặt. APK thử và cache được giữ trên OPPO. Manifest, canonical events và log gốc được lưu local.
 - **E02 — `NOT_RUN`.** Bản debug ghi `FIREBASE_NOT_CONFIGURED`; chưa có lượt silent push đầu cuối.
 
+### Bộ dữ liệu E01
+
+| Lượt | Trạng thái | Manifest | Sự kiện v2 | Báo cáo xuất |
+| --- | --- | --- | --- | --- |
+| Emulator `run-sem41-pilot-e01-1-20261120-8d5816` | `COMPLETED`, `SUCCESS`, 2 chu kỳ, dưới mục tiêu 3 | [Manifest](../../../experiments/pilots/run-sem41-pilot-e01-1-20261120-8d5816/manifest.json) | [18 sự kiện](../../../experiments/pilots/run-sem41-pilot-e01-1-20261120-8d5816/events.jsonl) | [Export](../../../experiments/pilots/run-sem41-pilot-e01-1-20261120-8d5816/export_report.json), [Android](../../../experiments/pilots/run-sem41-pilot-e01-1-20261120-8d5816/android_export_report.json) |
+| OPPO `run-sem42-oppo-e01-02` | `ABORTED`, 3 chu kỳ quan sát được trước gián đoạn | [Manifest](../../../experiments/pilots/run-sem42-oppo-e01-02/manifest.json) | [18 sự kiện](../../../experiments/pilots/run-sem42-oppo-e01-02/events.jsonl) | [Export](../../../experiments/pilots/run-sem42-oppo-e01-02/export_report.json), [Android](../../../experiments/pilots/run-sem42-oppo-e01-02/android_export_report.json) |
+| OPPO `run-sem42-oppo-e01-03` | `COMPLETED`, `SUCCESS`, 5 chu kỳ, đạt mục tiêu | [Manifest](../../../experiments/pilots/run-sem42-oppo-e01-03/manifest.json) | [26 sự kiện](../../../experiments/pilots/run-sem42-oppo-e01-03/events.jsonl) | [Export](../../../experiments/pilots/run-sem42-oppo-e01-03/export_report.json), [Android](../../../experiments/pilots/run-sem42-oppo-e01-03/android_export_report.json) |
+
+Mỗi JSONL giữ sự kiện chuẩn hóa của đúng run ID và alias. Khi đếm chu kỳ của lượt hoàn tất, lọc `work_started` nguồn PERIODIC trong cửa sổ Android elapsed realtime, lấy `request_id` riêng với `work_attempt=0`. Manifest của lượt gián đoạn ghi thời điểm app trở lại tiền cảnh và để trống các mốc bắt đầu chưa được ghi chính xác. Báo cáo Android ghi sự kiện bị bỏ do schema. Các phép đo dùng để mô tả từng lượt, vì đồng hồ giữa thiết bị và server chưa được hiệu chỉnh. Logcat, Room DB và tệp định danh thiết bị được lưu local.
+
 ## Kiểm tra chuẩn bị ngày 19/11/2026
 
 - Base: `9caaf38f3932269bdcdd74aa0bfef0e9fc148271`.
