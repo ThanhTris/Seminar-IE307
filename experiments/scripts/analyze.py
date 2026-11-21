@@ -15,7 +15,7 @@ import sys
 
 import export_logs as contract
 
-VERSION = "0.6.0"
+VERSION = "0.7.0"
 ROOT = Path(__file__).resolve().parents[2]
 
 
@@ -243,7 +243,7 @@ def e03_doze_phase_flag(observation):
     return None
 
 
-def observation_on_android_clock(manifest, android, estimate):
+def observation_on_android_clock(manifest, android, estimate, *, allow_empty_android=False):
     """Check that the manifest window UTC is consistent with same-boot events."""
     obs = manifest["observation"]
     if estimate is None or not all((obs["start_utc"], obs["end_utc"], obs["boot_session_id"])):
@@ -251,12 +251,15 @@ def observation_on_android_clock(manifest, android, estimate):
     start, end = obs["start_elapsed_realtime_ms"], obs["end_elapsed_realtime_ms"]
     anchors = [utc_ms(e["timestamp_utc"]) - e["elapsed_realtime_ms"] for e in android
                if e["boot_session_id"] == obs["boot_session_id"]]
-    if not anchors or not contract.uint(start) or not contract.uint(end):
+    if not contract.uint(start) or not contract.uint(end) or end < start:
         return False
     utc_start, utc_end = utc_ms(obs["start_utc"]), utc_ms(obs["end_utc"])
     before = max(utc_ms(s["client_receive_utc"]) for s in manifest["clock"]["before_samples"])
     after = min(utc_ms(s["client_send_utc"]) for s in manifest["clock"]["after_samples"])
     tolerance = 2 * estimate[1]
+    if not anchors:
+        return (allow_empty_android and not android and before <= utc_start <= utc_end <= after and
+                abs((utc_end - utc_start) - (end - start)) <= tolerance)
     return (before <= utc_start <= utc_end <= after and
             all(abs(anchor - boundary) <= tolerance for anchor in anchors
                 for boundary in (utc_start - start, utc_end - end)))
@@ -396,7 +399,7 @@ def analyze_run(run):
                               "outcome": finished[0]["outcome"] if finished else None})
 
     clock, clock_reason = m["clock"], None
-    estimate = clock_estimate(clock)
+    observation_estimate = estimate = clock_estimate(clock)
     android = [e for e in events if e["origin"] == "ANDROID"]
     if estimate and android:
         before_end = max(utc_ms(s["client_receive_utc"]) for s in clock["before_samples"])
@@ -419,6 +422,12 @@ def analyze_run(run):
 
     target = obs["target_version"]
     updated = only([e for e in events if e["event_type"] == "server_updated" and e["data_version"] == target])
+    # Late events outside the clock samples do not invalidate the observation window's own clock evidence.
+    if (m["case_id"] == "E02" and updated is not None and
+            observation_on_android_clock(m, android, observation_estimate, allow_empty_android=True)):
+        earliest_update, latest_update = server_time_on_android(updated, observation_estimate)
+        if not earliest_update <= utc_ms(obs["start_utc"]) <= latest_update:
+            flags.add("E02_WINDOW_START_CLOCK_CONFLICT")
     def target_apply(e):
         return (e["event_type"] == "snapshot_applied" and e["data_version"] == target and
                 target is not None and e["source"] != "MANUAL" and

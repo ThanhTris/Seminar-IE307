@@ -817,6 +817,11 @@ class E02ChainTests(unittest.TestCase):
 
     def test_e02_clock_overlap_with_callback_is_not_a_certain_conflict(self):
         self.controlled_clock()
+        self.manifest["observation"].update(start_utc="2026-11-03T00:00:02Z", end_utc="2026-11-03T00:02:02Z",
+                                            start_elapsed_realtime_ms=32000, end_elapsed_realtime_ms=152000)
+        after = {"client_send_utc": "2026-11-03T00:02:03Z", "client_receive_utc": "2026-11-03T00:02:03.010Z",
+                 "server_utc": "2026-11-03T00:02:04.005Z", "resolution_ms": 1}
+        self.manifest["clock"]["after_samples"] = [after] * 3
         next(e for e in self.events if e["event_type"] == "server_updated")[
             "timestamp_utc"] = "2026-11-03T00:00:03.003Z"
         next(e for e in self.events if e["event_type"] == "push_send_accepted")[
@@ -825,6 +830,42 @@ class E02ChainTests(unittest.TestCase):
         self.assertTrue(row["eligible"])
         self.assertNotIn("E02_PUSH_CLOCK_ORDER_CONFLICT", row["flags"])
         self.assertIsNone(row["update_to_received_ms"])
+
+    def test_e02_window_opened_60_seconds_before_target_commit_is_excluded(self):
+        self.controlled_clock()
+        self.manifest.update(outcome="TIMEOUT", reason_codes=["TIMEOUT"])
+        next(e for e in self.events if e["event_type"] == "server_updated")[
+            "timestamp_utc"] = "2026-11-03T00:01:01Z"
+        next(e for e in self.events if e["event_type"] == "push_send_accepted")[
+            "timestamp_utc"] = "2026-11-03T00:01:02Z"
+        for event in self.events:
+            if event["origin"] == "ANDROID":
+                earlier = datetime.fromisoformat(event["timestamp_utc"].replace("Z", "+00:00"))
+                event["timestamp_utc"] = (earlier + timedelta(seconds=123)).isoformat().replace("+00:00", "Z")
+                event["elapsed_realtime_ms"] += 123000
+        result = analyzer.analyze_run(self.main_input())
+        row = result["row"]
+        self.assertEqual(row["outcome"], "TIMEOUT")
+        self.assertEqual(row["observed_completion"], "LATE_TARGET")
+        self.assertEqual(row["late_target_applied_count"], 1)
+        self.assertFalse(row["eligible"])
+        self.assertIn("E02_WINDOW_START_CLOCK_CONFLICT", row["flags"])
+        group = analyzer.summarize([result])[0]
+        self.assertEqual(group["n_eligible"], 0)
+        self.assertEqual(group["eligible_outcomes"], {})
+
+    def test_e02_timeout_at_target_commit_stays_eligible_with_clock_uncertainty(self):
+        self.controlled_clock()
+        self.manifest.update(outcome="TIMEOUT", reason_codes=["TIMEOUT"])
+        self.events = [e for e in self.events if e["origin"] == "SERVER"]
+        next(e for e in self.events if e["event_type"] == "server_updated")[
+            "timestamp_utc"] = "2026-11-03T00:00:01.003Z"
+        next(e for e in self.events if e["event_type"] == "push_send_accepted")[
+            "timestamp_utc"] = "2026-11-03T00:00:02Z"
+        result = analyzer.analyze_run(self.main_input())
+        self.assertTrue(result["row"]["eligible"])
+        self.assertEqual(result["row"]["observed_completion"], "NO_TARGET_EVIDENCE")
+        self.assertEqual(analyzer.summarize([result])[0]["eligible_outcomes"], {"TIMEOUT": 1})
 
     def test_e02_unrelated_signal_or_wrong_sender_update_excludes_declared_success(self):
         for mismatch in ({"signal_ids": ["unrelated-signal"]}, {"update_id": "other-update"}, {"data_version": 2}):
