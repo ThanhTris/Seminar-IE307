@@ -1,21 +1,21 @@
 # Phân tích manifest/JSONL — SEM-45
 
-Phiên bản công cụ **0.6.0**, Tuấn (`mtuan2491`), cập nhật 19/11/2026 theo review thứ tự clock E02/E03. Python **3.9+**, standard library và Git khi dùng index nguồn. Đã kiểm trên Windows với Python 3.12.14 và Ubuntu 24.04. Analyzer đọc dữ liệu offline và xuất CSV, summary, report có checksum. [Yêu cầu SEM-45](../tasks/backlog/SEM-45.md) · [CHECKS](../docs/evidence/SEM-45/CHECKS.md).
+Phiên bản công cụ **0.7.0**, Tuấn (`mtuan2491`), cập nhật 21/11/2026 theo review cửa sổ E02 và dữ liệu pilot mới. Python **3.9+**, standard library và Git khi dùng index nguồn. Đã kiểm trên Windows với Python 3.12.14 và Ubuntu 24.04. Analyzer đọc dữ liệu offline và xuất CSV, summary, report có checksum. [Yêu cầu SEM-45](../tasks/backlog/SEM-45.md) · [CHECKS](../docs/evidence/SEM-45/CHECKS.md).
 
 ## Bộ kết quả bàn giao
 
-[results.csv](results.csv) giữ **12 dòng OBSERVED/pilot đã bàn giao tại `dec00b7`**, đọc lại theo commit `42ca000da1de2b7465851e1485fec2631f4b1a3c` của Draft PR #29. Bộ này có **0 VALID / 12 INVALID** sau audit collector. Nguồn thu hồi qualification của 8 lượt từng VALID vì `dumpsys jobscheduler` trong cửa sổ có thể tác động timer, với lý do `IN_WINDOW_JOB_DUMP_CAN_REEVALUATE_TIMERS`. `eligible=false` ở cả 12 dòng và mẫu số main bằng 0. [Nguồn SEM-41](https://github.com/ThanhTris/Seminar-IE307/blob/42ca000da1de2b7465851e1485fec2631f4b1a3c/docs/evidence/SEM-41/CHECKS.md).
+[results.csv](results.csv) có **23 dòng OBSERVED/pilot** từ snapshot main `aa425c3`. PR #29 cung cấp 20 lượt, gồm 12 lượt lịch sử INVALID sau audit collector và 8 lượt chạy lại VALID. PR #35 cung cấp 3 lượt E01, gồm 2 VALID/COMPLETED và 1 INVALID/ABORTED. `source_pr` và `source_merge_commit` được ghi cho từng input. Tất cả là pilot và mẫu số main bằng 0. [INPUTS.json](../docs/evidence/SEM-45/INPUTS.json).
 
-Revision nguồn còn có 6 lượt chạy lại được đánh dấu VALID, batch đo lại đang RUNNING. Lần sửa theo review này giữ phạm vi 12 lượt cũ. Sáu lượt mới nằm ngoài CSV và được liệt kê tại `selection_scope.excluded_new_run_directories` trong index. Qualification của bộ cũ là `REVOKED_AFTER_SCHEDULER_COLLECTOR_AUDIT`. [INPUTS.json](../docs/evidence/SEM-45/INPUTS.json).
+OPPO `run-sem42-oppo-e01-03` có 5 chu kỳ theo Android elapsed trong 90 phút và apply v5 ở `930021 ms` tính từ đầu cửa sổ, qua `ADB_REVERSE` khi cấp nguồn USB. Emulator `run-sem41-pilot-e01-1-20261120-8d5816` có 2 chu kỳ, dưới mục tiêu 3, qua `EMULATOR_HOST_GATEWAY`. Lượt OPPO `run-sem42-oppo-e01-02` bị hủy và thiếu mốc mở nên không có số chu kỳ trong cửa sổ. [CHECKS SEM-42](../docs/evidence/SEM-42/CHECKS.md).
 
-Event Android trong bộ này có `boot_session_id=null`. CSV giữ `observed_completion=UNCERTAIN_WINDOW`, các count trong cửa sổ, completion và duration chưa xác minh để rỗng. Outcome lịch sử gồm 5 SUCCESS, 5 TIMEOUT và 2 FAILURE được giữ cùng validity INVALID để truy vết. Nguồn còn ghi 27 slot main chưa chạy và profile đo chưa cấu hình Firebase. OPPO chưa có bộ log nhận cho lần bàn giao này. [Giới hạn và phần Not run](../docs/evidence/SEM-45/CHECKS.md).
+Ba pilot E01 của PR #35 cùng ghi APK `814347F…`, provenance ở PR #37. `DBAAD…` là SHA của bản debug dưới `release/`. Nhóm thống kê dùng toàn bộ `build`, `device` và `config`, gồm `server_route` và `powered`. Event Android thiếu boot ID nên các metric đã xác minh cùng boot vẫn để trống. Hai cột `pilot_elapsed_*_unverified_boot` mô tả phép đếm/đối chiếu elapsed của pilot E01 hoàn tất theo mốc khai báo. Đồng hồ liên máy chưa kiểm soát nên latency server → Android để trống. [Build manifest](../release/BUILD_MANIFEST.json) · [Giới hạn](../docs/evidence/SEM-45/CHECKS.md).
 
 ## Tái lập bộ kết quả
 
 Từ root repo, dùng Python 3.9+ đang hoạt động. Khi Windows alias không hoạt động, thay `python` bằng đường dẫn executable đã cài. Các lệnh dưới dùng cú pháp shell hỗ trợ `\` để xuống dòng, trên PowerShell có thể viết mỗi lệnh thành một dòng.
 
 ```sh
-git fetch origin 42ca000da1de2b7465851e1485fec2631f4b1a3c
+git fetch origin aa425c33bdee034afcc552ebc390cae6780f6dbe
 
 python -B experiments/scripts/analyze.py --dataset pilot \
   --source-index docs/evidence/SEM-45/INPUTS.json \
@@ -112,6 +112,7 @@ Giá trị chưa đủ căn cứ là ô CSV rỗng hoặc JSON null. Số 0 bi�
 - **E02** cần `server_updated` duy nhất của target version và event sender có cùng `update_id`, version và tín hiệu. Sender `accepted` hoặc `unknown` phải đi cùng callback `push_received` có cùng `run_id`, `device_alias`, `signal_id`. Cùng tín hiệu phải nối được qua `work_enqueued`, `work_started` và `snapshot_applied` theo request/work và attempt thực hiện apply. Callback phải đi trước hoặc cùng mốc elapsed với enqueue và worker start cùng boot. Log xác nhận enqueue có thể xuất hiện sau worker start do cách WorkManager xác nhận, khi đó `queue_ms` để trống. Mốc phản hồi server có thể được ghi sau callback.
 - E02 khai báo `SUCCESS` mà chuỗi không xác minh được nhận `E02_PUSH_CHAIN_UNVERIFIED`, giữ outcome và event gốc, loại khỏi mẫu số và để trống timing dựa vào chuỗi chưa đủ căn cứ. Lượt timeout/lỗi đủ cửa sổ vẫn được tính khi không có apply trong cửa sổ. Event gửi thất bại vẫn có trong report để truy vết.
 - Khi clock liên máy đã xác minh được, E02 quy đổi target commit sang Android UTC và xét sai số. Nếu cả khoảng commit nằm sau callback hoặc apply của cùng chuỗi trong cửa sổ, analyzer gắn `E02_PUSH_CLOCK_ORDER_CONFLICT` và loại lượt khỏi mẫu số. Khi khoảng sai số chồng lên callback/apply, thứ tự chưa thể kết luận mâu thuẫn và latency liên quan có thể để trống. Thời điểm server ghi nhận phản hồi FCM có thể muộn hơn callback.
+- E02 kiểm riêng clock của cửa sổ. Khi mốc mở nằm ngoài khoảng commit đã quy đổi ± sai số, analyzer gắn `E02_WINDOW_START_CLOCK_CONFLICT` và loại lượt khỏi mẫu số, kể cả khi outcome là `TIMEOUT`. Các mốc cửa sổ, nhãn late theo cửa sổ đã khai báo, outcome và event gốc được giữ để truy vết.
 - **E03** cần `deep_idle_during=IDLE`, mốc start/enter/exit/end có thứ tự và tách đủ 5 phút baseline, 20 phút deep Doze, 10 phút sau thoát. Tổng thời lượng UTC phải khớp khoảng elapsed realtime trong dung sai 1 giây. Mốc pha dùng cùng clock quan sát khai báo trong manifest. Trạng thái thiếu/mâu thuẫn hay pha thiếu, đảo thứ tự hoặc quá ngắn bị gắn cờ và loại khỏi mẫu số. Outcome và event nguồn vẫn đọc được. Xác nhận checkpoint thực tế trong lúc Doze và phase event counts dựa vào audit của lượt chạy. [Protocol](PROTOCOL.md).
 - E03 áp dụng clock Android đã kiểm với mẫu trước/sau cửa sổ và mốc UTC–elapsed cùng boot. Toàn bộ khoảng sai số của `server_updated` duy nhất cho đúng target phải nằm trong `[idle_start_utc, idle_exit_utc)`. Update ở baseline hoặc sau khi thoát Doze nhận `E03_TARGET_UPDATE_OUTSIDE_DOZE`. Thiếu mốc update duy nhất, clock chưa đối chiếu được hoặc khoảng sai số chồng ranh giới nhận `E03_TARGET_UPDATE_TIME_UNVERIFIED`. Apply chắc chắn có trước target commit nhận `E03_APPLIED_BEFORE_TARGET_UPDATE`. Các lượt có cờ này bị loại khỏi mẫu số, giữ nguyên outcome và event nguồn.
 
@@ -123,7 +124,7 @@ Giá trị chưa đủ căn cứ là ô CSV rỗng hoặc JSON null. Số 0 bi�
 - Thiếu fetch, sai correlation/target/status/thứ tự/boot nhận `E06_FETCH_CHAIN_UNVERIFIED` và loại khỏi mẫu số. Mâu thuẫn correlation nội bộ vẫn trả lỗi contract hiện có. Chuỗi đủ evidence mới được xét `APPLIED_TARGET`; TIMEOUT chưa có apply vẫn được đánh giá theo cửa sổ và evidence skip thật.
 - E06 cần `push_send_skipped` cho cùng `update_id` và target version của `server_updated`. Nếu có `push_send_accepted`, `push_send_rejected` hoặc `push_send_unknown` cho cặp này, `E06_FAULT_SKIP_CONFLICTING_SEND` đánh dấu đã thử gửi qua provider và loại lượt khỏi mẫu số. Report vẫn giữ event skip/send, outcome khai báo và bằng chứng periodic apply để truy vết.
 
-Bộ v0.6.0 giữ source index của 12 pilot lịch sử và validity INVALID. CSV/summary/report được sinh từ analyzer mới và có checksum tương ứng. Các phép đo và event nguồn được giữ để truy vết.
+Bộ v0.7.0 có CSV, summary và report tái lập từ cùng source index. Đếm chu kỳ descriptive hoặc cùng boot đều dùng `work_started` nguồn PERIODIC, attempt 0, request ID riêng trong cửa sổ elapsed. Request có attempt 0 ngoài cửa sổ bị loại. Lượt hủy và thiếu mốc giữ giá trị trong cửa sổ là null.
 
 ## Nhóm thống kê và bàn giao tiếp
 
@@ -135,4 +136,4 @@ Summary có `declared_outcomes` và `valid_completed_declared_outcomes` để đ
 
 Report lưu hash, raw/window event counts, bucket setup/window/late/unknown, fetch pairs và lý do clock. Summary hiện là whole-run. Phân tích riêng phase idle/offline E03/E04, race E05, callback FCM và so sánh OPPO vẫn Not run trong SEM-45. Các audit OS của người chạy được tham chiếu theo commit nguồn.
 
-Khi có main logs từ SEM-41/42, nhận commit/build/config/clock/CHECKS, chạy `--dataset main` với danh sách run cụ thể, kiểm cờ và mẫu số rồi cập nhật bộ CSV/report/index. SEM-43/44/48/50 nhận bộ hiện tại với nhãn pilot/INVALID để kiểm pipeline và truy vết lịch sử. Qualification bị thu hồi khiến bộ này chưa có mẫu scheduler hợp lệ cho kết luận thực nghiệm. SEM-44 tiếp nhận để kiểm độc lập. Các lượt đo lại cần được nhận riêng theo commit/evidence của batch tương ứng.
+Khi có main logs từ SEM-41/42, nhận commit/build/config/clock/CHECKS, chạy `--dataset main` với danh sách run cụ thể, kiểm cờ và mẫu số rồi cập nhật bộ CSV/report/index. SEM-43 và SEM-48 có thể dùng bộ pilot mới để làm mới SUMMARY và biểu đồ theo từng build, thiết bị và route. SEM-50 có thể dẫn run-03 trực tiếp với nhãn pilot, điều kiện USB/ADB reverse và giới hạn clock/boot. SEM-44 tiếp nhận để kiểm độc lập.

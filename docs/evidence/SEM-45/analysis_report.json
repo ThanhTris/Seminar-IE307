@@ -1,13 +1,205 @@
 {
-  "analysis_version": "0.6.0",
-  "analyzer_sha256": "51e57bc9ca1291c2efb23fc985180379e3ef332dd34fb7e1558586171d70f87e",
+  "analysis_version": "0.7.0",
+  "analyzer_sha256": "ec016871bb71b148056c16b3420bf089c077f753bc155d7da7502d6870063663",
   "batch_id": "windows",
   "dataset": "pilot",
   "outputs_sha256": {
-    "results.csv": "4851afcde92542c1b5f245d69a1193a69acf7e1e3b3a4c3967da4dd090ac8eca",
-    "summary.json": "8b34ec5d7179ebbb0ac19a8dc9f74cfab998748f07562043bb90f40cdfdbfdb4"
+    "results.csv": "0fa852edb24a8f7cf9fd953d2338974b1516f32e6e278c22c0d34c574780bbd6",
+    "summary.json": "cbbaf7590a20ed136b155b5cc8dc9b379f6f4c8a539c494649361c818394dd67"
   },
   "runs": [
+    {
+      "bucket_counts": {
+        "late": 0,
+        "server": 1,
+        "setup": 0,
+        "unknown": 25,
+        "window": 0
+      },
+      "clock_estimate": null,
+      "clock_reason": "CLOCK_NOT_USABLE",
+      "declared_reason_codes": [
+        "CANDIDATE_NOT_READY",
+        "CLOCK_UNCONTROLLED",
+        "CLEANUP_EVENT_OMITTED"
+      ],
+      "duplicates_ignored": 0,
+      "event_counts": {
+        "periodic_registered": 1,
+        "server_updated": 1,
+        "snapshot_applied": 1,
+        "snapshot_fetch_completed": 6,
+        "snapshot_fetch_started": 6,
+        "snapshot_unchanged": 5,
+        "work_started": 6
+      },
+      "fetches": [
+        {
+          "duration_ms": null,
+          "location": "unknown",
+          "network_call_id": "01bad95f-643f-4ca3-b5e0-3f2310861cf8",
+          "outcome": "not_modified",
+          "request_id": "req-3aadfda6-3107-446a-b971-f335a2312ab2"
+        },
+        {
+          "duration_ms": null,
+          "location": "unknown",
+          "network_call_id": "04d1911b-7edf-4da1-b177-08b69a18c546",
+          "outcome": "not_modified",
+          "request_id": "req-5e1ccf2f-6ce4-4743-ad95-6498240bcc0c"
+        },
+        {
+          "duration_ms": null,
+          "location": "unknown",
+          "network_call_id": "0503354d-2962-4b72-bfce-63deb37744e2",
+          "outcome": "not_modified",
+          "request_id": "req-80dc2309-76df-430c-a916-3936d324043a"
+        },
+        {
+          "duration_ms": null,
+          "location": "unknown",
+          "network_call_id": "1fad2b9b-ca1e-4aa2-b565-2e1b6f8d685c",
+          "outcome": "success",
+          "request_id": "req-75091e44-e73c-49d1-8701-bdb534d35ae7"
+        },
+        {
+          "duration_ms": null,
+          "location": "unknown",
+          "network_call_id": "92d7affc-7fc0-4b97-91c7-91bf0416e93b",
+          "outcome": "not_modified",
+          "request_id": "req-40f8d7a8-4252-4aa9-9168-8480f31bee18"
+        },
+        {
+          "duration_ms": null,
+          "location": "unknown",
+          "network_call_id": "cd1f276f-d02f-4da3-bc01-0a74353b10ae",
+          "outcome": "not_modified",
+          "request_id": "req-f99c8d65-802d-41a3-b29c-05e93adffdc6"
+        }
+      ],
+      "group_identity": {
+        "build": {
+          "api_version": "2.0.0",
+          "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
+          "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
+          "candidate_gate_passed": false,
+          "compile_sdk": 37,
+          "min_sdk": 24,
+          "package_name": "com.thanhtris.seminarie307",
+          "server_commit": "c77772e426c00ae464240f00942f8368c638aaa8",
+          "target_sdk": 37,
+          "version_code": 1,
+          "version_name": "0.1.0"
+        },
+        "config": {
+          "battery_optimization": null,
+          "battery_percent": 100,
+          "battery_saver": false,
+          "collapse_key": null,
+          "connect_timeout_ms": 5000,
+          "deep_idle_after": "ACTIVE",
+          "deep_idle_before": "ACTIVE",
+          "deep_idle_during": "ACTIVE",
+          "idle_method": "NATURAL",
+          "network_constraint": "CONNECTED",
+          "network_transports": [
+            "WIFI",
+            "CELLULAR"
+          ],
+          "package_stopped_before": false,
+          "periodic_flex_minutes": 15,
+          "periodic_initial_delay_ms": 0,
+          "periodic_interval_minutes": 15,
+          "periodic_policy": "UPDATE",
+          "periodic_unique_name": "periodic_bulletin_sync",
+          "powered": false,
+          "push_payload_kind": null,
+          "push_priority": null,
+          "read_timeout_ms": 5000,
+          "retry_backoff_ms": 30000,
+          "retry_backoff_policy": "EXPONENTIAL",
+          "retry_max_attempts": 4,
+          "screen_state": "ON",
+          "server_route": "EMULATOR_HOST_HTTP",
+          "ttl_ms": null
+        },
+        "device": {
+          "abi": "arm64-v8a",
+          "android_release": "17",
+          "api_level": 37,
+          "build_fingerprint": "google/sdk_gphone16k_arm64/emu64a16k:17/CP31.260623.012/16064790:user/dev-keys",
+          "coloros": null,
+          "kind": "EMULATOR",
+          "manufacturer": "Google",
+          "model": "sdk_gphone16k_arm64",
+          "page_size_bytes": 16384,
+          "play_services_version": "26.43.30",
+          "security_patch": "2026-07-05"
+        },
+        "event_schema_version": "2.0.0",
+        "protocol_version": "1.0.0",
+        "source_context": {
+          "server_store_epoch": "pilots-20261115-r3"
+        }
+      },
+      "row": {
+        "analysis_version": "0.7.0",
+        "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
+        "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
+        "applied_event_count": null,
+        "case_id": "E01",
+        "data_kind": "OBSERVED",
+        "db_write_count": null,
+        "declared_cached_version_after": 16,
+        "declared_natural_periodic_cycles": 5,
+        "device_alias": "emulator-main",
+        "eligible": false,
+        "events_sha256": "1ac6374c10f1ab8ce2202a6fee35ef21a7de13f847158d1491c5b17f406a42e3",
+        "execution_status": "COMPLETED",
+        "flags": "ANDROID_WINDOW_OR_BOOT_UNKNOWN|OUTCOME_EVIDENCE_UNVERIFIED",
+        "get_started_count": null,
+        "group_id": "29c3860586e2053afae5d2271bf8f210ea525bb9051fbbea4a447c1a83e47504",
+        "intervention": "NONE",
+        "late_target_applied_count": null,
+        "manifest_sha256": "56b44dafede1f36eff5f2ec3c386859125e93e339f5029a62300154e7e89f7b7",
+        "mode": "PERIODIC",
+        "natural_periodic_cycles": null,
+        "observed_completion": "UNCERTAIN_WINDOW",
+        "outcome": "SUCCESS",
+        "pilot_elapsed_first_target_apply_from_start_ms_unverified_boot": 953614,
+        "pilot_elapsed_periodic_cycles_unverified_boot": 5,
+        "push_received_event_count_all": 0,
+        "push_send_accepted_event_count_all": 0,
+        "push_send_skipped_event_count_all": 0,
+        "queue_ms": null,
+        "received_to_enqueue_ms": null,
+        "repetition": 1,
+        "retry_event_count": null,
+        "run_id": "run-sem41-pilot-e01-1-20261115-575a7a",
+        "run_phase": "pilot",
+        "server_commit": "c77772e426c00ae464240f00942f8368c638aaa8",
+        "server_route": "EMULATOR_HOST_HTTP",
+        "server_store_epoch": "pilots-20261115-r3",
+        "server_updated_event_count_all": 1,
+        "snapshot_applied_event_count_all": 1,
+        "snapshot_fetch_started_event_count_all": 6,
+        "subscenario": "PERIODIC_BASELINE",
+        "sync_ms": null,
+        "target_applied_in_window": null,
+        "target_version": 16,
+        "update_to_applied_ms": null,
+        "update_to_applied_uncertainty_ms": null,
+        "update_to_received_ms": null,
+        "update_to_received_uncertainty_ms": null,
+        "validity": "VALID",
+        "window_basis": "ANDROID_MONOTONIC",
+        "window_events_verified": false,
+        "work_attempt_count": null,
+        "work_enqueued_event_count_all": 0,
+        "work_started_event_count_all": 6
+      },
+      "window_event_counts": {}
+    },
     {
       "bucket_counts": {
         "late": 0,
@@ -113,7 +305,7 @@
         }
       },
       "row": {
-        "analysis_version": "0.6.0",
+        "analysis_version": "0.7.0",
         "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
         "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
         "applied_event_count": null,
@@ -136,6 +328,8 @@
         "natural_periodic_cycles": null,
         "observed_completion": "UNCERTAIN_WINDOW",
         "outcome": "TIMEOUT",
+        "pilot_elapsed_first_target_apply_from_start_ms_unverified_boot": null,
+        "pilot_elapsed_periodic_cycles_unverified_boot": null,
         "push_received_event_count_all": 0,
         "push_send_accepted_event_count_all": 0,
         "push_send_skipped_event_count_all": 0,
@@ -146,6 +340,7 @@
         "run_id": "run-sem41-pilot-e01-1-20261115-760217",
         "run_phase": "pilot",
         "server_commit": "c77772e426c00ae464240f00942f8368c638aaa8",
+        "server_route": "EMULATOR_HOST_HTTP",
         "server_store_epoch": "pilots-20261115-r2",
         "server_updated_event_count_all": 1,
         "snapshot_applied_event_count_all": 0,
@@ -258,7 +453,7 @@
         }
       },
       "row": {
-        "analysis_version": "0.6.0",
+        "analysis_version": "0.7.0",
         "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
         "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
         "applied_event_count": null,
@@ -281,6 +476,8 @@
         "natural_periodic_cycles": null,
         "observed_completion": "UNCERTAIN_WINDOW",
         "outcome": "FAILURE",
+        "pilot_elapsed_first_target_apply_from_start_ms_unverified_boot": null,
+        "pilot_elapsed_periodic_cycles_unverified_boot": null,
         "push_received_event_count_all": 0,
         "push_send_accepted_event_count_all": 0,
         "push_send_skipped_event_count_all": 0,
@@ -291,6 +488,7 @@
         "run_id": "run-sem41-pilot-e01-1-20261115-89b884",
         "run_phase": "pilot",
         "server_commit": "c77772e426c00ae464240f00942f8368c638aaa8",
+        "server_route": "EMULATOR_HOST_HTTP",
         "server_store_epoch": null,
         "server_updated_event_count_all": 0,
         "snapshot_applied_event_count_all": 0,
@@ -415,7 +613,7 @@
         }
       },
       "row": {
-        "analysis_version": "0.6.0",
+        "analysis_version": "0.7.0",
         "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
         "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
         "applied_event_count": null,
@@ -438,6 +636,8 @@
         "natural_periodic_cycles": null,
         "observed_completion": "UNCERTAIN_WINDOW",
         "outcome": "TIMEOUT",
+        "pilot_elapsed_first_target_apply_from_start_ms_unverified_boot": null,
+        "pilot_elapsed_periodic_cycles_unverified_boot": null,
         "push_received_event_count_all": 0,
         "push_send_accepted_event_count_all": 0,
         "push_send_skipped_event_count_all": 0,
@@ -448,6 +648,7 @@
         "run_id": "run-sem41-pilot-e01-1-20261115-9a8b41",
         "run_phase": "pilot",
         "server_commit": "c77772e426c00ae464240f00942f8368c638aaa8",
+        "server_route": "EMULATOR_HOST_HTTP",
         "server_store_epoch": "pilots-20261115-r3",
         "server_updated_event_count_all": 1,
         "snapshot_applied_event_count_all": 0,
@@ -466,6 +667,183 @@
         "work_attempt_count": null,
         "work_enqueued_event_count_all": 0,
         "work_started_event_count_all": 2
+      },
+      "window_event_counts": {}
+    },
+    {
+      "bucket_counts": {
+        "late": 0,
+        "server": 1,
+        "setup": 0,
+        "unknown": 17,
+        "window": 0
+      },
+      "clock_estimate": null,
+      "clock_reason": "CLOCK_NOT_USABLE",
+      "declared_reason_codes": [
+        "NATURAL_CYCLE_TARGET_NOT_MET",
+        "CANDIDATE_NOT_READY",
+        "CLOCK_UNCONTROLLED",
+        "CLEANUP_EVENT_OMITTED"
+      ],
+      "duplicates_ignored": 0,
+      "event_counts": {
+        "periodic_registered": 1,
+        "server_updated": 1,
+        "snapshot_applied": 1,
+        "snapshot_fetch_completed": 4,
+        "snapshot_fetch_started": 4,
+        "snapshot_unchanged": 2,
+        "sync_retrying": 1,
+        "work_started": 4
+      },
+      "fetches": [
+        {
+          "duration_ms": null,
+          "location": "unknown",
+          "network_call_id": "1c778b58-bb06-41bd-8d5a-7aa6b1d5fd5f",
+          "outcome": "not_modified",
+          "request_id": "req-9c38d146-4653-4c1c-b400-d86975bc7af4"
+        },
+        {
+          "duration_ms": null,
+          "location": "unknown",
+          "network_call_id": "5c704cc5-1143-44c9-87e9-d40b3315850a",
+          "outcome": "failure",
+          "request_id": "req-0bdcf8b6-17a5-4654-8447-f14ca67f73f4"
+        },
+        {
+          "duration_ms": null,
+          "location": "unknown",
+          "network_call_id": "838c1ad4-9dd8-444d-ba86-7ea3e86a8cff",
+          "outcome": "success",
+          "request_id": "req-2dce85e9-be56-4ca9-96e6-c23db0adc70d"
+        },
+        {
+          "duration_ms": null,
+          "location": "unknown",
+          "network_call_id": "e7a99f3d-2e29-46b4-9e74-4cc000e6b159",
+          "outcome": "not_modified",
+          "request_id": "req-1b3d80b0-d0cd-403c-b571-f6b68135f454"
+        }
+      ],
+      "group_identity": {
+        "build": {
+          "api_version": "2.0.0",
+          "apk_sha256": "814347f09ef9a61331910d7c4267fef827a4749377f3af53ae21fbb882ebaf5b",
+          "app_commit": "76fece00110e0dba83c59b3e56bdabd2b4b7934e",
+          "candidate_gate_passed": false,
+          "compile_sdk": null,
+          "min_sdk": null,
+          "package_name": "com.thanhtris.seminarie307",
+          "server_commit": "76fece00110e0dba83c59b3e56bdabd2b4b7934e",
+          "target_sdk": null,
+          "version_code": null,
+          "version_name": null
+        },
+        "config": {
+          "battery_optimization": null,
+          "battery_percent": 100,
+          "battery_saver": null,
+          "collapse_key": null,
+          "connect_timeout_ms": null,
+          "deep_idle_after": null,
+          "deep_idle_before": null,
+          "deep_idle_during": null,
+          "idle_method": null,
+          "network_constraint": "CONNECTED",
+          "network_transports": [],
+          "package_stopped_before": false,
+          "periodic_flex_minutes": null,
+          "periodic_initial_delay_ms": null,
+          "periodic_interval_minutes": 15,
+          "periodic_policy": null,
+          "periodic_unique_name": null,
+          "powered": true,
+          "push_payload_kind": null,
+          "push_priority": null,
+          "read_timeout_ms": null,
+          "retry_backoff_ms": null,
+          "retry_backoff_policy": null,
+          "retry_max_attempts": null,
+          "screen_state": null,
+          "server_route": "EMULATOR_HOST_GATEWAY",
+          "ttl_ms": null
+        },
+        "device": {
+          "abi": null,
+          "android_release": "17",
+          "api_level": 37,
+          "build_fingerprint": null,
+          "coloros": null,
+          "kind": "EMULATOR",
+          "manufacturer": null,
+          "model": "Medium_Phone_API_37.0",
+          "page_size_bytes": null,
+          "play_services_version": null,
+          "security_patch": null
+        },
+        "event_schema_version": "2.0.0",
+        "protocol_version": "1.0.0",
+        "source_context": {
+          "server_store_epoch": null
+        }
+      },
+      "row": {
+        "analysis_version": "0.7.0",
+        "apk_sha256": "814347f09ef9a61331910d7c4267fef827a4749377f3af53ae21fbb882ebaf5b",
+        "app_commit": "76fece00110e0dba83c59b3e56bdabd2b4b7934e",
+        "applied_event_count": null,
+        "case_id": "E01",
+        "data_kind": "OBSERVED",
+        "db_write_count": null,
+        "declared_cached_version_after": 3,
+        "declared_natural_periodic_cycles": 2,
+        "device_alias": "emulator-main",
+        "eligible": false,
+        "events_sha256": "61e297ffeebcf33e7476b84c534891c05d67d0a3fc499e723d14642dc77d5721",
+        "execution_status": "COMPLETED",
+        "flags": "ANDROID_WINDOW_OR_BOOT_UNKNOWN|MONOTONIC_WINDOW_UNAVAILABLE|OUTCOME_EVIDENCE_UNVERIFIED",
+        "get_started_count": null,
+        "group_id": "d8cf179f7c64945fbae8a1f9f3642a19039d71c6950b7d5e401c22767f7fafff",
+        "intervention": "NONE",
+        "late_target_applied_count": null,
+        "manifest_sha256": "baa027abc422fa45a9455a72524666f449cae4849538da165bcb1a49e4c22218",
+        "mode": "PERIODIC",
+        "natural_periodic_cycles": null,
+        "observed_completion": "UNCERTAIN_WINDOW",
+        "outcome": "SUCCESS",
+        "pilot_elapsed_first_target_apply_from_start_ms_unverified_boot": 2194372,
+        "pilot_elapsed_periodic_cycles_unverified_boot": 2,
+        "push_received_event_count_all": 0,
+        "push_send_accepted_event_count_all": 0,
+        "push_send_skipped_event_count_all": 0,
+        "queue_ms": null,
+        "received_to_enqueue_ms": null,
+        "repetition": 1,
+        "retry_event_count": null,
+        "run_id": "run-sem41-pilot-e01-1-20261120-8d5816",
+        "run_phase": "pilot",
+        "server_commit": "76fece00110e0dba83c59b3e56bdabd2b4b7934e",
+        "server_route": "EMULATOR_HOST_GATEWAY",
+        "server_store_epoch": null,
+        "server_updated_event_count_all": 1,
+        "snapshot_applied_event_count_all": 1,
+        "snapshot_fetch_started_event_count_all": 4,
+        "subscenario": null,
+        "sync_ms": null,
+        "target_applied_in_window": null,
+        "target_version": 3,
+        "update_to_applied_ms": null,
+        "update_to_applied_uncertainty_ms": null,
+        "update_to_received_ms": null,
+        "update_to_received_uncertainty_ms": null,
+        "validity": "VALID",
+        "window_basis": "UNAVAILABLE",
+        "window_events_verified": false,
+        "work_attempt_count": null,
+        "work_enqueued_event_count_all": 0,
+        "work_started_event_count_all": 4
       },
       "window_event_counts": {}
     },
@@ -577,7 +955,7 @@
         }
       },
       "row": {
-        "analysis_version": "0.6.0",
+        "analysis_version": "0.7.0",
         "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
         "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
         "applied_event_count": null,
@@ -600,6 +978,8 @@
         "natural_periodic_cycles": null,
         "observed_completion": "UNCERTAIN_WINDOW",
         "outcome": "SUCCESS",
+        "pilot_elapsed_first_target_apply_from_start_ms_unverified_boot": null,
+        "pilot_elapsed_periodic_cycles_unverified_boot": null,
         "push_received_event_count_all": 0,
         "push_send_accepted_event_count_all": 0,
         "push_send_skipped_event_count_all": 0,
@@ -610,6 +990,7 @@
         "run_id": "run-sem41-pilot-e03-1-20261115-5db4eb",
         "run_phase": "pilot",
         "server_commit": "c77772e426c00ae464240f00942f8368c638aaa8",
+        "server_route": "EMULATOR_HOST_HTTP",
         "server_store_epoch": "pilots-20261115-r2",
         "server_updated_event_count_all": 1,
         "snapshot_applied_event_count_all": 2,
@@ -623,6 +1004,170 @@
         "update_to_received_ms": null,
         "update_to_received_uncertainty_ms": null,
         "validity": "INVALID",
+        "window_basis": "ANDROID_MONOTONIC",
+        "window_events_verified": false,
+        "work_attempt_count": null,
+        "work_enqueued_event_count_all": 0,
+        "work_started_event_count_all": 2
+      },
+      "window_event_counts": {}
+    },
+    {
+      "bucket_counts": {
+        "late": 0,
+        "server": 1,
+        "setup": 0,
+        "unknown": 9,
+        "window": 0
+      },
+      "clock_estimate": null,
+      "clock_reason": "CLOCK_NOT_USABLE",
+      "declared_reason_codes": [
+        "CANDIDATE_NOT_READY",
+        "CLOCK_UNCONTROLLED",
+        "CLEANUP_EVENT_OMITTED"
+      ],
+      "duplicates_ignored": 0,
+      "event_counts": {
+        "periodic_registered": 1,
+        "server_updated": 1,
+        "snapshot_applied": 1,
+        "snapshot_fetch_completed": 2,
+        "snapshot_fetch_started": 2,
+        "snapshot_unchanged": 1,
+        "work_started": 2
+      },
+      "fetches": [
+        {
+          "duration_ms": null,
+          "location": "unknown",
+          "network_call_id": "076f4937-aea7-4bba-a47f-f33fd04a495d",
+          "outcome": "success",
+          "request_id": "req-6f32f5de-e6ce-4e3d-93cc-faf8d8966d4d"
+        },
+        {
+          "duration_ms": null,
+          "location": "unknown",
+          "network_call_id": "73475b18-c30d-4a8e-81ce-59a9a36f34b2",
+          "outcome": "not_modified",
+          "request_id": "req-475cc6c8-174c-4f3c-a78c-972037185fe7"
+        }
+      ],
+      "group_identity": {
+        "build": {
+          "api_version": "2.0.0",
+          "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
+          "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
+          "candidate_gate_passed": false,
+          "compile_sdk": 37,
+          "min_sdk": 24,
+          "package_name": "com.thanhtris.seminarie307",
+          "server_commit": "c77772e426c00ae464240f00942f8368c638aaa8",
+          "target_sdk": 37,
+          "version_code": 1,
+          "version_name": "0.1.0"
+        },
+        "config": {
+          "battery_optimization": null,
+          "battery_percent": 100,
+          "battery_saver": false,
+          "collapse_key": null,
+          "connect_timeout_ms": 5000,
+          "deep_idle_after": "ACTIVE",
+          "deep_idle_before": "ACTIVE",
+          "deep_idle_during": "IDLE",
+          "idle_method": "ADB_FORCE_IDLE",
+          "network_constraint": "CONNECTED",
+          "network_transports": [
+            "WIFI",
+            "CELLULAR"
+          ],
+          "package_stopped_before": false,
+          "periodic_flex_minutes": 15,
+          "periodic_initial_delay_ms": 0,
+          "periodic_interval_minutes": 15,
+          "periodic_policy": "UPDATE",
+          "periodic_unique_name": "periodic_bulletin_sync",
+          "powered": false,
+          "push_payload_kind": null,
+          "push_priority": null,
+          "read_timeout_ms": 5000,
+          "retry_backoff_ms": 30000,
+          "retry_backoff_policy": "EXPONENTIAL",
+          "retry_max_attempts": 4,
+          "screen_state": "ON",
+          "server_route": "EMULATOR_HOST_HTTP",
+          "ttl_ms": null
+        },
+        "device": {
+          "abi": "arm64-v8a",
+          "android_release": "17",
+          "api_level": 37,
+          "build_fingerprint": "google/sdk_gphone16k_arm64/emu64a16k:17/CP31.260623.012/16064790:user/dev-keys",
+          "coloros": null,
+          "kind": "EMULATOR",
+          "manufacturer": "Google",
+          "model": "sdk_gphone16k_arm64",
+          "page_size_bytes": 16384,
+          "play_services_version": "26.43.30",
+          "security_patch": "2026-07-05"
+        },
+        "event_schema_version": "2.0.0",
+        "protocol_version": "1.0.0",
+        "source_context": {
+          "server_store_epoch": "pilots-20261115-r3"
+        }
+      },
+      "row": {
+        "analysis_version": "0.7.0",
+        "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
+        "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
+        "applied_event_count": null,
+        "case_id": "E03",
+        "data_kind": "OBSERVED",
+        "db_write_count": null,
+        "declared_cached_version_after": 17,
+        "declared_natural_periodic_cycles": 1,
+        "device_alias": "emulator-main",
+        "eligible": false,
+        "events_sha256": "005d5546bbda922da1796dc1fa8316f90ba48f489d248a703c22942f6832dfc0",
+        "execution_status": "COMPLETED",
+        "flags": "ANDROID_WINDOW_OR_BOOT_UNKNOWN|E03_TARGET_UPDATE_TIME_UNVERIFIED|OUTCOME_EVIDENCE_UNVERIFIED",
+        "get_started_count": null,
+        "group_id": "a92f5e78c06c0bc0d3419028265be7564205e025f73425f92284382bd9c6866b",
+        "intervention": "INJECTED",
+        "late_target_applied_count": null,
+        "manifest_sha256": "26db2be6c56932f608360a1ca7d42e04260df13d0b1881c0b4eb7d8921ef2ba6",
+        "mode": "PERIODIC",
+        "natural_periodic_cycles": null,
+        "observed_completion": "UNCERTAIN_WINDOW",
+        "outcome": "SUCCESS",
+        "pilot_elapsed_first_target_apply_from_start_ms_unverified_boot": null,
+        "pilot_elapsed_periodic_cycles_unverified_boot": null,
+        "push_received_event_count_all": 0,
+        "push_send_accepted_event_count_all": 0,
+        "push_send_skipped_event_count_all": 0,
+        "queue_ms": null,
+        "received_to_enqueue_ms": null,
+        "repetition": 1,
+        "retry_event_count": null,
+        "run_id": "run-sem41-pilot-e03-1-20261115-dc9cc9",
+        "run_phase": "pilot",
+        "server_commit": "c77772e426c00ae464240f00942f8368c638aaa8",
+        "server_route": "EMULATOR_HOST_HTTP",
+        "server_store_epoch": "pilots-20261115-r3",
+        "server_updated_event_count_all": 1,
+        "snapshot_applied_event_count_all": 1,
+        "snapshot_fetch_started_event_count_all": 2,
+        "subscenario": "PERIODIC_BASELINE",
+        "sync_ms": null,
+        "target_applied_in_window": null,
+        "target_version": 17,
+        "update_to_applied_ms": null,
+        "update_to_applied_uncertainty_ms": null,
+        "update_to_received_ms": null,
+        "update_to_received_uncertainty_ms": null,
+        "validity": "VALID",
         "window_basis": "ANDROID_MONOTONIC",
         "window_events_verified": false,
         "work_attempt_count": null,
@@ -736,7 +1281,7 @@
         }
       },
       "row": {
-        "analysis_version": "0.6.0",
+        "analysis_version": "0.7.0",
         "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
         "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
         "applied_event_count": null,
@@ -759,6 +1304,8 @@
         "natural_periodic_cycles": null,
         "observed_completion": "UNCERTAIN_WINDOW",
         "outcome": "FAILURE",
+        "pilot_elapsed_first_target_apply_from_start_ms_unverified_boot": null,
+        "pilot_elapsed_periodic_cycles_unverified_boot": null,
         "push_received_event_count_all": 0,
         "push_send_accepted_event_count_all": 0,
         "push_send_skipped_event_count_all": 0,
@@ -769,6 +1316,7 @@
         "run_id": "run-sem41-pilot-e03-2-20261115-0d277e",
         "run_phase": "pilot",
         "server_commit": "c77772e426c00ae464240f00942f8368c638aaa8",
+        "server_route": "EMULATOR_HOST_HTTP",
         "server_store_epoch": "pilots-20261115-r2",
         "server_updated_event_count_all": 1,
         "snapshot_applied_event_count_all": 0,
@@ -899,7 +1447,7 @@
         }
       },
       "row": {
-        "analysis_version": "0.6.0",
+        "analysis_version": "0.7.0",
         "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
         "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
         "applied_event_count": null,
@@ -922,6 +1470,8 @@
         "natural_periodic_cycles": null,
         "observed_completion": "UNCERTAIN_WINDOW",
         "outcome": "SUCCESS",
+        "pilot_elapsed_first_target_apply_from_start_ms_unverified_boot": null,
+        "pilot_elapsed_periodic_cycles_unverified_boot": null,
         "push_received_event_count_all": 0,
         "push_send_accepted_event_count_all": 0,
         "push_send_skipped_event_count_all": 0,
@@ -932,6 +1482,7 @@
         "run_id": "run-sem41-pilot-e03-2-20261115-33a460",
         "run_phase": "pilot",
         "server_commit": "c77772e426c00ae464240f00942f8368c638aaa8",
+        "server_route": "EMULATOR_HOST_HTTP",
         "server_store_epoch": "pilots-20261115-r3",
         "server_updated_event_count_all": 1,
         "snapshot_applied_event_count_all": 1,
@@ -945,6 +1496,170 @@
         "update_to_received_ms": null,
         "update_to_received_uncertainty_ms": null,
         "validity": "INVALID",
+        "window_basis": "ANDROID_MONOTONIC",
+        "window_events_verified": false,
+        "work_attempt_count": null,
+        "work_enqueued_event_count_all": 0,
+        "work_started_event_count_all": 2
+      },
+      "window_event_counts": {}
+    },
+    {
+      "bucket_counts": {
+        "late": 0,
+        "server": 1,
+        "setup": 0,
+        "unknown": 9,
+        "window": 0
+      },
+      "clock_estimate": null,
+      "clock_reason": "CLOCK_NOT_USABLE",
+      "declared_reason_codes": [
+        "CANDIDATE_NOT_READY",
+        "CLOCK_UNCONTROLLED",
+        "CLEANUP_EVENT_OMITTED"
+      ],
+      "duplicates_ignored": 0,
+      "event_counts": {
+        "periodic_registered": 1,
+        "server_updated": 1,
+        "snapshot_applied": 1,
+        "snapshot_fetch_completed": 2,
+        "snapshot_fetch_started": 2,
+        "snapshot_unchanged": 1,
+        "work_started": 2
+      },
+      "fetches": [
+        {
+          "duration_ms": null,
+          "location": "unknown",
+          "network_call_id": "60ff3783-17ec-4570-9492-c34c706a6644",
+          "outcome": "success",
+          "request_id": "req-ac624a7e-be9e-4456-88cd-c61d0c43054b"
+        },
+        {
+          "duration_ms": null,
+          "location": "unknown",
+          "network_call_id": "8eef0963-eb36-4bba-9c3d-fb7029aaef79",
+          "outcome": "not_modified",
+          "request_id": "req-5946f3af-e790-4c6b-bdfc-80bdfc6faa63"
+        }
+      ],
+      "group_identity": {
+        "build": {
+          "api_version": "2.0.0",
+          "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
+          "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
+          "candidate_gate_passed": false,
+          "compile_sdk": 37,
+          "min_sdk": 24,
+          "package_name": "com.thanhtris.seminarie307",
+          "server_commit": "c77772e426c00ae464240f00942f8368c638aaa8",
+          "target_sdk": 37,
+          "version_code": 1,
+          "version_name": "0.1.0"
+        },
+        "config": {
+          "battery_optimization": null,
+          "battery_percent": 100,
+          "battery_saver": false,
+          "collapse_key": null,
+          "connect_timeout_ms": 5000,
+          "deep_idle_after": "ACTIVE",
+          "deep_idle_before": "ACTIVE",
+          "deep_idle_during": "IDLE",
+          "idle_method": "ADB_FORCE_IDLE",
+          "network_constraint": "CONNECTED",
+          "network_transports": [
+            "WIFI",
+            "CELLULAR"
+          ],
+          "package_stopped_before": false,
+          "periodic_flex_minutes": 15,
+          "periodic_initial_delay_ms": 0,
+          "periodic_interval_minutes": 15,
+          "periodic_policy": "UPDATE",
+          "periodic_unique_name": "periodic_bulletin_sync",
+          "powered": false,
+          "push_payload_kind": null,
+          "push_priority": null,
+          "read_timeout_ms": 5000,
+          "retry_backoff_ms": 30000,
+          "retry_backoff_policy": "EXPONENTIAL",
+          "retry_max_attempts": 4,
+          "screen_state": "ON",
+          "server_route": "EMULATOR_HOST_HTTP",
+          "ttl_ms": null
+        },
+        "device": {
+          "abi": "arm64-v8a",
+          "android_release": "17",
+          "api_level": 37,
+          "build_fingerprint": "google/sdk_gphone16k_arm64/emu64a16k:17/CP31.260623.012/16064790:user/dev-keys",
+          "coloros": null,
+          "kind": "EMULATOR",
+          "manufacturer": "Google",
+          "model": "sdk_gphone16k_arm64",
+          "page_size_bytes": 16384,
+          "play_services_version": "26.43.30",
+          "security_patch": "2026-07-05"
+        },
+        "event_schema_version": "2.0.0",
+        "protocol_version": "1.0.0",
+        "source_context": {
+          "server_store_epoch": "pilots-20261115-r3"
+        }
+      },
+      "row": {
+        "analysis_version": "0.7.0",
+        "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
+        "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
+        "applied_event_count": null,
+        "case_id": "E03",
+        "data_kind": "OBSERVED",
+        "db_write_count": null,
+        "declared_cached_version_after": 18,
+        "declared_natural_periodic_cycles": 1,
+        "device_alias": "emulator-main",
+        "eligible": false,
+        "events_sha256": "633ed8778ce64a72e85be1fd3313aae479ecd98baf133bba17ee7668fb66af2a",
+        "execution_status": "COMPLETED",
+        "flags": "ANDROID_WINDOW_OR_BOOT_UNKNOWN|E03_TARGET_UPDATE_TIME_UNVERIFIED|OUTCOME_EVIDENCE_UNVERIFIED",
+        "get_started_count": null,
+        "group_id": "a92f5e78c06c0bc0d3419028265be7564205e025f73425f92284382bd9c6866b",
+        "intervention": "INJECTED",
+        "late_target_applied_count": null,
+        "manifest_sha256": "8ea9c55b833289ebdcc8a0f6a9fc27b393b78c6465ae707b11745f8285baa60b",
+        "mode": "PERIODIC",
+        "natural_periodic_cycles": null,
+        "observed_completion": "UNCERTAIN_WINDOW",
+        "outcome": "SUCCESS",
+        "pilot_elapsed_first_target_apply_from_start_ms_unverified_boot": null,
+        "pilot_elapsed_periodic_cycles_unverified_boot": null,
+        "push_received_event_count_all": 0,
+        "push_send_accepted_event_count_all": 0,
+        "push_send_skipped_event_count_all": 0,
+        "queue_ms": null,
+        "received_to_enqueue_ms": null,
+        "repetition": 2,
+        "retry_event_count": null,
+        "run_id": "run-sem41-pilot-e03-2-20261115-7f63e0",
+        "run_phase": "pilot",
+        "server_commit": "c77772e426c00ae464240f00942f8368c638aaa8",
+        "server_route": "EMULATOR_HOST_HTTP",
+        "server_store_epoch": "pilots-20261115-r3",
+        "server_updated_event_count_all": 1,
+        "snapshot_applied_event_count_all": 1,
+        "snapshot_fetch_started_event_count_all": 2,
+        "subscenario": "PERIODIC_BASELINE",
+        "sync_ms": null,
+        "target_applied_in_window": null,
+        "target_version": 18,
+        "update_to_applied_ms": null,
+        "update_to_applied_uncertainty_ms": null,
+        "update_to_received_ms": null,
+        "update_to_received_uncertainty_ms": null,
+        "validity": "VALID",
         "window_basis": "ANDROID_MONOTONIC",
         "window_events_verified": false,
         "work_attempt_count": null,
@@ -1064,7 +1779,7 @@
         }
       },
       "row": {
-        "analysis_version": "0.6.0",
+        "analysis_version": "0.7.0",
         "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
         "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
         "applied_event_count": null,
@@ -1087,6 +1802,8 @@
         "natural_periodic_cycles": null,
         "observed_completion": "UNCERTAIN_WINDOW",
         "outcome": "SUCCESS",
+        "pilot_elapsed_first_target_apply_from_start_ms_unverified_boot": null,
+        "pilot_elapsed_periodic_cycles_unverified_boot": null,
         "push_received_event_count_all": 0,
         "push_send_accepted_event_count_all": 0,
         "push_send_skipped_event_count_all": 0,
@@ -1097,6 +1814,7 @@
         "run_id": "run-sem41-pilot-e03-2-20261115-c12a28",
         "run_phase": "pilot",
         "server_commit": "c77772e426c00ae464240f00942f8368c638aaa8",
+        "server_route": "EMULATOR_HOST_HTTP",
         "server_store_epoch": "pilots-20261115-r3",
         "server_updated_event_count_all": 1,
         "snapshot_applied_event_count_all": 1,
@@ -1227,7 +1945,7 @@
         }
       },
       "row": {
-        "analysis_version": "0.6.0",
+        "analysis_version": "0.7.0",
         "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
         "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
         "applied_event_count": null,
@@ -1250,6 +1968,8 @@
         "natural_periodic_cycles": null,
         "observed_completion": "UNCERTAIN_WINDOW",
         "outcome": "SUCCESS",
+        "pilot_elapsed_first_target_apply_from_start_ms_unverified_boot": null,
+        "pilot_elapsed_periodic_cycles_unverified_boot": null,
         "push_received_event_count_all": 0,
         "push_send_accepted_event_count_all": 0,
         "push_send_skipped_event_count_all": 0,
@@ -1260,6 +1980,7 @@
         "run_id": "run-sem41-pilot-e04-1-20261115-a52b51",
         "run_phase": "pilot",
         "server_commit": "c77772e426c00ae464240f00942f8368c638aaa8",
+        "server_route": "EMULATOR_HOST_HTTP",
         "server_store_epoch": "pilots-20261115-r3",
         "server_updated_event_count_all": 1,
         "snapshot_applied_event_count_all": 1,
@@ -1273,6 +1994,341 @@
         "update_to_received_ms": null,
         "update_to_received_uncertainty_ms": null,
         "validity": "INVALID",
+        "window_basis": "ANDROID_MONOTONIC",
+        "window_events_verified": false,
+        "work_attempt_count": null,
+        "work_enqueued_event_count_all": 0,
+        "work_started_event_count_all": 2
+      },
+      "window_event_counts": {}
+    },
+    {
+      "bucket_counts": {
+        "late": 0,
+        "server": 1,
+        "setup": 0,
+        "unknown": 13,
+        "window": 0
+      },
+      "clock_estimate": null,
+      "clock_reason": "CLOCK_NOT_USABLE",
+      "declared_reason_codes": [
+        "CANDIDATE_NOT_READY",
+        "CLOCK_UNCONTROLLED",
+        "CLEANUP_EVENT_OMITTED"
+      ],
+      "duplicates_ignored": 0,
+      "event_counts": {
+        "periodic_registered": 1,
+        "server_updated": 1,
+        "snapshot_applied": 1,
+        "snapshot_fetch_completed": 3,
+        "snapshot_fetch_started": 3,
+        "snapshot_unchanged": 2,
+        "work_started": 3
+      },
+      "fetches": [
+        {
+          "duration_ms": null,
+          "location": "unknown",
+          "network_call_id": "7a6d575f-552d-4188-a4f6-8fbc68ce66c8",
+          "outcome": "not_modified",
+          "request_id": "req-6e81417e-ff85-4c4d-95c5-f69a803260c7"
+        },
+        {
+          "duration_ms": null,
+          "location": "unknown",
+          "network_call_id": "fcdf2ee7-3d89-4b3a-a02a-95962617f1a7",
+          "outcome": "success",
+          "request_id": "req-eeb4c2ef-4c80-4f9b-89d5-23250fa57f38"
+        },
+        {
+          "duration_ms": null,
+          "location": "unknown",
+          "network_call_id": "fefb1a8b-15c5-4eac-a442-8210c6ab254d",
+          "outcome": "not_modified",
+          "request_id": "req-9db8d6fc-c280-4432-b3ad-2654521223e2"
+        }
+      ],
+      "group_identity": {
+        "build": {
+          "api_version": "2.0.0",
+          "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
+          "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
+          "candidate_gate_passed": false,
+          "compile_sdk": 37,
+          "min_sdk": 24,
+          "package_name": "com.thanhtris.seminarie307",
+          "server_commit": "c77772e426c00ae464240f00942f8368c638aaa8",
+          "target_sdk": 37,
+          "version_code": 1,
+          "version_name": "0.1.0"
+        },
+        "config": {
+          "battery_optimization": null,
+          "battery_percent": 100,
+          "battery_saver": false,
+          "collapse_key": null,
+          "connect_timeout_ms": 5000,
+          "deep_idle_after": "ACTIVE",
+          "deep_idle_before": "ACTIVE",
+          "deep_idle_during": "ACTIVE",
+          "idle_method": "NATURAL",
+          "network_constraint": "CONNECTED",
+          "network_transports": [
+            "WIFI",
+            "CELLULAR"
+          ],
+          "package_stopped_before": false,
+          "periodic_flex_minutes": 15,
+          "periodic_initial_delay_ms": 0,
+          "periodic_interval_minutes": 15,
+          "periodic_policy": "UPDATE",
+          "periodic_unique_name": "periodic_bulletin_sync",
+          "powered": false,
+          "push_payload_kind": null,
+          "push_priority": null,
+          "read_timeout_ms": 5000,
+          "retry_backoff_ms": 30000,
+          "retry_backoff_policy": "EXPONENTIAL",
+          "retry_max_attempts": 4,
+          "screen_state": "ON",
+          "server_route": "EMULATOR_HOST_HTTP",
+          "ttl_ms": null
+        },
+        "device": {
+          "abi": "arm64-v8a",
+          "android_release": "17",
+          "api_level": 37,
+          "build_fingerprint": "google/sdk_gphone16k_arm64/emu64a16k:17/CP31.260623.012/16064790:user/dev-keys",
+          "coloros": null,
+          "kind": "EMULATOR",
+          "manufacturer": "Google",
+          "model": "sdk_gphone16k_arm64",
+          "page_size_bytes": 16384,
+          "play_services_version": "26.43.30",
+          "security_patch": "2026-07-05"
+        },
+        "event_schema_version": "2.0.0",
+        "protocol_version": "1.0.0",
+        "source_context": {
+          "server_store_epoch": "pilots-20261115-r3"
+        }
+      },
+      "row": {
+        "analysis_version": "0.7.0",
+        "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
+        "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
+        "applied_event_count": null,
+        "case_id": "E04",
+        "data_kind": "OBSERVED",
+        "db_write_count": null,
+        "declared_cached_version_after": 19,
+        "declared_natural_periodic_cycles": 2,
+        "device_alias": "emulator-main",
+        "eligible": false,
+        "events_sha256": "a2748149eb7d28eeac00bab8131563216ceeba37663d36e8acabf44888a18605",
+        "execution_status": "COMPLETED",
+        "flags": "ANDROID_WINDOW_OR_BOOT_UNKNOWN|E04_RECOVERY_CLOCK_UNVERIFIED|OUTCOME_EVIDENCE_UNVERIFIED",
+        "get_started_count": null,
+        "group_id": "bc29d30ac2ea8034f5748b3ce00a646f6dd92074c4d50b3facd1aea28347db18",
+        "intervention": "NONE",
+        "late_target_applied_count": null,
+        "manifest_sha256": "409a5f7d214744e5fe1a0c1bf18513ff0fcd009eb6628a7685b528c6bc7ac050",
+        "mode": "PERIODIC",
+        "natural_periodic_cycles": null,
+        "observed_completion": "UNCERTAIN_WINDOW",
+        "outcome": "SUCCESS",
+        "pilot_elapsed_first_target_apply_from_start_ms_unverified_boot": null,
+        "pilot_elapsed_periodic_cycles_unverified_boot": null,
+        "push_received_event_count_all": 0,
+        "push_send_accepted_event_count_all": 0,
+        "push_send_skipped_event_count_all": 0,
+        "queue_ms": null,
+        "received_to_enqueue_ms": null,
+        "repetition": 1,
+        "retry_event_count": null,
+        "run_id": "run-sem41-pilot-e04-1-20261115-cda576",
+        "run_phase": "pilot",
+        "server_commit": "c77772e426c00ae464240f00942f8368c638aaa8",
+        "server_route": "EMULATOR_HOST_HTTP",
+        "server_store_epoch": "pilots-20261115-r3",
+        "server_updated_event_count_all": 1,
+        "snapshot_applied_event_count_all": 1,
+        "snapshot_fetch_started_event_count_all": 3,
+        "subscenario": "PERIODIC_BASELINE",
+        "sync_ms": null,
+        "target_applied_in_window": null,
+        "target_version": 19,
+        "update_to_applied_ms": null,
+        "update_to_applied_uncertainty_ms": null,
+        "update_to_received_ms": null,
+        "update_to_received_uncertainty_ms": null,
+        "validity": "VALID",
+        "window_basis": "ANDROID_MONOTONIC",
+        "window_events_verified": false,
+        "work_attempt_count": null,
+        "work_enqueued_event_count_all": 0,
+        "work_started_event_count_all": 3
+      },
+      "window_event_counts": {}
+    },
+    {
+      "bucket_counts": {
+        "late": 0,
+        "server": 1,
+        "setup": 0,
+        "unknown": 9,
+        "window": 0
+      },
+      "clock_estimate": null,
+      "clock_reason": "CLOCK_NOT_USABLE",
+      "declared_reason_codes": [
+        "CANDIDATE_NOT_READY",
+        "CLOCK_UNCONTROLLED",
+        "CLEANUP_EVENT_OMITTED"
+      ],
+      "duplicates_ignored": 0,
+      "event_counts": {
+        "periodic_registered": 1,
+        "server_updated": 1,
+        "snapshot_applied": 1,
+        "snapshot_fetch_completed": 2,
+        "snapshot_fetch_started": 2,
+        "snapshot_unchanged": 1,
+        "work_started": 2
+      },
+      "fetches": [
+        {
+          "duration_ms": null,
+          "location": "unknown",
+          "network_call_id": "41b4b084-7c1a-407e-8c40-ae3c8dd5a92a",
+          "outcome": "not_modified",
+          "request_id": "req-1fa948e9-fc39-4e59-b9c1-3007fd2e90a5"
+        },
+        {
+          "duration_ms": null,
+          "location": "unknown",
+          "network_call_id": "b627fa18-ede1-4e1a-b5d9-2c4d1b00d245",
+          "outcome": "success",
+          "request_id": "req-f5b28b6a-5820-41af-9dbb-cc4c07b0d33f"
+        }
+      ],
+      "group_identity": {
+        "build": {
+          "api_version": "2.0.0",
+          "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
+          "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
+          "candidate_gate_passed": false,
+          "compile_sdk": 37,
+          "min_sdk": 24,
+          "package_name": "com.thanhtris.seminarie307",
+          "server_commit": "c77772e426c00ae464240f00942f8368c638aaa8",
+          "target_sdk": 37,
+          "version_code": 1,
+          "version_name": "0.1.0"
+        },
+        "config": {
+          "battery_optimization": null,
+          "battery_percent": 100,
+          "battery_saver": false,
+          "collapse_key": null,
+          "connect_timeout_ms": 5000,
+          "deep_idle_after": "ACTIVE",
+          "deep_idle_before": "ACTIVE",
+          "deep_idle_during": "ACTIVE",
+          "idle_method": "NATURAL",
+          "network_constraint": "CONNECTED",
+          "network_transports": [
+            "WIFI",
+            "CELLULAR"
+          ],
+          "package_stopped_before": false,
+          "periodic_flex_minutes": 15,
+          "periodic_initial_delay_ms": 0,
+          "periodic_interval_minutes": 15,
+          "periodic_policy": "UPDATE",
+          "periodic_unique_name": "periodic_bulletin_sync",
+          "powered": false,
+          "push_payload_kind": null,
+          "push_priority": null,
+          "read_timeout_ms": 5000,
+          "retry_backoff_ms": 30000,
+          "retry_backoff_policy": "EXPONENTIAL",
+          "retry_max_attempts": 4,
+          "screen_state": "ON",
+          "server_route": "EMULATOR_HOST_HTTP",
+          "ttl_ms": null
+        },
+        "device": {
+          "abi": "arm64-v8a",
+          "android_release": "17",
+          "api_level": 37,
+          "build_fingerprint": "google/sdk_gphone16k_arm64/emu64a16k:17/CP31.260623.012/16064790:user/dev-keys",
+          "coloros": null,
+          "kind": "EMULATOR",
+          "manufacturer": "Google",
+          "model": "sdk_gphone16k_arm64",
+          "page_size_bytes": 16384,
+          "play_services_version": "26.43.30",
+          "security_patch": "2026-07-05"
+        },
+        "event_schema_version": "2.0.0",
+        "protocol_version": "1.0.0",
+        "source_context": {
+          "server_store_epoch": "pilots-20261115-r3"
+        }
+      },
+      "row": {
+        "analysis_version": "0.7.0",
+        "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
+        "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
+        "applied_event_count": null,
+        "case_id": "E04",
+        "data_kind": "OBSERVED",
+        "db_write_count": null,
+        "declared_cached_version_after": 20,
+        "declared_natural_periodic_cycles": 1,
+        "device_alias": "emulator-main",
+        "eligible": false,
+        "events_sha256": "ce655a4579cd37d0e41a23e2438b3b24d824f0e874f8cf9a73edf6310a457ffd",
+        "execution_status": "COMPLETED",
+        "flags": "ANDROID_WINDOW_OR_BOOT_UNKNOWN|E04_RECOVERY_CLOCK_UNVERIFIED|OUTCOME_EVIDENCE_UNVERIFIED",
+        "get_started_count": null,
+        "group_id": "bc29d30ac2ea8034f5748b3ce00a646f6dd92074c4d50b3facd1aea28347db18",
+        "intervention": "NONE",
+        "late_target_applied_count": null,
+        "manifest_sha256": "6f7d6f5acbd682ea6c358dfe0c9a290be28329bfd76668d3aebb145ea8a85567",
+        "mode": "PERIODIC",
+        "natural_periodic_cycles": null,
+        "observed_completion": "UNCERTAIN_WINDOW",
+        "outcome": "SUCCESS",
+        "pilot_elapsed_first_target_apply_from_start_ms_unverified_boot": null,
+        "pilot_elapsed_periodic_cycles_unverified_boot": null,
+        "push_received_event_count_all": 0,
+        "push_send_accepted_event_count_all": 0,
+        "push_send_skipped_event_count_all": 0,
+        "queue_ms": null,
+        "received_to_enqueue_ms": null,
+        "repetition": 2,
+        "retry_event_count": null,
+        "run_id": "run-sem41-pilot-e04-2-20261115-3bde4f",
+        "run_phase": "pilot",
+        "server_commit": "c77772e426c00ae464240f00942f8368c638aaa8",
+        "server_route": "EMULATOR_HOST_HTTP",
+        "server_store_epoch": "pilots-20261115-r3",
+        "server_updated_event_count_all": 1,
+        "snapshot_applied_event_count_all": 1,
+        "snapshot_fetch_started_event_count_all": 2,
+        "subscenario": "PERIODIC_BASELINE",
+        "sync_ms": null,
+        "target_applied_in_window": null,
+        "target_version": 20,
+        "update_to_applied_ms": null,
+        "update_to_applied_uncertainty_ms": null,
+        "update_to_received_ms": null,
+        "update_to_received_uncertainty_ms": null,
+        "validity": "VALID",
         "window_basis": "ANDROID_MONOTONIC",
         "window_events_verified": false,
         "work_attempt_count": null,
@@ -1383,7 +2439,7 @@
         }
       },
       "row": {
-        "analysis_version": "0.6.0",
+        "analysis_version": "0.7.0",
         "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
         "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
         "applied_event_count": null,
@@ -1406,6 +2462,8 @@
         "natural_periodic_cycles": null,
         "observed_completion": "UNCERTAIN_WINDOW",
         "outcome": "TIMEOUT",
+        "pilot_elapsed_first_target_apply_from_start_ms_unverified_boot": null,
+        "pilot_elapsed_periodic_cycles_unverified_boot": null,
         "push_received_event_count_all": 0,
         "push_send_accepted_event_count_all": 0,
         "push_send_skipped_event_count_all": 0,
@@ -1416,6 +2474,7 @@
         "run_id": "run-sem41-pilot-e04-2-20261115-b5e415",
         "run_phase": "pilot",
         "server_commit": "c77772e426c00ae464240f00942f8368c638aaa8",
+        "server_route": "EMULATOR_HOST_HTTP",
         "server_store_epoch": "pilots-20261115-r3",
         "server_updated_event_count_all": 1,
         "snapshot_applied_event_count_all": 0,
@@ -1434,6 +2493,170 @@
         "work_attempt_count": null,
         "work_enqueued_event_count_all": 0,
         "work_started_event_count_all": 1
+      },
+      "window_event_counts": {}
+    },
+    {
+      "bucket_counts": {
+        "late": 0,
+        "server": 1,
+        "setup": 0,
+        "unknown": 10,
+        "window": 0
+      },
+      "clock_estimate": null,
+      "clock_reason": "CLOCK_NOT_USABLE",
+      "declared_reason_codes": [
+        "CANDIDATE_NOT_READY",
+        "CLOCK_UNCONTROLLED",
+        "CLEANUP_EVENT_OMITTED"
+      ],
+      "duplicates_ignored": 0,
+      "event_counts": {
+        "periodic_registered": 1,
+        "server_updated": 1,
+        "snapshot_applied": 1,
+        "snapshot_fetch_completed": 2,
+        "snapshot_fetch_started": 2,
+        "snapshot_unchanged": 1,
+        "work_started": 3
+      },
+      "fetches": [
+        {
+          "duration_ms": null,
+          "location": "unknown",
+          "network_call_id": "6a72d6b9-1cc5-4f99-aea1-a27fd3020dd4",
+          "outcome": "success",
+          "request_id": "req-d92d0b81-2f37-432e-b18c-69ae6bbb5282"
+        },
+        {
+          "duration_ms": null,
+          "location": "unknown",
+          "network_call_id": "e5544c17-3b7a-43e3-9363-35ea4db9716e",
+          "outcome": "not_modified",
+          "request_id": "req-bc3c046f-d813-4ba0-b04c-ab46f717c597"
+        }
+      ],
+      "group_identity": {
+        "build": {
+          "api_version": "2.0.0",
+          "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
+          "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
+          "candidate_gate_passed": false,
+          "compile_sdk": 37,
+          "min_sdk": 24,
+          "package_name": "com.thanhtris.seminarie307",
+          "server_commit": "c77772e426c00ae464240f00942f8368c638aaa8",
+          "target_sdk": 37,
+          "version_code": 1,
+          "version_name": "0.1.0"
+        },
+        "config": {
+          "battery_optimization": null,
+          "battery_percent": 100,
+          "battery_saver": false,
+          "collapse_key": null,
+          "connect_timeout_ms": 5000,
+          "deep_idle_after": "ACTIVE",
+          "deep_idle_before": "ACTIVE",
+          "deep_idle_during": "ACTIVE",
+          "idle_method": "NATURAL",
+          "network_constraint": "CONNECTED",
+          "network_transports": [
+            "WIFI",
+            "CELLULAR"
+          ],
+          "package_stopped_before": false,
+          "periodic_flex_minutes": 15,
+          "periodic_initial_delay_ms": 0,
+          "periodic_interval_minutes": 15,
+          "periodic_policy": "UPDATE",
+          "periodic_unique_name": "periodic_bulletin_sync",
+          "powered": false,
+          "push_payload_kind": null,
+          "push_priority": null,
+          "read_timeout_ms": 5000,
+          "retry_backoff_ms": 30000,
+          "retry_backoff_policy": "EXPONENTIAL",
+          "retry_max_attempts": 4,
+          "screen_state": "ON",
+          "server_route": "EMULATOR_HOST_HTTP",
+          "ttl_ms": null
+        },
+        "device": {
+          "abi": "arm64-v8a",
+          "android_release": "17",
+          "api_level": 37,
+          "build_fingerprint": "google/sdk_gphone16k_arm64/emu64a16k:17/CP31.260623.012/16064790:user/dev-keys",
+          "coloros": null,
+          "kind": "EMULATOR",
+          "manufacturer": "Google",
+          "model": "sdk_gphone16k_arm64",
+          "page_size_bytes": 16384,
+          "play_services_version": "26.43.30",
+          "security_patch": "2026-07-05"
+        },
+        "event_schema_version": "2.0.0",
+        "protocol_version": "1.0.0",
+        "source_context": {
+          "server_store_epoch": "pilots-20261115-r3"
+        }
+      },
+      "row": {
+        "analysis_version": "0.7.0",
+        "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
+        "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
+        "applied_event_count": null,
+        "case_id": "E04",
+        "data_kind": "OBSERVED",
+        "db_write_count": null,
+        "declared_cached_version_after": 21,
+        "declared_natural_periodic_cycles": 1,
+        "device_alias": "emulator-main",
+        "eligible": false,
+        "events_sha256": "1aae38bf8aff01244d2c29fbad6abe8bdb60d21da2948b603b7766ffd3cb1f54",
+        "execution_status": "COMPLETED",
+        "flags": "ANDROID_WINDOW_OR_BOOT_UNKNOWN|E04_RECOVERY_CLOCK_UNVERIFIED|OUTCOME_EVIDENCE_UNVERIFIED",
+        "get_started_count": null,
+        "group_id": "bc29d30ac2ea8034f5748b3ce00a646f6dd92074c4d50b3facd1aea28347db18",
+        "intervention": "NONE",
+        "late_target_applied_count": null,
+        "manifest_sha256": "dff7fd0448c39c838ed23db01b2e542a0c22404bbf6b29dfbf0c70784a372bd0",
+        "mode": "PERIODIC",
+        "natural_periodic_cycles": null,
+        "observed_completion": "UNCERTAIN_WINDOW",
+        "outcome": "SUCCESS",
+        "pilot_elapsed_first_target_apply_from_start_ms_unverified_boot": null,
+        "pilot_elapsed_periodic_cycles_unverified_boot": null,
+        "push_received_event_count_all": 0,
+        "push_send_accepted_event_count_all": 0,
+        "push_send_skipped_event_count_all": 0,
+        "queue_ms": null,
+        "received_to_enqueue_ms": null,
+        "repetition": 3,
+        "retry_event_count": null,
+        "run_id": "run-sem41-pilot-e04-3-20261115-54c1a9",
+        "run_phase": "pilot",
+        "server_commit": "c77772e426c00ae464240f00942f8368c638aaa8",
+        "server_route": "EMULATOR_HOST_HTTP",
+        "server_store_epoch": "pilots-20261115-r3",
+        "server_updated_event_count_all": 1,
+        "snapshot_applied_event_count_all": 1,
+        "snapshot_fetch_started_event_count_all": 2,
+        "subscenario": "PERIODIC_BASELINE",
+        "sync_ms": null,
+        "target_applied_in_window": null,
+        "target_version": 21,
+        "update_to_applied_ms": null,
+        "update_to_applied_uncertainty_ms": null,
+        "update_to_received_ms": null,
+        "update_to_received_uncertainty_ms": null,
+        "validity": "VALID",
+        "window_basis": "ANDROID_MONOTONIC",
+        "window_events_verified": false,
+        "work_attempt_count": null,
+        "work_enqueued_event_count_all": 0,
+        "work_started_event_count_all": 3
       },
       "window_event_counts": {}
     },
@@ -1545,7 +2768,7 @@
         }
       },
       "row": {
-        "analysis_version": "0.6.0",
+        "analysis_version": "0.7.0",
         "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
         "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
         "applied_event_count": null,
@@ -1568,6 +2791,8 @@
         "natural_periodic_cycles": null,
         "observed_completion": "UNCERTAIN_WINDOW",
         "outcome": "SUCCESS",
+        "pilot_elapsed_first_target_apply_from_start_ms_unverified_boot": null,
+        "pilot_elapsed_periodic_cycles_unverified_boot": null,
         "push_received_event_count_all": 0,
         "push_send_accepted_event_count_all": 0,
         "push_send_skipped_event_count_all": 0,
@@ -1578,6 +2803,7 @@
         "run_id": "run-sem41-pilot-e04-3-20261115-f9f6a0",
         "run_phase": "pilot",
         "server_commit": "c77772e426c00ae464240f00942f8368c638aaa8",
+        "server_route": "EMULATOR_HOST_HTTP",
         "server_store_epoch": "pilots-20261115-r3",
         "server_updated_event_count_all": 1,
         "snapshot_applied_event_count_all": 2,
@@ -1702,7 +2928,7 @@
         }
       },
       "row": {
-        "analysis_version": "0.6.0",
+        "analysis_version": "0.7.0",
         "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
         "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
         "applied_event_count": null,
@@ -1725,6 +2951,8 @@
         "natural_periodic_cycles": null,
         "observed_completion": "UNCERTAIN_WINDOW",
         "outcome": "TIMEOUT",
+        "pilot_elapsed_first_target_apply_from_start_ms_unverified_boot": null,
+        "pilot_elapsed_periodic_cycles_unverified_boot": null,
         "push_received_event_count_all": 0,
         "push_send_accepted_event_count_all": 0,
         "push_send_skipped_event_count_all": 1,
@@ -1735,6 +2963,7 @@
         "run_id": "run-sem41-pilot-e06-1-20261115-18fec8",
         "run_phase": "pilot",
         "server_commit": "c77772e426c00ae464240f00942f8368c638aaa8",
+        "server_route": "EMULATOR_HOST_HTTP",
         "server_store_epoch": "pilots-20261115-r3",
         "server_updated_event_count_all": 1,
         "snapshot_applied_event_count_all": 0,
@@ -1753,6 +2982,178 @@
         "work_attempt_count": null,
         "work_enqueued_event_count_all": 0,
         "work_started_event_count_all": 1
+      },
+      "window_event_counts": {}
+    },
+    {
+      "bucket_counts": {
+        "late": 0,
+        "server": 2,
+        "setup": 0,
+        "unknown": 13,
+        "window": 0
+      },
+      "clock_estimate": null,
+      "clock_reason": "CLOCK_NOT_USABLE",
+      "declared_reason_codes": [
+        "CANDIDATE_NOT_READY",
+        "CLOCK_UNCONTROLLED",
+        "CLEANUP_EVENT_OMITTED"
+      ],
+      "duplicates_ignored": 0,
+      "event_counts": {
+        "periodic_registered": 1,
+        "push_send_skipped": 1,
+        "server_updated": 1,
+        "snapshot_applied": 1,
+        "snapshot_fetch_completed": 3,
+        "snapshot_fetch_started": 3,
+        "snapshot_unchanged": 2,
+        "work_started": 3
+      },
+      "fetches": [
+        {
+          "duration_ms": null,
+          "location": "unknown",
+          "network_call_id": "0e84a5ed-926f-428a-b4ba-1f612fc4c615",
+          "outcome": "success",
+          "request_id": "req-28ef5d03-49b9-492e-ae50-3965febca372"
+        },
+        {
+          "duration_ms": null,
+          "location": "unknown",
+          "network_call_id": "decc8930-c714-4bf6-ac14-ce0e70870e55",
+          "outcome": "not_modified",
+          "request_id": "req-4150edb0-c031-4ad4-8102-33df41875971"
+        },
+        {
+          "duration_ms": null,
+          "location": "unknown",
+          "network_call_id": "f0104c53-392d-4ea5-9101-12901ad7f6f3",
+          "outcome": "not_modified",
+          "request_id": "req-1a39cf2f-2519-4eb5-a2a7-762456163309"
+        }
+      ],
+      "group_identity": {
+        "build": {
+          "api_version": "2.0.0",
+          "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
+          "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
+          "candidate_gate_passed": false,
+          "compile_sdk": 37,
+          "min_sdk": 24,
+          "package_name": "com.thanhtris.seminarie307",
+          "server_commit": "c77772e426c00ae464240f00942f8368c638aaa8",
+          "target_sdk": 37,
+          "version_code": 1,
+          "version_name": "0.1.0"
+        },
+        "config": {
+          "battery_optimization": null,
+          "battery_percent": 100,
+          "battery_saver": false,
+          "collapse_key": null,
+          "connect_timeout_ms": 5000,
+          "deep_idle_after": "ACTIVE",
+          "deep_idle_before": "ACTIVE",
+          "deep_idle_during": "ACTIVE",
+          "idle_method": "NATURAL",
+          "network_constraint": "CONNECTED",
+          "network_transports": [
+            "WIFI",
+            "CELLULAR"
+          ],
+          "package_stopped_before": false,
+          "periodic_flex_minutes": 15,
+          "periodic_initial_delay_ms": 0,
+          "periodic_interval_minutes": 15,
+          "periodic_policy": "UPDATE",
+          "periodic_unique_name": "periodic_bulletin_sync",
+          "powered": false,
+          "push_payload_kind": null,
+          "push_priority": null,
+          "read_timeout_ms": 5000,
+          "retry_backoff_ms": 30000,
+          "retry_backoff_policy": "EXPONENTIAL",
+          "retry_max_attempts": 4,
+          "screen_state": "ON",
+          "server_route": "EMULATOR_HOST_HTTP",
+          "ttl_ms": null
+        },
+        "device": {
+          "abi": "arm64-v8a",
+          "android_release": "17",
+          "api_level": 37,
+          "build_fingerprint": "google/sdk_gphone16k_arm64/emu64a16k:17/CP31.260623.012/16064790:user/dev-keys",
+          "coloros": null,
+          "kind": "EMULATOR",
+          "manufacturer": "Google",
+          "model": "sdk_gphone16k_arm64",
+          "page_size_bytes": 16384,
+          "play_services_version": "26.43.30",
+          "security_patch": "2026-07-05"
+        },
+        "event_schema_version": "2.0.0",
+        "protocol_version": "1.0.0",
+        "source_context": {
+          "server_store_epoch": "pilots-20261115-r3"
+        }
+      },
+      "row": {
+        "analysis_version": "0.7.0",
+        "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
+        "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
+        "applied_event_count": null,
+        "case_id": "E06",
+        "data_kind": "OBSERVED",
+        "db_write_count": null,
+        "declared_cached_version_after": 22,
+        "declared_natural_periodic_cycles": 2,
+        "device_alias": "emulator-main",
+        "eligible": false,
+        "events_sha256": "00eb51ef2260e7564d452bae7fc38e4f65c13fba255c081b8e8adb4d20b21af4",
+        "execution_status": "COMPLETED",
+        "flags": "ANDROID_WINDOW_OR_BOOT_UNKNOWN|OUTCOME_EVIDENCE_UNVERIFIED",
+        "get_started_count": null,
+        "group_id": "a3dad4a9a48731bfed7fb29cc033217828581a13da9427fa3c3c9af9b35e2769",
+        "intervention": "INJECTED",
+        "late_target_applied_count": null,
+        "manifest_sha256": "60fc6e6b6a9fec258652d0f3032d95f8f0c80896b5c51962d64f765176a00cc9",
+        "mode": "HYBRID",
+        "natural_periodic_cycles": null,
+        "observed_completion": "UNCERTAIN_WINDOW",
+        "outcome": "SUCCESS",
+        "pilot_elapsed_first_target_apply_from_start_ms_unverified_boot": null,
+        "pilot_elapsed_periodic_cycles_unverified_boot": null,
+        "push_received_event_count_all": 0,
+        "push_send_accepted_event_count_all": 0,
+        "push_send_skipped_event_count_all": 1,
+        "queue_ms": null,
+        "received_to_enqueue_ms": null,
+        "repetition": 1,
+        "retry_event_count": null,
+        "run_id": "run-sem41-pilot-e06-1-20261116-aa16ca",
+        "run_phase": "pilot",
+        "server_commit": "c77772e426c00ae464240f00942f8368c638aaa8",
+        "server_route": "EMULATOR_HOST_HTTP",
+        "server_store_epoch": "pilots-20261115-r3",
+        "server_updated_event_count_all": 1,
+        "snapshot_applied_event_count_all": 1,
+        "snapshot_fetch_started_event_count_all": 3,
+        "subscenario": "CONTROLLED_SKIP",
+        "sync_ms": null,
+        "target_applied_in_window": null,
+        "target_version": 22,
+        "update_to_applied_ms": null,
+        "update_to_applied_uncertainty_ms": null,
+        "update_to_received_ms": null,
+        "update_to_received_uncertainty_ms": null,
+        "validity": "VALID",
+        "window_basis": "ANDROID_MONOTONIC",
+        "window_events_verified": false,
+        "work_attempt_count": null,
+        "work_enqueued_event_count_all": 0,
+        "work_started_event_count_all": 3
       },
       "window_event_counts": {}
     },
@@ -1859,7 +3260,7 @@
         }
       },
       "row": {
-        "analysis_version": "0.6.0",
+        "analysis_version": "0.7.0",
         "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
         "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
         "applied_event_count": null,
@@ -1882,6 +3283,8 @@
         "natural_periodic_cycles": null,
         "observed_completion": "UNCERTAIN_WINDOW",
         "outcome": "TIMEOUT",
+        "pilot_elapsed_first_target_apply_from_start_ms_unverified_boot": null,
+        "pilot_elapsed_periodic_cycles_unverified_boot": null,
         "push_received_event_count_all": 0,
         "push_send_accepted_event_count_all": 0,
         "push_send_skipped_event_count_all": 1,
@@ -1892,6 +3295,7 @@
         "run_id": "run-sem41-pilot-e06-2-20261115-f56fc9",
         "run_phase": "pilot",
         "server_commit": "c77772e426c00ae464240f00942f8368c638aaa8",
+        "server_route": "EMULATOR_HOST_HTTP",
         "server_store_epoch": "pilots-20261115-r3",
         "server_updated_event_count_all": 1,
         "snapshot_applied_event_count_all": 1,
@@ -1912,6 +3316,541 @@
         "work_started_event_count_all": 1
       },
       "window_event_counts": {}
+    },
+    {
+      "bucket_counts": {
+        "late": 0,
+        "server": 2,
+        "setup": 0,
+        "unknown": 13,
+        "window": 0
+      },
+      "clock_estimate": null,
+      "clock_reason": "CLOCK_NOT_USABLE",
+      "declared_reason_codes": [
+        "CANDIDATE_NOT_READY",
+        "CLOCK_UNCONTROLLED",
+        "CLEANUP_EVENT_OMITTED"
+      ],
+      "duplicates_ignored": 0,
+      "event_counts": {
+        "periodic_registered": 1,
+        "push_send_skipped": 1,
+        "server_updated": 1,
+        "snapshot_applied": 1,
+        "snapshot_fetch_completed": 3,
+        "snapshot_fetch_started": 3,
+        "snapshot_unchanged": 2,
+        "work_started": 3
+      },
+      "fetches": [
+        {
+          "duration_ms": null,
+          "location": "unknown",
+          "network_call_id": "3f08cf01-7525-425a-bfe0-1562134ca065",
+          "outcome": "not_modified",
+          "request_id": "req-aff6fb39-cbe2-47c7-aef3-54eb0b8f6f63"
+        },
+        {
+          "duration_ms": null,
+          "location": "unknown",
+          "network_call_id": "7ab39b0f-1c10-4a48-bbd0-71c144028df8",
+          "outcome": "success",
+          "request_id": "req-bc922893-8dc5-41dd-a836-8e5ab0fe0b7d"
+        },
+        {
+          "duration_ms": null,
+          "location": "unknown",
+          "network_call_id": "bac7a62c-5b77-4a91-b9fa-30b8ad2634bb",
+          "outcome": "not_modified",
+          "request_id": "req-764f8667-99af-466d-add3-47853cafe331"
+        }
+      ],
+      "group_identity": {
+        "build": {
+          "api_version": "2.0.0",
+          "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
+          "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
+          "candidate_gate_passed": false,
+          "compile_sdk": 37,
+          "min_sdk": 24,
+          "package_name": "com.thanhtris.seminarie307",
+          "server_commit": "c77772e426c00ae464240f00942f8368c638aaa8",
+          "target_sdk": 37,
+          "version_code": 1,
+          "version_name": "0.1.0"
+        },
+        "config": {
+          "battery_optimization": null,
+          "battery_percent": 100,
+          "battery_saver": false,
+          "collapse_key": null,
+          "connect_timeout_ms": 5000,
+          "deep_idle_after": "ACTIVE",
+          "deep_idle_before": "ACTIVE",
+          "deep_idle_during": "ACTIVE",
+          "idle_method": "NATURAL",
+          "network_constraint": "CONNECTED",
+          "network_transports": [
+            "WIFI",
+            "CELLULAR"
+          ],
+          "package_stopped_before": false,
+          "periodic_flex_minutes": 15,
+          "periodic_initial_delay_ms": 0,
+          "periodic_interval_minutes": 15,
+          "periodic_policy": "UPDATE",
+          "periodic_unique_name": "periodic_bulletin_sync",
+          "powered": false,
+          "push_payload_kind": null,
+          "push_priority": null,
+          "read_timeout_ms": 5000,
+          "retry_backoff_ms": 30000,
+          "retry_backoff_policy": "EXPONENTIAL",
+          "retry_max_attempts": 4,
+          "screen_state": "ON",
+          "server_route": "EMULATOR_HOST_HTTP",
+          "ttl_ms": null
+        },
+        "device": {
+          "abi": "arm64-v8a",
+          "android_release": "17",
+          "api_level": 37,
+          "build_fingerprint": "google/sdk_gphone16k_arm64/emu64a16k:17/CP31.260623.012/16064790:user/dev-keys",
+          "coloros": null,
+          "kind": "EMULATOR",
+          "manufacturer": "Google",
+          "model": "sdk_gphone16k_arm64",
+          "page_size_bytes": 16384,
+          "play_services_version": "26.43.30",
+          "security_patch": "2026-07-05"
+        },
+        "event_schema_version": "2.0.0",
+        "protocol_version": "1.0.0",
+        "source_context": {
+          "server_store_epoch": "pilots-20261115-r3"
+        }
+      },
+      "row": {
+        "analysis_version": "0.7.0",
+        "apk_sha256": "bde050c084d655c66f9f1497c57900a7f0efc39e12a9da55110771926c3f2e23",
+        "app_commit": "9e7e55b76c646ff113a152022cc23317a202e533",
+        "applied_event_count": null,
+        "case_id": "E06",
+        "data_kind": "OBSERVED",
+        "db_write_count": null,
+        "declared_cached_version_after": 23,
+        "declared_natural_periodic_cycles": 2,
+        "device_alias": "emulator-main",
+        "eligible": false,
+        "events_sha256": "e893e119932f9920f2e731f0914f4d6c4ed7e4d946a3af70707c24f01d599559",
+        "execution_status": "COMPLETED",
+        "flags": "ANDROID_WINDOW_OR_BOOT_UNKNOWN|OUTCOME_EVIDENCE_UNVERIFIED",
+        "get_started_count": null,
+        "group_id": "a3dad4a9a48731bfed7fb29cc033217828581a13da9427fa3c3c9af9b35e2769",
+        "intervention": "INJECTED",
+        "late_target_applied_count": null,
+        "manifest_sha256": "8d9ca31e4042250e8924c0c4222fb9d5a2bbd3477e0185a47f2d1b76585b1c6e",
+        "mode": "HYBRID",
+        "natural_periodic_cycles": null,
+        "observed_completion": "UNCERTAIN_WINDOW",
+        "outcome": "SUCCESS",
+        "pilot_elapsed_first_target_apply_from_start_ms_unverified_boot": null,
+        "pilot_elapsed_periodic_cycles_unverified_boot": null,
+        "push_received_event_count_all": 0,
+        "push_send_accepted_event_count_all": 0,
+        "push_send_skipped_event_count_all": 1,
+        "queue_ms": null,
+        "received_to_enqueue_ms": null,
+        "repetition": 2,
+        "retry_event_count": null,
+        "run_id": "run-sem41-pilot-e06-2-20261116-8f734c",
+        "run_phase": "pilot",
+        "server_commit": "c77772e426c00ae464240f00942f8368c638aaa8",
+        "server_route": "EMULATOR_HOST_HTTP",
+        "server_store_epoch": "pilots-20261115-r3",
+        "server_updated_event_count_all": 1,
+        "snapshot_applied_event_count_all": 1,
+        "snapshot_fetch_started_event_count_all": 3,
+        "subscenario": "CONTROLLED_SKIP",
+        "sync_ms": null,
+        "target_applied_in_window": null,
+        "target_version": 23,
+        "update_to_applied_ms": null,
+        "update_to_applied_uncertainty_ms": null,
+        "update_to_received_ms": null,
+        "update_to_received_uncertainty_ms": null,
+        "validity": "VALID",
+        "window_basis": "ANDROID_MONOTONIC",
+        "window_events_verified": false,
+        "work_attempt_count": null,
+        "work_enqueued_event_count_all": 0,
+        "work_started_event_count_all": 3
+      },
+      "window_event_counts": {}
+    },
+    {
+      "bucket_counts": {
+        "late": 0,
+        "server": 1,
+        "setup": 0,
+        "unknown": 17,
+        "window": 0
+      },
+      "clock_estimate": null,
+      "clock_reason": "CLOCK_NOT_USABLE",
+      "declared_reason_codes": [
+        "APP_STATE_CHANGED_DURING_WINDOW",
+        "CANDIDATE_NOT_READY",
+        "CLOCK_UNCONTROLLED"
+      ],
+      "duplicates_ignored": 0,
+      "event_counts": {
+        "periodic_registered": 1,
+        "server_updated": 1,
+        "snapshot_applied": 1,
+        "snapshot_fetch_completed": 4,
+        "snapshot_fetch_started": 4,
+        "snapshot_unchanged": 3,
+        "work_started": 4
+      },
+      "fetches": [
+        {
+          "duration_ms": null,
+          "location": "unknown",
+          "network_call_id": "3c1ff80c-00f4-4f97-b3d7-d57468597dec",
+          "outcome": "not_modified",
+          "request_id": "req-d9de13b4-707f-411a-bc85-bf8e67b4bb3c"
+        },
+        {
+          "duration_ms": null,
+          "location": "unknown",
+          "network_call_id": "3e8e8cb7-00d4-495a-93d1-e42713dcefc2",
+          "outcome": "not_modified",
+          "request_id": "req-04b608b0-fc06-4f41-8698-e71cc6962286"
+        },
+        {
+          "duration_ms": null,
+          "location": "unknown",
+          "network_call_id": "499aa607-f3c6-4d2c-9254-d86d8e71bfe4",
+          "outcome": "success",
+          "request_id": "req-e4c6cd90-0175-43dc-972c-19d0719a78f3"
+        },
+        {
+          "duration_ms": null,
+          "location": "unknown",
+          "network_call_id": "f3b3f56d-7497-41e1-8c2c-b2c96ef8ba18",
+          "outcome": "not_modified",
+          "request_id": "req-de3b0315-b78a-4276-865e-dc82e1599a6e"
+        }
+      ],
+      "group_identity": {
+        "build": {
+          "api_version": "2.0.0",
+          "apk_sha256": "814347f09ef9a61331910d7c4267fef827a4749377f3af53ae21fbb882ebaf5b",
+          "app_commit": "76fece00110e0dba83c59b3e56bdabd2b4b7934e",
+          "candidate_gate_passed": false,
+          "compile_sdk": null,
+          "min_sdk": null,
+          "package_name": "com.thanhtris.seminarie307",
+          "server_commit": "76fece00110e0dba83c59b3e56bdabd2b4b7934e",
+          "target_sdk": null,
+          "version_code": null,
+          "version_name": null
+        },
+        "config": {
+          "battery_optimization": "NOT_ALLOWLISTED",
+          "battery_percent": 73,
+          "battery_saver": false,
+          "collapse_key": null,
+          "connect_timeout_ms": null,
+          "deep_idle_after": null,
+          "deep_idle_before": null,
+          "deep_idle_during": null,
+          "idle_method": null,
+          "network_constraint": "CONNECTED",
+          "network_transports": [],
+          "package_stopped_before": false,
+          "periodic_flex_minutes": null,
+          "periodic_initial_delay_ms": null,
+          "periodic_interval_minutes": 15,
+          "periodic_policy": null,
+          "periodic_unique_name": null,
+          "powered": true,
+          "push_payload_kind": null,
+          "push_priority": null,
+          "read_timeout_ms": null,
+          "retry_backoff_ms": null,
+          "retry_backoff_policy": null,
+          "retry_max_attempts": null,
+          "screen_state": null,
+          "server_route": "ADB_REVERSE",
+          "ttl_ms": null
+        },
+        "device": {
+          "abi": "arm64-v8a",
+          "android_release": "17",
+          "api_level": 37,
+          "build_fingerprint": null,
+          "coloros": "V17.0.0",
+          "kind": "OPPO",
+          "manufacturer": "OPPO",
+          "model": "CPH2797",
+          "page_size_bytes": null,
+          "play_services_version": null,
+          "security_patch": "2026-10-01"
+        },
+        "event_schema_version": "2.0.0",
+        "protocol_version": "1.0.0",
+        "source_context": {
+          "server_store_epoch": null
+        }
+      },
+      "row": {
+        "analysis_version": "0.7.0",
+        "apk_sha256": "814347f09ef9a61331910d7c4267fef827a4749377f3af53ae21fbb882ebaf5b",
+        "app_commit": "76fece00110e0dba83c59b3e56bdabd2b4b7934e",
+        "applied_event_count": null,
+        "case_id": "E01",
+        "data_kind": "OBSERVED",
+        "db_write_count": null,
+        "declared_cached_version_after": 3,
+        "declared_natural_periodic_cycles": 3,
+        "device_alias": "oppo-find-x9",
+        "eligible": false,
+        "events_sha256": "27df572a2d99917b55e5001538c1f812c24251b3694ca852f13380346c456c15",
+        "execution_status": "ABORTED",
+        "flags": "ANDROID_WINDOW_OR_BOOT_UNKNOWN|MONOTONIC_WINDOW_UNAVAILABLE",
+        "get_started_count": null,
+        "group_id": "69b482c8cc0d19d6223423483148a851f7e19db70483a24b528c69b1684a9a1c",
+        "intervention": "NONE",
+        "late_target_applied_count": null,
+        "manifest_sha256": "5df5ade2635e0d22f48ba5880936000ff692de4f91dc1bd355c90b9b6d023565",
+        "mode": "PERIODIC",
+        "natural_periodic_cycles": null,
+        "observed_completion": "UNCERTAIN_WINDOW",
+        "outcome": "UNKNOWN",
+        "pilot_elapsed_first_target_apply_from_start_ms_unverified_boot": null,
+        "pilot_elapsed_periodic_cycles_unverified_boot": null,
+        "push_received_event_count_all": 0,
+        "push_send_accepted_event_count_all": 0,
+        "push_send_skipped_event_count_all": 0,
+        "queue_ms": null,
+        "received_to_enqueue_ms": null,
+        "repetition": 1,
+        "retry_event_count": null,
+        "run_id": "run-sem42-oppo-e01-02",
+        "run_phase": "pilot",
+        "server_commit": "76fece00110e0dba83c59b3e56bdabd2b4b7934e",
+        "server_route": "ADB_REVERSE",
+        "server_store_epoch": null,
+        "server_updated_event_count_all": 1,
+        "snapshot_applied_event_count_all": 1,
+        "snapshot_fetch_started_event_count_all": 4,
+        "subscenario": null,
+        "sync_ms": null,
+        "target_applied_in_window": null,
+        "target_version": 3,
+        "update_to_applied_ms": null,
+        "update_to_applied_uncertainty_ms": null,
+        "update_to_received_ms": null,
+        "update_to_received_uncertainty_ms": null,
+        "validity": "INVALID",
+        "window_basis": "UNAVAILABLE",
+        "window_events_verified": false,
+        "work_attempt_count": null,
+        "work_enqueued_event_count_all": 0,
+        "work_started_event_count_all": 4
+      },
+      "window_event_counts": {}
+    },
+    {
+      "bucket_counts": {
+        "late": 0,
+        "server": 1,
+        "setup": 0,
+        "unknown": 25,
+        "window": 0
+      },
+      "clock_estimate": null,
+      "clock_reason": "CLOCK_NOT_USABLE",
+      "declared_reason_codes": [
+        "CANDIDATE_NOT_READY",
+        "CLOCK_UNCONTROLLED"
+      ],
+      "duplicates_ignored": 0,
+      "event_counts": {
+        "periodic_registered": 1,
+        "server_updated": 1,
+        "snapshot_applied": 1,
+        "snapshot_fetch_completed": 6,
+        "snapshot_fetch_started": 6,
+        "snapshot_unchanged": 5,
+        "work_started": 6
+      },
+      "fetches": [
+        {
+          "duration_ms": null,
+          "location": "unknown",
+          "network_call_id": "02090bf7-03cc-4674-b49e-ee3198c34dba",
+          "outcome": "not_modified",
+          "request_id": "req-7083f79d-fd31-4fa3-acc1-bec5bae10d68"
+        },
+        {
+          "duration_ms": null,
+          "location": "unknown",
+          "network_call_id": "29e2abf9-0669-4ee4-965c-e25fa74606e6",
+          "outcome": "success",
+          "request_id": "req-f593f415-980b-42c0-a657-5093bf06056d"
+        },
+        {
+          "duration_ms": null,
+          "location": "unknown",
+          "network_call_id": "56a0bb94-de06-4d0a-8031-12dc1808bccc",
+          "outcome": "not_modified",
+          "request_id": "req-58e69ba8-3a49-4107-8ead-7ee536676777"
+        },
+        {
+          "duration_ms": null,
+          "location": "unknown",
+          "network_call_id": "775c43e2-790d-4b89-b627-95c5d548d5bd",
+          "outcome": "not_modified",
+          "request_id": "req-b55d5320-ec93-4e28-99ab-6f28fa75c3c4"
+        },
+        {
+          "duration_ms": null,
+          "location": "unknown",
+          "network_call_id": "8723fb01-1c58-4977-ac8b-50e0fc92aab4",
+          "outcome": "not_modified",
+          "request_id": "req-9422cb1c-d92b-4879-b474-485523130d08"
+        },
+        {
+          "duration_ms": null,
+          "location": "unknown",
+          "network_call_id": "d53d9ae1-8c33-41dc-9a2a-4970d7e6ca84",
+          "outcome": "not_modified",
+          "request_id": "req-c4ecd0ef-d567-490e-a16e-a7eae0b435b8"
+        }
+      ],
+      "group_identity": {
+        "build": {
+          "api_version": "2.0.0",
+          "apk_sha256": "814347f09ef9a61331910d7c4267fef827a4749377f3af53ae21fbb882ebaf5b",
+          "app_commit": "76fece00110e0dba83c59b3e56bdabd2b4b7934e",
+          "candidate_gate_passed": false,
+          "compile_sdk": 37,
+          "min_sdk": 24,
+          "package_name": "com.thanhtris.seminarie307",
+          "server_commit": "76fece00110e0dba83c59b3e56bdabd2b4b7934e",
+          "target_sdk": 37,
+          "version_code": 1,
+          "version_name": "0.1.0"
+        },
+        "config": {
+          "battery_optimization": "NOT_ALLOWLISTED",
+          "battery_percent": 73,
+          "battery_saver": false,
+          "collapse_key": null,
+          "connect_timeout_ms": null,
+          "deep_idle_after": "ACTIVE",
+          "deep_idle_before": "ACTIVE",
+          "deep_idle_during": "ACTIVE",
+          "idle_method": "NATURAL",
+          "network_constraint": "CONNECTED",
+          "network_transports": [],
+          "package_stopped_before": false,
+          "periodic_flex_minutes": null,
+          "periodic_initial_delay_ms": null,
+          "periodic_interval_minutes": 15,
+          "periodic_policy": null,
+          "periodic_unique_name": null,
+          "powered": true,
+          "push_payload_kind": null,
+          "push_priority": null,
+          "read_timeout_ms": null,
+          "retry_backoff_ms": null,
+          "retry_backoff_policy": null,
+          "retry_max_attempts": null,
+          "screen_state": "ON",
+          "server_route": "ADB_REVERSE",
+          "ttl_ms": null
+        },
+        "device": {
+          "abi": "arm64-v8a",
+          "android_release": "17",
+          "api_level": 37,
+          "build_fingerprint": null,
+          "coloros": "V17.0.0",
+          "kind": "OPPO",
+          "manufacturer": "OPPO",
+          "model": "CPH2797",
+          "page_size_bytes": null,
+          "play_services_version": null,
+          "security_patch": "2026-10-01"
+        },
+        "event_schema_version": "2.0.0",
+        "protocol_version": "1.0.0",
+        "source_context": {
+          "server_store_epoch": null
+        }
+      },
+      "row": {
+        "analysis_version": "0.7.0",
+        "apk_sha256": "814347f09ef9a61331910d7c4267fef827a4749377f3af53ae21fbb882ebaf5b",
+        "app_commit": "76fece00110e0dba83c59b3e56bdabd2b4b7934e",
+        "applied_event_count": null,
+        "case_id": "E01",
+        "data_kind": "OBSERVED",
+        "db_write_count": null,
+        "declared_cached_version_after": 5,
+        "declared_natural_periodic_cycles": 5,
+        "device_alias": "oppo-find-x9",
+        "eligible": false,
+        "events_sha256": "91f851a6ecea482362dffeab43ed98d271c746dbfd26f03dcd05393a998216a7",
+        "execution_status": "COMPLETED",
+        "flags": "ANDROID_WINDOW_OR_BOOT_UNKNOWN|MONOTONIC_WINDOW_UNAVAILABLE|OUTCOME_EVIDENCE_UNVERIFIED",
+        "get_started_count": null,
+        "group_id": "4fda2d1156a0e8513ff30cce2414b325551fdaf9b961da0368e7baaefab540e6",
+        "intervention": "NONE",
+        "late_target_applied_count": null,
+        "manifest_sha256": "99331a37ab22853b06bf2f0f4c2a4bff93ca708cc72d6a445b61a368fb2e7656",
+        "mode": "PERIODIC",
+        "natural_periodic_cycles": null,
+        "observed_completion": "UNCERTAIN_WINDOW",
+        "outcome": "SUCCESS",
+        "pilot_elapsed_first_target_apply_from_start_ms_unverified_boot": 930021,
+        "pilot_elapsed_periodic_cycles_unverified_boot": 5,
+        "push_received_event_count_all": 0,
+        "push_send_accepted_event_count_all": 0,
+        "push_send_skipped_event_count_all": 0,
+        "queue_ms": null,
+        "received_to_enqueue_ms": null,
+        "repetition": 1,
+        "retry_event_count": null,
+        "run_id": "run-sem42-oppo-e01-03",
+        "run_phase": "pilot",
+        "server_commit": "76fece00110e0dba83c59b3e56bdabd2b4b7934e",
+        "server_route": "ADB_REVERSE",
+        "server_store_epoch": null,
+        "server_updated_event_count_all": 1,
+        "snapshot_applied_event_count_all": 1,
+        "snapshot_fetch_started_event_count_all": 6,
+        "subscenario": null,
+        "sync_ms": null,
+        "target_applied_in_window": null,
+        "target_version": 5,
+        "update_to_applied_ms": null,
+        "update_to_applied_uncertainty_ms": null,
+        "update_to_received_ms": null,
+        "update_to_received_uncertainty_ms": null,
+        "validity": "VALID",
+        "window_basis": "UNAVAILABLE",
+        "window_events_verified": false,
+        "work_attempt_count": null,
+        "work_enqueued_event_count_all": 0,
+        "work_started_event_count_all": 6
+      },
+      "window_event_counts": {}
     }
   ],
   "runtime_experiment_performed": false,
@@ -1920,119 +3859,291 @@
     "evidence": [
       {
         "path": "docs/evidence/SEM-41/CHECKS.md",
-        "sha256": "5838e3776b608f8ece5d720bf4c386d2a2a664f8e05fb0953dd3cdebe3f2cdc5"
+        "sha256": "a9ba5b153943b578a71aafdbe84d645dcec562dab48daeb142d493602d6ba93f",
+        "source_merge_commit": "007a1aa31d02d7af47570f4cf7b60a7ed8135a33",
+        "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/29"
       },
       {
         "path": "docs/evidence/SEM-41/PILOT_RESULTS.json",
-        "sha256": "18e9591e62190aa02c03d029ef46c06d1d467726b989ec3ed90bb25609ea191f"
+        "sha256": "d3a0a7e723835e668921b6496b9df07d1d67d6b35cd83d938a4c0d8eb2bac986",
+        "source_merge_commit": "007a1aa31d02d7af47570f4cf7b60a7ed8135a33",
+        "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/29"
       },
       {
         "path": "docs/evidence/SEM-41/SCHEDULER_OBSERVER_AUDIT.json",
-        "sha256": "073712bae48c64f9e598b11137673828ac7582c82dc8d5d38d4c43e207c8d3cb"
+        "sha256": "c7041b17540d4f4f81378e4198630a5263ccd2cbc8b292f2fd8df2d4a762d395",
+        "source_merge_commit": "007a1aa31d02d7af47570f4cf7b60a7ed8135a33",
+        "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/29"
       },
       {
         "path": "experiments/plans/SEM-41/EMULATOR_PLAN.json",
-        "sha256": "3ad77818754c95cbdc16bf267bc4ef52c466f32f7f9b8dfcaa0faae29d39cff6"
+        "sha256": "3ad77818754c95cbdc16bf267bc4ef52c466f32f7f9b8dfcaa0faae29d39cff6",
+        "source_merge_commit": "007a1aa31d02d7af47570f4cf7b60a7ed8135a33",
+        "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/29"
+      },
+      {
+        "path": "docs/evidence/SEM-42/CHECKS.md",
+        "sha256": "613488c5ac537b2da838e370e783534366a0c14f9d827156d6f7cdf7c725f5e3",
+        "source_merge_commit": "3f0871c194f87aa6e2d5ac45e16fe9ada5264e57",
+        "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/35"
+      },
+      {
+        "path": "release/BUILD_MANIFEST.json",
+        "sha256": "52ad40006430584d6e843e66089d29998c9e38731f86152b2be09d103b85b013",
+        "source_merge_commit": "aa425c33bdee034afcc552ebc390cae6780f6dbe",
+        "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/37"
+      },
+      {
+        "path": "experiments/pilots/run-sem41-pilot-e01-1-20261120-8d5816/export_report.json",
+        "sha256": "3344ae705ff3ea8ef6717df927bf3d844aea7b7e3031647a3c36ab6c9c76193e",
+        "source_merge_commit": "3f0871c194f87aa6e2d5ac45e16fe9ada5264e57",
+        "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/35"
+      },
+      {
+        "path": "experiments/pilots/run-sem41-pilot-e01-1-20261120-8d5816/android_export_report.json",
+        "sha256": "f9c80e33896537406d02e73f3d3910e8c51907d8f280074bf56ed84df0555244",
+        "source_merge_commit": "3f0871c194f87aa6e2d5ac45e16fe9ada5264e57",
+        "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/35"
+      },
+      {
+        "path": "experiments/pilots/run-sem42-oppo-e01-02/export_report.json",
+        "sha256": "bff3857cf998317a19c3500a4a5f02a0827f31957dd8beb9c36b95d4bc3b3d23",
+        "source_merge_commit": "3f0871c194f87aa6e2d5ac45e16fe9ada5264e57",
+        "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/35"
+      },
+      {
+        "path": "experiments/pilots/run-sem42-oppo-e01-02/android_export_report.json",
+        "sha256": "f9c80e33896537406d02e73f3d3910e8c51907d8f280074bf56ed84df0555244",
+        "source_merge_commit": "3f0871c194f87aa6e2d5ac45e16fe9ada5264e57",
+        "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/35"
+      },
+      {
+        "path": "experiments/pilots/run-sem42-oppo-e01-03/export_report.json",
+        "sha256": "505964de61dc1d4612de535a84af451006df7fd7ee41a0d057792c7b2b19370e",
+        "source_merge_commit": "3f0871c194f87aa6e2d5ac45e16fe9ada5264e57",
+        "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/35"
+      },
+      {
+        "path": "experiments/pilots/run-sem42-oppo-e01-03/android_export_report.json",
+        "sha256": "25b8143230d36cc65cba78a4f0e5f376519a76c2d74d9eca56f7fca60f293c7b",
+        "source_merge_commit": "3f0871c194f87aa6e2d5ac45e16fe9ada5264e57",
+        "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/35"
       }
     ],
-    "index_sha256": "849fe6df1ea7f6cc169d4cb1e80ff63ec797a60fd3450a86017d90faefee7bab",
+    "index_sha256": "487f36f16d33ababed54effe5959bd28ae549740fe1f3d7c081edd560b0b2630",
     "index_version": "1.0.0",
     "runs": [
+      {
+        "directory": "experiments/pilots/run-sem41-pilot-e01-1-20261115-575a7a",
+        "events_sha256": "1ac6374c10f1ab8ce2202a6fee35ef21a7de13f847158d1491c5b17f406a42e3",
+        "manifest_sha256": "56b44dafede1f36eff5f2ec3c386859125e93e339f5029a62300154e7e89f7b7",
+        "server_store_epoch": "pilots-20261115-r3",
+        "source_merge_commit": "007a1aa31d02d7af47570f4cf7b60a7ed8135a33",
+        "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/29"
+      },
       {
         "directory": "experiments/pilots/run-sem41-pilot-e01-1-20261115-760217",
         "events_sha256": "fe6b56b8729c5619d2c353a38bcfe8e4b9355d27bd06adf8f503612482c85f66",
         "manifest_sha256": "4819eeee398046c2137f18e1d8ca2b3580e137fdcdb7ec994f6c939188386c50",
-        "server_store_epoch": "pilots-20261115-r2"
+        "server_store_epoch": "pilots-20261115-r2",
+        "source_merge_commit": "007a1aa31d02d7af47570f4cf7b60a7ed8135a33",
+        "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/29"
       },
       {
         "directory": "experiments/pilots/run-sem41-pilot-e01-1-20261115-89b884",
         "events_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
         "manifest_sha256": "6eb306e1cb8c6304de4a224b59de4dc394811889edaf71247c329eb4b6ca6ccb",
-        "server_store_epoch": null
+        "server_store_epoch": null,
+        "source_merge_commit": "007a1aa31d02d7af47570f4cf7b60a7ed8135a33",
+        "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/29"
       },
       {
         "directory": "experiments/pilots/run-sem41-pilot-e01-1-20261115-9a8b41",
         "events_sha256": "9fcacd5f56ab42d37675f443ec035b6ffad90f5fa8dc56f798c9f43f7799e6bf",
         "manifest_sha256": "08f530deb91beb4f1ed65e53e62322929b17cebb9a5ecdd0ac9cd8f0cad1f4f7",
-        "server_store_epoch": "pilots-20261115-r3"
+        "server_store_epoch": "pilots-20261115-r3",
+        "source_merge_commit": "007a1aa31d02d7af47570f4cf7b60a7ed8135a33",
+        "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/29"
+      },
+      {
+        "directory": "experiments/pilots/run-sem41-pilot-e01-1-20261120-8d5816",
+        "events_sha256": "61e297ffeebcf33e7476b84c534891c05d67d0a3fc499e723d14642dc77d5721",
+        "manifest_sha256": "baa027abc422fa45a9455a72524666f449cae4849538da165bcb1a49e4c22218",
+        "server_store_epoch": null,
+        "source_merge_commit": "3f0871c194f87aa6e2d5ac45e16fe9ada5264e57",
+        "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/35"
       },
       {
         "directory": "experiments/pilots/run-sem41-pilot-e03-1-20261115-5db4eb",
         "events_sha256": "75df33f9ff9ef10fd17dbbe1b243b9a5d052fe12e20917e13aacfd879677d5f8",
         "manifest_sha256": "54844ec731c1cf0d2d6bf886c00c5e91128c08de4146d8b2f4b9c4d1fb37f74e",
-        "server_store_epoch": "pilots-20261115-r2"
+        "server_store_epoch": "pilots-20261115-r2",
+        "source_merge_commit": "007a1aa31d02d7af47570f4cf7b60a7ed8135a33",
+        "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/29"
+      },
+      {
+        "directory": "experiments/pilots/run-sem41-pilot-e03-1-20261115-dc9cc9",
+        "events_sha256": "005d5546bbda922da1796dc1fa8316f90ba48f489d248a703c22942f6832dfc0",
+        "manifest_sha256": "26db2be6c56932f608360a1ca7d42e04260df13d0b1881c0b4eb7d8921ef2ba6",
+        "server_store_epoch": "pilots-20261115-r3",
+        "source_merge_commit": "007a1aa31d02d7af47570f4cf7b60a7ed8135a33",
+        "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/29"
       },
       {
         "directory": "experiments/pilots/run-sem41-pilot-e03-2-20261115-0d277e",
         "events_sha256": "e41763ad9ff79d2d9bc022bcf42d541844460411ca1e94dd40c7ba6a2a45811d",
         "manifest_sha256": "962e7ce97a703860ec229479cff2bb94a6c9940a7c8ebade32d39c1ddc87f5d2",
-        "server_store_epoch": "pilots-20261115-r2"
+        "server_store_epoch": "pilots-20261115-r2",
+        "source_merge_commit": "007a1aa31d02d7af47570f4cf7b60a7ed8135a33",
+        "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/29"
       },
       {
         "directory": "experiments/pilots/run-sem41-pilot-e03-2-20261115-33a460",
         "events_sha256": "851975a5d274ee2e600a96f088b9d394182a18724193c9b82dcf7bd39b9b207e",
         "manifest_sha256": "000145e039ee712b1dd1236e5b4cffa66a7e236ae409645d6ad2ec9cc3b17a8c",
-        "server_store_epoch": "pilots-20261115-r3"
+        "server_store_epoch": "pilots-20261115-r3",
+        "source_merge_commit": "007a1aa31d02d7af47570f4cf7b60a7ed8135a33",
+        "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/29"
+      },
+      {
+        "directory": "experiments/pilots/run-sem41-pilot-e03-2-20261115-7f63e0",
+        "events_sha256": "633ed8778ce64a72e85be1fd3313aae479ecd98baf133bba17ee7668fb66af2a",
+        "manifest_sha256": "8ea9c55b833289ebdcc8a0f6a9fc27b393b78c6465ae707b11745f8285baa60b",
+        "server_store_epoch": "pilots-20261115-r3",
+        "source_merge_commit": "007a1aa31d02d7af47570f4cf7b60a7ed8135a33",
+        "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/29"
       },
       {
         "directory": "experiments/pilots/run-sem41-pilot-e03-2-20261115-c12a28",
         "events_sha256": "ac09651ff2d88f8a58545138f4b5b3a21d79fb4cf5203d4c9c9d1649712456ae",
         "manifest_sha256": "d02bf376c4e7682700e3710befbf91099aca2001fc12ffac53929327214c9add",
-        "server_store_epoch": "pilots-20261115-r3"
+        "server_store_epoch": "pilots-20261115-r3",
+        "source_merge_commit": "007a1aa31d02d7af47570f4cf7b60a7ed8135a33",
+        "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/29"
       },
       {
         "directory": "experiments/pilots/run-sem41-pilot-e04-1-20261115-a52b51",
         "events_sha256": "a6d94d0f582951c8e9012892ab66fecec371e987414f957457766fcf75d17f7c",
         "manifest_sha256": "cd5f6d5fa9f72962ce149cbcba677f7c1e05328f990613ce6b8e1ecd431f32be",
-        "server_store_epoch": "pilots-20261115-r3"
+        "server_store_epoch": "pilots-20261115-r3",
+        "source_merge_commit": "007a1aa31d02d7af47570f4cf7b60a7ed8135a33",
+        "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/29"
+      },
+      {
+        "directory": "experiments/pilots/run-sem41-pilot-e04-1-20261115-cda576",
+        "events_sha256": "a2748149eb7d28eeac00bab8131563216ceeba37663d36e8acabf44888a18605",
+        "manifest_sha256": "409a5f7d214744e5fe1a0c1bf18513ff0fcd009eb6628a7685b528c6bc7ac050",
+        "server_store_epoch": "pilots-20261115-r3",
+        "source_merge_commit": "007a1aa31d02d7af47570f4cf7b60a7ed8135a33",
+        "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/29"
+      },
+      {
+        "directory": "experiments/pilots/run-sem41-pilot-e04-2-20261115-3bde4f",
+        "events_sha256": "ce655a4579cd37d0e41a23e2438b3b24d824f0e874f8cf9a73edf6310a457ffd",
+        "manifest_sha256": "6f7d6f5acbd682ea6c358dfe0c9a290be28329bfd76668d3aebb145ea8a85567",
+        "server_store_epoch": "pilots-20261115-r3",
+        "source_merge_commit": "007a1aa31d02d7af47570f4cf7b60a7ed8135a33",
+        "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/29"
       },
       {
         "directory": "experiments/pilots/run-sem41-pilot-e04-2-20261115-b5e415",
         "events_sha256": "eb229c7d00001f92c4ca6c2aca9f009086fb5b5c411954296eec6cb9ed61fd21",
         "manifest_sha256": "f240d0ecad0c538b966cbe818ec146947449b582599ac3ab296a5d59bd9fcc82",
-        "server_store_epoch": "pilots-20261115-r3"
+        "server_store_epoch": "pilots-20261115-r3",
+        "source_merge_commit": "007a1aa31d02d7af47570f4cf7b60a7ed8135a33",
+        "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/29"
+      },
+      {
+        "directory": "experiments/pilots/run-sem41-pilot-e04-3-20261115-54c1a9",
+        "events_sha256": "1aae38bf8aff01244d2c29fbad6abe8bdb60d21da2948b603b7766ffd3cb1f54",
+        "manifest_sha256": "dff7fd0448c39c838ed23db01b2e542a0c22404bbf6b29dfbf0c70784a372bd0",
+        "server_store_epoch": "pilots-20261115-r3",
+        "source_merge_commit": "007a1aa31d02d7af47570f4cf7b60a7ed8135a33",
+        "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/29"
       },
       {
         "directory": "experiments/pilots/run-sem41-pilot-e04-3-20261115-f9f6a0",
         "events_sha256": "9d0cd90c8c112e579ed67d8907ad2d939bf96dc6e832aa5d6b2d5b27185a169f",
         "manifest_sha256": "13c11db978db5e44475b62c65958cffeec7985d095bb48f5201e6af95cba42de",
-        "server_store_epoch": "pilots-20261115-r3"
+        "server_store_epoch": "pilots-20261115-r3",
+        "source_merge_commit": "007a1aa31d02d7af47570f4cf7b60a7ed8135a33",
+        "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/29"
       },
       {
         "directory": "experiments/pilots/run-sem41-pilot-e06-1-20261115-18fec8",
         "events_sha256": "fa4438d6e087a0024354c1a2334bf74b63d7e7ed049b908bb78c4440d5a284a0",
         "manifest_sha256": "90d2c9c8434b1bee538a970c94e4fb010ba169512538701cba76719b45a8c56e",
-        "server_store_epoch": "pilots-20261115-r3"
+        "server_store_epoch": "pilots-20261115-r3",
+        "source_merge_commit": "007a1aa31d02d7af47570f4cf7b60a7ed8135a33",
+        "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/29"
+      },
+      {
+        "directory": "experiments/pilots/run-sem41-pilot-e06-1-20261116-aa16ca",
+        "events_sha256": "00eb51ef2260e7564d452bae7fc38e4f65c13fba255c081b8e8adb4d20b21af4",
+        "manifest_sha256": "60fc6e6b6a9fec258652d0f3032d95f8f0c80896b5c51962d64f765176a00cc9",
+        "server_store_epoch": "pilots-20261115-r3",
+        "source_merge_commit": "007a1aa31d02d7af47570f4cf7b60a7ed8135a33",
+        "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/29"
       },
       {
         "directory": "experiments/pilots/run-sem41-pilot-e06-2-20261115-f56fc9",
         "events_sha256": "e8f8e91fec9f633b0571053d874a792945cd8b94f5768db0d8aac577e5423f91",
         "manifest_sha256": "2845d457bdd36e93d7e06d8b600eccaae5999602b88f555167a684023a98a73d",
-        "server_store_epoch": "pilots-20261115-r3"
+        "server_store_epoch": "pilots-20261115-r3",
+        "source_merge_commit": "007a1aa31d02d7af47570f4cf7b60a7ed8135a33",
+        "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/29"
+      },
+      {
+        "directory": "experiments/pilots/run-sem41-pilot-e06-2-20261116-8f734c",
+        "events_sha256": "e893e119932f9920f2e731f0914f4d6c4ed7e4d946a3af70707c24f01d599559",
+        "manifest_sha256": "8d9ca31e4042250e8924c0c4222fb9d5a2bbd3477e0185a47f2d1b76585b1c6e",
+        "server_store_epoch": "pilots-20261115-r3",
+        "source_merge_commit": "007a1aa31d02d7af47570f4cf7b60a7ed8135a33",
+        "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/29"
+      },
+      {
+        "directory": "experiments/pilots/run-sem42-oppo-e01-02",
+        "events_sha256": "27df572a2d99917b55e5001538c1f812c24251b3694ca852f13380346c456c15",
+        "manifest_sha256": "5df5ade2635e0d22f48ba5880936000ff692de4f91dc1bd355c90b9b6d023565",
+        "server_store_epoch": null,
+        "source_merge_commit": "3f0871c194f87aa6e2d5ac45e16fe9ada5264e57",
+        "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/35"
+      },
+      {
+        "directory": "experiments/pilots/run-sem42-oppo-e01-03",
+        "events_sha256": "91f851a6ecea482362dffeab43ed98d271c746dbfd26f03dcd05393a998216a7",
+        "manifest_sha256": "99331a37ab22853b06bf2f0f4c2a4bff93ca708cc72d6a445b61a368fb2e7656",
+        "server_store_epoch": null,
+        "source_merge_commit": "3f0871c194f87aa6e2d5ac45e16fe9ada5264e57",
+        "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/35"
       }
     ],
     "selection_scope": {
-      "cohort": "ORIGINAL_SEM45_HANDOFF_AT_dec00b7",
-      "excluded_new_run_directories": [
-        "experiments/pilots/run-sem41-pilot-e01-1-20261115-575a7a",
-        "experiments/pilots/run-sem41-pilot-e03-1-20261115-dc9cc9",
-        "experiments/pilots/run-sem41-pilot-e03-2-20261115-7f63e0",
-        "experiments/pilots/run-sem41-pilot-e04-1-20261115-cda576",
-        "experiments/pilots/run-sem41-pilot-e04-2-20261115-3bde4f",
-        "experiments/pilots/run-sem41-pilot-e04-3-20261115-54c1a9"
-      ],
-      "exclusion_reason": "REQUALIFICATION_RUNS_OUTSIDE_ORIGINAL_REVIEWED_COHORT",
-      "previous_source_commit": "0e293c1483d961eb4233b8ad381765ea4cdacf1d",
-      "qualification_status": "REVOKED_AFTER_SCHEDULER_COLLECTOR_AUDIT",
-      "selected_invalid_runs": 12,
-      "selected_run_count": 12,
-      "selected_valid_completed_runs": 0,
-      "upstream_requalification_batch_status": "RUNNING",
-      "upstream_requalification_valid_completed_runs": 6
+      "cohort": "MERGED_SEM41_AND_SEM42_PILOTS",
+      "pr_35_run_count": 3,
+      "previous_published_run_count": 12,
+      "previous_source_commit": "42ca000da1de2b7465851e1485fec2631f4b1a3c",
+      "selected_invalid_runs": 13,
+      "selected_run_count": 23,
+      "selected_valid_completed_runs": 10,
+      "sem41_merged_pr_29_run_count": 20
     },
-    "source_commit": "42ca000da1de2b7465851e1485fec2631f4b1a3c",
-    "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/29",
-    "source_review_status": "DRAFT_AT_IMPORT"
+    "source_commit": "aa425c33bdee034afcc552ebc390cae6780f6dbe",
+    "source_prs": [
+      {
+        "source_merge_commit": "007a1aa31d02d7af47570f4cf7b60a7ed8135a33",
+        "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/29"
+      },
+      {
+        "source_merge_commit": "3f0871c194f87aa6e2d5ac45e16fe9ada5264e57",
+        "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/35"
+      },
+      {
+        "source_merge_commit": "aa425c33bdee034afcc552ebc390cae6780f6dbe",
+        "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/37"
+      }
+    ],
+    "source_review_status": "MERGED"
   },
   "status": "COMPLETED",
   "validator_sha256": "ce6d968e851a269b356d85487f1bbcc1e0e9be1008464f9e97b35e47297390a6"

@@ -11,7 +11,7 @@
 
 > **Cập nhật 16/11/2026 theo review của Trí.** Bộ `experiments/results.csv` giữ 12 lượt OBSERVED/pilot đã bàn giao, cập nhật theo nguồn SEM-41 `42ca000` thành **0 VALID / 12 INVALID** sau audit collector thu hồi 8 qualification. Sáu lượt chạy lại mới của nguồn nằm ngoài bộ chọn hiện tại và được liệt kê trong INPUTS. Mẫu số main bằng 0; main emulator 27 slot Not run, OPPO chưa có log, kiểm độc lập SEM-44 và các phép đo thiếu clock/boot ghi Not run/giới hạn trong CHECKS. Trạng thái Project hiện vẫn In Progress, chờ review bản sửa.
 
-> **Cập nhật 19/11/2026 theo review trên `a270a9b`.** Analyzer v0.6.0 loại chuỗi E02 chắc chắn mâu thuẫn thứ tự clock và kiểm thời điểm target commit E03 nằm trong deep Doze. Bộ artifact giữ 12 pilot lịch sử INVALID, mẫu số main bằng 0. CHECKS ghi kết quả Ubuntu/Windows và giới hạn chứng cứ. PR tiếp tục Draft để kiểm lại.
+> **Cập nhật 21/11/2026 theo review trên `741e375`.** Analyzer v0.7.0 loại E02 có mốc mở cửa sổ chắc chắn lệch target commit. Bộ bàn giao ghim 23 pilot từ PR #29/#35, gồm hai pilot OPPO và một pilot emulator mới. Manifest ghi 10 VALID/COMPLETED và 13 INVALID, mẫu số main bằng 0. CHECKS ghi cách tách nhóm theo build/route và phân biệt tái đếm elapsed với số chu kỳ đã xác minh cùng boot. PR tiếp tục Draft để kiểm lại.
 
 ## Dependency — bấm mã task để mở yêu cầu
 
@@ -65,7 +65,7 @@ Nhánh `codex/SEM-45-log-parser`, từ main `d29532a` ngày 08/11/2026. Lịch s
 3. **Đã xong** sinh CSV 12 dòng pilot, summary/report có provenance, đối chiếu và tái lập giống từng byte — `fd3aa8c`.
 4. **Đã xong** rà nhóm epoch store và LF/checksum, kiểm 81 test, cập nhật hướng dẫn/CHECKS/Not run và chuẩn bị Draft PR — `dec00b7`.
 
-Đầu vào SEM-41 được tham chiếu từ Draft PR #29 tại commit `42ca000da1de2b7465851e1485fec2631f4b1a3c`. CSV hiện có nhãn pilot và cả 12 dòng INVALID. Main/OPPO chưa nhận được bộ đo cho lần bàn giao này. SEM-43/44/48/50 dùng bộ lịch sử cùng giới hạn đã ghi để kiểm pipeline và truy vết. Batch đo lại của nguồn đang RUNNING, các lượt mới được nhận riêng theo revision/evidence phù hợp.
+Ở bản bàn giao lịch sử, đầu vào SEM-41 được ghim tại `42ca000da1de2b7465851e1485fec2631f4b1a3c` khi PR #29 còn Draft, gồm 12 pilot INVALID. Bản ngày 21/11 đọc từ snapshot main `aa425c3`, gồm cả batch đo lại của SEM-41 và ba lượt E01 PR #35. SEM-43/44/48/50 có thể dùng index mới để truy vết nguồn theo từng run.
 
 ### Ba bước sửa theo review ngày 16/11
 
@@ -96,7 +96,13 @@ Nhánh `codex/SEM-45-log-parser`, từ main `d29532a` ngày 08/11/2026. Lịch s
 
 1. **Đã xong** kiểm thứ tự target commit trước callback/apply E02 theo offset/sai số — `6877b00`.
 2. **Đã xong** kiểm target commit trong pha deep Doze E03 theo clock Android — `f844bdb`.
-3. **Đã xong** tái sinh artifact v0.6.0 và kiểm bàn giao. Commit tra trong lịch sử CHECKS.
+3. **Đã xong** tái sinh artifact v0.6.0 và kiểm bàn giao — `741e375`.
+
+### Sửa cửa sổ E02 và bổ sung pilot theo review 21/11
+
+1. **Đã xong** kiểm mốc mở E02 bằng target commit đã quy đổi, giữ outcome và cửa sổ gốc — `9cf1156`.
+2. **Đã xong** ghim input của PR #29/#35, đối chiếu provenance PR #37 và tái đếm elapsed E01 — `d550ba1`.
+3. **Đã xong** tái sinh CSV/summary/report v0.7.0 và kiểm Ubuntu/Windows. Commit tra trong lịch sử CHECKS.
 
 ## Task được mở khóa
 

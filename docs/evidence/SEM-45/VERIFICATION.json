@@ -1,6 +1,6 @@
 {
-  "analysis_version": "0.6.0",
-  "base_main_commit": "9caaf38f3932269bdcdd74aa0bfef0e9fc148271",
+  "analysis_version": "0.7.0",
+  "base_main_commit": "aa425c33bdee034afcc552ebc390cae6780f6dbe",
   "cli_checks": {
     "fixture": {
       "exit_code": 0,
@@ -27,39 +27,70 @@
     "validator_sha256"
   ],
   "crlf_reproduction_checked_version": "0.5.0",
-  "csv_sha256": "4851afcde92542c1b5f245d69a1193a69acf7e1e3b3a4c3967da4dd090ac8eca",
+  "csv_sha256": "0fa852edb24a8f7cf9fd953d2338974b1516f32e6e278c22c0d34c574780bbd6",
   "declared_outcomes_all_runs": {
     "FAILURE": 2,
-    "SUCCESS": 5,
-    "TIMEOUT": 5
+    "SUCCESS": 15,
+    "TIMEOUT": 5,
+    "UNKNOWN": 1
   },
-  "excluded_requalification_run_count": 6,
   "git_diff_check_passed": true,
-  "group_count": 7,
-  "historical_e03_rows_with_added_flags": 3,
-  "independent_review_status": "V06_AWAITING_REVIEW",
-  "index_sha256": "849fe6df1ea7f6cc169d4cb1e80ff63ec797a60fd3450a86017d90faefee7bab",
-  "internal_links_checked": 56,
-  "invalid_attempts_retained": 12,
+  "group_count": 10,
+  "independent_review_status": "V07_AWAITING_REVIEW",
+  "index_sha256": "487f36f16d33ababed54effe5959bd28ae549740fe1f3d7c081edd560b0b2630",
+  "internal_links_checked": 62,
+  "invalid_attempts_retained": 13,
   "lf_repaired_report_matches": true,
   "main_eligible": 0,
   "markdown_fences_passed": true,
-  "markdown_tables_checked": 13,
+  "markdown_tables_checked": 15,
   "matches_local_source_exports": true,
+  "new_pilot_checks": {
+    "run-sem41-pilot-e01-1-20261120-8d5816": {
+      "apk_sha256": "814347f09ef9a61331910d7c4267fef827a4749377f3af53ae21fbb882ebaf5b",
+      "elapsed_cycles_unverified_boot": 2,
+      "execution_status": "COMPLETED",
+      "first_target_apply_elapsed_ms_unverified_boot": 2194372,
+      "group_id": "d8cf179f7c64945fbae8a1f9f3642a19039d71c6950b7d5e401c22767f7fafff",
+      "outcome": "SUCCESS",
+      "server_route": "EMULATOR_HOST_GATEWAY",
+      "validity": "VALID"
+    },
+    "run-sem42-oppo-e01-02": {
+      "apk_sha256": "814347f09ef9a61331910d7c4267fef827a4749377f3af53ae21fbb882ebaf5b",
+      "elapsed_cycles_unverified_boot": null,
+      "execution_status": "ABORTED",
+      "first_target_apply_elapsed_ms_unverified_boot": null,
+      "group_id": "69b482c8cc0d19d6223423483148a851f7e19db70483a24b528c69b1684a9a1c",
+      "outcome": "UNKNOWN",
+      "server_route": "ADB_REVERSE",
+      "validity": "INVALID"
+    },
+    "run-sem42-oppo-e01-03": {
+      "apk_sha256": "814347f09ef9a61331910d7c4267fef827a4749377f3af53ae21fbb882ebaf5b",
+      "elapsed_cycles_unverified_boot": 5,
+      "execution_status": "COMPLETED",
+      "first_target_apply_elapsed_ms_unverified_boot": 930021,
+      "group_id": "4fda2d1156a0e8513ff30cce2414b325551fdaf9b961da0368e7baaefab540e6",
+      "outcome": "SUCCESS",
+      "server_route": "ADB_REVERSE",
+      "validity": "VALID"
+    }
+  },
   "not_run": [
     "main_emulator",
-    "oppo",
+    "main_oppo",
+    "oppo_e02",
     "firebase_runtime",
     "phase_specific_metrics",
-    "independent_review_of_v06"
+    "independent_review_of_v07"
   ],
-  "original_csv_values_preserved_except_analysis_version_and_flags": true,
   "original_event_bytes_preserved": true,
   "python_39_syntax_passed": true,
   "python_version": "3.12.14",
-  "qualification_status": "REVOKED_AFTER_SCHEDULER_COLLECTOR_AUDIT",
   "regression_tests": {
-    "E02": 7,
+    "E01_pilot_recount": 1,
+    "E02": 9,
     "E03": 9,
     "E04": 10,
     "E06": 8,
@@ -67,43 +98,58 @@
     "data_kind": "SYNTHETIC_TEST_ONLY"
   },
   "reproduced_byte_for_byte": true,
-  "review_commit": "a270a9b37b48366be209055c5fe8b43aa0eafebf",
-  "run_count": 12,
+  "review_commit": "741e3756bca75e6add7843b6c9197f256bfb4ae9",
+  "route_build_groups_verified": true,
+  "run_count": 23,
   "runtime_experiment_performed": false,
-  "scope": "SEM45_OFFLINE_ANALYSIS_ORIGINAL_12_RUN_COHORT",
+  "scope": "SEM45_OFFLINE_ANALYSIS_23_MERGED_PILOTS",
   "sem19_docs_check": {
     "files": 5,
     "internal_links": 174,
     "passed": true
   },
-  "source_commit": "42ca000da1de2b7465851e1485fec2631f4b1a3c",
+  "source_commit": "aa425c33bdee034afcc552ebc390cae6780f6dbe",
   "source_epochs_match_pinned_pilot_results": true,
-  "source_review_status": "DRAFT_AT_IMPORT",
-  "summary_sha256": "8b34ec5d7179ebbb0ac19a8dc9f74cfab998748f07562043bb90f40cdfdbfdb4",
+  "source_prs": [
+    {
+      "source_merge_commit": "007a1aa31d02d7af47570f4cf7b60a7ed8135a33",
+      "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/29"
+    },
+    {
+      "source_merge_commit": "3f0871c194f87aa6e2d5ac45e16fe9ada5264e57",
+      "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/35"
+    },
+    {
+      "source_merge_commit": "aa425c33bdee034afcc552ebc390cae6780f6dbe",
+      "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/37"
+    }
+  ],
+  "source_review_status": "MERGED",
+  "summary_sha256": "cbbaf7590a20ed136b155b5cc8dc9b379f6f4c8a539c494649361c818394dd67",
   "task_snapshot_check": {
     "passed": true,
     "verified_tasks": 45
   },
-  "uncertain_window_rows": 12,
+  "uncertain_window_rows": 23,
   "unit_tests": {
-    "analyzer_tests": 79,
+    "analyzer_tests": 82,
     "exporter_tests": 36,
     "failures": 0,
     "other_main_tests": 52,
-    "passed": 167,
+    "passed": 170,
     "platform": "Ubuntu 24.04 WSL",
     "python_version": "3.12.3"
   },
-  "upstream_requalification_batch_status": "RUNNING",
-  "upstream_requalification_valid_completed_runs": 6,
-  "valid_completed_declared_outcomes": {},
-  "valid_completed_runs": 0,
-  "verification_date": "2026-11-19",
+  "valid_completed_declared_outcomes": {
+    "SUCCESS": 10
+  },
+  "valid_completed_runs": 10,
+  "verification_date": "2026-11-21",
   "windows_index_checkout_reproduced": true,
   "windows_ubuntu_csv_summary_report_equal": true,
   "windows_unit_tests": {
-    "analyzer_tests_passed": 79,
-    "full_suite": "NOT_RUN_FOR_V06",
+    "analyzer_tests_passed": 82,
+    "full_suite": "NOT_RUN_FOR_V07",
     "previous_full_suite_limit": "SEM41_SYMLINK_PRIVILEGE_WINERROR_1314",
     "python_version": "3.12.14"
   }
