@@ -1,0 +1,87 @@
+{
+  "plan_version": "1.0.0",
+  "data_kind": "PLANNED",
+  "protocol_version": "1.0.0",
+  "device_alias": "oppo-find-x9",
+  "run_phase": "main",
+  "planned_observation_seconds": 6000,
+  "slots": [
+    {
+      "case_id": "E01",
+      "repetition": 1,
+      "mode": "PERIODIC",
+      "window_seconds": 5400,
+      "run_id": null,
+      "execution_status": "NOT_RUN",
+      "reason_codes": [
+        "CANDIDATE_NOT_READY",
+        "USB_ENDPOINT_UNVERIFIED"
+      ]
+    },
+    {
+      "case_id": "E02",
+      "repetition": 1,
+      "mode": "PUSH",
+      "window_seconds": 120,
+      "run_id": null,
+      "execution_status": "NOT_RUN",
+      "reason_codes": [
+        "CANDIDATE_NOT_READY",
+        "USB_ENDPOINT_UNVERIFIED",
+        "FIREBASE_NOT_CONFIGURED"
+      ]
+    },
+    {
+      "case_id": "E02",
+      "repetition": 2,
+      "mode": "PUSH",
+      "window_seconds": 120,
+      "run_id": null,
+      "execution_status": "NOT_RUN",
+      "reason_codes": [
+        "CANDIDATE_NOT_READY",
+        "USB_ENDPOINT_UNVERIFIED",
+        "FIREBASE_NOT_CONFIGURED"
+      ]
+    },
+    {
+      "case_id": "E02",
+      "repetition": 3,
+      "mode": "PUSH",
+      "window_seconds": 120,
+      "run_id": null,
+      "execution_status": "NOT_RUN",
+      "reason_codes": [
+        "CANDIDATE_NOT_READY",
+        "USB_ENDPOINT_UNVERIFIED",
+        "FIREBASE_NOT_CONFIGURED"
+      ]
+    },
+    {
+      "case_id": "E02",
+      "repetition": 4,
+      "mode": "PUSH",
+      "window_seconds": 120,
+      "run_id": null,
+      "execution_status": "NOT_RUN",
+      "reason_codes": [
+        "CANDIDATE_NOT_READY",
+        "USB_ENDPOINT_UNVERIFIED",
+        "FIREBASE_NOT_CONFIGURED"
+      ]
+    },
+    {
+      "case_id": "E02",
+      "repetition": 5,
+      "mode": "PUSH",
+      "window_seconds": 120,
+      "run_id": null,
+      "execution_status": "NOT_RUN",
+      "reason_codes": [
+        "CANDIDATE_NOT_READY",
+        "USB_ENDPOINT_UNVERIFIED",
+        "FIREBASE_NOT_CONFIGURED"
+      ]
+    }
+  ]
+}

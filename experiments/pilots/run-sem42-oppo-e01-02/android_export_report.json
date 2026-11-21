@@ -1,0 +1,9 @@
+{
+  "schema_version": "2.0.0",
+  "status": "PARTIAL",
+  "exported_event_count": 17,
+  "omitted_event_count": 1,
+  "omissions": [
+    "periodic_cancelled"
+  ]
+}
