@@ -307,7 +307,8 @@ class MetricTests(unittest.TestCase):
     def test_group_identity_separates_phase_build_config_and_injection(self):
         original = analyzer.group_identity(self.manifest)
         for section, key, value in ((None, "run_phase", "main"), (None, "intervention", "INJECTED"),
-                ("build", "apk_sha256", "4" * 64), ("config", "battery_saver", True)):
+                ("build", "apk_sha256", "4" * 64), ("config", "battery_saver", True),
+                ("config", "server_route", "EMULATOR_HOST_GATEWAY"), ("config", "powered", True)):
             m = copy.deepcopy(self.manifest)
             (m[section] if section else m)[key] = value
             self.assertNotEqual(analyzer.group_identity(m), original)
@@ -356,6 +357,37 @@ class CaseEvidenceTests(unittest.TestCase):
             event["mode"] = mode
             if event["origin"] == "ANDROID":
                 event.update(source="PERIODIC" if mode != "PUSH" else "PUSH", signal_ids=[])
+
+    def test_pilot_e01_elapsed_recount_without_boot_is_descriptive(self):
+        self.observed_case("E01", "PERIODIC", 5400)
+        self.manifest.update(run_phase="pilot")
+        self.manifest["build"]["candidate_gate_passed"] = False
+        self.manifest["observation"]["boot_session_id"] = None
+        for event in self.events:
+            event["boot_session_id"] = None
+        work = next(e for e in self.events if e["event_type"] == "work_started")
+        for n, elapsed, request, attempt in (
+                (90, 20000, "setup-cycle", 0), (91, 60000, "setup-cycle", 0),
+                (92, 70000, "new-cycle", 0), (93, 80000, "new-cycle", 0),
+                (94, 90000, "retry-only", 1), (95, 5430001, "late-cycle", 0)):
+            self.events.append(dict(work, event_id=f"00000000-0000-4000-8000-{n:012d}",
+                                    elapsed_realtime_ms=elapsed, request_id=request, work_attempt=attempt))
+        row = analyzer.analyze_run(self.load("pilot"))["row"]
+        self.assertEqual(row["pilot_elapsed_periodic_cycles_unverified_boot"], 2)
+        self.assertEqual(row["pilot_elapsed_first_target_apply_from_start_ms_unverified_boot"], 7000)
+        self.assertIsNone(row["natural_periodic_cycles"])
+        self.assertIsNone(row["update_to_applied_ms"])
+        self.assertFalse(row["window_events_verified"])
+        self.assertFalse(row["eligible"])
+
+        self.manifest.update(execution_status="ABORTED", outcome="UNKNOWN", validity="INVALID",
+                             reason_codes=["RUN_INTERRUPTED"])
+        self.manifest["observation"]["start_elapsed_realtime_ms"] = None
+        row = analyzer.analyze_run(self.load("pilot"))["row"]
+        self.assertEqual(row["execution_status"], "ABORTED")
+        self.assertIsNone(row["pilot_elapsed_periodic_cycles_unverified_boot"])
+        self.assertIsNone(row["pilot_elapsed_first_target_apply_from_start_ms_unverified_boot"])
+        self.assertFalse(row["eligible"])
 
     def e03(self, mode="PERIODIC"):
         self.observed_case("E03", mode, 2100)

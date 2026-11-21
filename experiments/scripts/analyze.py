@@ -315,6 +315,40 @@ def e06_fetch_verified(applied, requests, fetches):
     return False
 
 
+def periodic_cycle_count(events, in_window):
+    """Count distinct attempt-zero requests that did not start outside the window."""
+    inside, outside = set(), set()
+    for event in events:
+        if (event["origin"] == "ANDROID" and event["event_type"] == "work_started" and
+                event["source"] == "PERIODIC" and event["work_attempt"] == 0):
+            (inside if in_window(event) else outside).add(event["request_id"])
+    return len(inside - outside)
+
+
+def pilot_e01_elapsed_recount(manifest, android):
+    """Describe a full pilot's elapsed bounds without asserting same-boot evidence."""
+    if (manifest["data_kind"] != "OBSERVED" or manifest["run_phase"] != "pilot" or
+            manifest["case_id"] != "E01" or manifest["mode"] != "PERIODIC" or
+            manifest["execution_status"] != "COMPLETED" or manifest["validity"] != "VALID" or
+            not android or any(e["boot_session_id"] is not None for e in android)):
+        return None, None
+    obs = manifest["observation"]
+    start, end, planned, actual = (obs[key] for key in ("start_elapsed_realtime_ms", "end_elapsed_realtime_ms",
+                                                     "planned_window_seconds", "actual_duration_ms"))
+    if (not all(contract.uint(value) for value in (start, end, planned, actual)) or
+            planned < 5400 or end - start < planned * 1000 or actual < planned * 1000 or
+            abs(actual - (end - start)) > 1000):
+        return None, None
+
+    def in_window(event):
+        return start <= event["elapsed_realtime_ms"] <= end
+
+    first_apply = min((e["elapsed_realtime_ms"] - start for e in android if
+                       e["event_type"] == "snapshot_applied" and e["source"] == "PERIODIC" and
+                       e["data_version"] == obs["target_version"] and in_window(e)), default=None)
+    return periodic_cycle_count(android, in_window), first_apply
+
+
 def analyze_run(run):
     """One run remains one sample. Counts are evidence, never invented DB writes."""
     m, events = run["manifest"], run["events"]
@@ -564,10 +598,8 @@ def analyze_run(run):
                      not e02_chain_unverified else None)
 
     counts = Counter(e["event_type"] for e in inside if e["source"] != "MANUAL")
-    natural_cycles = {e["request_id"] for e in inside if e["event_type"] == "work_started" and
-                      e["source"] == "PERIODIC" and e["work_attempt"] == 0}
-    natural_cycles -= {e["request_id"] for e in events if e["event_type"] == "work_started" and
-                       e["source"] == "PERIODIC" and e["work_attempt"] == 0 and location(e) != "window"}
+    natural_cycles = periodic_cycle_count(android, lambda e: location(e) == "window") if window_verified else None
+    pilot_cycles, pilot_first_apply = pilot_e01_elapsed_recount(m, android)
     attempts = {(e["request_id"], e["work_id"], e["work_attempt"]) for e in inside
                 if e["event_type"] == "work_started" and e["source"] != "MANUAL"}
     row = {k: m[k] for k in ("run_id", "data_kind", "run_phase", "case_id", "subscenario", "repetition",
@@ -575,6 +607,7 @@ def analyze_run(run):
     source_context = run.get("source_context")
     row.update({"analysis_version": VERSION, "group_id": group_identity(m, source_context),
                 "server_store_epoch": (source_context or {}).get("server_store_epoch"),
+                "server_route": m["config"]["server_route"],
                 **{k: m["build"][k] for k in ("app_commit", "server_commit", "apk_sha256")},
                 "manifest_sha256": run["manifest_sha256"], "events_sha256": run["events_sha256"],
                 "target_version": target, "declared_cached_version_after": obs["cached_version_after"],
@@ -590,7 +623,9 @@ def analyze_run(run):
                 "target_applied_in_window": bool(applied) if
                                             (window_verified and recovery_verified) or applied else None,
                 "late_target_applied_count": len(late) if window_verified and recovery_verified else None,
-                "natural_periodic_cycles": len(natural_cycles) if window_verified else None,
+                "natural_periodic_cycles": natural_cycles,
+                "pilot_elapsed_periodic_cycles_unverified_boot": pilot_cycles,
+                "pilot_elapsed_first_target_apply_from_start_ms_unverified_boot": pilot_first_apply,
                 "work_attempt_count": len(attempts) if window_verified else None,
                 "get_started_count": len({e["network_call_id"] for e in inside if
                                           e["event_type"] == "snapshot_fetch_started" and e["source"] != "MANUAL"})

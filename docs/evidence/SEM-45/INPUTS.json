@@ -3,116 +3,288 @@
   "evidence": [
     {
       "path": "docs/evidence/SEM-41/CHECKS.md",
-      "sha256": "5838e3776b608f8ece5d720bf4c386d2a2a664f8e05fb0953dd3cdebe3f2cdc5"
+      "sha256": "a9ba5b153943b578a71aafdbe84d645dcec562dab48daeb142d493602d6ba93f",
+      "source_merge_commit": "007a1aa31d02d7af47570f4cf7b60a7ed8135a33",
+      "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/29"
     },
     {
       "path": "docs/evidence/SEM-41/PILOT_RESULTS.json",
-      "sha256": "18e9591e62190aa02c03d029ef46c06d1d467726b989ec3ed90bb25609ea191f"
+      "sha256": "d3a0a7e723835e668921b6496b9df07d1d67d6b35cd83d938a4c0d8eb2bac986",
+      "source_merge_commit": "007a1aa31d02d7af47570f4cf7b60a7ed8135a33",
+      "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/29"
     },
     {
       "path": "docs/evidence/SEM-41/SCHEDULER_OBSERVER_AUDIT.json",
-      "sha256": "073712bae48c64f9e598b11137673828ac7582c82dc8d5d38d4c43e207c8d3cb"
+      "sha256": "c7041b17540d4f4f81378e4198630a5263ccd2cbc8b292f2fd8df2d4a762d395",
+      "source_merge_commit": "007a1aa31d02d7af47570f4cf7b60a7ed8135a33",
+      "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/29"
     },
     {
       "path": "experiments/plans/SEM-41/EMULATOR_PLAN.json",
-      "sha256": "3ad77818754c95cbdc16bf267bc4ef52c466f32f7f9b8dfcaa0faae29d39cff6"
+      "sha256": "3ad77818754c95cbdc16bf267bc4ef52c466f32f7f9b8dfcaa0faae29d39cff6",
+      "source_merge_commit": "007a1aa31d02d7af47570f4cf7b60a7ed8135a33",
+      "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/29"
+    },
+    {
+      "path": "docs/evidence/SEM-42/CHECKS.md",
+      "sha256": "613488c5ac537b2da838e370e783534366a0c14f9d827156d6f7cdf7c725f5e3",
+      "source_merge_commit": "3f0871c194f87aa6e2d5ac45e16fe9ada5264e57",
+      "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/35"
+    },
+    {
+      "path": "release/BUILD_MANIFEST.json",
+      "sha256": "52ad40006430584d6e843e66089d29998c9e38731f86152b2be09d103b85b013",
+      "source_merge_commit": "aa425c33bdee034afcc552ebc390cae6780f6dbe",
+      "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/37"
+    },
+    {
+      "path": "experiments/pilots/run-sem41-pilot-e01-1-20261120-8d5816/export_report.json",
+      "sha256": "3344ae705ff3ea8ef6717df927bf3d844aea7b7e3031647a3c36ab6c9c76193e",
+      "source_merge_commit": "3f0871c194f87aa6e2d5ac45e16fe9ada5264e57",
+      "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/35"
+    },
+    {
+      "path": "experiments/pilots/run-sem41-pilot-e01-1-20261120-8d5816/android_export_report.json",
+      "sha256": "f9c80e33896537406d02e73f3d3910e8c51907d8f280074bf56ed84df0555244",
+      "source_merge_commit": "3f0871c194f87aa6e2d5ac45e16fe9ada5264e57",
+      "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/35"
+    },
+    {
+      "path": "experiments/pilots/run-sem42-oppo-e01-02/export_report.json",
+      "sha256": "bff3857cf998317a19c3500a4a5f02a0827f31957dd8beb9c36b95d4bc3b3d23",
+      "source_merge_commit": "3f0871c194f87aa6e2d5ac45e16fe9ada5264e57",
+      "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/35"
+    },
+    {
+      "path": "experiments/pilots/run-sem42-oppo-e01-02/android_export_report.json",
+      "sha256": "f9c80e33896537406d02e73f3d3910e8c51907d8f280074bf56ed84df0555244",
+      "source_merge_commit": "3f0871c194f87aa6e2d5ac45e16fe9ada5264e57",
+      "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/35"
+    },
+    {
+      "path": "experiments/pilots/run-sem42-oppo-e01-03/export_report.json",
+      "sha256": "505964de61dc1d4612de535a84af451006df7fd7ee41a0d057792c7b2b19370e",
+      "source_merge_commit": "3f0871c194f87aa6e2d5ac45e16fe9ada5264e57",
+      "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/35"
+    },
+    {
+      "path": "experiments/pilots/run-sem42-oppo-e01-03/android_export_report.json",
+      "sha256": "25b8143230d36cc65cba78a4f0e5f376519a76c2d74d9eca56f7fca60f293c7b",
+      "source_merge_commit": "3f0871c194f87aa6e2d5ac45e16fe9ada5264e57",
+      "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/35"
     }
   ],
   "index_version": "1.0.0",
   "runs": [
     {
+      "directory": "experiments/pilots/run-sem41-pilot-e01-1-20261115-575a7a",
+      "events_sha256": "1ac6374c10f1ab8ce2202a6fee35ef21a7de13f847158d1491c5b17f406a42e3",
+      "manifest_sha256": "56b44dafede1f36eff5f2ec3c386859125e93e339f5029a62300154e7e89f7b7",
+      "server_store_epoch": "pilots-20261115-r3",
+      "source_merge_commit": "007a1aa31d02d7af47570f4cf7b60a7ed8135a33",
+      "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/29"
+    },
+    {
       "directory": "experiments/pilots/run-sem41-pilot-e01-1-20261115-760217",
       "events_sha256": "fe6b56b8729c5619d2c353a38bcfe8e4b9355d27bd06adf8f503612482c85f66",
       "manifest_sha256": "4819eeee398046c2137f18e1d8ca2b3580e137fdcdb7ec994f6c939188386c50",
-      "server_store_epoch": "pilots-20261115-r2"
+      "server_store_epoch": "pilots-20261115-r2",
+      "source_merge_commit": "007a1aa31d02d7af47570f4cf7b60a7ed8135a33",
+      "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/29"
     },
     {
       "directory": "experiments/pilots/run-sem41-pilot-e01-1-20261115-89b884",
       "events_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "manifest_sha256": "6eb306e1cb8c6304de4a224b59de4dc394811889edaf71247c329eb4b6ca6ccb",
-      "server_store_epoch": null
+      "server_store_epoch": null,
+      "source_merge_commit": "007a1aa31d02d7af47570f4cf7b60a7ed8135a33",
+      "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/29"
     },
     {
       "directory": "experiments/pilots/run-sem41-pilot-e01-1-20261115-9a8b41",
       "events_sha256": "9fcacd5f56ab42d37675f443ec035b6ffad90f5fa8dc56f798c9f43f7799e6bf",
       "manifest_sha256": "08f530deb91beb4f1ed65e53e62322929b17cebb9a5ecdd0ac9cd8f0cad1f4f7",
-      "server_store_epoch": "pilots-20261115-r3"
+      "server_store_epoch": "pilots-20261115-r3",
+      "source_merge_commit": "007a1aa31d02d7af47570f4cf7b60a7ed8135a33",
+      "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/29"
+    },
+    {
+      "directory": "experiments/pilots/run-sem41-pilot-e01-1-20261120-8d5816",
+      "events_sha256": "61e297ffeebcf33e7476b84c534891c05d67d0a3fc499e723d14642dc77d5721",
+      "manifest_sha256": "baa027abc422fa45a9455a72524666f449cae4849538da165bcb1a49e4c22218",
+      "server_store_epoch": null,
+      "source_merge_commit": "3f0871c194f87aa6e2d5ac45e16fe9ada5264e57",
+      "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/35"
     },
     {
       "directory": "experiments/pilots/run-sem41-pilot-e03-1-20261115-5db4eb",
       "events_sha256": "75df33f9ff9ef10fd17dbbe1b243b9a5d052fe12e20917e13aacfd879677d5f8",
       "manifest_sha256": "54844ec731c1cf0d2d6bf886c00c5e91128c08de4146d8b2f4b9c4d1fb37f74e",
-      "server_store_epoch": "pilots-20261115-r2"
+      "server_store_epoch": "pilots-20261115-r2",
+      "source_merge_commit": "007a1aa31d02d7af47570f4cf7b60a7ed8135a33",
+      "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/29"
+    },
+    {
+      "directory": "experiments/pilots/run-sem41-pilot-e03-1-20261115-dc9cc9",
+      "events_sha256": "005d5546bbda922da1796dc1fa8316f90ba48f489d248a703c22942f6832dfc0",
+      "manifest_sha256": "26db2be6c56932f608360a1ca7d42e04260df13d0b1881c0b4eb7d8921ef2ba6",
+      "server_store_epoch": "pilots-20261115-r3",
+      "source_merge_commit": "007a1aa31d02d7af47570f4cf7b60a7ed8135a33",
+      "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/29"
     },
     {
       "directory": "experiments/pilots/run-sem41-pilot-e03-2-20261115-0d277e",
       "events_sha256": "e41763ad9ff79d2d9bc022bcf42d541844460411ca1e94dd40c7ba6a2a45811d",
       "manifest_sha256": "962e7ce97a703860ec229479cff2bb94a6c9940a7c8ebade32d39c1ddc87f5d2",
-      "server_store_epoch": "pilots-20261115-r2"
+      "server_store_epoch": "pilots-20261115-r2",
+      "source_merge_commit": "007a1aa31d02d7af47570f4cf7b60a7ed8135a33",
+      "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/29"
     },
     {
       "directory": "experiments/pilots/run-sem41-pilot-e03-2-20261115-33a460",
       "events_sha256": "851975a5d274ee2e600a96f088b9d394182a18724193c9b82dcf7bd39b9b207e",
       "manifest_sha256": "000145e039ee712b1dd1236e5b4cffa66a7e236ae409645d6ad2ec9cc3b17a8c",
-      "server_store_epoch": "pilots-20261115-r3"
+      "server_store_epoch": "pilots-20261115-r3",
+      "source_merge_commit": "007a1aa31d02d7af47570f4cf7b60a7ed8135a33",
+      "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/29"
+    },
+    {
+      "directory": "experiments/pilots/run-sem41-pilot-e03-2-20261115-7f63e0",
+      "events_sha256": "633ed8778ce64a72e85be1fd3313aae479ecd98baf133bba17ee7668fb66af2a",
+      "manifest_sha256": "8ea9c55b833289ebdcc8a0f6a9fc27b393b78c6465ae707b11745f8285baa60b",
+      "server_store_epoch": "pilots-20261115-r3",
+      "source_merge_commit": "007a1aa31d02d7af47570f4cf7b60a7ed8135a33",
+      "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/29"
     },
     {
       "directory": "experiments/pilots/run-sem41-pilot-e03-2-20261115-c12a28",
       "events_sha256": "ac09651ff2d88f8a58545138f4b5b3a21d79fb4cf5203d4c9c9d1649712456ae",
       "manifest_sha256": "d02bf376c4e7682700e3710befbf91099aca2001fc12ffac53929327214c9add",
-      "server_store_epoch": "pilots-20261115-r3"
+      "server_store_epoch": "pilots-20261115-r3",
+      "source_merge_commit": "007a1aa31d02d7af47570f4cf7b60a7ed8135a33",
+      "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/29"
     },
     {
       "directory": "experiments/pilots/run-sem41-pilot-e04-1-20261115-a52b51",
       "events_sha256": "a6d94d0f582951c8e9012892ab66fecec371e987414f957457766fcf75d17f7c",
       "manifest_sha256": "cd5f6d5fa9f72962ce149cbcba677f7c1e05328f990613ce6b8e1ecd431f32be",
-      "server_store_epoch": "pilots-20261115-r3"
+      "server_store_epoch": "pilots-20261115-r3",
+      "source_merge_commit": "007a1aa31d02d7af47570f4cf7b60a7ed8135a33",
+      "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/29"
+    },
+    {
+      "directory": "experiments/pilots/run-sem41-pilot-e04-1-20261115-cda576",
+      "events_sha256": "a2748149eb7d28eeac00bab8131563216ceeba37663d36e8acabf44888a18605",
+      "manifest_sha256": "409a5f7d214744e5fe1a0c1bf18513ff0fcd009eb6628a7685b528c6bc7ac050",
+      "server_store_epoch": "pilots-20261115-r3",
+      "source_merge_commit": "007a1aa31d02d7af47570f4cf7b60a7ed8135a33",
+      "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/29"
+    },
+    {
+      "directory": "experiments/pilots/run-sem41-pilot-e04-2-20261115-3bde4f",
+      "events_sha256": "ce655a4579cd37d0e41a23e2438b3b24d824f0e874f8cf9a73edf6310a457ffd",
+      "manifest_sha256": "6f7d6f5acbd682ea6c358dfe0c9a290be28329bfd76668d3aebb145ea8a85567",
+      "server_store_epoch": "pilots-20261115-r3",
+      "source_merge_commit": "007a1aa31d02d7af47570f4cf7b60a7ed8135a33",
+      "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/29"
     },
     {
       "directory": "experiments/pilots/run-sem41-pilot-e04-2-20261115-b5e415",
       "events_sha256": "eb229c7d00001f92c4ca6c2aca9f009086fb5b5c411954296eec6cb9ed61fd21",
       "manifest_sha256": "f240d0ecad0c538b966cbe818ec146947449b582599ac3ab296a5d59bd9fcc82",
-      "server_store_epoch": "pilots-20261115-r3"
+      "server_store_epoch": "pilots-20261115-r3",
+      "source_merge_commit": "007a1aa31d02d7af47570f4cf7b60a7ed8135a33",
+      "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/29"
+    },
+    {
+      "directory": "experiments/pilots/run-sem41-pilot-e04-3-20261115-54c1a9",
+      "events_sha256": "1aae38bf8aff01244d2c29fbad6abe8bdb60d21da2948b603b7766ffd3cb1f54",
+      "manifest_sha256": "dff7fd0448c39c838ed23db01b2e542a0c22404bbf6b29dfbf0c70784a372bd0",
+      "server_store_epoch": "pilots-20261115-r3",
+      "source_merge_commit": "007a1aa31d02d7af47570f4cf7b60a7ed8135a33",
+      "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/29"
     },
     {
       "directory": "experiments/pilots/run-sem41-pilot-e04-3-20261115-f9f6a0",
       "events_sha256": "9d0cd90c8c112e579ed67d8907ad2d939bf96dc6e832aa5d6b2d5b27185a169f",
       "manifest_sha256": "13c11db978db5e44475b62c65958cffeec7985d095bb48f5201e6af95cba42de",
-      "server_store_epoch": "pilots-20261115-r3"
+      "server_store_epoch": "pilots-20261115-r3",
+      "source_merge_commit": "007a1aa31d02d7af47570f4cf7b60a7ed8135a33",
+      "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/29"
     },
     {
       "directory": "experiments/pilots/run-sem41-pilot-e06-1-20261115-18fec8",
       "events_sha256": "fa4438d6e087a0024354c1a2334bf74b63d7e7ed049b908bb78c4440d5a284a0",
       "manifest_sha256": "90d2c9c8434b1bee538a970c94e4fb010ba169512538701cba76719b45a8c56e",
-      "server_store_epoch": "pilots-20261115-r3"
+      "server_store_epoch": "pilots-20261115-r3",
+      "source_merge_commit": "007a1aa31d02d7af47570f4cf7b60a7ed8135a33",
+      "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/29"
+    },
+    {
+      "directory": "experiments/pilots/run-sem41-pilot-e06-1-20261116-aa16ca",
+      "events_sha256": "00eb51ef2260e7564d452bae7fc38e4f65c13fba255c081b8e8adb4d20b21af4",
+      "manifest_sha256": "60fc6e6b6a9fec258652d0f3032d95f8f0c80896b5c51962d64f765176a00cc9",
+      "server_store_epoch": "pilots-20261115-r3",
+      "source_merge_commit": "007a1aa31d02d7af47570f4cf7b60a7ed8135a33",
+      "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/29"
     },
     {
       "directory": "experiments/pilots/run-sem41-pilot-e06-2-20261115-f56fc9",
       "events_sha256": "e8f8e91fec9f633b0571053d874a792945cd8b94f5768db0d8aac577e5423f91",
       "manifest_sha256": "2845d457bdd36e93d7e06d8b600eccaae5999602b88f555167a684023a98a73d",
-      "server_store_epoch": "pilots-20261115-r3"
+      "server_store_epoch": "pilots-20261115-r3",
+      "source_merge_commit": "007a1aa31d02d7af47570f4cf7b60a7ed8135a33",
+      "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/29"
+    },
+    {
+      "directory": "experiments/pilots/run-sem41-pilot-e06-2-20261116-8f734c",
+      "events_sha256": "e893e119932f9920f2e731f0914f4d6c4ed7e4d946a3af70707c24f01d599559",
+      "manifest_sha256": "8d9ca31e4042250e8924c0c4222fb9d5a2bbd3477e0185a47f2d1b76585b1c6e",
+      "server_store_epoch": "pilots-20261115-r3",
+      "source_merge_commit": "007a1aa31d02d7af47570f4cf7b60a7ed8135a33",
+      "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/29"
+    },
+    {
+      "directory": "experiments/pilots/run-sem42-oppo-e01-02",
+      "events_sha256": "27df572a2d99917b55e5001538c1f812c24251b3694ca852f13380346c456c15",
+      "manifest_sha256": "5df5ade2635e0d22f48ba5880936000ff692de4f91dc1bd355c90b9b6d023565",
+      "server_store_epoch": null,
+      "source_merge_commit": "3f0871c194f87aa6e2d5ac45e16fe9ada5264e57",
+      "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/35"
+    },
+    {
+      "directory": "experiments/pilots/run-sem42-oppo-e01-03",
+      "events_sha256": "91f851a6ecea482362dffeab43ed98d271c746dbfd26f03dcd05393a998216a7",
+      "manifest_sha256": "99331a37ab22853b06bf2f0f4c2a4bff93ca708cc72d6a445b61a368fb2e7656",
+      "server_store_epoch": null,
+      "source_merge_commit": "3f0871c194f87aa6e2d5ac45e16fe9ada5264e57",
+      "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/35"
     }
   ],
   "selection_scope": {
-    "cohort": "ORIGINAL_SEM45_HANDOFF_AT_dec00b7",
-    "excluded_new_run_directories": [
-      "experiments/pilots/run-sem41-pilot-e01-1-20261115-575a7a",
-      "experiments/pilots/run-sem41-pilot-e03-1-20261115-dc9cc9",
-      "experiments/pilots/run-sem41-pilot-e03-2-20261115-7f63e0",
-      "experiments/pilots/run-sem41-pilot-e04-1-20261115-cda576",
-      "experiments/pilots/run-sem41-pilot-e04-2-20261115-3bde4f",
-      "experiments/pilots/run-sem41-pilot-e04-3-20261115-54c1a9"
-    ],
-    "exclusion_reason": "REQUALIFICATION_RUNS_OUTSIDE_ORIGINAL_REVIEWED_COHORT",
-    "previous_source_commit": "0e293c1483d961eb4233b8ad381765ea4cdacf1d",
-    "qualification_status": "REVOKED_AFTER_SCHEDULER_COLLECTOR_AUDIT",
-    "selected_invalid_runs": 12,
-    "selected_run_count": 12,
-    "selected_valid_completed_runs": 0,
-    "upstream_requalification_batch_status": "RUNNING",
-    "upstream_requalification_valid_completed_runs": 6
+    "cohort": "MERGED_SEM41_AND_SEM42_PILOTS",
+    "pr_35_run_count": 3,
+    "previous_published_run_count": 12,
+    "previous_source_commit": "42ca000da1de2b7465851e1485fec2631f4b1a3c",
+    "selected_invalid_runs": 13,
+    "selected_run_count": 23,
+    "selected_valid_completed_runs": 10,
+    "sem41_merged_pr_29_run_count": 20
   },
-  "source_commit": "42ca000da1de2b7465851e1485fec2631f4b1a3c",
-  "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/29",
-  "source_review_status": "DRAFT_AT_IMPORT"
+  "source_commit": "aa425c33bdee034afcc552ebc390cae6780f6dbe",
+  "source_prs": [
+    {
+      "source_merge_commit": "007a1aa31d02d7af47570f4cf7b60a7ed8135a33",
+      "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/29"
+    },
+    {
+      "source_merge_commit": "3f0871c194f87aa6e2d5ac45e16fe9ada5264e57",
+      "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/35"
+    },
+    {
+      "source_merge_commit": "aa425c33bdee034afcc552ebc390cae6780f6dbe",
+      "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/37"
+    }
+  ],
+  "source_review_status": "MERGED"
 }
