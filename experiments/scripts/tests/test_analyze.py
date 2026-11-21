@@ -1,0 +1,1185 @@
+"""SEM-45 tool tests use synthetic data only, never device measurements."""
+
+import copy
+from contextlib import redirect_stderr, redirect_stdout
+from datetime import datetime, timedelta, timezone
+import csv
+import importlib.util
+import io
+import hashlib
+import json
+from pathlib import Path
+import sys
+import tempfile
+import unittest
+from unittest.mock import patch
+
+SCRIPTS = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(SCRIPTS))
+spec = importlib.util.spec_from_file_location("sem45_analyze", SCRIPTS / "analyze.py")
+analyzer = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(analyzer)
+FIXTURE = SCRIPTS.parents[1] / "experiments/fixture_exports/run-sem24-fixture"
+
+
+class InputTests(unittest.TestCase):
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.temp.cleanup)
+        self.directory = Path(self.temp.name)
+        self.manifest = json.loads((FIXTURE / "manifest.json").read_text(encoding="utf-8"))
+        self.events = [json.loads(line) for line in
+                       (FIXTURE / "events.jsonl").read_text(encoding="utf-8").splitlines()]
+
+    def load(self, dataset="fixture", raw_events=None):
+        (self.directory / "manifest.json").write_text(json.dumps(self.manifest), encoding="utf-8")
+        (self.directory / "events.jsonl").write_text(
+            raw_events if raw_events is not None else
+            "".join(json.dumps(e) + "\n" for e in self.events), encoding="utf-8")
+        return analyzer.load_run(self.directory, dataset)
+
+    def test_sem24_export_is_read_without_changing_values(self):
+        run = self.load()
+        self.assertEqual(run["events"], self.events)
+        self.assertEqual(run["manifest"], self.manifest)
+        self.assertEqual(run["duplicates"], 0)
+        self.assertEqual(len(run["events_sha256"]), 64)
+
+    def test_fixture_cannot_be_main(self):
+        with self.assertRaisesRegex(analyzer.AnalysisError, "DATA_KIND_MISMATCH"):
+            self.load("main")
+
+    def test_legacy_pilot_is_rejected_without_inventing_fields(self):
+        self.manifest["event_schema_version"] = "legacy-room-v1"
+        with self.assertRaisesRegex(analyzer.AnalysisError, "CONTRACT_VERSION_UNSUPPORTED"):
+            self.load()
+
+    def test_other_run_or_mode_is_not_silently_joined(self):
+        for key, value in (("run_id", "other-run"), ("device_alias", "other-device"),
+                           ("mode", "HYBRID")):
+            with self.subTest(key=key):
+                old = self.events[0][key]
+                self.events[0][key] = value
+                with self.assertRaisesRegex(analyzer.AnalysisError, "EVENT_MANIFEST_MISMATCH"):
+                    self.load()
+                self.events[0][key] = old
+
+    def test_replay_deduplicates_by_id_and_conflict_aborts(self):
+        self.events.append(copy.deepcopy(self.events[0]))
+        self.assertEqual(self.load()["duplicates"], 1)
+        self.events[-1]["timestamp_utc"] = "2026-11-03T00:00:04Z"
+        with self.assertRaisesRegex(analyzer.AnalysisError, "CONFLICTING_EVENT_ID"):
+            self.load()
+
+    def test_duplicate_keys_nonfinite_and_blank_lines_rejected(self):
+        for raw in ('{"run_id":"one","run_id":"two"}\n', '{"value":NaN}\n', '\n'):
+            with self.subTest(raw=raw), self.assertRaises(analyzer.AnalysisError):
+                self.load(raw_events=raw)
+
+    def test_unknown_schema_fields_and_event_types_rejected(self):
+        self.events[0]["extra"] = True
+        with self.assertRaisesRegex(analyzer.AnalysisError, "CANONICAL_FIELDS_REQUIRED"):
+            self.load()
+        del self.events[0]["extra"]
+        self.events[0]["event_type"] = "future_event"
+        with self.assertRaisesRegex(analyzer.AnalysisError, "EVENT_TYPE_UNSUPPORTED"):
+            self.load()
+
+    def test_malformed_types_return_static_error_instead_of_traceback(self):
+        self.manifest["mode"] = []
+        with self.assertRaisesRegex(analyzer.AnalysisError, "INPUT_TYPES_INVALID"):
+            self.load()
+
+    def test_no_not_run_observed_events(self):
+        self.manifest.update(data_kind="OBSERVED", run_phase="pilot")
+        with self.assertRaisesRegex(analyzer.AnalysisError, "NOT_RUN_HAS_EVENTS"):
+            # Remove the deliberately synthetic FCM response ID first.
+            self.events = [e for e in self.events if e["origin"] == "ANDROID"]
+            self.load("pilot")
+
+
+class MetricTests(unittest.TestCase):
+    load = InputTests.load
+
+    def setUp(self):
+        InputTests.setUp(self)
+        self.manifest.update(execution_status="COMPLETED", outcome="SUCCESS", validity="VALID")
+        self.manifest["observation"].update(start_elapsed_realtime_ms=30000,
+            end_elapsed_realtime_ms=150000, boot_session_id="boot-fixture-01")
+        self.next_id = 100
+
+    def analyze(self):
+        return analyzer.analyze_run(self.load())
+
+    def event(self, kind, ms, **changes):
+        base = copy.deepcopy(next(e for e in self.events if e["event_type"] == "work_started"))
+        self.next_id += 1
+        base.update(event_id=f"00000000-0000-4000-8000-{self.next_id:012d}", event_type=kind,
+                    elapsed_realtime_ms=ms,
+                    timestamp_utc=(datetime(2026, 11, 3, tzinfo=timezone.utc) +
+                                   timedelta(milliseconds=ms - 30000)).isoformat().replace("+00:00", "Z"))
+        base["outcome"] = next(iter(analyzer.contract.EVENTS[kind][2]))
+        if kind == "sync_retrying":
+            base["reason"] = "NETWORK_ERROR"
+        if kind == "sync_failed":
+            base["reason"] = "RETRY_EXHAUSTED"
+        if kind == "snapshot_applied":
+            base.update(data_version=1, cached_version=1)
+        base.update(changes)
+        self.events.append(base)
+        return base
+
+    def controlled_clock(self, reference="ANDROID"):
+        sample = {"client_send_utc": "2026-11-02T23:59:59Z",
+                  "client_receive_utc": "2026-11-02T23:59:59.010Z",
+                  "server_utc": "2026-11-03T00:00:00.005Z", "resolution_ms": 1}
+        after = {"client_send_utc": "2026-11-03T00:02:01Z",
+                 "client_receive_utc": "2026-11-03T00:02:01.010Z",
+                 "server_utc": "2026-11-03T00:02:02.005Z", "resolution_ms": 1}
+        self.manifest["clock"].update(controlled=True, client_clock=reference, method_code="FIXTURE_CLOCK",
+            offset_before_ms=1000, offset_after_ms=1000, uncertainty_before_ms=6,
+            uncertainty_after_ms=6, before_samples=[sample] * 3, after_samples=[after] * 3)
+
+    def test_stages_are_separate_and_uncontrolled_cross_clock_is_null(self):
+        row = self.analyze()["row"]
+        self.assertEqual(row["received_to_enqueue_ms"], 1000)
+        self.assertEqual(row["queue_ms"], 1000)
+        self.assertEqual(row["sync_ms"], 3000)
+        self.assertIsNone(row["update_to_applied_ms"])
+        self.assertIsNone(row["db_write_count"])
+        self.assertEqual(row["get_started_count"], 1)
+        self.assertEqual(row["observed_completion"], "APPLIED_TARGET")
+        self.assertFalse(row["eligible"])  # Still synthetic, never a main sample.
+
+    def test_timeout_with_late_apply_stays_timeout_and_latency_empty(self):
+        self.manifest.update(outcome="TIMEOUT", reason_codes=["TIMEOUT"])
+        applied = next(e for e in self.events if e["event_type"] == "snapshot_applied")
+        applied["elapsed_realtime_ms"] = 150001
+        row = self.analyze()["row"]
+        self.assertEqual(row["outcome"], "TIMEOUT")
+        self.assertEqual(row["observed_completion"], "LATE_TARGET")
+        self.assertEqual(row["late_target_applied_count"], 1)
+        self.assertFalse(row["target_applied_in_window"])
+        self.assertIsNone(row["sync_ms"])
+        self.assertIsNone(row["update_to_applied_ms"])
+
+    def test_accepted_without_receipt_is_not_completion(self):
+        self.events = [e for e in self.events if e["origin"] == "SERVER"]
+        self.manifest.update(outcome="UNKNOWN", reason_codes=["FCM_RESPONSE_UNKNOWN"])
+        row = self.analyze()["row"]
+        self.assertFalse(row["target_applied_in_window"])
+        self.assertIsNone(row["received_to_enqueue_ms"])
+        self.assertEqual(row["observed_completion"], "NO_TARGET_EVIDENCE")
+
+    def test_monotonic_survives_wall_clock_jump_and_input_order(self):
+        self.events.reverse()
+        next(e for e in self.events if e["event_type"] == "snapshot_applied")["timestamp_utc"] = "2026-11-02T00:00:00Z"
+        row = self.analyze()["row"]
+        self.assertEqual(row["sync_ms"], 3000)
+        self.assertTrue(row["target_applied_in_window"])
+
+    def test_reboot_and_unknown_boot_do_not_produce_duration_or_completion(self):
+        applied = next(e for e in self.events if e["event_type"] == "snapshot_applied")
+        for boot in (None, "boot-other"):
+            with self.subTest(boot=boot):
+                applied["boot_session_id"] = boot
+                row = self.analyze()["row"]
+                self.assertIsNone(row["sync_ms"])
+                self.assertFalse(row["target_applied_in_window"])
+                self.assertIn("ANDROID_WINDOW_OR_BOOT_UNKNOWN", row["flags"])
+
+    def test_missing_event_boot_keeps_window_counts_unknown_and_raw_stages_separate(self):
+        for event in self.events:
+            if event["origin"] == "ANDROID":
+                event["boot_session_id"] = None
+        row = self.analyze()["row"]
+        self.assertEqual(row["outcome"], "SUCCESS")
+        self.assertEqual(row["observed_completion"], "UNCERTAIN_WINDOW")
+        self.assertFalse(row["window_events_verified"])
+        self.assertIsNone(row["target_applied_in_window"])
+        for field in ("natural_periodic_cycles", "work_attempt_count", "get_started_count",
+                      "retry_event_count", "applied_event_count", "late_target_applied_count"):
+            self.assertIsNone(row[field])
+        for kind in ("server_updated", "push_send_accepted", "push_received", "work_enqueued",
+                     "work_started", "snapshot_applied"):
+            self.assertEqual(row[kind + "_event_count_all"], 1)
+        self.assertIn("OUTCOME_EVIDENCE_UNVERIFIED", row["flags"])
+        self.assertNotIn("OUTCOME_EVIDENCE_CONFLICT", row["flags"])
+
+    def test_missing_boot_timeout_keeps_declared_outcome_and_no_zero_duration(self):
+        self.manifest.update(outcome="TIMEOUT", reason_codes=["TIMEOUT"])
+        self.manifest["observation"]["natural_periodic_cycles"] = 2
+        for event in self.events:
+            event["boot_session_id"] = None
+        result = self.analyze()
+        row = result["row"]
+        self.assertEqual(row["outcome"], "TIMEOUT")
+        self.assertEqual(row["declared_natural_periodic_cycles"], 2)
+        self.assertIsNone(row["natural_periodic_cycles"])
+        self.assertIsNone(row["sync_ms"])
+        self.assertIsNone(row["update_to_applied_ms"])
+        csv_row = next(csv.DictReader(io.StringIO(analyzer.csv_text([result]))))
+        self.assertEqual(csv_row["natural_periodic_cycles"], "")
+        self.assertEqual(csv_row["target_applied_in_window"], "")
+
+    def test_clock_offset_sign_and_uncertainty(self):
+        self.controlled_clock()
+        row = self.analyze()["row"]
+        self.assertEqual(row["update_to_applied_ms"], 8000)
+        self.assertEqual(row["update_to_received_ms"], 3000)
+        self.assertEqual(row["update_to_applied_uncertainty_ms"], 6)
+        # Response can be logged after callback; it is not a receipt timestamp.
+        next(e for e in self.events if e["event_type"] == "push_send_accepted")["timestamp_utc"] = "2026-11-03T00:00:10Z"
+        self.assertEqual(self.analyze()["row"]["update_to_received_ms"], 3000)
+
+    def test_host_clock_bad_samples_and_negative_bound_not_used(self):
+        self.controlled_clock("HOST")
+        self.assertIsNone(self.analyze()["row"]["update_to_applied_ms"])
+        self.controlled_clock()
+        self.manifest["clock"]["uncertainty_before_ms"] = 0
+        self.assertIsNone(self.analyze()["row"]["update_to_applied_ms"])
+        self.controlled_clock()
+        server = next(e for e in self.events if e["event_type"] == "server_updated")
+        server["timestamp_utc"] = "2026-11-03T00:00:08Z"
+        self.assertIsNone(self.analyze()["row"]["update_to_applied_ms"])
+
+    def test_missing_enqueue_and_ambiguous_receipts_do_not_guess(self):
+        receipt = copy.deepcopy(next(e for e in self.events if e["event_type"] == "push_received"))
+        receipt["event_id"] = "00000000-0000-4000-8000-000000000099"
+        self.events.append(receipt)
+        self.assertIsNone(self.analyze()["row"]["received_to_enqueue_ms"])
+        self.events = [e for e in self.events if e["event_type"] != "work_enqueued"]
+        self.assertIsNone(self.analyze()["row"]["queue_ms"])
+
+    def test_retry_keeps_logical_request_and_each_get_separate(self):
+        self.event("sync_retrying", 36500)
+        self.event("work_started", 38000, work_attempt=1)
+        for e in self.events:
+            if e["event_type"] == "snapshot_applied":
+                e.update(work_attempt=1, elapsed_realtime_ms=41000)
+        self.event("snapshot_fetch_started", 39000, work_attempt=1,
+                   network_call_id="00000000-0000-4000-8000-000000000020")
+        self.event("snapshot_fetch_completed", 40000, work_attempt=1,
+                   network_call_id="00000000-0000-4000-8000-000000000020",
+                   outcome="success", data_version=1, http_status=200)
+        result = self.analyze()
+        self.assertEqual(result["row"]["work_attempt_count"], 2)
+        self.assertEqual(result["row"]["retry_event_count"], 1)
+        self.assertEqual(result["row"]["get_started_count"], 2)
+        self.assertEqual(result["row"]["sync_ms"], 3000)
+        self.assertEqual([f["duration_ms"] for f in result["fetches"]], [1000, 1000])
+
+    def test_shared_work_id_is_not_shared_periodic_cycle(self):
+        self.manifest.update(case_id="E01", mode="PERIODIC")
+        self.manifest["observation"].update(planned_window_seconds=5400, actual_duration_ms=5400000,
+                                           end_elapsed_realtime_ms=5430000)
+        self.events = [e for e in self.events if e["event_type"] in {"work_started", "snapshot_applied"}]
+        for e in self.events:
+            e.update(mode="PERIODIC", source="PERIODIC", signal_ids=[])
+        self.event("work_started", 940000, mode="PERIODIC", source="PERIODIC", request_id="cycle-two", signal_ids=[])
+        self.event("work_started", 950000, mode="PERIODIC", source="PERIODIC", request_id="cycle-two", work_attempt=1, signal_ids=[])
+        row = self.analyze()["row"]
+        self.assertEqual(row["natural_periodic_cycles"], 2)
+        self.assertEqual(row["work_attempt_count"], 3)
+
+    def test_setup_recovery_manual_and_short_window_are_flagged(self):
+        self.manifest["case_id"] = "E05"
+        next(e for e in self.events if e["event_type"] == "work_started")["elapsed_realtime_ms"] = 29000
+        self.assertIn("TARGET_START_NOT_IN_WINDOW", self.analyze()["row"]["flags"])
+        self.event("work_started", 45000, source="MANUAL", request_id="manual-request",
+                   work_id="00000000-0000-4000-8000-000000000022", signal_ids=[])
+        self.assertIn("MANUAL_IN_WINDOW", self.analyze()["row"]["flags"])
+        self.manifest["observation"]["end_elapsed_realtime_ms"] = 50000
+        self.assertIn("WINDOW_SHORT_OR_UNDECLARED", self.analyze()["row"]["flags"])
+
+    def test_network_call_cannot_join_a_different_attempt(self):
+        next(e for e in self.events if e["event_type"] == "snapshot_fetch_completed")["work_attempt"] = 1
+        with self.assertRaisesRegex(analyzer.AnalysisError, "FETCH_CORRELATION_CONFLICT"):
+            self.analyze()
+
+    def test_same_target_hint_or_unchanged_does_not_imply_applied(self):
+        self.events = [e for e in self.events if e["event_type"] != "snapshot_applied"]
+        self.manifest.update(outcome="TIMEOUT", reason_codes=["TIMEOUT"])
+        row = self.analyze()["row"]
+        self.assertFalse(row["target_applied_in_window"])
+        self.assertIsNone(row["sync_ms"])
+
+    def test_group_identity_separates_phase_build_config_and_injection(self):
+        original = analyzer.group_identity(self.manifest)
+        for section, key, value in ((None, "run_phase", "main"), (None, "intervention", "INJECTED"),
+                ("build", "apk_sha256", "4" * 64), ("config", "battery_saver", True),
+                ("config", "server_route", "EMULATOR_HOST_GATEWAY"), ("config", "powered", True)):
+            m = copy.deepcopy(self.manifest)
+            (m[section] if section else m)[key] = value
+            self.assertNotEqual(analyzer.group_identity(m), original)
+
+    def test_clock_samples_need_to_bracket_events_and_wall_clock_must_be_stable(self):
+        self.controlled_clock()
+        self.events[0]["timestamp_utc"] = "2026-11-03T01:00:00Z"
+        result = self.analyze()
+        self.assertIsNone(result["row"]["update_to_applied_ms"])
+        self.assertIsNotNone(result["clock_reason"])
+
+    def test_hybrid_skip_case_requires_real_skipped_event_for_the_target_update(self):
+        self.manifest.update(case_id="E06", mode="HYBRID")
+        self.manifest["observation"].update(planned_window_seconds=2700, actual_duration_ms=2700000,
+                                           end_elapsed_realtime_ms=2730000)
+        self.events = [e for e in self.events if e["event_type"] in
+                       {"work_started", "snapshot_applied", "server_updated"}]
+        for e in self.events:
+            e["mode"] = "HYBRID"
+            if e["origin"] == "ANDROID":
+                e.update(source="PERIODIC", signal_ids=[])
+        self.assertIn("FAULT_SKIP_EVIDENCE_MISSING", self.analyze()["row"]["flags"])
+        skipped = copy.deepcopy(next(e for e in self.events if e["event_type"] == "server_updated"))
+        skipped.update(event_id="00000000-0000-4000-8000-000000000099", event_type="push_send_skipped",
+                       source="PUSH", outcome="skipped", reason="FAULT_INJECTION_SKIP")
+        self.events.append(skipped)
+        self.assertNotIn("FAULT_SKIP_EVIDENCE_MISSING", self.analyze()["row"]["flags"])
+
+
+class CaseEvidenceTests(unittest.TestCase):
+    setUp = MetricTests.setUp
+    load = InputTests.load
+    controlled_clock = MetricTests.controlled_clock
+
+    def observed_case(self, case, mode, seconds):
+        self.manifest.update(case_id=case, mode=mode, data_kind="OBSERVED", run_phase="main")
+        self.manifest["build"]["candidate_gate_passed"] = True
+        obs = self.manifest["observation"]
+        obs.update(planned_window_seconds=seconds, actual_duration_ms=seconds * 1000,
+                   end_elapsed_realtime_ms=30000 + seconds * 1000,
+                   end_utc=(datetime(2026, 11, 3, tzinfo=timezone.utc) +
+                            timedelta(seconds=seconds)).isoformat().replace("+00:00", "Z"))
+        self.events = [e for e in self.events if e["event_type"] not in
+                       {"push_send_accepted", "push_received", "work_enqueued"}]
+        for event in self.events:
+            event["mode"] = mode
+            if event["origin"] == "ANDROID":
+                event.update(source="PERIODIC" if mode != "PUSH" else "PUSH", signal_ids=[])
+
+    def test_pilot_e01_elapsed_recount_without_boot_is_descriptive(self):
+        self.observed_case("E01", "PERIODIC", 5400)
+        self.manifest.update(run_phase="pilot")
+        self.manifest["build"]["candidate_gate_passed"] = False
+        self.manifest["observation"]["boot_session_id"] = None
+        for event in self.events:
+            event["boot_session_id"] = None
+        work = next(e for e in self.events if e["event_type"] == "work_started")
+        for n, elapsed, request, attempt in (
+                (90, 20000, "setup-cycle", 0), (91, 60000, "setup-cycle", 0),
+                (92, 70000, "new-cycle", 0), (93, 80000, "new-cycle", 0),
+                (94, 90000, "retry-only", 1), (95, 5430001, "late-cycle", 0)):
+            self.events.append(dict(work, event_id=f"00000000-0000-4000-8000-{n:012d}",
+                                    elapsed_realtime_ms=elapsed, request_id=request, work_attempt=attempt))
+        row = analyzer.analyze_run(self.load("pilot"))["row"]
+        self.assertEqual(row["pilot_elapsed_periodic_cycles_unverified_boot"], 2)
+        self.assertEqual(row["pilot_elapsed_first_target_apply_from_start_ms_unverified_boot"], 7000)
+        self.assertIsNone(row["natural_periodic_cycles"])
+        self.assertIsNone(row["update_to_applied_ms"])
+        self.assertFalse(row["window_events_verified"])
+        self.assertFalse(row["eligible"])
+
+        self.manifest.update(execution_status="ABORTED", outcome="UNKNOWN", validity="INVALID",
+                             reason_codes=["RUN_INTERRUPTED"])
+        self.manifest["observation"]["start_elapsed_realtime_ms"] = None
+        row = analyzer.analyze_run(self.load("pilot"))["row"]
+        self.assertEqual(row["execution_status"], "ABORTED")
+        self.assertIsNone(row["pilot_elapsed_periodic_cycles_unverified_boot"])
+        self.assertIsNone(row["pilot_elapsed_first_target_apply_from_start_ms_unverified_boot"])
+        self.assertFalse(row["eligible"])
+
+    def e03(self, mode="PERIODIC"):
+        self.observed_case("E03", mode, 2100)
+        self.controlled_clock_for_window()
+        self.manifest["config"].update(deep_idle_before="ACTIVE", deep_idle_during="IDLE",
+                                       deep_idle_after="ACTIVE")
+        self.manifest["observation"]["milestones"].update(
+            idle_start_utc="2026-11-03T00:05:00Z", idle_exit_utc="2026-11-03T00:25:00Z")
+        next(e for e in self.events if e["event_type"] == "server_updated")[
+            "timestamp_utc"] = "2026-11-03T00:05:02Z"
+        self.move_apply_chain(1800)
+
+    def test_e03_active_and_short_idle_is_excluded_even_with_full_total_window(self):
+        self.e03()
+        self.manifest["config"]["deep_idle_during"] = "ACTIVE"
+        self.manifest["observation"]["milestones"]["idle_exit_utc"] = "2026-11-03T00:06:00Z"
+        result = self.analyze()
+        row = result["row"]
+        self.assertFalse(row["eligible"])
+        self.assertEqual(row["outcome"], "SUCCESS")
+        self.assertEqual(row["snapshot_applied_event_count_all"], 1)
+        self.assertIn("E03_DEEP_DOZE_NOT_CONFIRMED", row["flags"])
+        self.assertIn("E03_DOZE_PHASE_TOO_SHORT", row["flags"])
+        group = analyzer.summarize([result])[0]
+        self.assertEqual((group["n_eligible"], group["n_complete"]), (0, 0))
+
+    def test_e03_verified_doze_and_required_phases_are_eligible_for_both_modes(self):
+        for mode in ("PERIODIC", "PUSH"):
+            with self.subTest(mode=mode):
+                self.setUp()
+                self.e03(mode)
+                result = self.analyze()
+                self.assertEqual(result["row"]["flags"], "")
+                self.assertTrue(result["row"]["eligible"])
+                self.assertEqual(result["row"]["update_to_applied_ms"], 1499000)
+                self.assertEqual(analyzer.summarize([result])[0]["n_complete"], 1)
+
+    def test_e03_update_and_apply_in_baseline_are_excluded(self):
+        self.e03()
+        next(e for e in self.events if e["event_type"] == "server_updated")[
+            "timestamp_utc"] = "2026-11-03T00:01:01Z"
+        self.move_apply_chain(120)
+        result = self.analyze()
+        row = result["row"]
+        self.assertFalse(row["eligible"])
+        self.assertIn("E03_TARGET_UPDATE_OUTSIDE_DOZE", row["flags"])
+        self.assertEqual(row["outcome"], "SUCCESS")
+        self.assertEqual(row["snapshot_applied_event_count_all"], 1)
+        self.assertEqual(row["observed_completion"], "UNCERTAIN_WINDOW")
+        self.assertIsNone(row["update_to_applied_ms"])
+        group = analyzer.summarize([result])[0]
+        self.assertEqual((group["n_eligible"], group["n_complete"]), (0, 0))
+
+    def test_e03_target_update_after_idle_exit_is_excluded(self):
+        self.e03()
+        next(e for e in self.events if e["event_type"] == "server_updated")[
+            "timestamp_utc"] = "2026-11-03T00:26:01Z"
+        row = self.analyze()["row"]
+        self.assertFalse(row["eligible"])
+        self.assertIn("E03_TARGET_UPDATE_OUTSIDE_DOZE", row["flags"])
+
+    def test_e03_update_without_certain_phase_is_unverified(self):
+        for problem in ("enter", "exit", "missing_target", "uncontrolled_clock", "window_anchor"):
+            with self.subTest(problem=problem):
+                self.setUp()
+                self.e03()
+                updated = next(e for e in self.events if e["event_type"] == "server_updated")
+                if problem == "enter":
+                    updated["timestamp_utc"] = "2026-11-03T00:05:01.003Z"
+                elif problem == "exit":
+                    updated["timestamp_utc"] = "2026-11-03T00:25:00.997Z"
+                elif problem == "missing_target":
+                    updated["data_version"] = 2
+                elif problem == "uncontrolled_clock":
+                    self.manifest["clock"]["controlled"] = False
+                else:
+                    self.manifest["observation"]["start_elapsed_realtime_ms"] += 100
+                row = self.analyze()["row"]
+                self.assertFalse(row["eligible"])
+                self.assertIn("E03_TARGET_UPDATE_TIME_UNVERIFIED", row["flags"])
+                self.assertIsNone(row["update_to_applied_ms"])
+
+    def test_e03_apply_before_target_update_in_doze_is_excluded(self):
+        self.e03()
+        self.move_apply_chain(120)
+        row = self.analyze()["row"]
+        self.assertFalse(row["eligible"])
+        self.assertIn("E03_APPLIED_BEFORE_TARGET_UPDATE", row["flags"])
+        self.assertFalse(row["target_applied_in_window"])
+
+    def test_e03_each_phase_minimum_is_checked_independently(self):
+        for enter, leave in (("04:59", "25:00"), ("05:00", "24:59"), ("05:00", "25:01")):
+            with self.subTest(enter=enter, leave=leave):
+                self.setUp()
+                self.e03()
+                self.manifest["observation"]["milestones"].update(
+                    idle_start_utc=f"2026-11-03T00:{enter}Z", idle_exit_utc=f"2026-11-03T00:{leave}Z")
+                row = self.analyze()["row"]
+                self.assertFalse(row["eligible"])
+                self.assertIn("E03_DOZE_PHASE_TOO_SHORT", row["flags"])
+
+    def test_e03_missing_conflicting_or_reversed_doze_evidence_is_excluded(self):
+        for field, value, flag in (
+                ("deep_idle_during", None, "E03_DEEP_DOZE_NOT_CONFIRMED"),
+                ("deep_idle_after", "IDLE", "E03_DOZE_STATE_CONFLICT"),
+                ("idle_start_utc", None, "E03_DOZE_PHASES_UNVERIFIED"),
+                ("idle_exit_utc", "2026-11-03T00:04:00Z", "E03_DOZE_PHASE_ORDER_INVALID")):
+            with self.subTest(field=field, value=value):
+                self.setUp()
+                self.e03()
+                section = (self.manifest["config"] if field.startswith("deep_idle") else
+                           self.manifest["observation"]["milestones"])
+                section[field] = value
+                row = self.analyze()["row"]
+                self.assertFalse(row["eligible"])
+                self.assertIn(flag, row["flags"])
+
+    def test_e03_full_window_timeout_with_valid_doze_remains_eligible(self):
+        self.e03()
+        self.manifest.update(outcome="TIMEOUT", reason_codes=["TIMEOUT"])
+        self.events = [e for e in self.events if e["event_type"] != "snapshot_applied"]
+        result = self.analyze()
+        self.assertTrue(result["row"]["eligible"])
+        self.assertEqual(result["row"]["outcome"], "TIMEOUT")
+        self.assertEqual(analyzer.summarize([result])[0]["eligible_outcomes"], {"TIMEOUT": 1})
+
+    def e04(self, mode="PUSH"):
+        self.observed_case("E04", mode, 1920 if mode == "PERIODIC" else 420)
+        self.manifest["observation"]["milestones"].update(
+            offline_utc="2026-11-03T00:00:00Z", reconnect_utc="2026-11-03T00:02:00Z")
+        self.controlled_clock_for_window()
+        next(e for e in self.events if e["event_type"] == "server_updated")[
+            "timestamp_utc"] = "2026-11-03T00:00:02Z"
+
+    def controlled_clock_for_window(self):
+        self.controlled_clock()
+        end = datetime.fromisoformat(self.manifest["observation"]["end_utc"].replace("Z", "+00:00"))
+        for sample in self.manifest["clock"]["after_samples"]:
+            sample.update(client_send_utc=(end + timedelta(seconds=1)).isoformat().replace("+00:00", "Z"),
+                          client_receive_utc=(end + timedelta(seconds=1, milliseconds=10)).isoformat().replace("+00:00", "Z"),
+                          server_utc=(end + timedelta(seconds=2, milliseconds=5)).isoformat().replace("+00:00", "Z"))
+
+    def move_apply_chain(self, applied_second):
+        times = {"work_started": applied_second - 3, "snapshot_fetch_started": applied_second - 2,
+                 "snapshot_fetch_completed": applied_second - 1, "snapshot_applied": applied_second}
+        for event in self.events:
+            if event["event_type"] in times:
+                seconds = times[event["event_type"]]
+                event.update(elapsed_realtime_ms=30000 + seconds * 1000,
+                             timestamp_utc=(datetime(2026, 11, 3, tzinfo=timezone.utc) +
+                                            timedelta(seconds=seconds)).isoformat().replace("+00:00", "Z"))
+
+    def analyze(self):
+        return analyzer.analyze_run(self.load("main"))
+
+    def test_e04_apply_before_reconnect_is_excluded_and_outcome_preserved(self):
+        self.e04()
+        row = self.analyze()["row"]
+        self.assertEqual(row["outcome"], "SUCCESS")
+        self.assertFalse(row["eligible"])
+        self.assertFalse(row["target_applied_in_window"])
+        self.assertIn("E04_APPLIED_BEFORE_RECONNECT", row["flags"])
+        self.assertIsNone(row["sync_ms"])
+
+    def test_e04_apply_after_reconnect_is_eligible_for_both_modes(self):
+        for mode in ("PUSH", "PERIODIC"):
+            self.setUp()
+            self.e04(mode)
+            self.move_apply_chain(200)
+            row = self.analyze()["row"]
+            self.assertEqual(row["flags"], "")
+            self.assertTrue(row["eligible"])
+            self.assertEqual(row["observed_completion"], "APPLIED_TARGET")
+
+    def test_e04_target_update_outside_offline_is_excluded(self):
+        for server_utc in ("2026-11-03T00:00:00Z", "2026-11-03T00:03:01Z"):
+            with self.subTest(server_utc=server_utc):
+                self.setUp()
+                self.e04()
+                self.move_apply_chain(200)
+                next(e for e in self.events if e["event_type"] == "server_updated")[
+                    "timestamp_utc"] = server_utc
+                result = self.analyze()
+                row = result["row"]
+                self.assertEqual(row["outcome"], "SUCCESS")
+                self.assertFalse(row["eligible"])
+                self.assertNotEqual(row["observed_completion"], "APPLIED_TARGET")
+                self.assertIn("E04_TARGET_UPDATE_OUTSIDE_OFFLINE", row["flags"])
+                self.assertIsNone(row["update_to_applied_ms"])
+                self.assertEqual(row["snapshot_applied_event_count_all"], 1)
+                self.assertEqual(analyzer.summarize([result])[0]["n_eligible"], 0)
+
+    def test_e04_offset_maps_target_update_into_offline_interval(self):
+        self.e04()
+        self.move_apply_chain(200)
+        next(e for e in self.events if e["event_type"] == "server_updated")[
+            "timestamp_utc"] = "2026-11-03T00:02:00.500Z"
+        row = self.analyze()["row"]
+        self.assertTrue(row["eligible"])
+        self.assertEqual(row["observed_completion"], "APPLIED_TARGET")
+        self.assertEqual(row["update_to_applied_ms"], 80500)
+
+    def test_e04_uncertainty_overlapping_offline_boundary_is_unverified(self):
+        for server_utc in ("2026-11-03T00:00:01.003Z", "2026-11-03T00:02:00.997Z"):
+            with self.subTest(server_utc=server_utc):
+                self.setUp()
+                self.e04()
+                self.move_apply_chain(200)
+                next(e for e in self.events if e["event_type"] == "server_updated")[
+                    "timestamp_utc"] = server_utc
+                row = self.analyze()["row"]
+                self.assertFalse(row["eligible"])
+                self.assertEqual(row["observed_completion"], "UNCERTAIN_WINDOW")
+                self.assertIn("E04_TARGET_UPDATE_TIME_UNVERIFIED", row["flags"])
+                self.assertIsNone(row["update_to_applied_ms"])
+
+    def test_e04_missing_or_ambiguous_target_update_is_unverified(self):
+        for ambiguous in (False, True):
+            with self.subTest(ambiguous=ambiguous):
+                self.setUp()
+                self.e04()
+                self.move_apply_chain(200)
+                updated = next(e for e in self.events if e["event_type"] == "server_updated")
+                if ambiguous:
+                    self.events.append(dict(updated, event_id="00000000-0000-4000-8000-000000000098",
+                                            update_id="second-update"))
+                else:
+                    updated["data_version"] = 2
+                row = self.analyze()["row"]
+                self.assertFalse(row["eligible"])
+                self.assertEqual(row["outcome"], "SUCCESS")
+                self.assertIsNone(row["target_applied_in_window"])
+                self.assertIn("E04_TARGET_UPDATE_TIME_UNVERIFIED", row["flags"])
+
+    def test_e04_missing_milestone_or_unverified_clock_is_excluded(self):
+        for problem in ("reconnect", "offline", "clock", "host", "anchor", "jump"):
+            self.setUp()
+            self.e04()
+            self.move_apply_chain(200)
+            if problem in {"reconnect", "offline"}:
+                self.manifest["observation"]["milestones"][problem + "_utc"] = None
+            elif problem == "clock":
+                self.manifest["clock"]["controlled"] = False
+            elif problem == "host":
+                self.manifest["clock"]["client_clock"] = "HOST"
+            elif problem == "anchor":
+                self.manifest["observation"]["start_elapsed_realtime_ms"] += 1000
+            else:
+                next(e for e in self.events if e["event_type"] == "snapshot_applied")[
+                    "timestamp_utc"] = "2026-11-03T00:03:30Z"
+            row = self.analyze()["row"]
+            self.assertFalse(row["eligible"], problem)
+            self.assertIsNone(row["target_applied_in_window"], problem)
+            self.assertEqual(row["observed_completion"], "UNCERTAIN_WINDOW", problem)
+            self.assertIn("E04_RECOVERY_CLOCK_UNVERIFIED", row["flags"], problem)
+
+    def test_e04_full_window_timeout_remains_in_denominator(self):
+        self.e04()
+        self.move_apply_chain(200)
+        self.events = [e for e in self.events if e["event_type"] != "snapshot_applied"]
+        self.manifest.update(outcome="TIMEOUT", reason_codes=["TIMEOUT"])
+        result = self.analyze()
+        self.assertTrue(result["row"]["eligible"])
+        self.assertEqual(result["row"]["outcome"], "TIMEOUT")
+        self.assertIsNone(result["row"]["sync_ms"])
+        self.assertEqual(analyzer.summarize([result])[0]["n_eligible"], 1)
+
+    def test_e04_apply_at_reconnect_precision_boundary_remains_unverified(self):
+        self.e04()
+        self.move_apply_chain(120)
+        row = self.analyze()["row"]
+        self.assertFalse(row["eligible"])
+        self.assertIsNone(row["target_applied_in_window"])
+        self.assertIn("E04_APPLY_TIME_UNVERIFIED", row["flags"])
+
+    def test_e04_short_offline_or_recovery_interval_is_excluded(self):
+        for reconnect, flag in (("00:01:00", "E04_OFFLINE_INTERVAL_INVALID"),
+                                ("00:03:00", "E04_RECOVERY_WINDOW_SHORT")):
+            self.setUp()
+            self.e04()
+            self.move_apply_chain(200)
+            self.manifest["observation"]["milestones"]["reconnect_utc"] = "2026-11-03T" + reconnect + "Z"
+            row = self.analyze()["row"]
+            self.assertFalse(row["eligible"])
+            self.assertIn(flag, row["flags"])
+
+    def e06(self):
+        self.observed_case("E06", "HYBRID", 2700)
+        updated = next(e for e in self.events if e["event_type"] == "server_updated")
+        skipped = copy.deepcopy(updated)
+        skipped.update(event_id="00000000-0000-4000-8000-000000000099", event_type="push_send_skipped",
+                       source="PUSH", outcome="skipped", reason="FAULT_INJECTION_SKIP")
+        self.events.append(skipped)
+
+    def test_e06_complete_fetch_chain_is_eligible_independent_of_input_order(self):
+        self.e06()
+        self.events.reverse()
+        row = self.analyze()["row"]
+        self.assertTrue(row["eligible"])
+        self.assertEqual(row["flags"], "")
+        self.assertEqual(row["get_started_count"], 1)
+        self.assertEqual(row["observed_completion"], "APPLIED_TARGET")
+        self.assertEqual(row["push_send_skipped_event_count_all"], 1)
+        self.assertEqual(row["push_send_accepted_event_count_all"], 0)
+
+    def test_e06_skipped_and_provider_send_for_same_update_conflict(self):
+        for kind, outcome, provider in (
+                ("push_send_accepted", "accepted", {"message_id": "test-provider-response", "http_status": 200}),
+                ("push_send_rejected", "rejected", {"reason": "FCM_REJECTED", "http_status": 400}),
+                ("push_send_unknown", "unknown", {"reason": "FCM_RESPONSE_UNKNOWN"})):
+            with self.subTest(kind=kind):
+                self.setUp()
+                self.e06()
+                updated = next(e for e in self.events if e["event_type"] == "server_updated")
+                self.events.append(dict(updated, event_id="00000000-0000-4000-8000-000000000098",
+                                        event_type=kind, source="PUSH", outcome=outcome,
+                                        signal_ids=["test-signal"], send_attempt_id="test-attempt",
+                                        ttl_ms=86400000, **provider))
+                result = self.analyze()
+                row = result["row"]
+                self.assertEqual(row["outcome"], "SUCCESS")
+                self.assertFalse(row["eligible"])
+                self.assertIn("E06_FAULT_SKIP_CONFLICTING_SEND", row["flags"])
+                self.assertNotIn("FAULT_SKIP_EVIDENCE_MISSING", row["flags"])
+                self.assertEqual(result["event_counts"][kind], 1)
+                self.assertEqual(result["event_counts"]["push_send_skipped"], 1)
+                self.assertEqual(analyzer.summarize([result])[0]["n_eligible"], 0)
+
+    def test_e06_unrelated_send_or_local_failure_does_not_conflict(self):
+        self.e06()
+        updated = next(e for e in self.events if e["event_type"] == "server_updated")
+        self.events.extend([
+            dict(updated, event_id="00000000-0000-4000-8000-000000000098",
+                 update_id="unrelated-update", event_type="push_send_accepted", source="PUSH",
+                 outcome="accepted", message_id="test-provider-response", http_status=200,
+                 signal_ids=["test-signal"], send_attempt_id="test-attempt", ttl_ms=86400000),
+            dict(updated, event_id="00000000-0000-4000-8000-000000000097",
+                 event_type="push_send_failed_local", source="PUSH", outcome="failure",
+                 reason="INVALID_FCM_CONFIG"),
+        ])
+        row = self.analyze()["row"]
+        self.assertTrue(row["eligible"])
+        self.assertEqual(row["flags"], "")
+
+    def test_e06_missing_fetch_stages_are_unverified(self):
+        for missing in ({"snapshot_fetch_started"}, {"snapshot_fetch_completed"},
+                        {"snapshot_fetch_started", "snapshot_fetch_completed"}):
+            self.setUp()
+            self.e06()
+            self.events = [e for e in self.events if e["event_type"] not in missing]
+            row = self.analyze()["row"]
+            self.assertEqual(row["outcome"], "SUCCESS")
+            self.assertFalse(row["eligible"])
+            self.assertIsNone(row["target_applied_in_window"])
+            self.assertIsNone(row["sync_ms"])
+            self.assertIn("E06_FETCH_CHAIN_UNVERIFIED", row["flags"])
+
+    def test_e06_different_request_work_or_attempt_cannot_prove_apply(self):
+        for field, value in (("request_id", "other-request"),
+                             ("work_id", "00000000-0000-4000-8000-000000000098"),
+                             ("work_attempt", 1)):
+            self.setUp()
+            self.e06()
+            for event in self.events:
+                if event["event_type"] in {"snapshot_fetch_started", "snapshot_fetch_completed"}:
+                    event[field] = value
+            if field == "work_id":
+                with self.assertRaisesRegex(analyzer.AnalysisError, "REQUEST_CORRELATION_CONFLICT"):
+                    self.analyze()
+            else:
+                row = self.analyze()["row"]
+                self.assertFalse(row["eligible"])
+                self.assertIn("E06_FETCH_CHAIN_UNVERIFIED", row["flags"])
+
+    def test_e06_fetch_must_succeed_for_target_version(self):
+        for change in ({"data_version": 2}, {"http_status": 500, "outcome": "failure", "reason": "HTTP_ERROR"}):
+            self.setUp()
+            self.e06()
+            next(e for e in self.events if e["event_type"] == "snapshot_fetch_completed").update(change)
+            row = self.analyze()["row"]
+            self.assertFalse(row["eligible"])
+            self.assertIn("E06_FETCH_CHAIN_UNVERIFIED", row["flags"])
+
+    def test_e06_fetch_must_follow_work_start_and_precede_apply(self):
+        for kind, seconds in (("snapshot_fetch_started", 3), ("snapshot_fetch_completed", 4),
+                              ("snapshot_fetch_completed", 8)):
+            self.setUp()
+            self.e06()
+            event = next(e for e in self.events if e["event_type"] == kind)
+            event.update(elapsed_realtime_ms=30000 + seconds * 1000,
+                         timestamp_utc="2026-11-03T00:00:0" + str(seconds) + "Z")
+            row = self.analyze()["row"]
+            self.assertFalse(row["eligible"])
+            self.assertIn("E06_FETCH_CHAIN_UNVERIFIED", row["flags"])
+
+    def test_e06_full_window_timeout_does_not_require_an_unobserved_fetch(self):
+        self.e06()
+        self.manifest.update(outcome="TIMEOUT", reason_codes=["TIMEOUT"])
+        self.events = [e for e in self.events if e["event_type"] not in
+                       {"snapshot_applied", "snapshot_fetch_started", "snapshot_fetch_completed"}]
+        result = self.analyze()
+        self.assertTrue(result["row"]["eligible"])
+        self.assertEqual(result["row"]["outcome"], "TIMEOUT")
+        self.assertEqual(analyzer.summarize([result])[0]["n_eligible"], 1)
+
+
+class E02ChainTests(unittest.TestCase):
+    load = InputTests.load
+    setUp = MetricTests.setUp
+    controlled_clock = MetricTests.controlled_clock
+
+    def main_input(self):
+        self.manifest.update(data_kind="OBSERVED", run_phase="main")
+        self.manifest["build"]["candidate_gate_passed"] = True
+        for event in self.events:
+            if event["event_type"] == "push_send_accepted":
+                event["message_id"] = "test-provider-response"
+        return self.load("main")
+
+    def test_e02_same_target_and_signal_chain_is_eligible(self):
+        # WorkManager can start work before the enqueue acknowledgement is logged.
+        enqueued = next(e for e in self.events if e["event_type"] == "work_enqueued")
+        enqueued["elapsed_realtime_ms"] = 34500
+        self.events.reverse()
+        result = analyzer.analyze_run(self.main_input())
+        row = result["row"]
+        self.assertTrue(row["eligible"])
+        self.assertEqual(row["observed_completion"], "APPLIED_TARGET")
+        self.assertIsNone(row["queue_ms"])
+        self.assertEqual(analyzer.summarize([result])[0]["n_complete"], 1)
+
+    def test_e02_clock_rejects_callback_and_apply_before_target_commit(self):
+        self.controlled_clock()
+        next(e for e in self.events if e["event_type"] == "server_updated")[
+            "timestamp_utc"] = "2026-11-03T00:01:01Z"
+        next(e for e in self.events if e["event_type"] == "push_send_accepted")[
+            "timestamp_utc"] = "2026-11-03T00:01:02Z"
+        result = analyzer.analyze_run(self.main_input())
+        row = result["row"]
+        self.assertEqual(row["outcome"], "SUCCESS")
+        self.assertFalse(row["eligible"])
+        self.assertEqual(row["observed_completion"], "UNCERTAIN_WINDOW")
+        self.assertIn("E02_PUSH_CLOCK_ORDER_CONFLICT", row["flags"])
+        self.assertEqual(row["snapshot_applied_event_count_all"], 1)
+        self.assertIsNone(row["update_to_applied_ms"])
+        group = analyzer.summarize([result])[0]
+        self.assertEqual((group["n_eligible"], group["n_complete"]), (0, 0))
+
+    def test_e02_clock_accepts_ordered_update_and_late_provider_response(self):
+        self.controlled_clock()
+        next(e for e in self.events if e["event_type"] == "server_updated")[
+            "timestamp_utc"] = "2026-11-03T00:00:01Z"
+        next(e for e in self.events if e["event_type"] == "push_send_accepted")[
+            "timestamp_utc"] = "2026-11-03T00:00:10Z"
+        result = analyzer.analyze_run(self.main_input())
+        self.assertTrue(result["row"]["eligible"])
+        self.assertEqual(result["row"]["update_to_applied_ms"], 7000)
+        self.assertEqual(analyzer.summarize([result])[0]["n_complete"], 1)
+
+    def test_e02_clock_overlap_with_callback_is_not_a_certain_conflict(self):
+        self.controlled_clock()
+        self.manifest["observation"].update(start_utc="2026-11-03T00:00:02Z", end_utc="2026-11-03T00:02:02Z",
+                                            start_elapsed_realtime_ms=32000, end_elapsed_realtime_ms=152000)
+        after = {"client_send_utc": "2026-11-03T00:02:03Z", "client_receive_utc": "2026-11-03T00:02:03.010Z",
+                 "server_utc": "2026-11-03T00:02:04.005Z", "resolution_ms": 1}
+        self.manifest["clock"]["after_samples"] = [after] * 3
+        next(e for e in self.events if e["event_type"] == "server_updated")[
+            "timestamp_utc"] = "2026-11-03T00:00:03.003Z"
+        next(e for e in self.events if e["event_type"] == "push_send_accepted")[
+            "timestamp_utc"] = "2026-11-03T00:00:04Z"
+        row = analyzer.analyze_run(self.main_input())["row"]
+        self.assertTrue(row["eligible"])
+        self.assertNotIn("E02_PUSH_CLOCK_ORDER_CONFLICT", row["flags"])
+        self.assertIsNone(row["update_to_received_ms"])
+
+    def test_e02_window_opened_60_seconds_before_target_commit_is_excluded(self):
+        self.controlled_clock()
+        self.manifest.update(outcome="TIMEOUT", reason_codes=["TIMEOUT"])
+        next(e for e in self.events if e["event_type"] == "server_updated")[
+            "timestamp_utc"] = "2026-11-03T00:01:01Z"
+        next(e for e in self.events if e["event_type"] == "push_send_accepted")[
+            "timestamp_utc"] = "2026-11-03T00:01:02Z"
+        for event in self.events:
+            if event["origin"] == "ANDROID":
+                earlier = datetime.fromisoformat(event["timestamp_utc"].replace("Z", "+00:00"))
+                event["timestamp_utc"] = (earlier + timedelta(seconds=123)).isoformat().replace("+00:00", "Z")
+                event["elapsed_realtime_ms"] += 123000
+        result = analyzer.analyze_run(self.main_input())
+        row = result["row"]
+        self.assertEqual(row["outcome"], "TIMEOUT")
+        self.assertEqual(row["observed_completion"], "LATE_TARGET")
+        self.assertEqual(row["late_target_applied_count"], 1)
+        self.assertFalse(row["eligible"])
+        self.assertIn("E02_WINDOW_START_CLOCK_CONFLICT", row["flags"])
+        group = analyzer.summarize([result])[0]
+        self.assertEqual(group["n_eligible"], 0)
+        self.assertEqual(group["eligible_outcomes"], {})
+
+    def test_e02_timeout_at_target_commit_stays_eligible_with_clock_uncertainty(self):
+        self.controlled_clock()
+        self.manifest.update(outcome="TIMEOUT", reason_codes=["TIMEOUT"])
+        self.events = [e for e in self.events if e["origin"] == "SERVER"]
+        next(e for e in self.events if e["event_type"] == "server_updated")[
+            "timestamp_utc"] = "2026-11-03T00:00:01.003Z"
+        next(e for e in self.events if e["event_type"] == "push_send_accepted")[
+            "timestamp_utc"] = "2026-11-03T00:00:02Z"
+        result = analyzer.analyze_run(self.main_input())
+        self.assertTrue(result["row"]["eligible"])
+        self.assertEqual(result["row"]["observed_completion"], "NO_TARGET_EVIDENCE")
+        self.assertEqual(analyzer.summarize([result])[0]["eligible_outcomes"], {"TIMEOUT": 1})
+
+    def test_e02_unrelated_signal_or_wrong_sender_update_excludes_declared_success(self):
+        for mismatch in ({"signal_ids": ["unrelated-signal"]}, {"update_id": "other-update"}, {"data_version": 2}):
+            with self.subTest(mismatch=mismatch):
+                self.setUp()
+                next(e for e in self.events if e["event_type"] == "push_send_accepted").update(mismatch)
+                result = analyzer.analyze_run(self.main_input())
+                row = result["row"]
+                self.assertEqual(row["outcome"], "SUCCESS")
+                self.assertFalse(row["eligible"])
+                self.assertEqual(row["observed_completion"], "UNCERTAIN_WINDOW")
+                self.assertIn("E02_PUSH_CHAIN_UNVERIFIED", row["flags"])
+                self.assertEqual(row["push_send_accepted_event_count_all"], 1)
+                self.assertEqual(row["snapshot_applied_event_count_all"], 1)
+                self.assertIsNone(row["update_to_applied_ms"])
+                group = analyzer.summarize([result])[0]
+                self.assertEqual((group["n_eligible"], group["n_complete"]), (0, 0))
+
+    def test_e02_missing_or_mismatched_callback_enqueue_or_worker_excludes_success(self):
+        for event_type in ("push_received", "work_enqueued", "work_started", "snapshot_applied"):
+            with self.subTest(event_type=event_type):
+                self.setUp()
+                event = next(e for e in self.events if e["event_type"] == event_type)
+                if event_type in {"push_received", "work_started"}:
+                    self.events.remove(event)
+                elif event_type == "work_enqueued":
+                    event["request_id"] = "other-request"
+                else:
+                    event["signal_ids"] = ["unrelated-signal"]
+                row = analyzer.analyze_run(self.main_input())["row"]
+                self.assertFalse(row["eligible"])
+                self.assertIn("E02_PUSH_CHAIN_UNVERIFIED", row["flags"])
+
+    def test_e02_observed_timeout_or_provider_failure_remains_eligible(self):
+        for outcome in ("TIMEOUT", "FAILURE"):
+            with self.subTest(outcome=outcome):
+                self.setUp()
+                self.manifest.update(outcome=outcome, reason_codes=["TIMEOUT" if outcome == "TIMEOUT" else "FCM_REJECTED"])
+                self.events = [e for e in self.events if e["origin"] == "SERVER"]
+                if outcome == "FAILURE":
+                    sender = next(e for e in self.events if e["event_type"] == "push_send_accepted")
+                    sender.update(event_type="push_send_rejected", message_id=None, outcome="rejected",
+                                  http_status=400, reason="FCM_REJECTED")
+                result = analyzer.analyze_run(self.main_input())
+                self.assertTrue(result["row"]["eligible"])
+                self.assertEqual(result["row"]["outcome"], outcome)
+                group = analyzer.summarize([result])[0]
+                self.assertEqual((group["n_eligible"], group["n_complete"]), (1, 0))
+
+
+class OutputTests(unittest.TestCase):
+    load = InputTests.load
+    setUp = MetricTests.setUp
+    main_input = E02ChainTests.main_input
+
+    def test_csv_nulls_are_empty_not_zero_and_fixture_never_enters_denominator(self):
+        result = analyzer.analyze_run(self.load())
+        text = analyzer.csv_text([result])
+        import csv
+        row = next(csv.DictReader(io.StringIO(text)))
+        self.assertEqual(row["update_to_applied_ms"], "")
+        self.assertEqual(row["eligible"], "false")
+        group = analyzer.summarize([result])[0]
+        self.assertEqual(group["n_eligible"], 0)
+        self.assertIsNone(group["completion_rate"])
+
+    def test_valid_main_timeouts_remain_in_denominator(self):
+        success = analyzer.analyze_run(self.main_input())
+        self.manifest.update(outcome="TIMEOUT", reason_codes=["TIMEOUT"])
+        self.events = [e for e in self.events if e["event_type"] != "snapshot_applied"]
+        timeout = analyzer.analyze_run(self.load("main"))
+        group = analyzer.summarize([success, timeout])[0]
+        self.assertEqual(group["n_eligible"], 2)
+        self.assertEqual(group["n_complete"], 1)
+        self.assertEqual(group["completion_rate"], 0.5)
+        self.assertEqual(group["eligible_outcomes"]["TIMEOUT"], 1)
+        self.assertEqual(group["metrics"]["sync_ms"]["n_measured"], 1)
+        self.assertIsNone(group["metrics"]["update_to_applied_ms"]["median"])
+
+    def test_not_run_is_excluded_without_hiding_rows(self):
+        self.main_input()
+        self.manifest.update(execution_status="NOT_RUN", outcome="NOT_RUN", validity="NOT_ASSESSED")
+        self.events = []
+        analysis = analyzer.analyze_run(self.load("main"))
+        group = analyzer.summarize([analysis])[0]
+        self.assertEqual(group["n_input"], 1)
+        self.assertEqual(group["n_not_run"], 1)
+        self.assertEqual(group["n_excluded"], 1)
+
+    def test_cannot_overwrite_output_and_report_hashes_match_bytes(self):
+        import hashlib
+        self.load()
+        base = self.directory / "out"
+        analyzer.publish([self.directory], "fixture", base, "one")
+        output = base / "fixture_analysis/one"
+        report = json.loads((output / "analysis_report.json").read_text(encoding="utf-8"))
+        self.assertFalse(report["runtime_experiment_performed"])
+        for filename, digest in report["outputs_sha256"].items():
+            self.assertEqual(hashlib.sha256((output / filename).read_bytes()).hexdigest(), digest)
+        with self.assertRaisesRegex(analyzer.AnalysisError, "OUTPUT_EXISTS"):
+            analyzer.publish([self.directory], "fixture", base, "one")
+
+    def test_multiple_batches_are_reproducible_and_inputs_unchanged(self):
+        self.load()
+        original = (self.directory / "events.jsonl").read_bytes()
+        for batch in ("one", "two"):
+            analyzer.publish([self.directory], "fixture", self.directory / "out", batch)
+        for filename in ("results.csv", "summary.json"):
+            self.assertEqual((self.directory / "out/fixture_analysis/one" / filename).read_bytes(),
+                             (self.directory / "out/fixture_analysis/two" / filename).read_bytes())
+        reports = [json.loads((self.directory / f"out/fixture_analysis/{batch}/analysis_report.json").read_text())
+                   for batch in ("one", "two")]
+        reports[0]["batch_id"] = reports[1]["batch_id"]
+        self.assertEqual(reports[0], reports[1])
+        self.assertEqual((self.directory / "events.jsonl").read_bytes(), original)
+
+    def test_bad_input_or_duplicate_run_does_not_create_output(self):
+        self.load()
+        base = self.directory / "out"
+        with self.assertRaisesRegex(analyzer.AnalysisError, "DUPLICATE_RUN_INPUT"):
+            analyzer.publish([self.directory, self.directory], "fixture", base, "one")
+        self.assertFalse(base.exists())
+        self.events[0]["mode"] = "HYBRID"
+        (self.directory / "events.jsonl").write_text("".join(json.dumps(e) + "\n" for e in self.events), encoding="utf-8")
+        with self.assertRaises(analyzer.AnalysisError):
+            analyzer.publish([self.directory], "fixture", base, "two")
+        self.assertFalse(base.exists())
+
+    def test_cli_has_safe_errors_without_raw_fields_or_traceback(self):
+        self.load()
+        (self.directory / "events.jsonl").write_text('{"private":"SYNTHETIC_SECRET"}\n', encoding="utf-8")
+        out, err = io.StringIO(), io.StringIO()
+        with redirect_stdout(out), redirect_stderr(err):
+            code = analyzer.main(["--run", str(self.directory), "--dataset", "fixture",
+                                  "--output-base", str(self.directory / "out"), "--batch-id", "bad"])
+        self.assertEqual(code, 2)
+        self.assertIn("CANONICAL_FIELDS_REQUIRED", err.getvalue())
+        self.assertNotIn("SYNTHETIC_SECRET", out.getvalue() + err.getvalue())
+        self.assertNotIn("Traceback", err.getvalue())
+
+    def test_exporter_to_analyzer_integration(self):
+        source = SCRIPTS.parents[1] / "experiments/fixtures/sem24"
+        base = self.directory / "export"
+        with patch.object(analyzer.contract, "ROOT", base), redirect_stdout(io.StringIO()):
+            code = analyzer.contract.main(["--manifest", str(source / "manifest.json"),
+                "--android-log", str(source / "android.jsonl"), "--server-log", str(source / "server.jsonl"),
+                "--run-id", "run-sem24-fixture", "--device-alias", "fixture-device", "--fixture"])
+        self.assertEqual(code, 0)
+        exported = base / "experiments/fixture_exports/run-sem24-fixture"
+        analyzer.publish([exported], "fixture", self.directory / "analysis", "integration")
+        report = json.loads((self.directory / "analysis/fixture_analysis/integration/analysis_report.json").read_text())
+        self.assertEqual(report["runs"][0]["event_counts"]["push_send_accepted"], 1)
+        self.assertEqual(report["runs"][0]["row"]["outcome"], "NOT_RUN")
+
+    def test_csv_results_do_not_depend_on_directory_input_order(self):
+        self.load()
+        second = self.directory / "second"
+        second.mkdir()
+        manifest = copy.deepcopy(self.manifest)
+        manifest["run_id"] = "run-sem45-second"
+        (second / "manifest.json").write_text(json.dumps(manifest), encoding="utf-8")
+        events = [dict(e, run_id=manifest["run_id"]) for e in self.events]
+        (second / "events.jsonl").write_text("".join(json.dumps(e) + "\n" for e in events), encoding="utf-8")
+        for batch, inputs in (("one", [self.directory, second]), ("two", [second, self.directory])):
+            analyzer.publish(inputs, "fixture", self.directory / "out", batch)
+        for filename in ("results.csv", "summary.json"):
+            self.assertEqual((self.directory / "out/fixture_analysis/one" / filename).read_bytes(),
+                             (self.directory / "out/fixture_analysis/two" / filename).read_bytes())
+
+    def test_missing_candidate_and_success_without_apply_do_not_enter_statistics(self):
+        self.main_input()
+        self.manifest["build"]["candidate_gate_passed"] = False
+        with self.assertRaisesRegex(analyzer.AnalysisError, "MAIN_CANDIDATE_REQUIRED"):
+            self.load("main")
+        self.manifest["build"]["candidate_gate_passed"] = True
+        self.events = [e for e in self.events if e["event_type"] != "snapshot_applied"]
+        row = analyzer.analyze_run(self.load("main"))["row"]
+        self.assertFalse(row["eligible"])
+        self.assertIn("E02_PUSH_CHAIN_UNVERIFIED", row["flags"])
+
+    def test_pilot_declared_outcomes_are_visible_with_zero_main_denominator(self):
+        self.manifest.update(data_kind="OBSERVED", run_phase="pilot")
+        next(e for e in self.events if e["event_type"] == "push_send_accepted")["message_id"] = "test-provider-response"
+        success = analyzer.analyze_run(self.load("pilot"))
+        self.manifest.update(outcome="TIMEOUT", reason_codes=["TIMEOUT"])
+        timeout = analyzer.analyze_run(self.load("pilot"))
+        self.manifest.update(validity="INVALID")
+        invalid = analyzer.analyze_run(self.load("pilot"))
+        group = analyzer.summarize([success, timeout, invalid])[0]
+        self.assertEqual(group["declared_outcomes"], {"SUCCESS": 1, "TIMEOUT": 2})
+        self.assertEqual(group["valid_completed_declared_outcomes"], {"SUCCESS": 1, "TIMEOUT": 1})
+        self.assertEqual(group["n_eligible"], 0)
+        self.assertIsNone(group["completion_rate"])
+
+
+class SourceIndexTests(unittest.TestCase):
+    setUp = InputTests.setUp
+    load = InputTests.load
+
+    def index_input(self):
+        self.load()
+        self.source_files = {
+            "exports/run/manifest.json": (self.directory / "manifest.json").read_bytes(),
+            "exports/run/events.jsonl": (self.directory / "events.jsonl").read_bytes(),
+            "checks.md": b"Synthetic source review evidence\n"}
+        def digest(path):
+            return hashlib.sha256(self.source_files[path]).hexdigest()
+
+        self.index = {"index_version": "1.0.0", "dataset": "fixture", "source_commit": "a" * 40,
+                      "evidence": [{"path": "checks.md", "sha256": digest("checks.md")}],
+                      "runs": [{"directory": "exports/run",
+                                "manifest_sha256": digest("exports/run/manifest.json"),
+                                "events_sha256": digest("exports/run/events.jsonl")}]}
+        return self.write_index()
+
+    def write_index(self):
+        path = self.directory / "index.json"
+        path.write_text(json.dumps(self.index), encoding="utf-8")
+        return path
+
+    def test_pinned_input_matches_local_output_and_report_records_provenance(self):
+        path = self.index_input()
+        with patch.object(analyzer, "source_bytes", side_effect=lambda commit, p: self.source_files[p]):
+            analyzer.publish(None, "fixture", self.directory / "out", "pinned", path)
+        analyzer.publish([self.directory], "fixture", self.directory / "out", "local")
+        root = self.directory / "out/fixture_analysis"
+        for name in ("results.csv", "summary.json"):
+            self.assertEqual((root / "pinned" / name).read_bytes(), (root / "local" / name).read_bytes())
+        report = json.loads((root / "pinned/analysis_report.json").read_text())
+        self.assertEqual(report["source"]["source_commit"], "a" * 40)
+        self.assertEqual(report["source"]["index_sha256"], hashlib.sha256(path.read_bytes()).hexdigest())
+
+    def test_changed_source_or_evidence_hash_aborts_before_output(self):
+        for name in ("exports/run/manifest.json", "exports/run/events.jsonl", "checks.md"):
+            path = self.index_input()
+            self.source_files[name] += b"\n"
+            with self.subTest(name=name), patch.object(analyzer, "source_bytes",
+                    side_effect=lambda commit, p: self.source_files[p]):
+                with self.assertRaisesRegex(analyzer.AnalysisError, "SOURCE_HASH_MISMATCH"):
+                    analyzer.publish(None, "fixture", self.directory / "out", "bad", path)
+            self.assertFalse((self.directory / "out").exists())
+
+    def test_unpinned_revision_and_dataset_change_are_rejected(self):
+        self.index_input()
+        self.index["source_commit"] = "origin/main"
+        with self.assertRaisesRegex(analyzer.AnalysisError, "SOURCE_COMMIT_INVALID"):
+            analyzer.load_source_index(self.write_index(), "fixture")
+        self.index["source_commit"] = "a" * 40
+        with self.assertRaisesRegex(analyzer.AnalysisError, "DATASET_PHASE_MISMATCH"):
+            analyzer.load_source_index(self.write_index(), "main")
+
+    def test_server_store_epochs_from_reviewed_index_stay_in_separate_groups(self):
+        self.index_input()
+        analyses = []
+        for epoch in ("store-r2", "store-r3"):
+            self.index["runs"][0]["server_store_epoch"] = epoch
+            with patch.object(analyzer, "source_bytes", side_effect=lambda commit, p: self.source_files[p]):
+                runs, _ = analyzer.load_source_index(self.write_index(), "fixture")
+            analyses.append(analyzer.analyze_run(runs[0]))
+        self.assertEqual([r["row"]["server_store_epoch"] for r in analyses], ["store-r2", "store-r3"])
+        self.assertEqual(len(analyzer.summarize(analyses)), 2)
+
+    def test_bad_source_paths_never_invoke_git(self):
+        for path in ("/absolute", "../outside", "safe/../outside", "C:/outside", "a\\b", "a\nother"):
+            with self.subTest(path=path), patch.object(analyzer.subprocess, "run") as run:
+                with self.assertRaisesRegex(analyzer.AnalysisError, "SOURCE_PATH_INVALID"):
+                    analyzer.source_bytes("a" * 40, path)
+                run.assert_not_called()
+
+    def test_missing_git_object_has_static_error(self):
+        with patch.object(analyzer.subprocess, "run", side_effect=FileNotFoundError):
+            with self.assertRaisesRegex(analyzer.AnalysisError, "SOURCE_OBJECT_UNAVAILABLE"):
+                analyzer.source_bytes("a" * 40, "safe/path")
+
+    def test_duplicate_runs_from_index_are_rejected(self):
+        self.index_input()
+        self.index["runs"] *= 2
+        with patch.object(analyzer, "source_bytes", side_effect=lambda commit, p: self.source_files[p]):
+            with self.assertRaisesRegex(analyzer.AnalysisError, "DUPLICATE_RUN_INPUT"):
+                analyzer.publish(None, "fixture", self.directory / "out", "bad", self.write_index())
+        self.assertFalse((self.directory / "out").exists())
+
+
+if __name__ == "__main__":
+    unittest.main()

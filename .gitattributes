@@ -1,2 +1,8 @@
 # Preserve the exact bytes used by JSONL evidence SHA-256 checks.
 *.jsonl text eol=lf
+
+# Keep SEM-45 reproducibility checks stable across Windows and Unix checkouts.
+/experiments/results.csv text eol=lf
+/docs/evidence/SEM-45/*.json text eol=lf
+/experiments/scripts/analyze.py text eol=lf
+/experiments/scripts/export_logs.py text eol=lf
