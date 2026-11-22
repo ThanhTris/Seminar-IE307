@@ -1,0 +1,156 @@
+{
+  "analysis_version": "0.7.0",
+  "base_main_commit": "aa425c33bdee034afcc552ebc390cae6780f6dbe",
+  "cli_checks": {
+    "fixture": {
+      "exit_code": 0,
+      "expected_error": null,
+      "passed": true
+    },
+    "legacy": {
+      "exit_code": 2,
+      "expected_error": "CONTRACT_VERSION_UNSUPPORTED",
+      "passed": true
+    },
+    "overwrite": {
+      "exit_code": 2,
+      "expected_error": "OUTPUT_EXISTS",
+      "passed": true
+    },
+    "phase": {
+      "exit_code": 2,
+      "expected_error": "DATASET_PHASE_MISMATCH",
+      "passed": true
+    }
+  },
+  "crlf_report_differences": [
+    "validator_sha256"
+  ],
+  "crlf_reproduction_checked_version": "0.5.0",
+  "csv_sha256": "0fa852edb24a8f7cf9fd953d2338974b1516f32e6e278c22c0d34c574780bbd6",
+  "declared_outcomes_all_runs": {
+    "FAILURE": 2,
+    "SUCCESS": 15,
+    "TIMEOUT": 5,
+    "UNKNOWN": 1
+  },
+  "git_diff_check_passed": true,
+  "group_count": 10,
+  "independent_review_status": "V07_AWAITING_REVIEW",
+  "index_sha256": "487f36f16d33ababed54effe5959bd28ae549740fe1f3d7c081edd560b0b2630",
+  "internal_links_checked": 62,
+  "invalid_attempts_retained": 13,
+  "lf_repaired_report_matches": true,
+  "main_eligible": 0,
+  "markdown_fences_passed": true,
+  "markdown_tables_checked": 15,
+  "matches_local_source_exports": true,
+  "new_pilot_checks": {
+    "run-sem41-pilot-e01-1-20261120-8d5816": {
+      "apk_sha256": "814347f09ef9a61331910d7c4267fef827a4749377f3af53ae21fbb882ebaf5b",
+      "elapsed_cycles_unverified_boot": 2,
+      "execution_status": "COMPLETED",
+      "first_target_apply_elapsed_ms_unverified_boot": 2194372,
+      "group_id": "d8cf179f7c64945fbae8a1f9f3642a19039d71c6950b7d5e401c22767f7fafff",
+      "outcome": "SUCCESS",
+      "server_route": "EMULATOR_HOST_GATEWAY",
+      "validity": "VALID"
+    },
+    "run-sem42-oppo-e01-02": {
+      "apk_sha256": "814347f09ef9a61331910d7c4267fef827a4749377f3af53ae21fbb882ebaf5b",
+      "elapsed_cycles_unverified_boot": null,
+      "execution_status": "ABORTED",
+      "first_target_apply_elapsed_ms_unverified_boot": null,
+      "group_id": "69b482c8cc0d19d6223423483148a851f7e19db70483a24b528c69b1684a9a1c",
+      "outcome": "UNKNOWN",
+      "server_route": "ADB_REVERSE",
+      "validity": "INVALID"
+    },
+    "run-sem42-oppo-e01-03": {
+      "apk_sha256": "814347f09ef9a61331910d7c4267fef827a4749377f3af53ae21fbb882ebaf5b",
+      "elapsed_cycles_unverified_boot": 5,
+      "execution_status": "COMPLETED",
+      "first_target_apply_elapsed_ms_unverified_boot": 930021,
+      "group_id": "4fda2d1156a0e8513ff30cce2414b325551fdaf9b961da0368e7baaefab540e6",
+      "outcome": "SUCCESS",
+      "server_route": "ADB_REVERSE",
+      "validity": "VALID"
+    }
+  },
+  "not_run": [
+    "main_emulator",
+    "main_oppo",
+    "oppo_e02",
+    "firebase_runtime",
+    "phase_specific_metrics",
+    "independent_review_of_v07"
+  ],
+  "original_event_bytes_preserved": true,
+  "python_39_syntax_passed": true,
+  "python_version": "3.12.14",
+  "regression_tests": {
+    "E01_pilot_recount": 1,
+    "E02": 9,
+    "E03": 9,
+    "E04": 10,
+    "E06": 8,
+    "all_passed": true,
+    "data_kind": "SYNTHETIC_TEST_ONLY"
+  },
+  "reproduced_byte_for_byte": true,
+  "review_commit": "741e3756bca75e6add7843b6c9197f256bfb4ae9",
+  "route_build_groups_verified": true,
+  "run_count": 23,
+  "runtime_experiment_performed": false,
+  "scope": "SEM45_OFFLINE_ANALYSIS_23_MERGED_PILOTS",
+  "sem19_docs_check": {
+    "files": 5,
+    "internal_links": 174,
+    "passed": true
+  },
+  "source_commit": "aa425c33bdee034afcc552ebc390cae6780f6dbe",
+  "source_epochs_match_pinned_pilot_results": true,
+  "source_prs": [
+    {
+      "source_merge_commit": "007a1aa31d02d7af47570f4cf7b60a7ed8135a33",
+      "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/29"
+    },
+    {
+      "source_merge_commit": "3f0871c194f87aa6e2d5ac45e16fe9ada5264e57",
+      "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/35"
+    },
+    {
+      "source_merge_commit": "aa425c33bdee034afcc552ebc390cae6780f6dbe",
+      "source_pr": "https://github.com/ThanhTris/Seminar-IE307/pull/37"
+    }
+  ],
+  "source_review_status": "MERGED",
+  "summary_sha256": "cbbaf7590a20ed136b155b5cc8dc9b379f6f4c8a539c494649361c818394dd67",
+  "task_snapshot_check": {
+    "passed": true,
+    "verified_tasks": 45
+  },
+  "uncertain_window_rows": 23,
+  "unit_tests": {
+    "analyzer_tests": 82,
+    "exporter_tests": 36,
+    "failures": 0,
+    "other_main_tests": 52,
+    "passed": 170,
+    "platform": "Ubuntu 24.04 WSL",
+    "python_version": "3.12.3"
+  },
+  "valid_completed_declared_outcomes": {
+    "SUCCESS": 10
+  },
+  "valid_completed_runs": 10,
+  "verification_date": "2026-11-21",
+  "windows_index_checkout_reproduced": true,
+  "windows_ubuntu_csv_summary_report_equal": true,
+  "windows_unit_tests": {
+    "analyzer_tests_passed": 82,
+    "full_suite": "NOT_RUN_FOR_V07",
+    "previous_full_suite_limit": "SEM41_SYMLINK_PRIVILEGE_WINERROR_1314",
+    "python_version": "3.12.14"
+  }
+}
