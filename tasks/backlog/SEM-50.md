@@ -53,10 +53,12 @@ Status nguồn được đối chiếu Project lúc **2026-11-18 02:33:31 UTC**;
 
 ## Tiêu chí hoàn thành
 
-- [ ] Bố cục đúng 3 chương và phụ lục Bảng phân công theo yêu cầu giảng viên; chương Hiện thực đủ 9 mục con.
-- [ ] PDF biên dịch được từ mã LaTeX trong repo; hai nghiên cứu có vai trò trong lập luận, DOI/metadata khớp và citations truy được.
-- [ ] Số liệu/giới hạn khớp logs/CSV/SUMMARY; phần chưa chạy nêu rõ.
-- [ ] Đầu ra và CHECKS có thật, link đọc được; chưa chạy phải ghi Not run, không tự chuyển Done từ kế hoạch.
+Bản review ngày 25/11/2026 đã có [nguồn LaTeX](../../report/latex/main.tex), [PDF](../../report/seminar-ie307.pdf), [bibliography](../../research/references.bib) và [CLAIMS](../../docs/CLAIMS.md). Phần còn thiếu gồm template môn, ảnh app và video/link Drive từ SEM-53 để SEM-55 chèn. Kết quả main vẫn `NOT_RUN`. Đối chiếu nguồn, bản build và bàn giao trong [CHECKS](../../docs/evidence/SEM-50/CHECKS.md).
+
+- [x] Bố cục bản review đủ 3 chương, phụ lục Bảng phân công và 9 mục trong chương Hiện thực.
+- [x] PDF biên dịch được từ mã LaTeX trong repo, hai nghiên cứu có vai trò trong lập luận và DOI/citation truy được.
+- [x] Số liệu và giới hạn khớp log, CSV và phạm vi snapshot SUMMARY. Phần chưa chạy ghi rõ trong CHECKS.
+- [ ] Áp dụng template môn, bổ sung ảnh app thực tế và cập nhật PDF cuối sau khi SEM-55 chèn link video.
 
 ## Task được mở khóa
 
