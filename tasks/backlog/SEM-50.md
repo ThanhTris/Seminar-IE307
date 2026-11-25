@@ -53,12 +53,13 @@ Status nguồn được đối chiếu Project lúc **2026-11-18 02:33:31 UTC**;
 
 ## Tiêu chí hoàn thành
 
-Bản review ngày 25/11/2026 đã có [nguồn LaTeX](../../report/latex/main.tex), [PDF](../../report/seminar-ie307.pdf), [bibliography](../../research/references.bib) và [CLAIMS](../../docs/CLAIMS.md). Phần còn thiếu gồm template môn, ảnh app và video/link Drive từ SEM-53 để SEM-55 chèn. Kết quả main vẫn `NOT_RUN`. Đối chiếu nguồn, bản build và bàn giao trong [CHECKS](../../docs/evidence/SEM-50/CHECKS.md).
+Bản review ngày 26/11/2026 đã có [nguồn LaTeX](../../report/latex/main.tex) chuyển từ mẫu Word, [PDF](../../report/seminar-ie307.pdf), [bibliography](../../research/references.bib) và [CLAIMS](../../docs/CLAIMS.md). PDF có sơ đồ kiến trúc, lược đồ Room và timeline OPPO. Thông tin bìa, ảnh minh chứng app/cơ sở dữ liệu và link Drive từ SEM-53 còn chờ bàn giao. Kết quả main vẫn `NOT_RUN`. Đối chiếu nguồn, bản build và bàn giao trong [CHECKS](../../docs/evidence/SEM-50/CHECKS.md).
 
 - [x] Bố cục bản review đủ 3 chương, phụ lục Bảng phân công và 9 mục trong chương Hiện thực.
 - [x] PDF biên dịch được từ mã LaTeX trong repo, hai nghiên cứu có vai trò trong lập luận và DOI/citation truy được.
 - [x] Số liệu và giới hạn khớp log, CSV và phạm vi snapshot SUMMARY. Phần chưa chạy ghi rõ trong CHECKS.
-- [ ] Áp dụng template môn, bổ sung ảnh app thực tế và cập nhật PDF cuối sau khi SEM-55 chèn link video.
+- [x] Chuyển mẫu Word sang LaTeX và đưa sơ đồ, lược đồ Room, timeline dựng từ log vào nội dung.
+- [ ] Bổ sung thông tin bìa, ảnh chụp app/Database Inspector và cập nhật PDF cuối sau khi SEM-55 chèn link video.
 
 ## Task được mở khóa
 

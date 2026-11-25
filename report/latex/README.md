@@ -10,7 +10,7 @@ Cài Tectonic và font Times New Roman, gồm regular, bold, italic và bold ita
 New-Item -ItemType Directory -Force .local/sem50-build | Out-Null
 $output = (Resolve-Path .local/sem50-build).Path
 Push-Location report/latex
-$env:SOURCE_DATE_EPOCH = '1795564800'
+$env:SOURCE_DATE_EPOCH = '1795651200'
 tectonic --keep-logs --outdir $output main.tex
 $buildExit = $LASTEXITCODE
 Pop-Location
