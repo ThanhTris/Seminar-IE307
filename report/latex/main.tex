@@ -1,0 +1,152 @@
+\documentclass[11pt,a4paper]{report}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+\usepackage{booktabs,tabularx,longtable}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{pdftitle={Tìm nạp nền và thông báo đẩy im lặng trên Android}}
+\urlstyle{same}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5em}
+\setlength{\emergencystretch}{2em}
+\setlength{\intextsep}{8pt plus 2pt minus 2pt}
+\renewcommand{\chaptername}{Chương}
+\renewcommand{\appendixname}{Phụ lục}
+\renewcommand{\contentsname}{Mục lục}
+\renewcommand{\bibname}{Tài liệu tham khảo}
+\renewcommand{\tablename}{Bảng}
+\renewcommand{\figurename}{Hình}
+\newcommand{\repo}{https://github.com/ThanhTris/Seminar-IE307/blob/db8dc5f}
+\newcommand{\source}[2]{\href{\repo/#1}{#2}}
+
+\begin{document}
+\hypersetup{pageanchor=false}
+\begin{titlepage}
+  \centering
+  {\Large Seminar IE307\par}
+  \vspace{1cm}
+  {\large Chủ đề 12\par}
+  \vspace{1.8cm}
+  {\Huge\bfseries Tìm nạp nền và thông báo đẩy im lặng trên Android\par}
+  \vspace{1cm}
+  {\large Báo cáo triển khai bảng tin đồng bộ\par}
+  \vfill
+  {\large Trí · Trang · Vinh · Trung · Tâm · Tuấn\par}
+  \vspace{0.6cm}
+  {Bản review SEM-50 · 25/11/2026\par}
+  {Bố cục tạm thời theo yêu cầu nộp, chờ template LaTeX của môn\par}
+\end{titlepage}
+
+\hypersetup{pageanchor=true}
+\tableofcontents
+
+\chapter{Giới thiệu đề tài}
+\section{Bài toán và phạm vi}
+Ứng dụng bảng tin Android cần phản ánh nội dung mới của máy chủ, kể cả khi người dùng rời màn hình. Máy chủ xuất một snapshot có phiên bản. Ứng dụng lưu snapshot vào Room và đọc cache để hiển thị. Đề tài khảo sát hai cách kích hoạt cùng một đường đồng bộ: tìm nạp nền định kỳ qua WorkManager và thông báo đẩy im lặng qua Firebase Cloud Messaging (FCM). Ở chế độ HYBRID, cả hai trigger dùng chung worker và quy tắc cập nhật cache. \source{docs/SCOPE.md}{Phạm vi triển khai}.
+
+Tìm nạp nền cho phép hệ điều hành bố trí thời điểm worker thực hiện GET khi thỏa điều kiện. Thông báo data-only báo ứng dụng có khả năng có dữ liệu mới, rồi callback giao việc cho worker. Các mốc máy chủ chấp nhận gửi, thiết bị nhận, enqueue, worker bắt đầu và commit Room được ghi riêng để phân biệt nguyên nhân khi một lượt cập nhật chậm hoặc thiếu kết quả. \source{docs/MECHANISMS.md}{Mô hình cơ chế}.
+
+\section{Mục tiêu và câu hỏi}
+Nhóm triển khai ba chế độ PERIODIC, PUSH, HYBRID và quan sát xem snapshot mục tiêu có được áp dụng trong cửa sổ hay không. Các câu hỏi chính là trigger nào tạo công việc thật, idle và mất mạng ảnh hưởng mốc nào, và periodic có áp dụng được bản mới khi HYBRID chủ động bỏ lượt gửi push hay không. Phạm vi đo tập trung vào phiên bản cache, sự kiện và lượng công việc quan sát được.
+
+\section{Hai nghiên cứu liên quan}
+Simon và cộng sự phân tích differential synchronisation của Mendeley trên iOS. Trong mẫu log của nghiên cứu, 96.792 trên 100.000 chu kỳ không mang thay đổi. Kết quả đó gợi ý theo dõi tỷ lệ lần GET dẫn đến apply ở bảng tin và đặt giả thuyết rằng kích hoạt khi có thay đổi có thể giảm công việc rỗng. Cơ chế giữ lượt lặp khi một tín hiệu tới lúc đang sync cũng gợi ý ca E05-C của nhóm. Số liệu năng lượng và workload thuộc bối cảnh Mendeley \citep{Simon2017DiffsyncEnergy}. \source{research/notes/PAPER_1.md}{Ghi chú SEM-20}.
+
+González-Pérez và cộng sự dùng AlarmManager, wake lock và thư viện NTD để đánh giá lịch tác vụ trên các thiết bị Android 7--11. Cách đối chiếu lượt dự kiến với lượt quan sát và báo điều kiện thiết bị thúc đẩy nhóm ghi cửa sổ, số work start, các lượt thiếu và ngoại lệ. Đơn vị phân tích ở đây là một lượt WorkManager/FCM với target cache, theo cấu hình của từng thiết bị \citep{GonzalezPerez2022AndroidScheduling}. \source{research/notes/PAPER_2.md}{Ghi chú SEM-21} · \source{research/notes/API_CROSSCHECK.md}{Đối chiếu API SEM-22}.
+
+\chapter{Hiện thực đề tài}
+\section{Môi trường thực hiện}
+Hồ sơ build Android ghi Windows 11 x64, JBR 25.0.3 (target Java 17), SDK platform 37 và Build Tools 36.0.0. Server yêu cầu Node.js 22+. Dùng Git và Python 3.10+ cho chuỗi xuất và phân tích log. Pilot có emulator Android 17/API 37 và OPPO Find X9 (Android 17, ColorOS V17.0.0). Ba pilot ngày 20/11 dùng app/server \texttt{76fece0}, APK \texttt{814347F\ldots}. Build debug bàn giao có hash \texttt{DBAAD\ldots}. Manifest lưu hash đầy đủ và công cụ build riêng của từng bản. \source{docs/ENVIRONMENT.md}{Hồ sơ môi trường} · \source{release/BUILD_MANIFEST.json}{Provenance build}.
+
+\section{Công cụ và công nghệ sử dụng}
+Kotlin và Jetpack Compose dựng app. Room lưu nội dung, phiên bản và timeline. WorkManager thực thi worker có điều kiện mạng CONNECTED. FCM data-only mang tín hiệu cùng mã correlation. Node.js/TypeScript cung cấp snapshot có version, GET và CLI cập nhật. Exporter chuẩn hóa manifest/events v2, analyzer Python tách nhóm theo case, build, route và cấu hình. \source{docs/SYNC_CORE_API.md}{Hợp đồng sync} · \source{docs/EVENT_SCHEMA.md}{Hợp đồng log}.
+
+\section{Các bước cài đặt}
+Clone repo và checkout revision dùng để tái lập. Cài SDK, JDK và Node theo hướng dẫn của dự án. Trong \texttt{server/}, dùng \texttt{npm ci} để cài dependency, rồi chạy \texttt{npm run build} và \texttt{npm test}. Chạy tác vụ \texttt{:app:testDebugUnitTest} và \texttt{:app:assembleDebug} qua Gradle wrapper trong \texttt{android/}. Dùng \texttt{adb devices} để kiểm thiết bị. Xác minh SHA-256 theo manifest và cài APK bằng \texttt{adb install -r}. Khi xuất log bằng instrumentation, cài cặp app/test APK đúng cùng bộ. \source{docs/SETUP.md}{Lệnh cài đặt và kiểm tra}.
+
+\section{Cấu hình}
+Đặt \texttt{HOST=127.0.0.1}, \texttt{PORT=3000} và \texttt{STORE\_DIR} riêng qua biến môi trường của shell. File \texttt{.env.example} ghi các biến cấu hình. Emulator đi qua host gateway \texttt{10.0.2.2:3000}. Thiết bị USB dùng \texttt{127.0.0.1:3000} với \texttt{adb reverse tcp:3000 tcp:3000} trên host server. Kiểm GET từ app bằng đồng bộ thủ công. Đặt run ID, device alias và mode trong app rồi đợi công việc cũ kết thúc trước khi đo. \source{docs/setup/SERVER.md}{Biến môi trường server}.
+
+Đối với PUSH, chuẩn bị cấu hình Firebase đúng package và quyền gửi trên máy thử. Giữ file \texttt{google-services.json}, credential và token ở local, chỉ ghi fingerprint khi kiểm token. Dùng data-only priority normal theo cấu hình protocol. TTL của E04 được giữ cố định để diễn giải cửa sổ reconnect. Periodic dùng khoảng lặp tối thiểu 15 phút và tôn trọng constraint \citep{AndroidDefineWork,FirebaseAndroidPriority}. \source{docs/PUSH.md}{Cấu hình push} · \source{experiments/PROTOCOL.md}{Protocol từng ca}.
+
+\section{Các bước triển khai và thực thi}
+\begin{enumerate}
+  \item Chạy \texttt{npm start}, kiểm \texttt{/health}, tạo snapshot với \texttt{npm run update --} và tham số theo hướng dẫn setup. Đồng bộ thủ công để khớp cache với server baseline.
+  \item Đặt run ID, alias và mode, đưa app về nền và ghi mốc bắt đầu theo từng ca. E01 giữ lịch tự nhiên trong 90 phút. E02 dùng cửa sổ 120 giây từ commit của target. Khi cấu hình Firebase đã đạt, dùng \texttt{npm run send-push} với update ID, version và các tham số của \source{docs/setup/FCM_SENDER.md}{hướng dẫn sender}.
+  \item E03 ghi rõ baseline, deep Doze và thời gian sau thoát. E04 cập nhật target trong khoảng offline rồi quan sát sau khi nối mạng. E05 tách duplicate, stale hint và overlap có chứng cứ. E06 ghi sự kiện deliberate skip và theo dõi periodic trong HYBRID.
+  \item Đóng cửa sổ trước cleanup, lưu manifest và canonical JSONL, rồi chạy \texttt{analyze.py} trên đúng dataset. Dùng \texttt{results.csv}, summary và report kiểm phase, nhóm, flags và checksum của đầu vào.
+\end{enumerate}
+Nếu bước live chưa có kết quả trong 30 giây của phần trình bày, runbook dự kiến chuyển sang playback đã chuẩn bị. Phần tái lập video cần bàn giao từ SEM-53. \source{docs/DEMO_RUNBOOK.md}{Runbook} · \source{experiments/ANALYSIS.md}{Tái lập phân tích}.
+
+\section{Kết quả đầu ra}
+\label{sec:results}
+Snapshot SEM-43 tại \texttt{007a1aa} ghi 20 lượt thử SEM-41, gồm tám VALID/SUCCESS sau khi sửa collector và 12 INVALID lịch sử. SEM-45 v0.7.0 tại \texttt{db8dc5f} thêm ba pilot E01 trong PR 35, cho tổng \textbf{23 pilot} thuộc 10 nhóm, với 10 VALID/COMPLETED và 13 INVALID theo manifest. Outcome toàn inventory là 15 SUCCESS, 5 TIMEOUT, 2 FAILURE và 1 UNKNOWN. Hai pilot legacy SEM-29 và các control development được đọc riêng theo SUMMARY.
+
+Kế hoạch main có 33 slot gồm 27 emulator và 6 OPPO. Snapshot bàn giao có 0 run main hợp lệ. Tỷ lệ hoàn thành và thống kê latency main để N/A. Cả ba pilot mới có candidate gate false, cùng build pilot nhưng khác route/thiết bị. \source{experiments/SUMMARY.md}{SUMMARY SEM-43} · \source{experiments/results.csv}{CSV SEM-45} · \source{docs/evidence/SEM-45/CHECKS.md}{CHECKS SEM-45}.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Ba pilot E01 ngày 20/11 theo manifest và Android elapsed}
+\begin{tabularx}{\textwidth}{@{}p{2.45cm}>{\raggedright\arraybackslash}p{3.45cm}X@{}}
+\toprule
+Lượt & Trạng thái nguồn & Quan sát \\
+\midrule
+OPPO run-03 & COMPLETED / SUCCESS / VALID & 5 chu kỳ trong 90 phút. Apply v5 tại 930\,021 ms từ đầu cửa sổ Android elapsed. Tuyến ADB reverse, cấp nguồn USB. \\
+OPPO run-02 & ABORTED / UNKNOWN / INVALID & App lên tiền cảnh và thiếu mốc mở. Số chu kỳ trong cửa sổ để trống. \\
+Emulator 8d5816 & COMPLETED / SUCCESS / VALID & 2 chu kỳ, dưới mục tiêu 3. Tuyến host gateway được phân nhóm riêng với host HTTP của loạt cũ. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Phép đếm mô tả dùng work start PERIODIC, attempt 0, request ID riêng trong khoảng elapsed đã khai báo. Event thiếu boot ID nên cột xác minh theo boot vẫn trống. Mốc 930\,021 ms là thời gian theo Android elapsed tính từ đầu cửa sổ. Clock liên máy chưa kiểm soát nên latency server đến Android để trống. \source{experiments/pilots/run-sem42-oppo-e01-03/manifest.json}{Manifest OPPO run-03} · \source{docs/evidence/SEM-42/CHECKS.md}{CHECKS SEM-42}.
+
+Trong snapshot cũ, audit E03 ghi hai pilot PERIODIC áp dụng target sau khi thoát force-idle. Ba pilot E04 PERIODIC áp dụng sau nối mạng. Hai pilot E06 HYBRID ghi deliberate skip và apply qua periodic, trên APK chưa cấu hình Firebase. Đây là quan sát pilot theo từng điều kiện. E02 FCM đầu cuối và E05 race trên thiết bị thuộc phần chưa chạy; test logic version guard được báo riêng. \source{experiments/SUMMARY.md}{Quan sát và giới hạn theo ca}.
+
+\section{Minh họa chức năng và thành phần chính}
+\label{sec:architecture}
+\begin{figure}[htbp]
+\centering
+\begin{tabular}{c@{\qquad}c}
+\fbox{Lịch WorkManager} & \fbox{FCM data-only và callback} \\
+$\downarrow$ & $\downarrow$ \\
+\multicolumn{2}{c}{\fbox{Worker chung: GET snapshot và kiểm version}} \\
+\multicolumn{2}{c}{$\downarrow$} \\
+\multicolumn{2}{c}{\fbox{Transaction Room: cache và timeline}} \\
+\multicolumn{2}{c}{$\downarrow$} \\
+\multicolumn{2}{c}{\fbox{Compose: nội dung cache và phiên bản}} \\
+\end{tabular}
+\caption{Sơ đồ luồng triển khai của hai trigger tới cùng cache}
+\end{figure}
+
+Ở PERIODIC, UI hiển thị mode và timeline cho các lần worker thực sự chạy. Ở PUSH, callback và enqueue xuất hiện riêng khi nhận tín hiệu hợp lệ. HYBRID dùng cả hai trigger, còn version guard quyết định snapshot nào được áp dụng. Run-03 ghi chuỗi \texttt{work\_started}, fetch thành công và \texttt{snapshot\_applied} v5. Bốn chu kỳ sau ghi HTTP 304. Bảng và sơ đồ minh họa bằng nguồn hiện có; ảnh màn hình thực của app còn chờ bàn giao. \source{experiments/pilots/run-sem42-oppo-e01-03/events.jsonl}{Timeline canonical run-03} · \source{slides/DEMO_SCRIPT.md}{Kịch bản demo}.
+
+\section{Vấn đề gặp phải và cách xử lý}
+\begin{itemize}
+  \setlength{\itemsep}{2pt}
+  \item \textbf{Lịch nền và Doze.} Lịch đăng ký xuất hiện trước work start. Constraint và idle có thể hoãn thực thi \citep{AndroidDefineWork,AndroidDozeStandby}. Audit loạt cũ phát hiện thao tác dump scheduler có khả năng làm thay đổi trạng thái timer. Nhóm thu hồi qualification của các lượt bị ảnh hưởng, giữ outcome cũ và dùng batch chạy lại để mô tả pilot.
+  \item \textbf{Token và callback.} Token có thể đổi, normal priority có thể trễ khi Doze, và callback có thời gian xử lý giới hạn \citep{FirebaseReceiveMessages,FirebaseAndroidPriority}. Kiểm cấu hình và token local, chuyển công việc sang worker, đối chiếu update ID, signal ID và kết quả cache.
+  \item \textbf{Trùng tín hiệu và response cũ.} Log rejection và correlation giúp truy vết tín hiệu trùng. Version guard trong transaction bảo vệ cache khi response đến khác thứ tự. Khả năng giữ update trong E05-C cần overlap và target cuối từ một lượt riêng.
+  \item \textbf{OEM, nguồn điện và clock.} OPPO run-02 bị gián đoạn khi app lên tiền cảnh; run-03 hoàn tất với USB. Các cấu hình khác nhau được giữ riêng. Khi clock hoặc boot thiếu căn cứ, báo count mô tả và giữ duration chưa xác minh ở trạng thái trống.
+\end{itemize}
+\source{docs/evidence/SEM-41/SCHEDULER_OBSERVER_AUDIT.json}{Audit collector} · \source{docs/evidence/SEM-39/CORE_CASES.md}{Kiểm version guard} · \source{docs/evidence/SEM-42/CHECKS.md}{Evidence thiết bị}.
+
+\section{Video demo}
+Manifest nháp SEM-53 ghi video \texttt{NOT\_RUN}. Khi nhận video và link Drive, SEM-55 kiểm quyền xem của giảng viên, chèn link tại đây rồi biên dịch lại PDF. \source{tasks/backlog/SEM-53.md}{Bàn giao SEM-53} · \source{tasks/backlog/SEM-55.md}{Đóng gói SEM-55}.
+
+\chapter{Kết luận và khuyến nghị}
+Nhóm đã hiện thực đường đồng bộ chung tới cache và quan sát periodic ở cấu hình pilot emulator và OPPO. E06 có quan sát deliberate skip cùng phục hồi qua periodic. Các lần thử bị hủy, timeout và thiếu evidence được giữ cùng trạng thái nguồn. Những kết quả này mô tả khả năng chạy của cấu hình thử. Phép so latency, năng lượng và khả năng delivery FCM cần mẫu main, clock kiểm soát và điều kiện thiết bị được ghi rõ.
+
+Periodic phù hợp khi dữ liệu có thể chờ cơ hội chạy nền và cần lượt kiểm tra định kỳ. Push thích hợp cho thay đổi do server phát hiện khi có Firebase và cùng chuỗi evidence nhận đến áp dụng. Hybrid phù hợp khi thiết kế cần cả tín hiệu thay đổi và cơ hội kiểm tra định kỳ, với version guard và quy tắc xử lý trùng rõ ràng. Chọn cơ chế theo yêu cầu độ mới dữ liệu, chi phí GET và điều kiện thiết bị. Sau khi có candidate, ưu tiên chạy E02 đầu cuối và E05-C với overlap quan sát được, đồng thời kiểm cửa sổ và clock trước khi so sánh.
+
+\appendix
+\chapter{Bảng phân công công việc}
+Phân công theo từng owner từ \source{docs/TEAM_ASSIGNMENTS.md}{TEAM\_ASSIGNMENTS} và \source{tasks/catalog.json}{catalog}. Bảng trình bày đầu việc được giao theo snapshot báo cáo.
+\input{assignments.tex}
+
+\clearpage
+\addcontentsline{toc}{chapter}{Tài liệu tham khảo}
+\bibliographystyle{plainnat}
+\bibliography{../../research/references}
+\end{document}
