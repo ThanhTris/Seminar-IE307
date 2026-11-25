@@ -1,8 +1,8 @@
-\documentclass[11pt,a4paper]{report}
-\usepackage[margin=2.5cm]{geometry}
+\documentclass[12pt,a4paper]{report}
+\usepackage[margin=2.54cm]{geometry}
 \usepackage{fontspec}
 \setmainfont{Times New Roman}
-\usepackage{booktabs,tabularx,longtable}
+\usepackage{graphicx,xcolor,booktabs,tabularx,longtable,titlesec}
 \usepackage[numbers,sort&compress]{natbib}
 \usepackage[hidelinks]{hyperref}
 \hypersetup{pdftitle={Tìm nạp nền và thông báo đẩy im lặng trên Android}}
@@ -14,32 +14,22 @@
 \renewcommand{\chaptername}{Chương}
 \renewcommand{\appendixname}{Phụ lục}
 \renewcommand{\contentsname}{Mục lục}
+\renewcommand{\listfigurename}{Danh sách hình}
+\renewcommand{\listtablename}{Danh sách bảng}
 \renewcommand{\bibname}{Tài liệu tham khảo}
 \renewcommand{\tablename}{Bảng}
 \renewcommand{\figurename}{Hình}
+\titleformat{\chapter}[hang]{\normalfont\bfseries\fontsize{16}{20}\selectfont}{\chaptertitlename\ \thechapter.}{0.6em}{}
+\titleformat{\section}{\normalfont\bfseries\fontsize{15}{19}\selectfont}{\thesection.}{0.6em}{}
+\titleformat{\subsection}{\normalfont\bfseries\fontsize{14}{18}\selectfont}{\thesubsection.}{0.6em}{}
+\titlespacing*{\chapter}{0pt}{10pt}{22pt}
 \newcommand{\repo}{https://github.com/ThanhTris/Seminar-IE307/blob/db8dc5f}
 \newcommand{\source}[2]{\href{\repo/#1}{#2}}
 
 \begin{document}
-\hypersetup{pageanchor=false}
-\begin{titlepage}
-  \centering
-  {\Large Seminar IE307\par}
-  \vspace{1cm}
-  {\large Chủ đề 12\par}
-  \vspace{1.8cm}
-  {\Huge\bfseries Tìm nạp nền và thông báo đẩy im lặng trên Android\par}
-  \vspace{1cm}
-  {\large Báo cáo triển khai bảng tin đồng bộ\par}
-  \vfill
-  {\large Trí · Trang · Vinh · Trung · Tâm · Tuấn\par}
-  \vspace{0.6cm}
-  {Bản review SEM-50 · 25/11/2026\par}
-  {Bố cục tạm thời theo yêu cầu nộp, chờ template LaTeX của môn\par}
-\end{titlepage}
-
-\hypersetup{pageanchor=true}
-\tableofcontents
+\input{front-matter.tex}
+\pagenumbering{arabic}
+\fontsize{13}{18}\selectfont
 
 \chapter{Giới thiệu đề tài}
 \section{Bài toán và phạm vi}

@@ -1,6 +1,6 @@
 # Biên dịch báo cáo Seminar IE307
 
-`main.tex` là bản review SEM-50 gồm ba chương, phụ lục phân công và tài liệu tham khảo. Bản này dùng lớp LaTeX `report` vì repo đang chờ template của môn. Lấy `assignments.tex` và `research/references.bib` từ cùng checkout khi biên dịch.
+`main.tex` dùng bố cục LaTeX chuyển từ mẫu Word. `front-matter.tex` gồm trang bìa, mục lục, danh sách hình và bảng, cùng phần tóm tắt. Nội dung theo bố cục ba chương của seminar, có phụ lục phân công và tài liệu tham khảo. Biên dịch từ cùng checkout để Tectonic đọc các tệp nguồn trong `report/latex/` và `research/references.bib`.
 
 ## Build trên Windows
 
