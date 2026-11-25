@@ -1,0 +1,47 @@
+\hypersetup{pageanchor=false}
+\begin{titlepage}
+  \centering
+  {\bfseries TRƯỜNG ĐẠI HỌC CÔNG NGHỆ THÔNG TIN\par}
+  {\bfseries ĐẠI HỌC QUỐC GIA THÀNH PHỐ HỒ CHÍ MINH\par}
+  \vspace{1.2cm}
+  \includegraphics[height=2.8cm]{assets/uit-logo.png}\par
+  \vspace{1.25cm}
+  {\fontsize{18}{22}\selectfont\bfseries BÁO CÁO SEMINAR\par}
+  \vspace{0.65cm}
+  {\fontsize{18}{23}\selectfont\bfseries XỬ LÝ VIỆC TÌM NẠP NỀN VÀ\par
+   THÔNG BÁO ĐẨY IM LẶNG TRÊN ANDROID\par}
+  \vspace{1.2cm}
+  \begin{minipage}{0.9\textwidth}
+    \fontsize{13}{18}\selectfont
+    \begin{tabularx}{\linewidth}{@{}lX@{}}
+      \textbf{Môn học} & IE307.R11 — Công nghệ lập trình đa nền tảng cho ứng dụng di động \\
+      \textbf{Giảng viên} & ThS. Phạm Nhật Duy \\
+      \textbf{Thành viên} & Trí (trưởng nhóm), Trang, Vinh, Trung, Tâm, Tuấn \\
+    \end{tabularx}
+  \end{minipage}
+  \vfill
+  {Thành phố Hồ Chí Minh, tháng 11 năm 2026\par}
+\end{titlepage}
+\cleardoublepage
+\pagenumbering{roman}
+\hypersetup{pageanchor=true}
+
+\tableofcontents
+\clearpage
+\phantomsection
+\addcontentsline{toc}{chapter}{\listfigurename}
+\listoffigures
+\clearpage
+\phantomsection
+\addcontentsline{toc}{chapter}{\listtablename}
+\listoftables
+\clearpage
+\chapter*{Tóm tắt}
+\addcontentsline{toc}{chapter}{Tóm tắt}
+\fontsize{13}{18}\selectfont
+Báo cáo trình bày ứng dụng bảng tin Android lưu snapshot có phiên bản trong Room và nhận dữ liệu mới khi ở nền. Hệ thống triển khai ba chế độ đồng bộ. PERIODIC dùng WorkManager, PUSH dùng thông báo data-only của Firebase Cloud Messaging và HYBRID kết hợp hai trigger. Cả ba chế độ dùng chung worker lấy snapshot và khâu kiểm phiên bản trước khi ghi cache.
+
+Nhóm đối chiếu kết quả với manifest và log theo từng lượt. Bộ dữ liệu có 23 lượt pilot, gồm 10 lượt hoàn tất hợp lệ theo manifest. OPPO Find X9 ghi nhận năm chu kỳ periodic tự nhiên trong 90 phút và áp dụng snapshot v5. Hai pilot HYBRID ghi nhận ứng dụng lấy được snapshot qua periodic sau khi máy chủ chủ động bỏ gửi push. Các quan sát này mô tả cấu hình pilot đã chạy. Tập chính chưa có lượt đủ điều kiện để so sánh tỷ lệ hoàn thành hoặc độ trễ giữa các cơ chế.
+
+\textbf{Từ khóa.} Android, tải dữ liệu nền, thông báo đẩy im lặng, WorkManager, FCM, Room.
+\clearpage
